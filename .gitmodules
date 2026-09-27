@@ -1,0 +1,6 @@
+[submodule "spec"]
+	path = spec
+	url = https://github.com/hhenson/hgraph_spec.git
+[submodule "stdlib"]
+	path = stdlib
+	url = https://github.com/hhenson/hgraph_std.git

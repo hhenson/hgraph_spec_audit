@@ -1,0 +1,86 @@
+{
+  "measured_at": "2026-09-27T09:45:38.228798+00:00",
+  "runtime_test_status": "passed",
+  "runtime_test_exit_code": 0,
+  "execution": "shared HGL imports compiled to C++, linked to the installed HGL standard library",
+  "repeats": 3,
+  "observed": {
+    "bit_and_waits_for_both": {
+      "ticks": [
+        null,
+        2,
+        3,
+        7,
+        7,
+        7
+      ],
+      "matches": true
+    },
+    "sample_only_on_signal": {
+      "ticks": [
+        null,
+        2,
+        null,
+        4,
+        4
+      ],
+      "matches": true
+    },
+    "sample_waits_for_value": {
+      "ticks": [
+        null,
+        null,
+        7,
+        null,
+        8
+      ],
+      "matches": true
+    },
+    "dedup_zero_and_idle": {
+      "ticks": [
+        null,
+        0,
+        null,
+        null,
+        1,
+        null,
+        0
+      ],
+      "matches": true
+    }
+  },
+  "checked_source_sha256": {
+    "nodes.hgl": "a73bb76bb8790c274130eab128ea5e14375877493b24d5dc36081702a1b0ff90",
+    "cases.hgl": "ae6504deca4521bfb956da98a9ee49963aa484aa24275dde386b52e83a48728b",
+    "cases.json": "fe7402d0a7f73eec172a6855d42d20f08a5b28e4494ebcc3ae3ea3420e8398f0"
+  },
+  "harness_sha256": {
+    "tools/run_stdlib.py": "9f205756fc6765b49d300444f060eee6d0be494c06c0b38777f07786e19d7dcd",
+    "tools/stdlib_cases.py": "6d97937c54ddf96644c10647defaca978786368cd0c1fda4a721663e916ab030",
+    "compiler/stdlib/native/main.cpp": "4e77d94719efd13ebe8babbae29b4fc15162799d27a00a2f381c90cf6ac6e19c",
+    "compiler/stdlib/native/CMakeLists.txt": "aaa7f4d39245e1b2734a4f92b15631af106701debbe7ca074bb17e05ac6cb27c"
+  },
+  "stdlib_source_sha256": {
+    "hgraph/control.hgl": "74dba97c15f6375735f53c2bffef20ed3e7f4d97d38bfdf129fcdc6c555726e8",
+    "hgraph/native/scalar_values.hgl": "7133bb54388f81816792d6a9592b702e92e912a774d5f6a435694664d920d3ab",
+    "hgraph/native/scalar_values_i64.hgl": "18395afe309bf778407d55fedbb3505e2ac239937b8521b6f708343d619bec92",
+    "hgraph/native/temporal_values.hgl": "cac890f075c9b2662f659b06151b1509327acdb9491cb523d6690f677677f6c5",
+    "hgraph/operators.hgl": "c45489ef8f45db425bf2b2f8c9325ff4d97507ac16789e59e363d4a272798983",
+    "hgraph/standard.hgl": "ff50d66f38a2f10b4d78083a92ed5fa862c237099adcd0d8c61caebebe9fe3cb",
+    "hgraph/stream.hgl": "102950cedeaa85516755bf0fdfa9c61f7be525c25146cdeff5abd6fe958c26d8",
+    "hgraph/temporal.hgl": "22cc220150fa1a63a53ddb6b573f1d30f17e8f29f0394572d8f11476abca3d04"
+  },
+  "compiler_sha256": "d93cb9efb99e4a478d8e6cf7265fe6f455b400ec842ba7319f99a494868f5c47",
+  "compiler_version": "hgl 0.8.30-55-g2738ca768 (hgraph api 0.8.0)",
+  "executable_sha256": "75af9b449e00b465ab076bfca69126d58e78c02d7e530a3b595ee4718460f37c",
+  "sdk_libraries_sha256": {
+    "lib/libhgl_core_native.a": "0e295d48834231b7d84ec6c6c6ca11ccb646b72b60eb1413b89194874a54fc2e",
+    "lib/libhgl_native_package.dylib": "62c24beb2052ae29c8a9995e8713d33888d75ddd2b736cebdd598bc041776d74",
+    "lib/libhgl_standard_library.a": "6471740d3b1e3cfb5b78fb414216961fe3f5f77b8678c32668b141b33e54b322"
+  },
+  "replay_digests": [
+    "b19153feff6f1db7a83b8b912af5e2bf3684f0381028509706c9c97a0fe4b2c3",
+    "b19153feff6f1db7a83b8b912af5e2bf3684f0381028509706c9c97a0fe4b2c3",
+    "b19153feff6f1db7a83b8b912af5e2bf3684f0381028509706c9c97a0fe4b2c3"
+  ]
+}

@@ -1,0 +1,436 @@
+{
+  "repositories": {
+    "hgraph_spec": "spec",
+    "hgraph_std": "stdlib"
+  },
+  "files": {
+    "runtime/index.rst": {
+      "repository": "hgraph_spec",
+      "path": "runtime/index.rst"
+    },
+    "runtime/conformance.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/conformance.md"
+    },
+    "runtime/overview.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/overview.md"
+    },
+    "runtime/cases_lifecycle.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/cases_lifecycle.md"
+    },
+    "runtime/extraction.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/extraction.md"
+    },
+    "runtime/wiring.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/wiring.md"
+    },
+    "runtime/cases_collections.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/cases_collections.md"
+    },
+    "runtime/cases_nested.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/cases_nested.md"
+    },
+    "runtime/cases_wiring.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/cases_wiring.md"
+    },
+    "runtime/node.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/node.md"
+    },
+    "runtime/cases_atomic.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/cases_atomic.md"
+    },
+    "runtime/operators.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/operators.md"
+    },
+    "runtime/representations.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/representations.md"
+    },
+    "runtime/boundaries.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/boundaries.md"
+    },
+    "runtime/execution_engine.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/execution_engine.md"
+    },
+    "runtime/cases_fixed.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/cases_fixed.md"
+    },
+    "runtime/injectables.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/injectables.md"
+    },
+    "runtime/cases_references.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/cases_references.md"
+    },
+    "runtime/time_series.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/time_series.md"
+    },
+    "runtime/layout_example.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/layout_example.md"
+    },
+    "runtime/scalar_types.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/scalar_types.md"
+    },
+    "runtime/graph.md": {
+      "repository": "hgraph_spec",
+      "path": "runtime/graph.md"
+    },
+    "runtime/validation/decisions.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/decisions.json"
+    },
+    "runtime/validation/reasoned.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/reasoned.json"
+    },
+    "runtime/validation/assertions.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/assertions.json"
+    },
+    "runtime/validation/parity/decisions.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/parity/decisions.json"
+    },
+    "runtime/validation/parity/reasoned.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/parity/reasoned.json"
+    },
+    "runtime/validation/descriptions/rulings.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/descriptions/rulings.json"
+    },
+    "runtime/validation/descriptions/reasoned.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/descriptions/reasoned.json"
+    },
+    "runtime/validation/descriptions/corrections.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/descriptions/corrections.json"
+    },
+    "runtime/validation/wiring/contract_widening.hgl": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/wiring/contract_widening.hgl"
+    },
+    "runtime/validation/wiring/decisions.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/wiring/decisions.json"
+    },
+    "runtime/validation/wiring/contract_superset.hgl": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/wiring/contract_superset.hgl"
+    },
+    "runtime/validation/wiring/front_end.hgl": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/wiring/front_end.hgl"
+    },
+    "runtime/validation/wiring/contract_required_extra.hgl": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/wiring/contract_required_extra.hgl"
+    },
+    "runtime/validation/wiring/reasoned.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/wiring/reasoned.json"
+    },
+    "runtime/validation/wiring/contract_extra_argument.hgl": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/wiring/contract_extra_argument.hgl"
+    },
+    "runtime/validation/fixed/reasoning_corrections.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/reasoning_corrections.json"
+    },
+    "runtime/validation/fixed/decisions.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/decisions.json"
+    },
+    "runtime/validation/fixed/reasoned.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/reasoned.json"
+    },
+    "runtime/validation/recipes/nested_timer.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/recipes/nested_timer.json"
+    },
+    "runtime/validation/recipes/child_start_failure.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/recipes/child_start_failure.json"
+    },
+    "runtime/validation/recipes/restore.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/recipes/restore.json"
+    },
+    "runtime/validation/recipes/membership.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/recipes/membership.json"
+    },
+    "runtime/validation/recipes/mapped_ref.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/recipes/mapped_ref.json"
+    },
+    "runtime/validation/recipes/nested_mapped_ref.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/recipes/nested_mapped_ref.json"
+    },
+    "runtime/validation/recipes/timer.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/recipes/timer.json"
+    },
+    "runtime/validation/recipes/dictionary_ref.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/recipes/dictionary_ref.json"
+    },
+    "runtime/validation/recipes/quote.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/recipes/quote.json"
+    },
+    "runtime/validation/recipes/cancel_timer.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/recipes/cancel_timer.json"
+    },
+    "runtime/validation/recipes/parallel_children.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/recipes/parallel_children.json"
+    },
+    "runtime/validation/recipes/expired_ref.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/recipes/expired_ref.json"
+    },
+    "runtime/validation/recipes/child_failure.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/recipes/child_failure.json"
+    },
+    "runtime/validation/recipes/scalar_ref.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/recipes/scalar_ref.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_tsb_graph_owned.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_tsb_graph_owned.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_ref_whole.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_ref_whole.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_tsb_assembled_invalidate.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_tsb_assembled_invalidate.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_tsl_graph_assembled.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_tsl_graph_assembled.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_tsb_owned_invalidate.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_tsb_owned_invalidate.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_tsl_graph_owned.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_tsl_graph_owned.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_ref_whole.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_ref_whole.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_passive.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_passive.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_dictionary_owned.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_dictionary_owned.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_tsb_assembled_invalidate.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_tsb_assembled_invalidate.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_tsl_owned_invalidate.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_tsl_owned_invalidate.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_assembled.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_assembled.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_dictionary_assembled.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_dictionary_assembled.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_heterogeneous_owned.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_heterogeneous_owned.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_dictionary_owned.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_dictionary_owned.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_tsb_mixed.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_tsb_mixed.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_tsl_owned.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_tsl_owned.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_owned.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_owned.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_assembled.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_assembled.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_tsl_owned.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_tsl_owned.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_tsl_mixed.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_tsl_mixed.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_tsb_graph_assembled.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_tsb_graph_assembled.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_tsl_owned_invalidate.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_tsl_owned_invalidate.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_tsb_owned.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_tsb_owned.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_passive.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_passive.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_heterogeneous_assembled.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_heterogeneous_assembled.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_tsb_assembled.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_tsb_assembled.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_tsl_assembled_invalidate.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_tsl_assembled_invalidate.json"
+    },
+    "runtime/validation/fixed/recipes/tsd_tsl_tsb.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsd_tsl_tsb.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_tsl_assembled.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_tsl_assembled.json"
+    },
+    "runtime/validation/fixed/recipes/tsd_tsb_tsl.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsd_tsb_tsl.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_owned.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_owned.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_dictionary_assembled.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_dictionary_assembled.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_tsb_owned.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_tsb_owned.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_tsl_assembled.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_tsl_assembled.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_tsb_assembled.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_tsb_assembled.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_tsb_ref.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_tsb_ref.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_latest_invalid.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_latest_invalid.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_tsl_assembled_invalidate.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_tsl_assembled_invalidate.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_tsl_ref.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_tsl_ref.json"
+    },
+    "runtime/validation/fixed/recipes/tsb_ref_items.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsb_ref_items.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_latest_invalid.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_latest_invalid.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_tsb_owned_invalidate.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_tsb_owned_invalidate.json"
+    },
+    "runtime/validation/fixed/recipes/tsl_ref_items.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/fixed/recipes/tsl_ref_items.json"
+    },
+    "runtime/validation/descriptions/recipes/mixed.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/descriptions/recipes/mixed.json"
+    },
+    "runtime/validation/descriptions/recipes/owned_capture.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/descriptions/recipes/owned_capture.json"
+    },
+    "runtime/validation/descriptions/recipes/assembled.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/descriptions/recipes/assembled.json"
+    },
+    "runtime/validation/descriptions/recipes/owned.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/descriptions/recipes/owned.json"
+    },
+    "runtime/validation/descriptions/recipes/mixed_capture.json": {
+      "repository": "hgraph_spec",
+      "path": "runtime/validation/descriptions/recipes/mixed_capture.json"
+    },
+    "compiler/bootstrap/cases.json": {
+      "repository": "hgraph_spec",
+      "path": "compiler/bootstrap/cases.json"
+    },
+    "compiler/stdlib/cases.hgl": {
+      "repository": "hgraph_spec",
+      "path": "compiler/stdlib/cases.hgl"
+    },
+    "compiler/stdlib/cases.json": {
+      "repository": "hgraph_spec",
+      "path": "compiler/stdlib/cases.json"
+    },
+    "compiler/stdlib/nodes.hgl": {
+      "repository": "hgraph_spec",
+      "path": "compiler/stdlib/nodes.hgl"
+    }
+  }
+}
