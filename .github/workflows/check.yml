@@ -1,0 +1,38 @@
+name: audit
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  recorded:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - run: python tools/shared_artifacts.py --offline
+      - run: python -m unittest discover -s tests
+      - run: python tools/check_recorded.py
+  references:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - run: python tools/shared_artifacts.py --offline
+      - run: |
+          python -m venv .venv-python
+          python -m venv .venv-cpp
+          .venv-python/bin/python -m pip install -r environments/python.txt
+          .venv-cpp/bin/python -m pip install -r environments/cpp.txt
+          python tools/compare.py --reference .venv-python/bin/python --candidate .venv-cpp/bin/python --output results/ci
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reference-observations
+          path: results/ci

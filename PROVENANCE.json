@@ -1,0 +1,814 @@
+{
+  "files": [
+    {
+      "path": "runtime/evidence.md",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/evidence.md",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation.md",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation.md",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/CMakeLists.txt",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/CMakeLists.txt",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/README.md",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/README.md",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/adapter.patch",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/adapter.patch",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/assessment.json",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/assessment.json",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/check.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/check.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/.gitignore",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/.gitignore",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/CMakeLists.txt",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/CMakeLists.txt",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/README.md",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/README.md",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/adapter.patch",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/adapter.patch",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/assessment.json",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/assessment.json",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/check.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/check.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/evidence.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/evidence.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/expand.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/expand.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/harness_identity.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/harness_identity.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/native_identity.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/native_identity.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/native_loaded_libraries.h",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/native_loaded_libraries.h",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/native_nested.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/native_nested.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/native_nested_assessment.json",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/native_nested_assessment.json",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/native_nested_build.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/native_nested_build.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/native_nested_observed.json",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/native_nested_observed.json",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/native_nested_probe.cpp",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/native_nested_probe.cpp",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/native_observed.txt",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/native_observed.txt",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/native_probe.cpp",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/native_probe.cpp",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/observed.json",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/observed.json",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/reference_identity.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/reference_identity.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/replay.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/replay.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/test_check.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/test_check.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/test_evidence.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/test_evidence.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/test_identity.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/test_identity.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/test_native_nested.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/test_native_nested.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/fixed/test_replay.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/fixed/test_replay.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/native_observed.txt",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/native_observed.txt",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/native_probe.cpp",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/native_probe.cpp",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/observed.json",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/observed.json",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/parity/README.md",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/parity/README.md",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/parity/assessment.json",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/parity/assessment.json",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/parity/check.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/parity/check.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/parity/observed.json",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/parity/observed.json",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/parity/tsd_set_model.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/parity/tsd_set_model.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/wiring/README.md",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/wiring/README.md",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/wiring/assessment.json",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/wiring/assessment.json",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/wiring/cases.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/wiring/cases.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/wiring/check.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/wiring/check.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/wiring/observe.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/wiring/observe.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/wiring/observe_hgl.py",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/wiring/observe_hgl.py",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/wiring/observed.json",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/wiring/observed.json",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/wiring/observed_96d364e87.json",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/wiring/observed_96d364e87.json",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/validation/wiring/observed_hgl.json",
+      "source_project": "hgraph",
+      "source_path": "docs/source/runtime_spec/validation/wiring/observed_hgl.json",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "archive/hgl/runtime/validation.md",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation.md",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/descriptions/README.md",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/descriptions/README.md",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/descriptions/adapter.patch",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/descriptions/adapter.patch",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/descriptions/assessment.json",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/descriptions/assessment.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/descriptions/check.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/descriptions/check.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/descriptions/observed.json",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/descriptions/observed.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/descriptions/test_check.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/descriptions/test_check.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "archive/hgl/runtime/validation/fixed/replay.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/replay.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "examples/examples/native-functions.hgl",
+      "source_project": "hgraph",
+      "source_path": "language/examples/native-functions.hgl",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "catalogue/README.md",
+      "source_project": "hgraph",
+      "source_path": "language/stdlib/catalogue/README.md",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "catalogue/catalogue.json",
+      "source_project": "hgraph",
+      "source_path": "language/stdlib/catalogue/catalogue.json",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "catalogue/registry.json",
+      "source_project": "hgraph",
+      "source_path": "language/stdlib/catalogue/registry.json",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "catalogue/status.json",
+      "source_project": "hgraph",
+      "source_path": "language/stdlib/catalogue/status.json",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "compiler/bootstrap/README.md",
+      "source_project": "hgl",
+      "source_path": "docs/compiler/bootstrap/README.md",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "compiler/bootstrap/cpp.json",
+      "source_project": "hgl",
+      "source_path": "docs/compiler/bootstrap/cpp.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "compiler/bootstrap/mutants.json",
+      "source_project": "hgl",
+      "source_path": "docs/compiler/bootstrap/mutants.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "compiler/bootstrap/python.json",
+      "source_project": "hgl",
+      "source_path": "docs/compiler/bootstrap/python.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "compiler/bootstrap/replay.py",
+      "source_project": "hgl",
+      "source_path": "docs/compiler/bootstrap/replay.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "compiler/capabilities/README.md",
+      "source_project": "hgl",
+      "source_path": "docs/compiler/capabilities/README.md",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "compiler/capabilities/cpp.json",
+      "source_project": "hgl",
+      "source_path": "docs/compiler/capabilities/cpp.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "compiler/capabilities/python.json",
+      "source_project": "hgl",
+      "source_path": "docs/compiler/capabilities/python.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "compiler/capabilities/replay.py",
+      "source_project": "hgl",
+      "source_path": "docs/compiler/capabilities/replay.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "compiler/stdlib/README.md",
+      "source_project": "hgl",
+      "source_path": "docs/compiler/stdlib/README.md",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "compiler/stdlib/cpp.json",
+      "source_project": "hgl",
+      "source_path": "docs/compiler/stdlib/cpp.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "compiler/stdlib/hgl-reference.json",
+      "source_project": "hgl",
+      "source_path": "docs/compiler/stdlib/hgl-reference.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "compiler/stdlib/mutants.json",
+      "source_project": "hgl",
+      "source_path": "docs/compiler/stdlib/mutants.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "compiler/stdlib/python.json",
+      "source_project": "hgl",
+      "source_path": "docs/compiler/stdlib/python.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "compiler/stdlib/replay.py",
+      "source_project": "hgl",
+      "source_path": "docs/compiler/stdlib/replay.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "compiler/stdlib/test_evidence.py",
+      "source_project": "hgl",
+      "source_path": "docs/compiler/stdlib/test_evidence.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "historical/python/00_INDEX.md",
+      "source_project": "hgraph",
+      "source_path": "docs/source/specification/00_INDEX.md",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "historical/python/01_OVERVIEW.md",
+      "source_project": "hgraph",
+      "source_path": "docs/source/specification/01_OVERVIEW.md",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "historical/python/02_TYPE_SYSTEM.md",
+      "source_project": "hgraph",
+      "source_path": "docs/source/specification/02_TYPE_SYSTEM.md",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "historical/python/03_WIRING_SYSTEM.md",
+      "source_project": "hgraph",
+      "source_path": "docs/source/specification/03_WIRING_SYSTEM.md",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "historical/python/04_RUNTIME_SYSTEM.md",
+      "source_project": "hgraph",
+      "source_path": "docs/source/specification/04_RUNTIME_SYSTEM.md",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "historical/python/05_TIME_SERIES_TYPES.md",
+      "source_project": "hgraph",
+      "source_path": "docs/source/specification/05_TIME_SERIES_TYPES.md",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "historical/python/06_NODE_TYPES.md",
+      "source_project": "hgraph",
+      "source_path": "docs/source/specification/06_NODE_TYPES.md",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "historical/python/07_OPERATORS.md",
+      "source_project": "hgraph",
+      "source_path": "docs/source/specification/07_OPERATORS.md",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "historical/python/08_ADVANCED_CONCEPTS.md",
+      "source_project": "hgraph",
+      "source_path": "docs/source/specification/08_ADVANCED_CONCEPTS.md",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "historical/python/09_CONTROL_FLOW.md",
+      "source_project": "hgraph",
+      "source_path": "docs/source/specification/09_CONTROL_FLOW.md",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "historical/python/10_DATA_SOURCES.md",
+      "source_project": "hgraph",
+      "source_path": "docs/source/specification/10_DATA_SOURCES.md",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "historical/python/index.rst",
+      "source_project": "hgraph",
+      "source_path": "docs/source/specification/index.rst",
+      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+    },
+    {
+      "path": "runtime/evidence.md",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/evidence.md",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/CMakeLists.txt",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/CMakeLists.txt",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/README.md",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/README.md",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/adapter.patch",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/adapter.patch",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/assessment.json",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/assessment.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/check.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/check.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/.gitignore",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/.gitignore",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/CMakeLists.txt",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/CMakeLists.txt",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/README.md",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/README.md",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/adapter.patch",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/adapter.patch",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/assessment.json",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/assessment.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/check.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/check.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/evidence.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/evidence.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/expand.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/expand.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/harness_identity.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/harness_identity.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/native_identity.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/native_identity.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/native_loaded_libraries.h",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/native_loaded_libraries.h",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/native_nested.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/native_nested.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/native_nested_assessment.json",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/native_nested_assessment.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/native_nested_build.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/native_nested_build.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/native_nested_observed.json",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/native_nested_observed.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/native_nested_probe.cpp",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/native_nested_probe.cpp",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/native_observed.txt",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/native_observed.txt",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/native_probe.cpp",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/native_probe.cpp",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/observed.json",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/observed.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/reference_identity.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/reference_identity.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/test_check.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/test_check.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/test_evidence.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/test_evidence.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/test_identity.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/test_identity.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/test_native_nested.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/test_native_nested.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/fixed/test_replay.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/fixed/test_replay.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/native_observed.txt",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/native_observed.txt",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/native_probe.cpp",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/native_probe.cpp",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/observed.json",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/observed.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/wiring/README.md",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/wiring/README.md",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/wiring/assessment.json",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/wiring/assessment.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/wiring/cases.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/wiring/cases.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/wiring/check.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/wiring/check.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/wiring/observe.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/wiring/observe.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/wiring/observe_hgl.py",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/wiring/observe_hgl.py",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/wiring/observed.json",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/wiring/observed.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/wiring/observed_96d364e87.json",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/wiring/observed_96d364e87.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "runtime/validation/wiring/observed_hgl.json",
+      "source_project": "hgl",
+      "source_path": "docs/runtime_spec/validation/wiring/observed_hgl.json",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    },
+    {
+      "path": "compiler/stdlib/nodes.hgl",
+      "source_project": "hgl",
+      "source_path": "docs/compiler/stdlib/nodes.hgl",
+      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+    }
+  ]
+}
