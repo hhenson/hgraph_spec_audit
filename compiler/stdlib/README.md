@@ -28,16 +28,18 @@ Upstream source revision: `73cc53c97c54079e245e538ae61a3709012ba933`.
 `cases.hgl` and the Rust test table are generated from the same reasoned JSON.
 
 ```sh
-python tools/stdlib_fixtures.py --check
-python -m unittest discover -s docs/compiler/stdlib -p 'test_*.py'
-python-hgraph -I docs/compiler/stdlib/replay.py --engine python --output python.json
-cpp-hgraph -I docs/compiler/stdlib/replay.py --engine cpp --output cpp.json
-hgl check docs/compiler/stdlib/nodes.hgl --part docs/compiler/stdlib/cases.hgl
-hgl test docs/compiler/stdlib/nodes.hgl --part docs/compiler/stdlib/cases.hgl
-cargo test -p hgl-native -p hgl-stdlib
+python tools/shared_artifacts.py
+python -m unittest discover -s compiler/stdlib -p 'test_*.py'
+python-hgraph -I compiler/stdlib/replay.py --engine python --output python.json
+cpp-hgraph -I compiler/stdlib/replay.py --engine cpp --output cpp.json
+hgl check compiler/stdlib/nodes.hgl --part compiler/stdlib/cases.hgl
+hgl test compiler/stdlib/nodes.hgl --part compiler/stdlib/cases.hgl
 ```
 
-`python-hgraph` and `cpp-hgraph` denote separately installed interpreters.
+Run these commands from this audit checkout. `python-hgraph` and `cpp-hgraph`
+denote separately installed interpreters; `hgl` is the C++ compiler from hgraph.
+The Rust fixture generator (`tools/stdlib_fixtures.py --check`) and Cargo gates
+remain in the private hgl implementation checkout, not this audit package.
 Replay refuses the wrong engine and records package and binary hashes. Review
 fresh observations before replacing the checked-in evidence.
 

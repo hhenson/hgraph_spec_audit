@@ -24,7 +24,8 @@ Repeat with a fresh instance. Exercise the sink with missing/equal/negative tick
 Reject unknown names, bad arity/types, scalar/temporal misuse, unmatched or
 missing target parts, unsupported syntax and duplicate declarations.
 
-`tools/compiler_mutants.py --output <file>` tests a disposable copy. Five
+In the hgl implementation checkout, `tools/compiler_mutants.py --output <file>`
+tests a disposable copy. Five
 compiled mutations fail their intended tests: delayed source publication,
 no-input bare-handler admission, temporal configuration, signature mismatch,
 and suppressed equal printing. The restored baseline passes; see `mutants.json`.

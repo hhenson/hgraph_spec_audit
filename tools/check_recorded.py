@@ -8,7 +8,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 CHECKS = ('runtime/validation/check.py', 'runtime/validation/fixed/check.py',
-          'runtime/validation/descriptions/check.py', 'runtime/validation/wiring/check.py')
+          'runtime/validation/fixed/native_nested.py', 'runtime/validation/descriptions/check.py', 'runtime/validation/wiring/check.py')
 
 
 def main():
@@ -17,11 +17,12 @@ def main():
         shutil.copytree(ROOT / 'runtime', work / 'runtime', ignore=shutil.ignore_patterns('__pycache__'))
         for check in CHECKS:
             completed = subprocess.run([sys.executable, str(work / check)], capture_output=True, text=True)
-            expected_exit = 1 if '/fixed/' in check else 0
+            expected_exit = 1 if check == 'runtime/validation/fixed/check.py' else 0
             if completed.returncode != expected_exit:
                 raise RuntimeError(f'{check}: unexpected exit {completed.returncode}\n{completed.stdout}\n{completed.stderr}')
-            original = ROOT / Path(check).parent / 'assessment.json'
-            generated = work / Path(check).parent / 'assessment.json'
+            report = 'native_nested_assessment.json' if check.endswith('native_nested.py') else 'assessment.json'
+            original = ROOT / Path(check).parent / report
+            generated = work / Path(check).parent / report
             if json.loads(original.read_text()) != json.loads(generated.read_text()):
                 raise RuntimeError(f'{check}: recorded assessment changed')
             print(check + ': recorded assessment reproduced')

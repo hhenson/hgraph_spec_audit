@@ -21,6 +21,12 @@ def main():
     args = parser.parse_args()
     if args.repeats < 2:
         parser.error('at least two fresh-process repeats are required')
+    output = args.output.resolve()
+    source = (ROOT / 'runtime/validation/wiring').resolve()
+    if output.is_relative_to(source):
+        parser.error('output must be outside the wiring source directory')
+    if output.exists():
+        parser.error('output already exists; choose a new directory to preserve prior evidence')
     identity_probe = (
         "import json, sys, importlib.metadata; import hgraph; "
         "print(json.dumps({'hgraph': importlib.metadata.version('hgraph'), "
@@ -34,9 +40,6 @@ def main():
         if not identity['hgraph'].startswith(family) or identity['native'] != native:
             parser.error(f'{name}: expected hgraph {family}x, native={native}; got {identity}')
         identities[name] = identity
-    output = args.output.resolve()
-    if output.exists():
-        parser.error('output already exists; choose a new directory to preserve prior evidence')
     wiring = output / 'runtime/validation/wiring'
     shutil.copytree(ROOT / 'runtime/validation/wiring', wiring, ignore=shutil.ignore_patterns('__pycache__'))
     for chapter in ('wiring.md', 'time_series.md'):
