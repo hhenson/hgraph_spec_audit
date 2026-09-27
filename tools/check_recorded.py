@@ -1,6 +1,7 @@
 """Check recorded evidence in a scratch copy; never rewrite archived results."""
 from pathlib import Path
 import json
+import hashlib
 import shutil
 import subprocess
 import sys
@@ -26,6 +27,16 @@ def main():
             if json.loads(original.read_text()) != json.loads(generated.read_text()):
                 raise RuntimeError(f'{check}: recorded assessment changed')
             print(check + ': recorded assessment reproduced')
+        released = ROOT / 'results/releases-0.5.42-0.8.30'
+        wiring = work / 'runtime/validation/wiring'
+        provenance = json.loads((released / 'provenance.json').read_text())
+        if hashlib.sha256((wiring / 'reasoned.json').read_bytes()).hexdigest() != provenance['reasoned_sha256']:
+            raise RuntimeError('released wiring expectations changed')
+        shutil.copy2(released / 'observed.json', wiring / 'observed.json')
+        subprocess.run([sys.executable, str(wiring / 'check.py')], check=True, capture_output=True)
+        if json.loads((wiring / 'assessment.json').read_text()) != json.loads((released / 'assessment.json').read_text()):
+            raise RuntimeError('released wiring assessment changed')
+        print('released wiring assessment reproduced')
         for folder in ('runtime/validation/descriptions', 'runtime/validation/fixed'):
             subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(work / folder)], check=True)
     subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(ROOT / 'compiler/stdlib')], check=True)

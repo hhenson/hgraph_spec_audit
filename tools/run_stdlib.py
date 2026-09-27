@@ -15,6 +15,16 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def configure_command(sdk, build, extra):
+    compiler = sdk / 'bin' / ('hgl.exe' if sys.platform == 'win32' else 'hgl')
+    # Fresh configuration prevents cached SDK/compiler selections surviving a run.
+    # Trusted definitions follow caller options, including typed -D overrides.
+    return ['cmake', *extra, '--fresh', '-S', str(CORPUS / 'native'), '-B', str(build),
+            '-DCMAKE_BUILD_TYPE=Release', '-DCMAKE_PREFIX_PATH=' + str(sdk),
+            '-Dhgraph_DIR=' + str(sdk / 'lib/cmake/hgraph'),
+            '-DHGL_EXECUTABLE=' + str(compiler), '-DPython_EXECUTABLE=' + sys.executable]
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--sdk', type=Path, required=True)
@@ -40,9 +50,7 @@ def main():
         sources[str(relative)] = sha(source)
     if not sources:
         parser.error('stdlib dependency is missing; initialize submodules first')
-    subprocess.run(['cmake', '-S', str(CORPUS / 'native'), '-B', str(build),
-                    '-DCMAKE_BUILD_TYPE=Release', '-DCMAKE_PREFIX_PATH=' + str(sdk),
-                    '-DPython_EXECUTABLE=' + sys.executable, *args.cmake_arg], check=True)
+    subprocess.run(configure_command(sdk, build, args.cmake_arg), check=True)
     subprocess.run(['cmake', '--build', str(build), '--config', 'Release',
                     '--parallel', str(args.parallel)], check=True)
     executable = build / ('stdlib_conformance.exe' if sys.platform == 'win32' else 'stdlib_conformance')

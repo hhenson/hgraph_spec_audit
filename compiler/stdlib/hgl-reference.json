@@ -1,5 +1,5 @@
 {
-  "measured_at": "2026-09-27T09:29:18.630704+00:00",
+  "measured_at": "2026-09-27T09:45:38.228798+00:00",
   "runtime_test_status": "passed",
   "runtime_test_exit_code": 0,
   "execution": "shared HGL imports compiled to C++, linked to the installed HGL standard library",
@@ -55,7 +55,7 @@
     "cases.json": "fe7402d0a7f73eec172a6855d42d20f08a5b28e4494ebcc3ae3ea3420e8398f0"
   },
   "harness_sha256": {
-    "tools/run_stdlib.py": "89fa2f26f56b9e51d2a71864a3b20e070238c48e6e85a47f1866bc05b10c6d1b",
+    "tools/run_stdlib.py": "9f205756fc6765b49d300444f060eee6d0be494c06c0b38777f07786e19d7dcd",
     "tools/stdlib_cases.py": "6d97937c54ddf96644c10647defaca978786368cd0c1fda4a721663e916ab030",
     "compiler/stdlib/native/main.cpp": "4e77d94719efd13ebe8babbae29b4fc15162799d27a00a2f381c90cf6ac6e19c",
     "compiler/stdlib/native/CMakeLists.txt": "aaa7f4d39245e1b2734a4f92b15631af106701debbe7ca074bb17e05ac6cb27c"
@@ -72,7 +72,7 @@
   },
   "compiler_sha256": "d93cb9efb99e4a478d8e6cf7265fe6f455b400ec842ba7319f99a494868f5c47",
   "compiler_version": "hgl 0.8.30-55-g2738ca768 (hgraph api 0.8.0)",
-  "executable_sha256": "752940cbaf8879d9d7e9540b89927bfbc80c4ea29e97a3635ced97266f5d441f",
+  "executable_sha256": "75af9b449e00b465ab076bfca69126d58e78c02d7e530a3b595ee4718460f37c",
   "sdk_libraries_sha256": {
     "lib/libhgl_core_native.a": "0e295d48834231b7d84ec6c6c6ca11ccb646b72b60eb1413b89194874a54fc2e",
     "lib/libhgl_native_package.dylib": "62c24beb2052ae29c8a9995e8713d33888d75ddd2b736cebdd598bc041776d74",
