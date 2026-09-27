@@ -43,6 +43,11 @@ def main() -> None:
     if undefined := sorted(cited - defined):
         raise SystemExit(f"expectations cite rules no chapter defines: {undefined}")
     observed = json.loads((HERE / "observed.json").read_text())["cases"]
+    for case, runs in observed.items():
+        for engine in ("python", "cpp"):
+            for marker in ("harness_error", "unstable"):
+                if marker in runs[engine]:
+                    raise SystemExit(f"{case}.{engine}: {marker}; no usable observation")
     hgl = json.loads((HERE / "observed_hgl.json").read_text())
     assessment: dict = {"runtimes": {}, "hgl": {}, "totals": {}}
     totals: dict[str, int] = {}
