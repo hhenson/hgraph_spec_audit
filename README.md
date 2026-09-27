@@ -19,8 +19,9 @@ python3 -m unittest discover -s tests
 The pinned `spec` and `stdlib` submodules are the source of expected traces
 and portable code. Materialized inputs are ignored working files; edit their
 owning repository. Existing result identities, historical adapters and
-variation reports are retained. A passing recorded-evidence check is not a
-fresh runtime measurement.
+variation reports are retained. The check reproduces the historical fixed-collection failure status (318
+unvalidated observations); it does not claim full conformance. A passing
+recorded-evidence check is not a fresh runtime measurement.
 
 ## Exercise the two reference implementations
 
@@ -60,3 +61,6 @@ one reference supports acceptance with a variation report. If both references
 agree against reasoning, revisit the reasoning. If no pair agrees, obtain an
 owner ruling; do not change an expectation to make a run pass. Recorded owner
 rulings remain authoritative.
+
+The [released reference audit](results/releases-0.5.42-0.8.30/) records the first
+independent run after extraction.

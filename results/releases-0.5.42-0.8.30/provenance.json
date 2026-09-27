@@ -1,0 +1,16 @@
+{
+  "measured_at": "2026-09-27T05:44:36.788658+00:00",
+  "runtimes": {
+    "python": {
+      "hgraph": "0.5.42",
+      "native": false
+    },
+    "cpp": {
+      "hgraph": "0.8.30",
+      "native": true
+    }
+  },
+  "repeats": 3,
+  "scope": "wiring runtime observations; HGL front-end evidence is historical",
+  "reasoned_sha256": "43aa45d9b771db19d590f72408253d27e1d96ac656248b565b9dd03d4e30c10e"
+}

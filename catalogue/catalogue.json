@@ -441,7 +441,7 @@
           "marker": "lag_proxy_node",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/stream.h",
-          "line": 55
+          "line": 56
         }
       ],
       "registration_sites": [
@@ -3244,7 +3244,7 @@
           "marker": "batch",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/stream.h",
-          "line": 259
+          "line": 261
         }
       ],
       "registration_sites": [
@@ -10312,7 +10312,7 @@
           "marker": "dedup",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/stream.h",
-          "line": 95
+          "line": 96
         }
       ],
       "registration_sites": [
@@ -12080,7 +12080,7 @@
           "marker": "drop",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/stream.h",
-          "line": 191
+          "line": 193
         }
       ],
       "registration_sites": [
@@ -13377,7 +13377,7 @@
           "marker": "filter_",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/stream.h",
-          "line": 111
+          "line": 112
         }
       ],
       "registration_sites": [
@@ -13466,7 +13466,7 @@
           "marker": "filter_by",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/stream.h",
-          "line": 126
+          "line": 127
         }
       ],
       "registration_sites": [],
@@ -14713,7 +14713,7 @@
           "marker": "freeze",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/stream.h",
-          "line": 152
+          "line": 154
         }
       ],
       "registration_sites": [
@@ -15253,7 +15253,7 @@
           "marker": "gate",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/stream.h",
-          "line": 242
+          "line": 244
         }
       ],
       "registration_sites": [
@@ -19928,7 +19928,7 @@
           "marker": "lag",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/stream.h",
-          "line": 47
+          "line": 48
         }
       ],
       "registration_sites": [
@@ -34219,7 +34219,7 @@
           "marker": "request_id",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/stream.h",
-          "line": 83
+          "line": 84
         }
       ],
       "registration_sites": [
@@ -35307,7 +35307,7 @@
           "marker": "schedule",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/stream.h",
-          "line": 72
+          "line": 73
         }
       ],
       "registration_sites": [
@@ -35935,7 +35935,7 @@
           "marker": "slice_",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/stream.h",
-          "line": 286
+          "line": 288
         }
       ],
       "registration_sites": [
@@ -36253,7 +36253,7 @@
           "marker": "step",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/stream.h",
-          "line": 272
+          "line": 274
         }
       ],
       "registration_sites": [
@@ -39377,7 +39377,7 @@
           "marker": "take",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/stream.h",
-          "line": 179
+          "line": 181
         }
       ],
       "registration_sites": [
@@ -40061,7 +40061,7 @@
           "marker": "throttle",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/stream.h",
-          "line": 167
+          "line": 169
         }
       ],
       "registration_sites": [
@@ -40672,7 +40672,7 @@
           "marker": "to_window",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/stream.h",
-          "line": 226
+          "line": 228
         }
       ],
       "registration_sites": [
@@ -41533,7 +41533,7 @@
           "marker": "until_true",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/stream.h",
-          "line": 139
+          "line": 140
         }
       ],
       "registration_sites": [
@@ -42012,7 +42012,7 @@
           "marker": "window",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/stream.h",
-          "line": 207
+          "line": 209
         }
       ],
       "registration_sites": [
@@ -43138,15 +43138,6 @@
     },
     {
       "module": "hgraph.native",
-      "name": "midnight",
-      "kind": "native-value",
-      "form": null,
-      "source": "language/stdlib/hgl/hgraph/native/temporal_values.hgl",
-      "line": 82,
-      "declaration": "native fn midnight(value: date) -> datetime"
-    },
-    {
-      "module": "hgraph.native",
       "name": "len",
       "kind": "native-value",
       "form": null,
@@ -43270,6 +43261,15 @@
       "source": "language/stdlib/hgl/hgraph/native.hgl",
       "line": 45,
       "declaration": "native fn active(value: signal) -> bool"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "midnight",
+      "kind": "native-value",
+      "form": null,
+      "source": "language/stdlib/hgl/hgraph/native.hgl",
+      "line": 73,
+      "declaration": "native fn midnight(value: date) -> datetime"
     }
   ],
   "hgl_native_implementations": [
@@ -44317,7 +44317,7 @@
       "scope": "analytics",
       "kind": "node",
       "source": "extensions/analytics/src/statistics_window.cpp",
-      "line": 68
+      "line": 66
     },
     {
       "operator": "std_",
@@ -44325,7 +44325,7 @@
       "scope": "analytics",
       "kind": "node",
       "source": "extensions/analytics/src/statistics_window.cpp",
-      "line": 69
+      "line": 67
     },
     {
       "operator": "std_",
@@ -44333,7 +44333,7 @@
       "scope": "analytics",
       "kind": "node",
       "source": "extensions/analytics/src/statistics_window.cpp",
-      "line": 70
+      "line": 68
     },
     {
       "operator": "std_",
@@ -44341,7 +44341,7 @@
       "scope": "analytics",
       "kind": "node",
       "source": "extensions/analytics/src/statistics_window.cpp",
-      "line": 71
+      "line": 69
     },
     {
       "operator": "rolling_mean",
@@ -44349,7 +44349,7 @@
       "scope": "analytics",
       "kind": "graph",
       "source": "extensions/analytics/src/statistics_window.cpp",
-      "line": 73
+      "line": 71
     },
     {
       "operator": "rolling_mean",
@@ -44357,7 +44357,7 @@
       "scope": "analytics",
       "kind": "graph",
       "source": "extensions/analytics/src/statistics_window.cpp",
-      "line": 74
+      "line": 72
     },
     {
       "operator": "resample",
@@ -44365,7 +44365,7 @@
       "scope": "analytics",
       "kind": "node",
       "source": "extensions/analytics/src/statistics_window.cpp",
-      "line": 75
+      "line": 73
     },
     {
       "operator": "SubscribeData",
@@ -44533,7 +44533,7 @@
       "scope": "core",
       "kind": "node",
       "source": "include/hgraph/lib/std/operators/impl/collection_impl.h",
-      "line": 4367
+      "line": 4423
     },
     {
       "operator": "Operator",
@@ -44541,7 +44541,7 @@
       "scope": "core",
       "kind": "node",
       "source": "include/hgraph/lib/std/operators/impl/collection_impl.h",
-      "line": 4368
+      "line": 4424
     },
     {
       "operator": "Operator",
@@ -44549,7 +44549,7 @@
       "scope": "core",
       "kind": "node",
       "source": "include/hgraph/lib/std/operators/impl/collection_impl.h",
-      "line": 4369
+      "line": 4425
     },
     {
       "operator": "Operator",
@@ -44557,7 +44557,7 @@
       "scope": "core",
       "kind": "node",
       "source": "include/hgraph/lib/std/operators/impl/collection_impl.h",
-      "line": 4370
+      "line": 4426
     },
     {
       "operator": "Operator",
@@ -44565,7 +44565,7 @@
       "scope": "core",
       "kind": "graph",
       "source": "include/hgraph/lib/std/operators/impl/collection_impl.h",
-      "line": 4377
+      "line": 4433
     },
     {
       "operator": "Operator",
@@ -44573,7 +44573,7 @@
       "scope": "core",
       "kind": "graph",
       "source": "include/hgraph/lib/std/operators/impl/collection_impl.h",
-      "line": 4378
+      "line": 4434
     },
     {
       "operator": "Operator",
@@ -44581,7 +44581,7 @@
       "scope": "core",
       "kind": "graph",
       "source": "include/hgraph/lib/std/operators/impl/collection_impl.h",
-      "line": 4379
+      "line": 4435
     },
     {
       "operator": "Operator",
@@ -44589,7 +44589,7 @@
       "scope": "core",
       "kind": "graph",
       "source": "include/hgraph/lib/std/operators/impl/collection_impl.h",
-      "line": 4380
+      "line": 4436
     },
     {
       "operator": "Operator",
@@ -50781,49 +50781,49 @@
       "marker": "quantile",
       "scope": "analytics",
       "source": "extensions/analytics/include/hgraph/analytics/operators.h",
-      "line": 229
+      "line": 231
     },
     {
       "name": "hgraph.analytics.array_std",
       "marker": "array_std",
       "scope": "analytics",
       "source": "extensions/analytics/include/hgraph/analytics/operators.h",
-      "line": 249
+      "line": 251
     },
     {
       "name": "hgraph.analytics.rolling_window",
       "marker": "rolling_window",
       "scope": "analytics",
       "source": "extensions/analytics/include/hgraph/analytics/operators.h",
-      "line": 271
+      "line": 273
     },
     {
       "name": "hgraph.analytics.std",
       "marker": "std_",
       "scope": "analytics",
       "source": "extensions/analytics/include/hgraph/analytics/operators.h",
-      "line": 299
+      "line": 301
     },
     {
       "name": "hgraph.analytics.var",
       "marker": "var_",
       "scope": "analytics",
       "source": "extensions/analytics/include/hgraph/analytics/operators.h",
-      "line": 322
+      "line": 326
     },
     {
       "name": "hgraph.analytics.rolling_mean",
       "marker": "rolling_mean",
       "scope": "analytics",
       "source": "extensions/analytics/include/hgraph/analytics/operators.h",
-      "line": 345
+      "line": 349
     },
     {
       "name": "hgraph.analytics.resample",
       "marker": "resample",
       "scope": "analytics",
       "source": "extensions/analytics/include/hgraph/analytics/operators.h",
-      "line": 368
+      "line": 372
     },
     {
       "name": "hgraph.fabric.subscribe_data",
