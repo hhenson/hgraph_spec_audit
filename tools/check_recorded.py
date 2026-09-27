@@ -28,6 +28,7 @@ def main():
             print(check + ': recorded assessment reproduced')
         for folder in ('runtime/validation/descriptions',):
             subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(work / folder)], check=True)
+    subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(ROOT / 'compiler/stdlib')], check=True)
     print('Recorded evidence checked; no fresh runtime measurements were made.')
 
 

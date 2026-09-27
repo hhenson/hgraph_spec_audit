@@ -427,6 +427,10 @@
     "compiler/stdlib/cases.json": {
       "repository": "hgraph_spec",
       "path": "compiler/stdlib/cases.json"
+    },
+    "compiler/stdlib/nodes.hgl": {
+      "repository": "hgraph_spec",
+      "path": "compiler/stdlib/nodes.hgl"
     }
   }
 }

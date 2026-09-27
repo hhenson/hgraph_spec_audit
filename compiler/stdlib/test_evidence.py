@@ -24,13 +24,26 @@ class Evidence(unittest.TestCase):
                     self.assertEqual(evidence['observed'][name]['ticks'], ticks)
                     self.assertTrue(evidence['observed'][name]['matches'])
 
-    def test_hgl_check_is_not_reported_as_runtime_execution(self):
+    def test_compiled_hgl_matches_current_shared_sources_and_ticks(self):
         evidence = json.loads((HERE / 'hgl-reference.json').read_text())
-        self.assertEqual(evidence['check_exit_code'], 0)
-        self.assertEqual(evidence['runtime_test_status'], 'blocked')
-        self.assertNotEqual(evidence['runtime_test_exit_code'], 0)
+        expected = {c['name']: c['expected'] for c in json.loads((HERE / 'cases.json').read_text())}
+        self.assertEqual(evidence['runtime_test_status'], 'passed')
+        self.assertEqual(evidence['runtime_test_exit_code'], 0)
+        self.assertEqual(evidence['repeats'], 3)
+        self.assertEqual(set(evidence['observed']), set(expected))
+        for name, ticks in expected.items():
+            self.assertEqual(evidence['observed'][name], {'ticks': ticks, 'matches': True})
+        digest = hashlib.sha256(json.dumps(evidence['observed'], sort_keys=True).encode()).hexdigest()
+        self.assertEqual(evidence['replay_digests'], [digest] * 3)
         for name, digest in evidence['checked_source_sha256'].items():
             self.assertEqual(hashlib.sha256((HERE / name).read_bytes()).hexdigest(), digest)
+        root = HERE.parents[1]
+        for name, digest in evidence['harness_sha256'].items():
+            self.assertEqual(hashlib.sha256((root / name).read_bytes()).hexdigest(), digest)
+        for name, digest in evidence['stdlib_source_sha256'].items():
+            self.assertEqual(hashlib.sha256((root / 'stdlib/hgl' / name).read_bytes()).hexdigest(), digest)
+        self.assertTrue(evidence['compiler_sha256'])
+        self.assertTrue(evidence['sdk_libraries_sha256'])
 
 
 if __name__ == '__main__':

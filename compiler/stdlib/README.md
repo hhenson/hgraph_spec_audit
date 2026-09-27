@@ -1,55 +1,30 @@
-# Initial port evidence
+# Standard-library conformance
 
-Status: four reasoned scenarios accepted unanimously; Rust fresh-run specimens implemented.
+The shared HGL wrappers import `bit_and`, `sample` and `dedup` from the actual
+standard library. No node body or native implementation is copied into this
+audit. Sources and independently reasoned expectations belong to
+[hgraph_spec](https://github.com/hhenson/hgraph_spec/tree/main/compiler/stdlib).
 
-[Cases](https://github.com/hhenson/hgraph_spec/blob/main/compiler/stdlib/cases.json) were written before the Rust implementations. Their rules
-are in [node authoring](https://github.com/hhenson/hgraph_spec/blob/main/language/docs/design/node-authoring.md). For these traces, no Python/C++
-variation needs a ruling. Each of the 23 cells asserts publication or absence
-of a tick, not merely a current value.
+Current results: four scenarios, 23 tick cells match reasoning on Python
+0.5.42, C++ 0.8.30 and compiled HGL linked to the installed C++ SDK. The HGL
+run repeats three times in fresh processes. `hgl-reference.json` records actual
+ticks, compiler/library fingerprints, shared-source hashes and harness hashes.
+The previous blocked compiler experiment has been replaced by this passing
+end-to-end check.
 
-| Evidence | Result |
-|---|---|
-| Released Python hgraph 0.5.41 | 4/4 scenarios, 23/23 cells |
-| Current C++ operators through the Python API | 4/4 scenarios, 23/23 cells |
-| Rust replay/node/record graphs | Same four tables; debug and release gates |
-| HGL specimens through reference `check` | Accepted |
-| HGL specimens through reference `test` | Blocked: process aborts in `NodeCheckpointIdentity` destruction before reporting tests |
-
-The last row is a [toolchain failure](hgl-reference.json), not an output disagreement or a pass.
-It reproduced with both available local reference compiler builds. Generated
-native code and its loaded runtime may be incompatible; that cause is not yet
-proven. The directly exercised Python and C++ operators agree with reasoning.
-Do not claim HGL-to-Rust source compilation: these Rust nodes are handwritten.
-
-`nodes.hgl` transcribes the upstream `bit_and<i64>`, `sample<T>` and
-`dedup<i64>` bodies. It renames local wrappers, specializes sample to i64 and
-colocates the existing native bitwise helper to avoid a package dependency.
-Upstream source revision: `73cc53c97c54079e245e538ae61a3709012ba933`.
-`cases.hgl` and the Rust test table are generated from the same reasoned JSON.
+From this checkout, after initializing the pinned dependencies:
 
 ```sh
 python tools/shared_artifacts.py
-python -m unittest discover -s compiler/stdlib -p 'test_*.py'
-python-hgraph -I compiler/stdlib/replay.py --engine python --output python.json
-cpp-hgraph -I compiler/stdlib/replay.py --engine cpp --output cpp.json
-hgl check compiler/stdlib/nodes.hgl --part compiler/stdlib/cases.hgl
-hgl test compiler/stdlib/nodes.hgl --part compiler/stdlib/cases.hgl
+.venv-python/bin/python -I compiler/stdlib/replay.py --engine python --output results/python-new.json
+.venv-cpp/bin/python -I compiler/stdlib/replay.py --engine cpp --output results/cpp-new.json
+.venv-cpp/bin/python tools/run_stdlib.py --sdk <installed-sdk> --build-dir build/stdlib --output results/hgl-new.json
+python -m unittest discover -s compiler/stdlib
 ```
 
-Run these commands from this audit checkout. `python-hgraph` and `cpp-hgraph`
-denote separately installed interpreters; `hgl` is the C++ compiler from hgraph.
-The Rust fixture generator (`tools/stdlib_fixtures.py --check`) and Cargo gates
-remain in the private hgl implementation checkout, not this audit package.
-Replay refuses the wrong engine and records package and binary hashes. Review
-fresh observations before replacing the checked-in evidence.
-
-Native-view tests cover unbound/idle inputs, peered and assembled TSL/TSB,
-nested immediate-child `all_valid`, cached invalidation times and scoped REF
-retirement and TSD removed-member expiry. Their expectations reuse TS-9/14/25/26 and the accepted fixed
-collection corpus; they do not claim new unanimous cross-runtime agreement.
-A peered structure is invalidated at its root; removing the final valid child
-invalidates an assembly. Retired child storage remains readable during its
-retirement cycle, then expires at the next cycle.
-
-[Mutation evidence](mutants.json): all six card mutations were rejected on an
-isolated copy. The original workspace remained unchanged.
+Use a full hgraph SDK install containing the compiler and standard library.
+The runner requires its installed HGL sources to match the `stdlib` pin and
+uses the invoking Python environment for SDK dependency discovery. On Windows,
+use the environments' `Scripts/python.exe` paths. Review new results before
+replacing the recorded files. Rust-specific tests and fixture generation stay
+in the private Rust implementation.

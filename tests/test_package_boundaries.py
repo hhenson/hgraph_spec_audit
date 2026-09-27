@@ -22,3 +22,7 @@ class PackageBoundaries(unittest.TestCase):
                         self.assertIsNone(re.search(r'^\s*```(?:python|py|cpp|c\+\+|rust)\b', source, re.M))
                         if path.suffix == '.hgl':
                             self.assertIsNone(re.search(r'^\s*cpp\s*\(', source, re.M))
+
+    def test_audit_does_not_own_hgl(self):
+        files = subprocess.check_output(['git', 'ls-files', '*.hgl'], cwd=ROOT, text=True).splitlines()
+        self.assertEqual(files, [], 'HGL belongs to the pinned spec or standard library')

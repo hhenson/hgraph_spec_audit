@@ -113,3 +113,4 @@ results/local/
 /runtime/wiring.md
 /results/local*/
 /results/ci/
+/compiler/stdlib/nodes.hgl

@@ -1,9 +1,10 @@
 # hgraph_spec_audit
 
-Public experiments and executable evidence for
+Executable conformance checks and recorded evidence for
 [hgraph_spec](https://github.com/hhenson/hgraph_spec) and
 [hgraph_std](https://github.com/hhenson/hgraph_std). Python/C++ examples,
-probes, harnesses and measured results live here. Native implementations of
+probes, harnesses and measured results live here. HGL inputs come from the
+pinned specification and standard library; this repository owns no HGL files. Native implementations of
 the standard library remain with their runtime.
 
 ## Reproduce recorded evidence
@@ -53,7 +54,9 @@ ctest --test-dir build/native --output-on-failure
 [description boundaries](runtime/validation/descriptions/README.md) document
 previous experiments and their exact harness requirements. Historical probes
 are retained as evidence; they are not claimed to support every later SDK.
-[Compiler experiments](compiler/) cover bootstrap, scalar helpers and services.
+[Compiled-HGL conformance](compiler/stdlib/) checks the current standard library
+through an installed compiler/SDK. Other compiler records retain their stated
+measurement dates and scope.
 The [catalogue](catalogue/) records implementation coverage.
 
 Reason first. Compare Python 0.5.x and C++ 0.8.x independently. Reasoning plus

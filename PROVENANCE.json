@@ -349,12 +349,6 @@
       "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
     },
     {
-      "path": "examples/examples/native-functions.hgl",
-      "source_project": "hgraph",
-      "source_path": "language/examples/native-functions.hgl",
-      "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
-    },
-    {
       "path": "catalogue/README.md",
       "source_project": "hgraph",
       "source_path": "language/stdlib/catalogue/README.md",
@@ -439,27 +433,9 @@
       "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
     },
     {
-      "path": "compiler/stdlib/cpp.json",
-      "source_project": "hgl",
-      "source_path": "docs/compiler/stdlib/cpp.json",
-      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
-    },
-    {
-      "path": "compiler/stdlib/hgl-reference.json",
-      "source_project": "hgl",
-      "source_path": "docs/compiler/stdlib/hgl-reference.json",
-      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
-    },
-    {
       "path": "compiler/stdlib/mutants.json",
       "source_project": "hgl",
       "source_path": "docs/compiler/stdlib/mutants.json",
-      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
-    },
-    {
-      "path": "compiler/stdlib/python.json",
-      "source_project": "hgl",
-      "source_path": "docs/compiler/stdlib/python.json",
       "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
     },
     {
@@ -802,12 +778,6 @@
       "path": "runtime/validation/wiring/observed_hgl.json",
       "source_project": "hgl",
       "source_path": "docs/runtime_spec/validation/wiring/observed_hgl.json",
-      "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
-    },
-    {
-      "path": "compiler/stdlib/nodes.hgl",
-      "source_project": "hgl",
-      "source_path": "docs/compiler/stdlib/nodes.hgl",
       "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
     }
   ]
