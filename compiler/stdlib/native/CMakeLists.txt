@@ -4,7 +4,7 @@ find_package(hgraph CONFIG REQUIRED)
 find_package(Python REQUIRED COMPONENTS Interpreter)
 include("${hgraph_DIR}/../hgl/HglLanguage.cmake")
 set(corpus "${CMAKE_CURRENT_SOURCE_DIR}/..")
-hgl_add_module(conformance_stdlib STATIC HGL "${corpus}/nodes.hgl"
+hgl_add_module(conformance_stdlib STATIC HGL "${corpus}/nodes.hgl" PARTS "${corpus}/cases.hgl"
     LINK_LIBRARIES hgl::standard_library)
 add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/cases.inc"
     COMMAND "${Python_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/../../../tools/stdlib_cases.py"

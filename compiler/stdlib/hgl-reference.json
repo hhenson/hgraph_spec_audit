@@ -1,5 +1,5 @@
 {
-  "measured_at": "2026-09-27T09:25:25.563942+00:00",
+  "measured_at": "2026-09-27T09:29:18.630704+00:00",
   "runtime_test_status": "passed",
   "runtime_test_exit_code": 0,
   "execution": "shared HGL imports compiled to C++, linked to the installed HGL standard library",
@@ -58,7 +58,7 @@
     "tools/run_stdlib.py": "89fa2f26f56b9e51d2a71864a3b20e070238c48e6e85a47f1866bc05b10c6d1b",
     "tools/stdlib_cases.py": "6d97937c54ddf96644c10647defaca978786368cd0c1fda4a721663e916ab030",
     "compiler/stdlib/native/main.cpp": "4e77d94719efd13ebe8babbae29b4fc15162799d27a00a2f381c90cf6ac6e19c",
-    "compiler/stdlib/native/CMakeLists.txt": "7d5c83227f11797da7afb804593c893eb319e4f74d95960baa619d49261a1b12"
+    "compiler/stdlib/native/CMakeLists.txt": "aaa7f4d39245e1b2734a4f92b15631af106701debbe7ca074bb17e05ac6cb27c"
   },
   "stdlib_source_sha256": {
     "hgraph/control.hgl": "74dba97c15f6375735f53c2bffef20ed3e7f4d97d38bfdf129fcdc6c555726e8",
