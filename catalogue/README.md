@@ -239,31 +239,31 @@ Implemented means the recorded domain is authored and tested; it does not promis
 
 Priority 1. Native errors and owned results: the exception half is admitted (ADR 0009: `throws` natives, descriptor policy `translated`, a raise ends the evaluation under hgraph's node error model) and scalar results including `str` are returned by value. Still missing: owned sequence/collection results (`split`), regex and formatting kernels that carry compiled state or packs (`match_`, `replace`, `format_`), and the coupled quotient/remainder result of `divmod_`.
 
-Evidence: [0009-native-errors-and-the-node-error-model.md](https://github.com/hhenson/hgraph/blob/main/language/docs/design/decisions/0009-native-errors-and-the-node-error-model.md), [native-interface.md](https://github.com/hhenson/hgraph/blob/main/language/docs/design/native-interface.md), [string_impl.h](https://github.com/hhenson/hgraph/blob/main/include/hgraph/lib/std/operators/impl/string_impl.h)
+Evidence: [0009-native-errors-and-the-node-error-model.md](https://github.com/hhenson/hgraph/blob/main/external/hgraph_spec/language/docs/design/decisions/0009-native-errors-and-the-node-error-model.md), [native-interface.md](https://github.com/hhenson/hgraph/blob/main/external/hgraph_spec/language/docs/design/native-interface.md), [string_impl.h](https://github.com/hhenson/hgraph/blob/main/include/hgraph/lib/std/operators/impl/string_impl.h)
 
 ### B2
 
 Priority 1. Lifecycle and activation: the clock and scheduler injectables, the scheduled() handler selector, passivate/activate (ADR 0010) and scalar cache fields aggregated into one native State slot (ADR 0011) are admitted. Native pending alarms and finite schedule progress recover in simulation. Still missing: cache beside recordable state (native coexistence is available; HGL mixed lowering remains gated), buffered delta queues and window state for throttle/batch/gate/lag/window (generic non-scalar state, MIG-005), passivation from a start block, an explicitly empty validity set for bound-but-invalid inputs (LIB-002), and external resource ownership.
 
-Evidence: [0010-lifecycle-capabilities.md](https://github.com/hhenson/hgraph/blob/main/language/docs/design/decisions/0010-lifecycle-capabilities.md), [0011-cache-declarations.md](https://github.com/hhenson/hgraph/blob/main/language/docs/design/decisions/0011-cache-declarations.md), [stream_impl.h](https://github.com/hhenson/hgraph/blob/main/include/hgraph/lib/std/operators/impl/stream_impl.h)
+Evidence: [0010-lifecycle-capabilities.md](https://github.com/hhenson/hgraph/blob/main/external/hgraph_spec/language/docs/design/decisions/0010-lifecycle-capabilities.md), [0011-cache-declarations.md](https://github.com/hhenson/hgraph/blob/main/external/hgraph_spec/language/docs/design/decisions/0011-cache-declarations.md), [stream_impl.h](https://github.com/hhenson/hgraph/blob/main/include/hgraph/lib/std/operators/impl/stream_impl.h)
 
 ### B3
 
 Priority 2. Open value/schema domains: runtime generic value operations, type carriers, arbitrary registered scalar/enum/Any and compound atomic schemas need native type mappings and residual generic constraints. Concrete admitted scalar slices are catalogued separately. CivilDateTime/ZonedDateTime/TimeZone value emission currently fails closed in cpp_emitter.cpp; ZonedTime is also unimplemented.
 
-Evidence: [roadmap.md](https://github.com/hhenson/hgraph/blob/main/language/docs/design/roadmap.md), [native-surface-proposal.md](https://github.com/hhenson/hgraph/blob/main/language/docs/design/native-surface-proposal.md), [cpp_emitter.cpp](https://github.com/hhenson/hgraph/blob/main/language/src/codegen/cpp_emitter.cpp)
+Evidence: [roadmap.md](https://github.com/hhenson/hgraph/blob/main/language/docs/design/roadmap.md), [native-surface-proposal.md](https://github.com/hhenson/hgraph/blob/main/external/hgraph_spec/language/docs/design/native-surface-proposal.md), [cpp_emitter.cpp](https://github.com/hhenson/hgraph/blob/main/language/src/codegen/cpp_emitter.cpp)
 
 ### B4
 
 Priority 2. Structural/reference parity: general delta transport, reference equality/reselection, recordable non-scalar state, output invalidation and shape-dependent policies are not yet covered by the admitted HGL implementation. Existing structural queries and bounded membership/index slices are credited separately.
 
-Evidence: [roadmap.md](https://github.com/hhenson/hgraph/blob/main/language/docs/design/roadmap.md), [language-model.md](https://github.com/hhenson/hgraph/blob/main/language/docs/design/language-model.md), [collection_input_semantics.h](https://github.com/hhenson/hgraph/blob/main/include/hgraph/lib/std/operators/impl/collection_input_semantics.h)
+Evidence: [roadmap.md](https://github.com/hhenson/hgraph/blob/main/language/docs/design/roadmap.md), [language-model.md](https://github.com/hhenson/hgraph/blob/main/external/hgraph_spec/language/docs/design/language-model.md), [collection_input_semantics.h](https://github.com/hhenson/hgraph/blob/main/include/hgraph/lib/std/operators/impl/collection_input_semantics.h)
 
 ### B5
 
 Priority 3. Native-backed domain types and resources: JSON trees, table/frame/series metadata, callable providers, range/period/zone policies, I/O and callbacks need public HGL native type/lifecycle bindings. Native providers remain the implementation owners; thin temporal delegations do not complete authoring.
 
-Evidence: [native-interface.md](https://github.com/hhenson/hgraph/blob/main/language/docs/design/native-interface.md), [roadmap.md](https://github.com/hhenson/hgraph/blob/main/language/docs/design/roadmap.md)
+Evidence: [native-interface.md](https://github.com/hhenson/hgraph/blob/main/external/hgraph_spec/language/docs/design/native-interface.md), [roadmap.md](https://github.com/hhenson/hgraph/blob/main/language/docs/design/roadmap.md)
 
 ### B6
 
@@ -290,4 +290,4 @@ python tools/hgl_catalogue.py --refresh-registry
 ```
 
 See [the design record](https://github.com/hhenson/hgraph/blob/main/language/docs/design/migration-catalogue.md) and the
-[requirements ledger](https://github.com/hhenson/hgraph_spec/blob/main/language/docs/design/migration-requirements.md) for the `HGL-MIG-*` and `HGL-LIB-*` identifiers.
+[requirements ledger](https://github.com/hhenson/hgraph_spec/blob/main/external/hgraph_spec/language/docs/design/migration-requirements.md) for the `HGL-MIG-*` and `HGL-LIB-*` identifiers.

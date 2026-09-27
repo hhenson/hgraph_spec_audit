@@ -2774,8 +2774,8 @@
       "priority": 1,
       "summary": "Native errors and owned results: the exception half is admitted (ADR 0009: `throws` natives, descriptor policy `translated`, a raise ends the evaluation under hgraph's node error model) and scalar results including `str` are returned by value. Still missing: owned sequence/collection results (`split`), regex and formatting kernels that carry compiled state or packs (`match_`, `replace`, `format_`), and the coupled quotient/remainder result of `divmod_`.",
       "evidence": [
-        "language/docs/design/decisions/0009-native-errors-and-the-node-error-model.md",
-        "language/docs/design/native-interface.md",
+        "external/hgraph_spec/language/docs/design/decisions/0009-native-errors-and-the-node-error-model.md",
+        "external/hgraph_spec/language/docs/design/native-interface.md",
         "include/hgraph/lib/std/operators/impl/string_impl.h"
       ]
     },
@@ -2783,8 +2783,8 @@
       "priority": 1,
       "summary": "Lifecycle and activation: the clock and scheduler injectables, the scheduled() handler selector, passivate/activate (ADR 0010) and scalar cache fields aggregated into one native State slot (ADR 0011) are admitted. Native pending alarms and finite schedule progress recover in simulation. Still missing: cache beside recordable state (native coexistence is available; HGL mixed lowering remains gated), buffered delta queues and window state for throttle/batch/gate/lag/window (generic non-scalar state, MIG-005), passivation from a start block, an explicitly empty validity set for bound-but-invalid inputs (LIB-002), and external resource ownership.",
       "evidence": [
-        "language/docs/design/decisions/0010-lifecycle-capabilities.md",
-        "language/docs/design/decisions/0011-cache-declarations.md",
+        "external/hgraph_spec/language/docs/design/decisions/0010-lifecycle-capabilities.md",
+        "external/hgraph_spec/language/docs/design/decisions/0011-cache-declarations.md",
         "include/hgraph/lib/std/operators/impl/stream_impl.h"
       ]
     },
@@ -2793,7 +2793,7 @@
       "summary": "Open value/schema domains: runtime generic value operations, type carriers, arbitrary registered scalar/enum/Any and compound atomic schemas need native type mappings and residual generic constraints. Concrete admitted scalar slices are catalogued separately. CivilDateTime/ZonedDateTime/TimeZone value emission currently fails closed in cpp_emitter.cpp; ZonedTime is also unimplemented.",
       "evidence": [
         "language/docs/design/roadmap.md",
-        "language/docs/design/native-surface-proposal.md",
+        "external/hgraph_spec/language/docs/design/native-surface-proposal.md",
         "language/src/codegen/cpp_emitter.cpp"
       ]
     },
@@ -2802,7 +2802,7 @@
       "summary": "Structural/reference parity: general delta transport, reference equality/reselection, recordable non-scalar state, output invalidation and shape-dependent policies are not yet covered by the admitted HGL implementation. Existing structural queries and bounded membership/index slices are credited separately.",
       "evidence": [
         "language/docs/design/roadmap.md",
-        "language/docs/design/language-model.md",
+        "external/hgraph_spec/language/docs/design/language-model.md",
         "include/hgraph/lib/std/operators/impl/collection_input_semantics.h"
       ]
     },
@@ -2810,7 +2810,7 @@
       "priority": 3,
       "summary": "Native-backed domain types and resources: JSON trees, table/frame/series metadata, callable providers, range/period/zone policies, I/O and callbacks need public HGL native type/lifecycle bindings. Native providers remain the implementation owners; thin temporal delegations do not complete authoring.",
       "evidence": [
-        "language/docs/design/native-interface.md",
+        "external/hgraph_spec/language/docs/design/native-interface.md",
         "language/docs/design/roadmap.md"
       ]
     },

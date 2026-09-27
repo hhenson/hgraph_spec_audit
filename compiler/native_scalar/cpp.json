@@ -1,0 +1,34 @@
+{
+  "hgraph": "0.8.30",
+  "native_binary_sha256": "5804356f480eb0939d1171cb4d4e331ac4f22335d13fbdc660de5f78894c1859",
+  "observed": {
+    "integer_add": [
+      null,
+      5,
+      6,
+      -1
+    ],
+    "mixed_add": [
+      2.5,
+      -4.5
+    ],
+    "text_add": [
+      "ab",
+      "b"
+    ],
+    "integer_div": [
+      -3.5
+    ],
+    "integer_floor": [
+      -4
+    ],
+    "integer_mod": [
+      1
+    ]
+  },
+  "engine": "cpp",
+  "repeats": 3,
+  "measured_at": "2026-09-27T16:31:51.222214+00:00",
+  "corpus_sha256": "aa5af895c796456ffb2d3556d90567e46fb011bafe3717c5de83ad43d79577dd",
+  "harness_sha256": "bda64fbe2180f774b80a825ddc1718d36865cd8bc11abb210cb5e572605d86b0"
+}
