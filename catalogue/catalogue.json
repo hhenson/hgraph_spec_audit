@@ -793,7 +793,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/stream.hgl",
-          "line": 19,
+          "line": 33,
           "declaration": "operator tick_count(ts: signal) -> i64"
         }
       ],
@@ -1086,7 +1086,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 25,
+          "line": 41,
           "declaration": "operator abs_<T>(ts: T) -> T"
         }
       ],
@@ -2390,7 +2390,7 @@
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
           "line": 4,
-          "declaration": "operator add_<L, R, O>(lhs: L, rhs: R) -> O\nproperties<str, str, str>"
+          "declaration": "operator add_<L, R, O>(lhs: L, rhs: R) -> O\n    properties<str, str, str>"
         }
       ],
       "core_cutover": "deferred"
@@ -2495,7 +2495,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/control.hgl",
-          "line": 6,
+          "line": 8,
           "declaration": "operator all_(values: ...bool) -> bool"
         }
       ],
@@ -2864,8 +2864,8 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 19,
-          "declaration": "operator and_<L, R>(lhs: L, rhs: R) -> bool\nproperties<bool, bool>"
+          "line": 31,
+          "declaration": "operator and_<L, R>(lhs: L, rhs: R) -> bool\n    properties<bool, bool>"
         }
       ],
       "core_cutover": "deferred"
@@ -2970,7 +2970,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/control.hgl",
-          "line": 7,
+          "line": 10,
           "declaration": "operator any_(values: ...bool) -> bool"
         }
       ],
@@ -3151,7 +3151,26 @@
           "id": "assert_:a4a95e7094a9"
         }
       ],
-      "hgl": [],
+      "hgl": [
+        {
+          "module": "hgraph.std",
+          "name": "assert_",
+          "kind": "contract",
+          "form": null,
+          "source": "external/hgraph_std/hgl/hgraph/control.hgl",
+          "line": 183,
+          "declaration": "operator assert_(condition: bool, const error_msg: str)"
+        },
+        {
+          "module": "hgraph.std",
+          "name": "assert_",
+          "kind": "implementation",
+          "form": "hgl-runtime",
+          "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "line": 254,
+          "declaration": "impl fn assert_(condition: bool, const error_msg: str)"
+        }
+      ],
       "core_cutover": "deferred"
     },
     {
@@ -3724,7 +3743,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 31,
+          "line": 53,
           "declaration": "operator bit_and<T>(lhs: T, rhs: T) -> T"
         }
       ],
@@ -4179,7 +4198,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 32,
+          "line": 55,
           "declaration": "operator bit_or<T>(lhs: T, rhs: T) -> T"
         }
       ],
@@ -4594,7 +4613,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 33,
+          "line": 57,
           "declaration": "operator bit_xor<T>(lhs: T, rhs: T) -> T"
         }
       ],
@@ -5628,7 +5647,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/standard.hgl",
-          "line": 13,
+          "line": 22,
           "declaration": "operator collect_map<K, V>(key: K, ts: V) -> map<K, V>"
         }
       ],
@@ -7122,7 +7141,26 @@
           "id": "const:cc2ee8daf54d"
         }
       ],
-      "hgl": [],
+      "hgl": [
+        {
+          "module": "hgraph.std",
+          "name": "const",
+          "kind": "contract",
+          "form": null,
+          "source": "external/hgraph_std/hgl/hgraph/control.hgl",
+          "line": 44,
+          "declaration": "operator const<T>(const value: T, const delay: duration = 0s) -> T\n\n/**\nA source that never ticks.\n\nType Args:\n    T: The result type, taken from the call site.\n\nTicks:\n    Never; the output stays invalid for the whole run.\n\nNotes:\n    hgraph's ``nothing[TS[T]]()``.\n*/"
+        },
+        {
+          "module": "hgraph.std",
+          "name": "const",
+          "kind": "implementation",
+          "form": "hgl-runtime",
+          "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "line": 34,
+          "declaration": "impl fn const<T>(const value: T, const delay: duration = 0s) -> T"
+        }
+      ],
       "core_cutover": "deferred"
     },
     {
@@ -7668,7 +7706,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 36,
+          "line": 63,
           "declaration": "operator contains_(ts: str, item: str) -> bool"
         },
         {
@@ -7677,7 +7715,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/standard.hgl",
-          "line": 6,
+          "line": 8,
           "declaration": "operator contains_<S, I>(ts: S, item: I) -> bool"
         }
       ],
@@ -9582,8 +9620,8 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/control.hgl",
-          "line": 10,
-          "declaration": "operator pass_through<T>(ts: T) -> T"
+          "line": 16,
+          "declaration": "operator pass_through<T>(ts: T) -> T\n\n\n\n\n\n\n\n/**\nPublish ``value`` once, ``delay`` after the run starts.\n\nArgs:\n    value: The constant.\n    delay: Offset from the start of the run; ``0s`` publishes in the first cycle.\n\nType Args:\n    T: The value type; the output is the time series of ``T``.\n\nReturns:\n    ``value``.\n\nTicks:\n    Once, at the start time plus ``delay``, and never again.\n\nNotes:\n    hgraph's ``const``, by its own name (MIG-009). A call ``const(f)`` whose\n    one argument names a function is the value-role selector instead.\n*/"
         },
         {
           "module": "hgraph.std",
@@ -9591,7 +9629,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-          "line": 19,
+          "line": 21,
           "declaration": "impl fn pass_through<T>(ts: T) -> T"
         },
         {
@@ -9672,7 +9710,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/standard.hgl",
-          "line": 8,
+          "line": 12,
           "declaration": "operator to_int<T>(ts: T) -> i64"
         },
         {
@@ -9681,7 +9719,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/standard.hgl",
-          "line": 9,
+          "line": 14,
           "declaration": "operator to_float<T>(ts: T) -> f64"
         },
         {
@@ -9690,7 +9728,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/standard.hgl",
-          "line": 10,
+          "line": 16,
           "declaration": "operator to_bool<T>(ts: T) -> bool"
         },
         {
@@ -9699,7 +9737,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/standard.hgl",
-          "line": 11,
+          "line": 18,
           "declaration": "operator to_date(ts: datetime) -> date"
         },
         {
@@ -9708,7 +9746,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/standard.hgl",
-          "line": 12,
+          "line": 20,
           "declaration": "operator to_datetime(ts: date) -> datetime"
         }
       ],
@@ -9986,7 +10024,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/temporal.hgl",
-          "line": 5,
+          "line": 6,
           "declaration": "operator day<T>(ts: T) -> i64"
         }
       ],
@@ -10111,7 +10149,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/temporal.hgl",
-          "line": 6,
+          "line": 8,
           "declaration": "operator day_of_month<T>(ts: T) -> i64"
         }
       ],
@@ -10194,7 +10232,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/temporal.hgl",
-          "line": 7,
+          "line": 10,
           "declaration": "operator days<T>(ts: T) -> i64"
         }
       ],
@@ -10281,7 +10319,89 @@
           "id": "debug_print:cd41dc16dac5"
         }
       ],
-      "hgl": [],
+      "hgl": [
+        {
+          "module": "hgraph.std",
+          "name": "debug_print",
+          "kind": "contract",
+          "form": null,
+          "source": "external/hgraph_std/hgl/hgraph/control.hgl",
+          "line": 135,
+          "declaration": "operator debug_print<T>(const label: str, ts: T, const print_delta: bool = true, const sample: i64 = -1)\n\n\n\n\n/**\nPrint ``format_str`` on each tick.\n\nArgs:\n    format_str: The text, printed verbatim, as hgraph prints a format string\n        that has no arguments.\n\nTicks:\n    On every tick of ``format_str``. Nothing is published.\n*/"
+        },
+        {
+          "module": "hgraph.std",
+          "name": "debug_print",
+          "kind": "implementation",
+          "form": "hgl-runtime",
+          "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "line": 89,
+          "declaration": "impl fn debug_print(const label: str, ts: bool, const print_delta: bool = true, const sample: i64 = -1)"
+        },
+        {
+          "module": "hgraph.std",
+          "name": "debug_print",
+          "kind": "implementation",
+          "form": "hgl-runtime",
+          "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "line": 106,
+          "declaration": "impl fn debug_print(const label: str, ts: i64, const print_delta: bool = true, const sample: i64 = -1)"
+        },
+        {
+          "module": "hgraph.std",
+          "name": "debug_print",
+          "kind": "implementation",
+          "form": "hgl-runtime",
+          "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "line": 123,
+          "declaration": "impl fn debug_print(const label: str, ts: f64, const print_delta: bool = true, const sample: i64 = -1)"
+        },
+        {
+          "module": "hgraph.std",
+          "name": "debug_print",
+          "kind": "implementation",
+          "form": "hgl-runtime",
+          "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "line": 140,
+          "declaration": "impl fn debug_print(const label: str, ts: str, const print_delta: bool = true, const sample: i64 = -1)"
+        },
+        {
+          "module": "hgraph.std",
+          "name": "debug_print",
+          "kind": "implementation",
+          "form": "hgl-runtime",
+          "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "line": 157,
+          "declaration": "impl fn debug_print(const label: str, ts: date, const print_delta: bool = true, const sample: i64 = -1)"
+        },
+        {
+          "module": "hgraph.std",
+          "name": "debug_print",
+          "kind": "implementation",
+          "form": "hgl-runtime",
+          "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "line": 174,
+          "declaration": "impl fn debug_print(const label: str, ts: time, const print_delta: bool = true, const sample: i64 = -1)"
+        },
+        {
+          "module": "hgraph.std",
+          "name": "debug_print",
+          "kind": "implementation",
+          "form": "hgl-runtime",
+          "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "line": 191,
+          "declaration": "impl fn debug_print(const label: str, ts: datetime, const print_delta: bool = true, const sample: i64 = -1)"
+        },
+        {
+          "module": "hgraph.std",
+          "name": "debug_print",
+          "kind": "implementation",
+          "form": "hgl-runtime",
+          "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "line": 208,
+          "declaration": "impl fn debug_print(const label: str, ts: duration, const print_delta: bool = true, const sample: i64 = -1)"
+        }
+      ],
       "core_cutover": "deferred"
     },
     {
@@ -10612,7 +10732,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/stream.hgl",
-          "line": 6,
+          "line": 8,
           "declaration": "operator dedup<T>(ts: T) -> T"
         },
         {
@@ -10621,7 +10741,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/stream.hgl",
-          "line": 13,
+          "line": 21,
           "declaration": "operator dedup_float(ts: f64, abs_tol: f64) -> f64"
         }
       ],
@@ -10694,7 +10814,26 @@
           "id": "default:8d0956ec7ea0"
         }
       ],
-      "hgl": [],
+      "hgl": [
+        {
+          "module": "hgraph.std",
+          "name": "default",
+          "kind": "contract",
+          "form": null,
+          "source": "external/hgraph_std/hgl/hgraph/control.hgl",
+          "line": 83,
+          "declaration": "operator default<T>(ts: T, default_value: T) -> T\n\n\n\n\n\n/**\nThe node behind ``default``: forward a reference to ``ts`` once ``ts`` is\nvalid, and a reference to ``default_value`` until then.\n\nArgs:\n    ts_ref: ``ts`` as a reference, forwarded once ``ts`` is valid.\n    ts: ``ts`` as a value, watched for validity and then made passive.\n    default_value: Forwarded as a reference until ``ts`` is valid.\n\nType Args:\n    T: The time-series type.\n\nReturns:\n    The current reference.\n\nTicks:\n    On a rebind of either reference and, while ``ts`` is invalid, on its\n    ticks; once ``ts`` is valid it is made passive and the node ticks only on\n    rebinds.\n\nNotes:\n    hgraph's ``default_ref``.\n*/"
+        },
+        {
+          "module": "hgraph.std",
+          "name": "default",
+          "kind": "implementation",
+          "form": "hgl-composition",
+          "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "line": 56,
+          "declaration": "impl fn default<T>(ts: T, default_value: T) -> T"
+        }
+      ],
       "core_cutover": "deferred"
     },
     {
@@ -11675,7 +11814,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 10,
+          "line": 13,
           "declaration": "operator div_<L, R, O>(lhs: L, rhs: R) -> O"
         }
       ],
@@ -12223,7 +12362,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/stream.hgl",
-          "line": 5,
+          "line": 6,
           "declaration": "operator drop<T>(ts: T, const count: i64 = 1) -> T"
         }
       ],
@@ -13124,7 +13263,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 13,
+          "line": 19,
           "declaration": "operator eq_<L, R>(lhs: L, rhs: R) -> bool"
         },
         {
@@ -13133,7 +13272,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 42,
+          "line": 75,
           "declaration": "operator eq_epsilon<L, R>(lhs: L, rhs: R, const epsilon: f64 = 1e-10) -> bool"
         }
       ],
@@ -13440,7 +13579,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/stream.hgl",
-          "line": 7,
+          "line": 10,
           "declaration": "operator filter_<T>(condition: bool, ts: T) -> T"
         }
       ],
@@ -14599,7 +14738,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 11,
+          "line": 15,
           "declaration": "operator floordiv_<L, R, O>(lhs: L, rhs: R) -> O"
         }
       ],
@@ -14856,7 +14995,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/stream.hgl",
-          "line": 9,
+          "line": 14,
           "declaration": "operator freeze<T>(predicate: bool, ts: T) -> T"
         }
       ],
@@ -15653,7 +15792,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 18,
+          "line": 29,
           "declaration": "operator ge_<L, R>(lhs: L, rhs: R) -> bool"
         }
       ],
@@ -17744,7 +17883,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 17,
+          "line": 27,
           "declaration": "operator gt_<L, R>(lhs: L, rhs: R) -> bool"
         }
       ],
@@ -17869,7 +18008,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/temporal.hgl",
-          "line": 8,
+          "line": 12,
           "declaration": "operator hour<T>(ts: T) -> i64"
         }
       ],
@@ -18181,7 +18320,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/control.hgl",
-          "line": 8,
+          "line": 12,
           "declaration": "operator if_true(condition: bool, const tick_once_only: bool = false) -> bool"
         },
         {
@@ -18190,7 +18329,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-          "line": 7,
+          "line": 9,
           "declaration": "impl fn if_true(condition: bool, const tick_once_only: bool = false) -> bool"
         }
       ],
@@ -18385,7 +18524,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/standard.hgl",
-          "line": 7,
+          "line": 10,
           "declaration": "operator index_of<T, const size: i64>(ts: list<T, size>, item: T) -> i64"
         }
       ],
@@ -18675,7 +18814,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 30,
+          "line": 51,
           "declaration": "operator invert_<T>(ts: T) -> i64"
         }
       ],
@@ -18888,7 +19027,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/standard.hgl",
-          "line": 5,
+          "line": 6,
           "declaration": "operator is_empty<S>(value: S) -> bool"
         }
       ],
@@ -19076,7 +19215,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/temporal.hgl",
-          "line": 9,
+          "line": 14,
           "declaration": "operator isoweekday<T>(ts: T) -> i64"
         }
       ],
@@ -20332,7 +20471,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/temporal.hgl",
-          "line": 22,
+          "line": 40,
           "declaration": "operator last_modified_date(ts: signal) -> date"
         }
       ],
@@ -20417,7 +20556,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/temporal.hgl",
-          "line": 21,
+          "line": 38,
           "declaration": "operator last_modified_time(ts: signal) -> datetime"
         }
       ],
@@ -20829,7 +20968,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 16,
+          "line": 25,
           "declaration": "operator le_<L, R>(lhs: L, rhs: R) -> bool"
         }
       ],
@@ -21257,7 +21396,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 28,
+          "line": 47,
           "declaration": "operator ln(ts: f64) -> f64"
         }
       ],
@@ -21344,7 +21483,26 @@
           "id": "log_:fe03d6f77408"
         }
       ],
-      "hgl": [],
+      "hgl": [
+        {
+          "module": "hgraph.std",
+          "name": "log_",
+          "kind": "contract",
+          "form": null,
+          "source": "external/hgraph_std/hgl/hgraph/control.hgl",
+          "line": 166,
+          "declaration": "operator log_(format_str: str, const sample_count: i64 = 1)\n\n\n/**\nRaise ``error_msg`` on any tick of a false ``condition``.\n\nArgs:\n    condition: Checked on each tick.\n    error_msg: The message of the error.\n\nRaises:\n    On a false tick of ``condition``. The raise ends the evaluation under the\n    node error model (ADR 0009).\n\nTicks:\n    On every tick of ``condition``. Nothing is published.\n*/"
+        },
+        {
+          "module": "hgraph.std",
+          "name": "log_",
+          "kind": "implementation",
+          "form": "hgl-runtime",
+          "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "line": 236,
+          "declaration": "impl fn log_(format_str: str, const sample_count: i64 = 1)"
+        }
+      ],
       "core_cutover": "deferred"
     },
     {
@@ -21593,7 +21751,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 39,
+          "line": 69,
           "declaration": "operator lshift_<T>(lhs: T, rhs: T) -> T"
         }
       ],
@@ -21942,7 +22100,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 15,
+          "line": 23,
           "declaration": "operator lt_<L, R>(lhs: L, rhs: R) -> bool"
         }
       ],
@@ -22228,7 +22386,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/standard.hgl",
-          "line": 14,
+          "line": 24,
           "declaration": "operator make_tsd<K, V>(key: K, value: V) -> map<K, V>"
         },
         {
@@ -22237,7 +22395,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/standard.hgl",
-          "line": 15,
+          "line": 26,
           "declaration": "operator make_tsd_remove<K, V>(key: K, value: V, remove_key: bool) -> map<K, V>"
         }
       ],
@@ -23881,7 +24039,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 35,
+          "line": 61,
           "declaration": "operator max_<L, R, O>(lhs: L, rhs: R) -> O"
         },
         {
@@ -23890,7 +24048,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/stream.hgl",
-          "line": 18,
+          "line": 31,
           "declaration": "operator max_<T>(ts: T) -> T"
         }
       ],
@@ -25135,7 +25293,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 41,
+          "line": 73,
           "declaration": "operator mean<L, R>(lhs: L, rhs: R) -> f64"
         },
         {
@@ -25144,7 +25302,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/stream.hgl",
-          "line": 16,
+          "line": 27,
           "declaration": "operator mean<T>(ts: T) -> f64"
         }
       ],
@@ -25595,7 +25753,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/temporal.hgl",
-          "line": 10,
+          "line": 16,
           "declaration": "operator microsecond<T>(ts: T) -> i64"
         }
       ],
@@ -25678,7 +25836,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/temporal.hgl",
-          "line": 11,
+          "line": 18,
           "declaration": "operator microseconds<T>(ts: T) -> i64"
         }
       ],
@@ -26980,7 +27138,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 34,
+          "line": 59,
           "declaration": "operator min_<L, R, O>(lhs: L, rhs: R) -> O"
         },
         {
@@ -26989,7 +27147,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/stream.hgl",
-          "line": 17,
+          "line": 29,
           "declaration": "operator min_<T>(ts: T) -> T"
         }
       ],
@@ -27177,7 +27335,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/temporal.hgl",
-          "line": 12,
+          "line": 20,
           "declaration": "operator minute<T>(ts: T) -> i64"
         }
       ],
@@ -27739,7 +27897,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 12,
+          "line": 17,
           "declaration": "operator mod_<L, R, O>(lhs: L, rhs: R) -> O"
         }
       ],
@@ -27927,7 +28085,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/temporal.hgl",
-          "line": 13,
+          "line": 22,
           "declaration": "operator month<T>(ts: T) -> i64"
         }
       ],
@@ -28052,7 +28210,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/temporal.hgl",
-          "line": 14,
+          "line": 24,
           "declaration": "operator month_of_year<T>(ts: T) -> i64"
         }
       ],
@@ -28826,8 +28984,8 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 8,
-          "declaration": "operator mul_<L, R, O>(lhs: L, rhs: R) -> O\nproperties<i64, i64, i64>"
+          "line": 10,
+          "declaration": "operator mul_<L, R, O>(lhs: L, rhs: R) -> O\n    properties<i64, i64, i64>"
         }
       ],
       "core_cutover": "deferred"
@@ -29303,7 +29461,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 14,
+          "line": 21,
           "declaration": "operator ne_<L, R>(lhs: L, rhs: R) -> bool"
         }
       ],
@@ -29554,7 +29712,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 23,
+          "line": 37,
           "declaration": "operator neg_<T, O>(ts: T) -> O"
         }
       ],
@@ -29831,7 +29989,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 24,
+          "line": 39,
           "declaration": "operator not_<T>(ts: T) -> bool"
         }
       ],
@@ -29898,7 +30056,26 @@
           "id": "nothing:a7896b5f8c64"
         }
       ],
-      "hgl": [],
+      "hgl": [
+        {
+          "module": "hgraph.std",
+          "name": "nothing",
+          "kind": "contract",
+          "form": null,
+          "source": "external/hgraph_std/hgl/hgraph/control.hgl",
+          "line": 58,
+          "declaration": "operator nothing<T>() -> T\n\n/**\nExpose ``ts`` once it is valid, and ``default_value`` until then.\n\nArgs:\n    ts: The primary input.\n    default_value: Exposed until ``ts`` is valid.\n\nType Args:\n    T: The time-series type of both inputs.\n\nReturns:\n    A reference to whichever input is current; consumers see that input's\n    ticks directly, and the node never reads the values.\n\nTicks:\n    When the reference rebinds: to ``default_value`` at start, to ``ts``\n    once it is valid. When both tick in one cycle, ``ts`` wins.\n\nNotes:\n    hgraph's ``default``: a composition over ``default_ref``, which sees\n    ``ts`` twice, as a reference to forward and as a value to watch for\n    validity.\n*/"
+        },
+        {
+          "module": "hgraph.std",
+          "name": "nothing",
+          "kind": "implementation",
+          "form": "hgl-runtime",
+          "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "line": 45,
+          "declaration": "impl fn nothing<T>() -> T"
+        }
+      ],
       "core_cutover": "deferred"
     },
     {
@@ -29969,7 +30146,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/control.hgl",
-          "line": 9,
+          "line": 14,
           "declaration": "operator null_sink(ts: signal)"
         },
         {
@@ -29978,7 +30155,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-          "line": 17,
+          "line": 19,
           "declaration": "impl fn null_sink(ts: signal)"
         }
       ],
@@ -30347,8 +30524,8 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 21,
-          "declaration": "operator or_<L, R>(lhs: L, rhs: R) -> bool\nproperties<bool, bool>"
+          "line": 34,
+          "declaration": "operator or_<L, R>(lhs: L, rhs: R) -> bool\n    properties<bool, bool>"
         }
       ],
       "core_cutover": "deferred"
@@ -30692,7 +30869,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 26,
+          "line": 43,
           "declaration": "operator pos_<T>(ts: T) -> T"
         }
       ],
@@ -31280,7 +31457,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 38,
+          "line": 67,
           "declaration": "operator pow_<L, R, O>(lhs: L, rhs: R) -> O"
         }
       ],
@@ -31360,7 +31537,26 @@
           "id": "print_:d24bfb254283"
         }
       ],
-      "hgl": [],
+      "hgl": [
+        {
+          "module": "hgraph.std",
+          "name": "print_",
+          "kind": "contract",
+          "form": null,
+          "source": "external/hgraph_std/hgl/hgraph/control.hgl",
+          "line": 150,
+          "declaration": "operator print_(format_str: str)\n\n\n\n\n/**\nLog ``format_str`` on each tick as ``[last modified time] text``, at INFO.\n\nArgs:\n    format_str: The text, logged verbatim.\n    sample_count: Above ``1``, log every ``sample_count``-th tick.\n\nTicks:\n    On every tick of ``format_str``, or every ``sample_count``-th one. Nothing\n    is published.\n*/"
+        },
+        {
+          "module": "hgraph.std",
+          "name": "print_",
+          "kind": "implementation",
+          "form": "hgl-runtime",
+          "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "line": 225,
+          "declaration": "impl fn print_(format_str: str)"
+        }
+      ],
       "core_cutover": "deferred"
     },
     {
@@ -31430,7 +31626,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/control.hgl",
-          "line": 5,
+          "line": 6,
           "declaration": "operator race<S>(values: ...S) -> S"
         }
       ],
@@ -34862,7 +35058,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 29,
+          "line": 49,
           "declaration": "operator round_(ts: f64, n_digits: i64) -> f64"
         }
       ],
@@ -35184,7 +35380,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 40,
+          "line": 71,
           "declaration": "operator rshift_<T>(lhs: T, rhs: T) -> T"
         }
       ],
@@ -35499,7 +35695,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/stream.hgl",
-          "line": 11,
+          "line": 18,
           "declaration": "operator schedule(const delay: duration, const initial_delay: bool = true,\n                  const max_ticks: i64 = 9223372036854775807, const use_wall_clock: bool = false) -> bool"
         }
       ],
@@ -35624,7 +35820,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/temporal.hgl",
-          "line": 15,
+          "line": 26,
           "declaration": "operator second<T>(ts: T) -> i64"
         }
       ],
@@ -35707,7 +35903,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/temporal.hgl",
-          "line": 16,
+          "line": 28,
           "declaration": "operator seconds<T>(ts: T) -> i64"
         }
       ],
@@ -35909,7 +36105,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 27,
+          "line": 45,
           "declaration": "operator sign<T>(ts: T) -> T"
         }
       ],
@@ -37839,7 +38035,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 7,
+          "line": 8,
           "declaration": "operator sub_<L, R, O>(lhs: L, rhs: R) -> O"
         }
       ],
@@ -37936,7 +38132,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/operators.hgl",
-          "line": 37,
+          "line": 65,
           "declaration": "operator substr(s: str, begin: i64, end: i64) -> str"
         }
       ],
@@ -39048,7 +39244,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/stream.hgl",
-          "line": 14,
+          "line": 23,
           "declaration": "operator sum<T>(ts: T) -> T"
         },
         {
@@ -39057,7 +39253,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/stream.hgl",
-          "line": 15,
+          "line": 25,
           "declaration": "operator sum_reset<T>(ts: T, reset: bool) -> T"
         }
       ],
@@ -39607,7 +39803,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/stream.hgl",
-          "line": 8,
+          "line": 12,
           "declaration": "operator take<T>(ts: T, const count: i64 = 1) -> T"
         }
       ],
@@ -40202,7 +40398,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/temporal.hgl",
-          "line": 17,
+          "line": 30,
           "declaration": "operator timestamp<T>(ts: T) -> f64"
         }
       ],
@@ -40961,7 +41157,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/temporal.hgl",
-          "line": 18,
+          "line": 32,
           "declaration": "operator total_seconds<T>(ts: T) -> f64"
         }
       ],
@@ -41669,7 +41865,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/stream.hgl",
-          "line": 10,
+          "line": 16,
           "declaration": "operator until_true(ts: bool) -> bool"
         }
       ],
@@ -41986,7 +42182,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/temporal.hgl",
-          "line": 19,
+          "line": 34,
           "declaration": "operator weekday<T>(ts: T) -> i64"
         }
       ],
@@ -42345,7 +42541,7 @@
           "kind": "contract",
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/temporal.hgl",
-          "line": 20,
+          "line": 36,
           "declaration": "operator year<T>(ts: T) -> i64"
         }
       ],
@@ -43512,7 +43708,97 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
       "line": 154,
-      "declaration": "native const fn as_float(value: i64) -> f64"
+      "declaration": "native const fn as_float(value: i64) -> f64\n\n/**\nPython's ``str()`` of a ``bool``: ``True`` or ``False``.\n\nArgs:\n    value: The value to render.\n\nReturns:\n    The text hgraph's ``debug_print``, ``str_`` and ``format_`` show.\n*/"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "as_str",
+      "kind": "native-value",
+      "form": null,
+      "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
+      "line": 165,
+      "declaration": "native const fn as_str(value: bool) -> str\n\n/**\nPython's ``str()`` of an ``i64``.\n*/"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "as_str",
+      "kind": "native-value",
+      "form": null,
+      "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
+      "line": 170,
+      "declaration": "native const fn as_str(value: i64) -> str\n\n/**\nPython's ``str()`` of an ``f64``: the shortest round-trip text, with a point.\n*/"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "as_str",
+      "kind": "native-value",
+      "form": null,
+      "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
+      "line": 175,
+      "declaration": "native const fn as_str(value: f64) -> str\n\n/**\nPython's ``str()`` of a ``str``: its characters, not a quoted literal.\n*/"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "as_str",
+      "kind": "native-value",
+      "form": null,
+      "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
+      "line": 180,
+      "declaration": "native const fn as_str(value: str) -> str\n\n/**\nPython's ``str()`` of a ``date``: ISO ``YYYY-MM-DD``.\n*/"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "as_str",
+      "kind": "native-value",
+      "form": null,
+      "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
+      "line": 185,
+      "declaration": "native const fn as_str(value: date) -> str\n\n/**\nPython's ``str()`` of a ``time``: ``HH:MM:SS[.ffffff]``.\n*/"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "as_str",
+      "kind": "native-value",
+      "form": null,
+      "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
+      "line": 190,
+      "declaration": "native const fn as_str(value: time) -> str\n\n/**\nPython's ``str()`` of a ``datetime``: ``YYYY-MM-DD HH:MM:SS[.ffffff]``.\n*/"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "as_str",
+      "kind": "native-value",
+      "form": null,
+      "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
+      "line": 195,
+      "declaration": "native const fn as_str(value: datetime) -> str\n\n/**\nPython's ``str()`` of a ``duration``: ``[D day(s), ]H:MM:SS[.ffffff]``.\n*/"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "as_str",
+      "kind": "native-value",
+      "form": null,
+      "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
+      "line": 200,
+      "declaration": "native const fn as_str(value: duration) -> str\n\n/**\nWrite one line of text to the run's standard output.\n\nArgs:\n    text: The line; the line break is added here.\n\nNotes:\n    Goes through hgraph's io writer, so tests that capture printed lines see\n    it.\n*/"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "print_line",
+      "kind": "native-value",
+      "form": null,
+      "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
+      "line": 212,
+      "declaration": "native const fn print_line(text: str)\n\n/**\nRaise an error carrying ``message``.\n\nArgs:\n    message: The error's message.\n\nRaises:\n    Always. The raise ends the evaluation under hgraph's node error model\n    (ADR 0009); ``assert_`` uses it for a false condition.\n*/"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "raise_error",
+      "kind": "native-value",
+      "form": null,
+      "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
+      "line": 224,
+      "declaration": "native const fn raise_error(message: str) throws"
     },
     {
       "module": "hgraph.native",
@@ -44913,6 +45199,96 @@
     },
     {
       "module": "hgraph.native",
+      "name": "as_str",
+      "kind": "native-implementation",
+      "form": "value",
+      "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values.hgl",
+      "line": 33,
+      "declaration": "native const fn as_str(value: bool) -> str"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "as_str",
+      "kind": "native-implementation",
+      "form": "value",
+      "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values.hgl",
+      "line": 34,
+      "declaration": "native const fn as_str(value: i64) -> str"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "as_str",
+      "kind": "native-implementation",
+      "form": "value",
+      "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values.hgl",
+      "line": 35,
+      "declaration": "native const fn as_str(value: f64) -> str"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "as_str",
+      "kind": "native-implementation",
+      "form": "value",
+      "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values.hgl",
+      "line": 36,
+      "declaration": "native const fn as_str(value: str) -> str"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "as_str",
+      "kind": "native-implementation",
+      "form": "value",
+      "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values.hgl",
+      "line": 37,
+      "declaration": "native const fn as_str(value: date) -> str"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "as_str",
+      "kind": "native-implementation",
+      "form": "value",
+      "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values.hgl",
+      "line": 38,
+      "declaration": "native const fn as_str(value: time) -> str"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "as_str",
+      "kind": "native-implementation",
+      "form": "value",
+      "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values.hgl",
+      "line": 39,
+      "declaration": "native const fn as_str(value: datetime) -> str"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "as_str",
+      "kind": "native-implementation",
+      "form": "value",
+      "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values.hgl",
+      "line": 40,
+      "declaration": "native const fn as_str(value: duration) -> str"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "print_line",
+      "kind": "native-implementation",
+      "form": "value",
+      "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values.hgl",
+      "line": 41,
+      "declaration": "native const fn print_line(text: str)"
+    },
+    {
+      "module": "hgraph.native",
+      "name": "raise_error",
+      "kind": "native-implementation",
+      "form": "value",
+      "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values.hgl",
+      "line": 42,
+      "declaration": "native const fn raise_error(message: str) throws"
+    },
+    {
+      "module": "hgraph.native",
       "name": "bit_and",
       "kind": "native-implementation",
       "form": "value",
@@ -45149,8 +45525,28 @@
   "hgl_materializations": [
     {
       "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-      "line": 20,
+      "line": 22,
       "declaration": "instantiate pass_through<bool>, pass_through<i64>, pass_through<f64>, pass_through<str>, pass_through<date>, pass_through<time>, pass_through<datetime>, pass_through<duration>"
+    },
+    {
+      "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+      "line": 39,
+      "declaration": "instantiate const<bool>, const<i64>, const<f64>, const<str>, const<date>, const<time>, const<datetime>, const<duration>"
+    },
+    {
+      "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+      "line": 49,
+      "declaration": "instantiate nothing<bool>, nothing<i64>, nothing<f64>, nothing<str>, nothing<date>, nothing<time>, nothing<datetime>, nothing<duration>"
+    },
+    {
+      "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+      "line": 57,
+      "declaration": "instantiate default<bool>, default<i64>, default<f64>, default<str>, default<date>, default<time>, default<datetime>, default<duration>"
+    },
+    {
+      "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+      "line": 80,
+      "declaration": "instantiate default_ref<bool>, default_ref<i64>, default_ref<f64>, default_ref<str>, default_ref<date>, default_ref<time>, default_ref<datetime>, default_ref<duration>"
     },
     {
       "source": "external/hgraph_std/hgl/hgraph/impl/operators.hgl",

@@ -38,7 +38,7 @@ Implemented means the recorded domain is authored and tested; it does not promis
 | `and_` | implemented-slice | hgl-runtime | Closed bool/i64/f64/str truthiness and native mixed numeric binary domains. Remaining: atomic containers and arbitrary registered scalar truthiness. [B3](#b3) |
 | `any_` | blocked | contract only | Existing HGL variadic contract only. Native binary and collection candidates schedule an initial result. [B2](#b2) |
 | `apply` | blocked | — | Callable, logging/formatting, recording or engine-control capability. [B5](#b5) |
-| `assert_` | blocked | — | Callable, logging/formatting, recording or engine-control capability. [B5](#b5) |
+| `assert_` | blocked | hgl-runtime | Callable, logging/formatting, recording or engine-control capability. [B5](#b5) |
 | `at_zone` | blocked | — | Temporal range, civil/zone policy or owned formatting native bindings. [B5](#b5) |
 | `batch` | blocked | — | Scheduling, passivation, buffered deltas or callable lifecycle. [B2](#b2) |
 | `bit_and` | implemented-slice | hgl-runtime | Native bool/i64 scalar bit projections in HGL bodies. Remaining: set/itemwise overload domains where registered. [B3](#b3), [B4](#b4) |
@@ -57,7 +57,7 @@ Implemented means the recorded domain is authored and tested; it does not promis
 | `combine_tss_from_tsl` | blocked | — | Type-directed output, arbitrary scalar/compound conversion and lifecycle semantics. [B3](#b3) |
 | `compare` | blocked | — | Callable, logging/formatting, recording or engine-control capability. [B5](#b5) |
 | `concat` | blocked | — | Frame/series native types, schema policies and Arrow-backed algorithms. [B5](#b5) |
-| `const` | native-provider | — | Runtime source/materialization or recovery provider. HGL surface needs startup and provider lifecycle; native ownership remains appropriate. [B2](#b2), [B5](#b5) |
+| `const` | native-provider | hgl-runtime | Runtime source/materialization or recovery provider. HGL surface needs startup and provider lifecycle; native ownership remains appropriate. [B2](#b2), [B5](#b5) |
 | `contains_` | implemented-slice | hgl-runtime | String byte membership; set membership/subsets and map keys for all eight emitted scalar types; map values retain unread resolver slots. Remaining: open registered scalar and atomic-container variants. Reference-forwarding boundness remains in the structural parity domain. [B3](#b3), [B4](#b4) |
 | `convert` | implemented-slice | hgl-runtime | Six bool/i64/f64 cross-conversions and Date/DateTime projections via native value functions; named to_int/to_float/to_bool/to_date/to_datetime. Remaining: general type-directed overloads and owned/container conversions. [B3](#b3), [B4](#b4), [B5](#b5) |
 | `convert_zone` | blocked | — | Temporal range, civil/zone policy or owned formatting native bindings. [B5](#b5) |
@@ -65,9 +65,9 @@ Implemented means the recorded domain is authored and tested; it does not promis
 | `day` | implemented | hgl-runtime | Date/DateTime projections with native date-only no-change suppression.  |
 | `day_of_month` | implemented | hgl-runtime | Date/DateTime projections with native date-only no-change suppression.  |
 | `days` | implemented | hgl-runtime | Duration components, including normalized negative values.  |
-| `debug_print` | blocked | — | Callable, logging/formatting, recording or engine-control capability. [B5](#b5) |
+| `debug_print` | blocked | hgl-runtime | Callable, logging/formatting, recording or engine-control capability. [B5](#b5) |
 | `dedup` | implemented-slice | hgl-runtime | Exact bool/i64/str/date/time/datetime/duration; f64 default tolerance and explicit temporal tolerance alias. Remaining: structural/arbitrary scalar state. Temporal defaults cannot yet be declared on an HGL contract. [B3](#b3), [B4](#b4) |
-| `default` | blocked | — | Type-directed output, arbitrary scalar/compound conversion and lifecycle semantics. [B3](#b3) |
+| `default` | blocked | hgl-composition | Type-directed output, arbitrary scalar/compound conversion and lifecycle semantics. [B3](#b3) |
 | `dereference` | blocked | — | Generic structural/reference field and item access semantics. [B4](#b4) |
 | `difference` | blocked | — | Generic keyed/structural transformations, aggregate startup and delta policies. [B4](#b4) |
 | `dispatch_` | blocked | — | Dynamic callable and nested graph ownership contracts. [B6](#b6) |
@@ -127,7 +127,7 @@ Implemented means the recorded domain is authored and tested; it does not promis
 | `le_` | implemented-slice | hgl-runtime | Materialized numeric, string and legacy temporal scalar comparisons; ne_ also bool. Remaining: enum/arbitrary scalar and structural candidates. [B3](#b3), [B4](#b4) |
 | `len_` | implemented-slice | hgl-runtime | Previously implemented str, fixed/unbounded list, set and map query bodies. Remaining: collection startup parity, rolling materialization and TSB schema domains. [B2](#b2), [B3](#b3), [B4](#b4) |
 | `ln` | implemented | hgl-runtime | f64 natural logarithm (native value binding).  |
-| `log_` | blocked | — | Callable, logging/formatting, recording or engine-control capability. [B5](#b5) |
+| `log_` | blocked | hgl-runtime | Callable, logging/formatting, recording or engine-control capability. [B5](#b5) |
 | `lshift_` | implemented | hgl-runtime | i64 body through the checked `shift_left` native binding; negative and too-large counts raise the native kernel's exception (ADR 0009). Itemwise TSL/TSB candidates remain (B4). [B4](#b4) |
 | `lt_` | implemented-slice | hgl-runtime | Materialized numeric, string and legacy temporal scalar comparisons; ne_ also bool. Remaining: enum/arbitrary scalar and structural candidates. [B3](#b3), [B4](#b4) |
 | `make_tsd` | implemented-slice | hgl-runtime | Scalar key/value domains across the eight emitted types, with explicit remove-key variant. Remaining: generic structural child delta/value transport. [B3](#b3), [B4](#b4) |
@@ -152,13 +152,13 @@ Implemented means the recorded domain is authored and tested; it does not promis
 | `ne_` | implemented-slice | hgl-runtime | Materialized numeric, string and legacy temporal scalar comparisons; ne_ also bool. Remaining: enum/arbitrary scalar and structural candidates. [B3](#b3), [B4](#b4) |
 | `neg_` | implemented-slice | hgl-runtime | i64 and f64 unary bodies. Remaining: checked duration/period overloads. Itemwise TSL/TSB candidates also remain. [B1](#b1), [B4](#b4) |
 | `not_` | implemented-slice | hgl-runtime | Closed bool/i64/f64/str truthiness and native mixed numeric binary domains. Remaining: atomic containers and arbitrary registered scalar truthiness. [B3](#b3) |
-| `nothing` | native-provider | — | Runtime source/materialization or recovery provider. HGL surface needs startup and provider lifecycle; native ownership remains appropriate. [B2](#b2), [B5](#b5) |
+| `nothing` | native-provider | hgl-runtime | Runtime source/materialization or recovery provider. HGL surface needs startup and provider lifecycle; native ownership remains appropriate. [B2](#b2), [B5](#b5) |
 | `null_sink` | implemented | hgl-runtime | Signal input-view sink: all endpoint shapes without reading the payload.  |
 | `or_` | implemented-slice | hgl-runtime | Closed bool/i64/f64/str truthiness and native mixed numeric binary domains. Remaining: atomic containers and arbitrary registered scalar truthiness. [B3](#b3) |
 | `partition` | blocked | — | Generic keyed/structural transformations, aggregate startup and delta policies. [B4](#b4) |
 | `pos_` | implemented-slice | hgl-runtime | i64, f64 and duration identity bodies. Remaining: itemwise TSL/TSB candidates and their child-delta policies. [B4](#b4) |
 | `pow_` | implemented-slice | hgl-runtime | i64/f64 and mixed numeric bodies through the checked `power` native binding; the native exceptions (negative integer exponent, overflow, zero to a negative power) are raised identically (ADR 0009). Remaining: the `divide_by_zero` policy parameter (enum, B3) and itemwise TSL/TSB candidates (B4). [B3](#b3), [B4](#b4) |
-| `print_` | blocked | — | Callable, logging/formatting, recording or engine-control capability. [B5](#b5) |
+| `print_` | blocked | hgl-runtime | Callable, logging/formatting, recording or engine-control capability. [B5](#b5) |
 | `race` | blocked | contract only | Reference selection/reselection or structural merge/race semantics. [B4](#b4) |
 | `range_adjacent` | blocked | — | Temporal range, civil/zone policy or owned formatting native bindings. [B5](#b5) |
 | `range_contains` | blocked | — | Temporal range, civil/zone policy or owned formatting native bindings. [B5](#b5) |
