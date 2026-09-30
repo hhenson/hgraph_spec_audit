@@ -1,0 +1,11 @@
+{
+  "purpose": "Positive control for external recording-key observability, added after initial lifecycle evidence without replacing it.",
+  "source_basis": "Python eval_node uses get_recorded_value default nodes.record.out; C++ facade records eval_node::out then runs graph and returns/copies GlobalState. Verify rather than assume that the external scope exposes that buffer.",
+  "expected": {
+    "positive_raw": [1,2],
+    "positive_capture": {"present":true,"entries":2},
+    "after_silent_raw": null,
+    "after_silent_capture": {"present":true,"entries":0}
+  },
+  "interpretation": "If the positive capture is absent, empty-record presence is unobservable through this route and the earlier absence must not be attributed to recorder allocation. Silent-empty presence remains the prospective OP-11 expectation, not a post-observation repair."
+}

@@ -1,0 +1,17 @@
+{
+  "basis": "HGL test expectations were written from specification rules before observation. Inputs independently replay; compute admission requires valid inputs and selected modifications; held values survive silence; output horizon follows longest input; separate eval runs own separate captures. Outputless runs have no output recording.",
+  "cases": [
+    {"id":"sum_rhs_longer","node":"sum","inputs":[[1,null,2],[10,20,null,30,null]],"expected":[11,21,22,32,null]},
+    {"id":"sum_lhs_longer","node":"sum","inputs":[[1,2,null,3,null],[10,null,20]],"expected":[11,12,22,23,null]},
+    {"id":"empty_lhs","node":"sum","inputs":[[],[1,null,2,null]],"expected":[null,null,null,null]},
+    {"id":"empty_rhs","node":"sum","inputs":[[1,null,2,null],[]],"expected":[null,null,null,null]},
+    {"id":"empty_both","node":"sum","inputs":[[],[]],"expected":[]},
+    {"id":"false_trigger","node":"sample","inputs":[["",null,"delta"],[false,false,null,false,null,null]],"expected":["","",null,"delta",null,null]},
+    {"id":"fresh_first","node":"text","inputs":[["first"]],"expected":["first"]},
+    {"id":"fresh_empty","node":"text","inputs":[[]],"expected":[]},
+    {"id":"fresh_second","node":"text","inputs":[[null,"second",null]],"expected":[null,"second",null]},
+    {"id":"sink_values","node":"sink","inputs":[[1,null,1,2,null]],"expected":null},
+    {"id":"sink_silence","node":"sink","inputs":[[null,null]],"expected":null},
+    {"id":"sink_empty","node":"sink","inputs":[[]],"expected":null}
+  ]
+}

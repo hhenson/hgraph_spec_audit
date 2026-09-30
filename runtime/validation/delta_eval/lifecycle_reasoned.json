@@ -1,0 +1,16 @@
+{
+  "scope": "Finite fresh eval invocations; public lifecycle observation plus post-run capture inspection. No restart/checkpoint/concurrency/resource-abstraction inference.",
+  "rules": ["OP-11: recorder start establishes an empty recording; no ticks still leaves empty recording", "VAL-17 / TS-21 / TS-22: retained deltas own independent copies", "eval-scoped construction and dense horizon reasoning in scalar-reasoning.md"],
+  "expectations": {
+    "empty": {"recorder_start_callbacks": 1, "recorder_stop_callbacks": 1, "record_present_after_eval": true, "record_entries_after_eval": 0},
+    "all_silent": {"recorder_start_callbacks": 1, "recorder_stop_callbacks": 1, "record_present_after_eval": true, "record_entries_after_eval": 0},
+    "isolation": {"first": [1,2], "second": [3], "third_dense": [null,null], "retained_first_after_second_and_third": [1,2]},
+    "mutable_delta": {"after_eval": [{"1":10},{"1":20},{"1":30}], "after_source_mutation_and_collection": [{"1":10},{"1":20},{"1":30}]}
+  },
+  "interpretation_limits": [
+    "Recorder callback occurrence directly observes lifecycle, but lookup absence during callbacks does not alone prove internal storage absence. Native GlobalState external copy-back occurs after execution; external state is not the graph-local buffer during callbacks.",
+    "Post-run record_presence uses each harness's actual known output key in externally supplied GlobalState. Absent key differs from accessible empty capture; do not normalize it into an empty record.",
+    "Mutable test reuses one dictionary returned by a TSD-producing compute at all ticks, then mutates it after graph return and garbage collection. This tests published delta retention across producer mutation and teardown, not arbitrary atomic payloads or internal buffer alias mutation.",
+    "Expected accessible empty post-run recording follows OP-11; reference disagreement is preserved rather than changing the expectation. Before-first-tick accessibility remains an observation, not a fabricated result."
+  ]
+}

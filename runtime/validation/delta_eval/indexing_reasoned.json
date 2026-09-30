@@ -1,0 +1,12 @@
+{
+  "basis": "Owner correction: replay input uses indexed sequence access; an in-range absent slot yields null. Receiver-first function spelling and nullable-expression typing are HGL rules, not Python/C++ API parity claims.",
+  "scope": "These expectations were written before execution. Reference probes establish the resulting publication traces only: absence produces no tick, while zero, false and empty text remain present values. They do not expose or validate HGL's indexed buffer primitive.",
+  "cases": [
+    {"id": "indexed_example", "type": "i64", "inputs": [10, null, 12], "expected": [10, null, 12]},
+    {"id": "present_zero", "type": "i64", "inputs": [0, null, 0], "expected": [0, null, 0]},
+    {"id": "present_false", "type": "bool", "inputs": [false, null, false], "expected": [false, null, false]},
+    {"id": "present_empty_text", "type": "str", "inputs": ["", null, ""], "expected": ["", null, ""]},
+    {"id": "all_absent", "type": "i64", "inputs": [null, null, null], "expected": [null, null, null]},
+    {"id": "empty_sequence", "type": "i64", "inputs": [], "expected": []}
+  ]
+}

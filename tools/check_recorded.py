@@ -30,8 +30,9 @@ def main():
         released = ROOT / 'results/releases-0.5.42-0.8.30'
         wiring = work / 'runtime/validation/wiring'
         provenance = json.loads((released / 'provenance.json').read_text())
-        if hashlib.sha256((wiring / 'reasoned.json').read_bytes()).hexdigest() != provenance['reasoned_sha256']:
+        if hashlib.sha256((released / 'reasoned.json').read_bytes()).hexdigest() != provenance['reasoned_sha256']:
             raise RuntimeError('released wiring expectations changed')
+        shutil.copy2(released / 'reasoned.json', wiring / 'reasoned.json')
         shutil.copy2(released / 'observed.json', wiring / 'observed.json')
         subprocess.run([sys.executable, str(wiring / 'check.py')], check=True, capture_output=True)
         if json.loads((wiring / 'assessment.json').read_text()) != json.loads((released / 'assessment.json').read_text()):
@@ -41,6 +42,7 @@ def main():
             subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(work / folder)], check=True)
     for folder in ('compiler/stdlib', 'compiler/stdlib_eval'):
         subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(ROOT / folder)], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'runtime/validation/delta_eval/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'compiler/native_interfaces/check.py')], check=True)
     print('Recorded evidence checked; no fresh runtime measurements were made.')
 

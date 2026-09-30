@@ -1,0 +1,352 @@
+{
+  "engines": {
+    "cpp": {
+      "assessment": {
+        "all_silent": {
+          "record_entries_after_eval": "divergence",
+          "record_present_after_eval": "divergence",
+          "recorder_start_callbacks": "match",
+          "recorder_stop_callbacks": "match"
+        },
+        "empty": {
+          "record_entries_after_eval": "divergence",
+          "record_present_after_eval": "divergence",
+          "recorder_start_callbacks": "match",
+          "recorder_stop_callbacks": "match"
+        },
+        "isolation": {
+          "first": "match",
+          "retained_first_after_second_and_third": "match",
+          "second": "match",
+          "third_dense": "match"
+        },
+        "mutable_delta": {
+          "after_eval": "match",
+          "after_source_mutation_and_collection": "match"
+        }
+      },
+      "identity_sha256": "362fdf032d44afc72414c4bdfff4454ee3bec6e9ec99126b4779e5ac1b586fe8",
+      "native": true,
+      "observed": {
+        "all_silent": {
+          "events": [
+            {
+              "event": "recorder_started",
+              "external_capture": {
+                "entries": null,
+                "present": false
+              },
+              "name": "__harness_record"
+            },
+            {
+              "event": "graph_started",
+              "external_capture": {
+                "entries": null,
+                "present": false
+              }
+            },
+            {
+              "event": "recorder_stopped",
+              "external_capture": {
+                "entries": null,
+                "present": false
+              },
+              "name": "__harness_record"
+            },
+            {
+              "event": "graph_stopped",
+              "external_capture": {
+                "entries": null,
+                "present": false
+              }
+            },
+            {
+              "event": "eval_returned",
+              "external_capture": {
+                "entries": null,
+                "present": false
+              }
+            }
+          ],
+          "raw": null,
+          "record_entries_after_eval": null,
+          "record_present_after_eval": false,
+          "recorder_start_callbacks": 1,
+          "recorder_stop_callbacks": 1
+        },
+        "empty": {
+          "events": [
+            {
+              "event": "recorder_started",
+              "external_capture": {
+                "entries": null,
+                "present": false
+              },
+              "name": "__harness_record"
+            },
+            {
+              "event": "graph_started",
+              "external_capture": {
+                "entries": null,
+                "present": false
+              }
+            },
+            {
+              "event": "recorder_stopped",
+              "external_capture": {
+                "entries": null,
+                "present": false
+              },
+              "name": "__harness_record"
+            },
+            {
+              "event": "graph_stopped",
+              "external_capture": {
+                "entries": null,
+                "present": false
+              }
+            },
+            {
+              "event": "eval_returned",
+              "external_capture": {
+                "entries": null,
+                "present": false
+              }
+            }
+          ],
+          "raw": null,
+          "record_entries_after_eval": null,
+          "record_present_after_eval": false,
+          "recorder_start_callbacks": 1,
+          "recorder_stop_callbacks": 1
+        },
+        "isolation": {
+          "capture_after_third": {
+            "entries": null,
+            "present": false
+          },
+          "first": [
+            1,
+            2
+          ],
+          "retained_first_after_second_and_third": [
+            1,
+            2
+          ],
+          "second": [
+            3
+          ],
+          "third_dense": [
+            null,
+            null
+          ],
+          "third_raw": null
+        },
+        "mutable_delta": {
+          "after_eval": [
+            {
+              "1": 10
+            },
+            {
+              "1": 20
+            },
+            {
+              "1": 30
+            }
+          ],
+          "after_source_mutation_and_collection": [
+            {
+              "1": 10
+            },
+            {
+              "1": 20
+            },
+            {
+              "1": 30
+            }
+          ],
+          "mutated_source": {
+            "1": 999,
+            "2": 777
+          }
+        }
+      }
+    },
+    "python": {
+      "assessment": {
+        "all_silent": {
+          "record_entries_after_eval": "match",
+          "record_present_after_eval": "match",
+          "recorder_start_callbacks": "match",
+          "recorder_stop_callbacks": "match"
+        },
+        "empty": {
+          "record_entries_after_eval": "match",
+          "record_present_after_eval": "match",
+          "recorder_start_callbacks": "match",
+          "recorder_stop_callbacks": "match"
+        },
+        "isolation": {
+          "first": "match",
+          "retained_first_after_second_and_third": "match",
+          "second": "match",
+          "third_dense": "match"
+        },
+        "mutable_delta": {
+          "after_eval": "match",
+          "after_source_mutation_and_collection": "match"
+        }
+      },
+      "identity_sha256": "cf800f0d81222a4a6267676b663fd74bd8e584b1fe5293945049138cd4ed71b6",
+      "native": false,
+      "observed": {
+        "all_silent": {
+          "events": [
+            {
+              "event": "recorder_started",
+              "external_capture": {
+                "entries": null,
+                "present": false
+              },
+              "name": "record_to_memory"
+            },
+            {
+              "event": "graph_started",
+              "external_capture": {
+                "entries": null,
+                "present": false
+              }
+            },
+            {
+              "event": "recorder_stopped",
+              "external_capture": {
+                "entries": 0,
+                "present": true
+              },
+              "name": "record_to_memory"
+            },
+            {
+              "event": "graph_stopped",
+              "external_capture": {
+                "entries": 0,
+                "present": true
+              }
+            },
+            {
+              "event": "eval_returned",
+              "external_capture": {
+                "entries": 0,
+                "present": true
+              }
+            }
+          ],
+          "raw": null,
+          "record_entries_after_eval": 0,
+          "record_present_after_eval": true,
+          "recorder_start_callbacks": 1,
+          "recorder_stop_callbacks": 1
+        },
+        "empty": {
+          "events": [
+            {
+              "event": "recorder_started",
+              "external_capture": {
+                "entries": null,
+                "present": false
+              },
+              "name": "record_to_memory"
+            },
+            {
+              "event": "graph_started",
+              "external_capture": {
+                "entries": null,
+                "present": false
+              }
+            },
+            {
+              "event": "recorder_stopped",
+              "external_capture": {
+                "entries": 0,
+                "present": true
+              },
+              "name": "record_to_memory"
+            },
+            {
+              "event": "graph_stopped",
+              "external_capture": {
+                "entries": 0,
+                "present": true
+              }
+            },
+            {
+              "event": "eval_returned",
+              "external_capture": {
+                "entries": 0,
+                "present": true
+              }
+            }
+          ],
+          "raw": null,
+          "record_entries_after_eval": 0,
+          "record_present_after_eval": true,
+          "recorder_start_callbacks": 1,
+          "recorder_stop_callbacks": 1
+        },
+        "isolation": {
+          "capture_after_third": {
+            "entries": 0,
+            "present": true
+          },
+          "first": [
+            1,
+            2
+          ],
+          "retained_first_after_second_and_third": [
+            1,
+            2
+          ],
+          "second": [
+            3
+          ],
+          "third_dense": [
+            null,
+            null
+          ],
+          "third_raw": null
+        },
+        "mutable_delta": {
+          "after_eval": [
+            {
+              "1": 10
+            },
+            {
+              "1": 20
+            },
+            {
+              "1": 30
+            }
+          ],
+          "after_source_mutation_and_collection": [
+            {
+              "1": 10
+            },
+            {
+              "1": 20
+            },
+            {
+              "1": 30
+            }
+          ],
+          "mutated_source": {
+            "1": 999,
+            "2": 777
+          }
+        }
+      }
+    }
+  },
+  "harness_sha256": "8d7125adfc40ad103afb170cb77c5f5564a54d9420e58ecdea41a12cbb3994c9",
+  "measured_at": "2026-09-30T13:30:28.027589+00:00",
+  "reasoned_sha256": "3cce5b90731531c932897f02dc9b5981849ec6a2f5ba26ac021042dda308834b",
+  "repeats": 3
+}

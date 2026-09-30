@@ -1,0 +1,889 @@
+{
+  "expected_origin": "Specification-only reasoning captured before first execution; JSON merely translates literal traces. Structural cases are runtime publication-delta probes, not HGL syntax acceptance. No explicit invalidation or invalid-child membership is claimed.",
+  "original_private_reasoning_sha256": {
+    "scalar-reasoning.md": "5ee948eb9f43530dfde6dfb8672600b5f3ddb7aefe30f82baf5ec7cdaa99e3ee",
+    "contract-review.md": "77108a7fde147c36d7af063b298d115eef339aa73777b0320f55c1ccd76dc0bf"
+  },
+  "cases": [
+    {
+      "id": "bool_equal_distinct",
+      "type": "bool",
+      "inputs": [
+        false,
+        false,
+        true,
+        false
+      ],
+      "expected": [
+        false,
+        false,
+        true,
+        false
+      ],
+      "reason": "scalar-reasoning.md case equal_distinct"
+    },
+    {
+      "id": "bool_silence",
+      "type": "bool",
+      "inputs": [
+        null,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        null,
+        false,
+        null,
+        null
+      ],
+      "expected": [
+        null,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        null,
+        false,
+        null,
+        null
+      ],
+      "reason": "scalar-reasoning.md case silence"
+    },
+    {
+      "id": "bool_all_silent",
+      "type": "bool",
+      "inputs": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "expected": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "reason": "scalar-reasoning.md case all_silent"
+    },
+    {
+      "id": "bool_empty",
+      "type": "bool",
+      "inputs": [],
+      "expected": [],
+      "reason": "scalar-reasoning.md case empty"
+    },
+    {
+      "id": "i64_equal_distinct",
+      "type": "i64",
+      "inputs": [
+        0,
+        0,
+        -7,
+        0
+      ],
+      "expected": [
+        0,
+        0,
+        -7,
+        0
+      ],
+      "reason": "scalar-reasoning.md case equal_distinct"
+    },
+    {
+      "id": "i64_silence",
+      "type": "i64",
+      "inputs": [
+        null,
+        null,
+        0,
+        null,
+        0,
+        -7,
+        null,
+        null,
+        0,
+        null,
+        null
+      ],
+      "expected": [
+        null,
+        null,
+        0,
+        null,
+        0,
+        -7,
+        null,
+        null,
+        0,
+        null,
+        null
+      ],
+      "reason": "scalar-reasoning.md case silence"
+    },
+    {
+      "id": "i64_all_silent",
+      "type": "i64",
+      "inputs": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "expected": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "reason": "scalar-reasoning.md case all_silent"
+    },
+    {
+      "id": "i64_empty",
+      "type": "i64",
+      "inputs": [],
+      "expected": [],
+      "reason": "scalar-reasoning.md case empty"
+    },
+    {
+      "id": "f64_equal_distinct",
+      "type": "f64",
+      "inputs": [
+        0.0,
+        0.0,
+        1.5,
+        0.0
+      ],
+      "expected": [
+        0.0,
+        0.0,
+        1.5,
+        0.0
+      ],
+      "reason": "scalar-reasoning.md case equal_distinct"
+    },
+    {
+      "id": "f64_silence",
+      "type": "f64",
+      "inputs": [
+        null,
+        null,
+        0.0,
+        null,
+        0.0,
+        1.5,
+        null,
+        null,
+        0.0,
+        null,
+        null
+      ],
+      "expected": [
+        null,
+        null,
+        0.0,
+        null,
+        0.0,
+        1.5,
+        null,
+        null,
+        0.0,
+        null,
+        null
+      ],
+      "reason": "scalar-reasoning.md case silence"
+    },
+    {
+      "id": "f64_all_silent",
+      "type": "f64",
+      "inputs": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "expected": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "reason": "scalar-reasoning.md case all_silent"
+    },
+    {
+      "id": "f64_empty",
+      "type": "f64",
+      "inputs": [],
+      "expected": [],
+      "reason": "scalar-reasoning.md case empty"
+    },
+    {
+      "id": "str_equal_distinct",
+      "type": "str",
+      "inputs": [
+        "",
+        "",
+        "delta",
+        ""
+      ],
+      "expected": [
+        "",
+        "",
+        "delta",
+        ""
+      ],
+      "reason": "scalar-reasoning.md case equal_distinct"
+    },
+    {
+      "id": "str_silence",
+      "type": "str",
+      "inputs": [
+        null,
+        null,
+        "",
+        null,
+        "",
+        "delta",
+        null,
+        null,
+        "",
+        null,
+        null
+      ],
+      "expected": [
+        null,
+        null,
+        "",
+        null,
+        "",
+        "delta",
+        null,
+        null,
+        "",
+        null,
+        null
+      ],
+      "reason": "scalar-reasoning.md case silence"
+    },
+    {
+      "id": "str_all_silent",
+      "type": "str",
+      "inputs": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "expected": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "reason": "scalar-reasoning.md case all_silent"
+    },
+    {
+      "id": "str_empty",
+      "type": "str",
+      "inputs": [],
+      "expected": [],
+      "reason": "scalar-reasoning.md case empty"
+    },
+    {
+      "id": "date_equal_distinct",
+      "type": "date",
+      "inputs": [
+        {
+          "date": "1970-01-01"
+        },
+        {
+          "date": "1970-01-01"
+        },
+        {
+          "date": "2024-02-29"
+        },
+        {
+          "date": "1970-01-01"
+        }
+      ],
+      "expected": [
+        {
+          "date": "1970-01-01"
+        },
+        {
+          "date": "1970-01-01"
+        },
+        {
+          "date": "2024-02-29"
+        },
+        {
+          "date": "1970-01-01"
+        }
+      ],
+      "reason": "scalar-reasoning.md case equal_distinct"
+    },
+    {
+      "id": "date_silence",
+      "type": "date",
+      "inputs": [
+        null,
+        null,
+        {
+          "date": "1970-01-01"
+        },
+        null,
+        {
+          "date": "1970-01-01"
+        },
+        {
+          "date": "2024-02-29"
+        },
+        null,
+        null,
+        {
+          "date": "1970-01-01"
+        },
+        null,
+        null
+      ],
+      "expected": [
+        null,
+        null,
+        {
+          "date": "1970-01-01"
+        },
+        null,
+        {
+          "date": "1970-01-01"
+        },
+        {
+          "date": "2024-02-29"
+        },
+        null,
+        null,
+        {
+          "date": "1970-01-01"
+        },
+        null,
+        null
+      ],
+      "reason": "scalar-reasoning.md case silence"
+    },
+    {
+      "id": "date_all_silent",
+      "type": "date",
+      "inputs": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "expected": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "reason": "scalar-reasoning.md case all_silent"
+    },
+    {
+      "id": "date_empty",
+      "type": "date",
+      "inputs": [],
+      "expected": [],
+      "reason": "scalar-reasoning.md case empty"
+    },
+    {
+      "id": "time_equal_distinct",
+      "type": "time",
+      "inputs": [
+        {
+          "time": "00:00:00"
+        },
+        {
+          "time": "00:00:00"
+        },
+        {
+          "time": "12:34:56"
+        },
+        {
+          "time": "00:00:00"
+        }
+      ],
+      "expected": [
+        {
+          "time": "00:00:00"
+        },
+        {
+          "time": "00:00:00"
+        },
+        {
+          "time": "12:34:56"
+        },
+        {
+          "time": "00:00:00"
+        }
+      ],
+      "reason": "scalar-reasoning.md case equal_distinct"
+    },
+    {
+      "id": "time_silence",
+      "type": "time",
+      "inputs": [
+        null,
+        null,
+        {
+          "time": "00:00:00"
+        },
+        null,
+        {
+          "time": "00:00:00"
+        },
+        {
+          "time": "12:34:56"
+        },
+        null,
+        null,
+        {
+          "time": "00:00:00"
+        },
+        null,
+        null
+      ],
+      "expected": [
+        null,
+        null,
+        {
+          "time": "00:00:00"
+        },
+        null,
+        {
+          "time": "00:00:00"
+        },
+        {
+          "time": "12:34:56"
+        },
+        null,
+        null,
+        {
+          "time": "00:00:00"
+        },
+        null,
+        null
+      ],
+      "reason": "scalar-reasoning.md case silence"
+    },
+    {
+      "id": "time_all_silent",
+      "type": "time",
+      "inputs": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "expected": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "reason": "scalar-reasoning.md case all_silent"
+    },
+    {
+      "id": "time_empty",
+      "type": "time",
+      "inputs": [],
+      "expected": [],
+      "reason": "scalar-reasoning.md case empty"
+    },
+    {
+      "id": "datetime_equal_distinct",
+      "type": "datetime",
+      "inputs": [
+        {
+          "datetime": "1970-01-01T00:00:00"
+        },
+        {
+          "datetime": "1970-01-01T00:00:00"
+        },
+        {
+          "datetime": "2024-02-29T12:34:56"
+        },
+        {
+          "datetime": "1970-01-01T00:00:00"
+        }
+      ],
+      "expected": [
+        {
+          "datetime": "1970-01-01T00:00:00"
+        },
+        {
+          "datetime": "1970-01-01T00:00:00"
+        },
+        {
+          "datetime": "2024-02-29T12:34:56"
+        },
+        {
+          "datetime": "1970-01-01T00:00:00"
+        }
+      ],
+      "reason": "scalar-reasoning.md case equal_distinct"
+    },
+    {
+      "id": "datetime_silence",
+      "type": "datetime",
+      "inputs": [
+        null,
+        null,
+        {
+          "datetime": "1970-01-01T00:00:00"
+        },
+        null,
+        {
+          "datetime": "1970-01-01T00:00:00"
+        },
+        {
+          "datetime": "2024-02-29T12:34:56"
+        },
+        null,
+        null,
+        {
+          "datetime": "1970-01-01T00:00:00"
+        },
+        null,
+        null
+      ],
+      "expected": [
+        null,
+        null,
+        {
+          "datetime": "1970-01-01T00:00:00"
+        },
+        null,
+        {
+          "datetime": "1970-01-01T00:00:00"
+        },
+        {
+          "datetime": "2024-02-29T12:34:56"
+        },
+        null,
+        null,
+        {
+          "datetime": "1970-01-01T00:00:00"
+        },
+        null,
+        null
+      ],
+      "reason": "scalar-reasoning.md case silence"
+    },
+    {
+      "id": "datetime_all_silent",
+      "type": "datetime",
+      "inputs": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "expected": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "reason": "scalar-reasoning.md case all_silent"
+    },
+    {
+      "id": "datetime_empty",
+      "type": "datetime",
+      "inputs": [],
+      "expected": [],
+      "reason": "scalar-reasoning.md case empty"
+    },
+    {
+      "id": "duration_equal_distinct",
+      "type": "duration",
+      "inputs": [
+        {
+          "duration_us": 0
+        },
+        {
+          "duration_us": 0
+        },
+        {
+          "duration_us": 1000000
+        },
+        {
+          "duration_us": 0
+        }
+      ],
+      "expected": [
+        {
+          "duration_us": 0
+        },
+        {
+          "duration_us": 0
+        },
+        {
+          "duration_us": 1000000
+        },
+        {
+          "duration_us": 0
+        }
+      ],
+      "reason": "scalar-reasoning.md case equal_distinct"
+    },
+    {
+      "id": "duration_silence",
+      "type": "duration",
+      "inputs": [
+        null,
+        null,
+        {
+          "duration_us": 0
+        },
+        null,
+        {
+          "duration_us": 0
+        },
+        {
+          "duration_us": 1000000
+        },
+        null,
+        null,
+        {
+          "duration_us": 0
+        },
+        null,
+        null
+      ],
+      "expected": [
+        null,
+        null,
+        {
+          "duration_us": 0
+        },
+        null,
+        {
+          "duration_us": 0
+        },
+        {
+          "duration_us": 1000000
+        },
+        null,
+        null,
+        {
+          "duration_us": 0
+        },
+        null,
+        null
+      ],
+      "reason": "scalar-reasoning.md case silence"
+    },
+    {
+      "id": "duration_all_silent",
+      "type": "duration",
+      "inputs": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "expected": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "reason": "scalar-reasoning.md case all_silent"
+    },
+    {
+      "id": "duration_empty",
+      "type": "duration",
+      "inputs": [],
+      "expected": [],
+      "reason": "scalar-reasoning.md case empty"
+    },
+    {
+      "id": "tsb_sparse",
+      "type": "tsb",
+      "inputs": [
+        {
+          "bid": 1
+        },
+        null,
+        {
+          "ask": 2
+        },
+        {
+          "bid": 1
+        }
+      ],
+      "expected": [
+        {
+          "bid": 1
+        },
+        null,
+        {
+          "ask": 2
+        },
+        {
+          "bid": 1
+        }
+      ],
+      "reason": "contract-review.md B1"
+    },
+    {
+      "id": "tsl_sparse",
+      "type": "tsl",
+      "inputs": [
+        {
+          "0": 10
+        },
+        {
+          "1": 20
+        },
+        {
+          "0": 11
+        },
+        null
+      ],
+      "expected": [
+        {
+          "0": 10
+        },
+        {
+          "1": 20
+        },
+        {
+          "0": 11
+        },
+        null
+      ],
+      "reason": "contract-review.md L1"
+    },
+    {
+      "id": "tss_i64_sparse",
+      "type": "tss_i64",
+      "inputs": [
+        {
+          "added": [
+            1,
+            2
+          ],
+          "removed": []
+        },
+        null,
+        {
+          "added": [
+            3
+          ],
+          "removed": [
+            1
+          ]
+        }
+      ],
+      "expected": [
+        {
+          "added": [
+            1,
+            2
+          ],
+          "removed": []
+        },
+        null,
+        {
+          "added": [
+            3
+          ],
+          "removed": [
+            1
+          ]
+        }
+      ],
+      "reason": "contract-review.md S2; a=1,b=2,c=3"
+    },
+    {
+      "id": "tss_bool_sparse",
+      "type": "tss_bool",
+      "inputs": [
+        {
+          "added": [
+            false,
+            true
+          ],
+          "removed": []
+        },
+        null,
+        {
+          "added": [],
+          "removed": [
+            false
+          ]
+        }
+      ],
+      "expected": [
+        {
+          "added": [
+            false,
+            true
+          ],
+          "removed": []
+        },
+        null,
+        {
+          "added": [],
+          "removed": [
+            false
+          ]
+        }
+      ],
+      "reason": "contract-review.md S2 two-element-domain specialization: start false/true, then remove false"
+    },
+    {
+      "id": "tsd_i64_sparse",
+      "type": "tsd",
+      "inputs": [
+        {
+          "1": 1,
+          "2": 2
+        },
+        {
+          "1": 3
+        },
+        {
+          "2": {
+            "remove": true
+          }
+        },
+        null
+      ],
+      "expected": [
+        {
+          "1": 1,
+          "2": 2
+        },
+        {
+          "1": 3
+        },
+        {
+          "2": {
+            "remove": true
+          }
+        },
+        null
+      ],
+      "reason": "contract-review.md D1; a=1,b=2"
+    }
+  ],
+  "deferred": {
+    "REF_R1": "Designations require a scoped identity fixture; eval_node records dereferenced values, so scalar-looking roundtrip is not designation conformance.",
+    "S3": "Requires same-cycle add/remove producer and event-preserving apply contract, not a literal empty set approximation.",
+    "other_structures": "Harness syntax/application contracts are pending; not substituted with scalar snapshots."
+  }
+}
