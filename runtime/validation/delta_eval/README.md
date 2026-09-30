@@ -168,3 +168,26 @@ python3 runtime/validation/delta_eval/indexing_observe.py \
   --cpp /path/to/cpp-hgraph/bin/python \
   --output /tmp/new-indexing-observed.json
 ```
+
+
+## General global state, separate from replay/record
+
+The [global-state review](global-state-review.md) records generic keyed-store
+APIs and how the reference replay/record operators use them. Neither reference
+requires a replay-input or capture injectable. HGL may instead pass replay
+its sequence directly as constant configuration; record still needs an owned
+result location that eval can retrieve after the run.
+
+The [focused probe](global_state_observe.py) measures ordinary scalar get/set
+through injection in start, evaluation and stop. Both references match eight
+observation groups in three fresh processes; [recorded results](global_state_observed.json)
+include engine identities and hashes. This is separate from preserved
+publication/capture evidence and does not establish general container or HGL
+ownership semantics.
+
+```sh
+python3 runtime/validation/delta_eval/global_state_observe.py \
+  --python /path/to/python-hgraph/bin/python \
+  --cpp /path/to/cpp-hgraph/bin/python \
+  --output /tmp/new-global-state-observed.json
+```

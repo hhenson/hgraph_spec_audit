@@ -204,5 +204,18 @@ def main():
             if case['id'] in {'all_absent','empty_sequence'}:
                 # Raw no-output remains distinct from a successful materialized recording.
                 assert raw is None
-    print('49 original cases, 6 absence/publication cases and 32 native scalar cases match; nested collection matches; lifecycle and empty-set divergences retained.')
+    global_state = json.loads((HERE / 'global_state_observed.json').read_text())
+    expected_state = json.loads((HERE / 'global_state_reasoned.json').read_text())['expected']
+    assert len(expected_state) == 8
+    assert global_state['reasoned_sha256'] == sha(HERE / 'global_state_reasoned.json')
+    assert global_state['harness_sha256'] == sha(HERE / 'global_state_observe.py')
+    assert global_state['identity_helper_sha256'] == sha(HERE / 'observe.py')
+    assert global_state['repeats'] == 3 and set(global_state['engines']) == {'python', 'cpp'}
+    for name, engine in global_state['engines'].items():
+        assert engine['identity'] == evidence['engines'][name]['identity']
+        assert set(engine['observed']) == set(engine['assessment']) == set(expected_state)
+        for field, expected in expected_state.items():
+            status = 'match' if json.dumps(engine['observed'][field], sort_keys=True) == json.dumps(expected, sort_keys=True) else 'divergence'
+            assert engine['assessment'][field] == status == 'match'
+    print('8 generic-state groups per engine match; 49 original cases, 6 absence/publication cases and 32 native scalar cases match; nested collection matches; lifecycle and empty-set divergences retained.')
 if __name__=='__main__': main()

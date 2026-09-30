@@ -28,6 +28,12 @@ class DeltaEvidenceTest(unittest.TestCase):
         path.write_text(json.dumps(value))
     def verify(self):
         with contextlib.redirect_stdout(io.StringIO()): check.main()
+    def test_global_state_cannot_lose_stop_write(self):
+        self.mutate('global_state_observed.json', lambda x: x['engines']['cpp']['observed']['first_state'].pop('stopped'))
+        with self.assertRaises(AssertionError): self.verify()
+    def test_global_state_false_is_not_numeric_zero(self):
+        self.mutate('global_state_observed.json', lambda x: x['engines']['python']['observed']['ordinary_values'].update(false=0))
+        with self.assertRaises(AssertionError): self.verify()
     def test_preserved_evidence(self): self.verify()
     def test_missing_engine_rejected(self):
         self.mutate('observed.json',lambda x:x['engines'].pop('python'))
