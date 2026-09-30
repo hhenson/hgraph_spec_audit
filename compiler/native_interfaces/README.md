@@ -1,28 +1,52 @@
-# Native-interface compatibility
+# Native-interface compatibility and source migration
 
-This audit owns the C++ compiler to Rust native-interface check. CI builds the
-pinned public hgraph compiler and compares its formatted `emit-native-rust`
-output with the fingerprints in `contracts.json`. Scalar and logger-capability
-contracts are covered, together with bootstrap source identity.
+This audit separates historical native-interface evidence from current HGL
+source identity. `contracts.json` keeps the original `hgraph_revision`,
+`upstream_files` and `historical_interface_files` ABI fingerprints immutable.
+The public compiler check builds that pinned compiler and runs its original
+source inputs through `emit-native-rust`, then compares the formatted output
+with the historical ABI baseline. It does not compile the current source
+spelling.
+
+The current specification uses receiver-first capability functions. Its
+`const-debug.hgl` and `native-provider.hgl` examples therefore differ from the
+original upstream files. `shared_files` and `hgl_files` record the current
+source bytes, while `source_migrations` links each changed source to an
+archived original in [historical_sources](historical_sources/). Those originals
+must match the immutable `upstream_files` hashes.
+
+The checker reconstructs the current bytes using exactly three approved
+call-spelling substitutions across the two files: scheduler scheduling,
+logger information logging and evaluation-clock access. Every other byte
+must remain identical. This checks native declarations, annotations and the
+rest of the bodies as well as the changed calls; refreshing a current hash
+cannot hide an unrelated change. The scalar source and implementation-part
+fingerprints remain unchanged. Current Rust interface fingerprints must
+still equal the historical ABI fingerprints.
+
+This is a bounded owner-directed source migration and an unchanged ABI
+baseline. It is **not evidence that the historical compiler accepts the new
+receiver-first syntax**, nor a fresh compilation of those current sources.
+Current compiler acceptance belongs to HGL's own checks. The audit retains
+its original upstream revision rather than relabelling old compilation
+results as measurements of new source text.
 
 HGL keeps its Rust interfaces and implementation parts. Its CI checks their
-bytes against the pinned audit fingerprints; it does not build C++ hgraph.
-The public audit never checks out the private HGL repository. HGL sources stay
-in the specification, standard library and implementation repositories.
+bytes and current shared source bytes against this manifest; it does not
+build C++ hgraph. The public audit does not check out the private HGL
+repository.
 
 ```sh
-# Public audit: use a compiler built from the pinned upstream revision.
+# Historical compiler/source check, using the pinned upstream revision.
 python compiler/native_interfaces/check.py --upstream <hgraph> --compiler <hgl>
-# Offline HGL check; no compiler is needed.
+# Current HGL source/interface fingerprint check; no compilation.
 python compiler/native_interfaces/check.py --hgl <hgl-checkout>
+# Shared current source, archived-original and exact migration checks only.
+python compiler/native_interfaces/check.py
 ```
 
-With no arguments, the checker verifies only the pinned shared inputs. This is
-part of recorded-evidence validation and is not a fresh compiler measurement.
-
-When contracts change, update the public source revision and fingerprints,
-run the compiler audit, then update HGL's interfaces and audit pin together.
-The Rust formatter version is pinned so formatting does not drift between jobs.
-The C++ target parts used by this audit have the same scalar signatures and
-logger injection as HGL's Rust target parts; the generated interface fingerprint
-must agree for both implementations.
+The Rust formatter version remains pinned. A future declaration or ABI change
+requires separate evidence and an explicit update; it cannot use this scoped
+spelling migration. The current C++ and Rust implementation-part fingerprints
+retain the original scalar signatures and logger injection, with no claim
+that a hash check alone validates their runtime behavior.

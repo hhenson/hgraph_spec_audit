@@ -136,3 +136,35 @@ python3 runtime/validation/delta_eval/collection_control.py \
   --cpp /path/to/cpp-hgraph/bin/python \
   --output /tmp/new-collection-control-observed.json
 ```
+
+## Publication traces accompanying indexed replay access
+
+[indexing_reasoned.json](indexing_reasoned.json) freezes six publication-trace
+expectations before [indexing_observe.py](indexing_observe.py) executes them.
+[indexing_observed.json](indexing_observed.json) records matching traces from
+both genuine engines in three fresh processes: `[10, _, 12]`, present zero,
+present false, present empty text, all-absent input, and empty input. The probe
+reuses the real replay → compute → record observation path and records its
+source hash, package identities, raw returns and input-derived padding.
+
+These measurements show that absence produces no publication while zero,
+false and empty text remain present scalar publications. The JSON `null`
+used in the audit encodes a silent position or raw no-output return. It does
+not prove that either engine exposes HGL's `replay_input[index]` primitive,
+returns the HGL absence literal, performs HGL nullable-flow refinement, or
+accepts receiver-first capability syntax. Those are separate HGL language
+contracts. Bounds errors and the HGL absence/read distinction are not tested
+by this publication-only probe.
+
+Both engines return raw `None` for empty and all-absent inputs. The adapter
+separately produces `[]` or three absent cells using the input horizon. The
+checker preserves that distinction and does not infer a materialized empty
+recording from raw no-output. Value checks are type-sensitive: false cannot
+be relabelled as numeric zero, and neither can be treated as absence.
+
+```sh
+python3 runtime/validation/delta_eval/indexing_observe.py \
+  --python /path/to/python-hgraph/bin/python \
+  --cpp /path/to/cpp-hgraph/bin/python \
+  --output /tmp/new-indexing-observed.json
+```

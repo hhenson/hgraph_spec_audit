@@ -77,4 +77,31 @@ class DeltaEvidenceTest(unittest.TestCase):
     def test_nested_held_child_cannot_be_lost(self):
         self.mutate('collection_observed.json',lambda x:x['engines']['cpp']['observations']['N0']['received'][1]['value']['7'].pop('2'))
         with self.assertRaises(AssertionError): self.verify()
+    def test_indexing_missing_case_rejected(self):
+        self.mutate('indexing_observed.json',lambda x:x['engines']['cpp']['observations'].pop('present_zero'))
+        with self.assertRaises(AssertionError): self.verify()
+    def test_indexing_observer_hash_drift_rejected(self):
+        self.mutate('indexing_observed.json',lambda x:x.update(observer_sha256='0'*64))
+        with self.assertRaises(AssertionError): self.verify()
+    def test_indexing_engine_identity_drift_rejected(self):
+        self.mutate('indexing_observed.json',lambda x:x['engines']['cpp'].update(identity_sha256='0'*64))
+        with self.assertRaises(AssertionError): self.verify()
+    def test_indexing_raw_absence_cannot_be_replaced_by_empty_recording(self):
+        self.mutate('indexing_observed.json',lambda x:x['engines']['python']['observations']['empty_sequence'].update(raw_eval_node=[]))
+        with self.assertRaises(AssertionError): self.verify()
+    def test_indexing_dense_silence_cannot_lose_horizon(self):
+        self.mutate('indexing_observed.json',lambda x:x['engines']['cpp']['observations']['all_absent'].update(padding_added=0))
+        with self.assertRaises(AssertionError): self.verify()
+    def test_indexing_false_is_not_numeric_zero(self):
+        self.mutate('indexing_observed.json',lambda x:x['engines']['python']['observations']['present_false'].update(raw_eval_node=[0,None,0],dense_from_input_horizon=[0,None,0]))
+        with self.assertRaises(AssertionError): self.verify()
+    def test_indexing_false_is_not_absence(self):
+        self.mutate('indexing_observed.json',lambda x:x['engines']['python']['observations']['present_false'].update(raw_eval_node=[None,None,None],dense_from_input_horizon=[None,None,None]))
+        with self.assertRaises(AssertionError): self.verify()
+    def test_indexing_empty_string_cannot_be_silence(self):
+        self.mutate('indexing_observed.json',lambda x:x['engines']['cpp']['observations']['present_empty_text'].update(raw_eval_node=[None,None,None],dense_from_input_horizon=[None,None,None]))
+        with self.assertRaises(AssertionError): self.verify()
+    def test_indexing_result_cannot_be_relabelled(self):
+        self.mutate('indexing_observed.json',lambda x:x['engines']['python']['assessment'].update(indexed_example='divergence'))
+        with self.assertRaises(AssertionError): self.verify()
 if __name__=='__main__':unittest.main()

@@ -174,5 +174,35 @@ def main():
         assert engine['assessment']==status
         assert engine['raw']==collections['engines'][name]['observations']['E1']['raw']
         assert [x['delta'] for x in engine['downstream']]==[x for x in engine['raw'] if x is not None]
-    print('49 original cases and 32 native scalar cases match; nested collection matches; lifecycle and empty-set divergences retained.')
+    indexing=json.loads((HERE/'indexing_observed.json').read_text())
+    indexing_cases=json.loads((HERE/'indexing_reasoned.json').read_text())['cases']
+    indexing_ids={'indexed_example','present_zero','present_false','present_empty_text','all_absent','empty_sequence'}
+    assert len(indexing_cases)==len(indexing_ids) and {c['id'] for c in indexing_cases}==indexing_ids
+    assert indexing['reasoned_sha256']==sha(HERE/'indexing_reasoned.json')
+    assert indexing['harness_sha256']==sha(HERE/'indexing_observe.py')
+    assert indexing['observer_sha256']==sha(HERE/'observe.py')
+    assert indexing['repeats']==3 and set(indexing['engines'])=={'python','cpp'}
+    for name,engine in indexing['engines'].items():
+        assert type(engine['native']) is bool and engine['native']==(name=='cpp')
+        assert engine['identity_sha256']==evidence['engines'][name]['identity']['package']['identity_sha256']
+        assert set(engine['observations'])==set(engine['assessment'])==indexing_ids
+        for case in indexing_cases:
+            observed=engine['observations'][case['id']]
+            assert set(observed)=={'raw_eval_node','input_horizon','padding_added','dense_from_input_horizon'}
+            assert type(observed['input_horizon']) is int and observed['input_horizon']==len(case['inputs'])
+            raw=observed['raw_eval_node']
+            assert raw is None or isinstance(raw,list)
+            dense=[] if raw is None else list(raw)
+            padding=max(0,len(case['inputs'])-len(dense))
+            dense += [None]*padding
+            assert type(observed['padding_added']) is int and observed['padding_added']==padding
+            expected_type={'i64':int,'bool':bool,'str':str}[case['type']]
+            assert all(value is None or type(value) is expected_type for value in dense)
+            assert json.dumps(observed['dense_from_input_horizon'])==json.dumps(dense)
+            status='match' if json.dumps(dense)==json.dumps(case['expected']) else 'divergence'
+            assert engine['assessment'][case['id']]==status=='match'
+            if case['id'] in {'all_absent','empty_sequence'}:
+                # Raw no-output remains distinct from a successful materialized recording.
+                assert raw is None
+    print('49 original cases, 6 absence/publication cases and 32 native scalar cases match; nested collection matches; lifecycle and empty-set divergences retained.')
 if __name__=='__main__': main()

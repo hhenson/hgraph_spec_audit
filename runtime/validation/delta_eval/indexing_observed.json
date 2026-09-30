@@ -1,0 +1,181 @@
+{
+  "engines": {
+    "cpp": {
+      "assessment": {
+        "all_absent": "match",
+        "empty_sequence": "match",
+        "indexed_example": "match",
+        "present_empty_text": "match",
+        "present_false": "match",
+        "present_zero": "match"
+      },
+      "identity_sha256": "362fdf032d44afc72414c4bdfff4454ee3bec6e9ec99126b4779e5ac1b586fe8",
+      "native": true,
+      "observations": {
+        "all_absent": {
+          "dense_from_input_horizon": [
+            null,
+            null,
+            null
+          ],
+          "input_horizon": 3,
+          "padding_added": 3,
+          "raw_eval_node": null
+        },
+        "empty_sequence": {
+          "dense_from_input_horizon": [],
+          "input_horizon": 0,
+          "padding_added": 0,
+          "raw_eval_node": null
+        },
+        "indexed_example": {
+          "dense_from_input_horizon": [
+            10,
+            null,
+            12
+          ],
+          "input_horizon": 3,
+          "padding_added": 0,
+          "raw_eval_node": [
+            10,
+            null,
+            12
+          ]
+        },
+        "present_empty_text": {
+          "dense_from_input_horizon": [
+            "",
+            null,
+            ""
+          ],
+          "input_horizon": 3,
+          "padding_added": 0,
+          "raw_eval_node": [
+            "",
+            null,
+            ""
+          ]
+        },
+        "present_false": {
+          "dense_from_input_horizon": [
+            false,
+            null,
+            false
+          ],
+          "input_horizon": 3,
+          "padding_added": 0,
+          "raw_eval_node": [
+            false,
+            null,
+            false
+          ]
+        },
+        "present_zero": {
+          "dense_from_input_horizon": [
+            0,
+            null,
+            0
+          ],
+          "input_horizon": 3,
+          "padding_added": 0,
+          "raw_eval_node": [
+            0,
+            null,
+            0
+          ]
+        }
+      }
+    },
+    "python": {
+      "assessment": {
+        "all_absent": "match",
+        "empty_sequence": "match",
+        "indexed_example": "match",
+        "present_empty_text": "match",
+        "present_false": "match",
+        "present_zero": "match"
+      },
+      "identity_sha256": "cf800f0d81222a4a6267676b663fd74bd8e584b1fe5293945049138cd4ed71b6",
+      "native": false,
+      "observations": {
+        "all_absent": {
+          "dense_from_input_horizon": [
+            null,
+            null,
+            null
+          ],
+          "input_horizon": 3,
+          "padding_added": 3,
+          "raw_eval_node": null
+        },
+        "empty_sequence": {
+          "dense_from_input_horizon": [],
+          "input_horizon": 0,
+          "padding_added": 0,
+          "raw_eval_node": null
+        },
+        "indexed_example": {
+          "dense_from_input_horizon": [
+            10,
+            null,
+            12
+          ],
+          "input_horizon": 3,
+          "padding_added": 0,
+          "raw_eval_node": [
+            10,
+            null,
+            12
+          ]
+        },
+        "present_empty_text": {
+          "dense_from_input_horizon": [
+            "",
+            null,
+            ""
+          ],
+          "input_horizon": 3,
+          "padding_added": 0,
+          "raw_eval_node": [
+            "",
+            null,
+            ""
+          ]
+        },
+        "present_false": {
+          "dense_from_input_horizon": [
+            false,
+            null,
+            false
+          ],
+          "input_horizon": 3,
+          "padding_added": 0,
+          "raw_eval_node": [
+            false,
+            null,
+            false
+          ]
+        },
+        "present_zero": {
+          "dense_from_input_horizon": [
+            0,
+            null,
+            0
+          ],
+          "input_horizon": 3,
+          "padding_added": 0,
+          "raw_eval_node": [
+            0,
+            null,
+            0
+          ]
+        }
+      }
+    }
+  },
+  "harness_sha256": "6c7676ee3120020413bb7d9871d6fbe8ebd715e376578eaaa17e93aeb17a2135",
+  "measured_at": "2026-09-30T14:56:31.680818+00:00",
+  "observer_sha256": "c7d54b7dadcfd86fce648d4ddd5fd8decb64f7cf0e36a7700fb1195dfb3b7ead",
+  "reasoned_sha256": "0588e29bcb8abbabec480c813e5ce0d9866fd826b19ba0996b7304acef1820d5",
+  "repeats": 3
+}
