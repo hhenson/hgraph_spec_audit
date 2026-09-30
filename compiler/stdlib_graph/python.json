@@ -1,0 +1,73 @@
+{
+  "engine": "python",
+  "package_version": "0.5.42",
+  "package_init_sha256": "324bd661bcecdb2e46c8e07f7bb80c931bc3961ab9ef13440f822c73abe865a1",
+  "native_binary_sha256": null,
+  "cases_sha256": "ea043dbaee0a42cc2a51f92ac1a2d73b231270d6f50f4305262fda29580b7965",
+  "observed": {
+    "constant": {
+      "ticks": [
+        42
+      ],
+      "lines": [
+        "answer: 42"
+      ],
+      "matches": true
+    },
+    "delayed-negative": {
+      "ticks": [
+        null,
+        null,
+        -7
+      ],
+      "lines": [
+        "answer: -7"
+      ],
+      "matches": true
+    },
+    "fresh-run": {
+      "ticks": [
+        42
+      ],
+      "lines": [
+        "answer: 42"
+      ],
+      "matches": true
+    },
+    "sampled-single": {
+      "ticks": [
+        42
+      ],
+      "lines": [],
+      "matches": true
+    },
+    "missing-and-equal": {
+      "ticks": [
+        null,
+        42,
+        null,
+        42,
+        -7
+      ],
+      "lines": [
+        "answer: 42",
+        "answer: 42",
+        "answer: -7"
+      ],
+      "matches": true
+    },
+    "sampled-input": {
+      "ticks": [
+        null,
+        42,
+        null,
+        42,
+        -7
+      ],
+      "lines": [
+        "[2] answer: 42"
+      ],
+      "matches": true
+    }
+  }
+}
