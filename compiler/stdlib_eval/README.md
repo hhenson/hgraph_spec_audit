@@ -10,10 +10,10 @@ The shared language guide defines dense alignment, silence and strict length.
 | C++ engine through Python authoring | 84/84 traces match |
 | Python 0.5.42 | 83/84 traces match; `sum_reset` variation below |
 
-The C++ compiler and wheel use hgraph commit
+The compiled-HGL run verifies hgraph commit
 `540b0976ada30f313975ca90533d6a7bce02b519` (native-provider PR #1669).
 The wheel labels itself `0.0.0`; binary and Python-source fingerprints identify
-the runtime used.
+the runtime used. Its source revision is not verified by the replay runner.
 The compiled-HGL run validates native C++ scalar functions and sink effects.
 Python-authoring runs exercise released operators where available. Embedded
 native tests lift independent Python scalar operations into compute nodes;
@@ -44,8 +44,10 @@ These rules explain the existing shared expectations. C++ execution confirms
 all of them; the accepted Python variation does not alter an expected trace.
 The Rust implementation records its own engine validation in its repository.
 Updating the library pin also reran the four existing compiled-HGL regression
-scenarios (23 cells) against the matching C++ SDK, three times with identical
+scenarios (23 cells) against an installed C++ SDK, three times with identical
 results; `compiler/stdlib/hgl-reference.json` contains the refreshed evidence.
+That separate SDK runner records binary fingerprints, not a verified source
+revision; the commit attribution above applies only to this eval campaign.
 
 ## Accepted variation: reset before addition
 
