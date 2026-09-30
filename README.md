@@ -61,6 +61,9 @@ The [native-interface audit](compiler/native_interfaces/) owns the C++ to Rust
 interface compatibility CI job. It uses public sources and publishes fingerprints
 that HGL checks locally, without a C++ build.
 The [catalogue](catalogue/) records implementation coverage.
+[Relocated implementation notes](docs/implementation-notes/) preserve earlier
+compiler status, source references and build guidance; they are historical
+context, not fresh conformance results.
 
 Reason first. Compare Python 0.5.x and C++ 0.8.x independently. Reasoning plus
 one reference supports acceptance with a variation report. If both references

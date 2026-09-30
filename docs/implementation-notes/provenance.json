@@ -1,0 +1,252 @@
+{
+  "source_repository": "https://github.com/hhenson/hgraph_spec",
+  "source_revision": "766033278bef6e9403cc99c0d8f318ba46a03919",
+  "files": [
+    {
+      "path": "docs/implementation-notes/language/docs/design/control-flow.md",
+      "source_path": "language/docs/design/control-flow.md",
+      "source_sha256": "0b9c1fcf3826fcc2a8239f02539f84a246df7e1eed22f42689ef3ea591e37c02",
+      "excerpts": 17
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/decisions/0005-inline-cpp-native-functions.md",
+      "source_path": "language/docs/design/decisions/0005-inline-cpp-native-functions.md",
+      "source_sha256": "9c30f9ee45f63804bcb45c4e1d6ba50c9ce8fe27f0a1d761c27abd4326cb545d",
+      "excerpts": 1
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/decisions/0006-multi-file-module-parts.md",
+      "source_path": "language/docs/design/decisions/0006-multi-file-module-parts.md",
+      "source_sha256": "1023e0545329f6504462bb08e55f21c506e09db4a6d72a7cb595442700b6aee5",
+      "excerpts": 1
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/decisions/0007-parameter-packs.md",
+      "source_path": "language/docs/design/decisions/0007-parameter-packs.md",
+      "source_sha256": "e17bd0c7d4fde5600862e8af20aabe12ee6ad21e82a91fb88100b6f82340eac5",
+      "excerpts": 2
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/decisions/0008-temporal-contracts-and-target-mappings.md",
+      "source_path": "language/docs/design/decisions/0008-temporal-contracts-and-target-mappings.md",
+      "source_sha256": "dff18a7e8eafbf3fd9fa7c250774c42f0936e04beea94967801daa1ca0fa4049",
+      "excerpts": 12
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/decisions/0009-native-errors-and-the-node-error-model.md",
+      "source_path": "language/docs/design/decisions/0009-native-errors-and-the-node-error-model.md",
+      "source_sha256": "9903dbce8c6bb38cab7b18d59ed6060ae77f7202d83a72d77544b34104119ceb",
+      "excerpts": 1
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/decisions/0010-lifecycle-capabilities.md",
+      "source_path": "language/docs/design/decisions/0010-lifecycle-capabilities.md",
+      "source_sha256": "9d436c7b6af3c2902151f77f7bd6137d51345c66529adba34e0321577d6c7f19",
+      "excerpts": 3
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/decisions/0011-cache-declarations.md",
+      "source_path": "language/docs/design/decisions/0011-cache-declarations.md",
+      "source_sha256": "1ef8484194a39aa4a293c3ed720f3e8af36506b087bcfc2e70bb4e60b500a35d",
+      "excerpts": 5
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/decisions/0012-recursive-struct-fields.md",
+      "source_path": "language/docs/design/decisions/0012-recursive-struct-fields.md",
+      "source_sha256": "e7a109daddd2c54ffb138dbfe79cdb363f73ba30d601d72b353556362dd02b4c",
+      "excerpts": 4
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/decisions/0013-struct-imports.md",
+      "source_path": "language/docs/design/decisions/0013-struct-imports.md",
+      "source_sha256": "8f52a7e818e6788d3d184acecccfea4b5462c2f91d7222c115496b6e3c9ccfdf",
+      "excerpts": 53
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/decisions/0014-native-implementation-interfaces.md",
+      "source_path": "language/docs/design/decisions/0014-native-implementation-interfaces.md",
+      "source_sha256": "d6ec84136155f76c5fb7f34c75de7f7c650c113c43aacc4028b7fa6e8e0629d4",
+      "excerpts": 5
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/decisions/0015-pull-sources.md",
+      "source_path": "language/docs/design/decisions/0015-pull-sources.md",
+      "source_sha256": "e67bd42a37f9d300eed586781123077af485e48c77c3faccda6315ab0a62aefb",
+      "excerpts": 9
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/decisions/README.md",
+      "source_path": "language/docs/design/decisions/README.md",
+      "source_sha256": "b16a6a1b25b40369edcfb79ef79b5e90462d92077d58e4b4ed241dd5969f8e35",
+      "excerpts": 2
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/documentation.md",
+      "source_path": "language/docs/design/documentation.md",
+      "source_sha256": "0ce6f80fa9e051699622b0b4581082ea52f90894d50085c5c0e3776f8954ff78",
+      "excerpts": 1
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/iteration.md",
+      "source_path": "language/docs/design/iteration.md",
+      "source_sha256": "30e5bc42c06d54a64a905f191482517fbadd28b3c2582fd81a479c523df2ebac",
+      "excerpts": 10
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/language-model.md",
+      "source_path": "language/docs/design/language-model.md",
+      "source_sha256": "7c9be4d5636e7428571f9d1c98c2f547cb398b62977d36ad84d4654d68ec6e69",
+      "excerpts": 19
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/migration-requirements.md",
+      "source_path": "language/docs/design/migration-requirements.md",
+      "source_sha256": "1af2c360ff5878f634edac7eee1d0d7bb290c17fcddae7249d2c47a3d03008eb",
+      "excerpts": 16
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/modules.md",
+      "source_path": "language/docs/design/modules.md",
+      "source_sha256": "e9179913a450ef47e1dc6921c6cf813309007dfc207f3c6079bdaf90e1a32def",
+      "excerpts": 15
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/native-implementation-parts.md",
+      "source_path": "language/docs/design/native-implementation-parts.md",
+      "source_sha256": "89bf83dfc5fa852cc3faf1b576abea9ace64614ef992ea8230106debbcd804ca",
+      "excerpts": 2
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/native-interface.md",
+      "source_path": "language/docs/design/native-interface.md",
+      "source_sha256": "26cd1040ccf9e16554a8393a07a9225e1128363bb989d52c71c024a166cec40d",
+      "excerpts": 48
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/native-interfaces.md",
+      "source_path": "language/docs/design/native-interfaces.md",
+      "source_sha256": "6b1ec4d232a78004e1bc6086e363cbdd28b8e338decf4918ec81e736d33c3dc0",
+      "excerpts": 9
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/native-surface-proposal.md",
+      "source_path": "language/docs/design/native-surface-proposal.md",
+      "source_sha256": "13441f441d0f2ed849a11bf69f624df2b8b8c0c1578c5182a6bb4c4cf3a0e1e6",
+      "excerpts": 8
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/node-authoring.md",
+      "source_path": "language/docs/design/node-authoring.md",
+      "source_sha256": "3b2fe38bc28c2f1bd4f11a1019b5aeaf9ef8544de6077d89600f58e40dbdc11f",
+      "excerpts": 16
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/operators.md",
+      "source_path": "language/docs/design/operators.md",
+      "source_sha256": "2f71d85f04fef4ae7ebcc7b10ca38ed36ae6614cbad04d8a094abb749ab4a847",
+      "excerpts": 6
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/switch.md",
+      "source_path": "language/docs/design/switch.md",
+      "source_sha256": "8bdc038fc4daeeec87afdfff291a55d72c414fbf9cf27b16eb1bd6e03af13ebb",
+      "excerpts": 3
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/design/type-extensions.md",
+      "source_path": "language/docs/design/type-extensions.md",
+      "source_sha256": "65556fcce92562380cfe2c047bfb78a7c1a853fbe3e9efd30394614217fcdfc5",
+      "excerpts": 9
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/developer-guide/syntax-and-semantics.md",
+      "source_path": "language/docs/developer-guide/syntax-and-semantics.md",
+      "source_sha256": "78c26473ae7f0ff31e953998659faedd3cb7e94dc67327dbd39eb48222791be5",
+      "excerpts": 30
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/user-guide/README.md",
+      "source_path": "language/docs/user-guide/README.md",
+      "source_sha256": "05b2074be0a96fea6dc2c81a5c5395c0f558716a146d2da333358b7dcbd70466",
+      "excerpts": 3
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/user-guide/functions.md",
+      "source_path": "language/docs/user-guide/functions.md",
+      "source_sha256": "264faffe6a07ef6438b2a8d55ce67f90989bf8ffd9ec8fdb8a08ebfd68b81c82",
+      "excerpts": 9
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/user-guide/language-tour.md",
+      "source_path": "language/docs/user-guide/language-tour.md",
+      "source_sha256": "f44b43ce7e3783bf8b03162bcb94ad9cf32f2010e3a6a9b1c36066a6d1d07fd9",
+      "excerpts": 1
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/user-guide/modules-and-tools.md",
+      "source_path": "language/docs/user-guide/modules-and-tools.md",
+      "source_sha256": "12c44a1c7e49eb2be62bc918d0da8775c9cdae443753fb182475c42bc943a6f1",
+      "excerpts": 14
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/user-guide/testing-and-running.md",
+      "source_path": "language/docs/user-guide/testing-and-running.md",
+      "source_sha256": "f1cb78f6fdaef9bfd035c002ab7f39739752210262a942f651392e6694d6a57c",
+      "excerpts": 9
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/user-guide/types-and-expressions.md",
+      "source_path": "language/docs/user-guide/types-and-expressions.md",
+      "source_sha256": "d5381a3756b387a73e933e9fc5edea338e29a161913effae4898651f5ad9976b",
+      "excerpts": 14
+    },
+    {
+      "path": "docs/implementation-notes/language/docs/user-guide/value-functions.md",
+      "source_path": "language/docs/user-guide/value-functions.md",
+      "source_sha256": "1ec609c900fd60e5d5c0da096b9851977f908913eba27251a293bd204ab7fd1b",
+      "excerpts": 5
+    },
+    {
+      "path": "docs/implementation-notes/library/operator_contracts.md",
+      "source_path": "library/operator_contracts.md",
+      "source_sha256": "162f3b3efea472eb8447e233249a09ac385bb5c7c0bfb78a62a0401226da1e54",
+      "excerpts": 2
+    },
+    {
+      "path": "docs/implementation-notes/runtime/graph.md",
+      "source_path": "runtime/graph.md",
+      "source_sha256": "60392101ea4ef63ca6fb556ebaa357acf3c225e65ca5cd68a72e4856a9cff8ce",
+      "excerpts": 1
+    },
+    {
+      "path": "docs/implementation-notes/runtime/injectables.md",
+      "source_path": "runtime/injectables.md",
+      "source_sha256": "eb83f0595c825ba934a0b898be51d48c2ea71fc51ae4f38928b35d14e3489cbb",
+      "excerpts": 1
+    },
+    {
+      "path": "docs/implementation-notes/runtime/node.md",
+      "source_path": "runtime/node.md",
+      "source_sha256": "8be1655b637f9b5fbdb1986a73161668a6834c943d27ed224b0252d2fd6c8036",
+      "excerpts": 1
+    },
+    {
+      "path": "docs/implementation-notes/runtime/representations.md",
+      "source_path": "runtime/representations.md",
+      "source_sha256": "ba866c426215df3b38aaaf056d66c21929195e171cfcc4a802f4986fda9ce2b2",
+      "excerpts": 1
+    },
+    {
+      "path": "docs/implementation-notes/runtime/scalar_types.md",
+      "source_path": "runtime/scalar_types.md",
+      "source_sha256": "d38f80eb0df41baead97e8e3ef9724214e2dc8dcc003ddbc702209c8dc8eaa1c",
+      "excerpts": 2
+    },
+    {
+      "path": "docs/implementation-notes/wiring/wiring.md",
+      "source_path": "wiring/wiring.md",
+      "source_sha256": "2707cb76cdc5e629f252fbff2f5edfa802747577eaeb95761b99dba87800d238",
+      "excerpts": 2
+    }
+  ]
+}
