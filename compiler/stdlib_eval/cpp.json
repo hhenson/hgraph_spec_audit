@@ -1,0 +1,1533 @@
+{
+  "engine": "cpp",
+  "version": "0.0.0",
+  "python_sources": {
+    "sha256": "eee221d781a471230776333a3d9bbc34187f6112fe96139d8a553ff9a939d979",
+    "files": 104
+  },
+  "support_sha256": "6f7d6d5789bffb811fe6a3a0ffd095eca554e735b60b3bab6dfb968ca6142593",
+  "native_sha256": "d1ace90d90800adabbc786e7993ded5e1fd132464c46edf8d8c6ac82a85cbf83",
+  "sources": {
+    "native/scalar_values.hgl": "aa2d31b5f988f1528e3692c50e94c02b08a504328b37930c86560ab141f1c3df",
+    "native/scalar_values_i64.hgl": "18395afe309bf778407d55fedbb3505e2ac239937b8521b6f708343d619bec92",
+    "native/temporal_values.hgl": "cac890f075c9b2662f659b06151b1509327acdb9491cb523d6690f677677f6c5",
+    "tests/control.hgl": "12483de61747fb26cf27a94f02a3390227436c3a843acee1c49b121f2398fd0e",
+    "tests/native_scalar_operators.hgl": "9c5e0d9addd33542dd64d20e20390c00a7644b8981f13526c0420ef29ca09a86",
+    "tests/operators.hgl": "c4b609b259513cb3cc04665dbeea1d6c13aa2c2469ef369698eddcb811f2e272",
+    "tests/standard.hgl": "4dec8d692264ebcff45b29e2c9111fe19e9b5ad21d004c0d7adfd7d260d95f72",
+    "tests/stream.hgl": "103d06d0c0571643186caac9183e98c7ca5fa17cdf2415b986bbabb9d9e58b51",
+    "tests/temporal.hgl": "6556509e538724b04ef795b49d471baed248ce685a5c811245534d74d805fb20"
+  },
+  "harness_sha256": "080d990ff042f96bdc3ca3654abdebb94f840bfcf5ccb06d222c5b97d55d6234",
+  "reader_sha256": "a6658697091382511d5b0e421d0961a56a499e3edad62e6e9188abd5e0990f15",
+  "cases": [
+    {
+      "index": 0,
+      "module": "hgraph.native",
+      "name": "text_length_and_silent_ticks",
+      "function": "test_text_length",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        3,
+        null,
+        0
+      ],
+      "observed": [
+        3,
+        null,
+        0
+      ],
+      "matches": true
+    },
+    {
+      "index": 1,
+      "module": "hgraph.native",
+      "name": "text_emptiness",
+      "function": "test_text_empty",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        false,
+        true
+      ],
+      "observed": [
+        false,
+        true
+      ],
+      "matches": true
+    },
+    {
+      "index": 2,
+      "module": "hgraph.native",
+      "name": "text_membership",
+      "function": "test_text_contains",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        true,
+        false,
+        true,
+        false
+      ],
+      "observed": [
+        true,
+        false,
+        true,
+        false
+      ],
+      "matches": true
+    },
+    {
+      "index": 3,
+      "module": "hgraph.native",
+      "name": "text_prefix",
+      "function": "test_text_prefix",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        true,
+        false,
+        true,
+        false
+      ],
+      "observed": [
+        true,
+        false,
+        true,
+        false
+      ],
+      "matches": true
+    },
+    {
+      "index": 4,
+      "module": "hgraph.native",
+      "name": "text_suffix",
+      "function": "test_text_suffix",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        true,
+        false,
+        true,
+        false
+      ],
+      "observed": [
+        true,
+        false,
+        true,
+        false
+      ],
+      "matches": true
+    },
+    {
+      "index": 5,
+      "module": "hgraph.native",
+      "name": "truthiness_is_a_value_operation",
+      "function": "scalar_truth",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        false,
+        true,
+        true
+      ],
+      "observed": [
+        false,
+        true,
+        true
+      ],
+      "matches": true
+    },
+    {
+      "index": 6,
+      "module": "hgraph.native",
+      "name": "truthiness_is_a_value_operation",
+      "function": "string_truth",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        false,
+        true
+      ],
+      "observed": [
+        false,
+        true
+      ],
+      "matches": true
+    },
+    {
+      "index": 7,
+      "module": "hgraph.native",
+      "name": "integer_bit_projection",
+      "function": "bit_intersection",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        2,
+        7
+      ],
+      "observed": [
+        2,
+        7
+      ],
+      "matches": true
+    },
+    {
+      "index": 8,
+      "module": "hgraph.native",
+      "name": "decimal_rounding",
+      "function": "scalar_round",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        2.67,
+        2.0,
+        4.0
+      ],
+      "observed": [
+        2.67,
+        2.0,
+        4.0
+      ],
+      "matches": true
+    },
+    {
+      "index": 9,
+      "module": "hgraph.native",
+      "name": "checked_powers",
+      "function": "integer_power",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        1024,
+        -27,
+        1
+      ],
+      "observed": [
+        1024,
+        -27,
+        1
+      ],
+      "matches": true
+    },
+    {
+      "index": 10,
+      "module": "hgraph.native",
+      "name": "checked_powers",
+      "function": "float_power",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        1.4142135623730951,
+        0.25
+      ],
+      "observed": [
+        1.4142135623730951,
+        0.25
+      ],
+      "matches": true
+    },
+    {
+      "index": 11,
+      "module": "hgraph.native",
+      "name": "checked_shifts",
+      "function": "left",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        8,
+        0,
+        -2
+      ],
+      "observed": [
+        8,
+        0,
+        -2
+      ],
+      "matches": true
+    },
+    {
+      "index": 12,
+      "module": "hgraph.native",
+      "name": "checked_shifts",
+      "function": "right",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        1,
+        -4,
+        0
+      ],
+      "observed": [
+        1,
+        -4,
+        0
+      ],
+      "matches": true
+    },
+    {
+      "index": 13,
+      "module": "hgraph.native",
+      "name": "python_slices",
+      "function": "text_slice",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        "hg",
+        "gr",
+        "",
+        ""
+      ],
+      "observed": [
+        "hg",
+        "gr",
+        "",
+        ""
+      ],
+      "matches": true
+    },
+    {
+      "index": 14,
+      "module": "hgraph.native",
+      "name": "python_str_of_scalars",
+      "function": "text_of_bool",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        "True",
+        "False"
+      ],
+      "observed": [
+        "True",
+        "False"
+      ],
+      "matches": true
+    },
+    {
+      "index": 15,
+      "module": "hgraph.native",
+      "name": "python_str_of_scalars",
+      "function": "text_of_int",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        "42",
+        "-7",
+        "0"
+      ],
+      "observed": [
+        "42",
+        "-7",
+        "0"
+      ],
+      "matches": true
+    },
+    {
+      "index": 16,
+      "module": "hgraph.native",
+      "name": "python_str_of_scalars",
+      "function": "text_of_float",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        "1.5",
+        "2.0",
+        "0.1"
+      ],
+      "observed": [
+        "1.5",
+        "2.0",
+        "0.1"
+      ],
+      "matches": true
+    },
+    {
+      "index": 17,
+      "module": "hgraph.native",
+      "name": "python_str_of_scalars",
+      "function": "text_of_str",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        "hgl",
+        ""
+      ],
+      "observed": [
+        "hgl",
+        ""
+      ],
+      "matches": true
+    },
+    {
+      "index": 18,
+      "module": "hgraph.native",
+      "name": "python_str_of_scalars",
+      "function": "text_of_date",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        "2026-09-03"
+      ],
+      "observed": [
+        "2026-09-03"
+      ],
+      "matches": true
+    },
+    {
+      "index": 19,
+      "module": "hgraph.native",
+      "name": "python_str_of_scalars",
+      "function": "text_of_time",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        "09:30:00",
+        "09:30:15.250000"
+      ],
+      "observed": [
+        "09:30:00",
+        "09:30:15.250000"
+      ],
+      "matches": true
+    },
+    {
+      "index": 20,
+      "module": "hgraph.native",
+      "name": "python_str_of_scalars",
+      "function": "text_of_datetime",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        "2026-09-03 09:30:00",
+        "2026-09-03 09:30:15.250000"
+      ],
+      "observed": [
+        "2026-09-03 09:30:00",
+        "2026-09-03 09:30:15.250000"
+      ],
+      "matches": true
+    },
+    {
+      "index": 21,
+      "module": "hgraph.native",
+      "name": "python_str_of_scalars",
+      "function": "text_of_duration",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        "0:05:00",
+        "1:30:00",
+        "1 day, 0:00:00",
+        "0:00:01.500000"
+      ],
+      "observed": [
+        "0:05:00",
+        "1:30:00",
+        "1 day, 0:00:00",
+        "0:00:01.500000"
+      ],
+      "matches": true
+    },
+    {
+      "index": 22,
+      "module": "hgraph.native",
+      "name": "bitwise_i64_value_contract",
+      "function": "test_bitwise_value",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        null,
+        2,
+        3,
+        7,
+        7,
+        7
+      ],
+      "observed": [
+        null,
+        2,
+        3,
+        7,
+        7,
+        7
+      ],
+      "matches": true
+    },
+    {
+      "index": 23,
+      "module": "hgraph.native",
+      "name": "calendar_components",
+      "function": "calendar_year",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        2024,
+        null,
+        2025
+      ],
+      "observed": [
+        2024,
+        null,
+        2025
+      ],
+      "matches": true
+    },
+    {
+      "index": 24,
+      "module": "hgraph.native",
+      "name": "calendar_components",
+      "function": "calendar_month",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        2,
+        1
+      ],
+      "observed": [
+        2,
+        1
+      ],
+      "matches": true
+    },
+    {
+      "index": 25,
+      "module": "hgraph.native",
+      "name": "calendar_components",
+      "function": "calendar_day",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        29,
+        1
+      ],
+      "observed": [
+        29,
+        1
+      ],
+      "matches": true
+    },
+    {
+      "index": 26,
+      "module": "hgraph.native",
+      "name": "negative_duration_components",
+      "function": "normalized_days",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        -1,
+        1
+      ],
+      "observed": [
+        -1,
+        1
+      ],
+      "matches": true
+    },
+    {
+      "index": 27,
+      "module": "hgraph.native",
+      "name": "negative_duration_components",
+      "function": "normalized_seconds",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        86399,
+        1
+      ],
+      "observed": [
+        86399,
+        1
+      ],
+      "matches": true
+    },
+    {
+      "index": 28,
+      "module": "hgraph.native",
+      "name": "negative_duration_components",
+      "function": "normalized_micros",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        999999,
+        2
+      ],
+      "observed": [
+        999999,
+        2
+      ],
+      "matches": true
+    },
+    {
+      "index": 29,
+      "module": "hgraph.native",
+      "name": "time_and_epoch",
+      "function": "time_hour",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        0,
+        23
+      ],
+      "observed": [
+        0,
+        23
+      ],
+      "matches": true
+    },
+    {
+      "index": 30,
+      "module": "hgraph.native",
+      "name": "time_and_epoch",
+      "function": "instant_timestamp",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        0.0,
+        1.0
+      ],
+      "observed": [
+        0.0,
+        1.0
+      ],
+      "matches": true
+    },
+    {
+      "index": 31,
+      "module": "hgraph.std",
+      "name": "repeated_true_and_once",
+      "function": "true_ticks",
+      "adapter": "released_operator",
+      "expected": [
+        null,
+        true,
+        null,
+        true,
+        null,
+        true
+      ],
+      "observed": [
+        null,
+        true,
+        null,
+        true,
+        null,
+        true
+      ],
+      "matches": true
+    },
+    {
+      "index": 32,
+      "module": "hgraph.std",
+      "name": "repeated_true_and_once",
+      "function": "true_ticks",
+      "adapter": "released_operator",
+      "expected": [
+        null,
+        true,
+        null,
+        null,
+        null,
+        null
+      ],
+      "observed": [
+        null,
+        true,
+        null,
+        null,
+        null,
+        null
+      ],
+      "matches": true
+    },
+    {
+      "index": 33,
+      "module": "hgraph.std",
+      "name": "constant_ticks_once_at_start",
+      "function": "forty_two",
+      "adapter": "released_operator",
+      "expected": [
+        42,
+        null,
+        null
+      ],
+      "observed": [
+        42,
+        null,
+        null
+      ],
+      "matches": true
+    },
+    {
+      "index": 34,
+      "module": "hgraph.std",
+      "name": "constant_ticks_once_at_start",
+      "function": "text",
+      "adapter": "released_operator",
+      "expected": [
+        "hgl"
+      ],
+      "observed": [
+        "hgl"
+      ],
+      "matches": true
+    },
+    {
+      "index": 35,
+      "module": "hgraph.std",
+      "name": "constant_after_a_delay",
+      "function": "later",
+      "adapter": "released_operator",
+      "expected": [
+        null,
+        null,
+        7
+      ],
+      "observed": [
+        null,
+        null,
+        7
+      ],
+      "matches": true
+    },
+    {
+      "index": 36,
+      "module": "hgraph.std",
+      "name": "nothing_never_ticks",
+      "function": "never",
+      "adapter": "released_operator",
+      "expected": [
+        null,
+        null
+      ],
+      "observed": [
+        null,
+        null
+      ],
+      "matches": true
+    },
+    {
+      "index": 37,
+      "module": "hgraph.std",
+      "name": "default_until_the_primary_is_valid",
+      "function": "with_default",
+      "adapter": "released_operator",
+      "expected": [
+        1,
+        2,
+        5,
+        null,
+        7
+      ],
+      "observed": [
+        1,
+        2,
+        5,
+        null,
+        7
+      ],
+      "matches": true
+    },
+    {
+      "index": 38,
+      "module": "hgraph.std",
+      "name": "primary_wins_when_both_tick",
+      "function": "with_default",
+      "adapter": "released_operator",
+      "expected": [
+        3,
+        null
+      ],
+      "observed": [
+        3,
+        null
+      ],
+      "matches": true
+    },
+    {
+      "index": 39,
+      "module": "hgraph.std",
+      "name": "constant_default",
+      "function": "with_zero",
+      "adapter": "released_operator",
+      "expected": [
+        0.0,
+        1.5
+      ],
+      "observed": [
+        0.0,
+        1.5
+      ],
+      "matches": true
+    },
+    {
+      "index": 40,
+      "module": "hgraph.std",
+      "name": "diagnostic_sinks_pass_their_input_through",
+      "function": "watched",
+      "adapter": "tick_passthrough_only",
+      "expected": [
+        1,
+        2,
+        3
+      ],
+      "observed": [
+        1,
+        2,
+        3
+      ],
+      "matches": true
+    },
+    {
+      "index": 41,
+      "module": "hgraph.std",
+      "name": "diagnostic_sinks_pass_their_input_through",
+      "function": "printed",
+      "adapter": "tick_passthrough_only",
+      "expected": [
+        "a",
+        null,
+        "b"
+      ],
+      "observed": [
+        "a",
+        null,
+        "b"
+      ],
+      "matches": true
+    },
+    {
+      "index": 42,
+      "module": "hgraph.std",
+      "name": "diagnostic_sinks_pass_their_input_through",
+      "function": "checked",
+      "adapter": "tick_passthrough_only",
+      "expected": [
+        true,
+        true
+      ],
+      "observed": [
+        true,
+        true
+      ],
+      "matches": true
+    },
+    {
+      "index": 43,
+      "module": "hgraph.native",
+      "name": "scalar_operator_values",
+      "function": "int_sum",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        5,
+        6,
+        -1
+      ],
+      "observed": [
+        5,
+        6,
+        -1
+      ],
+      "matches": true
+    },
+    {
+      "index": 44,
+      "module": "hgraph.native",
+      "name": "scalar_operator_values",
+      "function": "mixed_sum",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        2.5,
+        -4.5
+      ],
+      "observed": [
+        2.5,
+        -4.5
+      ],
+      "matches": true
+    },
+    {
+      "index": 45,
+      "module": "hgraph.native",
+      "name": "scalar_operator_values",
+      "function": "text_sum",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        "ab",
+        "b"
+      ],
+      "observed": [
+        "ab",
+        "b"
+      ],
+      "matches": true
+    },
+    {
+      "index": 46,
+      "module": "hgraph.native",
+      "name": "scalar_operator_values",
+      "function": "quotient",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        -3.5
+      ],
+      "observed": [
+        -3.5
+      ],
+      "matches": true
+    },
+    {
+      "index": 47,
+      "module": "hgraph.native",
+      "name": "scalar_operator_values",
+      "function": "floor_quotient",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        -4
+      ],
+      "observed": [
+        -4
+      ],
+      "matches": true
+    },
+    {
+      "index": 48,
+      "module": "hgraph.native",
+      "name": "scalar_operator_values",
+      "function": "remainder",
+      "adapter": "python_scalar_lift",
+      "expected": [
+        1
+      ],
+      "observed": [
+        1
+      ],
+      "matches": true
+    },
+    {
+      "index": 49,
+      "module": "hgraph.operators",
+      "name": "equality_uses_native_default_tolerance",
+      "function": "equals",
+      "adapter": "released_operator",
+      "expected": [
+        true,
+        true,
+        false
+      ],
+      "observed": [
+        true,
+        true,
+        false
+      ],
+      "matches": true
+    },
+    {
+      "index": 50,
+      "module": "hgraph.operators",
+      "name": "zero_sign_and_mean",
+      "function": "positive_sign",
+      "adapter": "released_operator",
+      "expected": [
+        -1,
+        1,
+        1
+      ],
+      "observed": [
+        -1,
+        1,
+        1
+      ],
+      "matches": true
+    },
+    {
+      "index": 51,
+      "module": "hgraph.operators",
+      "name": "zero_sign_and_mean",
+      "function": "average",
+      "adapter": "released_operator",
+      "expected": [
+        3.0,
+        6.0
+      ],
+      "observed": [
+        3.0,
+        6.0
+      ],
+      "matches": true
+    },
+    {
+      "index": 52,
+      "module": "hgraph.operators",
+      "name": "checked_arithmetic_values",
+      "function": "integer_power",
+      "adapter": "released_operator",
+      "expected": [
+        1024,
+        59049,
+        9
+      ],
+      "observed": [
+        1024,
+        59049,
+        9
+      ],
+      "matches": true
+    },
+    {
+      "index": 53,
+      "module": "hgraph.operators",
+      "name": "checked_arithmetic_values",
+      "function": "mixed_power",
+      "adapter": "released_operator",
+      "expected": [
+        2.0,
+        0.5
+      ],
+      "observed": [
+        2.0,
+        0.5
+      ],
+      "matches": true
+    },
+    {
+      "index": 54,
+      "module": "hgraph.operators",
+      "name": "checked_arithmetic_values",
+      "function": "shifted_left",
+      "adapter": "released_operator",
+      "expected": [
+        16,
+        0
+      ],
+      "observed": [
+        16,
+        0
+      ],
+      "matches": true
+    },
+    {
+      "index": 55,
+      "module": "hgraph.operators",
+      "name": "checked_arithmetic_values",
+      "function": "shifted_right",
+      "adapter": "released_operator",
+      "expected": [
+        -4,
+        0
+      ],
+      "observed": [
+        -4,
+        0
+      ],
+      "matches": true
+    },
+    {
+      "index": 56,
+      "module": "hgraph.operators",
+      "name": "substring_slices",
+      "function": "sliced",
+      "adapter": "released_operator",
+      "expected": [
+        "gr",
+        "ra",
+        "ph"
+      ],
+      "observed": [
+        "gr",
+        "ra",
+        "ph"
+      ],
+      "matches": true
+    },
+    {
+      "index": 57,
+      "module": "hgraph.operators",
+      "name": "native_requirements_select_scalar_overloads",
+      "function": "integer_add",
+      "adapter": "released_operator",
+      "expected": [
+        null,
+        5,
+        6,
+        -1
+      ],
+      "observed": [
+        null,
+        5,
+        6,
+        -1
+      ],
+      "matches": true
+    },
+    {
+      "index": 58,
+      "module": "hgraph.operators",
+      "name": "native_requirements_select_scalar_overloads",
+      "function": "mixed_add",
+      "adapter": "released_operator",
+      "expected": [
+        2.5,
+        -4.5
+      ],
+      "observed": [
+        2.5,
+        -4.5
+      ],
+      "matches": true
+    },
+    {
+      "index": 59,
+      "module": "hgraph.operators",
+      "name": "native_requirements_select_scalar_overloads",
+      "function": "text_add",
+      "adapter": "released_operator",
+      "expected": [
+        "ab",
+        "b"
+      ],
+      "observed": [
+        "ab",
+        "b"
+      ],
+      "matches": true
+    },
+    {
+      "index": 60,
+      "module": "hgraph.operators",
+      "name": "native_requirements_select_scalar_overloads",
+      "function": "integer_div",
+      "adapter": "released_operator",
+      "expected": [
+        -3.5
+      ],
+      "observed": [
+        -3.5
+      ],
+      "matches": true
+    },
+    {
+      "index": 61,
+      "module": "hgraph.operators",
+      "name": "native_requirements_select_scalar_overloads",
+      "function": "integer_floor",
+      "adapter": "released_operator",
+      "expected": [
+        -4
+      ],
+      "observed": [
+        -4
+      ],
+      "matches": true
+    },
+    {
+      "index": 62,
+      "module": "hgraph.operators",
+      "name": "native_requirements_select_scalar_overloads",
+      "function": "integer_mod",
+      "adapter": "released_operator",
+      "expected": [
+        1
+      ],
+      "observed": [
+        1
+      ],
+      "matches": true
+    },
+    {
+      "index": 63,
+      "module": "hgraph.std",
+      "name": "numeric_conversions_truncate",
+      "function": "convert_integer",
+      "adapter": "released_operator",
+      "expected": [
+        null,
+        1,
+        -1,
+        0
+      ],
+      "observed": [
+        null,
+        1,
+        -1,
+        0
+      ],
+      "matches": true
+    },
+    {
+      "index": 64,
+      "module": "hgraph.std",
+      "name": "numeric_conversions_truncate",
+      "function": "convert_float",
+      "adapter": "released_operator",
+      "expected": [
+        null,
+        0.0,
+        -7.0
+      ],
+      "observed": [
+        null,
+        0.0,
+        -7.0
+      ],
+      "matches": true
+    },
+    {
+      "index": 65,
+      "module": "hgraph.std",
+      "name": "membership_seeds_and_resamples",
+      "function": "membership",
+      "adapter": "python_set_producer_with_released_operator",
+      "expected": [
+        false,
+        true,
+        true,
+        false
+      ],
+      "observed": [
+        false,
+        true,
+        true,
+        false
+      ],
+      "matches": true
+    },
+    {
+      "index": 66,
+      "module": "hgraph.std",
+      "name": "boolean_set_elements_are_values",
+      "function": "boolean_copy_size",
+      "adapter": "python_set_producer_with_released_operator",
+      "expected": [
+        1,
+        2,
+        null
+      ],
+      "observed": [
+        1,
+        2,
+        null
+      ],
+      "matches": true
+    },
+    {
+      "index": 67,
+      "module": "hgraph.std",
+      "name": "take_passivates_after_count",
+      "function": "first_two",
+      "adapter": "released_operator",
+      "expected": [
+        1,
+        2,
+        null,
+        null
+      ],
+      "observed": [
+        1,
+        2,
+        null,
+        null
+      ],
+      "matches": true
+    },
+    {
+      "index": 68,
+      "module": "hgraph.std",
+      "name": "freeze_holds_the_last_value_once_true",
+      "function": "frozen",
+      "adapter": "released_operator",
+      "expected": [
+        1,
+        2,
+        3,
+        null
+      ],
+      "observed": [
+        1,
+        2,
+        3,
+        null
+      ],
+      "matches": true
+    },
+    {
+      "index": 69,
+      "module": "hgraph.std",
+      "name": "until_true_stops_listening_once_true",
+      "function": "latched",
+      "adapter": "released_operator",
+      "expected": [
+        false,
+        false,
+        true,
+        null
+      ],
+      "observed": [
+        false,
+        false,
+        true,
+        null
+      ],
+      "matches": true
+    },
+    {
+      "index": 70,
+      "module": "hgraph.std",
+      "name": "sample_uses_only_trigger_ticks",
+      "function": "sample_integer",
+      "adapter": "released_operator",
+      "expected": [
+        null,
+        2,
+        null,
+        4,
+        4
+      ],
+      "observed": [
+        null,
+        2,
+        null,
+        4,
+        4
+      ],
+      "matches": true
+    },
+    {
+      "index": 71,
+      "module": "hgraph.std",
+      "name": "drop_counts_ticks_not_cycles",
+      "function": "drop_integer",
+      "adapter": "released_operator",
+      "expected": [
+        null,
+        null,
+        null,
+        2,
+        2
+      ],
+      "observed": [
+        null,
+        null,
+        null,
+        2,
+        2
+      ],
+      "matches": true
+    },
+    {
+      "index": 72,
+      "module": "hgraph.std",
+      "name": "drop_counts_ticks_not_cycles",
+      "function": "drop_integer",
+      "adapter": "released_operator",
+      "expected": [
+        1,
+        null,
+        2
+      ],
+      "observed": [
+        1,
+        null,
+        2
+      ],
+      "matches": true
+    },
+    {
+      "index": 73,
+      "module": "hgraph.std",
+      "name": "dedup_remembers_zero_and_empty_cycles",
+      "function": "dedup_integer",
+      "adapter": "released_operator",
+      "expected": [
+        null,
+        0,
+        null,
+        null,
+        1,
+        null,
+        0
+      ],
+      "observed": [
+        null,
+        0,
+        null,
+        null,
+        1,
+        null,
+        0
+      ],
+      "matches": true
+    },
+    {
+      "index": 74,
+      "module": "hgraph.std",
+      "name": "filter_resynchronizes_on_reopen",
+      "function": "filter_integer",
+      "adapter": "released_operator",
+      "expected": [
+        1,
+        null,
+        null,
+        3,
+        null,
+        4
+      ],
+      "observed": [
+        1,
+        null,
+        null,
+        3,
+        null,
+        4
+      ],
+      "matches": true
+    },
+    {
+      "index": 75,
+      "module": "hgraph.std",
+      "name": "filter_resynchronizes_on_reopen",
+      "function": "filter_integer",
+      "adapter": "released_operator",
+      "expected": [
+        1,
+        null,
+        null
+      ],
+      "observed": [
+        1,
+        null,
+        null
+      ],
+      "matches": true
+    },
+    {
+      "index": 76,
+      "module": "hgraph.std",
+      "name": "folds_and_reset_before_first_value",
+      "function": "sum_integer",
+      "adapter": "released_operator",
+      "expected": [
+        null,
+        0,
+        3,
+        6,
+        null,
+        4
+      ],
+      "observed": [
+        null,
+        0,
+        3,
+        6,
+        null,
+        4
+      ],
+      "matches": true
+    },
+    {
+      "index": 77,
+      "module": "hgraph.std",
+      "name": "folds_and_reset_before_first_value",
+      "function": "reset_integer",
+      "adapter": "released_operator",
+      "expected": [
+        0,
+        2,
+        3,
+        0,
+        1
+      ],
+      "observed": [
+        0,
+        2,
+        3,
+        0,
+        1
+      ],
+      "matches": true
+    },
+    {
+      "index": 78,
+      "module": "hgraph.std",
+      "name": "folds_and_reset_before_first_value",
+      "function": "mean_integer",
+      "adapter": "released_operator",
+      "expected": [
+        null,
+        2.0,
+        3.0,
+        null,
+        4.0
+      ],
+      "observed": [
+        null,
+        2.0,
+        3.0,
+        null,
+        4.0
+      ],
+      "matches": true
+    },
+    {
+      "index": 79,
+      "module": "hgraph.std",
+      "name": "dedup_tracks_last_emitted_value",
+      "function": "dedup_tolerance",
+      "adapter": "released_operator",
+      "expected": [
+        0.0,
+        null,
+        1.0,
+        null,
+        2.0
+      ],
+      "observed": [
+        0.0,
+        null,
+        1.0,
+        null,
+        2.0
+      ],
+      "matches": true
+    },
+    {
+      "index": 80,
+      "module": "hgraph.std",
+      "name": "date_components_elide_unchanged_values",
+      "function": "date_year",
+      "adapter": "released_operator",
+      "expected": [
+        2024,
+        null,
+        null,
+        2025
+      ],
+      "observed": [
+        2024,
+        null,
+        null,
+        2025
+      ],
+      "matches": true
+    },
+    {
+      "index": 81,
+      "module": "hgraph.std",
+      "name": "instant_components_keep_repeated_ticks",
+      "function": "instant_year",
+      "adapter": "released_operator",
+      "expected": [
+        2024,
+        2024
+      ],
+      "observed": [
+        2024,
+        2024
+      ],
+      "matches": true
+    },
+    {
+      "index": 82,
+      "module": "hgraph.std",
+      "name": "instant_components_keep_repeated_ticks",
+      "function": "instant_hour",
+      "adapter": "released_operator",
+      "expected": [
+        23,
+        0
+      ],
+      "observed": [
+        23,
+        0
+      ],
+      "matches": true
+    },
+    {
+      "index": 83,
+      "module": "hgraph.std",
+      "name": "duration_remainders_are_normalized",
+      "function": "duration_seconds",
+      "adapter": "released_operator",
+      "expected": [
+        86399,
+        0,
+        1
+      ],
+      "observed": [
+        86399,
+        0,
+        1
+      ],
+      "matches": true
+    }
+  ]
+}
