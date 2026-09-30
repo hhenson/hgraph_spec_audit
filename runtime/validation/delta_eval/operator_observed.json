@@ -1,0 +1,312 @@
+{
+  "engines": {
+    "cpp": {
+      "assessment": {
+        "empty_both": "match",
+        "empty_lhs": "match",
+        "empty_rhs": "match",
+        "false_trigger": "match",
+        "fresh_empty": "match",
+        "fresh_first": "match",
+        "fresh_second": "match",
+        "sink_empty": "match",
+        "sink_silence": "match",
+        "sink_values": "match",
+        "sum_lhs_longer": "match",
+        "sum_rhs_longer": "match"
+      },
+      "identity_sha256": "362fdf032d44afc72414c4bdfff4454ee3bec6e9ec99126b4779e5ac1b586fe8",
+      "native": true,
+      "observations": {
+        "empty_both": {
+          "dense": [],
+          "input_horizon": 0,
+          "outputless": false,
+          "raw": null
+        },
+        "empty_lhs": {
+          "dense": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "input_horizon": 4,
+          "outputless": false,
+          "raw": null
+        },
+        "empty_rhs": {
+          "dense": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "input_horizon": 4,
+          "outputless": false,
+          "raw": null
+        },
+        "false_trigger": {
+          "dense": [
+            "",
+            "",
+            null,
+            "delta",
+            null,
+            null
+          ],
+          "input_horizon": 6,
+          "outputless": false,
+          "raw": [
+            "",
+            "",
+            null,
+            "delta",
+            null,
+            null
+          ]
+        },
+        "fresh_empty": {
+          "dense": [],
+          "input_horizon": 0,
+          "outputless": false,
+          "raw": null
+        },
+        "fresh_first": {
+          "dense": [
+            "first"
+          ],
+          "input_horizon": 1,
+          "outputless": false,
+          "raw": [
+            "first"
+          ]
+        },
+        "fresh_second": {
+          "dense": [
+            null,
+            "second",
+            null
+          ],
+          "input_horizon": 3,
+          "outputless": false,
+          "raw": [
+            null,
+            "second",
+            null
+          ]
+        },
+        "sink_empty": {
+          "dense": null,
+          "input_horizon": 0,
+          "outputless": true,
+          "raw": null
+        },
+        "sink_silence": {
+          "dense": null,
+          "input_horizon": 2,
+          "outputless": true,
+          "raw": null
+        },
+        "sink_values": {
+          "dense": null,
+          "input_horizon": 5,
+          "outputless": true,
+          "raw": null
+        },
+        "sum_lhs_longer": {
+          "dense": [
+            11,
+            12,
+            22,
+            23,
+            null
+          ],
+          "input_horizon": 5,
+          "outputless": false,
+          "raw": [
+            11,
+            12,
+            22,
+            23,
+            null
+          ]
+        },
+        "sum_rhs_longer": {
+          "dense": [
+            11,
+            21,
+            22,
+            32,
+            null
+          ],
+          "input_horizon": 5,
+          "outputless": false,
+          "raw": [
+            11,
+            21,
+            22,
+            32,
+            null
+          ]
+        }
+      }
+    },
+    "python": {
+      "assessment": {
+        "empty_both": "match",
+        "empty_lhs": "match",
+        "empty_rhs": "match",
+        "false_trigger": "match",
+        "fresh_empty": "match",
+        "fresh_first": "match",
+        "fresh_second": "match",
+        "sink_empty": "match",
+        "sink_silence": "match",
+        "sink_values": "match",
+        "sum_lhs_longer": "match",
+        "sum_rhs_longer": "match"
+      },
+      "identity_sha256": "cf800f0d81222a4a6267676b663fd74bd8e584b1fe5293945049138cd4ed71b6",
+      "native": false,
+      "observations": {
+        "empty_both": {
+          "dense": [],
+          "input_horizon": 0,
+          "outputless": false,
+          "raw": null
+        },
+        "empty_lhs": {
+          "dense": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "input_horizon": 4,
+          "outputless": false,
+          "raw": null
+        },
+        "empty_rhs": {
+          "dense": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "input_horizon": 4,
+          "outputless": false,
+          "raw": null
+        },
+        "false_trigger": {
+          "dense": [
+            "",
+            "",
+            null,
+            "delta",
+            null,
+            null
+          ],
+          "input_horizon": 6,
+          "outputless": false,
+          "raw": [
+            "",
+            "",
+            null,
+            "delta",
+            null,
+            null
+          ]
+        },
+        "fresh_empty": {
+          "dense": [],
+          "input_horizon": 0,
+          "outputless": false,
+          "raw": null
+        },
+        "fresh_first": {
+          "dense": [
+            "first"
+          ],
+          "input_horizon": 1,
+          "outputless": false,
+          "raw": [
+            "first"
+          ]
+        },
+        "fresh_second": {
+          "dense": [
+            null,
+            "second",
+            null
+          ],
+          "input_horizon": 3,
+          "outputless": false,
+          "raw": [
+            null,
+            "second",
+            null
+          ]
+        },
+        "sink_empty": {
+          "dense": null,
+          "input_horizon": 0,
+          "outputless": true,
+          "raw": null
+        },
+        "sink_silence": {
+          "dense": null,
+          "input_horizon": 2,
+          "outputless": true,
+          "raw": null
+        },
+        "sink_values": {
+          "dense": null,
+          "input_horizon": 5,
+          "outputless": true,
+          "raw": null
+        },
+        "sum_lhs_longer": {
+          "dense": [
+            11,
+            12,
+            22,
+            23,
+            null
+          ],
+          "input_horizon": 5,
+          "outputless": false,
+          "raw": [
+            11,
+            12,
+            22,
+            23,
+            null
+          ]
+        },
+        "sum_rhs_longer": {
+          "dense": [
+            11,
+            21,
+            22,
+            32,
+            null
+          ],
+          "input_horizon": 5,
+          "outputless": false,
+          "raw": [
+            11,
+            21,
+            22,
+            32,
+            null
+          ]
+        }
+      }
+    }
+  },
+  "harness_sha256": "70c7123b4b032a3e73b5cdd386bfb223ee4cedac5ef3e05e588a19d29ac77cf3",
+  "measured_at": "2026-09-30T13:51:17.701591+00:00",
+  "reasoned_sha256": "dafd0ad07d06b86eb5789e50c3f6e5517aa411009419bd62cd430a5dc8fc7a8c",
+  "repeats": 3
+}

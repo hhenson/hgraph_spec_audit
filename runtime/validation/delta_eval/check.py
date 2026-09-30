@@ -107,5 +107,30 @@ def main():
             assert engine['assessment'][field]==status
         assert engine['observed']['positive_capture']=={'present':True,'entries':2}
         assert engine['capture_key'] in engine['observed']['positive_global_keys']
-    print('37 cases × 2 engines and 32 direct native scalar cases match frozen traces; lifecycle evidence retains its divergences.')
+    operators=json.loads((HERE/'operator_observed.json').read_text())
+    operator_cases=json.loads((HERE/'operator_reasoned.json').read_text())['cases']
+    operator_ids={case['id'] for case in operator_cases}
+    assert len(operator_ids)==len(operator_cases)==12
+    assert operators['reasoned_sha256']==sha(HERE/'operator_reasoned.json')
+    assert operators['harness_sha256']==sha(HERE/'operator_observe.py')
+    assert operators['repeats']==3 and set(operators['engines'])=={'python','cpp'}
+    for name,engine in operators['engines'].items():
+        assert engine['native']==(name=='cpp')
+        assert engine['identity_sha256']==evidence['engines'][name]['identity']['package']['identity_sha256']
+        assert set(engine['observations'])==set(engine['assessment'])==operator_ids
+        for case in operator_cases:
+            result=engine['observations'][case['id']]
+            horizon=max(map(len,case['inputs']),default=0)
+            assert result['input_horizon']==horizon
+            assert result['outputless']==(case['node']=='sink')
+            if result['outputless']:
+                assert result['raw'] is None
+                dense=None
+            else:
+                assert result['raw'] is None or isinstance(result['raw'],list)
+                dense=[] if result['raw'] is None else list(result['raw'])
+                dense += [None]*max(0,horizon-len(dense))
+            assert result['dense']==dense==case['expected']
+            assert engine['assessment'][case['id']]=='match'
+    print('49 cases × 2 engines and 32 direct native scalar cases match frozen traces; lifecycle evidence retains its divergences.')
 if __name__=='__main__': main()

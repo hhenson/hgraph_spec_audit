@@ -74,3 +74,16 @@ python3 -m unittest discover -s tests -p test_delta_eval.py
 
 The positive control can be repeated with `lifecycle_control.py` and the same
 `--python`, `--cpp`, and new `--output` arguments used for `lifecycle.py`.
+
+## Multi-input and outputless operator cases
+
+[operator_reasoned.json](operator_reasoned.json) freezes 12 additional expectations from the prewritten [HGL replay/record tests](https://github.com/hhenson/hgraph_std/blob/codex/delta-replay-record-scalars/hgl/hgraph/tests/replay_record.hgl): separate inputs with unequal lengths, an empty required input, string sampling on false trigger ticks, fresh successive evaluations, and outputless sinks. Both engines match all 12 in three fresh processes; [operator_observed.json](operator_observed.json) retains their raw returns, input-derived horizons and engine-identity hashes. These supplement the 37 basic traces above for 49 total cases per engine.
+
+[operator_observe.py](operator_observe.py) runs ordinary compute/sink nodes through the real `eval_node`. The sampling compute tests the trigger's modification rather than its boolean payload. An outputless run is recorded as successful without an output result (`null`); it is never normalized into an empty recording. Empty output-producing runs retain the earlier, separately described dense normalization.
+
+```sh
+python3 runtime/validation/delta_eval/operator_observe.py \
+  --python /path/to/python-hgraph/bin/python \
+  --cpp /path/to/cpp-hgraph/bin/python \
+  --output /tmp/new-operator-observed.json
+```

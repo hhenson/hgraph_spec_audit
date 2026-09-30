@@ -56,4 +56,13 @@ class DeltaEvidenceTest(unittest.TestCase):
     def test_positive_control_cannot_lose_observability(self):
         self.mutate('lifecycle_control_observed.json',lambda x:x['engines']['cpp']['observed'].update(positive_capture={'present':False,'entries':None}))
         with self.assertRaises(AssertionError): self.verify()
+    def test_operator_corpus_cannot_lose_a_case(self):
+        self.mutate('operator_observed.json',lambda x:x['engines']['cpp']['observations'].pop('false_trigger'))
+        with self.assertRaises(AssertionError): self.verify()
+    def test_outputless_cannot_be_reported_as_empty_recording(self):
+        self.mutate('operator_observed.json',lambda x:x['engines']['python']['observations']['sink_empty'].update(dense=[]))
+        with self.assertRaises(AssertionError): self.verify()
+    def test_multi_input_padding_cannot_trim_longest_horizon(self):
+        self.mutate('operator_observed.json',lambda x:x['engines']['cpp']['observations']['empty_lhs'].update(input_horizon=0))
+        with self.assertRaises(AssertionError): self.verify()
 if __name__=='__main__':unittest.main()
