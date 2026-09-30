@@ -1,0 +1,72 @@
+{
+  "engines": {
+    "cpp": {
+      "assessment": {
+        "after_silent_capture": "divergence",
+        "after_silent_raw": "match",
+        "positive_capture": "match",
+        "positive_raw": "match"
+      },
+      "capture_key": "eval_node::out",
+      "identity_sha256": "362fdf032d44afc72414c4bdfff4454ee3bec6e9ec99126b4779e5ac1b586fe8",
+      "native": true,
+      "observed": {
+        "after_silent_capture": {
+          "entries": null,
+          "present": false
+        },
+        "after_silent_raw": null,
+        "positive_capture": {
+          "entries": 2,
+          "present": true
+        },
+        "positive_global_keys": [
+          "__start_time__",
+          "eval_node::out",
+          "eval_node::ts"
+        ],
+        "positive_raw": [
+          1,
+          2
+        ]
+      }
+    },
+    "python": {
+      "assessment": {
+        "after_silent_capture": "match",
+        "after_silent_raw": "match",
+        "positive_capture": "match",
+        "positive_raw": "match"
+      },
+      "capture_key": "nodes.record.out",
+      "identity_sha256": "cf800f0d81222a4a6267676b663fd74bd8e584b1fe5293945049138cd4ed71b6",
+      "native": false,
+      "observed": {
+        "after_silent_capture": {
+          "entries": 0,
+          "present": true
+        },
+        "after_silent_raw": null,
+        "positive_capture": {
+          "entries": 2,
+          "present": true
+        },
+        "positive_global_keys": [
+          "__graph_custom_formatter__",
+          "__graph_logger__",
+          "_previous",
+          "nodes.record.out",
+          "nodes.replay_from_memory.ts"
+        ],
+        "positive_raw": [
+          1,
+          2
+        ]
+      }
+    }
+  },
+  "harness_sha256": "f5363f20be9b66b2cb8a7a1c4bf0e3bb6c6fa5282978988059c497140bbea3c5",
+  "measured_at": "2026-09-30T13:32:33.045941+00:00",
+  "reasoned_sha256": "d73b79453e559a0c4f15d684fdc4a7bf80fa4707cc0bd15512e985d269d3b027",
+  "repeats": 3
+}

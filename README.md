@@ -24,6 +24,14 @@ variation reports are retained. The check reproduces the historical fixed-collec
 unvalidated observations); it does not claim full conformance. A passing
 recorded-evidence check is not a fresh runtime measurement.
 
+## Delta evaluation evidence
+
+The [delta eval audit](runtime/validation/delta_eval/README.md) measures actual
+replay → compute → record graphs across eight scalar types and five structural
+publication-delta cases, with direct native C++ scalar corroboration. It retains
+raw no-output returns separately from dense horizon normalization, and records
+lifecycle/capture divergences with an external-key positive control.
+
 ## Exercise the two reference implementations
 
 Both distributions import as `hgraph`, so use independent environments:
