@@ -6,7 +6,34 @@ import os
 from pathlib import Path
 import re
 import subprocess
-from shared_cases import read
+
+
+GROUPS = {
+    'standard': ['standard.hgl','control.hgl','stream.hgl','temporal.hgl'] + [f'{folder}/{name}.hgl' for folder in ('impl','tests') for name in ('standard','control','stream','temporal')],
+    'operators': ['operators.hgl','impl/operators.hgl','tests/operators.hgl'],
+    'native': ['native/scalar_values.hgl','native/scalar_values_i64.hgl','native/scalar_operators.hgl','native/temporal_values.hgl','tests/native_scalar_operators.hgl'],
+}
+
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def stdlib_sources(stdlib):
+    return {name: digest(stdlib / name) for name in sorted({file for files in GROUPS.values() for file in files})}
+
+
+def source_revision(source, expected=None):
+    source = source.resolve()
+    def git(*args):
+        return subprocess.check_output(['git', '-C', str(source), *args], text=True).strip()
+    if Path(git('rev-parse', '--show-toplevel')).resolve() != source:
+        raise ValueError('--source must be the root of a Git checkout')
+    revision = git('rev-parse', 'HEAD')
+    if expected is not None and expected != revision:
+        raise ValueError(f'expected revision {expected}, source HEAD is {revision}')
+    subprocess.run(['git', '-C', str(source), 'diff', '--quiet', 'HEAD', '--'], check=True)
+    return revision
 
 
 def main():
@@ -14,9 +41,10 @@ def main():
     parser.add_argument('--source', type=Path, required=True)
     parser.add_argument('--build', type=Path, required=True)
     parser.add_argument('--stdlib', type=Path, required=True)
-    parser.add_argument('--revision', required=True)
+    parser.add_argument('--revision', help='Expected source HEAD (optional full commit hash)')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
+    revision = source_revision(args.source, args.revision)
     driver = args.build / 'language/tests/hgl_stdlib_test_driver'
     generated = args.build / 'language/generated/hgl_core_native'
     native = args.source / 'language/stdlib/hgl/hgraph'
@@ -24,17 +52,15 @@ def main():
     env = dict(os.environ)
     env['CPLUS_INCLUDE_PATH'] = os.pathsep.join([str(generated / 'include'), str(native_cpp), env.get('CPLUS_INCLUDE_PATH','')])
     rows = []
-    groups = {
-        'standard': ['standard.hgl','control.hgl','stream.hgl','temporal.hgl'] + [f'{folder}/{name}.hgl' for folder in ('impl','tests') for name in ('standard','control','stream','temporal')],
-        'operators': ['operators.hgl','impl/operators.hgl','tests/operators.hgl'],
-        'native': ['native/scalar_values.hgl','native/scalar_values_i64.hgl','native/scalar_operators.hgl','native/temporal_values.hgl','tests/native_scalar_operators.hgl'],
-    }
-    for name, files in groups.items():
+    sources = stdlib_sources(args.stdlib)
+    native_sources = {}
+    for name, files in GROUPS.items():
         files = [args.stdlib / file for file in files]
         extra = []
         if name == 'native':
-            files.insert(0,native / 'native.hgl')
-            files += [native / f'native/impl/cpp_{part}.hgl' for part in ('scalar_values','scalar_values_i64','scalar_operators','temporal_values')]
+            native_parts = [native / 'native.hgl'] + [native / f'native/impl/cpp_{part}.hgl' for part in ('scalar_values','scalar_values_i64','scalar_operators','temporal_values')]
+            files = native_parts[:1] + files + native_parts[1:]
+            native_sources = {file.relative_to(args.source).as_posix(): digest(file) for file in native_parts}
             extra = ['--native-provider-header','native_scalar.h','--native-provider','hgl::stdlib::scalar_native']
         else:
             extra = ['--module-descriptor',str(generated / 'src/native.hgl-module.json')]
@@ -47,9 +73,15 @@ def main():
             # Diagnostics may contain private build paths; keep them local.
             raise RuntimeError(output.stdout + output.stderr)
         rows.append(row)
-    _, hashes = read(args.stdlib)
-    report = dict(reference_revision=args.revision, compiler_sha256=hashlib.sha256(driver.read_bytes()).hexdigest(),
-                  sources=hashes, groups=rows, tests=sum(len(row['tests']) for row in rows))
+    source_revision(args.source, revision)
+    if sources != stdlib_sources(args.stdlib):
+        raise RuntimeError('standard-library sources changed during the run')
+    report = dict(reference_revision=revision, compiler_sha256=digest(driver),
+                  harness_sha256=digest(Path(__file__)), sources=sources,
+                  native_sources=dict(sorted(native_sources.items())),
+                  descriptor_sha256=digest(generated / 'src/native.hgl-module.json'),
+                  provider_header_sha256=digest(native_cpp / 'native_scalar.h'),
+                  groups=rows, tests=sum(len(row['tests']) for row in rows))
     args.output.write_text(json.dumps(report,indent=2)+'\n')
     print(f"C++ HGL: {report['tests']} tests passed")
 

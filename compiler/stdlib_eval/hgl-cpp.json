@@ -1,10 +1,22 @@
 {
   "reference_revision": "540b0976ada30f313975ca90533d6a7bce02b519",
   "compiler_sha256": "1e57ce3f3856e930b72d6ec47a464afc586c560f4431256340a01b6af44ddf54",
+  "harness_sha256": "bb757df5197131b9f172338dcb4e513b84b10e066ccced4427a247138f21e80e",
   "sources": {
+    "control.hgl": "e4e484d7593ca2f4f94a8836bfd57329f1bbfca88eafd17424e447c50e3cfb48",
+    "impl/control.hgl": "f670df54ff898b1846ac46561208ae4227493f2f18a5b1820f54cf7db5863532",
+    "impl/operators.hgl": "f41924dd4e096ab4020ff58ed9dfc936bacb850b41fb671001f6162d00d6acb7",
+    "impl/standard.hgl": "bb19d76a743624825b7936a2d6f988272110f7aeffa5481f345ff1e44d247123",
+    "impl/stream.hgl": "50640e70c28b386ddb12fb9f96b148106cc907da1caf56f1c890048d9302972e",
+    "impl/temporal.hgl": "12fe30b6325f37def9f0689f495e66dbcb7445c3df8a482d5135b6c88f13573c",
+    "native/scalar_operators.hgl": "40e2950cf14e4f49ee114f3c0626104e4d97a4a7e8527233a83ecaade08ef2db",
     "native/scalar_values.hgl": "aa2d31b5f988f1528e3692c50e94c02b08a504328b37930c86560ab141f1c3df",
     "native/scalar_values_i64.hgl": "18395afe309bf778407d55fedbb3505e2ac239937b8521b6f708343d619bec92",
     "native/temporal_values.hgl": "cac890f075c9b2662f659b06151b1509327acdb9491cb523d6690f677677f6c5",
+    "operators.hgl": "aca1803d45624620f01c74c65a542b598ae843a2324f60bf1b0c603afd316443",
+    "standard.hgl": "acacccebe1031d202f3ed05532ff0639a158046af725dbeed666997affeaa5de",
+    "stream.hgl": "5a7d6b0a73e56052ed004f90cd704214a196d1be0805bceaa920e04889b66a6f",
+    "temporal.hgl": "6d7e7d3b7b01623f0682364fc0752179a3cbaf791bf29f7d87dedf46841ed226",
     "tests/control.hgl": "12483de61747fb26cf27a94f02a3390227436c3a843acee1c49b121f2398fd0e",
     "tests/native_scalar_operators.hgl": "9c5e0d9addd33542dd64d20e20390c00a7644b8981f13526c0420ef29ca09a86",
     "tests/operators.hgl": "c4b609b259513cb3cc04665dbeea1d6c13aa2c2469ef369698eddcb811f2e272",
@@ -12,6 +24,15 @@
     "tests/stream.hgl": "103d06d0c0571643186caac9183e98c7ca5fa17cdf2415b986bbabb9d9e58b51",
     "tests/temporal.hgl": "6556509e538724b04ef795b49d471baed248ce685a5c811245534d74d805fb20"
   },
+  "native_sources": {
+    "language/stdlib/hgl/hgraph/native.hgl": "0e7a8bfeeb226212854d37c77ea1fcbdfdfde49b2b486da830a9b43d97576d3e",
+    "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_operators.hgl": "5d616dc9df5a429eaf7871c10f9bcc5d25f82510854233953b7bae1e01058fae",
+    "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values.hgl": "714282c27127c63e605381c337e5a0f49e9a4cc29244dd9f8c3d534e8f358b0a",
+    "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values_i64.hgl": "577cff08a2e427fba792cf796a7a62f54d1c8b0fb28c8bbe567c8b2340371b8a",
+    "language/stdlib/hgl/hgraph/native/impl/cpp_temporal_values.hgl": "8401a168d96a40dc9e92b49bbb87e3fe0b4edc03d9b29cf4078bbedf861f049d"
+  },
+  "descriptor_sha256": "887a37eace21b980f25efda37a191650afff0d43348218d2b59f9050ce7d3c30",
+  "provider_header_sha256": "12486bdba55e973e470a5d729f01a8eb9b0cce33e239d76f0bf1a3dfe20b18c9",
   "groups": [
     {
       "group": "standard",

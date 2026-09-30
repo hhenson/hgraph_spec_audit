@@ -78,5 +78,10 @@ python -m unittest discover -s compiler/stdlib_eval
 
 Build `hgl_stdlib_test_driver` with language/testing enabled. Its linked native
 provider and generated descriptor must match the supplied source and build.
+The runner requires a clean Git source checkout and derives its revision from
+HEAD; `--revision` verifies an expected commit. Evidence hashes every shared
+and native HGL part passed to the driver, plus the driver, runner, generated
+descriptor and provider header. Recorded checks reject changed shared
+implementation files even when assertions are unchanged.
 `shared_cases.py` accepts the current flat scalar assertion syntax and fails
 on unrecognized values. It is an audit reader, not another HGL compiler.
