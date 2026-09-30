@@ -10,3 +10,7 @@ The HGL front-end rows in `assessment.json` are copied historical evidence,
 not a new compiler run. `provenance.json` identifies the runtime measurement
 and expected-trace hash. Reproduce with `tools/compare.py` and the pinned
 environments; choose a new output directory for each run.
+
+The archived `reasoned.json` preserves the exact expectations identified by
+`provenance.json`. Validation uses that snapshot when reproducing this
+release assessment, independently of later specification rulings.

@@ -171,12 +171,8 @@
     "caught_failure": {
       "outcome": {
         "cpp": "wires",
-        "expected": "fails",
         "python": "wires",
-        "rules": [
-          "WIR-4"
-        ],
-        "verdict": "neither"
+        "verdict": "recorded"
       }
     },
     "failure_report": {
@@ -672,7 +668,7 @@
     "cpp": 1,
     "hgl:match": 1,
     "hgl:varies": 5,
-    "neither": 4,
+    "neither": 3,
     "python": 4
   }
 }

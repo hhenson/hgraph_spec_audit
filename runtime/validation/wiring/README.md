@@ -1,7 +1,7 @@
 # Wiring validation
 
-Status: recorded 2026-09-26. The expectations follow [Wiring](https://github.com/hhenson/hgraph_spec/blob/main/runtime/wiring.md)
-and are derived in [wiring cases](https://github.com/hhenson/hgraph_spec/blob/main/runtime/cases_wiring.md). The runtimes are
+Status: observed 2026-09-26; reassessed against the updated specification on 2026-09-30. The expectations follow [Wiring](https://github.com/hhenson/hgraph_spec/blob/main/wiring/wiring.md)
+and are derived in [wiring cases](https://github.com/hhenson/hgraph_spec/blob/main/wiring/cases_wiring.md). The runtimes are
 unchanged by this record; the HGL correction it calls for lands separately
 and cites it.
 
@@ -22,7 +22,7 @@ changed. The HGL front end was observed on the same generic calls at
 | Reasoning matches both runtimes | 40 |
 | Reasoning matches C++ only; Python varies | 1 |
 | Reasoning matches Python only; C++ varies | 4 |
-| Reasoning matches neither runtime; the owner's ruling decides | 4 |
+| Reasoning matches neither runtime; the owner's ruling decides | 3 |
 | HGL front end matches | 1 |
 | HGL front end varies (WIR-14, WIR-22) | 5 |
 
@@ -45,9 +45,11 @@ agree with each other against it on widening, so per
 [Conformance](https://github.com/hhenson/hgraph_spec/blob/main/runtime/conformance.md) the ruling decides: both vary (WV-6).
 
 The failure_report and caught_failure cases were added on 2026-09-26 from
-the owner's rulings on WIR-4: a failure fails the graph, even when the
-graph's code catches it, and the error says where and why. Their
-expectations were written from those rulings before they ran.
+the owner's original WIR-4 rulings. The 2026-09-30 clarification makes
+continuation after suppressing a wiring failure undefined. The current
+assessment therefore retains `caught_failure.outcome` as historical context,
+not an asserted expectation. Raw observations are unchanged; the archived
+release comparison retains its original expectations and assessment.
 
 Recorded, not asserted: the printed names of the bundles used as sources.
 They differ between the runtimes and no rule states them.
@@ -98,7 +100,7 @@ rule:
 | WV-7 | HGL front end, a call passing `scale: 5.0`, which the operator does not declare; WIR-22 | R + both runtimes: accepted, the argument goes to the candidates | HGL binds a call's arguments against the operator's signature and rejects the extra one |
 | WV-8 | failure_report, the graph path; WIR-4 | Owner ruling: the error names the path of graph calls that led to the failed call, `failing_outer` then `_failing_inner` | Neither runtime names it. Both name the call, the argument's type and each candidate's reason. The C++ `Wiring` keeps the path (`current_wiring_path`) but passes it only to wiring observers |
 | WV-9 | failure_report, the operator's name; WIR-4 | R + Python: the error names `_only_int` | C++ names the operator by its registry name, `__pyop____main__._only_int_1` |
-| WV-10 | caught_failure; WIR-4 | Owner ruling: the graph fails to wire | Both runtimes let the graph's code catch the error and wire its fallback; the node the failed attempt added stays in the graph and runs. The Python port's own wiring layer relies on catching in three places: `hgraph.arrow`'s argument-shape retries, port attribute sugar (`port.year`) and `convert`'s target handlers |
+| WV-10 (historical) | caught_failure; WIR-4 | No current asserted outcome: continuation after a wiring failure is undefined | Both runtimes let the graph's code catch the error and wire its fallback; the node the failed attempt added stays in the graph and runs. The Python port's own wiring layer relies on catching in three places: `hgraph.arrow`'s argument-shape retries, port attribute sugar (`port.year`) and `convert`'s target handlers |
 | WV-2 | HGL front end, `pass(value: ref<f64>)` and `pass(values: list<ref<f64>, 2>)`; WIR-14, WIR-7 | R + both runtimes: `T` binds `f64` and `list<f64, 2>` | HGL binds `ref<f64>` and `list<ref<f64>, 2>`: its generic inference (`GenericSubstitution::unify`) binds a variable to the argument as supplied. The emitted C++ still wires correctly, because the runtime resolves the emitted generic call, but HGL's own checker works from a different type than the graph it builds |
 
 ## HGL correction
