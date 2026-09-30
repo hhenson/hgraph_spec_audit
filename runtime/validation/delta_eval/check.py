@@ -132,5 +132,47 @@ def main():
                 dense += [None]*max(0,horizon-len(dense))
             assert result['dense']==dense==case['expected']
             assert engine['assessment'][case['id']]=='match'
-    print('49 cases × 2 engines and 32 direct native scalar cases match frozen traces; lifecycle evidence retains its divergences.')
+    collections=json.loads((HERE/'collection_observed.json').read_text())
+    collection_cases=json.loads((HERE/'collection_reasoned.json').read_text())['cases']
+    assert {c['id'] for c in collection_cases}=={'E0','E1','N0'}
+    assert collections['reasoned_sha256']==sha(HERE/'collection_reasoned.json')
+    assert collections['harness_sha256']==sha(HERE/'collection_observe.py')
+    assert collections['repeats']==3 and set(collections['engines'])=={'python','cpp'}
+    for name,engine in collections['engines'].items():
+        assert engine['identity']==evidence['engines'][name]['identity']
+        assert set(engine['observations'])==set(engine['assessment'])=={'E0','E1','N0'}
+        for case in collection_cases:
+            observed=engine['observations'][case['id']]
+            assert 'error_type' not in observed
+            assert observed['input_horizon']==len(case['inputs'])
+            raw=observed['raw']
+            assert raw is None or isinstance(raw,list)
+            dense=[] if raw is None else list(raw)
+            dense += [None]*max(0,len(case['inputs'])-len(dense))
+            assert observed['dense']==dense
+            expected_assessment={'output':'match' if dense==case['expected'] else 'divergence'}
+            if 'expected_producer' in case:
+                expected_assessment['producer']='match' if observed['producer']==case['expected_producer'] else 'divergence'
+            if 'expected_values' in case:
+                expected_assessment['held_values']='match' if [x['value'] for x in observed['received']]==case['expected_values'] else 'divergence'
+            assert engine['assessment'][case['id']]==expected_assessment
+        # Preserve the positive event control independently of the output mismatch.
+        empty={'added':[],'removed':[]}
+        assert engine['observations']['E1']['producer']==[
+            {'step':i,'valid':True,'modified':True,'delta':empty} for i in (1,2)]
+        assert engine['observations']['E1']['received']==[
+            {'valid':True,'modified':True,'delta':empty,'value':[]} for _ in range(2)]
+    collection_control=json.loads((HERE/'collection_control_observed.json').read_text())
+    control_expected=json.loads((HERE/'collection_control_reasoned.json').read_text())['expected_downstream']
+    assert collection_control['reasoned_sha256']==sha(HERE/'collection_control_reasoned.json')
+    assert collection_control['harness_sha256']==sha(HERE/'collection_control.py')
+    assert collection_control['repeats']==3 and set(collection_control['engines'])=={'python','cpp'}
+    for name,engine in collection_control['engines'].items():
+        assert engine['native']==(name=='cpp')
+        assert engine['identity_sha256']==evidence['engines'][name]['identity']['package']['identity_sha256']
+        status='match' if engine['downstream']==control_expected else 'divergence'
+        assert engine['assessment']==status
+        assert engine['raw']==collections['engines'][name]['observations']['E1']['raw']
+        assert [x['delta'] for x in engine['downstream']]==[x for x in engine['raw'] if x is not None]
+    print('49 original cases and 32 native scalar cases match; nested collection matches; lifecycle and empty-set divergences retained.')
 if __name__=='__main__': main()

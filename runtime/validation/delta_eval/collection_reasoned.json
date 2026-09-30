@@ -1,0 +1,117 @@
+{
+  "status": "Frozen before collection probe execution; E0/E1 transcribe original proposal and N0 concretizes its independently reasoned nested trace. Do not rewrite expectations to fit observations.",
+  "cases": [
+    {
+      "id": "E0",
+      "description": "Explicit empty set delta at first and next cycle, then idle. A present empty publication is preserved through an owned-output pass-through.",
+      "inputs": [
+        {
+          "added": [],
+          "removed": []
+        },
+        {
+          "added": [],
+          "removed": []
+        },
+        null
+      ],
+      "expected": [
+        {
+          "added": [],
+          "removed": []
+        },
+        {
+          "added": [],
+          "removed": []
+        },
+        null
+      ]
+    },
+    {
+      "id": "E1",
+      "description": "Producer adds then removes member 1 in each active evaluation. First prove producer is valid and modified with an empty delta; pass-through and recorder preserve both empty events.",
+      "inputs": [
+        1,
+        2,
+        null
+      ],
+      "expected": [
+        {
+          "added": [],
+          "removed": []
+        },
+        {
+          "added": [],
+          "removed": []
+        },
+        null
+      ],
+      "expected_producer": [
+        {
+          "step": 1,
+          "valid": true,
+          "modified": true,
+          "delta": {
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "step": 2,
+          "valid": true,
+          "modified": true,
+          "delta": {
+            "added": [],
+            "removed": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "N0",
+      "description": "Nested map initializes two inner keys; later changes only one child and preserves the other held value.",
+      "inputs": [
+        {
+          "7": {
+            "1": 10,
+            "2": 20
+          }
+        },
+        {
+          "7": {
+            "1": 11
+          }
+        },
+        null
+      ],
+      "expected": [
+        {
+          "7": {
+            "1": 10,
+            "2": 20
+          }
+        },
+        {
+          "7": {
+            "1": 11
+          }
+        },
+        null
+      ],
+      "expected_values": [
+        {
+          "7": {
+            "1": 10,
+            "2": 20
+          }
+        },
+        {
+          "7": {
+            "1": 11,
+            "2": 20
+          }
+        }
+      ]
+    }
+  ]
+}

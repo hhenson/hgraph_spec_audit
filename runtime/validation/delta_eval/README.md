@@ -2,7 +2,7 @@
 
 Measured 2026-09-30. Thirty-seven prewritten cases match independent Python and C++ runtimes in three fresh processes each: 32 scalar cases (eight types × four traces), fixed TSB and TSL, TSS bool/int, and integer-key TSD. The compute node executes `return ts.delta_value`; the real `eval_node` wires its replay source and record sink. This is not a graph identity or a synthetic delta simulator.
 
-[Scalar reasoning](scalar-reasoning.md) and the [specification-only review](contract-review.md) were saved before execution. [reasoned.json](reasoned.json) transcribes those literal expectations; observations never generate expectations. The bool set specialization starts with both possible elements and later removes false. The five structural cases measure publication deltas in the reference runtimes; they do not establish HGL collection harness syntax or general invalidation/membership reconstruction. REF designation and same-cycle empty-event fixtures remain explicitly deferred in the corpus.
+[Scalar reasoning](scalar-reasoning.md) and the [specification-only review](contract-review.md) were saved before execution. [reasoned.json](reasoned.json) transcribes those literal expectations; observations never generate expectations. The bool set specialization starts with both possible elements and later removes false. The five structural cases measure publication deltas in the reference runtimes; they do not establish HGL collection harness syntax or general invalidation/membership reconstruction. REF designation remains deferred. Same-cycle empty events are measured separately below, with disagreements retained.
 
 [observed.json](observed.json) preserves raw returns, independent input-horizon normalization, every observed delta, assessment, package/distribution manifests, native artifact hashes and actual loaded hgraph library hashes. The Python engine is hgraph 0.5.41 under Python 3.14.4, with no native hgraph extension. The C++ engine is an installed development wheel reporting 0.0.0 under Python 3.12.14. Binary and package hashes identify it; this evidence does not claim a published 0.8 release identity. Source checkout context for the wheel was commit `8e899e600089902f9b755f67d9998292fcc03e84`, which alone does not authenticate a built binary.
 
@@ -86,4 +86,53 @@ python3 runtime/validation/delta_eval/operator_observe.py \
   --python /path/to/python-hgraph/bin/python \
   --cpp /path/to/cpp-hgraph/bin/python \
   --output /tmp/new-operator-observed.json
+```
+
+## Empty-set publications and recursive map deltas
+
+[collection_reasoned.json](collection_reasoned.json) freezes three additional
+expectations before the [collection probe](collection_observe.py). The two
+empty-set expectations are retained as disagreements; they were not adjusted
+to fit either engine. All observations repeat identically in three fresh
+processes per engine, with the same package and native-library identities as
+the earlier corpus.
+
+| Case | Frozen expectation | Both engines observed |
+|---|---|---|
+| E0: explicit empty set delta, repeated next cycle, then silence | Two present empty deltas, then silence | One empty delta, then two silent cells; only the first replay publication reaches compute |
+| E1: add then remove one member in each of two producer evaluations | Two present empty deltas, then silence | Producer and compute input both report two valid, modified empty deltas; only one reaches the recording |
+| N0: nested integer-key map; update one inner key | Sparse update only for the changed key; other held child preserved | Matches both the sparse recorded deltas and the held child values |
+
+[collection_observed.json](collection_observed.json) preserves the raw returns,
+input-horizon normalization, producer metadata, compute-input deltas and held
+values. E1 proves that actual empty events reach the compute node; it does not
+infer their existence merely from a supplied replay literal. Idle metadata is
+not sampled by this observer, so the silent slot does not independently prove
+the endpoint's idle delta accessor result.
+
+A separately frozen [downstream-control expectation](collection_control_reasoned.json)
+and [probe](collection_control.py) attach an ordinary observer sink directly
+to the pass-through output, alongside the real recorder. Both engines expose
+only the first empty event there; [control observations](collection_control_observed.json)
+retain this disagreement in three fresh processes. The second real input event
+is therefore suppressed while applying the compute result to its own output,
+before the recorder. The recorder's one captured event matches the actual
+output publications. This localizes the mismatch without changing the desired
+event-preserving expectation or claiming either application rule has been
+selected for HGL.
+
+The nested-map evidence covers the stated ordinary publication trace, not
+invalidation, invalid-child membership, empty map events or general structural
+conformance. The two empty-set cases add two disagreements, and the nested case
+adds one matching case; the downstream probe is a localization control.
+
+```sh
+python3 runtime/validation/delta_eval/collection_observe.py \
+  --python /path/to/python-hgraph/bin/python \
+  --cpp /path/to/cpp-hgraph/bin/python \
+  --output /tmp/new-collection-observed.json
+python3 runtime/validation/delta_eval/collection_control.py \
+  --python /path/to/python-hgraph/bin/python \
+  --cpp /path/to/cpp-hgraph/bin/python \
+  --output /tmp/new-collection-control-observed.json
 ```

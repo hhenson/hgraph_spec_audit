@@ -65,4 +65,16 @@ class DeltaEvidenceTest(unittest.TestCase):
     def test_multi_input_padding_cannot_trim_longest_horizon(self):
         self.mutate('operator_observed.json',lambda x:x['engines']['cpp']['observations']['empty_lhs'].update(input_horizon=0))
         with self.assertRaises(AssertionError): self.verify()
+    def test_collection_divergence_cannot_be_relabelled(self):
+        self.mutate('collection_observed.json',lambda x:x['engines']['cpp']['assessment']['E1'].update(output='match'))
+        with self.assertRaises(AssertionError): self.verify()
+    def test_real_empty_input_event_cannot_be_dropped(self):
+        self.mutate('collection_observed.json',lambda x:x['engines']['python']['observations']['E1']['received'].pop())
+        with self.assertRaises(AssertionError): self.verify()
+    def test_downstream_control_cannot_be_relabelled(self):
+        self.mutate('collection_control_observed.json',lambda x:x['engines']['cpp'].update(assessment='match'))
+        with self.assertRaises(AssertionError): self.verify()
+    def test_nested_held_child_cannot_be_lost(self):
+        self.mutate('collection_observed.json',lambda x:x['engines']['cpp']['observations']['N0']['received'][1]['value']['7'].pop('2'))
+        with self.assertRaises(AssertionError): self.verify()
 if __name__=='__main__':unittest.main()

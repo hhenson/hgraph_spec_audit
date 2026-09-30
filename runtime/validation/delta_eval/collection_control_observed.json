@@ -1,0 +1,54 @@
+{
+  "engines": {
+    "cpp": {
+      "assessment": "divergence",
+      "downstream": [
+        {
+          "delta": {
+            "added": [],
+            "removed": []
+          },
+          "modified": true,
+          "valid": true
+        }
+      ],
+      "identity_sha256": "362fdf032d44afc72414c4bdfff4454ee3bec6e9ec99126b4779e5ac1b586fe8",
+      "native": true,
+      "raw": [
+        {
+          "added": [],
+          "removed": []
+        },
+        null,
+        null
+      ]
+    },
+    "python": {
+      "assessment": "divergence",
+      "downstream": [
+        {
+          "delta": {
+            "added": [],
+            "removed": []
+          },
+          "modified": true,
+          "valid": true
+        }
+      ],
+      "identity_sha256": "cf800f0d81222a4a6267676b663fd74bd8e584b1fe5293945049138cd4ed71b6",
+      "native": false,
+      "raw": [
+        {
+          "added": [],
+          "removed": []
+        },
+        null,
+        null
+      ]
+    }
+  },
+  "harness_sha256": "4cc270e96fdd4709ab21c23bfa818e319e3156dc55eb3d3b745be35805acd0d3",
+  "measured_at": "2026-09-30T14:08:54.480805+00:00",
+  "reasoned_sha256": "2bc2766208f0603b2d6a36c15b466e37e781d4df220f57d0e0d992e4f257b4d0",
+  "repeats": 3
+}

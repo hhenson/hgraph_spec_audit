@@ -1,0 +1,7 @@
+{
+  "reason": "Localize the frozen E1 mismatch without changing its expectation. A downstream sink observes the actual pass-through output before the recorder. Event-preserving output application requires two downstream empty events, matching the producer and input observations.",
+  "expected_downstream": [
+    {"valid": true, "modified": true, "delta": {"added": [], "removed": []}},
+    {"valid": true, "modified": true, "delta": {"added": [], "removed": []}}
+  ]
+}
