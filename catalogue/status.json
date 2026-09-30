@@ -210,15 +210,19 @@
       ]
     },
     "assert_": {
-      "status": "blocked",
-      "priority": 3,
-      "reason": "Callable, logging/formatting, recording or engine-control capability.",
-      "completed_domains": [],
+      "status": "implemented-slice",
+      "priority": 1,
+      "reason": "Boolean condition with a constant message, raising through the native raise_error under the node error model (ADR 0009). Remaining: formatted messages (format_).",
+      "completed_domains": [
+        "Boolean condition with a constant message, raising through the native raise_error under the node error model (ADR 0009)."
+      ],
       "blockers": [
-        "B5"
+        "B1"
       ],
       "evidence": [
-        "include/hgraph/lib/std/operators/io.h"
+        "include/hgraph/lib/std/operators/io.h",
+        "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+        "external/hgraph_std/hgl/hgraph/tests/control.hgl"
       ]
     },
     "at_zone": {
@@ -457,16 +461,19 @@
       ]
     },
     "const": {
-      "status": "native-provider",
-      "priority": 3,
-      "reason": "Runtime source/materialization or recovery provider. HGL surface needs startup and provider lifecycle; native ownership remains appropriate.",
-      "completed_domains": [],
+      "status": "implemented-slice",
+      "priority": 1,
+      "reason": "Scalar constant source on the stateless alarm (ADR 0015) for the eight scalar types, with delay from the start of the run, spelled const (MIG-009). Remaining: the independent output shape tp/S waits on explicit generic call arguments; non-scalar values.",
+      "completed_domains": [
+        "Scalar constant source on the stateless alarm (ADR 0015) for the eight scalar types, with delay from the start of the run, spelled const (MIG-009)."
+      ],
       "blockers": [
-        "B2",
-        "B5"
+        "B3"
       ],
       "evidence": [
-        "include/hgraph/lib/std/operators/conversion.h"
+        "include/hgraph/lib/std/operators/conversion.h",
+        "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+        "external/hgraph_std/hgl/hgraph/tests/control.hgl"
       ]
     },
     "contains_": {
@@ -575,15 +582,19 @@
       ]
     },
     "debug_print": {
-      "status": "blocked",
-      "priority": 3,
-      "reason": "Callable, logging/formatting, recording or engine-control capability.",
-      "completed_domains": [],
+      "status": "implemented-slice",
+      "priority": 1,
+      "reason": "Scalar inputs of the eight scalar types with label, print_delta accepted for parity and sample; the text is the native as_str projection (Python str()). Remaining: compound and collection values, delta rendering.",
+      "completed_domains": [
+        "Scalar inputs of the eight scalar types with label, print_delta accepted for parity and sample; the text is the native as_str projection (Python str())."
+      ],
       "blockers": [
-        "B5"
+        "B3"
       ],
       "evidence": [
-        "include/hgraph/lib/std/operators/io.h"
+        "include/hgraph/lib/std/operators/io.h",
+        "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+        "external/hgraph_std/hgl/hgraph/tests/control.hgl"
       ]
     },
     "dedup": {
@@ -607,15 +618,19 @@
       ]
     },
     "default": {
-      "status": "blocked",
-      "priority": 2,
-      "reason": "Type-directed output, arbitrary scalar/compound conversion and lifecycle semantics.",
-      "completed_domains": [],
+      "status": "implemented-slice",
+      "priority": 1,
+      "reason": "Reference-forwarding composition over default_ref (ts forwarded once valid and made passive, default_value forwarded until then) for the eight scalar types; the node never reads the values. Remaining: structural and reference input shapes; forwarding an upstream reference of ts is an open spec decision.",
+      "completed_domains": [
+        "Reference-forwarding composition over default_ref (ts forwarded once valid and made passive, default_value forwarded until then) for the eight scalar types; the node never reads the values."
+      ],
       "blockers": [
         "B3"
       ],
       "evidence": [
-        "include/hgraph/lib/std/operators/conversion.h"
+        "include/hgraph/lib/std/operators/conversion.h",
+        "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+        "external/hgraph_std/hgl/hgraph/tests/control.hgl"
       ]
     },
     "dereference": {
@@ -1398,15 +1413,19 @@
       ]
     },
     "log_": {
-      "status": "blocked",
-      "priority": 3,
-      "reason": "Callable, logging/formatting, recording or engine-control capability.",
-      "completed_domains": [],
+      "status": "implemented-slice",
+      "priority": 1,
+      "reason": "A plain string logged at INFO as [last modified] text through logger.info, with sample_count. Remaining: format arguments and the level (format_; the C++ backend emits logger.info only).",
+      "completed_domains": [
+        "A plain string logged at INFO as [last modified] text through logger.info, with sample_count."
+      ],
       "blockers": [
-        "B5"
+        "B1"
       ],
       "evidence": [
-        "include/hgraph/lib/std/operators/io.h"
+        "include/hgraph/lib/std/operators/io.h",
+        "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+        "external/hgraph_std/hgl/hgraph/tests/control.hgl"
       ]
     },
     "lshift_": {
@@ -1754,16 +1773,19 @@
       ]
     },
     "nothing": {
-      "status": "native-provider",
-      "priority": 3,
-      "reason": "Runtime source/materialization or recovery provider. HGL surface needs startup and provider lifecycle; native ownership remains appropriate.",
-      "completed_domains": [],
+      "status": "implemented-slice",
+      "priority": 1,
+      "reason": "Never-ticking source on an unarmed alarm for the eight scalar types; the result type comes from the call site. Remaining: structural result shapes.",
+      "completed_domains": [
+        "Never-ticking source on an unarmed alarm for the eight scalar types; the result type comes from the call site."
+      ],
       "blockers": [
-        "B2",
-        "B5"
+        "B3"
       ],
       "evidence": [
-        "include/hgraph/lib/std/operators/conversion.h"
+        "include/hgraph/lib/std/operators/conversion.h",
+        "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+        "external/hgraph_std/hgl/hgraph/tests/control.hgl"
       ]
     },
     "null_sink": {
@@ -1838,15 +1860,19 @@
       ]
     },
     "print_": {
-      "status": "blocked",
-      "priority": 3,
-      "reason": "Callable, logging/formatting, recording or engine-control capability.",
-      "completed_domains": [],
+      "status": "implemented-slice",
+      "priority": 1,
+      "reason": "A plain string printed verbatim through the native print_line. Remaining: format arguments (format_).",
+      "completed_domains": [
+        "A plain string printed verbatim through the native print_line."
+      ],
       "blockers": [
-        "B5"
+        "B1"
       ],
       "evidence": [
-        "include/hgraph/lib/std/operators/io.h"
+        "include/hgraph/lib/std/operators/io.h",
+        "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+        "external/hgraph_std/hgl/hgraph/tests/control.hgl"
       ]
     },
     "race": {

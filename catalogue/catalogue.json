@@ -3040,15 +3040,19 @@
     {
       "name": "assert_",
       "review": {
-        "status": "blocked",
-        "priority": 3,
-        "reason": "Callable, logging/formatting, recording or engine-control capability.",
-        "completed_domains": [],
+        "status": "implemented-slice",
+        "priority": 1,
+        "reason": "Boolean condition with a constant message, raising through the native raise_error under the node error model (ADR 0009). Remaining: formatted messages (format_).",
+        "completed_domains": [
+          "Boolean condition with a constant message, raising through the native raise_error under the node error model (ADR 0009)."
+        ],
         "blockers": [
-          "B5"
+          "B1"
         ],
         "evidence": [
-          "include/hgraph/lib/std/operators/io.h"
+          "include/hgraph/lib/std/operators/io.h",
+          "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "external/hgraph_std/hgl/hgraph/tests/control.hgl"
         ]
       },
       "declarations": [
@@ -6958,16 +6962,19 @@
     {
       "name": "const",
       "review": {
-        "status": "native-provider",
-        "priority": 3,
-        "reason": "Runtime source/materialization or recovery provider. HGL surface needs startup and provider lifecycle; native ownership remains appropriate.",
-        "completed_domains": [],
+        "status": "implemented-slice",
+        "priority": 1,
+        "reason": "Scalar constant source on the stateless alarm (ADR 0015) for the eight scalar types, with delay from the start of the run, spelled const (MIG-009). Remaining: the independent output shape tp/S waits on explicit generic call arguments; non-scalar values.",
+        "completed_domains": [
+          "Scalar constant source on the stateless alarm (ADR 0015) for the eight scalar types, with delay from the start of the run, spelled const (MIG-009)."
+        ],
         "blockers": [
-          "B2",
-          "B5"
+          "B3"
         ],
         "evidence": [
-          "include/hgraph/lib/std/operators/conversion.h"
+          "include/hgraph/lib/std/operators/conversion.h",
+          "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "external/hgraph_std/hgl/hgraph/tests/control.hgl"
         ]
       },
       "declarations": [
@@ -7149,7 +7156,7 @@
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/control.hgl",
           "line": 44,
-          "declaration": "operator const<T>(const value: T, const delay: duration = 0s) -> T\n\n/**\nA source that never ticks.\n\nType Args:\n    T: The result type, taken from the call site.\n\nTicks:\n    Never; the output stays invalid for the whole run.\n\nNotes:\n    hgraph's ``nothing[TS[T]]()``.\n*/"
+          "declaration": "operator const<T>(const value: T, const delay: duration = 0s) -> T"
         },
         {
           "module": "hgraph.std",
@@ -9621,7 +9628,7 @@
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/control.hgl",
           "line": 16,
-          "declaration": "operator pass_through<T>(ts: T) -> T\n\n\n\n\n\n\n\n/**\nPublish ``value`` once, ``delay`` after the run starts.\n\nArgs:\n    value: The constant.\n    delay: Offset from the start of the run; ``0s`` publishes in the first cycle.\n\nType Args:\n    T: The value type; the output is the time series of ``T``.\n\nReturns:\n    ``value``.\n\nTicks:\n    Once, at the start time plus ``delay``, and never again.\n\nNotes:\n    hgraph's ``const``, by its own name (MIG-009). A call ``const(f)`` whose\n    one argument names a function is the value-role selector instead.\n*/"
+          "declaration": "operator pass_through<T>(ts: T) -> T"
         },
         {
           "module": "hgraph.std",
@@ -10241,15 +10248,19 @@
     {
       "name": "debug_print",
       "review": {
-        "status": "blocked",
-        "priority": 3,
-        "reason": "Callable, logging/formatting, recording or engine-control capability.",
-        "completed_domains": [],
+        "status": "implemented-slice",
+        "priority": 1,
+        "reason": "Scalar inputs of the eight scalar types with label, print_delta accepted for parity and sample; the text is the native as_str projection (Python str()). Remaining: compound and collection values, delta rendering.",
+        "completed_domains": [
+          "Scalar inputs of the eight scalar types with label, print_delta accepted for parity and sample; the text is the native as_str projection (Python str())."
+        ],
         "blockers": [
-          "B5"
+          "B3"
         ],
         "evidence": [
-          "include/hgraph/lib/std/operators/io.h"
+          "include/hgraph/lib/std/operators/io.h",
+          "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "external/hgraph_std/hgl/hgraph/tests/control.hgl"
         ]
       },
       "declarations": [
@@ -10327,7 +10338,7 @@
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/control.hgl",
           "line": 135,
-          "declaration": "operator debug_print<T>(const label: str, ts: T, const print_delta: bool = true, const sample: i64 = -1)\n\n\n\n\n/**\nPrint ``format_str`` on each tick.\n\nArgs:\n    format_str: The text, printed verbatim, as hgraph prints a format string\n        that has no arguments.\n\nTicks:\n    On every tick of ``format_str``. Nothing is published.\n*/"
+          "declaration": "operator debug_print<T>(const label: str, ts: T, const print_delta: bool = true, const sample: i64 = -1)"
         },
         {
           "module": "hgraph.std",
@@ -10750,15 +10761,19 @@
     {
       "name": "default",
       "review": {
-        "status": "blocked",
-        "priority": 2,
-        "reason": "Type-directed output, arbitrary scalar/compound conversion and lifecycle semantics.",
-        "completed_domains": [],
+        "status": "implemented-slice",
+        "priority": 1,
+        "reason": "Reference-forwarding composition over default_ref (ts forwarded once valid and made passive, default_value forwarded until then) for the eight scalar types; the node never reads the values. Remaining: structural and reference input shapes; forwarding an upstream reference of ts is an open spec decision.",
+        "completed_domains": [
+          "Reference-forwarding composition over default_ref (ts forwarded once valid and made passive, default_value forwarded until then) for the eight scalar types; the node never reads the values."
+        ],
         "blockers": [
           "B3"
         ],
         "evidence": [
-          "include/hgraph/lib/std/operators/conversion.h"
+          "include/hgraph/lib/std/operators/conversion.h",
+          "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "external/hgraph_std/hgl/hgraph/tests/control.hgl"
         ]
       },
       "declarations": [
@@ -10822,7 +10837,7 @@
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/control.hgl",
           "line": 83,
-          "declaration": "operator default<T>(ts: T, default_value: T) -> T\n\n\n\n\n\n/**\nThe node behind ``default``: forward a reference to ``ts`` once ``ts`` is\nvalid, and a reference to ``default_value`` until then.\n\nArgs:\n    ts_ref: ``ts`` as a reference, forwarded once ``ts`` is valid.\n    ts: ``ts`` as a value, watched for validity and then made passive.\n    default_value: Forwarded as a reference until ``ts`` is valid.\n\nType Args:\n    T: The time-series type.\n\nReturns:\n    The current reference.\n\nTicks:\n    On a rebind of either reference and, while ``ts`` is invalid, on its\n    ticks; once ``ts`` is valid it is made passive and the node ticks only on\n    rebinds.\n\nNotes:\n    hgraph's ``default_ref``.\n*/"
+          "declaration": "operator default<T>(ts: T, default_value: T) -> T"
         },
         {
           "module": "hgraph.std",
@@ -21405,15 +21420,19 @@
     {
       "name": "log_",
       "review": {
-        "status": "blocked",
-        "priority": 3,
-        "reason": "Callable, logging/formatting, recording or engine-control capability.",
-        "completed_domains": [],
+        "status": "implemented-slice",
+        "priority": 1,
+        "reason": "A plain string logged at INFO as [last modified] text through logger.info, with sample_count. Remaining: format arguments and the level (format_; the C++ backend emits logger.info only).",
+        "completed_domains": [
+          "A plain string logged at INFO as [last modified] text through logger.info, with sample_count."
+        ],
         "blockers": [
-          "B5"
+          "B1"
         ],
         "evidence": [
-          "include/hgraph/lib/std/operators/io.h"
+          "include/hgraph/lib/std/operators/io.h",
+          "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "external/hgraph_std/hgl/hgraph/tests/control.hgl"
         ]
       },
       "declarations": [
@@ -21491,7 +21510,7 @@
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/control.hgl",
           "line": 166,
-          "declaration": "operator log_(format_str: str, const sample_count: i64 = 1)\n\n\n/**\nRaise ``error_msg`` on any tick of a false ``condition``.\n\nArgs:\n    condition: Checked on each tick.\n    error_msg: The message of the error.\n\nRaises:\n    On a false tick of ``condition``. The raise ends the evaluation under the\n    node error model (ADR 0009).\n\nTicks:\n    On every tick of ``condition``. Nothing is published.\n*/"
+          "declaration": "operator log_(format_str: str, const sample_count: i64 = 1)"
         },
         {
           "module": "hgraph.std",
@@ -29998,16 +30017,19 @@
     {
       "name": "nothing",
       "review": {
-        "status": "native-provider",
-        "priority": 3,
-        "reason": "Runtime source/materialization or recovery provider. HGL surface needs startup and provider lifecycle; native ownership remains appropriate.",
-        "completed_domains": [],
+        "status": "implemented-slice",
+        "priority": 1,
+        "reason": "Never-ticking source on an unarmed alarm for the eight scalar types; the result type comes from the call site. Remaining: structural result shapes.",
+        "completed_domains": [
+          "Never-ticking source on an unarmed alarm for the eight scalar types; the result type comes from the call site."
+        ],
         "blockers": [
-          "B2",
-          "B5"
+          "B3"
         ],
         "evidence": [
-          "include/hgraph/lib/std/operators/conversion.h"
+          "include/hgraph/lib/std/operators/conversion.h",
+          "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "external/hgraph_std/hgl/hgraph/tests/control.hgl"
         ]
       },
       "declarations": [
@@ -30064,7 +30086,7 @@
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/control.hgl",
           "line": 58,
-          "declaration": "operator nothing<T>() -> T\n\n/**\nExpose ``ts`` once it is valid, and ``default_value`` until then.\n\nArgs:\n    ts: The primary input.\n    default_value: Exposed until ``ts`` is valid.\n\nType Args:\n    T: The time-series type of both inputs.\n\nReturns:\n    A reference to whichever input is current; consumers see that input's\n    ticks directly, and the node never reads the values.\n\nTicks:\n    When the reference rebinds: to ``default_value`` at start, to ``ts``\n    once it is valid. When both tick in one cycle, ``ts`` wins.\n\nNotes:\n    hgraph's ``default``: a composition over ``default_ref``, which sees\n    ``ts`` twice, as a reference to forward and as a value to watch for\n    validity.\n*/"
+          "declaration": "operator nothing<T>() -> T"
         },
         {
           "module": "hgraph.std",
@@ -31466,15 +31488,19 @@
     {
       "name": "print_",
       "review": {
-        "status": "blocked",
-        "priority": 3,
-        "reason": "Callable, logging/formatting, recording or engine-control capability.",
-        "completed_domains": [],
+        "status": "implemented-slice",
+        "priority": 1,
+        "reason": "A plain string printed verbatim through the native print_line. Remaining: format arguments (format_).",
+        "completed_domains": [
+          "A plain string printed verbatim through the native print_line."
+        ],
         "blockers": [
-          "B5"
+          "B1"
         ],
         "evidence": [
-          "include/hgraph/lib/std/operators/io.h"
+          "include/hgraph/lib/std/operators/io.h",
+          "external/hgraph_std/hgl/hgraph/impl/control.hgl",
+          "external/hgraph_std/hgl/hgraph/tests/control.hgl"
         ]
       },
       "declarations": [
@@ -31545,7 +31571,7 @@
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/control.hgl",
           "line": 150,
-          "declaration": "operator print_(format_str: str)\n\n\n\n\n/**\nLog ``format_str`` on each tick as ``[last modified time] text``, at INFO.\n\nArgs:\n    format_str: The text, logged verbatim.\n    sample_count: Above ``1``, log every ``sample_count``-th tick.\n\nTicks:\n    On every tick of ``format_str``, or every ``sample_count``-th one. Nothing\n    is published.\n*/"
+          "declaration": "operator print_(format_str: str)"
         },
         {
           "module": "hgraph.std",
@@ -43708,7 +43734,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
       "line": 154,
-      "declaration": "native const fn as_float(value: i64) -> f64\n\n/**\nPython's ``str()`` of a ``bool``: ``True`` or ``False``.\n\nArgs:\n    value: The value to render.\n\nReturns:\n    The text hgraph's ``debug_print``, ``str_`` and ``format_`` show.\n*/"
+      "declaration": "native const fn as_float(value: i64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -43717,7 +43743,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
       "line": 165,
-      "declaration": "native const fn as_str(value: bool) -> str\n\n/**\nPython's ``str()`` of an ``i64``.\n*/"
+      "declaration": "native const fn as_str(value: bool) -> str"
     },
     {
       "module": "hgraph.native",
@@ -43726,7 +43752,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
       "line": 170,
-      "declaration": "native const fn as_str(value: i64) -> str\n\n/**\nPython's ``str()`` of an ``f64``: the shortest round-trip text, with a point.\n*/"
+      "declaration": "native const fn as_str(value: i64) -> str"
     },
     {
       "module": "hgraph.native",
@@ -43735,7 +43761,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
       "line": 175,
-      "declaration": "native const fn as_str(value: f64) -> str\n\n/**\nPython's ``str()`` of a ``str``: its characters, not a quoted literal.\n*/"
+      "declaration": "native const fn as_str(value: f64) -> str"
     },
     {
       "module": "hgraph.native",
@@ -43744,7 +43770,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
       "line": 180,
-      "declaration": "native const fn as_str(value: str) -> str\n\n/**\nPython's ``str()`` of a ``date``: ISO ``YYYY-MM-DD``.\n*/"
+      "declaration": "native const fn as_str(value: str) -> str"
     },
     {
       "module": "hgraph.native",
@@ -43753,7 +43779,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
       "line": 185,
-      "declaration": "native const fn as_str(value: date) -> str\n\n/**\nPython's ``str()`` of a ``time``: ``HH:MM:SS[.ffffff]``.\n*/"
+      "declaration": "native const fn as_str(value: date) -> str"
     },
     {
       "module": "hgraph.native",
@@ -43762,7 +43788,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
       "line": 190,
-      "declaration": "native const fn as_str(value: time) -> str\n\n/**\nPython's ``str()`` of a ``datetime``: ``YYYY-MM-DD HH:MM:SS[.ffffff]``.\n*/"
+      "declaration": "native const fn as_str(value: time) -> str"
     },
     {
       "module": "hgraph.native",
@@ -43771,7 +43797,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
       "line": 195,
-      "declaration": "native const fn as_str(value: datetime) -> str\n\n/**\nPython's ``str()`` of a ``duration``: ``[D day(s), ]H:MM:SS[.ffffff]``.\n*/"
+      "declaration": "native const fn as_str(value: datetime) -> str"
     },
     {
       "module": "hgraph.native",
@@ -43780,7 +43806,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
       "line": 200,
-      "declaration": "native const fn as_str(value: duration) -> str\n\n/**\nWrite one line of text to the run's standard output.\n\nArgs:\n    text: The line; the line break is added here.\n\nNotes:\n    Goes through hgraph's io writer, so tests that capture printed lines see\n    it.\n*/"
+      "declaration": "native const fn as_str(value: duration) -> str"
     },
     {
       "module": "hgraph.native",
@@ -43789,7 +43815,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
       "line": 212,
-      "declaration": "native const fn print_line(text: str)\n\n/**\nRaise an error carrying ``message``.\n\nArgs:\n    message: The error's message.\n\nRaises:\n    Always. The raise ends the evaluation under hgraph's node error model\n    (ADR 0009); ``assert_`` uses it for a false condition.\n*/"
+      "declaration": "native const fn print_line(text: str)"
     },
     {
       "module": "hgraph.native",
