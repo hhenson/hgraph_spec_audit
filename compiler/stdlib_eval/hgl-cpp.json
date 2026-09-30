@@ -1,0 +1,224 @@
+{
+  "reference_revision": "540b0976ada30f313975ca90533d6a7bce02b519",
+  "compiler_sha256": "1e57ce3f3856e930b72d6ec47a464afc586c560f4431256340a01b6af44ddf54",
+  "sources": {
+    "native/scalar_values.hgl": "aa2d31b5f988f1528e3692c50e94c02b08a504328b37930c86560ab141f1c3df",
+    "native/scalar_values_i64.hgl": "18395afe309bf778407d55fedbb3505e2ac239937b8521b6f708343d619bec92",
+    "native/temporal_values.hgl": "cac890f075c9b2662f659b06151b1509327acdb9491cb523d6690f677677f6c5",
+    "tests/control.hgl": "12483de61747fb26cf27a94f02a3390227436c3a843acee1c49b121f2398fd0e",
+    "tests/native_scalar_operators.hgl": "9c5e0d9addd33542dd64d20e20390c00a7644b8981f13526c0420ef29ca09a86",
+    "tests/operators.hgl": "c4b609b259513cb3cc04665dbeea1d6c13aa2c2469ef369698eddcb811f2e272",
+    "tests/standard.hgl": "4dec8d692264ebcff45b29e2c9111fe19e9b5ad21d004c0d7adfd7d260d95f72",
+    "tests/stream.hgl": "103d06d0c0571643186caac9183e98c7ca5fa17cdf2415b986bbabb9d9e58b51",
+    "tests/temporal.hgl": "6556509e538724b04ef795b49d471baed248ce685a5c811245534d74d805fb20"
+  },
+  "groups": [
+    {
+      "group": "standard",
+      "passed": true,
+      "tests": [
+        {
+          "name": "repeated_true_and_once",
+          "result": "ok"
+        },
+        {
+          "name": "constant_ticks_once_at_start",
+          "result": "ok"
+        },
+        {
+          "name": "constant_after_a_delay",
+          "result": "ok"
+        },
+        {
+          "name": "nothing_never_ticks",
+          "result": "ok"
+        },
+        {
+          "name": "default_until_the_primary_is_valid",
+          "result": "ok"
+        },
+        {
+          "name": "primary_wins_when_both_tick",
+          "result": "ok"
+        },
+        {
+          "name": "constant_default",
+          "result": "ok"
+        },
+        {
+          "name": "diagnostic_sinks_pass_their_input_through",
+          "result": "ok"
+        },
+        {
+          "name": "numeric_conversions_truncate",
+          "result": "ok"
+        },
+        {
+          "name": "membership_seeds_and_resamples",
+          "result": "ok"
+        },
+        {
+          "name": "boolean_set_elements_are_values",
+          "result": "ok"
+        },
+        {
+          "name": "take_passivates_after_count",
+          "result": "ok"
+        },
+        {
+          "name": "freeze_holds_the_last_value_once_true",
+          "result": "ok"
+        },
+        {
+          "name": "until_true_stops_listening_once_true",
+          "result": "ok"
+        },
+        {
+          "name": "sample_uses_only_trigger_ticks",
+          "result": "ok"
+        },
+        {
+          "name": "drop_counts_ticks_not_cycles",
+          "result": "ok"
+        },
+        {
+          "name": "dedup_remembers_zero_and_empty_cycles",
+          "result": "ok"
+        },
+        {
+          "name": "filter_resynchronizes_on_reopen",
+          "result": "ok"
+        },
+        {
+          "name": "folds_and_reset_before_first_value",
+          "result": "ok"
+        },
+        {
+          "name": "dedup_tracks_last_emitted_value",
+          "result": "ok"
+        },
+        {
+          "name": "date_components_elide_unchanged_values",
+          "result": "ok"
+        },
+        {
+          "name": "instant_components_keep_repeated_ticks",
+          "result": "ok"
+        },
+        {
+          "name": "duration_remainders_are_normalized",
+          "result": "ok"
+        }
+      ]
+    },
+    {
+      "group": "operators",
+      "passed": true,
+      "tests": [
+        {
+          "name": "equality_uses_native_default_tolerance",
+          "result": "ok"
+        },
+        {
+          "name": "zero_sign_and_mean",
+          "result": "ok"
+        },
+        {
+          "name": "checked_arithmetic_values",
+          "result": "ok"
+        },
+        {
+          "name": "substring_slices",
+          "result": "ok"
+        },
+        {
+          "name": "native_requirements_select_scalar_overloads",
+          "result": "ok"
+        }
+      ]
+    },
+    {
+      "group": "native",
+      "passed": true,
+      "tests": [
+        {
+          "name": "endpoint_flags_on_live_ticks",
+          "result": "ok"
+        },
+        {
+          "name": "endpoint_modification_time",
+          "result": "ok"
+        },
+        {
+          "name": "scalar_operator_values",
+          "result": "ok"
+        },
+        {
+          "name": "text_length_and_silent_ticks",
+          "result": "ok"
+        },
+        {
+          "name": "text_emptiness",
+          "result": "ok"
+        },
+        {
+          "name": "text_membership",
+          "result": "ok"
+        },
+        {
+          "name": "text_prefix",
+          "result": "ok"
+        },
+        {
+          "name": "text_suffix",
+          "result": "ok"
+        },
+        {
+          "name": "truthiness_is_a_value_operation",
+          "result": "ok"
+        },
+        {
+          "name": "integer_bit_projection",
+          "result": "ok"
+        },
+        {
+          "name": "decimal_rounding",
+          "result": "ok"
+        },
+        {
+          "name": "checked_powers",
+          "result": "ok"
+        },
+        {
+          "name": "checked_shifts",
+          "result": "ok"
+        },
+        {
+          "name": "python_slices",
+          "result": "ok"
+        },
+        {
+          "name": "python_str_of_scalars",
+          "result": "ok"
+        },
+        {
+          "name": "bitwise_i64_value_contract",
+          "result": "ok"
+        },
+        {
+          "name": "calendar_components",
+          "result": "ok"
+        },
+        {
+          "name": "negative_duration_components",
+          "result": "ok"
+        },
+        {
+          "name": "time_and_epoch",
+          "result": "ok"
+        }
+      ]
+    }
+  ],
+  "tests": 47
+}

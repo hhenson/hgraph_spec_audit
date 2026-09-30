@@ -6,7 +6,10 @@ audit. Sources and independently reasoned expectations belong to
 [hgraph_spec](https://github.com/hhenson/hgraph_spec/tree/main/compiler/stdlib).
 
 Current results: four scenarios, 23 tick cells match reasoning on Python
-0.5.42, C++ 0.8.30 and compiled HGL linked to the installed C++ SDK. The HGL
+0.5.42, C++ 0.8.30 and compiled HGL linked to the installed C++ SDK.
+The compiled-HGL evidence was refreshed against the current library pin using
+hgraph native-provider commit `540b0976ada30f313975ca90533d6a7bce02b519`;
+the earlier released-runtime records remain unchanged. The HGL
 run repeats three times in fresh processes. `hgl-reference.json` records actual
 ticks, compiler/library fingerprints, shared-source hashes and harness hashes.
 The previous blocked compiler experiment has been replaced by this passing
