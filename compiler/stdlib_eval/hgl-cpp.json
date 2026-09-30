@@ -1,7 +1,11 @@
 {
   "reference_revision": "540b0976ada30f313975ca90533d6a7bce02b519",
-  "compiler_sha256": "1e57ce3f3856e930b72d6ec47a464afc586c560f4431256340a01b6af44ddf54",
-  "harness_sha256": "bb757df5197131b9f172338dcb4e513b84b10e066ccced4427a247138f21e80e",
+  "build": {
+    "source_revision": "540b0976ada30f313975ca90533d6a7bce02b519",
+    "clean_rebuild": true
+  },
+  "compiler_sha256": "bbcceaa5cbec8e6780e62b5c05a40c77ed83317aaa84d5d91a1d852b05f45394",
+  "harness_sha256": "37d1b237d8ec5399a37392fc4cb7a205b328230aec92d549b0fea9c076b2fa58",
   "sources": {
     "control.hgl": "e4e484d7593ca2f4f94a8836bfd57329f1bbfca88eafd17424e447c50e3cfb48",
     "impl/control.hgl": "f670df54ff898b1846ac46561208ae4227493f2f18a5b1820f54cf7db5863532",
@@ -31,7 +35,7 @@
     "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values_i64.hgl": "577cff08a2e427fba792cf796a7a62f54d1c8b0fb28c8bbe567c8b2340371b8a",
     "language/stdlib/hgl/hgraph/native/impl/cpp_temporal_values.hgl": "8401a168d96a40dc9e92b49bbb87e3fe0b4edc03d9b29cf4078bbedf861f049d"
   },
-  "descriptor_sha256": "887a37eace21b980f25efda37a191650afff0d43348218d2b59f9050ce7d3c30",
+  "descriptor_sha256": "ce9e648ad9bc91031496e92b8f70709ba4d07ab095320ffcd4060aa959c4c6d4",
   "provider_header_sha256": "12486bdba55e973e470a5d729f01a8eb9b0cce33e239d76f0bf1a3dfe20b18c9",
   "groups": [
     {

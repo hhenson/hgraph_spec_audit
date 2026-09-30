@@ -11,6 +11,7 @@ import sys
 import hgraph as hg
 from hgraph.test import eval_node
 from shared_cases import TYPES, encode, read
+from evidence_support import python_fingerprint, validate_replay
 
 SCALARS = {
     'int_sum': operator.add, 'mixed_sum': operator.add, 'text_sum': operator.add,
@@ -132,11 +133,17 @@ def main():
         rows.append(row)
     binary = getattr(sys.modules.get('_hgraph'), '__file__', None)
     report = dict(engine=engine, version=importlib.metadata.version('hgraph'),
+                  python_sources=python_fingerprint(Path(hg.__file__).parent),
+                  support_sha256=hashlib.sha256(Path(__file__).with_name('evidence_support.py').read_bytes()).hexdigest(),
                   native_sha256=hashlib.sha256(Path(binary).read_bytes()).hexdigest() if binary else None,
                   sources=hashes, harness_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                   reader_sha256=hashlib.sha256(Path(__file__).with_name('shared_cases.py').read_bytes()).hexdigest(), cases=rows)
     args.output.write_text(json.dumps(report, indent=2, default=encode)+'\n')
     print(f"{engine}: {sum(r['matches'] for r in rows)}/{len(rows)} match")
+    try:
+        validate_replay(engine, rows)
+    except ValueError as error:
+        raise SystemExit(str(error)) from error
 
 
 if __name__ == '__main__': main()

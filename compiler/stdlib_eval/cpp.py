@@ -36,6 +36,24 @@ def source_revision(source, expected=None):
     return revision
 
 
+def build_source(build):
+    cache = (build / 'CMakeCache.txt').read_text()
+    match = re.search(r'^CMAKE_HOME_DIRECTORY:INTERNAL=(.+)$', cache, re.M)
+    if not match:
+        raise ValueError('build has no CMake source directory')
+    return Path(match[1]).resolve()
+
+
+def rebuild(source, build, revision, jobs):
+    if build_source(build) != source.resolve():
+        raise ValueError('build was configured from a different source checkout')
+    subprocess.run(['cmake', '-S', str(source), '-B', str(build)], check=True)
+    subprocess.run(['cmake', '--build', str(build), '--clean-first', '--target',
+                    'hgl_stdlib_test_driver', '--parallel', str(jobs)], check=True)
+    source_revision(source, revision)
+    return dict(source_revision=revision, clean_rebuild=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source', type=Path, required=True)
@@ -43,8 +61,12 @@ def main():
     parser.add_argument('--stdlib', type=Path, required=True)
     parser.add_argument('--revision', help='Expected source HEAD (optional full commit hash)')
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--jobs', type=int, default=8)
     args = parser.parse_args()
+    if args.jobs < 1:
+        parser.error('--jobs must be positive')
     revision = source_revision(args.source, args.revision)
+    build = rebuild(args.source, args.build, revision, args.jobs)
     driver = args.build / 'language/tests/hgl_stdlib_test_driver'
     generated = args.build / 'language/generated/hgl_core_native'
     native = args.source / 'language/stdlib/hgl/hgraph'
@@ -76,7 +98,7 @@ def main():
     source_revision(args.source, revision)
     if sources != stdlib_sources(args.stdlib):
         raise RuntimeError('standard-library sources changed during the run')
-    report = dict(reference_revision=revision, compiler_sha256=digest(driver),
+    report = dict(reference_revision=revision, build=build, compiler_sha256=digest(driver),
                   harness_sha256=digest(Path(__file__)), sources=sources,
                   native_sources=dict(sorted(native_sources.items())),
                   descriptor_sha256=digest(generated / 'src/native.hgl-module.json'),

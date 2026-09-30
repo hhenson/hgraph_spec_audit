@@ -12,7 +12,8 @@ The shared language guide defines dense alignment, silence and strict length.
 
 The C++ compiler and wheel use hgraph commit
 `540b0976ada30f313975ca90533d6a7bce02b519` (native-provider PR #1669).
-The wheel labels itself `0.0.0`; its binary hash identifies the actual build.
+The wheel labels itself `0.0.0`; binary and Python-source fingerprints identify
+the runtime used.
 The compiled-HGL run validates native C++ scalar functions and sink effects.
 Python-authoring runs exercise released operators where available. Embedded
 native tests lift independent Python scalar operations into compute nodes;
@@ -76,8 +77,10 @@ python compiler/stdlib_eval/cpp.py --source <hgraph-source> --build <hgraph-buil
 python -m unittest discover -s compiler/stdlib_eval
 ```
 
-Build `hgl_stdlib_test_driver` with language/testing enabled. Its linked native
-provider and generated descriptor must match the supplied source and build.
+Configure a dedicated CMake build directory with language/testing enabled.
+The runner verifies its source directory, reconfigures and clean-rebuilds
+`hgl_stdlib_test_driver` and its dependencies before recording results.
+`--jobs` controls build parallelism (default 8).
 The runner requires a clean Git source checkout and derives its revision from
 HEAD; `--revision` verifies an expected commit. Evidence hashes every shared
 and native HGL part passed to the driver, plus the driver, runner, generated
@@ -85,3 +88,6 @@ descriptor and provider header. Recorded checks reject changed shared
 implementation files even when assertions are unchanged.
 `shared_cases.py` accepts the current flat scalar assertion syntax and fails
 on unrecognized values. It is an audit reader, not another HGL compiler.
+Replay writes its report, then fails on unexpected mismatches or errors.
+Python must reproduce exactly the accepted reset variation above; C++ must
+match every case. Each run fingerprints all Python files in its `hgraph` package.
