@@ -1,0 +1,37 @@
+{
+  "hgraph_revision": "0e33040ba70f2fb361ae843275de24ff2b0075ed",
+  "rust_toolchain": "1.98.1",
+  "upstream_files": {
+    "language/examples/const-debug.hgl": "b43f21f1785b5f04597628aa564006b0ab0048aefabe9b72a631da6b7bb50e36",
+    "language/stdlib/hgl/hgraph/native/scalar_values_i64.hgl": "18395afe309bf778407d55fedbb3505e2ac239937b8521b6f708343d619bec92",
+    "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values_i64.hgl": "577cff08a2e427fba792cf796a7a62f54d1c8b0fb28c8bbe567c8b2340371b8a",
+    "language/tests/codegen/native-provider.hgl": "92348998272fd3c1e2417d59324ea83d8ad86f95f3ba4784a0ef6d4e40d520f2",
+    "language/tests/codegen/native-provider-impl.hgl": "4a503d04b13ed7910a9b47e4a88d750d2b159fbb0c8f79dbe88614f88ab88545"
+  },
+  "shared_files": {
+    "spec/language/examples/const-debug.hgl": "b43f21f1785b5f04597628aa564006b0ab0048aefabe9b72a631da6b7bb50e36",
+    "spec/language/examples/native-provider.hgl": "92348998272fd3c1e2417d59324ea83d8ad86f95f3ba4784a0ef6d4e40d520f2",
+    "stdlib/hgl/hgraph/native/scalar_values_i64.hgl": "18395afe309bf778407d55fedbb3505e2ac239937b8521b6f708343d619bec92"
+  },
+  "hgl_files": {
+    "examples/const-debug/main.hgl": "b43f21f1785b5f04597628aa564006b0ab0048aefabe9b72a631da6b7bb50e36",
+    "crates/hgl-native/interfaces/scalar.hgl": "18395afe309bf778407d55fedbb3505e2ac239937b8521b6f708343d619bec92",
+    "crates/hgl-native/interfaces/scalar-impl.hgl": "7614f3df88c727da74ebba2671583ae0339fbe0e9f2f46b2f69f49ebf2c47de2",
+    "crates/hgl-native/interfaces/capabilities.hgl": "92348998272fd3c1e2417d59324ea83d8ad86f95f3ba4784a0ef6d4e40d520f2",
+    "crates/hgl-native/interfaces/capabilities-impl.hgl": "d4687cd668a52a967c1a8b6d650c05a09077109158ae4a9bb2dad94bec2f76b5",
+    "crates/hgl-native/src/scalar_interface.rs": "523b58046c3e0918805ace738c28556df09f961c3e4d65618b4b6c896e419d00",
+    "crates/hgl-native/tests/support/capability_interface.rs": "7fd5a1fc333c684430acfbd1b888717971099b5f7d30415435fe96fcee055499"
+  },
+  "contracts": [
+    {
+      "interface": "language/stdlib/hgl/hgraph/native/scalar_values_i64.hgl",
+      "implementation": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values_i64.hgl",
+      "rust_file": "crates/hgl-native/src/scalar_interface.rs"
+    },
+    {
+      "interface": "language/tests/codegen/native-provider.hgl",
+      "implementation": "language/tests/codegen/native-provider-impl.hgl",
+      "rust_file": "crates/hgl-native/tests/support/capability_interface.rs"
+    }
+  ]
+}
