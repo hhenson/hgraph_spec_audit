@@ -18,32 +18,35 @@ def verify_files(root, files):
 
 
 # Exact substitutions for the two archived sources, not an arbitrary rewrite API.
-CALL_SPELLINGS = {
+ACCESS_SPELLINGS = {
     'language/examples/const-debug.hgl': [
         ('scheduler.schedule(0s)', 'schedule(scheduler, 0s)')],
     'language/tests/codegen/native-provider.hgl': [
         ('logger.info("HGL helper")', 'info(logger, "HGL helper")'),
-        ('clock.evaluation_time()', 'evaluation_time(clock)')],
+        ('clock.evaluation_time()', 'clock.evaluation_time')],
 }
 
 
 def verify_source_migrations(root, manifest):
+    archive = json.loads((root / manifest['historical_sources']).read_text())
+    if archive['hgraph_revision'] != manifest['hgraph_revision'] or set(archive['sources']) != set(ACCESS_SPELLINGS):
+        raise ValueError('Native interface audit: incomplete or relabelled historical sources')
     migrations = manifest['source_migrations']
-    if len(migrations) != len(CALL_SPELLINGS) or {m['upstream'] for m in migrations} != set(CALL_SPELLINGS):
+    if len(migrations) != len(ACCESS_SPELLINGS) or {m['upstream'] for m in migrations} != set(ACCESS_SPELLINGS):
         raise ValueError('Native interface audit: incomplete source migration coverage')
     for migration in migrations:
-        if migration['spelling'] != 'capability-receiver-first-v1':
+        if migration['spelling'] != 'capability-functions-clock-properties-v2':
             raise ValueError('Native interface audit: unknown source migration')
-        original = root / migration['original']
-        verify_files(root, {migration['original']: manifest['upstream_files'][migration['upstream']]})
-        transformed = original.read_bytes()
-        for old, new in CALL_SPELLINGS[migration['upstream']]:
+        transformed = archive['sources'][migration['upstream']].encode('utf-8')
+        if hashlib.sha256(transformed).hexdigest() != manifest['upstream_files'][migration['upstream']]:
+            raise ValueError('Native interface audit: changed historical source')
+        for old, new in ACCESS_SPELLINGS[migration['upstream']]:
             if transformed.count(old.encode()) != 1:
                 raise ValueError('Native interface audit: unexpected original capability call')
             transformed = transformed.replace(old.encode(), new.encode())
         current = root / migration['shared']
         if current.read_bytes() != transformed:
-            raise ValueError('Native interface audit: source changed beyond capability call spelling')
+            raise ValueError('Native interface audit: source changed beyond capability access spelling')
         digest = hashlib.sha256(transformed).hexdigest()
         if manifest['shared_files'][migration['shared']] != digest or manifest['hgl_files'][migration['hgl']] != digest:
             raise ValueError('Native interface audit: migrated source fingerprints disagree')

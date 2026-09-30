@@ -1,0 +1,7 @@
+{
+  "hgraph_revision": "0e33040ba70f2fb361ae843275de24ff2b0075ed",
+  "sources": {
+    "language/examples/const-debug.hgl": "module examples.const_debug\n\nnative const fn print_i64(value: i64)\n\nexport fn const_(const value: i64) -> i64 {\n    inject scheduler\n    start { scheduler.schedule(0s) }\n    when scheduled() { return value }\n}\n\nexport fn debug_print(value: i64) {\n    when { print_i64(value) }\n}\n\nexport fn main() -> i64 {\n    let value = const_(42)\n    debug_print(value)\n    return value\n}\n",
+    "language/tests/codegen/native-provider.hgl": "module checks.native_provider\n\nnative const fn bit_and(lhs: i64, rhs: i64) -> i64\n\nexport fn bitwise(lhs: i64, rhs: i64) -> i64 {\n    when { return bit_and(lhs, rhs) }\n}\n\nexport fn lifted(lhs: i64, rhs: i64) -> i64 => bit_and(rhs: rhs, lhs: lhs)\nexport fn mixed(lhs: i64) -> i64 => bit_and(lhs, 3)\n\nnative const fn audit(value: i64) -> i64\n\nconst fn forward(value: i64) -> i64 => audit(value)\n\nexport fn audited(value: i64) -> i64 {\n    when { return forward(value) }\n}\n\nconst fn hgl_audit(value: i64) -> i64 {\n    inject logger\n    logger.info(\"HGL helper\")\n    return value\n}\n\nexport fn hgl_audited(value: i64) -> i64 {\n    when { return hgl_audit(value) }\n}\n\nexport fn lifted_audited(value: i64) -> i64 => audit(value)\n\nconst fn stamp() -> datetime {\n    inject clock\n    return clock.evaluation_time()\n}\n\nexport fn stamped(value: i64) -> datetime {\n    when { return stamp() }\n}\n"
+  }
+}

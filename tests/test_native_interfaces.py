@@ -54,11 +54,11 @@ class NativeInterfaces(unittest.TestCase):
     def migration_fixture(self, directory):
         root = Path(directory)
         manifest = json.loads((ROOT / 'compiler/native_interfaces/contracts.json').read_text())
-        for migration in manifest['source_migrations']:
-            for key in ('original', 'shared'):
-                target = root / migration[key]
-                target.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copyfile(ROOT / migration[key], target)
+        files = [manifest['historical_sources']] + [m['shared'] for m in manifest['source_migrations']]
+        for name in files:
+            target = root / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / name, target)
         return root, manifest
 
     def test_native_declaration_change_cannot_hide_behind_new_fingerprint(self):
@@ -71,7 +71,7 @@ class NativeInterfaces(unittest.TestCase):
             changed = hashlib.sha256(path.read_bytes()).hexdigest()
             manifest['shared_files'][migration['shared']] = changed
             manifest['hgl_files'][migration['hgl']] = changed
-            with self.assertRaisesRegex(ValueError, 'beyond capability call spelling'):
+            with self.assertRaisesRegex(ValueError, 'beyond capability access spelling'):
                 audit.verify_source_migrations(root, manifest)
 
     def test_non_call_body_change_is_not_a_syntax_migration(self):
@@ -79,15 +79,32 @@ class NativeInterfaces(unittest.TestCase):
             root, manifest = self.migration_fixture(directory)
             path = root / manifest['source_migrations'][0]['shared']
             path.write_text(path.read_text().replace('const_(42)', 'const_(43)'))
-            with self.assertRaisesRegex(ValueError, 'beyond capability call spelling'):
+            with self.assertRaisesRegex(ValueError, 'beyond capability access spelling'):
                 audit.verify_source_migrations(root, manifest)
+
+    def test_clock_call_aliases_cannot_replace_property_access(self):
+        for alias in ('clock.evaluation_time()', 'evaluation_time(clock)'):
+            with self.subTest(alias=alias), tempfile.TemporaryDirectory() as directory:
+                root, manifest = self.migration_fixture(directory)
+                migration = manifest['source_migrations'][1]
+                path = root / migration['shared']
+                path.write_text(path.read_text().replace('return clock.evaluation_time',
+                                                         'return ' + alias))
+                changed = hashlib.sha256(path.read_bytes()).hexdigest()
+                manifest['shared_files'][migration['shared']] = changed
+                manifest['hgl_files'][migration['hgl']] = changed
+                with self.assertRaisesRegex(ValueError, 'beyond capability access spelling'):
+                    audit.verify_source_migrations(root, manifest)
 
     def test_original_source_cannot_be_updated_to_current_syntax(self):
         with tempfile.TemporaryDirectory() as directory:
             root, manifest = self.migration_fixture(directory)
             migration = manifest['source_migrations'][1]
-            shutil.copyfile(root / migration['shared'], root / migration['original'])
-            with self.assertRaisesRegex(ValueError, 'missing or changed'):
+            path = root / manifest['historical_sources']
+            archive = json.loads(path.read_text())
+            archive['sources'][migration['upstream']] = (root / migration['shared']).read_text()
+            path.write_text(json.dumps(archive))
+            with self.assertRaisesRegex(ValueError, 'changed historical source'):
                 audit.verify_source_migrations(root, manifest)
 
     def test_migration_coverage_cannot_drop_a_source(self):
