@@ -32,6 +32,11 @@ publication-delta cases, with direct native C++ scalar corroboration. It retains
 raw no-output returns separately from dense horizon normalization, and records
 lifecycle/capture divergences with an external-key positive control.
 
+The [ordinary value-sequence audit](runtime/validation/value_sequences/README.md)
+measures timed const-data replay, mutable and immutable lists, retained copies
+and the distinct alias behavior of Python objects, native Python exports and
+direct native borrowed views.
+
 ## Exercise the two reference implementations
 
 Both distributions import as `hgraph`, so use independent environments:
