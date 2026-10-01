@@ -1,0 +1,13 @@
+{
+  "scope": "Generic scalar state via an injected store, independent of replay and recording keys. Arithmetic expectations follow the seeded counter and published inputs. This corpus was frozen before the repeated measurement, after an exploratory lifecycle smoke check.",
+  "expected": {
+    "first_output": [41, null, 43],
+    "first_state": {"count": 43, "started": true, "stopped": true},
+    "second_output": [8],
+    "second_state": {"count": 8, "started": true, "stopped": true},
+    "retained_first_state": {"count": 43, "started": true, "stopped": true},
+    "missing_index": "KeyError",
+    "missing_get_default": 99,
+    "ordinary_values": {"zero": 0, "false": false, "empty_text": ""}
+  }
+}
