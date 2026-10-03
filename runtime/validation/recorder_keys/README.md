@@ -103,4 +103,9 @@ The runner refuses an existing destination and verifies engine identity
 before/after each case and across its repetitions. It preserves errors and
 normalizes only private paths or unstable addresses in error messages. The
 checker validates saved corpus/harness hashes, types and assessments without
-executing engines.
+executing engines. It recomputes each package identity digest, checks the
+source/artifact/native manifests, and requires every hook in order: start,
+both evaluations and stop, each with before/after snapshots. The native dense
+error case instead requires the recorded first evaluation followed by stop,
+with no fabricated second evaluation. Negative tests reject deleted, reordered
+or duplicated hooks and changed package identities.

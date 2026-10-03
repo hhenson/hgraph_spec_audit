@@ -11,6 +11,7 @@ import sys
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / 'delta_eval'))
 from observe import encode, identity, sha
+from assessment import assess
 
 
 def observe(name):
@@ -45,7 +46,10 @@ def observe(name):
         return {'trace': trace, 'raw': raw, 'fails': False}
     except Exception as exc:
         return {'trace': trace, 'fails': True, 'error_type': type(exc).__name__,
-                'sentinel': 'operand-audit-sentinel' in str(exc)}
+                'sentinel': 'operand-audit-sentinel' in str(exc),
+                # Preserve exception text; only replace private filesystem prefixes.
+                'error_message': str(exc).replace(str(HERE.parents[2]), '<audit-root>')
+                    .replace(sys.prefix, '<environment>').replace(str(Path.home()), '<private-home>')}
 
 
 def probe():
@@ -74,19 +78,23 @@ def main():
     corpus = HERE / 'reasoned.json'
     corpus_hash = sha(corpus)
     cases = json.loads(corpus.read_text())['cases']
+    contract_path = HERE / 'error_contract.json'
+    contract_hash = sha(contract_path)
+    contract = json.loads(contract_path.read_text())
     evidence = {'measured_at': datetime.now(timezone.utc).isoformat(),
                 'reasoned_sha256': corpus_hash, 'harness_sha256': sha(__file__),
                 'identity_helper_sha256': sha(HERE.parent / 'delta_eval/observe.py'),
+                'error_contract_sha256': contract_hash, 'assessment_sha256': sha(HERE / 'assessment.py'),
                 'repeats': 3, 'engines': {}}
     for name, executable, native in [('python', args.python, False), ('cpp', args.cpp, True)]:
         runs = [json.loads(subprocess.check_output([str(executable), __file__, '--probe'], text=True)) for _ in range(3)]
         if any(run != runs[0] for run in runs) or runs[0]['identity']['native'] != native:
             raise RuntimeError('unstable or incorrect engine: ' + name)
         result = runs[0]
-        result['assessment'] = {case: 'match' if all(result['observations'][case].get(k) == v for k, v in expected.items()) else 'divergence' for case, expected in cases.items()}
+        result['assessment'] = assess(result['observations'], cases, name, contract)
         evidence['engines'][name] = result
         print(name, result['assessment'])
-    if sha(corpus) != corpus_hash:
+    if sha(corpus) != corpus_hash or sha(contract_path) != contract_hash:
         raise RuntimeError('expectations changed')
     args.output.write_text(json.dumps(evidence, indent=2, sort_keys=True) + '\n')
 

@@ -72,3 +72,24 @@ runtime compatible with its shared libraries. Run `native_observe.py` with
 
 `python3 runtime/validation/owned_deltas/check.py` validates saved evidence
 and reproduces all matches, divergences and errors without executing engines.
+
+The checker requires a valid executable SHA-256 and a nonempty, wellformed
+installed-SDK header manifest for both successful and failed native probes.
+The CMake project tracks `native.cpp` as a configure dependency so an ordinary
+source-change build updates its embedded digest. The rebuild regression check
+copies the probe into a temporary directory, builds it, appends a comment,
+and builds again without an explicit configure step. It checks that both
+source and executable digests change and that all six native observations
+remain correct:
+
+```sh
+python3 runtime/validation/owned_deltas/rebuild_check.py \
+  --cmake-arg=-Dhgraph_DIR=/path/to/native/lib/cmake/hgraph \
+  --cmake-arg=-DPython_EXECUTABLE=/path/to/native/bin/python \
+  --cmake-arg=-DCMAKE_CXX_COMPILER=/path/to/compatible/compiler
+```
+
+This regression passed during review with the installed SDK and its required
+nanobind 2.13.0, GCC 15 and Python 3.14.4. It does not alter the archived native
+measurement or its source file. `tools/check_recorded.py` runs the offline
+negative provenance tests; the rebuild regression requires the native SDK.
