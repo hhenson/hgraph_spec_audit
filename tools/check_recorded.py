@@ -49,6 +49,7 @@ def main():
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/eval_timed_values/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/generator_operands/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/owned_deltas/check.py')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'runtime/validation/recorder_keys/check.py')], check=True)
     print('Recorded evidence checked; no fresh runtime measurements were made.')
 
 

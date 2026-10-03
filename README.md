@@ -26,6 +26,10 @@ recorded-evidence check is not a fresh runtime measurement.
 
 ## Delta evaluation evidence
 
+The [recorder-key collision audit](runtime/validation/recorder_keys/README.md)
+measures within-run same-type interference, preserving overwritten user state,
+corrupted output and native failure separately from the proposed fresh-key rule.
+
 The [delta eval audit](runtime/validation/delta_eval/README.md) measures actual
 replay → compute → record graphs across eight scalar types and five structural
 publication-delta cases, with direct native C++ scalar corroboration. It retains
