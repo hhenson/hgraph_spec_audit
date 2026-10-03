@@ -2,7 +2,10 @@
 import hashlib
 import json
 from pathlib import Path
+import sys
 HERE=Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE.parent))
+from evidence_identity import digest, manifest
 
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -27,6 +30,13 @@ def main():
                 assert result['assessment'][case]==assessment
             print(name,engine,result['assessment'])
     native=json.loads((HERE/'native_observed.json').read_text())
+    validate_native(native, corpus)
+    print('Owned-delta evidence verified; no engines were executed.')
+
+def validate_native(native, corpus):
+    digest(native['binary_sha256'])
+    manifest(native['sdk_headers_sha256'])
+    assert native['status'] in {'error', 'observed'}
     assert native['reasoned_sha256']==sha(HERE/'reasoned.json') and native['recorder_sha256']==sha(HERE/'native_observe.py')
     assert native['repeats']==3
     if native['status']=='error':assert native['returncode']!=0 and native['stderr']
@@ -36,6 +46,5 @@ def main():
         for case,want in corpus['native_expected'].items():assert native['assessment'][case]==('match' if native['observed'][case]==want else 'divergence')
         authoring=json.loads((HERE/'observed.json').read_text())['engines']['cpp']['identity']['loaded_hgraph_libraries']
         for name in ('libhgraph_runtime.so','libhgraph_wiring.so','libhgraph_stdlib.so'):assert native['loaded_libraries_sha256'][name]==authoring[name]
-    print('Owned-delta evidence verified; no engines were executed.')
 
 if __name__=='__main__':main()

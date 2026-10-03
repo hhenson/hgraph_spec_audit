@@ -69,5 +69,10 @@ python3 runtime/validation/eval_timed_values/check.py
 ```
 
 The runner refuses to overwrite a result and preserves errors. The checker
-checks saved evidence and provenance; it does not rerun the engines. No native
+requires all 24 results to match after checking raw results and separately
+materialized horizons. Consistently labelled errors or divergences fail. It
+validates the package identity digest, source and artifact manifests, eval
+helper source, native artifacts and loaded libraries, including consistency
+between overlapping manifests. This checks recorded provenance consistency;
+it does not independently authenticate the wheel or rerun the engines. No native
 performance or allocation benchmark was measured here.

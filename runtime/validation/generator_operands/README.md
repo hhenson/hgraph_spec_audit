@@ -16,7 +16,13 @@ yielded tuple before handing it to either engine.
 Both engines match the prewritten future-resumption trace, time-operand
 failure, past-yield payload failure, and duplicate-due-publication failure.
 The duplicate evaluates both operands before failing and does not resume
-past its second yield. No runtime payload-retention or allocation-failure
+past its second yield. The review remeasurement preserves the actual exception
+text, including its stack/activation trace, with only filesystem prefixes
+redacted as `<audit-root>`, `<environment>` and `<private-home>`. Python reports
+`Duplicate time produced by generator: [1970-01-01 00:00:00.000001] - 2`;
+the native engine reports `Python generator output times must be strictly increasing`.
+The checker requires the exact engine diagnostic line and exception type;
+a generic failure after operand evaluation cannot satisfy this case. No runtime payload-retention or allocation-failure
 claim is added by these scalar traces.
 
 Two timing cases diverge from the proposed uniform past-target skip:
@@ -50,5 +56,19 @@ python3 runtime/validation/generator_operands/check.py
 ```
 
 The runner refuses to overwrite evidence. The saved report includes corpus,
-harness, identity-helper, package and native binary hashes. The checker
-recomputes assessments including divergences and does not execute engines.
+harness, assessment-helper, error-contract, identity-helper, package and native
+binary hashes. The checker validates the package identity digest, source and
+artifact manifests, eval helper source, native artifacts and loaded libraries,
+including consistency between the overlapping manifests. This establishes
+recorded provenance consistency, not independent authenticity of the wheel.
+
+The original `reasoned.json` remains unchanged. The separately labelled
+[error_contract.json](error_contract.json) records the diagnostic spelling
+inspected during review before the three fresh-process remeasurement runs.
+The new `observed.json` includes those actual error details; its package
+identity records the fresh historical-Python installation. The original
+observations remain in Git history. The checker reproduces the original
+past-target divergences and requires the four claimed agreements. Negative
+tests reject unrelated failures, diagnostics appearing only later in a
+traceback, missing error details and altered provenance. Checking saved
+evidence does not execute engines.

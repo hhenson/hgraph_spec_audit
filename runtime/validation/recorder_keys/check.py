@@ -2,17 +2,18 @@
 import hashlib
 import json
 from pathlib import Path
+import sys
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE.parent))
+from evidence_identity import validate_identity
 
 
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def main():
-    corpus = json.loads((HERE / 'reasoned.json').read_text())
-    evidence = json.loads((HERE / 'observed.json').read_text())
+def validate(corpus, evidence):
     assert corpus['written_before_measurement']
     assert evidence['reasoned_sha256'] == sha(HERE / 'reasoned.json')
     assert evidence['harness_sha256'] == sha(HERE / 'observe.py')
@@ -21,11 +22,7 @@ def main():
     assert set(evidence['engines']) == {'python', 'cpp'}
     for engine, result in evidence['engines'].items():
         native = engine == 'cpp'
-        assert result['identity']['native'] == native
-        assert result['identity']['package']['identity_sha256']
-        if native:
-            assert result['identity']['native_artifacts']
-            assert result['identity']['loaded_hgraph_libraries']
+        validate_identity(result['identity'], engine)
         assert set(result['observations']) == set(corpus['cases'])
         for name, observed in result['observations'].items():
             case = corpus['cases'][name]
@@ -34,7 +31,12 @@ def main():
             assert observed['user_key'] == (recorder_key if case['collide'] else 'audit.user.recording')
             timed = case['layout'] == 'sparse' or not native
             assert observed['logical_entry_type'] == ('list[tuple[datetime,int]]' if timed else 'list[int]')
-            assert observed['events'] and observed['events'][0]['phase'] == 'start_before'
+            phases = ['start_before', 'start_after', 'eval_before_1', 'eval_after_1']
+            if not (native and name == 'dense_eval_collision'):
+                phases += ['eval_before_2', 'eval_after_2']
+            phases += ['stop_before', 'stop_after']
+            assert [event['phase'] for event in observed['events']] == phases, (engine, name)
+            assert ('error' in observed['result']) == (native and name == 'dense_eval_collision')
             for snapshot in [observed['initial_user_entry'], observed['final_user_entry'], observed['final_recorder_entry']] + [s for e in observed['events'] for s in (e['recorder_entry'], e['user_entry'])]:
                 assert type(snapshot['present']) is bool
                 if snapshot['present']:
@@ -67,6 +69,11 @@ def main():
         artifacts = evidence['engines'][engine]['identity']['package']['artifacts_sha256']
         assert artifacts[source[field]['path']] == source[field][hash_field]
     print('Recorded key-collision evidence verified; no engines were executed.')
+
+
+def main():
+    validate(json.loads((HERE / 'reasoned.json').read_text()),
+             json.loads((HERE / 'observed.json').read_text()))
 
 
 if __name__ == '__main__':
