@@ -69,7 +69,7 @@ def validate(corpus, evidence):
                         assert lines[1] == 'NodeError: ' + sentinel
             comparison = {field: 'match' if json.dumps(observed.get(field)) == json.dumps(value) else 'divergence'
                           for field, value in case['expected'].items()}
-            print(engine, name, 'HGL effect comparison:', comparison)
+            print(engine, name, 'Pre-ordering HGL effect comparison:', comparison)
     supersession = json.loads((HERE.parent / 'generator_operands/supersession.json').read_text())
     assert supersession['superseded_reasoned_sha256'] == sha(HERE.parent / 'generator_operands/reasoned.json')
     assert supersession['superseded_by'] == '../generator_negative/README.md'

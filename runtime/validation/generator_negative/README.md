@@ -1,10 +1,17 @@
 # Negative relative yield durations: explicit HGL rejection
 
+**Later ordering extension:** [strict target ordering](../generator_ordering/README.md)
+applies across every resolved target, including skipped past entries. The
+first target has no predecessor. This page preserves the earlier negative-only
+measurement and reasoning; its `past_absolute_later` expected skip is now
+superseded by order rejection, as identified in [metadata](supersession.json).
+Negative rejection and its operand phase are unchanged.
+
 The current HGL rule rejects every negative relative yield duration after
 successful time-expression and payload-expression evaluation, and before
 implicit target-time addition or past/due/future classification. Zero remains
 admissible, subject to the existing duplicate-publication rule. Past absolute
-timestamps retain skip behavior. A failure while evaluating the time
+timestamps retain skip behavior only after strict target-order validation. A failure while evaluating the time
 expression prevents payload evaluation; a payload failure prevents admission.
 
 This supersedes the negative-duration skip proposal preserved in the older
@@ -70,7 +77,7 @@ authored time expression before the payload effect. HGL rejects the negative
 duration before its implicit addition; explicit arithmetic performed inside
 a time expression can still fail before HGL reaches the admission check.
 
-The checker compares prewritten HGL *effects* separately from actual reference
+The checker compares the pre-ordering HGL *effects* separately from actual reference
 facts, requires exact diagnostic causes, and preserves every divergence. An
 effect labelled `match` does not equate a duplicate/overflow error with HGL's
 negative-duration error. Zero after a prelude remains subject to HGL's
