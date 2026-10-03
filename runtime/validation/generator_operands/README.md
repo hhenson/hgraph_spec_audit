@@ -5,7 +5,9 @@
 [negative-duration correction](../generator_negative/README.md) requires
 rejection after both operands succeed and before implicit target addition.
 [Supersession metadata](supersession.json) identifies the unchanged original
-corpus. Past absolute targets still skip under HGL.
+corpus. Past absolute targets skip only after the later
+[strict target-order check](../generator_ordering/README.md), which includes
+previously skipped targets.
 
 Measured 2026-10-03, with six prewritten cases and three fresh-process runs
 per engine. This exercises the Python authoring surface on historical
