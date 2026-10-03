@@ -66,3 +66,8 @@ A shared adapter mistake was found before acceptance: `no_key` still
 multiplexes the price dictionary. Both runtimes rejected that graph. Rechecking
 the intended boundary selected `pass_through`; the input/output expectations
 did not change. Runtime errors in the expiry case remain recorded errors.
+
+The [atomic full-snapshot audit](atomic_snapshots/README.md) separately measures
+complete tuple/list/struct publications and recording independence. It preserves
+historical Python mutable aliases and the native engine's independent captures;
+it adds no set/map or arbitrary atomic-payload coverage claim.

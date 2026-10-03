@@ -40,11 +40,12 @@ def main():
         print('released wiring assessment reproduced')
         for folder in ('runtime/validation/descriptions', 'runtime/validation/fixed'):
             subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(work / folder)], check=True)
-    for folder in ('compiler/stdlib', 'compiler/stdlib_eval'):
+    for folder in ('compiler/stdlib', 'compiler/stdlib_eval', 'runtime/validation/atomic_snapshots'):
         subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(ROOT / folder)], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/delta_eval/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'compiler/native_interfaces/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/value_sequences/check.py')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'runtime/validation/atomic_snapshots/check.py')], check=True)
     print('Recorded evidence checked; no fresh runtime measurements were made.')
 
 

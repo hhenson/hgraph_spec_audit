@@ -1,0 +1,22 @@
+{
+  "written_before_measurement": true,
+  "scope": "Full snapshots at TS[V] atomic boundaries through Python authoring. V is a finite ordinary tuple, list or required/defaulted concrete struct with owned primitive or recursively ordinary children. This audit does not claim new set/map implementation support, native C++ expression order, nullable-field semantics or recursive nominal types.",
+  "expected_rules": {
+    "full_snapshot": "For each admitted publication, current value and delta are the complete V, not a sparse patch. Ordinary struct construction supplies defaults before publication.",
+    "presence": "Silence is distinct from an empty ordinary list. Equal complete values, including empty lists, remain present publication events.",
+    "source_independence": "Later mutation of an original input must not alter an owned recorded snapshot.",
+    "capture_independence": "Changing one exported recorded snapshot must not alter another capture even when both came from the same input object.",
+    "run_independence": "A second eval and its teardown must not alter a previously obtained recording."
+  },
+  "cases": [
+    "tuple_eight_scalars",
+    "tuple_nested_list",
+    "list_i64",
+    "list_nested",
+    "list_shared_captures",
+    "required_nominal",
+    "defaulted_nominal",
+    "list_nominal"
+  ],
+  "limits": "Python datetime, timedelta and dataclass authoring represent the corresponding ordinary payloads; no HGL type-inference claim follows. TS[list[int]] measures ordinary variable-length list snapshots, not HGL fixed-size checking. Host-object mutation of returned captures measures independence, not HGL mutation syntax or writable endpoint access. Primitive equality cases avoid NaN. The aggregate tuple exercises eight primitive payloads together, not every arbitrary nested type or allocation failure."
+}
