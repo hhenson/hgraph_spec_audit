@@ -1,5 +1,12 @@
 # Generator yield operands and timing boundaries
 
+**Superseded proposal:** the negative-duration skip proposal preserved in
+`reasoned.json` is historical, not current HGL policy. The
+[negative-duration correction](../generator_negative/README.md) requires
+rejection after both operands succeed and before implicit target addition.
+[Supersession metadata](supersession.json) identifies the unchanged original
+corpus. Past absolute targets still skip under HGL.
+
 Measured 2026-10-03, with six prewritten cases and three fresh-process runs
 per engine. This exercises the Python authoring surface on historical
 Python hgraph 0.5.41 and the native development engine. It does not measure
@@ -25,7 +32,8 @@ The checker requires the exact engine diagnostic line and exception type;
 a generic failure after operand evaluation cannot satisfy this case. No runtime payload-retention or allocation-failure
 claim is added by these scalar traces.
 
-Two timing cases diverge from the proposed uniform past-target skip:
+Two timing cases diverged from the original, now superseded uniform
+past-target skip proposal:
 
 | Case | Historical Python | Native development engine |
 | --- | --- | --- |
@@ -42,8 +50,8 @@ The HGL specification already requires skipping past absolute times and has
 a pre-epoch example. That agreed behavior remains a specification rule even
 where this native development observation differs. Clarifying yield operand
 order is a separate source-language choice supported by the authoring trace;
-clarifying negative durations requires an explicit language decision, not a
-claim of existing agreement between these engines.
+the later explicit negative-duration rejection decision is documented in the
+linked correction, separately from these measured engine behaviors.
 
 ## Reproduce
 
