@@ -1,0 +1,14 @@
+{
+  "historical_recorder": {
+    "package": "hgraph 0.5.41",
+    "path": "hgraph/_impl/_operators/_record_replay_in_memory.py",
+    "sha256": "7fa336699973efa2e38ce48681baf980983dde42d2e1d7dc5ed594fd85d2c8f6"
+  },
+  "limits": "Read-only source inventory. Header identity matches the installed SDK and named checkout file; executable engine identities remain the observed package/binary hashes. No private host paths are recorded.",
+  "native_header": {
+    "checkout_sha256": "6b38a278b4343ab98d87bbb8167a08f62badeead48b9fc9aa32c9b042a53db95",
+    "installed_sha256": "6b38a278b4343ab98d87bbb8167a08f62badeead48b9fc9aa32c9b042a53db95",
+    "path": "include/hgraph/lib/std/operators/impl/record_replay_memory_impl.h",
+    "revision": "8e899e600089902f9b755f67d9998292fcc03e84"
+  }
+}
