@@ -49,6 +49,10 @@ The [generator operand audit](runtime/validation/generator_operands/README.md)
 records operand evaluation and failure traces, retaining differences at the
 minimum start-time boundary.
 
+The [owned structural delta audit](runtime/validation/owned_deltas/README.md)
+measures sparse payload retention through native ordinary storage and
+separates Python aliasing and marker-copy failures from copied-input controls.
+
 ## Exercise the two reference implementations
 
 Both distributions import as `hgraph`, so use independent environments:
