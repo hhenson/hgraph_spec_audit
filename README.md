@@ -37,6 +37,10 @@ measures timed const-data replay, mutable and immutable lists, retained copies
 and the distinct alias behavior of Python objects, native Python exports and
 direct native borrowed views.
 
+The [constructor-order audit](runtime/validation/constructor_order/README.md)
+measures named scalar argument evaluation and early exceptions on both Python
+authoring surfaces, without claiming native C++ expression-order guarantees.
+
 ## Exercise the two reference implementations
 
 Both distributions import as `hgraph`, so use independent environments:

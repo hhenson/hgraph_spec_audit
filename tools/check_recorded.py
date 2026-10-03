@@ -45,6 +45,7 @@ def main():
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/delta_eval/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'compiler/native_interfaces/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/value_sequences/check.py')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'runtime/validation/constructor_order/check.py')], check=True)
     print('Recorded evidence checked; no fresh runtime measurements were made.')
 
 

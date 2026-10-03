@@ -1,0 +1,9 @@
+{
+  "written_before_measurement": true,
+  "scope": "Python-authored CompoundScalar dataclass keyword arguments on two independent hgraph packages; not native C++ argument evaluation order.",
+  "reasoning": "Evaluate each supplied argument once in written order before constructor invocation. Associate each result with its named field. An earlier argument exception prevents later arguments and constructor invocation.",
+  "expected": {
+    "reversed_keywords": {"trace": [2, 1], "left": 1, "right": 2},
+    "first_argument_failure": {"trace": [2], "error_type": "ValueError", "error": "first argument failed", "constructed": false}
+  }
+}
