@@ -41,6 +41,10 @@ The [constructor-order audit](runtime/validation/constructor_order/README.md)
 measures named scalar argument evaluation and early exceptions on both Python
 authoring surfaces, without claiming native C++ expression-order guarantees.
 
+The [timed-value eval audit](runtime/validation/eval_timed_values/README.md)
+tests ordinary const timestamp/payload lists for all eight scalar types,
+keeping raw output separate from dense horizon materialization.
+
 ## Exercise the two reference implementations
 
 Both distributions import as `hgraph`, so use independent environments:
