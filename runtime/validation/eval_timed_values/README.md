@@ -47,7 +47,10 @@ the existing generator scheduling rules; this evidence does not establish
 a stricter timestamp-admission policy. Record can retain an ordinary
 timestamp/delta value in its typed global list. This probe used only valid
 ordered timestamps and does not establish behavior for malformed or
-out-of-order reference inputs.
+out-of-order reference inputs. The frozen reasoned file also records an
+initial proposal for strict pre-start timestamp admission. That unmeasured
+proposal was dropped after checking the existing HGL generator contract; it
+is preserved in the pre-measurement record, not adopted as a conclusion.
 
 Structural deltas still need an ordinary storable representation. This audit
 does not equate a complete collection value with its publication delta or
