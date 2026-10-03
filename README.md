@@ -45,6 +45,10 @@ The [timed-value eval audit](runtime/validation/eval_timed_values/README.md)
 tests ordinary const timestamp/payload lists for all eight scalar types,
 keeping raw output separate from dense horizon materialization.
 
+The [generator operand audit](runtime/validation/generator_operands/README.md)
+records operand evaluation and failure traces, retaining differences at the
+minimum start-time boundary.
+
 ## Exercise the two reference implementations
 
 Both distributions import as `hgraph`, so use independent environments:

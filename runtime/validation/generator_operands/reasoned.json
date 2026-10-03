@@ -1,0 +1,13 @@
+{
+  "written_before_measurement": true,
+  "scope": "Generator operand evaluation on Python authoring surfaces for historical Python and native development engines. Source-language expression order is distinguished from runtime skip/suspend rules; no native C++ expression-order claim.",
+  "proposal": "Evaluate time then payload once before deciding whether the yielded publication is past, due or future. A failed time operand prevents payload evaluation; a failed payload prevents scheduling/publication. Resolve negative durations relative to the running body and skip a representable past target. Duplicate due publication is an error.",
+  "cases": {
+    "past_absolute": {"trace": ["time1", "value1", "after1", "time2", "value2", "after2"], "raw": [null, null, 2], "fails": false},
+    "negative_duration": {"trace": ["time1", "value1", "after1", "time2", "value2", "after2"], "raw": [2], "fails": false},
+    "future_resume": {"trace": ["time1", "value1", "after1", "time2", "value2", "after2"], "raw": [null, null, 1, 2], "fails": false},
+    "past_payload_failure": {"trace": ["time1", "value1"], "fails": true, "sentinel": true},
+    "time_failure": {"trace": ["time1"], "fails": true, "sentinel": true},
+    "duplicate_due": {"trace": ["time1", "value1", "after1", "time2", "value2"], "fails": true}
+  }
+}
