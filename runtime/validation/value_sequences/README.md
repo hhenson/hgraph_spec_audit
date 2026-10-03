@@ -44,6 +44,38 @@ The publisher reuses one mutable dictionary, replacing its contents each tick be
 
 No timings, allocation counts or complexity benchmark were recorded. The native in-place append path avoids a required full-list get/export/set in the probe's call structure; no measured asymptotic performance claim is made.
 
+## Mapping to the proposed ordinary-list contract
+
+Design review, 2026-10-03; this section adds reasoning, not new runtime
+measurements. The proposed HGL ordinary-list extension admits contextual typed
+empty construction, length, indexed reads and an ordinary retaining push.
+The existing native fixture supports the feasibility of these operations:
+`native.cpp` lines 10–15 construct an element-bound empty list, lines 39–47
+read length and indexed elements, and lines 62–77 exercise independent owning
+copies and nested payload retention. The Python alias observations above
+remain variations; Python assignment or append is not itself the HGL owning
+retention contract. Neither reference's operation names determine HGL syntax.
+
+The proposed HGL rule requires push to retain its argument and obtain needed
+capacity before logical insertion. If retention or allocation fails, the
+list's elements and length must remain unchanged; earlier successful
+operations are not rolled back. This is a new normative HGL choice, motivated
+by preserving a valid accumulated recording and the existing ownership rules.
+It is not an observed general guarantee of either reference runtime.
+
+Separate source inspection at C++ revision
+[`8e899e600089902f9b755f67d9998292fcc03e84`](https://github.com/hhenson/hgraph/blob/8e899e600089902f9b755f67d9998292fcc03e84/include/hgraph/types/value/mutable_container_ops.h#L104-L123)
+shows mutable-list push obtains capacity and constructs a copied payload before
+incrementing logical size. Its cross-binding copy path has a destruction guard.
+This supports the implementation direction, but does not establish rollback for
+every throwing payload, allocation site or representation. In particular,
+the saved audit does not inject arbitrary allocation or copy failures, and
+does not measure self-source aggregate insertion during growth. The HGL rule
+that a direct `push(values, values[0])` retains the item before extending the
+list is a language-level lifetime choice, not a promise that arbitrary native
+element views survive mutation. No new performance result or asymptotic
+guarantee follows from this mapping.
+
 ## Reproduction
 
 ```sh
