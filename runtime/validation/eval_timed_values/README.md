@@ -41,13 +41,13 @@ for retained constructor arguments, list insertion and typed global borrowing
 remain language choices; these observations do not establish arbitrary
 allocation-failure behavior.
 
-The proposed source admission should validate finite length, representable
-slot times, engine-time bounds and strictly increasing publication times
-before graph start. The source should schedule each supplied publication,
-while record should retain an ordinary timestamp/delta value in its typed
-global list. This probe used only valid ordered timestamps. The stronger
-validation boundary is a proposed language rule, not measured parity for
-malformed reference inputs.
+Eval normalization must retain its existing checks for representable slot
+times and finite input length. Independently supplied replay entries can use
+the existing generator scheduling rules; this evidence does not establish
+a stricter timestamp-admission policy. Record can retain an ordinary
+timestamp/delta value in its typed global list. This probe used only valid
+ordered timestamps and does not establish behavior for malformed or
+out-of-order reference inputs.
 
 Structural deltas still need an ordinary storable representation. This audit
 does not equate a complete collection value with its publication delta or
