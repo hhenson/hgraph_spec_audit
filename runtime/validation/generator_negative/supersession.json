@@ -1,0 +1,9 @@
+{
+  "superseded_reasoned_sha256": "83cfd684d80df2e00a3c05c4fbcfd841e5f87dead788655071af954624a84844",
+  "superseded_by": "../generator_ordering/README.md",
+  "changed_expected_cases": [
+    "past_absolute_later"
+  ],
+  "current_hgl_rule": "All successfully resolved yield targets must strictly exceed the previous target, including previously skipped past targets. The first target has no predecessor. Negative relative rejection remains after successful operands and before implicit addition.",
+  "history": "Original measurements and the pre-ordering expected effects remain unchanged. The earlier past_absolute_later expected skip is superseded by strict-order rejection."
+}

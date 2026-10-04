@@ -1,0 +1,17 @@
+{
+  "written_before_measurement": true,
+  "scope": "Python authoring of both engines. HGL admission rejects any negative relative duration after successful time then payload evaluation and before implicit addition. Zero remains allowed, subject to duplicate-publication rules; past absolute targets are skipped. Explicit arithmetic failure inside a time expression prevents payload evaluation.",
+  "limits": "The large negative case crosses Python datetime's year-1 bound, not signed 64-bit microsecond arithmetic. Downstream captures are observations at a compute node, not proof of unobserved generator-output mutation or rollback. HGL errors are compared by effects, not by equating a reference duplicate diagnostic with negative-duration admission.",
+  "cases": {
+    "negative_start": {"time_kind":"negative", "later":false, "expected":{"trace":["time","value"],"fails":true}},
+    "negative_later": {"time_kind":"negative", "later":true, "expected":{"trace":["prelude_time","prelude_value","after_prelude","time","value"],"fails":true}},
+    "negative_payload_failure": {"time_kind":"negative", "later":false, "payload_failure":true, "expected":{"trace":["time","value"],"fails":true}},
+    "negative_time_failure": {"time_kind":"negative", "later":false, "time_failure":true, "expected":{"trace":["time"],"fails":true}},
+    "negative_target_underflow": {"time_kind":"large_negative", "later":false, "expected":{"trace":["time","value"],"fails":true}},
+    "time_expression_underflow": {"time_kind":"expression_underflow", "later":false, "expected":{"trace":["time"],"fails":true}},
+    "zero_start": {"time_kind":"zero", "later":false, "expected":{"trace":["time","value","after","time2","value2","after2"],"fails":false,"raw":[1,2]}},
+    "zero_later": {"time_kind":"zero", "later":true, "expected":{"trace":["prelude_time","prelude_value","after_prelude","time","value"],"fails":true}},
+    "past_absolute_start": {"time_kind":"past_absolute", "later":false, "expected":{"trace":["time","value","after","time2","value2","after2"],"fails":false,"raw":[null,2]}},
+    "past_absolute_later": {"time_kind":"past_absolute", "later":true, "expected":{"trace":["prelude_time","prelude_value","after_prelude","time","value","after","time2","value2","after2"],"fails":false,"raw":[null,null,10,2]}}
+  }
+}

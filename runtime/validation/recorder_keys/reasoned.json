@@ -1,0 +1,16 @@
+{
+  "written_before_measurement": true,
+  "scope": "Within-run ordinary state interference with the real eval recorder key, on independent historical Python and current native authoring surfaces. A desired collision-free eval owner must preserve both its output and unrelated source-owned state. This proposed ownership rule is not assumed to describe existing runtimes.",
+  "input": [1, 2],
+  "cases": {
+    "sparse_unrelated_eval": {"layout": "sparse", "write": "eval", "collide": false, "expected_raw": [1,2], "expected_user_payloads": [902]},
+    "sparse_seed_collision": {"layout": "sparse", "write": "seed", "collide": true, "expected_raw": [1,2], "expected_user_payloads": [700]},
+    "sparse_start_collision": {"layout": "sparse", "write": "start", "collide": true, "expected_raw": [1,2], "expected_user_payloads": [701]},
+    "sparse_eval_collision": {"layout": "sparse", "write": "eval", "collide": true, "expected_raw": [1,2], "expected_user_payloads": [902]},
+    "sparse_stop_collision": {"layout": "sparse", "write": "stop", "collide": true, "expected_raw": [1,2], "expected_user_payloads": [703]},
+    "dense_eval_collision": {"layout": "dense", "write": "eval", "collide": true, "expected_raw": [1,2], "expected_user_payloads": [902]}
+  },
+  "typing": "Sparse storage uses an ordinary list of datetime/integer tuples in both surfaces. Historical dense eval still stores timed tuples; native dense eval stores an integer list. Mutating writes use these same logical exported element types, not a different scalar type. Exact native schema names are not inferred from Python class names.",
+  "observations": "Preserve raw return or error, snapshots before/after each target hook, final exact key contents and exported Python element types. Do not pad results, repair corruption, rename supplied keys or reinterpret callback absence as absent internal allocation. One fresh process per case, three runs per engine.",
+  "limits": "No incompatible-type writes, simultaneous borrows, threads, destruction timing, HGL key discovery mechanism or hidden namespace are tested. Existing references are measured, not changed."
+}

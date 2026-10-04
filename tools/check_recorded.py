@@ -40,11 +40,21 @@ def main():
         print('released wiring assessment reproduced')
         for folder in ('runtime/validation/descriptions', 'runtime/validation/fixed'):
             subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(work / folder)], check=True)
-    for folder in ('compiler/stdlib', 'compiler/stdlib_eval'):
+    for folder in ('compiler/stdlib', 'compiler/stdlib_eval',
+                   'runtime/validation/eval_timed_values', 'runtime/validation/generator_operands',
+                   'runtime/validation/owned_deltas', 'runtime/validation/recorder_keys',
+                   'runtime/validation/generator_negative', 'runtime/validation/generator_ordering'):
         subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(ROOT / folder)], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/delta_eval/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'compiler/native_interfaces/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/value_sequences/check.py')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'runtime/validation/constructor_order/check.py')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'runtime/validation/eval_timed_values/check.py')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'runtime/validation/generator_operands/check.py')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'runtime/validation/owned_deltas/check.py')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'runtime/validation/recorder_keys/check.py')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'runtime/validation/generator_negative/check.py')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'runtime/validation/generator_ordering/check.py')], check=True)
     print('Recorded evidence checked; no fresh runtime measurements were made.')
 
 

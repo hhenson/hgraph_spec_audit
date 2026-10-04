@@ -1,0 +1,21 @@
+{
+  "written_before_measurement": true,
+  "scope": "Independently owned structural deltas: actual source/compute/record traces on Python authoring surfaces, and direct native ordinary timed-list/global retention of canonical delta Values. No HGL grammar or derived-type inference parity claim.",
+  "expected": {
+    "set_i64": [{"added":[1,2],"removed":[]},{"added":[],"removed":[1]},{"added":[],"removed":[2]}],
+    "fixed_list": [{"0":10,"2":30},{"0":11},{"2":31}],
+    "named_bundle": [{"bid":10,"ask":20},{"bid":11},{"ask":21}],
+    "map": [{"1":10,"2":20},{"1":11},{"2":{"remove":true}}],
+    "nested_map": [{"7":{"1":10,"2":20}},{"7":{"1":11}},{"7":{"2":{"remove":true}}}],
+    "list_of_maps": [{"0":{"1":10,"2":20}},{"0":{"1":11}},{"0":{"2":{"remove":true}}}]
+  },
+  "native_expected": {
+    "set_i64": true,
+    "fixed_list": true,
+    "named_bundle": true,
+    "map": true,
+    "nested_map": true,
+    "list_of_maps": true
+  },
+  "native_rule": "For each nonempty canonical delta, ordinary timed tuple construction, list insertion, global set/get owning retention and copying the whole recording survive replacement and destruction of source owners. First retained payload equals its original delta and differs from its later replacement. This is storage only, not a new publication-admission policy."
+}
