@@ -90,6 +90,8 @@ are retained as evidence; they are not claimed to support every later SDK.
 [Compiled-HGL conformance](compiler/stdlib/) checks the current standard library
 through an installed compiler/SDK. Other compiler records retain their stated
 measurement dates and scope.
+The [retained-specialization evidence boundary](compiler/retained_specialization/)
+distinguishes the new compile-time rule from measured runtime retention.
 The [native-interface audit](compiler/native_interfaces/) owns the C++ to Rust
 interface compatibility CI job. It uses public sources and publishes fingerprints
 that HGL checks locally, without a C++ build.
