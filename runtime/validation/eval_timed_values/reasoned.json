@@ -1,0 +1,517 @@
+{
+  "written_before_measurement": true,
+  "scope": "Ordinary timed const lists through real source/compute/record graphs for eight scalar types. The source receives only present timestamp/payload entries; dense horizon remains independent eval metadata. No nullable ordinary value type is required by this representation. Raw engine results are preserved before explicitly labelled horizon materialization.",
+  "rules": {
+    "present": "Each timed entry publishes at MIN_ST plus index*MIN_TD; repeated equal payloads remain ticks.",
+    "silence": "Omitted positions are no publication; false, zero and empty text remain present.",
+    "empty": "An empty timed list publishes nothing regardless of external dense horizon. Empty/all-silent raw engine returns may differ from the proposed dense HGL result; preserve this difference.",
+    "ownership": "Previous value_sequences evidence supports retained ordinary timestamp/payload entries. This probe does not add arbitrary mutable payload retention or allocation/failure measurements.",
+    "boundaries": "HGL admission must check representable length/slot times and strictly increasing valid times before replay starts. This stricter validation boundary is a proposed language choice, not measured parity with the reference generators."
+  },
+  "cases": [
+    {
+      "id": "bool_silence",
+      "type": "bool",
+      "horizon": 11,
+      "timed_entries": [
+        {
+          "index": 2,
+          "value": false
+        },
+        {
+          "index": 4,
+          "value": false
+        },
+        {
+          "index": 5,
+          "value": true
+        },
+        {
+          "index": 8,
+          "value": false
+        }
+      ],
+      "expected_dense": [
+        null,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        null,
+        false,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "bool_all_silent",
+      "type": "bool",
+      "horizon": 4,
+      "timed_entries": [],
+      "expected_dense": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "bool_empty",
+      "type": "bool",
+      "horizon": 0,
+      "timed_entries": [],
+      "expected_dense": []
+    },
+    {
+      "id": "i64_silence",
+      "type": "i64",
+      "horizon": 11,
+      "timed_entries": [
+        {
+          "index": 2,
+          "value": 0
+        },
+        {
+          "index": 4,
+          "value": 0
+        },
+        {
+          "index": 5,
+          "value": -7
+        },
+        {
+          "index": 8,
+          "value": 0
+        }
+      ],
+      "expected_dense": [
+        null,
+        null,
+        0,
+        null,
+        0,
+        -7,
+        null,
+        null,
+        0,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "i64_all_silent",
+      "type": "i64",
+      "horizon": 4,
+      "timed_entries": [],
+      "expected_dense": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "i64_empty",
+      "type": "i64",
+      "horizon": 0,
+      "timed_entries": [],
+      "expected_dense": []
+    },
+    {
+      "id": "f64_silence",
+      "type": "f64",
+      "horizon": 11,
+      "timed_entries": [
+        {
+          "index": 2,
+          "value": 0.0
+        },
+        {
+          "index": 4,
+          "value": 0.0
+        },
+        {
+          "index": 5,
+          "value": 1.5
+        },
+        {
+          "index": 8,
+          "value": 0.0
+        }
+      ],
+      "expected_dense": [
+        null,
+        null,
+        0.0,
+        null,
+        0.0,
+        1.5,
+        null,
+        null,
+        0.0,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "f64_all_silent",
+      "type": "f64",
+      "horizon": 4,
+      "timed_entries": [],
+      "expected_dense": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "f64_empty",
+      "type": "f64",
+      "horizon": 0,
+      "timed_entries": [],
+      "expected_dense": []
+    },
+    {
+      "id": "str_silence",
+      "type": "str",
+      "horizon": 11,
+      "timed_entries": [
+        {
+          "index": 2,
+          "value": ""
+        },
+        {
+          "index": 4,
+          "value": ""
+        },
+        {
+          "index": 5,
+          "value": "delta"
+        },
+        {
+          "index": 8,
+          "value": ""
+        }
+      ],
+      "expected_dense": [
+        null,
+        null,
+        "",
+        null,
+        "",
+        "delta",
+        null,
+        null,
+        "",
+        null,
+        null
+      ]
+    },
+    {
+      "id": "str_all_silent",
+      "type": "str",
+      "horizon": 4,
+      "timed_entries": [],
+      "expected_dense": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "str_empty",
+      "type": "str",
+      "horizon": 0,
+      "timed_entries": [],
+      "expected_dense": []
+    },
+    {
+      "id": "date_silence",
+      "type": "date",
+      "horizon": 11,
+      "timed_entries": [
+        {
+          "index": 2,
+          "value": {
+            "date": "1970-01-01"
+          }
+        },
+        {
+          "index": 4,
+          "value": {
+            "date": "1970-01-01"
+          }
+        },
+        {
+          "index": 5,
+          "value": {
+            "date": "2024-02-29"
+          }
+        },
+        {
+          "index": 8,
+          "value": {
+            "date": "1970-01-01"
+          }
+        }
+      ],
+      "expected_dense": [
+        null,
+        null,
+        {
+          "date": "1970-01-01"
+        },
+        null,
+        {
+          "date": "1970-01-01"
+        },
+        {
+          "date": "2024-02-29"
+        },
+        null,
+        null,
+        {
+          "date": "1970-01-01"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "id": "date_all_silent",
+      "type": "date",
+      "horizon": 4,
+      "timed_entries": [],
+      "expected_dense": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "date_empty",
+      "type": "date",
+      "horizon": 0,
+      "timed_entries": [],
+      "expected_dense": []
+    },
+    {
+      "id": "time_silence",
+      "type": "time",
+      "horizon": 11,
+      "timed_entries": [
+        {
+          "index": 2,
+          "value": {
+            "time": "00:00:00"
+          }
+        },
+        {
+          "index": 4,
+          "value": {
+            "time": "00:00:00"
+          }
+        },
+        {
+          "index": 5,
+          "value": {
+            "time": "12:34:56"
+          }
+        },
+        {
+          "index": 8,
+          "value": {
+            "time": "00:00:00"
+          }
+        }
+      ],
+      "expected_dense": [
+        null,
+        null,
+        {
+          "time": "00:00:00"
+        },
+        null,
+        {
+          "time": "00:00:00"
+        },
+        {
+          "time": "12:34:56"
+        },
+        null,
+        null,
+        {
+          "time": "00:00:00"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "id": "time_all_silent",
+      "type": "time",
+      "horizon": 4,
+      "timed_entries": [],
+      "expected_dense": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "time_empty",
+      "type": "time",
+      "horizon": 0,
+      "timed_entries": [],
+      "expected_dense": []
+    },
+    {
+      "id": "datetime_silence",
+      "type": "datetime",
+      "horizon": 11,
+      "timed_entries": [
+        {
+          "index": 2,
+          "value": {
+            "datetime": "1970-01-01T00:00:00"
+          }
+        },
+        {
+          "index": 4,
+          "value": {
+            "datetime": "1970-01-01T00:00:00"
+          }
+        },
+        {
+          "index": 5,
+          "value": {
+            "datetime": "2024-02-29T12:34:56"
+          }
+        },
+        {
+          "index": 8,
+          "value": {
+            "datetime": "1970-01-01T00:00:00"
+          }
+        }
+      ],
+      "expected_dense": [
+        null,
+        null,
+        {
+          "datetime": "1970-01-01T00:00:00"
+        },
+        null,
+        {
+          "datetime": "1970-01-01T00:00:00"
+        },
+        {
+          "datetime": "2024-02-29T12:34:56"
+        },
+        null,
+        null,
+        {
+          "datetime": "1970-01-01T00:00:00"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "id": "datetime_all_silent",
+      "type": "datetime",
+      "horizon": 4,
+      "timed_entries": [],
+      "expected_dense": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "datetime_empty",
+      "type": "datetime",
+      "horizon": 0,
+      "timed_entries": [],
+      "expected_dense": []
+    },
+    {
+      "id": "duration_silence",
+      "type": "duration",
+      "horizon": 11,
+      "timed_entries": [
+        {
+          "index": 2,
+          "value": {
+            "duration_us": 0
+          }
+        },
+        {
+          "index": 4,
+          "value": {
+            "duration_us": 0
+          }
+        },
+        {
+          "index": 5,
+          "value": {
+            "duration_us": 1000000
+          }
+        },
+        {
+          "index": 8,
+          "value": {
+            "duration_us": 0
+          }
+        }
+      ],
+      "expected_dense": [
+        null,
+        null,
+        {
+          "duration_us": 0
+        },
+        null,
+        {
+          "duration_us": 0
+        },
+        {
+          "duration_us": 1000000
+        },
+        null,
+        null,
+        {
+          "duration_us": 0
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "id": "duration_all_silent",
+      "type": "duration",
+      "horizon": 4,
+      "timed_entries": [],
+      "expected_dense": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "duration_empty",
+      "type": "duration",
+      "horizon": 0,
+      "timed_entries": [],
+      "expected_dense": []
+    }
+  ]
+}

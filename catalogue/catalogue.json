@@ -3171,7 +3171,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-          "line": 254,
+          "line": 253,
           "declaration": "impl fn assert_(condition: bool, const error_msg: str)"
         }
       ],
@@ -7164,7 +7164,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-          "line": 34,
+          "line": 33,
           "declaration": "impl fn const<T>(const value: T, const delay: duration = 0s) -> T"
         }
       ],
@@ -9628,7 +9628,7 @@
           "form": null,
           "source": "external/hgraph_std/hgl/hgraph/control.hgl",
           "line": 16,
-          "declaration": "operator pass_through<T>(ts: T) -> T"
+          "declaration": "operator pass_through<T>(value: T) -> T"
         },
         {
           "module": "hgraph.std",
@@ -9637,7 +9637,7 @@
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
           "line": 21,
-          "declaration": "impl fn pass_through<T>(ts: T) -> T"
+          "declaration": "impl fn pass_through<T>(value: T) -> T"
         },
         {
           "module": "hgraph.std",
@@ -10346,7 +10346,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-          "line": 89,
+          "line": 88,
           "declaration": "impl fn debug_print(const label: str, ts: bool, const print_delta: bool = true, const sample: i64 = -1)"
         },
         {
@@ -10355,7 +10355,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-          "line": 106,
+          "line": 105,
           "declaration": "impl fn debug_print(const label: str, ts: i64, const print_delta: bool = true, const sample: i64 = -1)"
         },
         {
@@ -10364,7 +10364,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-          "line": 123,
+          "line": 122,
           "declaration": "impl fn debug_print(const label: str, ts: f64, const print_delta: bool = true, const sample: i64 = -1)"
         },
         {
@@ -10373,7 +10373,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-          "line": 140,
+          "line": 139,
           "declaration": "impl fn debug_print(const label: str, ts: str, const print_delta: bool = true, const sample: i64 = -1)"
         },
         {
@@ -10382,7 +10382,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-          "line": 157,
+          "line": 156,
           "declaration": "impl fn debug_print(const label: str, ts: date, const print_delta: bool = true, const sample: i64 = -1)"
         },
         {
@@ -10391,7 +10391,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-          "line": 174,
+          "line": 173,
           "declaration": "impl fn debug_print(const label: str, ts: time, const print_delta: bool = true, const sample: i64 = -1)"
         },
         {
@@ -10400,7 +10400,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-          "line": 191,
+          "line": 190,
           "declaration": "impl fn debug_print(const label: str, ts: datetime, const print_delta: bool = true, const sample: i64 = -1)"
         },
         {
@@ -10409,7 +10409,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-          "line": 208,
+          "line": 207,
           "declaration": "impl fn debug_print(const label: str, ts: duration, const print_delta: bool = true, const sample: i64 = -1)"
         }
       ],
@@ -10845,7 +10845,7 @@
           "kind": "implementation",
           "form": "hgl-composition",
           "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-          "line": 56,
+          "line": 55,
           "declaration": "impl fn default<T>(ts: T, default_value: T) -> T"
         }
       ],
@@ -21518,7 +21518,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-          "line": 236,
+          "line": 235,
           "declaration": "impl fn log_(format_str: str, const sample_count: i64 = 1)"
         }
       ],
@@ -30094,7 +30094,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-          "line": 45,
+          "line": 44,
           "declaration": "impl fn nothing<T>() -> T"
         }
       ],
@@ -31579,7 +31579,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-          "line": 225,
+          "line": 224,
           "declaration": "impl fn print_(format_str: str)"
         }
       ],
@@ -33254,7 +33254,26 @@
           "id": "record:31aa310016de"
         }
       ],
-      "hgl": [],
+      "hgl": [
+        {
+          "module": "hgraph.std",
+          "name": "record",
+          "kind": "implementation",
+          "form": "hgl-runtime",
+          "source": "external/hgraph_std/hgl/hgraph/impl/replay_record.hgl",
+          "line": 12,
+          "declaration": "impl fn record<T>(ts: T, const key: str)"
+        },
+        {
+          "module": "hgraph.std",
+          "name": "record",
+          "kind": "contract",
+          "form": null,
+          "source": "external/hgraph_std/hgl/hgraph/replay_record.hgl",
+          "line": 11,
+          "declaration": "operator record<T>(ts: T, const key: str)"
+        }
+      ],
       "core_cutover": "deferred"
     },
     {
@@ -34319,7 +34338,26 @@
           "id": "replay:e2e628221842"
         }
       ],
-      "hgl": [],
+      "hgl": [
+        {
+          "module": "hgraph.std",
+          "name": "replay",
+          "kind": "implementation",
+          "form": "hgl-runtime",
+          "source": "external/hgraph_std/hgl/hgraph/impl/replay_record.hgl",
+          "line": 3,
+          "declaration": "impl fn replay<T>(const values: list<TimedValue<T>>) -> T"
+        },
+        {
+          "module": "hgraph.std",
+          "name": "replay",
+          "kind": "contract",
+          "form": null,
+          "source": "external/hgraph_std/hgl/hgraph/replay_record.hgl",
+          "line": 9,
+          "declaration": "operator replay<T>(const values: list<TimedValue<T>>) -> T"
+        }
+      ],
       "core_cutover": "deferred"
     },
     {
@@ -45552,26 +45590,26 @@
     {
       "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
       "line": 22,
-      "declaration": "instantiate pass_through<bool>, pass_through<i64>, pass_through<f64>, pass_through<str>, pass_through<date>, pass_through<time>, pass_through<datetime>, pass_through<duration>"
+      "declaration": "instantiate pass_through<_>"
     },
     {
       "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-      "line": 39,
+      "line": 38,
       "declaration": "instantiate const<bool>, const<i64>, const<f64>, const<str>, const<date>, const<time>, const<datetime>, const<duration>"
     },
     {
       "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-      "line": 49,
+      "line": 48,
       "declaration": "instantiate nothing<bool>, nothing<i64>, nothing<f64>, nothing<str>, nothing<date>, nothing<time>, nothing<datetime>, nothing<duration>"
     },
     {
       "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-      "line": 57,
+      "line": 56,
       "declaration": "instantiate default<bool>, default<i64>, default<f64>, default<str>, default<date>, default<time>, default<datetime>, default<duration>"
     },
     {
       "source": "external/hgraph_std/hgl/hgraph/impl/control.hgl",
-      "line": 80,
+      "line": 79,
       "declaration": "instantiate default_ref<bool>, default_ref<i64>, default_ref<f64>, default_ref<str>, default_ref<date>, default_ref<time>, default_ref<datetime>, default_ref<duration>"
     },
     {
@@ -45588,6 +45626,11 @@
       "source": "external/hgraph_std/hgl/hgraph/impl/operators.hgl",
       "line": 594,
       "declaration": "instantiate eq_<time, time>, ne_<time, time>"
+    },
+    {
+      "source": "external/hgraph_std/hgl/hgraph/impl/replay_record.hgl",
+      "line": 28,
+      "declaration": "instantiate replay<_>, record<_>"
     },
     {
       "source": "external/hgraph_std/hgl/hgraph/impl/standard.hgl",

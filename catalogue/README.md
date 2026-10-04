@@ -172,13 +172,13 @@ Implemented means the recorded domain is authored and tested; it does not promis
 | `range_shift` | blocked | — | Temporal range, civil/zone policy or owned formatting native bindings. [B5](#b5) |
 | `range_touches` | blocked | — | Temporal range, civil/zone policy or owned formatting native bindings. [B5](#b5) |
 | `range_union` | blocked | — | Temporal range, civil/zone policy or owned formatting native bindings. [B5](#b5) |
-| `record` | blocked | — | Callable, logging/formatting, recording or engine-control capability. [B5](#b5) |
+| `record` | blocked | hgl-runtime | Callable, logging/formatting, recording or engine-control capability. [B5](#b5) |
 | `reduce` | blocked | — | Dynamic callable and nested graph ownership contracts. [B6](#b6) |
 | `reduce_tsd_of_bundles_with_race` | blocked | — | Reference selection/reselection or structural merge/race semantics. [B4](#b4) |
 | `reduce_tsd_with_race` | blocked | — | Reference selection/reselection or structural merge/race semantics. [B4](#b4) |
 | `rekey` | blocked | — | Generic keyed/structural transformations, aggregate startup and delta policies. [B4](#b4) |
 | `replace` | blocked | — | Owned string/sequence results, formatting/regex dependencies and errors. [B1](#b1) |
-| `replay` | native-provider | — | Runtime source/materialization or recovery provider. HGL surface needs startup and provider lifecycle; native ownership remains appropriate. [B2](#b2), [B5](#b5) |
+| `replay` | native-provider | hgl-runtime | Runtime source/materialization or recovery provider. HGL surface needs startup and provider lifecycle; native ownership remains appropriate. [B2](#b2), [B5](#b5) |
 | `replay_const` | native-provider | — | Runtime source/materialization or recovery provider. HGL surface needs startup and provider lifecycle; native ownership remains appropriate. [B2](#b2), [B5](#b5) |
 | `replay_data_frame` | blocked | — | Frame/series native types, schema policies and Arrow-backed algorithms. [B5](#b5) |
 | `request_id` | blocked | — | Scheduling, passivation, buffered deltas or callable lifecycle. [B2](#b2) |

@@ -1,0 +1,15 @@
+{
+  "scope": "Review correction: duplicate-due acceptance requires the actual engine diagnostic, in addition to the original frozen operand trace. These observed diagnostic spellings were inspected before the three-run remeasurement; they are not part of the original pre-measurement reasoning.",
+  "duplicate_due": {
+    "python": {
+      "error_type": "NodeException",
+      "line_index": 1,
+      "diagnostic_line": "NodeError: Duplicate time produced by generator: [1970-01-01 00:00:00.000001] - 2"
+    },
+    "cpp": {
+      "error_type": "RuntimeError",
+      "line_index": 0,
+      "diagnostic_line": "node[0 'body'] evaluate failed: Python generator output times must be strictly increasing"
+    }
+  }
+}

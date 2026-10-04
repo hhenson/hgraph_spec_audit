@@ -1,0 +1,171 @@
+{
+  "written_before_measurement": true,
+  "scope": "Every resolved yield target must be strictly greater than the previous target, including skipped past absolute targets. The first target has no predecessor. Time then payload are evaluated before the order check. Negative relative admission remains a separate earlier check.",
+  "limits": "Python authoring expressions and runtime outcomes, not native C++ expression order. Downstream captures do not expose internal output writes or rollback. The first negative relative target is never made admissible by having no predecessor.",
+  "cases": {
+    "repeat_past_epoch": {
+      "absolute_offsets_us": [
+        -1,
+        -1,
+        2
+      ],
+      "expected": {
+        "trace": [
+          "time1",
+          "value1",
+          "after1",
+          "time2",
+          "value2"
+        ],
+        "fails": true
+      }
+    },
+    "repeat_past_preepoch": {
+      "absolute_offsets_us": [
+        -3,
+        -3,
+        2
+      ],
+      "expected": {
+        "trace": [
+          "time1",
+          "value1",
+          "after1",
+          "time2",
+          "value2"
+        ],
+        "fails": true
+      }
+    },
+    "decrease_past_preepoch": {
+      "absolute_offsets_us": [
+        -2,
+        -3,
+        2
+      ],
+      "expected": {
+        "trace": [
+          "time1",
+          "value1",
+          "after1",
+          "time2",
+          "value2"
+        ],
+        "fails": true
+      }
+    },
+    "increase_past_preepoch": {
+      "absolute_offsets_us": [
+        -3,
+        -2,
+        2
+      ],
+      "expected": {
+        "trace": [
+          "time1",
+          "value1",
+          "after1",
+          "time2",
+          "value2",
+          "after2",
+          "time3",
+          "value3",
+          "after3"
+        ],
+        "fails": false,
+        "raw": [
+          null,
+          null,
+          3
+        ]
+      }
+    },
+    "increase_past_cross_epoch": {
+      "absolute_offsets_us": [
+        -2,
+        -1,
+        2
+      ],
+      "expected": {
+        "trace": [
+          "time1",
+          "value1",
+          "after1",
+          "time2",
+          "value2",
+          "after2",
+          "time3",
+          "value3",
+          "after3"
+        ],
+        "fails": false,
+        "raw": [
+          null,
+          null,
+          3
+        ]
+      }
+    },
+    "increase_future": {
+      "absolute_offsets_us": [
+        1,
+        2,
+        3
+      ],
+      "expected": {
+        "trace": [
+          "time1",
+          "value1",
+          "after1",
+          "time2",
+          "value2",
+          "after2",
+          "time3",
+          "value3",
+          "after3"
+        ],
+        "fails": false,
+        "raw": [
+          null,
+          1,
+          2,
+          3
+        ]
+      }
+    },
+    "repeat_future": {
+      "absolute_offsets_us": [
+        2,
+        2,
+        3
+      ],
+      "expected": {
+        "trace": [
+          "time1",
+          "value1",
+          "after1",
+          "time2",
+          "value2"
+        ],
+        "fails": true
+      }
+    },
+    "decrease_future": {
+      "absolute_offsets_us": [
+        2,
+        1,
+        3
+      ],
+      "expected": {
+        "trace": [
+          "time1",
+          "value1",
+          "after1",
+          "time2",
+          "value2"
+        ],
+        "fails": true
+      }
+    }
+  }
+}

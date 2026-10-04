@@ -1,0 +1,7 @@
+{
+  "superseded_reasoned_sha256": "2eb682ccbaac7e9fb5b8560ddddd7d3807908377382696136d0132355b3ce0ba",
+  "superseded_by": "../generator_negative/README.md",
+  "superseded_proposal": "Skip a representable past target resolved from a negative relative duration.",
+  "current_hgl_rule": "After successful time then payload evaluation, reject every negative relative duration before implicit target addition. Zero relative durations retain existing due/duplicate rules; past absolute targets retain skip behavior.",
+  "history": "The original pre-measurement corpus and measured evidence remain unchanged; this additive note supersedes only the negative-duration skip proposal."
+}

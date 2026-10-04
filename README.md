@@ -26,6 +26,10 @@ recorded-evidence check is not a fresh runtime measurement.
 
 ## Delta evaluation evidence
 
+The [recorder-key collision audit](runtime/validation/recorder_keys/README.md)
+measures within-run same-type interference, preserving overwritten user state,
+corrupted output and native failure separately from the proposed fresh-key rule.
+
 The [delta eval audit](runtime/validation/delta_eval/README.md) measures actual
 replay → compute → record graphs across eight scalar types and five structural
 publication-delta cases, with direct native C++ scalar corroboration. It retains
@@ -36,6 +40,22 @@ The [ordinary value-sequence audit](runtime/validation/value_sequences/README.md
 measures timed const-data replay, mutable and immutable lists, retained copies
 and the distinct alias behavior of Python objects, native Python exports and
 direct native borrowed views.
+
+The [constructor-order audit](runtime/validation/constructor_order/README.md)
+measures named scalar argument evaluation and early exceptions on both Python
+authoring surfaces, without claiming native C++ expression-order guarantees.
+
+The [timed-value eval audit](runtime/validation/eval_timed_values/README.md)
+tests ordinary const timestamp/payload lists for all eight scalar types,
+keeping raw output separate from dense horizon materialization.
+
+The [generator operand audit](runtime/validation/generator_operands/README.md)
+records operand evaluation and failure traces, retaining differences at the
+minimum start-time boundary.
+
+The [owned structural delta audit](runtime/validation/owned_deltas/README.md)
+measures sparse payload retention through native ordinary storage and
+separates Python aliasing and marker-copy failures from copied-input controls.
 
 ## Exercise the two reference implementations
 
@@ -70,6 +90,8 @@ are retained as evidence; they are not claimed to support every later SDK.
 [Compiled-HGL conformance](compiler/stdlib/) checks the current standard library
 through an installed compiler/SDK. Other compiler records retain their stated
 measurement dates and scope.
+The [retained-specialization evidence boundary](compiler/retained_specialization/)
+distinguishes the new compile-time rule from measured runtime retention.
 The [native-interface audit](compiler/native_interfaces/) owns the C++ to Rust
 interface compatibility CI job. It uses public sources and publishes fingerprints
 that HGL checks locally, without a C++ build.
