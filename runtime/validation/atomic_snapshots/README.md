@@ -94,6 +94,18 @@ allocation failures, writable endpoint access and arbitrary type coverage
 are outside this recorded profile. Host-object mutation of returned captures
 establishes the measured independence behavior, not new HGL mutation syntax.
 
+## Non-composite atomic identity
+
+HGL makes `atomic<S>` and S the same canonical temporal type for every admitted
+non-composite S; composite atomic boundaries remain distinct.
+The [scalar audit](../delta_eval/README.md) measures 32 cases over bool, i64,
+f64, str, date, time, datetime and duration using `TS[S]` endpoints.
+This supports a shared runtime representation, but no probe parses HGL
+`atomic<S>` or establishes its canonical identity, generic matching, overload
+resolution or compiler support. Those are HGL language and frontend rules.
+The broader rule does not establish reference coverage for enums, native opaque
+values or additional scalars, or expand the finite eval/publication profile.
+
 ## Reproduce
 
 ```sh
