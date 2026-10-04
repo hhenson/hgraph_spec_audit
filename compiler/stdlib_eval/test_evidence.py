@@ -18,6 +18,8 @@ from evidence_support import python_fingerprint, validate_replay
 class Evidence(unittest.TestCase):
     def test_current_shared_cases_and_all_results(self):
         cases, hashes = read(HERE.parents[1] / 'stdlib/hgl/hgraph')
+        # Archived evidence uses POSIX paths; preserve the recorded reader hash.
+        hashes = {Path(name).as_posix(): digest for name, digest in hashes.items()}
         self.assertEqual(len(cases),84)
         self.assertEqual(len({(c['module'],c['name']) for c in cases}),45)
         for engine, failures in [('python',[77]),('cpp',[])]:
