@@ -71,3 +71,11 @@ The [atomic full-snapshot audit](atomic_snapshots/README.md) separately measures
 complete tuple/list/struct publications and recording independence. It preserves
 historical Python mutable aliases and the native engine's independent captures;
 it adds no set/map or arbitrary atomic-payload coverage claim.
+
+The [temporal scalar audit](temporal_scalars/README.md) measures native civil
+datetimes, timezone identities and zoned datetimes, including retained captures
+and provider construction phases. Missing historical Python canonical types
+and the unavailable native zoned-time authoring type remain explicit boundaries.
+
+The [strict zone-name follow-up](strict_zone_names/README.md) separates permissive
+zone construction/ad-hoc JSON decoding from exact provider-name validation.

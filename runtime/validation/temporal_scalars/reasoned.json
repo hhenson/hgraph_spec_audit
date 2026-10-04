@@ -1,0 +1,21 @@
+{
+  "written_before_measurement": true,
+  "scope": ["civil_datetime", "timezone", "zoned_datetime"],
+  "spec_baseline": "73f03bfa77349bfa284a23eb781e4c79c85eff8a",
+  "boundary": "Proposed finite publication extension; baseline admits eight scalar leaves. Native Python authoring evidence, not direct C++ or HGL frontend conformance. Historical Python canonical types and native zoned_time are unavailable; no substituted parity claim.",
+  "patterns": {
+    "equal_distinct": ["a", "a", "b", "a"],
+    "silence": [null, "a", null, "a", "b", null],
+    "all_silent": [null, null, null],
+    "empty": []
+  },
+  "rules": [
+    "Each present scalar publishes its complete current value as delta, including equal repeats; silence is absent.",
+    "Preserve civil fields and exact zone spelling. Zoned values preserve instant, zone and offset; same instant need not mean equal value.",
+    "Raw eval output is retained separately from any input-horizon padding.",
+    "Repeated fresh processes and a second eval retain the same scalar values.",
+    "Mutating original ordinary lists and one exported capture must leave other native captures and runs independent; immutable scalars alone do not prove ownership.",
+    "Provider-dependent construction is observed separately before eval. Successful preconstructed-value replay without an active provider is a question to measure, not a precondition to assume."
+  ],
+  "extra_cases": ["zone_alias", "same_instant_different_zone", "civil_datetime_retention", "timezone_retention", "zoned_datetime_retention"]
+}
