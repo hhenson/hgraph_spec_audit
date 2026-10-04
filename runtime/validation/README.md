@@ -76,3 +76,6 @@ The [temporal scalar audit](temporal_scalars/README.md) measures native civil
 datetimes, timezone identities and zoned datetimes, including retained captures
 and provider construction phases. Missing historical Python canonical types
 and the unavailable native zoned-time authoring type remain explicit boundaries.
+
+The [strict zone-name follow-up](strict_zone_names/README.md) separates permissive
+zone construction/ad-hoc JSON decoding from exact provider-name validation.

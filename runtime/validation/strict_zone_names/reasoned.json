@@ -1,0 +1,21 @@
+{
+  "written_before_measurement": true,
+  "cases": {
+    "UTC": {"provider_accepts": true, "offset_seconds": 0},
+    "Etc/UTC": {"provider_accepts": true, "offset_seconds": 0},
+    "America/New_York": {"provider_accepts": true, "offset_seconds": -14400},
+    "US/Eastern": {"provider_accepts": true, "offset_seconds": -14400},
+    "utc": {"provider_accepts": false},
+    "america/new_york": {"provider_accepts": false},
+    "Etc/Unknown": {"provider_accepts": false},
+    "Missing/Zone": {"provider_accepts": false}
+  },
+  "expectation_origin": "Proposed exact provider-name policy and parent exploratory observations, recorded before this independent measurement. Not an inference of HGL semantics from native ZoneId construction.",
+  "rules": [
+    "These eight strings are syntactically plausible zone names; ZoneId construction is expected to preserve their exact spelling without proving provider membership.",
+    "With a configured native provider, at_zone should accept the four exact identifiers/links and reject wrong-case and nonexistent names, including synthetic Etc/Unknown.",
+    "US/Eastern and America/New_York should retain distinct names despite identical offsets at the tested instant.",
+    "Observe ad-hoc JSON decoding separately; do not presume it is provider-validating strict decoding.",
+    "Historical Python canonical-type availability is tested without substituting datetime or custom wrappers."
+  ]
+}
