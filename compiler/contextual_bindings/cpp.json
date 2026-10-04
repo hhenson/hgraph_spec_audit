@@ -1,0 +1,387 @@
+{
+  "measured_at": "2026-10-04T18:15:04.822628+00:00",
+  "engine": "cpp-hgl",
+  "scope": "existing-binary focused compiler probe",
+  "binary_sha256": "4328aee54fcde8b6a65ec42b03657e1ec912fcdd628e7f2271887fcc0010923e",
+  "version": {
+    "command": [
+      "--version"
+    ],
+    "returncode": 0,
+    "stdout": "hgl 0.8.31-36-gdb55ea2c2 (hgraph api 0.8.0)\n",
+    "stderr": ""
+  },
+  "build": {
+    "rebuilt": false,
+    "source_revision_verified": false
+  },
+  "harness_sha256": "d4837022650dc7328d4f89cb1ec82009d6f1142ee9ee30cd3474295d450de77c",
+  "manifest_sha256": "f51e4209a0c2f572b9f3b0e520278e743f87bd7b68cde8a05843dcf62861cdf8",
+  "cases": [
+    {
+      "id": "conditional_initial_port_change",
+      "file": "conditional_initial_port_change.hgl",
+      "source_sha256": "dedd048c726865f7a53e80a2d298971bcfa1bcd5efd4def0409b5fe562f2d108",
+      "expected_check": "reject",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "matches": false,
+      "expected_diagnostic_contains": "type:"
+    },
+    {
+      "id": "conditional_initial_scalar_change",
+      "file": "conditional_initial_scalar_change.hgl",
+      "source_sha256": "d3d987fbf4c8a1f42d869da5c2dd27bc068981a9fdac6ce6568697098ac675c5",
+      "expected_check": "reject",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "matches": false,
+      "expected_diagnostic_contains": "type:"
+    },
+    {
+      "id": "conditional_repeated_result",
+      "file": "conditional_repeated_result.hgl",
+      "source_sha256": "575784a66539af34896ec533e16aacac9bd734da3ccdd70180e7ed00ba325c14",
+      "expected_check": "accept",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "matches": true
+    },
+    {
+      "id": "conditional_uninitialized_result",
+      "file": "conditional_uninitialized_result.hgl",
+      "source_sha256": "ac6a992e891943dad093f324d8a22e7118e834aa6bc1c46fb35b5fa63f7f167d",
+      "expected_check": "accept",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "matches": true
+    },
+    {
+      "id": "conditional_unused_scalar_write",
+      "file": "conditional_unused_scalar_write.hgl",
+      "source_sha256": "f6be7f433c9aa851246e5038ad5ea404503ec0cc3b09101536ab84377c9b50f8",
+      "expected_check": "reject",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "conditional_unused_scalar_write.hgl:2:49: backend: 'local' is declared but never read\n    fn sample(condition: bool, value: i64) -> i64 { var local = 1\n                                                    ^^^^^^^^^^^^^\n"
+      },
+      "matches": false,
+      "expected_diagnostic_contains": "type:"
+    },
+    {
+      "id": "graph_compound",
+      "file": "graph_compound.hgl",
+      "source_sha256": "4ee1309a70f13a49357308998e142f1f8632f392f62aca86284578cd1ca98cbd",
+      "expected_check": "accept",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "matches": true,
+      "test": {
+        "command": [
+          "test"
+        ],
+        "returncode": 0,
+        "stdout": "graph_compound ... ok\n1 test, 0 failed\n",
+        "stderr": ""
+      }
+    },
+    {
+      "id": "graph_scalar_local",
+      "file": "graph_scalar_local.hgl",
+      "source_sha256": "7643d223684296e653a12a2a1f3aa05c691ba06dd2480f52adf285e0b5b7ebfc",
+      "expected_check": "accept",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "matches": true,
+      "test": {
+        "command": [
+          "test"
+        ],
+        "returncode": 0,
+        "stdout": "graph_scalar_local ... ok\n1 test, 0 failed\n",
+        "stderr": ""
+      }
+    },
+    {
+      "id": "let_port_reassign",
+      "file": "let_port_reassign.hgl",
+      "source_sha256": "deabd5855e6d73d2016db1425e74dd0b765da341836f630b6845174d7d51fc36",
+      "expected_check": "reject",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "let_port_reassign.hgl:3:2: type: assignment target is immutable\n     local = second\n     ^^^^^\n"
+      },
+      "matches": true
+    },
+    {
+      "id": "let_scalar_reassign",
+      "file": "let_scalar_reassign.hgl",
+      "source_sha256": "5e637e8103dfde0c7201ae725cc072eef7e068706de8f56af36864768399b999",
+      "expected_check": "reject",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "let_scalar_reassign.hgl:3:2: type: assignment target is immutable\n     local = 2\n     ^^^^^\n"
+      },
+      "matches": true
+    },
+    {
+      "id": "node_atomic_composite",
+      "file": "node_atomic_composite.hgl",
+      "source_sha256": "ca158c4d0628ff06e3709e1d21942c455b4a3569a06a43718d687f4e189e299b",
+      "expected_check": "reject",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "matches": false,
+      "expected_diagnostic_contains": "type:"
+    },
+    {
+      "id": "node_scalar_local",
+      "file": "node_scalar_local.hgl",
+      "source_sha256": "ac553ebc4771d535a842c28d999813b1f9d6b4e5195c763777e14494be4d98a3",
+      "expected_check": "accept",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "matches": true,
+      "test": {
+        "command": [
+          "test"
+        ],
+        "returncode": 0,
+        "stdout": "node_scalar_local ... ok\n1 test, 0 failed\n",
+        "stderr": ""
+      },
+      "ir": {
+        "command": [
+          "check",
+          "--dump-hgraph-ir"
+        ],
+        "returncode": 0,
+        "stdout": "HGRAPH-IR bodies module cases.contextual_bindings.node_scalar_local\ncpp-includes []\nsource-order [callable:f0, test:x0]\nprovider-requirements []\nconstant-expressions\ntypes\n  t0 scalar i64\n  t1 void\n  t2 scalar bool\n  t3 scalar f64\n  t4 scalar str\n  t5 scalar date\n  t6 scalar time\n  t7 scalar datetime\n  t8 scalar duration\n  t9 scalar civil_datetime\n  t10 scalar zoned_datetime\n  t11 scalar zoned_time\n  t12 scalar timezone\n  t13 callable\n  t14 callable children=[t0, t0]\n  t15 harness-sequence children=[t0]\nconstraints\nstructures\noperators\nnative-functions\ncallables\n  internal runtime-node cases.contextual_bindings.node_scalar_local.sample (value:t0) -> t0 effects=read-input|write-local body=b0\nmaterializations\nbindings\n  n0 signal-parameter value:t0 owner=cases.contextual_bindings.node_scalar_local.sample index=0 [61..66)\n  n1 var local:t0 owner=cases.contextual_bindings.node_scalar_local.sample index=0 [93..98)\nvalues\n  v0 call v1 arguments=[v2] type=t0 phase=runtime kind=runtime-value effects=read-input operation=intrinsic identity=delta_value registry=delta_value [101..119)\n  v1 reference intrinsic delta_value registry=delta_value type=t13 phase=constant kind=function effects=none [101..112)\n  v2 reference binding n0 type=t0 phase=runtime kind=runtime-value effects=read-input [113..118)\n  v3 reference binding n1 type=t0 phase=runtime kind=runtime-value effects=none [121..126)\n  v4 literal 3 type=t0 phase=constant kind=constant effects=none constant=3 [130..131)\n  v5 reference binding n1 type=t0 phase=runtime kind=runtime-value effects=none [140..145)\n  v6 equal v7 v12 type=t2 phase=constant kind=constant effects=harness operation=nominal-operator identity=eq_ registry=eq_ [182..219)\n  v7 eval v8 arguments=[value:v9] type=t15 phase=constant kind=constant effects=harness operation=harness-eval identity=cases.contextual_bindings.node_scalar_local.sample callable=f0 [182..209)\n  v8 reference callable f0 type=t14 phase=constant kind=function effects=none [187..193)\n  v9 sequence [v10, v11] type=t15 phase=constant kind=constant effects=none [202..208)\n  v10 literal 1 type=t0 phase=constant kind=constant effects=none constant=1 [203..204)\n  v11 literal 2 type=t0 phase=constant kind=constant effects=none constant=2 [206..207)\n  v12 sequence [v13, v14] type=t15 phase=constant kind=constant effects=none [213..219)\n  v13 literal 4 type=t0 phase=constant kind=constant effects=none constant=4 [214..215)\n  v14 literal 5 type=t0 phase=constant kind=constant effects=none constant=5 [217..218)\nstatements\n  q0 when condition=default body=b1 effects=read-input|write-local [82..147)\n  q1 local n1 type=t0 init=v0 effects=read-input [89..119)\n  q2 add-assign place=v3 value=v4 effects=write-local [121..131)\n  q3 return v5 effects=none [133..145)\n  q4 assert v6 effects=harness [175..219)\nblocks\n  b0 statements=[q0] effects=read-input|write-local [80..149)\n  b1 statements=[q1, q2, q3] effects=read-input|write-local [87..147)\n  b2 statements=[q4] effects=harness [173..221)\ntests\n  cases.contextual_bindings.node_scalar_local.node_scalar_local body=b2 [150..221)\n",
+        "stderr": ""
+      }
+    },
+    {
+      "id": "ordinary_widening",
+      "file": "ordinary_widening.hgl",
+      "source_sha256": "a13682b5161b5cc9f01b3473b2ab6ccd6ad82ec1f3d263a258e787d3c1d5e022",
+      "expected_check": "accept",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "matches": true,
+      "test": {
+        "command": [
+          "test"
+        ],
+        "returncode": 0,
+        "stdout": "ordinary_widening ... ok\n1 test, 0 failed\n",
+        "stderr": ""
+      }
+    },
+    {
+      "id": "port_to_scalar",
+      "file": "port_to_scalar.hgl",
+      "source_sha256": "5a5e7b342e0cdc9a851e3cd67fce24176ba90e757e7b1117edd928888b0a1314",
+      "expected_check": "reject",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "matches": false,
+      "expected_diagnostic_contains": "type:"
+    },
+    {
+      "id": "port_type_change",
+      "file": "port_type_change.hgl",
+      "source_sha256": "fbc807a9845da323a201b84b84f699479251d41eab72f77f22345b61fa91ca30",
+      "expected_check": "reject",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "port_type_change.hgl:3:10: type: assignment has type str, expected i64\n     local = other\n             ^^^^^\n"
+      },
+      "matches": true
+    },
+    {
+      "id": "scalar_to_port",
+      "file": "scalar_to_port.hgl",
+      "source_sha256": "6ebb4b7ea82784889240a460d6ee87cf1e94ea948552a0f74318d9ea21b1ef43",
+      "expected_check": "reject",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "matches": false,
+      "expected_diagnostic_contains": "type:"
+    },
+    {
+      "id": "scalar_type_change",
+      "file": "scalar_type_change.hgl",
+      "source_sha256": "35e4047b75a090d148b87e78cf7983aff0c6621b1545be30bb75294077c5dde0",
+      "expected_check": "reject",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "scalar_type_change.hgl:3:10: type: assignment has type str, expected i64\n     local = \"wrong\"\n             ^^^^^^^\n"
+      },
+      "matches": true
+    },
+    {
+      "id": "uninitialized_scalar",
+      "file": "uninitialized_scalar.hgl",
+      "source_sha256": "9e66df24a7731c6e99a42e77558e68e28ee5844f8508b0854b929f3e82d43644",
+      "expected_check": "accept",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "matches": true,
+      "test": {
+        "command": [
+          "test"
+        ],
+        "returncode": 0,
+        "stdout": "uninitialized_scalar ... ok\n1 test, 0 failed\n",
+        "stderr": ""
+      }
+    },
+    {
+      "id": "uninitialized_scalar_to_port",
+      "file": "uninitialized_scalar_to_port.hgl",
+      "source_sha256": "0b3d6f0803ed267eb2f9263b395eb1690ee6b4195249165da2da79df426a4f06",
+      "expected_check": "reject",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "matches": false,
+      "expected_diagnostic_contains": "type:"
+    },
+    {
+      "id": "unused_category_change",
+      "file": "unused_category_change.hgl",
+      "source_sha256": "ec209e7a4f7a375443ae9e4ffad8491dd087336624334beded69e2101611fc5d",
+      "expected_check": "reject",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "unused_category_change.hgl:2:32: backend: 'local' is declared but never read\n    fn sample(value: i64) -> i64 { var local = 1\n                                   ^^^^^^^^^^^^^\n"
+      },
+      "matches": false,
+      "expected_diagnostic_contains": "type:"
+    },
+    {
+      "id": "wire_rebind",
+      "file": "wire_rebind.hgl",
+      "source_sha256": "ddfd524787c8344417608ef50f9f7fc9f9fffabb78e7ed6a6210604ca7885da0",
+      "expected_check": "accept",
+      "check": {
+        "command": [
+          "check"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "matches": true,
+      "test": {
+        "command": [
+          "test"
+        ],
+        "returncode": 0,
+        "stdout": "wire_rebind ... ok\n1 test, 0 failed\n",
+        "stderr": ""
+      }
+    }
+  ]
+}
