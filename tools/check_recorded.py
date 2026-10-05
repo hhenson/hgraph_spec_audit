@@ -44,7 +44,7 @@ def main():
                    'runtime/validation/eval_timed_values', 'runtime/validation/generator_operands',
                    'runtime/validation/owned_deltas', 'runtime/validation/recorder_keys',
                    'runtime/validation/generator_negative', 'runtime/validation/generator_ordering',
-                   'runtime/validation/atomic_snapshots', 'runtime/validation/temporal_scalars', 'runtime/validation/strict_zone_names', 'runtime/validation/zoned_time', 'runtime/validation/enum_publications', 'runtime/validation/scalar_collection_keys', 'runtime/validation/atomic_set_map', 'runtime/validation/growing_list', 'runtime/validation/rolling_publications', 'runtime/validation/optional_atomic', 'runtime/validation/recursive_atomic'):
+                   'runtime/validation/atomic_snapshots', 'runtime/validation/temporal_scalars', 'runtime/validation/strict_zone_names', 'runtime/validation/zoned_time', 'runtime/validation/enum_publications', 'runtime/validation/scalar_collection_keys', 'runtime/validation/atomic_set_map', 'runtime/validation/growing_list', 'runtime/validation/rolling_publications', 'runtime/validation/optional_atomic', 'runtime/validation/recursive_atomic', 'runtime/validation/abstract_atomic'):
         subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(ROOT / folder)], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/delta_eval/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'compiler/native_interfaces/check.py')], check=True)
@@ -68,6 +68,7 @@ def main():
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/rolling_publications/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/optional_atomic/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/recursive_atomic/check.py')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'runtime/validation/abstract_atomic/check.py')], check=True)
     print('Recorded evidence checked; no fresh runtime measurements were made.')
 
 
