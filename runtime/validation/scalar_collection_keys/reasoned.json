@@ -1,0 +1,8 @@
+{
+  "reasoning": "Exact scalar key identity uses ordinary equality and hash, not ordering, display text or integer erasure. Nonempty set membership deltas and keyed child deltas pass through unchanged. Retain actual failures and unavailable authoring types.",
+  "scope": ["bool", "i64", "f64", "str", "date", "time", "datetime", "duration", "civil_datetime", "timezone", "zoned_datetime", "zoned_time", "enum"],
+  "set_trace": [{"add": ["a", "b"], "remove": []}, null, {"add": [], "remove": ["a"]}],
+  "map_trace": [{"upsert": [["a", 10], ["b", 20]], "remove": []}, {"upsert": [["a", 10]], "remove": []}, null, {"upsert": [], "remove": ["a"]}],
+  "float_boundary": "Distinct ordinary finite values only; NaN remains an open source contract.",
+  "excluded": ["references", "composite keys", "empty publications", "invalidations", "atomic sets/maps"]
+}
