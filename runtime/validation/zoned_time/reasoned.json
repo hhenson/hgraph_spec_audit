@@ -1,0 +1,17 @@
+{
+  "spec_commit": "3fb31379c1c003985ff85aee6ff4a2ac5129297b",
+  "identity": ["wall_clock_microseconds", "exact_zone_name"],
+  "absent_components": ["date", "instant", "offset"],
+  "candidate_cases": {
+    "equal_and_silent": {"inputs": ["a", "a", null, "b"], "expected": ["a", "a", null, "b"]},
+    "a": {"time": "09:30:00.123456", "zone": "US/Eastern"},
+    "b": {"time": "09:30:00.123456", "zone": "America/New_York"},
+    "c": {"time": "09:30:00.123457", "zone": "US/Eastern"},
+    "a_equals_b": false,
+    "a_equals_c": false,
+    "all_silent": [null, null],
+    "empty": []
+  },
+  "measurement_scope": "Inspect the installed canonical ZonedTime authoring surface first; missing types block these candidate graph cases. Do not substitute datetime, ZonedDateTime or a user-defined struct.",
+  "graph_cases_executed": false
+}
