@@ -1,0 +1,12 @@
+{
+  "reasoning": "A window delta is one arrival payload, not its held window. Pass-through with identical shape/timing independently derives the same eviction history. Arrival alone evicts; equal arrivals tick. Readiness minimum does not gate validity. Runtime TS-31 says readiness is sticky; the language developer guide instead describes the current captured span. Measure this disagreement before choosing an extension.",
+  "cases": {
+    "tick": {"max": 2, "min": 2, "inputs": [10, null, 20, 30]},
+    "duration_gap": {"max_us": 5, "min_us": 1, "inputs": [10, null, 20, null, null, null, null, null, 30]},
+    "duration_zero_min": {"max_us": 5, "min_us": 0, "inputs": [10, null, 20]},
+    "equal_arrivals": {"max": 2, "min": 1, "inputs": [10, 10, null, 10]},
+    "empty": {"max": 2, "min": 1, "inputs": []},
+    "all_silent": {"max": 2, "min": 1, "inputs": [null, null]}
+  },
+  "scope": "Actual TSW[int] input and same-shaped output, i64 arrival payload only. No custom window substitute, references, invalidation or timer eviction."
+}
