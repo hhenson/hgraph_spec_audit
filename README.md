@@ -92,6 +92,8 @@ through an installed compiler/SDK. Other compiler records retain their stated
 measurement dates and scope.
 The [retained-specialization evidence boundary](compiler/retained_specialization/)
 distinguishes the new compile-time rule from measured runtime retention.
+The [contextual local-binding audit](compiler/contextual_bindings/) records
+focused C++ checks of fixed binding categories, with eight documented gaps.
 The [native-interface audit](compiler/native_interfaces/) owns the C++ to Rust
 interface compatibility CI job. It uses public sources and publishes fingerprints
 that HGL checks locally, without a C++ build.
