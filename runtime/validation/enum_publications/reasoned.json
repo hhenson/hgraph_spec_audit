@@ -1,0 +1,12 @@
+{
+  "reasoning": "A declared enum is a nominal scalar. Its delta is the published member, preserving its enum type, name and assigned integer. Equal repeats publish; null input is silence. Observations preserve raw eval output separately from HGL dense-horizon expectations.",
+  "members": {"first": -7, "second": 11, "third": 9223372036854775807},
+  "patterns": {
+    "equal_distinct": ["first", "first", "second", "third"],
+    "silence": [null, "first", null, "second", null],
+    "all_silent": [null, null],
+    "empty": []
+  },
+  "controls": {"same_member_equal": true, "different_member_equal": false, "other_enum_equal": false, "integer_equal": false},
+  "scope": "Declared enum members only. No unknown native enum values, implicit integer conversions, enum-key collections, or references."
+}
