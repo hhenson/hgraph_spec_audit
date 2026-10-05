@@ -1,0 +1,6 @@
+{
+  "reasoning": "Finite positional tuples and concrete ordinary structs whose fields support stable equality and hashing may act as keys or set members. Exact nominal structure and all components define identity; equal independently constructed keys address the same member. Key capture owns its components. Removal and reinsert preserve normal membership lifecycle without converting keys into text or integer IDs. Mutable containers, abstract families, recursive keys and references are outside this finite slice.",
+  "cases": ["tuple_set", "tuple_map", "struct_set", "struct_map"],
+  "set_trace": ["add_first", "add_equal_first_and_second", null, "remove_equal_first", "reinsert_first"],
+  "map_trace": ["first:1", "equal_first:1,second:2", null, "remove_equal_first", "first:3"]
+}
