@@ -1,0 +1,8 @@
+{
+  "reasoning": "A recursive atomic payload is a finite ordinary tree. Optional direct edges terminate at unset; each present edge retains exact nominal type. Complete publication replaces the entire root and descendants. Equal deep values repeat as ticks; absence of a child differs from silent input. Owning copies must recursively isolate mutable descendants.",
+  "cases": ["self_snapshots", "self_retention", "mutual_snapshots"],
+  "self_trace": ["depth_three", "depth_three", null, "leaf"],
+  "retention_trace": ["shared_root", null, "shared_root"],
+  "mutual_trace": ["A_to_B_to_A", null, "A_leaf"],
+  "excluded": ["cyclic object graphs", "container recursion", "abstract families", "references", "structural clearing"]
+}
