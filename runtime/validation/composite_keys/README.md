@@ -11,6 +11,10 @@ map child update still publishes. Removal and later reinsertion preserve the
 complete key. Empty/all-silent raw recordings remain null. Three fresh
 processes per engine run 96 eval calls in total, with matching observations.
 
+The redundant set addition is an oracle observation, not an admitted HGL eval
+input. The existing publication profile still requires additions of absent
+members and removals of present members; the key extension does not relax it.
+
 This evidence covers two immutable key shapes (`tuple[int,str]` and a frozen
 concrete struct with int/string fields). It does not establish mutable-source
 key retention, optional fields, provider children, hash-collision behavior,
