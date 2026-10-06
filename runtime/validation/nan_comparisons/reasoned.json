@@ -1,0 +1,361 @@
+{
+  "status": "Frozen before runtime comparison/ln measurements; candidate IEEE expectations, not adopted HGL semantics.",
+  "cases": [
+    {
+      "id": "nan_nan_eq",
+      "kind": "comparison",
+      "operator": "eq_",
+      "operands": [
+        "nan",
+        "nan"
+      ],
+      "expected": [
+        false,
+        null
+      ]
+    },
+    {
+      "id": "nan_nan_ne",
+      "kind": "comparison",
+      "operator": "ne_",
+      "operands": [
+        "nan",
+        "nan"
+      ],
+      "expected": [
+        true,
+        null
+      ]
+    },
+    {
+      "id": "nan_nan_lt",
+      "kind": "comparison",
+      "operator": "lt_",
+      "operands": [
+        "nan",
+        "nan"
+      ],
+      "expected": [
+        false,
+        null
+      ]
+    },
+    {
+      "id": "nan_nan_le",
+      "kind": "comparison",
+      "operator": "le_",
+      "operands": [
+        "nan",
+        "nan"
+      ],
+      "expected": [
+        false,
+        null
+      ]
+    },
+    {
+      "id": "nan_nan_gt",
+      "kind": "comparison",
+      "operator": "gt_",
+      "operands": [
+        "nan",
+        "nan"
+      ],
+      "expected": [
+        false,
+        null
+      ]
+    },
+    {
+      "id": "nan_nan_ge",
+      "kind": "comparison",
+      "operator": "ge_",
+      "operands": [
+        "nan",
+        "nan"
+      ],
+      "expected": [
+        false,
+        null
+      ]
+    },
+    {
+      "id": "nan_finite_eq",
+      "kind": "comparison",
+      "operator": "eq_",
+      "operands": [
+        "nan",
+        1.0
+      ],
+      "expected": [
+        false,
+        null
+      ]
+    },
+    {
+      "id": "nan_finite_ne",
+      "kind": "comparison",
+      "operator": "ne_",
+      "operands": [
+        "nan",
+        1.0
+      ],
+      "expected": [
+        true,
+        null
+      ]
+    },
+    {
+      "id": "nan_finite_lt",
+      "kind": "comparison",
+      "operator": "lt_",
+      "operands": [
+        "nan",
+        1.0
+      ],
+      "expected": [
+        false,
+        null
+      ]
+    },
+    {
+      "id": "nan_finite_le",
+      "kind": "comparison",
+      "operator": "le_",
+      "operands": [
+        "nan",
+        1.0
+      ],
+      "expected": [
+        false,
+        null
+      ]
+    },
+    {
+      "id": "nan_finite_gt",
+      "kind": "comparison",
+      "operator": "gt_",
+      "operands": [
+        "nan",
+        1.0
+      ],
+      "expected": [
+        false,
+        null
+      ]
+    },
+    {
+      "id": "nan_finite_ge",
+      "kind": "comparison",
+      "operator": "ge_",
+      "operands": [
+        "nan",
+        1.0
+      ],
+      "expected": [
+        false,
+        null
+      ]
+    },
+    {
+      "id": "finite_nan_eq",
+      "kind": "comparison",
+      "operator": "eq_",
+      "operands": [
+        1.0,
+        "nan"
+      ],
+      "expected": [
+        false,
+        null
+      ]
+    },
+    {
+      "id": "finite_nan_ne",
+      "kind": "comparison",
+      "operator": "ne_",
+      "operands": [
+        1.0,
+        "nan"
+      ],
+      "expected": [
+        true,
+        null
+      ]
+    },
+    {
+      "id": "finite_nan_lt",
+      "kind": "comparison",
+      "operator": "lt_",
+      "operands": [
+        1.0,
+        "nan"
+      ],
+      "expected": [
+        false,
+        null
+      ]
+    },
+    {
+      "id": "finite_nan_le",
+      "kind": "comparison",
+      "operator": "le_",
+      "operands": [
+        1.0,
+        "nan"
+      ],
+      "expected": [
+        false,
+        null
+      ]
+    },
+    {
+      "id": "finite_nan_gt",
+      "kind": "comparison",
+      "operator": "gt_",
+      "operands": [
+        1.0,
+        "nan"
+      ],
+      "expected": [
+        false,
+        null
+      ]
+    },
+    {
+      "id": "finite_nan_ge",
+      "kind": "comparison",
+      "operator": "ge_",
+      "operands": [
+        1.0,
+        "nan"
+      ],
+      "expected": [
+        false,
+        null
+      ]
+    },
+    {
+      "id": "finite_equal_eq",
+      "kind": "comparison",
+      "operator": "eq_",
+      "operands": [
+        1.0,
+        1.0
+      ],
+      "expected": [
+        true,
+        null
+      ]
+    },
+    {
+      "id": "finite_equal_ne",
+      "kind": "comparison",
+      "operator": "ne_",
+      "operands": [
+        1.0,
+        1.0
+      ],
+      "expected": [
+        false,
+        null
+      ]
+    },
+    {
+      "id": "finite_equal_lt",
+      "kind": "comparison",
+      "operator": "lt_",
+      "operands": [
+        1.0,
+        1.0
+      ],
+      "expected": [
+        false,
+        null
+      ]
+    },
+    {
+      "id": "finite_equal_le",
+      "kind": "comparison",
+      "operator": "le_",
+      "operands": [
+        1.0,
+        1.0
+      ],
+      "expected": [
+        true,
+        null
+      ]
+    },
+    {
+      "id": "finite_equal_gt",
+      "kind": "comparison",
+      "operator": "gt_",
+      "operands": [
+        1.0,
+        1.0
+      ],
+      "expected": [
+        false,
+        null
+      ]
+    },
+    {
+      "id": "finite_equal_ge",
+      "kind": "comparison",
+      "operator": "ge_",
+      "operands": [
+        1.0,
+        1.0
+      ],
+      "expected": [
+        true,
+        null
+      ]
+    },
+    {
+      "id": "ln_negative",
+      "kind": "ln",
+      "operand": -1.0,
+      "expected": [
+        {
+          "float_class": "nan"
+        },
+        null
+      ]
+    },
+    {
+      "id": "ln_one",
+      "kind": "ln",
+      "operand": 1.0,
+      "expected": [
+        0.0,
+        null
+      ]
+    },
+    {
+      "id": "ln_negative_self_eq",
+      "kind": "ln_compare",
+      "operator": "eq_",
+      "operand": -1.0,
+      "expected": [
+        false,
+        null
+      ]
+    },
+    {
+      "id": "ln_negative_self_ne",
+      "kind": "ln_compare",
+      "operator": "ne_",
+      "operand": -1.0,
+      "expected": [
+        true,
+        null
+      ]
+    }
+  ],
+  "primitive_candidates": [
+    "is_nan",
+    "isnan"
+  ]
+}
