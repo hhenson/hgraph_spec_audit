@@ -5,13 +5,22 @@ and [shared fixtures](../../spec/compiler/negative_testing/cases.json). A catego
 such as `type` groups diagnostics; a code such as `rolling.size_kind` identifies
 the precise failure. These expectations are established before measurement.
 
-The fixtures exercise matching execution errors and continuation, nested
-assertions, source rejection and controls that must fail. Runtime controls are
-source-checked separately so a compiler rejection cannot stand in for an
-executed failing test. Every runtime fixture must report a named test outcome;
-failing controls must report a named test failure. Timeouts and abnormal process exits never match.
-The observer preserves output, binary and source fingerprints, and mismatches;
-it does not infer error identifiers from human-readable messages.
+All fixtures use ordinary `hgl test FILE [selectors] --part ...`. An
+`# expect-error(...)` annotation creates a source-rejection case alongside
+executable tests; there is no rejection command mode.
+
+The schema-2 manifest names the required executed and rejected outcomes.
+Mixed cases cover successful rejection, rejection mismatch with continued
+execution, runtime failure, selection, nested test contexts, explicit module
+parts, and safe syntax recovery. The observer requires every expected outcome
+exactly once and checks that rejected or unselected tests never execute.
+Runtime-only controls are also source-checked before execution. Mixed source
+cannot be preflighted that way because its annotated owners are intentionally
+invalid. Admission failures must occur without reported test execution.
+
+The observer preserves raw output and binary, source, part and manifest
+fingerprints. Timeouts and abnormal process exits never match. It reads explicit
+case outcomes, not diagnostic message wording or aggregate counts.
 
 ## Reference boundary
 
@@ -29,9 +38,9 @@ Python exceptions with new HGL identifiers.
 
 ## Reproduce
 
-Run against built compiler executables and specification `4c5a22d`. The Rust
-measurement uses standard-library revision `0cd99ff` from its compiler checkout;
-set `STD` to that checkout's `external/hgraph_std` directory. The four input
+Run against built compiler executables and specification `d02ff9b`. The Rust
+measurement uses standard-library revision `cbc46df` from its compiler checkout;
+set `STD` to that checkout's `external/hgraph_std` directory. The library and backend-part input
 fingerprints are retained in the report (the audit's historical `stdlib` pin is unchanged):
 
 ```sh
@@ -41,10 +50,9 @@ python3 compiler/negative_testing/observe.py --backend cpp \
 python3 compiler/negative_testing/observe.py --backend rust \
   --compiler /path/to/hglc --source-revision COMMIT \
   --cases-dir spec/compiler/negative_testing \
-  --part "$STD"/hgl/hgraph/replay_record.hgl \
-  --part "$STD"/hgl/hgraph/impl/replay_record.hgl \
-  --part "$STD"/hgl/hgraph/control.hgl \
-  --part "$STD"/hgl/hgraph/impl/control.hgl \
+  --library "$STD"/hgl/hgraph \
+  --part /path/to/rust-checkout/native/stdlib/interfaces.hgl \
+  --part /path/to/rust-checkout/native/stdlib/rust.hgl \
   --output /tmp/negative-rust.json
 ```
 
@@ -56,10 +64,11 @@ fixture matched its recorded expectation, including controls expected to fail.
 
 ## Measured result
 
-All 25 shared cases matched their expected outcomes on Linux for C++
-`cc79c604c04f54b698b26111e2688667ff52983c` and Rust
-`c04235ae9067a46472216a853c497854e7e4c715`. This includes expected failures:
-zero mismatches does not mean every fixture command returned zero.
+The previous 25-case campaign remains in repository history at `b5b7469`.
+The 43 mixed-case expectations passed for C++
+`6a23daad104fc4856bae0586b1b44248db29f780` and Rust
+`3f1f16dd2bd50bbd5bc0408fe9dc8fc10fc53c5f`. Expected failing controls are included: zero
+mismatches does not mean every fixture command returned zero.
 
 The catalogue currently covers two execution codes and six source diagnostic
 codes. This evidence does not claim that every language error has a code or

@@ -5,14 +5,14 @@ import argparse
 import json
 from pathlib import Path
 
-from observe import matches, sha
+from observe import expectations, matches, sha
 
 
 def validate(cases_dir: Path, report_path: Path) -> int:
     manifest_path = cases_dir / 'cases.json'
     manifest = json.loads(manifest_path.read_text())
     report = json.loads(report_path.read_text())
-    if manifest['schema_version'] != 1 or manifest['path_base'] != 'manifest_directory':
+    if manifest['schema_version'] != 2 or manifest['path_base'] != 'manifest_directory':
         raise ValueError('unsupported fixture manifest')
     if report['manifest_sha256'] != sha(manifest_path):
         raise ValueError('fixture manifest differs from measured input')
@@ -29,7 +29,14 @@ def validate(cases_dir: Path, report_path: Path) -> int:
                 raise ValueError(f'{case["id"]}: changed {key}')
         if row['source_sha256'] != sha(cases_dir / case['file']):
             raise ValueError(f'{case["id"]}: changed source')
-        matched = matches(case, row)
+        required = expectations(case, report['cases_directory'])
+        if row['expected'] != required:
+            raise ValueError(f'{case["id"]}: changed outcome expectations')
+        parts = [dict(file=name, sha256=sha(cases_dir / name))
+                 for name in case.get('parts', [])]
+        if row['part_sources'] != parts:
+            raise ValueError(f'{case["id"]}: changed module parts')
+        matched = matches(required, row)
         if matched != row['matches']:
             raise ValueError(f'{case["id"]}: inconsistent match flag')
         if not matched:
