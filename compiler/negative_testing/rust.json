@@ -1,9 +1,9 @@
 {
-  "measured_at": "2026-10-06T07:49:18.262279+00:00",
+  "measured_at": "2026-10-06T08:10:46.668736+00:00",
   "backend": "rust",
-  "source_revision": "8e56c31bad2e29af32d5b1670cf268b1a9b5b248",
+  "source_revision": "c04235ae9067a46472216a853c497854e7e4c715",
   "source_revision_verified_by_runner": false,
-  "compiler_sha256": "fb665b5c83dadecdc262bb8c35b4f7fa77222f66306ee7446e36a90ef8b9db89",
+  "compiler_sha256": "86cb36a6fbc443d48dc3f15f868b8f6269b4b2d8bc63c476c2498267f7d093ed",
   "observer_sha256": "44bbe15571d23a94910f8f188696aedcedbf49a00507cd8113fea6a1c0069382",
   "manifest_sha256": "90adacf5a585cad2ce23ebb7ee3236133db098ca2bacc6f86f831cdc5187ee50",
   "parts": [

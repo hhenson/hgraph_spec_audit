@@ -1,9 +1,9 @@
 {
-  "measured_at": "2026-10-06T07:49:17.152792+00:00",
+  "measured_at": "2026-10-06T08:07:39.147516+00:00",
   "backend": "cpp",
-  "source_revision": "83fd507556b6c9c91d8af2d69a3edaf547962c0e",
+  "source_revision": "cc79c604c04f54b698b26111e2688667ff52983c",
   "source_revision_verified_by_runner": false,
-  "compiler_sha256": "1127d8885c0362e68f3db7aac71aa5df089e35cce578091044e760441f526de0",
+  "compiler_sha256": "929c601758b5978a0c5cd1a50b56b66f97e9f927e9c90554dbc8d7a9ac16bf8f",
   "observer_sha256": "44bbe15571d23a94910f8f188696aedcedbf49a00507cd8113fea6a1c0069382",
   "manifest_sha256": "90adacf5a585cad2ce23ebb7ee3236133db098ca2bacc6f86f831cdc5187ee50",
   "parts": [],

@@ -57,8 +57,8 @@ fixture matched its recorded expectation, including controls expected to fail.
 ## Measured result
 
 All 25 shared cases matched their expected outcomes on Linux for C++
-`83fd507556b6c9c91d8af2d69a3edaf547962c0e` and Rust
-`8e56c31bad2e29af32d5b1670cf268b1a9b5b248`. This includes expected failures:
+`cc79c604c04f54b698b26111e2688667ff52983c` and Rust
+`c04235ae9067a46472216a853c497854e7e4c715`. This includes expected failures:
 zero mismatches does not mean every fixture command returned zero.
 
 The catalogue currently covers two execution codes and six source diagnostic
