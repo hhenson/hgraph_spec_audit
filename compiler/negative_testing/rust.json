@@ -1,27 +1,215 @@
 {
-  "measured_at": "2026-10-06T08:10:46.668736+00:00",
+  "measured_at": "2026-10-06T13:42:42.495785+00:00",
   "backend": "rust",
-  "source_revision": "c04235ae9067a46472216a853c497854e7e4c715",
+  "source_revision": "3f1f16dd2bd50bbd5bc0408fe9dc8fc10fc53c5f",
   "source_revision_verified_by_runner": false,
-  "compiler_sha256": "86cb36a6fbc443d48dc3f15f868b8f6269b4b2d8bc63c476c2498267f7d093ed",
-  "observer_sha256": "44bbe15571d23a94910f8f188696aedcedbf49a00507cd8113fea6a1c0069382",
-  "manifest_sha256": "90adacf5a585cad2ce23ebb7ee3236133db098ca2bacc6f86f831cdc5187ee50",
+  "compiler_sha256": "1e782a83247d4bee874167e4911c0b57752c19f998a83b0e2d9f299333a8f80b",
+  "observer_sha256": "074a55d95cd5cb5daf21c125f8c4f85d734ba3a15f41d196e2ff5a98b3219236",
+  "manifest_sha256": "ec3e7af8c98efdc15ebe6fc865968f443a233e488becd91070d50b3e5a596f7c",
+  "cases_directory": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing",
   "parts": [
     {
-      "name": "replay_record.hgl",
-      "sha256": "d78b942477f7683661fdced78db84ebae3529f2e1e7aa35ac656d1671ccd7e9c"
+      "name": "interfaces.hgl",
+      "sha256": "a3dd13853c0104b658e324932a76276b822b88243d32972254fa054e8eb0f720"
     },
     {
-      "name": "replay_record.hgl",
-      "sha256": "4a416617e152ebe079118b5f6c7feb27964c84c9c692ca7dd2993e7fcb6ef06e"
-    },
+      "name": "rust.hgl",
+      "sha256": "5fa76b0e28a9e7835bab712be7b5b187536b77da197a0bd7820b7f42b53fbc5e"
+    }
+  ],
+  "libraries": [
     {
-      "name": "control.hgl",
-      "sha256": "827431f1c8d100738acdc4df1319b2bab5115556295bbafac9ce2f793b8605b7"
-    },
-    {
-      "name": "control.hgl",
-      "sha256": "e0c1525d01a72e3cf2b5102afdc61217cf06af9b039bef27acbf93675aa07b94"
+      "name": "hgraph",
+      "files": [
+        {
+          "file": "control.hgl",
+          "sha256": "827431f1c8d100738acdc4df1319b2bab5115556295bbafac9ce2f793b8605b7"
+        },
+        {
+          "file": "impl/control.hgl",
+          "sha256": "e0c1525d01a72e3cf2b5102afdc61217cf06af9b039bef27acbf93675aa07b94"
+        },
+        {
+          "file": "impl/operators.hgl",
+          "sha256": "f41924dd4e096ab4020ff58ed9dfc936bacb850b41fb671001f6162d00d6acb7"
+        },
+        {
+          "file": "impl/replay_record.hgl",
+          "sha256": "4a416617e152ebe079118b5f6c7feb27964c84c9c692ca7dd2993e7fcb6ef06e"
+        },
+        {
+          "file": "impl/standard.hgl",
+          "sha256": "bb19d76a743624825b7936a2d6f988272110f7aeffa5481f345ff1e44d247123"
+        },
+        {
+          "file": "impl/stream.hgl",
+          "sha256": "5d3ce3e8ec1fa097ec595a718dd32400298670d7b4cf6aaa6e3bb80d885ffed8"
+        },
+        {
+          "file": "impl/temporal.hgl",
+          "sha256": "12fe30b6325f37def9f0689f495e66dbcb7445c3df8a482d5135b6c88f13573c"
+        },
+        {
+          "file": "native/scalar_operators.hgl",
+          "sha256": "40e2950cf14e4f49ee114f3c0626104e4d97a4a7e8527233a83ecaade08ef2db"
+        },
+        {
+          "file": "native/scalar_values.hgl",
+          "sha256": "aa2d31b5f988f1528e3692c50e94c02b08a504328b37930c86560ab141f1c3df"
+        },
+        {
+          "file": "native/scalar_values_i64.hgl",
+          "sha256": "18395afe309bf778407d55fedbb3505e2ac239937b8521b6f708343d619bec92"
+        },
+        {
+          "file": "native/temporal_values.hgl",
+          "sha256": "cac890f075c9b2662f659b06151b1509327acdb9491cb523d6690f677677f6c5"
+        },
+        {
+          "file": "operators.hgl",
+          "sha256": "aca1803d45624620f01c74c65a542b598ae843a2324f60bf1b0c603afd316443"
+        },
+        {
+          "file": "replay_record.hgl",
+          "sha256": "d78b942477f7683661fdced78db84ebae3529f2e1e7aa35ac656d1671ccd7e9c"
+        },
+        {
+          "file": "standard.hgl",
+          "sha256": "acacccebe1031d202f3ed05532ff0639a158046af725dbeed666997affeaa5de"
+        },
+        {
+          "file": "stream.hgl",
+          "sha256": "5a7d6b0a73e56052ed004f90cd704214a196d1be0805bceaa920e04889b66a6f"
+        },
+        {
+          "file": "temporal.hgl",
+          "sha256": "6d7e7d3b7b01623f0682364fc0752179a3cbaf791bf29f7d87dedf46841ed226"
+        },
+        {
+          "file": "tests/abstract_atomic_values.hgl",
+          "sha256": "786356792e7c5de1de15d7086ba3ec0e5563b547b4944f42a25e7f2397d6570c"
+        },
+        {
+          "file": "tests/atomic_eval_values.hgl",
+          "sha256": "2ec53bc270c9dcf9b30a8a69062f4a614829bde9cf00f9992fd7ce3a3ccda2c5"
+        },
+        {
+          "file": "tests/atomic_replay_values.hgl",
+          "sha256": "98b724c3411ba9cc1ba46de2e6bfd0795920e6ee57b3e0243382878d28b74628"
+        },
+        {
+          "file": "tests/atomic_scalar_values.hgl",
+          "sha256": "f3c6dea1acf2651de7cf5b8e32b0e8711e4b6698f242178b8460904a9395010e"
+        },
+        {
+          "file": "tests/atomic_set_map_values.hgl",
+          "sha256": "2cd241f03f8939dd3706feb3eeaddca101b58c8d2cb4a66a632c180bd17909b0"
+        },
+        {
+          "file": "tests/composite_key_values.hgl",
+          "sha256": "7982cb06066dd4244626971dcfb6ec811ab38add8a6b526ffc54a65eca3c76a0"
+        },
+        {
+          "file": "tests/control.hgl",
+          "sha256": "12483de61747fb26cf27a94f02a3390227436c3a843acee1c49b121f2398fd0e"
+        },
+        {
+          "file": "tests/enum_values.hgl",
+          "sha256": "80eeed2603b29976a24fd7900fa4bf94be43f52ff7b6774fe180191b2e44c41f"
+        },
+        {
+          "file": "tests/growing_list_values.hgl",
+          "sha256": "f054abd9af68f372ca7b3f51a9e0a0e972496f4fde8cfc7718cdf5625c4c0490"
+        },
+        {
+          "file": "tests/native_scalar_operators.hgl",
+          "sha256": "9c5e0d9addd33542dd64d20e20390c00a7644b8981f13526c0420ef29ca09a86"
+        },
+        {
+          "file": "tests/operators.hgl",
+          "sha256": "c4b609b259513cb3cc04665dbeea1d6c13aa2c2469ef369698eddcb811f2e272"
+        },
+        {
+          "file": "tests/optional_atomic_values.hgl",
+          "sha256": "b3110611c8817e6b5f1e45db7862ae6a05d41b0217b5849ba1b249f770f6105c"
+        },
+        {
+          "file": "tests/ordinary_replay_values.hgl",
+          "sha256": "1b5764b8bba831824e26ee3d955fb19db63b870452195724854fdc42183e55fa"
+        },
+        {
+          "file": "tests/pass_through_defaults.hgl",
+          "sha256": "a66236493983f02cd36bad0f13d1b3cafb917f81c9739897fa1c952adf01cf90"
+        },
+        {
+          "file": "tests/pass_through_scalars.hgl",
+          "sha256": "e013e32e2ab170c918f94111abf46a0c347186b2fe3acee85761ebfcd79e7bfa"
+        },
+        {
+          "file": "tests/pass_through_structural.hgl",
+          "sha256": "fcf33f061de597ef1c8f1cb815bed0b0d73ff64aa4f890985bb3068bbc6ec528"
+        },
+        {
+          "file": "tests/prepared_key_alias_values.hgl",
+          "sha256": "12ccdd8288add8958db6fb036c922a11a7369d709209ab3a6d1c0f5e37202fc6"
+        },
+        {
+          "file": "tests/record_observation_values.hgl",
+          "sha256": "7a9d9864ceafddc21fa8b55ceffa3cf532787980bd722c1fffd2d7dd47947c36"
+        },
+        {
+          "file": "tests/recursive_atomic_values.hgl",
+          "sha256": "bdacef29b0e7f11aa6db2b6a3260499c30d48418652f905f245b9cdd6bd43c92"
+        },
+        {
+          "file": "tests/recursive_eval_values.hgl",
+          "sha256": "ac91c5dcf3087a693b2689e8b51fe10cb4822d69f249402c403b27c4592eb14a"
+        },
+        {
+          "file": "tests/replay_record.hgl",
+          "sha256": "fa49a1c2dac8f8adc02aac279cbf928b92ceaa50514e62838abe1de0b5b9181f"
+        },
+        {
+          "file": "tests/rolling_values.hgl",
+          "sha256": "aad51057f7b46b69b7749c641274855aaec5893c1ce75012c724db57bf046e3e"
+        },
+        {
+          "file": "tests/scalar_key_values.hgl",
+          "sha256": "2e80535ad17f8426470519d98746207e6aa2ddb4ab7ea5a6bee528a3e6d0ebb3"
+        },
+        {
+          "file": "tests/signal_observation_values.hgl",
+          "sha256": "ae81691fca97c8bd25df1c0638bdd4e3facd8c8089dc1da254ea0606913d898b"
+        },
+        {
+          "file": "tests/standard.hgl",
+          "sha256": "280ef1260b7561b1ee7c5a1b329b32bacc9b1ab8f705c3d01345e4a571f72574"
+        },
+        {
+          "file": "tests/stream.hgl",
+          "sha256": "103d06d0c0571643186caac9183e98c7ca5fa17cdf2415b986bbabb9d9e58b51"
+        },
+        {
+          "file": "tests/temporal.hgl",
+          "sha256": "6556509e538724b04ef795b49d471baed248ce685a5c811245534d74d805fb20"
+        },
+        {
+          "file": "tests/temporal_retention_values.hgl",
+          "sha256": "35c37cf421d2b593f8aadac69be7e6b4cc1528827fa75b66f7f165963799a5b5"
+        },
+        {
+          "file": "tests/temporal_scalar_values.hgl",
+          "sha256": "ed59376b0870ee34d44fd3a88c954be50ee931dd4b0bad6cecf122b7b485bf85"
+        },
+        {
+          "file": "tests/temporal_structural_values.hgl",
+          "sha256": "19ddb8c660ded335425f55b76b3c5623b37b2207dfc81518786d1183e219e6cd"
+        },
+        {
+          "file": "tests/zoned_time_values.hgl",
+          "sha256": "b27c77bd88e8f31dc94e0f9c0c9f9079e75eff645c7c155acd7f56aec7a20835"
+        }
+      ]
     }
   ],
   "cases": [
@@ -31,6 +219,26 @@
       "mode": "test",
       "expected_exit": 0,
       "source_sha256": "ccf47e7ee6f86e9b342dbd4e4660cb8a1d15a6bfbf5106fa8bf39e27e9e04f60",
+      "part_sources": [],
+      "expected": {
+        "file": "../../language/examples/execution-errors.hgl",
+        "mode": "test",
+        "expected_exit": 0,
+        "purpose": "Both yield codes, continuation after cleanup and successful nesting.",
+        "id": "execution-errors",
+        "preflight": true,
+        "runtime_results": [
+          {
+            "name": "expected_execution_errors",
+            "outcome": "passed"
+          },
+          {
+            "name": "nested_execution_errors",
+            "outcome": "passed"
+          }
+        ],
+        "rejection_results": []
+      },
       "source_check": {
         "returncode": 0,
         "stdout": "",
@@ -39,7 +247,7 @@
       },
       "run": {
         "returncode": 0,
-        "stdout": "examples.execution_errors::expected_execution_errors ... ok\nexamples.execution_errors::nested_execution_errors ... ok\n2 tests, 6 evaluations, 0 failures\n",
+        "stdout": "examples.execution_errors::expected_execution_errors ... ok [executed]\nexamples.execution_errors::nested_execution_errors ... ok [executed]\n2 executed tests, 6 evaluations, 0 failures\n",
         "stderr": "warning: unnecessary parentheses around assigned value\n  --> src/main.rs:80:12\n   |\n80 | ... = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n   |       ^                                                                                                                                ^\n   |\n   = note: `#[warn(unused_parens)]` (part of `#[warn(unused)]`) on by default\nhelp: remove these parentheses\n   |\n80 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n80 + let time = ((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0;\n   |\n\nwarning: unnecessary parentheses around function argument\n  --> src/main.rs:80:62\n   |\n80 | ...dex(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n   |                                ^                                                                       ^\n   |\nhelp: remove these parentheses\n   |\n80 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n80 + let time = (((*hgl_store::list_index(&(self.configuration0), (*self.generator_local0.as_ref().expect(\"initialized generator local\")))?)).0);\n   |\n\nwarning: unnecessary parentheses around assigned value\n  --> src/main.rs:81:64\n   |\n81 | ...figuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<Glo...\n   |                                ^                                                                       ^\n   |\nhelp: remove these parentheses\n   |\n81 - let payload = ({let parent=self.configuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n81 + let payload = ({let parent=self.configuration_slot0; let index=(*self.generator_local0.as_ref().expect(\"initialized generator local\")); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n   |\n\nwarning: unnecessary parentheses around assigned value\n   --> src/main.rs:339:12\n    |\n339 | ... = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n    |       ^                                                                                                                                ^\n    |\nhelp: remove these parentheses\n    |\n339 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n339 + let time = ((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0;\n    |\n\nwarning: unnecessary parentheses around function argument\n   --> src/main.rs:339:62\n    |\n339 | ...ex(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n    |                               ^                                                                       ^\n    |\nhelp: remove these parentheses\n    |\n339 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n339 + let time = (((*hgl_store::list_index(&(self.configuration0), (*self.generator_local0.as_ref().expect(\"initialized generator local\")))?)).0);\n    |\n\nwarning: unnecessary parentheses around assigned value\n   --> src/main.rs:340:64\n    |\n340 | ...iguration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<Glo...\n    |                               ^                                                                       ^\n    |\nhelp: remove these parentheses\n    |\n340 - let payload = ({let parent=self.configuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n340 + let payload = ({let parent=self.configuration_slot0; let index=(*self.generator_local0.as_ref().expect(\"initialized generator local\")); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n    |\n\nwarning: unnecessary parentheses around assigned value\n   --> src/main.rs:501:12\n    |\n501 | ... = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n    |       ^                                                                                                                                ^\n    |\nhelp: remove these parentheses\n    |\n501 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n501 + let time = ((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0;\n    |\n\nwarning: unnecessary parentheses around function argument\n   --> src/main.rs:501:62\n    |\n501 | ...ex(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n    |                               ^                                                                       ^\n    |\nhelp: remove these parentheses\n    |\n501 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n501 + let time = (((*hgl_store::list_index(&(self.configuration0), (*self.generator_local0.as_ref().expect(\"initialized generator local\")))?)).0);\n    |\n\nwarning: unnecessary parentheses around assigned value\n   --> src/main.rs:502:64\n    |\n502 | ...iguration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<Glo...\n    |                               ^                                                                       ^\n    |\nhelp: remove these parentheses\n    |\n502 - let payload = ({let parent=self.configuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n502 + let payload = ({let parent=self.configuration_slot0; let index=(*self.generator_local0.as_ref().expect(\"initialized generator local\")); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n    |\n\nwarning: unnecessary parentheses around assigned value\n   --> src/main.rs:777:12\n    |\n777 | ... = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n    |       ^                                                                                                                                ^\n    |\nhelp: remove these parentheses\n    |\n777 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n777 + let time = ((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0;\n    |\n\nwarning: unnecessary parentheses around function argument\n   --> src/main.rs:777:62\n    |\n777 | ...ex(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n    |                               ^                                                                       ^\n    |\nhelp: remove these parentheses\n    |\n777 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n777 + let time = (((*hgl_store::list_index(&(self.configuration0), (*self.generator_local0.as_ref().expect(\"initialized generator local\")))?)).0);\n    |\n\nwarning: unnecessary parentheses around assigned value\n   --> src/main.rs:778:64\n    |\n778 | ...iguration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<Glo...\n    |                               ^                                                                       ^\n    |\nhelp: remove these parentheses\n    |\n778 - let payload = ({let parent=self.configuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n778 + let payload = ({let parent=self.configuration_slot0; let index=(*self.generator_local0.as_ref().expect(\"initialized generator local\")); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n    |\n\nwarning: unnecessary parentheses around assigned value\n   --> src/main.rs:939:12\n    |\n939 | ... = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n    |       ^                                                                                                                                ^\n    |\nhelp: remove these parentheses\n    |\n939 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n939 + let time = ((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0;\n    |\n\nwarning: unnecessary parentheses around function argument\n   --> src/main.rs:939:62\n    |\n939 | ...ex(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n    |                               ^                                                                       ^\n    |\nhelp: remove these parentheses\n    |\n939 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n939 + let time = (((*hgl_store::list_index(&(self.configuration0), (*self.generator_local0.as_ref().expect(\"initialized generator local\")))?)).0);\n    |\n\nwarning: unnecessary parentheses around assigned value\n   --> src/main.rs:940:64\n    |\n940 | ...iguration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<Glo...\n    |                               ^                                                                       ^\n    |\nhelp: remove these parentheses\n    |\n940 - let payload = ({let parent=self.configuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n940 + let payload = ({let parent=self.configuration_slot0; let index=(*self.generator_local0.as_ref().expect(\"initialized generator local\")); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n    |\n\nwarning: unnecessary parentheses around assigned value\n    --> src/main.rs:1198:12\n     |\n1198 | ... = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n     |       ^                                                                                                                                ^\n     |\nhelp: remove these parentheses\n     |\n1198 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n1198 + let time = ((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0;\n     |\n\nwarning: unnecessary parentheses around function argument\n    --> src/main.rs:1198:62\n     |\n1198 | ...ex(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n     |                               ^                                                                       ^\n     |\nhelp: remove these parentheses\n     |\n1198 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n1198 + let time = (((*hgl_store::list_index(&(self.configuration0), (*self.generator_local0.as_ref().expect(\"initialized generator local\")))?)).0);\n     |\n\nwarning: unnecessary parentheses around assigned value\n    --> src/main.rs:1199:64\n     |\n1199 | ...iguration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<Gl...\n     |                               ^                                                                       ^\n     |\nhelp: remove these parentheses\n     |\n1199 - let payload = ({let parent=self.configuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n1199 + let payload = ({let parent=self.configuration_slot0; let index=(*self.generator_local0.as_ref().expect(\"initialized generator local\")); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n     |\n\nwarning: unused variable: `layout`\n  --> src/main.rs:10:306\n   |\n10 | ...ots.1.flatten(field); let layout = rest; }\n   |                              ^^^^^^ help: if this is intentional, prefix it with an underscore: `_layout`\n   |\n   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `ports`\n   --> src/main.rs:107:10\n    |\n107 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError>{Err(hgl_describe::BuildError::InvalidNodeType {...\n    |          ^^^^^ help: if this is intentional, prefix it with an underscore: `_ports`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:144:90\n    |\n144 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n    |\n    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:219:20\n    |\n219 | let local0 = { let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items };\n    |                    ----^^^^^\n    |                    |\n    |                    help: remove this `mut`\n\nwarning: unused variable: `now`\n   --> src/main.rs:227:48\n    |\n227 | {let prepared_item0=_ctx.evaluation_time();let now=_ctx.evaluation_time();let list=local1;let mut prepared=_ctx.prepared();let (obs...\n    |                                                ^^^ help: if this is intentional, prefix it with an underscore: `_now`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:243:90\n    |\n243 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n\nwarning: unused variable: `keys`\n   --> src/main.rs:270:19\n    |\n270 | fn prepare_static(keys:&mut hgl_store::Keys)->Result<(),String> { Ok(())}\n    |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_keys`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:285:1284\n    |\n285 | ...{let value=(||->hgl_types::NodeResult<_>{Ok({ let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items })})().map_err...\n    |                                                      ----^^^^^\n    |                                                      |\n    |                                                      help: remove this `mut`\n\nwarning: unused variable: `empty`\n   --> src/main.rs:286:172\n    |\n286 | ...hgl_types::NodeResult {let empty=FiniteTopology::default();store.prepared().prepare_scalar::<i64>(built.outputs[graph.nodes.iter...\n    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_empty`\n\nwarning: unused variable: `ports`\n   --> src/main.rs:366:10\n    |\n366 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError>{Err(hgl_describe::BuildError::InvalidNodeType {...\n    |          ^^^^^ help: if this is intentional, prefix it with an underscore: `_ports`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:386:20\n    |\n386 | let local0 = { let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items };\n    |                    ----^^^^^\n    |                    |\n    |                    help: remove this `mut`\n\nwarning: unused variable: `now`\n   --> src/main.rs:394:48\n    |\n394 | {let prepared_item0=_ctx.evaluation_time();let now=_ctx.evaluation_time();let list=local1;let mut prepared=_ctx.prepared();let (obs...\n    |                                                ^^^ help: if this is intentional, prefix it with an underscore: `_now`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:410:90\n    |\n410 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n\nwarning: unused variable: `keys`\n   --> src/main.rs:432:19\n    |\n432 | fn prepare_static(keys:&mut hgl_store::Keys)->Result<(),String> { Ok(())}\n    |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_keys`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:447:960\n    |\n447 | ...{let value=(||->hgl_types::NodeResult<_>{Ok({ let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items })})().map_err...\n    |                                                      ----^^^^^\n    |                                                      |\n    |                                                      help: remove this `mut`\n\nwarning: unused variable: `empty`\n   --> src/main.rs:448:172\n    |\n448 | ...hgl_types::NodeResult {let empty=FiniteTopology::default();store.prepared().prepare_scalar::<i64>(built.outputs[graph.nodes.iter...\n    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_empty`\n\nwarning: unused variable: `ports`\n   --> src/main.rs:528:10\n    |\n528 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError>{Err(hgl_describe::BuildError::InvalidNodeType {...\n    |          ^^^^^ help: if this is intentional, prefix it with an underscore: `_ports`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:565:90\n    |\n565 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:657:20\n    |\n657 | let local0 = { let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items };\n    |                    ----^^^^^\n    |                    |\n    |                    help: remove this `mut`\n\nwarning: unused variable: `now`\n   --> src/main.rs:665:48\n    |\n665 | {let prepared_item0=_ctx.evaluation_time();let now=_ctx.evaluation_time();let list=local1;let mut prepared=_ctx.prepared();let (obs...\n    |                                                ^^^ help: if this is intentional, prefix it with an underscore: `_now`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:681:90\n    |\n681 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n\nwarning: unused variable: `keys`\n   --> src/main.rs:708:19\n    |\n708 | fn prepare_static(keys:&mut hgl_store::Keys)->Result<(),String> { Ok(())}\n    |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_keys`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:723:1606\n    |\n723 | ...{let value=(||->hgl_types::NodeResult<_>{Ok({ let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items })})().map_err...\n    |                                                      ----^^^^^\n    |                                                      |\n    |                                                      help: remove this `mut`\n\nwarning: unused variable: `empty`\n   --> src/main.rs:724:172\n    |\n724 | ...hgl_types::NodeResult {let empty=FiniteTopology::default();store.prepared().prepare_scalar::<i64>(built.outputs[graph.nodes.iter...\n    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_empty`\n\nwarning: unused variable: `ports`\n   --> src/main.rs:804:10\n    |\n804 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError>{Err(hgl_describe::BuildError::InvalidNodeType {...\n    |          ^^^^^ help: if this is intentional, prefix it with an underscore: `_ports`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:824:20\n    |\n824 | let local0 = { let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items };\n    |                    ----^^^^^\n    |                    |\n    |                    help: remove this `mut`\n\nwarning: unused variable: `now`\n   --> src/main.rs:832:48\n    |\n832 | {let prepared_item0=_ctx.evaluation_time();let now=_ctx.evaluation_time();let list=local1;let mut prepared=_ctx.prepared();let (obs...\n    |                                                ^^^ help: if this is intentional, prefix it with an underscore: `_now`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:848:90\n    |\n848 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n\nwarning: unused variable: `keys`\n   --> src/main.rs:870:19\n    |\n870 | fn prepare_static(keys:&mut hgl_store::Keys)->Result<(),String> { Ok(())}\n    |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_keys`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:885:960\n    |\n885 | ...{let value=(||->hgl_types::NodeResult<_>{Ok({ let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items })})().map_err...\n    |                                                      ----^^^^^\n    |                                                      |\n    |                                                      help: remove this `mut`\n\nwarning: unused variable: `empty`\n   --> src/main.rs:886:172\n    |\n886 | ...hgl_types::NodeResult {let empty=FiniteTopology::default();store.prepared().prepare_scalar::<i64>(built.outputs[graph.nodes.iter...\n    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_empty`\n\nwarning: unused variable: `ports`\n   --> src/main.rs:966:10\n    |\n966 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError>{Err(hgl_describe::BuildError::InvalidNodeType {...\n    |          ^^^^^ help: if this is intentional, prefix it with an underscore: `_ports`\n\nwarning: variable does not need to be mutable\n    --> src/main.rs:1003:90\n     |\n1003 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Valu...\n     |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n     |                                                                                          |\n     |                                                                                          help: remove this `mut`\n\nwarning: variable does not need to be mutable\n    --> src/main.rs:1078:20\n     |\n1078 | let local0 = { let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items };\n     |                    ----^^^^^\n     |                    |\n     |                    help: remove this `mut`\n\nwarning: unused variable: `now`\n    --> src/main.rs:1086:48\n     |\n1086 | {let prepared_item0=_ctx.evaluation_time();let now=_ctx.evaluation_time();let list=local1;let mut prepared=_ctx.prepared();let (ob...\n     |                                                ^^^ help: if this is intentional, prefix it with an underscore: `_now`\n\nwarning: variable does not need to be mutable\n    --> src/main.rs:1102:90\n     |\n1102 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Valu...\n     |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n     |                                                                                          |\n     |                                                                                          help: remove this `mut`\n\nwarning: unused variable: `keys`\n    --> src/main.rs:1129:19\n     |\n1129 | fn prepare_static(keys:&mut hgl_store::Keys)->Result<(),String> { Ok(())}\n     |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_keys`\n\nwarning: variable does not need to be mutable\n    --> src/main.rs:1144:1284\n     |\n1144 | ...let value=(||->hgl_types::NodeResult<_>{Ok({ let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items })})().map_err...\n     |                                                     ----^^^^^\n     |                                                     |\n     |                                                     help: remove this `mut`\n\nwarning: unused variable: `empty`\n    --> src/main.rs:1145:172\n     |\n1145 | ...gl_types::NodeResult {let empty=FiniteTopology::default();store.prepared().prepare_scalar::<i64>(built.outputs[graph.nodes.iter...\n     |                              ^^^^^ help: if this is intentional, prefix it with an underscore: `_empty`\n\nwarning: unused variable: `ports`\n    --> src/main.rs:1225:10\n     |\n1225 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError>{Err(hgl_describe::BuildError::InvalidNodeType ...\n     |          ^^^^^ help: if this is intentional, prefix it with an underscore: `_ports`\n\nwarning: variable does not need to be mutable\n    --> src/main.rs:1262:90\n     |\n1262 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Valu...\n     |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n     |                                                                                          |\n     |                                                                                          help: remove this `mut`\n\nwarning: variable does not need to be mutable\n    --> src/main.rs:1354:20\n     |\n1354 | let local0 = { let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items };\n     |                    ----^^^^^\n     |                    |\n     |                    help: remove this `mut`\n\nwarning: unused variable: `now`\n    --> src/main.rs:1362:48\n     |\n1362 | {let prepared_item0=_ctx.evaluation_time();let now=_ctx.evaluation_time();let list=local1;let mut prepared=_ctx.prepared();let (ob...\n     |                                                ^^^ help: if this is intentional, prefix it with an underscore: `_now`\n\nwarning: variable does not need to be mutable\n    --> src/main.rs:1378:90\n     |\n1378 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Valu...\n     |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n     |                                                                                          |\n     |                                                                                          help: remove this `mut`\n\nwarning: unused variable: `keys`\n    --> src/main.rs:1405:19\n     |\n1405 | fn prepare_static(keys:&mut hgl_store::Keys)->Result<(),String> { Ok(())}\n     |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_keys`\n\nwarning: variable does not need to be mutable\n    --> src/main.rs:1420:1606\n     |\n1420 | ...let value=(||->hgl_types::NodeResult<_>{Ok({ let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items })})().map_err...\n     |                                                     ----^^^^^\n     |                                                     |\n     |                                                     help: remove this `mut`\n\nwarning: unused variable: `empty`\n    --> src/main.rs:1421:172\n     |\n1421 | ...gl_types::NodeResult {let empty=FiniteTopology::default();store.prepared().prepare_scalar::<i64>(built.outputs[graph.nodes.iter...\n     |                              ^^^^^ help: if this is intentional, prefix it with an underscore: `_empty`\n\nwarning: associated functions `key_slot_id` and `copy_key` are never used\n  --> src/main.rs:39:4\n   |\n38 | impl GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e {\n   | ----------------------------------------------------------------------- associated functions in this implementation\n39 | fn key_slot_id(keys:&hgl_store::Keys,source:&hgl_store::ValueColumns,slot:hgl_store::ValueSlot<Self>)->hgl_types::NodeResult<i64> {k...\n   |    ^^^^^^^^^^^\n40 | fn copy_key(keys:&hgl_store::Keys,id:i64,columns:&mut hgl_store::ValueColumns,slot:hgl_store::ValueSlot<Self>)->hgl_types::NodeResul...\n   |    ^^^^^^^^\n   |\n   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:120:1\n    |\n119 | struct Node1 {\n    |        ----- field in this struct\n120 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: field `configuration0` is never read\n   --> src/main.rs:156:1\n    |\n150 | struct Node2 {\n    |        ----- field in this struct\n...\n156 | configuration0: i64,configuration_slot0:hgl_store::ValueSlot<i64>,\n    | ^^^^^^^^^^^^^^\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:213:1\n    |\n211 | struct Node3 {\n    |        ----- field in this struct\n212 | global0: hgl_store::Global<hgl_store::List<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e, -1>>,\n213 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: function `register` is never used\n   --> src/main.rs:251:8\n    |\n251 | pub fn register(registry: &mut hgl_describe::Registry) -> Result<(),hgl_describe::BuildError> {\n    |        ^^^^^^^^\n\nwarning: field `children` is never read\n   --> src/main.rs:283:43\n    |\n283 | #[derive(Default)] struct FiniteTopology {children:std::collections::BTreeMap<i64,FiniteTopology>}\n    |                           --------------  ^^^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `limit0` is never read\n   --> src/main.rs:284:58\n    |\n284 | #[derive(Default)] struct FiniteCapacity {arrivals:usize,limit0:usize,limit1:usize,limit2:usize,limit3:usize,limit4:usize,}\n    |                           --------------                 ^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:380:1\n    |\n378 | struct Node1 {\n    |        ----- field in this struct\n379 | global0: hgl_store::Global<hgl_store::List<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e, -1>>,\n380 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: function `register` is never used\n   --> src/main.rs:418:8\n    |\n418 | pub fn register(registry: &mut hgl_describe::Registry) -> Result<(),hgl_describe::BuildError> {\n    |        ^^^^^^^^\n\nwarning: field `children` is never read\n   --> src/main.rs:445:43\n    |\n445 | #[derive(Default)] struct FiniteTopology {children:std::collections::BTreeMap<i64,FiniteTopology>}\n    |                           --------------  ^^^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `limit0` is never read\n   --> src/main.rs:446:58\n    |\n446 | #[derive(Default)] struct FiniteCapacity {arrivals:usize,limit0:usize,limit1:usize,limit2:usize,limit3:usize,}\n    |                           --------------                 ^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:541:1\n    |\n540 | struct Node1 {\n    |        ----- field in this struct\n541 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: fields `configuration0` and `configuration1` are never read\n   --> src/main.rs:577:1\n    |\n571 | struct Node2 {\n    |        ----- fields in this struct\n...\n577 | configuration0: i64,configuration_slot0:hgl_store::ValueSlot<i64>,\n    | ^^^^^^^^^^^^^^\n578 | configuration1: i64,configuration_slot1:hgl_store::ValueSlot<i64>,\n    | ^^^^^^^^^^^^^^\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:651:1\n    |\n649 | struct Node3 {\n    |        ----- field in this struct\n650 | global0: hgl_store::Global<hgl_store::List<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e, -1>>,\n651 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: function `register` is never used\n   --> src/main.rs:689:8\n    |\n689 | pub fn register(registry: &mut hgl_describe::Registry) -> Result<(),hgl_describe::BuildError> {\n    |        ^^^^^^^^\n\nwarning: field `children` is never read\n   --> src/main.rs:721:43\n    |\n721 | #[derive(Default)] struct FiniteTopology {children:std::collections::BTreeMap<i64,FiniteTopology>}\n    |                           --------------  ^^^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `limit0` is never read\n   --> src/main.rs:722:58\n    |\n722 | #[derive(Default)] struct FiniteCapacity {arrivals:usize,limit0:usize,limit1:usize,limit2:usize,limit3:usize,limit4:usize,}\n    |                           --------------                 ^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:818:1\n    |\n816 | struct Node1 {\n    |        ----- field in this struct\n817 | global0: hgl_store::Global<hgl_store::List<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e, -1>>,\n818 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: function `register` is never used\n   --> src/main.rs:856:8\n    |\n856 | pub fn register(registry: &mut hgl_describe::Registry) -> Result<(),hgl_describe::BuildError> {\n    |        ^^^^^^^^\n\nwarning: field `children` is never read\n   --> src/main.rs:883:43\n    |\n883 | #[derive(Default)] struct FiniteTopology {children:std::collections::BTreeMap<i64,FiniteTopology>}\n    |                           --------------  ^^^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `limit0` is never read\n   --> src/main.rs:884:58\n    |\n884 | #[derive(Default)] struct FiniteCapacity {arrivals:usize,limit0:usize,limit1:usize,limit2:usize,limit3:usize,}\n    |                           --------------                 ^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:979:1\n    |\n978 | struct Node1 {\n    |        ----- field in this struct\n979 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: field `configuration0` is never read\n    --> src/main.rs:1015:1\n     |\n1009 | struct Node2 {\n     |        ----- field in this struct\n...\n1015 | configuration0: i64,configuration_slot0:hgl_store::ValueSlot<i64>,\n     | ^^^^^^^^^^^^^^\n\nwarning: field `configuration_columns` is never read\n    --> src/main.rs:1072:1\n     |\n1070 | struct Node3 {\n     |        ----- field in this struct\n1071 | global0: hgl_store::Global<hgl_store::List<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e, -1>>,\n1072 | configuration_columns:hgl_store::ValueColumns,\n     | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: function `register` is never used\n    --> src/main.rs:1110:8\n     |\n1110 | pub fn register(registry: &mut hgl_describe::Registry) -> Result<(),hgl_describe::BuildError> {\n     |        ^^^^^^^^\n\nwarning: field `children` is never read\n    --> src/main.rs:1142:43\n     |\n1142 | #[derive(Default)] struct FiniteTopology {children:std::collections::BTreeMap<i64,FiniteTopology>}\n     |                           --------------  ^^^^^^^^\n     |                           |\n     |                           field in this struct\n\nwarning: field `limit0` is never read\n    --> src/main.rs:1143:58\n     |\n1143 | #[derive(Default)] struct FiniteCapacity {arrivals:usize,limit0:usize,limit1:usize,limit2:usize,limit3:usize,limit4:usize,}\n     |                           --------------                 ^^^^^^\n     |                           |\n     |                           field in this struct\n\nwarning: field `configuration_columns` is never read\n    --> src/main.rs:1238:1\n     |\n1237 | struct Node1 {\n     |        ----- field in this struct\n1238 | configuration_columns:hgl_store::ValueColumns,\n     | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: fields `configuration0` and `configuration1` are never read\n    --> src/main.rs:1274:1\n     |\n1268 | struct Node2 {\n     |        ----- fields in this struct\n...\n1274 | configuration0: i64,configuration_slot0:hgl_store::ValueSlot<i64>,\n     | ^^^^^^^^^^^^^^\n1275 | configuration1: i64,configuration_slot1:hgl_store::ValueSlot<i64>,\n     | ^^^^^^^^^^^^^^\n\nwarning: field `configuration_columns` is never read\n    --> src/main.rs:1348:1\n     |\n1346 | struct Node3 {\n     |        ----- field in this struct\n1347 | global0: hgl_store::Global<hgl_store::List<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e, -1>>,\n1348 | configuration_columns:hgl_store::ValueColumns,\n     | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: function `register` is never used\n    --> src/main.rs:1386:8\n     |\n1386 | pub fn register(registry: &mut hgl_describe::Registry) -> Result<(),hgl_describe::BuildError> {\n     |        ^^^^^^^^\n\nwarning: field `children` is never read\n    --> src/main.rs:1418:43\n     |\n1418 | #[derive(Default)] struct FiniteTopology {children:std::collections::BTreeMap<i64,FiniteTopology>}\n     |                           --------------  ^^^^^^^^\n     |                           |\n     |                           field in this struct\n\nwarning: field `limit0` is never read\n    --> src/main.rs:1419:58\n     |\n1419 | #[derive(Default)] struct FiniteCapacity {arrivals:usize,limit0:usize,limit1:usize,limit2:usize,limit3:usize,limit4:usize,}\n     |                           --------------                 ^^^^^^\n     |                           |\n     |                           field in this struct\n\n",
         "timed_out": false
       },
@@ -48,12 +256,29 @@
     {
       "id": "missing-parameter-close",
       "file": "../../language/examples/reject/missing-parameter-close.hgl",
-      "mode": "reject",
+      "mode": "test",
       "expected_exit": 0,
       "source_sha256": "72e834a6db123392a041da8d802189dcbe1d005ab46dea52eb8f08e578a54f3a",
+      "part_sources": [],
+      "expected": {
+        "file": "../../language/examples/reject/missing-parameter-close.hgl",
+        "mode": "test",
+        "expected_exit": 0,
+        "purpose": "A sole malformed declaration has an unambiguous extent through EOF despite its missing parameter close.",
+        "id": "missing-parameter-close",
+        "preflight": false,
+        "rejection_results": [
+          {
+            "file": "../../language/examples/reject/missing-parameter-close.hgl",
+            "owner_line": 4,
+            "outcome": "passed",
+            "identity": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/missing-parameter-close.hgl:4"
+          }
+        ]
+      },
       "run": {
         "returncode": 0,
-        "stdout": "",
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/missing-parameter-close.hgl:4 identity ... ok [rejection]\n1 rejection cases, 0 failures\n",
         "stderr": "",
         "timed_out": false
       },
@@ -62,12 +287,30 @@
     {
       "id": "raises-computed-code",
       "file": "../../language/examples/reject/raises-computed-code.hgl",
-      "mode": "reject",
+      "mode": "test",
       "expected_exit": 0,
       "source_sha256": "0e800bf3b6fface6a7486dae9632a2a3cf3763daf03759a0273962fa9f316eca",
+      "part_sources": [],
+      "expected": {
+        "file": "../../language/examples/reject/raises-computed-code.hgl",
+        "mode": "test",
+        "expected_exit": 0,
+        "purpose": "Exact expected source rejection: raises-computed-code.",
+        "id": "raises-computed-code",
+        "preflight": false,
+        "rejection_results": [
+          {
+            "name": "invalid_code_expression",
+            "outcome": "passed"
+          }
+        ],
+        "not_executed": [
+          "invalid_code_expression"
+        ]
+      },
       "run": {
         "returncode": 0,
-        "stdout": "",
+        "stdout": "examples.reject.raises_computed_code::invalid_code_expression ... ok [rejection]\n1 rejection cases, 0 failures\n",
         "stderr": "",
         "timed_out": false
       },
@@ -76,12 +319,30 @@
     {
       "id": "raises-unknown-code",
       "file": "../../language/examples/reject/raises-unknown-code.hgl",
-      "mode": "reject",
+      "mode": "test",
       "expected_exit": 0,
       "source_sha256": "cd3392d599f9320ed469c41d78b6ff477ef6b5e3974e5a464ab6c8e7aa7aa3b5",
+      "part_sources": [],
+      "expected": {
+        "file": "../../language/examples/reject/raises-unknown-code.hgl",
+        "mode": "test",
+        "expected_exit": 0,
+        "purpose": "Exact expected source rejection: raises-unknown-code.",
+        "id": "raises-unknown-code",
+        "preflight": false,
+        "rejection_results": [
+          {
+            "name": "invalid_code",
+            "outcome": "passed"
+          }
+        ],
+        "not_executed": [
+          "invalid_code"
+        ]
+      },
       "run": {
         "returncode": 0,
-        "stdout": "",
+        "stdout": "examples.reject.raises_unknown_code::invalid_code ... ok [rejection]\n1 rejection cases, 0 failures\n",
         "stderr": "",
         "timed_out": false
       },
@@ -90,12 +351,29 @@
     {
       "id": "rolling-size-bounds",
       "file": "../../language/examples/reject/rolling-size-bounds.hgl",
-      "mode": "reject",
+      "mode": "test",
       "expected_exit": 0,
       "source_sha256": "d0e5aef99b000cdb7c4e078ac485db9ec2b1735b0daacaea841403c1dd6818ac",
+      "part_sources": [],
+      "expected": {
+        "file": "../../language/examples/reject/rolling-size-bounds.hgl",
+        "mode": "test",
+        "expected_exit": 0,
+        "purpose": "Exact expected source rejection: rolling-size-bounds.",
+        "id": "rolling-size-bounds",
+        "preflight": false,
+        "rejection_results": [
+          {
+            "file": "../../language/examples/reject/rolling-size-bounds.hgl",
+            "owner_line": 4,
+            "outcome": "passed",
+            "identity": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/rolling-size-bounds.hgl:4"
+          }
+        ]
+      },
       "run": {
         "returncode": 0,
-        "stdout": "",
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/rolling-size-bounds.hgl:4 consume ... ok [rejection]\n1 rejection cases, 0 failures\n",
         "stderr": "",
         "timed_out": false
       },
@@ -104,12 +382,29 @@
     {
       "id": "rolling-size-kind",
       "file": "../../language/examples/reject/rolling-size-kind.hgl",
-      "mode": "reject",
+      "mode": "test",
       "expected_exit": 0,
       "source_sha256": "3024a08bef10a91368c67c0993b73bb9cf117e5060ceb20500fd84f5a1add6dd",
+      "part_sources": [],
+      "expected": {
+        "file": "../../language/examples/reject/rolling-size-kind.hgl",
+        "mode": "test",
+        "expected_exit": 0,
+        "purpose": "Exact expected source rejection: rolling-size-kind.",
+        "id": "rolling-size-kind",
+        "preflight": false,
+        "rejection_results": [
+          {
+            "file": "../../language/examples/reject/rolling-size-kind.hgl",
+            "owner_line": 4,
+            "outcome": "passed",
+            "identity": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/rolling-size-kind.hgl:4"
+          }
+        ]
+      },
       "run": {
         "returncode": 0,
-        "stdout": "",
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/rolling-size-kind.hgl:4 consume ... ok [rejection]\n1 rejection cases, 0 failures\n",
         "stderr": "",
         "timed_out": false
       },
@@ -118,12 +413,30 @@
     {
       "id": "test-inject",
       "file": "../../language/examples/reject/test-inject.hgl",
-      "mode": "reject",
+      "mode": "test",
       "expected_exit": 0,
       "source_sha256": "79ee9ede4ce2b6994a40564eb0ba8eeb08a5f893af640dbc6babea91fddc4c95",
+      "part_sources": [],
+      "expected": {
+        "file": "../../language/examples/reject/test-inject.hgl",
+        "mode": "test",
+        "expected_exit": 0,
+        "purpose": "Exact expected source rejection: test-inject.",
+        "id": "test-inject",
+        "preflight": false,
+        "rejection_results": [
+          {
+            "name": "invalid_capability",
+            "outcome": "passed"
+          }
+        ],
+        "not_executed": [
+          "invalid_capability"
+        ]
+      },
       "run": {
         "returncode": 0,
-        "stdout": "",
+        "stdout": "examples.reject.test_inject::invalid_capability ... ok [rejection]\n1 rejection cases, 0 failures\n",
         "stderr": "",
         "timed_out": false
       },
@@ -132,12 +445,29 @@
     {
       "id": "yield-time-type",
       "file": "../../language/examples/reject/yield-time-type.hgl",
-      "mode": "reject",
+      "mode": "test",
       "expected_exit": 0,
       "source_sha256": "185612f0de0bbc3c7e9cc08c825c11b49d24fca7b3cdd6c0ac66f4715b9a54c0",
+      "part_sources": [],
+      "expected": {
+        "file": "../../language/examples/reject/yield-time-type.hgl",
+        "mode": "test",
+        "expected_exit": 0,
+        "purpose": "Exact expected source rejection: yield-time-type.",
+        "id": "yield-time-type",
+        "preflight": false,
+        "rejection_results": [
+          {
+            "file": "../../language/examples/reject/yield-time-type.hgl",
+            "owner_line": 3,
+            "outcome": "passed",
+            "identity": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/yield-time-type.hgl:3"
+          }
+        ]
+      },
       "run": {
         "returncode": 0,
-        "stdout": "",
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/yield-time-type.hgl:3 invalid_time ... ok [rejection]\n1 rejection cases, 0 failures\n",
         "stderr": "",
         "timed_out": false
       },
@@ -149,6 +479,22 @@
       "mode": "test",
       "expected_exit": 1,
       "source_sha256": "e9f39aee6f3ea374ca2ddbb8f030287764bf9abeed0f1d5c8b8658220dbaecd7",
+      "part_sources": [],
+      "expected": {
+        "file": "controls/runtime-normal-return.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "Normal completion must not satisfy an expected execution error.",
+        "id": "runtime-normal-return",
+        "preflight": true,
+        "runtime_results": [
+          {
+            "name": "normal_return",
+            "outcome": "failed"
+          }
+        ],
+        "rejection_results": []
+      },
       "source_check": {
         "returncode": 0,
         "stdout": "",
@@ -157,8 +503,8 @@
       },
       "run": {
         "returncode": 1,
-        "stdout": "1 tests, 0 evaluations, 1 failures\n",
-        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:575\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nconformance.negative_testing.runtime_normal_return::normal_return ... FAILED: expected yield.negative_duration, block completed normally\ntest build/run failed: exit status: 1\n",
+        "stdout": "conformance.negative_testing.runtime_normal_return::normal_return ... FAILED [executed]\n1 executed tests, 0 evaluations, 1 failures\n",
+        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:575\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nexpected yield.negative_duration, block completed normally\nexecuted tests failed\n",
         "timed_out": false
       },
       "matches": true
@@ -169,6 +515,22 @@
       "mode": "test",
       "expected_exit": 1,
       "source_sha256": "b76731cc438d7cdb851e947e82ba34f452d94fa87df6a7a38f2602fc237eaba0",
+      "part_sources": [],
+      "expected": {
+        "file": "controls/runtime-empty-block.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "An empty block completes normally and must fail.",
+        "id": "runtime-empty-block",
+        "preflight": true,
+        "runtime_results": [
+          {
+            "name": "empty_block",
+            "outcome": "failed"
+          }
+        ],
+        "rejection_results": []
+      },
       "source_check": {
         "returncode": 0,
         "stdout": "",
@@ -177,8 +539,8 @@
       },
       "run": {
         "returncode": 1,
-        "stdout": "1 tests, 0 evaluations, 1 failures\n",
-        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:436\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nconformance.negative_testing.runtime_empty_block::empty_block ... FAILED: expected yield.negative_duration, block completed normally\ntest build/run failed: exit status: 1\n",
+        "stdout": "conformance.negative_testing.runtime_empty_block::empty_block ... FAILED [executed]\n1 executed tests, 0 evaluations, 1 failures\n",
+        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:436\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nexpected yield.negative_duration, block completed normally\nexecuted tests failed\n",
         "timed_out": false
       },
       "matches": true
@@ -189,6 +551,22 @@
       "mode": "test",
       "expected_exit": 1,
       "source_sha256": "0665b6871168dfe9343bce70b991095763f45f324aa5d52ed9149f042a6b0270",
+      "part_sources": [],
+      "expected": {
+        "file": "controls/runtime-wrong-code.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "An execution error with another listed code must fail.",
+        "id": "runtime-wrong-code",
+        "preflight": true,
+        "runtime_results": [
+          {
+            "name": "wrong_code",
+            "outcome": "failed"
+          }
+        ],
+        "rejection_results": []
+      },
       "source_check": {
         "returncode": 0,
         "stdout": "",
@@ -197,8 +575,8 @@
       },
       "run": {
         "returncode": 1,
-        "stdout": "1 tests, 0 evaluations, 1 failures\n",
-        "stderr": "warning: unnecessary parentheses around assigned value\n  --> src/main.rs:80:12\n   |\n80 | ... = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n   |       ^                                                                                                                                ^\n   |\n   = note: `#[warn(unused_parens)]` (part of `#[warn(unused)]`) on by default\nhelp: remove these parentheses\n   |\n80 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n80 + let time = ((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0;\n   |\n\nwarning: unnecessary parentheses around function argument\n  --> src/main.rs:80:62\n   |\n80 | ...dex(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n   |                                ^                                                                       ^\n   |\nhelp: remove these parentheses\n   |\n80 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n80 + let time = (((*hgl_store::list_index(&(self.configuration0), (*self.generator_local0.as_ref().expect(\"initialized generator local\")))?)).0);\n   |\n\nwarning: unnecessary parentheses around assigned value\n  --> src/main.rs:81:64\n   |\n81 | ...figuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<Glo...\n   |                                ^                                                                       ^\n   |\nhelp: remove these parentheses\n   |\n81 - let payload = ({let parent=self.configuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n81 + let payload = ({let parent=self.configuration_slot0; let index=(*self.generator_local0.as_ref().expect(\"initialized generator local\")); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n   |\n\nwarning: unused variable: `layout`\n  --> src/main.rs:10:306\n   |\n10 | ...ots.1.flatten(field); let layout = rest; }\n   |                              ^^^^^^ help: if this is intentional, prefix it with an underscore: `_layout`\n   |\n   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `ports`\n   --> src/main.rs:107:10\n    |\n107 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError>{Err(hgl_describe::BuildError::InvalidNodeType {...\n    |          ^^^^^ help: if this is intentional, prefix it with an underscore: `_ports`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:144:90\n    |\n144 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n    |\n    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:219:20\n    |\n219 | let local0 = { let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items };\n    |                    ----^^^^^\n    |                    |\n    |                    help: remove this `mut`\n\nwarning: unused variable: `now`\n   --> src/main.rs:227:48\n    |\n227 | {let prepared_item0=_ctx.evaluation_time();let now=_ctx.evaluation_time();let list=local1;let mut prepared=_ctx.prepared();let (obs...\n    |                                                ^^^ help: if this is intentional, prefix it with an underscore: `_now`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:243:90\n    |\n243 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n\nwarning: unused variable: `keys`\n   --> src/main.rs:270:19\n    |\n270 | fn prepare_static(keys:&mut hgl_store::Keys)->Result<(),String> { Ok(())}\n    |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_keys`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:285:1284\n    |\n285 | ...{let value=(||->hgl_types::NodeResult<_>{Ok({ let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items })})().map_err...\n    |                                                      ----^^^^^\n    |                                                      |\n    |                                                      help: remove this `mut`\n\nwarning: unused variable: `empty`\n   --> src/main.rs:286:172\n    |\n286 | ...hgl_types::NodeResult {let empty=FiniteTopology::default();store.prepared().prepare_scalar::<i64>(built.outputs[graph.nodes.iter...\n    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_empty`\n\nwarning: associated functions `key_slot_id` and `copy_key` are never used\n  --> src/main.rs:39:4\n   |\n38 | impl GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e {\n   | ----------------------------------------------------------------------- associated functions in this implementation\n39 | fn key_slot_id(keys:&hgl_store::Keys,source:&hgl_store::ValueColumns,slot:hgl_store::ValueSlot<Self>)->hgl_types::NodeResult<i64> {k...\n   |    ^^^^^^^^^^^\n40 | fn copy_key(keys:&hgl_store::Keys,id:i64,columns:&mut hgl_store::ValueColumns,slot:hgl_store::ValueSlot<Self>)->hgl_types::NodeResul...\n   |    ^^^^^^^^\n   |\n   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:120:1\n    |\n119 | struct Node1 {\n    |        ----- field in this struct\n120 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: field `configuration0` is never read\n   --> src/main.rs:156:1\n    |\n150 | struct Node2 {\n    |        ----- field in this struct\n...\n156 | configuration0: i64,configuration_slot0:hgl_store::ValueSlot<i64>,\n    | ^^^^^^^^^^^^^^\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:213:1\n    |\n211 | struct Node3 {\n    |        ----- field in this struct\n212 | global0: hgl_store::Global<hgl_store::List<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e, -1>>,\n213 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: function `register` is never used\n   --> src/main.rs:251:8\n    |\n251 | pub fn register(registry: &mut hgl_describe::Registry) -> Result<(),hgl_describe::BuildError> {\n    |        ^^^^^^^^\n\nwarning: field `children` is never read\n   --> src/main.rs:283:43\n    |\n283 | #[derive(Default)] struct FiniteTopology {children:std::collections::BTreeMap<i64,FiniteTopology>}\n    |                           --------------  ^^^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `limit0` is never read\n   --> src/main.rs:284:58\n    |\n284 | #[derive(Default)] struct FiniteCapacity {arrivals:usize,limit0:usize,limit1:usize,limit2:usize,limit3:usize,limit4:usize,}\n    |                           --------------                 ^^^^^^\n    |                           |\n    |                           field in this struct\n\nconformance.negative_testing.runtime_wrong_code::wrong_code ... FAILED: expected yield.non_increasing_time: NodeError { node: NodeId(1), label: \"conformance.negative_testing.runtime_wrong_code::negative#2\", phase: Eval, message: \"generator negative yield duration\", code: Some(\"yield.negative_duration\"), cleanup: [] }\ntest build/run failed: exit status: 1\n",
+        "stdout": "conformance.negative_testing.runtime_wrong_code::wrong_code ... FAILED [executed]\n1 executed tests, 0 evaluations, 1 failures\n",
+        "stderr": "warning: unnecessary parentheses around assigned value\n  --> src/main.rs:80:12\n   |\n80 | ... = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n   |       ^                                                                                                                                ^\n   |\n   = note: `#[warn(unused_parens)]` (part of `#[warn(unused)]`) on by default\nhelp: remove these parentheses\n   |\n80 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n80 + let time = ((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0;\n   |\n\nwarning: unnecessary parentheses around function argument\n  --> src/main.rs:80:62\n   |\n80 | ...dex(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n   |                                ^                                                                       ^\n   |\nhelp: remove these parentheses\n   |\n80 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n80 + let time = (((*hgl_store::list_index(&(self.configuration0), (*self.generator_local0.as_ref().expect(\"initialized generator local\")))?)).0);\n   |\n\nwarning: unnecessary parentheses around assigned value\n  --> src/main.rs:81:64\n   |\n81 | ...figuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<Glo...\n   |                                ^                                                                       ^\n   |\nhelp: remove these parentheses\n   |\n81 - let payload = ({let parent=self.configuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n81 + let payload = ({let parent=self.configuration_slot0; let index=(*self.generator_local0.as_ref().expect(\"initialized generator local\")); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n   |\n\nwarning: unused variable: `layout`\n  --> src/main.rs:10:306\n   |\n10 | ...ots.1.flatten(field); let layout = rest; }\n   |                              ^^^^^^ help: if this is intentional, prefix it with an underscore: `_layout`\n   |\n   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `ports`\n   --> src/main.rs:107:10\n    |\n107 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError>{Err(hgl_describe::BuildError::InvalidNodeType {...\n    |          ^^^^^ help: if this is intentional, prefix it with an underscore: `_ports`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:144:90\n    |\n144 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n    |\n    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:219:20\n    |\n219 | let local0 = { let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items };\n    |                    ----^^^^^\n    |                    |\n    |                    help: remove this `mut`\n\nwarning: unused variable: `now`\n   --> src/main.rs:227:48\n    |\n227 | {let prepared_item0=_ctx.evaluation_time();let now=_ctx.evaluation_time();let list=local1;let mut prepared=_ctx.prepared();let (obs...\n    |                                                ^^^ help: if this is intentional, prefix it with an underscore: `_now`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:243:90\n    |\n243 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n\nwarning: unused variable: `keys`\n   --> src/main.rs:270:19\n    |\n270 | fn prepare_static(keys:&mut hgl_store::Keys)->Result<(),String> { Ok(())}\n    |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_keys`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:285:1284\n    |\n285 | ...{let value=(||->hgl_types::NodeResult<_>{Ok({ let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items })})().map_err...\n    |                                                      ----^^^^^\n    |                                                      |\n    |                                                      help: remove this `mut`\n\nwarning: unused variable: `empty`\n   --> src/main.rs:286:172\n    |\n286 | ...hgl_types::NodeResult {let empty=FiniteTopology::default();store.prepared().prepare_scalar::<i64>(built.outputs[graph.nodes.iter...\n    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_empty`\n\nwarning: associated functions `key_slot_id` and `copy_key` are never used\n  --> src/main.rs:39:4\n   |\n38 | impl GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e {\n   | ----------------------------------------------------------------------- associated functions in this implementation\n39 | fn key_slot_id(keys:&hgl_store::Keys,source:&hgl_store::ValueColumns,slot:hgl_store::ValueSlot<Self>)->hgl_types::NodeResult<i64> {k...\n   |    ^^^^^^^^^^^\n40 | fn copy_key(keys:&hgl_store::Keys,id:i64,columns:&mut hgl_store::ValueColumns,slot:hgl_store::ValueSlot<Self>)->hgl_types::NodeResul...\n   |    ^^^^^^^^\n   |\n   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:120:1\n    |\n119 | struct Node1 {\n    |        ----- field in this struct\n120 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: field `configuration0` is never read\n   --> src/main.rs:156:1\n    |\n150 | struct Node2 {\n    |        ----- field in this struct\n...\n156 | configuration0: i64,configuration_slot0:hgl_store::ValueSlot<i64>,\n    | ^^^^^^^^^^^^^^\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:213:1\n    |\n211 | struct Node3 {\n    |        ----- field in this struct\n212 | global0: hgl_store::Global<hgl_store::List<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e, -1>>,\n213 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: function `register` is never used\n   --> src/main.rs:251:8\n    |\n251 | pub fn register(registry: &mut hgl_describe::Registry) -> Result<(),hgl_describe::BuildError> {\n    |        ^^^^^^^^\n\nwarning: field `children` is never read\n   --> src/main.rs:283:43\n    |\n283 | #[derive(Default)] struct FiniteTopology {children:std::collections::BTreeMap<i64,FiniteTopology>}\n    |                           --------------  ^^^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `limit0` is never read\n   --> src/main.rs:284:58\n    |\n284 | #[derive(Default)] struct FiniteCapacity {arrivals:usize,limit0:usize,limit1:usize,limit2:usize,limit3:usize,limit4:usize,}\n    |                           --------------                 ^^^^^^\n    |                           |\n    |                           field in this struct\n\nexpected yield.non_increasing_time: NodeError { node: NodeId(1), label: \"conformance.negative_testing.runtime_wrong_code::negative#2\", phase: Eval, message: \"generator negative yield duration\", code: Some(\"yield.negative_duration\"), cleanup: [] }\nexecuted tests failed\n",
         "timed_out": false
       },
       "matches": true
@@ -209,6 +587,22 @@
       "mode": "test",
       "expected_exit": 1,
       "source_sha256": "a78834b2bf78a74550cc0c8b7c8cc00a9b69f24c43d955f8eea83acd240f0e83",
+      "part_sources": [],
+      "expected": {
+        "file": "controls/runtime-assertion-failure.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "An ordinary assertion failure cannot satisfy raises.",
+        "id": "runtime-assertion-failure",
+        "preflight": true,
+        "runtime_results": [
+          {
+            "name": "assertion_failure",
+            "outcome": "failed"
+          }
+        ],
+        "rejection_results": []
+      },
       "source_check": {
         "returncode": 0,
         "stdout": "",
@@ -217,8 +611,8 @@
       },
       "run": {
         "returncode": 1,
-        "stdout": "1 tests, 0 evaluations, 1 failures\n",
-        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:584\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nconformance.negative_testing.runtime_assertion_failure::assertion_failure ... FAILED: expected yield.negative_duration: ordinary assertion failed\ntest build/run failed: exit status: 1\n",
+        "stdout": "conformance.negative_testing.runtime_assertion_failure::assertion_failure ... FAILED [executed]\n1 executed tests, 0 evaluations, 1 failures\n",
+        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:584\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nexpected yield.negative_duration: ordinary assertion failed\nexecuted tests failed\n",
         "timed_out": false
       },
       "matches": true
@@ -229,6 +623,22 @@
       "mode": "test",
       "expected_exit": 1,
       "source_sha256": "fb70936a4a524dce741f57e64ab614c036fb96b8561b7f9bccacdcacfacd43e2",
+      "part_sources": [],
+      "expected": {
+        "file": "controls/runtime-nested-failure.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "A failed inner raises cannot be caught by an outer raises.",
+        "id": "runtime-nested-failure",
+        "preflight": true,
+        "runtime_results": [
+          {
+            "name": "nested_failure",
+            "outcome": "failed"
+          }
+        ],
+        "rejection_results": []
+      },
       "source_check": {
         "returncode": 0,
         "stdout": "",
@@ -237,8 +647,8 @@
       },
       "run": {
         "returncode": 1,
-        "stdout": "1 tests, 0 evaluations, 1 failures\n",
-        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:646\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nconformance.negative_testing.runtime_nested_failure::nested_failure ... FAILED: expected yield.negative_duration: expected yield.negative_duration, block completed normally\ntest build/run failed: exit status: 1\n",
+        "stdout": "conformance.negative_testing.runtime_nested_failure::nested_failure ... FAILED [executed]\n1 executed tests, 0 evaluations, 1 failures\n",
+        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:646\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nexpected yield.negative_duration: expected yield.negative_duration, block completed normally\nexecuted tests failed\n",
         "timed_out": false
       },
       "matches": true
@@ -249,6 +659,22 @@
       "mode": "test",
       "expected_exit": 1,
       "source_sha256": "81d9aaf96d343786e05c87f4ecffca52f699b5a5047fa70387da8d19558d83b9",
+      "part_sources": [],
+      "expected": {
+        "file": "controls/runtime-consumed-inner.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "A successful inner raises consumes its error; outer normal completion fails.",
+        "id": "runtime-consumed-inner",
+        "preflight": true,
+        "runtime_results": [
+          {
+            "name": "consumed_inner",
+            "outcome": "failed"
+          }
+        ],
+        "rejection_results": []
+      },
       "source_check": {
         "returncode": 0,
         "stdout": "",
@@ -257,8 +683,8 @@
       },
       "run": {
         "returncode": 1,
-        "stdout": "1 tests, 0 evaluations, 1 failures\n",
-        "stderr": "warning: unnecessary parentheses around assigned value\n  --> src/main.rs:80:12\n   |\n80 | ... = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n   |       ^                                                                                                                                ^\n   |\n   = note: `#[warn(unused_parens)]` (part of `#[warn(unused)]`) on by default\nhelp: remove these parentheses\n   |\n80 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n80 + let time = ((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0;\n   |\n\nwarning: unnecessary parentheses around function argument\n  --> src/main.rs:80:62\n   |\n80 | ...dex(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n   |                                ^                                                                       ^\n   |\nhelp: remove these parentheses\n   |\n80 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n80 + let time = (((*hgl_store::list_index(&(self.configuration0), (*self.generator_local0.as_ref().expect(\"initialized generator local\")))?)).0);\n   |\n\nwarning: unnecessary parentheses around assigned value\n  --> src/main.rs:81:64\n   |\n81 | ...figuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<Glo...\n   |                                ^                                                                       ^\n   |\nhelp: remove these parentheses\n   |\n81 - let payload = ({let parent=self.configuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n81 + let payload = ({let parent=self.configuration_slot0; let index=(*self.generator_local0.as_ref().expect(\"initialized generator local\")); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n   |\n\nwarning: unused variable: `layout`\n  --> src/main.rs:10:306\n   |\n10 | ...ots.1.flatten(field); let layout = rest; }\n   |                              ^^^^^^ help: if this is intentional, prefix it with an underscore: `_layout`\n   |\n   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `ports`\n   --> src/main.rs:107:10\n    |\n107 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError>{Err(hgl_describe::BuildError::InvalidNodeType {...\n    |          ^^^^^ help: if this is intentional, prefix it with an underscore: `_ports`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:144:90\n    |\n144 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n    |\n    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:219:20\n    |\n219 | let local0 = { let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items };\n    |                    ----^^^^^\n    |                    |\n    |                    help: remove this `mut`\n\nwarning: unused variable: `now`\n   --> src/main.rs:227:48\n    |\n227 | {let prepared_item0=_ctx.evaluation_time();let now=_ctx.evaluation_time();let list=local1;let mut prepared=_ctx.prepared();let (obs...\n    |                                                ^^^ help: if this is intentional, prefix it with an underscore: `_now`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:243:90\n    |\n243 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n\nwarning: unused variable: `keys`\n   --> src/main.rs:270:19\n    |\n270 | fn prepare_static(keys:&mut hgl_store::Keys)->Result<(),String> { Ok(())}\n    |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_keys`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:285:1284\n    |\n285 | ...{let value=(||->hgl_types::NodeResult<_>{Ok({ let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items })})().map_err...\n    |                                                      ----^^^^^\n    |                                                      |\n    |                                                      help: remove this `mut`\n\nwarning: unused variable: `empty`\n   --> src/main.rs:286:172\n    |\n286 | ...hgl_types::NodeResult {let empty=FiniteTopology::default();store.prepared().prepare_scalar::<i64>(built.outputs[graph.nodes.iter...\n    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_empty`\n\nwarning: associated functions `key_slot_id` and `copy_key` are never used\n  --> src/main.rs:39:4\n   |\n38 | impl GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e {\n   | ----------------------------------------------------------------------- associated functions in this implementation\n39 | fn key_slot_id(keys:&hgl_store::Keys,source:&hgl_store::ValueColumns,slot:hgl_store::ValueSlot<Self>)->hgl_types::NodeResult<i64> {k...\n   |    ^^^^^^^^^^^\n40 | fn copy_key(keys:&hgl_store::Keys,id:i64,columns:&mut hgl_store::ValueColumns,slot:hgl_store::ValueSlot<Self>)->hgl_types::NodeResul...\n   |    ^^^^^^^^\n   |\n   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:120:1\n    |\n119 | struct Node1 {\n    |        ----- field in this struct\n120 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: field `configuration0` is never read\n   --> src/main.rs:156:1\n    |\n150 | struct Node2 {\n    |        ----- field in this struct\n...\n156 | configuration0: i64,configuration_slot0:hgl_store::ValueSlot<i64>,\n    | ^^^^^^^^^^^^^^\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:213:1\n    |\n211 | struct Node3 {\n    |        ----- field in this struct\n212 | global0: hgl_store::Global<hgl_store::List<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e, -1>>,\n213 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: function `register` is never used\n   --> src/main.rs:251:8\n    |\n251 | pub fn register(registry: &mut hgl_describe::Registry) -> Result<(),hgl_describe::BuildError> {\n    |        ^^^^^^^^\n\nwarning: field `children` is never read\n   --> src/main.rs:283:43\n    |\n283 | #[derive(Default)] struct FiniteTopology {children:std::collections::BTreeMap<i64,FiniteTopology>}\n    |                           --------------  ^^^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `limit0` is never read\n   --> src/main.rs:284:58\n    |\n284 | #[derive(Default)] struct FiniteCapacity {arrivals:usize,limit0:usize,limit1:usize,limit2:usize,limit3:usize,limit4:usize,}\n    |                           --------------                 ^^^^^^\n    |                           |\n    |                           field in this struct\n\nconformance.negative_testing.runtime_consumed_inner::consumed_inner ... FAILED: expected yield.negative_duration, block completed normally\ntest build/run failed: exit status: 1\n",
+        "stdout": "conformance.negative_testing.runtime_consumed_inner::consumed_inner ... FAILED [executed]\n1 executed tests, 0 evaluations, 1 failures\n",
+        "stderr": "warning: unnecessary parentheses around assigned value\n  --> src/main.rs:80:12\n   |\n80 | ... = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n   |       ^                                                                                                                                ^\n   |\n   = note: `#[warn(unused_parens)]` (part of `#[warn(unused)]`) on by default\nhelp: remove these parentheses\n   |\n80 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n80 + let time = ((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0;\n   |\n\nwarning: unnecessary parentheses around function argument\n  --> src/main.rs:80:62\n   |\n80 | ...dex(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n   |                                ^                                                                       ^\n   |\nhelp: remove these parentheses\n   |\n80 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n80 + let time = (((*hgl_store::list_index(&(self.configuration0), (*self.generator_local0.as_ref().expect(\"initialized generator local\")))?)).0);\n   |\n\nwarning: unnecessary parentheses around assigned value\n  --> src/main.rs:81:64\n   |\n81 | ...figuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<Glo...\n   |                                ^                                                                       ^\n   |\nhelp: remove these parentheses\n   |\n81 - let payload = ({let parent=self.configuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n81 + let payload = ({let parent=self.configuration_slot0; let index=(*self.generator_local0.as_ref().expect(\"initialized generator local\")); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n   |\n\nwarning: unused variable: `layout`\n  --> src/main.rs:10:306\n   |\n10 | ...ots.1.flatten(field); let layout = rest; }\n   |                              ^^^^^^ help: if this is intentional, prefix it with an underscore: `_layout`\n   |\n   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `ports`\n   --> src/main.rs:107:10\n    |\n107 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError>{Err(hgl_describe::BuildError::InvalidNodeType {...\n    |          ^^^^^ help: if this is intentional, prefix it with an underscore: `_ports`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:144:90\n    |\n144 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n    |\n    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:219:20\n    |\n219 | let local0 = { let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items };\n    |                    ----^^^^^\n    |                    |\n    |                    help: remove this `mut`\n\nwarning: unused variable: `now`\n   --> src/main.rs:227:48\n    |\n227 | {let prepared_item0=_ctx.evaluation_time();let now=_ctx.evaluation_time();let list=local1;let mut prepared=_ctx.prepared();let (obs...\n    |                                                ^^^ help: if this is intentional, prefix it with an underscore: `_now`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:243:90\n    |\n243 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n\nwarning: unused variable: `keys`\n   --> src/main.rs:270:19\n    |\n270 | fn prepare_static(keys:&mut hgl_store::Keys)->Result<(),String> { Ok(())}\n    |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_keys`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:285:1284\n    |\n285 | ...{let value=(||->hgl_types::NodeResult<_>{Ok({ let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items })})().map_err...\n    |                                                      ----^^^^^\n    |                                                      |\n    |                                                      help: remove this `mut`\n\nwarning: unused variable: `empty`\n   --> src/main.rs:286:172\n    |\n286 | ...hgl_types::NodeResult {let empty=FiniteTopology::default();store.prepared().prepare_scalar::<i64>(built.outputs[graph.nodes.iter...\n    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_empty`\n\nwarning: associated functions `key_slot_id` and `copy_key` are never used\n  --> src/main.rs:39:4\n   |\n38 | impl GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e {\n   | ----------------------------------------------------------------------- associated functions in this implementation\n39 | fn key_slot_id(keys:&hgl_store::Keys,source:&hgl_store::ValueColumns,slot:hgl_store::ValueSlot<Self>)->hgl_types::NodeResult<i64> {k...\n   |    ^^^^^^^^^^^\n40 | fn copy_key(keys:&hgl_store::Keys,id:i64,columns:&mut hgl_store::ValueColumns,slot:hgl_store::ValueSlot<Self>)->hgl_types::NodeResul...\n   |    ^^^^^^^^\n   |\n   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:120:1\n    |\n119 | struct Node1 {\n    |        ----- field in this struct\n120 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: field `configuration0` is never read\n   --> src/main.rs:156:1\n    |\n150 | struct Node2 {\n    |        ----- field in this struct\n...\n156 | configuration0: i64,configuration_slot0:hgl_store::ValueSlot<i64>,\n    | ^^^^^^^^^^^^^^\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:213:1\n    |\n211 | struct Node3 {\n    |        ----- field in this struct\n212 | global0: hgl_store::Global<hgl_store::List<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e, -1>>,\n213 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: function `register` is never used\n   --> src/main.rs:251:8\n    |\n251 | pub fn register(registry: &mut hgl_describe::Registry) -> Result<(),hgl_describe::BuildError> {\n    |        ^^^^^^^^\n\nwarning: field `children` is never read\n   --> src/main.rs:283:43\n    |\n283 | #[derive(Default)] struct FiniteTopology {children:std::collections::BTreeMap<i64,FiniteTopology>}\n    |                           --------------  ^^^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `limit0` is never read\n   --> src/main.rs:284:58\n    |\n284 | #[derive(Default)] struct FiniteCapacity {arrivals:usize,limit0:usize,limit1:usize,limit2:usize,limit3:usize,limit4:usize,}\n    |                           --------------                 ^^^^^^\n    |                           |\n    |                           field in this struct\n\nexpected yield.negative_duration, block completed normally\nexecuted tests failed\n",
         "timed_out": false
       },
       "matches": true
@@ -266,13 +692,30 @@
     {
       "id": "reject-valid-source",
       "file": "controls/reject-valid-source.hgl",
-      "mode": "reject",
+      "mode": "test",
       "expected_exit": 1,
       "source_sha256": "aa6e26f6884b73368c37854e97beb6a98c800bb290c49eee9a57641b60672cf9",
+      "part_sources": [],
+      "expected": {
+        "file": "controls/reject-valid-source.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "An expected source error cannot match successful source checking.",
+        "id": "reject-valid-source",
+        "preflight": false,
+        "rejection_results": [
+          {
+            "file": "controls/reject-valid-source.hgl",
+            "owner_line": 4,
+            "outcome": "failed",
+            "identity": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-valid-source.hgl:4"
+          }
+        ]
+      },
       "run": {
         "returncode": 1,
-        "stdout": "",
-        "stderr": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-valid-source.hgl:4: missing type[rolling.size_kind]\n",
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-valid-source.hgl:4 identity ... FAILED [rejection]\n1 rejection cases, 1 failures\n",
+        "stderr": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-valid-source.hgl:4 identity: /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-valid-source.hgl:4: missing type[rolling.size_kind]\n1 rejection cases failed\n",
         "timed_out": false
       },
       "matches": true
@@ -280,13 +723,30 @@
     {
       "id": "reject-wrong-code",
       "file": "controls/reject-wrong-code.hgl",
-      "mode": "reject",
+      "mode": "test",
       "expected_exit": 1,
       "source_sha256": "8655089b15cac6086269df27e36db8a0d3508b4b734501f061ea1cf9ecbea2a1",
+      "part_sources": [],
+      "expected": {
+        "file": "controls/reject-wrong-code.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "Another known error code cannot satisfy an expectation.",
+        "id": "reject-wrong-code",
+        "preflight": false,
+        "rejection_results": [
+          {
+            "file": "controls/reject-wrong-code.hgl",
+            "owner_line": 4,
+            "outcome": "failed",
+            "identity": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-wrong-code.hgl:4"
+          }
+        ]
+      },
       "run": {
         "returncode": 1,
-        "stdout": "",
-        "stderr": "unexpected /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-wrong-code.hgl:4:36: type[rolling.size_kind]: rolling sizes require constants of the same i64 or duration kind\n/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-wrong-code.hgl:4: missing type[rolling.size_bounds]\n",
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-wrong-code.hgl:4 consume ... FAILED [rejection]\n1 rejection cases, 1 failures\n",
+        "stderr": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-wrong-code.hgl:4 consume: unexpected /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-wrong-code.hgl:4:36: type[rolling.size_kind]: rolling sizes require constants of the same i64 or duration kind\n/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-wrong-code.hgl:4: missing type[rolling.size_bounds]\n1 rejection cases failed\n",
         "timed_out": false
       },
       "matches": true
@@ -294,13 +754,23 @@
     {
       "id": "reject-wrong-location",
       "file": "controls/reject-wrong-location.hgl",
-      "mode": "reject",
+      "mode": "test",
       "expected_exit": 1,
       "source_sha256": "c81ba3511df9f3cc7a82481c04ca7a45f8e1c16218a1afae6b9cf71f766c2ec5",
+      "part_sources": [],
+      "expected": {
+        "file": "controls/reject-wrong-location.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "The expectation targets the blank line, not the later error.",
+        "id": "reject-wrong-location",
+        "preflight": false,
+        "rejection_results": []
+      },
       "run": {
         "returncode": 1,
         "stdout": "",
-        "stderr": "unexpected /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-wrong-location.hgl:5:36: type[rolling.size_kind]: rolling sizes require constants of the same i64 or duration kind\n/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-wrong-location.hgl:4: missing type[rolling.size_kind]\n",
+        "stderr": "admission: /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-wrong-location.hgl:4: orphaned expectation or invalid owner\n",
         "timed_out": false
       },
       "matches": true
@@ -308,13 +778,23 @@
     {
       "id": "reject-unexpected-error",
       "file": "controls/reject-unexpected-error.hgl",
-      "mode": "reject",
+      "mode": "test",
       "expected_exit": 1,
       "source_sha256": "669926b7e24a173cdf6e19c1c14ed5152641165b108cc259902d78cb270e9966",
+      "part_sources": [],
+      "expected": {
+        "file": "controls/reject-unexpected-error.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "An extra primary error with no annotation must fail.",
+        "id": "reject-unexpected-error",
+        "preflight": false,
+        "rejection_results": []
+      },
       "run": {
         "returncode": 1,
         "stdout": "",
-        "stderr": "unexpected /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-unexpected-error.hgl:5:34: type[rolling.size_bounds]: rolling requires positive maximum, admitted minimum and Min <= Max\n",
+        "stderr": "admission: /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-unexpected-error.hgl:5:34: type[rolling.size_bounds]: rolling requires positive maximum, admitted minimum and Min <= Max\n",
         "timed_out": false
       },
       "matches": true
@@ -322,13 +802,23 @@
     {
       "id": "reject-malformed-annotation",
       "file": "controls/reject-malformed-annotation.hgl",
-      "mode": "reject",
+      "mode": "test",
       "expected_exit": 1,
       "source_sha256": "acb3cdb3662bfe9532bb18f069f9a5016b581ffd390209ab920d3f07be8232de",
+      "part_sources": [],
+      "expected": {
+        "file": "controls/reject-malformed-annotation.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "Malformed expectation metadata must fail.",
+        "id": "reject-malformed-annotation",
+        "preflight": false,
+        "rejection_results": []
+      },
       "run": {
         "returncode": 1,
         "stdout": "",
-        "stderr": "line 3: invalid expectation: parse[syntax.expected_token]: expected ,, found \"rolling.size_kind\"\n",
+        "stderr": "admission: /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-malformed-annotation.hgl: line 3: invalid expectation: parse[syntax.expected_token]: expected ,, found \"rolling.size_kind\"\n",
         "timed_out": false
       },
       "matches": true
@@ -336,13 +826,23 @@
     {
       "id": "reject-unknown-category",
       "file": "controls/reject-unknown-category.hgl",
-      "mode": "reject",
+      "mode": "test",
       "expected_exit": 1,
       "source_sha256": "bc06e43b58e46fa77e59990438f47e9d971f6c2a202e6e5e05bcf1ceb14ce6f2",
+      "part_sources": [],
+      "expected": {
+        "file": "controls/reject-unknown-category.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "Unknown category names must fail metadata validation.",
+        "id": "reject-unknown-category",
+        "preflight": false,
+        "rejection_results": []
+      },
       "run": {
         "returncode": 1,
         "stdout": "",
-        "stderr": "line 3: invalid expectation: unknown diagnostic category unknown\n",
+        "stderr": "admission: /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-unknown-category.hgl: line 3: invalid expectation: unknown diagnostic category unknown\n",
         "timed_out": false
       },
       "matches": true
@@ -350,13 +850,23 @@
     {
       "id": "reject-unknown-code",
       "file": "controls/reject-unknown-code.hgl",
-      "mode": "reject",
+      "mode": "test",
       "expected_exit": 1,
       "source_sha256": "1436da83e5d8246c1aab0e78dda6f3f1a939dfed8977158bb6cd0aae4f6e6720",
+      "part_sources": [],
+      "expected": {
+        "file": "controls/reject-unknown-code.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "Unknown codes must fail metadata validation.",
+        "id": "reject-unknown-code",
+        "preflight": false,
+        "rejection_results": []
+      },
       "run": {
         "returncode": 1,
         "stdout": "",
-        "stderr": "line 3: invalid expectation: unknown or mismatched category/code type[rolling.unknown]\n",
+        "stderr": "admission: /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-unknown-code.hgl: line 3: invalid expectation: unknown or mismatched category/code type[rolling.unknown]\n",
         "timed_out": false
       },
       "matches": true
@@ -364,13 +874,23 @@
     {
       "id": "reject-category-mismatch",
       "file": "controls/reject-category-mismatch.hgl",
-      "mode": "reject",
+      "mode": "test",
       "expected_exit": 1,
       "source_sha256": "a9e715376f52ca15eb2a537f5b5692abe8c7aff025f4e80f58ad42b2b175b681",
+      "part_sources": [],
+      "expected": {
+        "file": "controls/reject-category-mismatch.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "A listed category/code pair must match the catalogue row.",
+        "id": "reject-category-mismatch",
+        "preflight": false,
+        "rejection_results": []
+      },
       "run": {
         "returncode": 1,
         "stdout": "",
-        "stderr": "line 3: invalid expectation: unknown or mismatched category/code shape[rolling.size_kind]\n",
+        "stderr": "admission: /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-category-mismatch.hgl: line 3: invalid expectation: unknown or mismatched category/code shape[rolling.size_kind]\n",
         "timed_out": false
       },
       "matches": true
@@ -378,13 +898,23 @@
     {
       "id": "reject-build-category",
       "file": "controls/reject-build-category.hgl",
-      "mode": "reject",
+      "mode": "test",
       "expected_exit": 1,
       "source_sha256": "c27bc90d9c5fa9707053969fb400a551f84e5c69285360a1dd374ee4545bae29",
+      "part_sources": [],
+      "expected": {
+        "file": "controls/reject-build-category.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "Build failures are ineligible source-rejection expectations.",
+        "id": "reject-build-category",
+        "preflight": false,
+        "rejection_results": []
+      },
       "run": {
         "returncode": 1,
         "stdout": "",
-        "stderr": "line 3: invalid expectation: build is not an eligible source-rejection category\n",
+        "stderr": "admission: /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-build-category.hgl: line 3: invalid expectation: build is not an eligible source-rejection category\n",
         "timed_out": false
       },
       "matches": true
@@ -392,13 +922,23 @@
     {
       "id": "reject-no-expectation",
       "file": "controls/reject-no-expectation.hgl",
-      "mode": "reject",
+      "mode": "test",
       "expected_exit": 1,
       "source_sha256": "5320dec0b875ec5bf7c89f705e7d7a81a8bb209ec924b42270de2377ca01d299",
+      "part_sources": [],
+      "expected": {
+        "file": "controls/reject-no-expectation.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "Source failure without any expectation is not a passing fixture.",
+        "id": "reject-no-expectation",
+        "preflight": false,
+        "rejection_results": []
+      },
       "run": {
         "returncode": 1,
         "stdout": "",
-        "stderr": "rejection fixture requires at least one expectation\n",
+        "stderr": "admission: /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-no-expectation.hgl:3:36: type[rolling.size_kind]: rolling sizes require constants of the same i64 or duration kind\n",
         "timed_out": false
       },
       "matches": true
@@ -406,13 +946,726 @@
     {
       "id": "comment-text",
       "file": "../../language/examples/reject/comment-text.hgl",
-      "mode": "reject",
+      "mode": "test",
       "expected_exit": 0,
       "source_sha256": "7721e37a03f3d2ee7552877b1fe57adf7463c9e88b07af87fa573426b16cb296",
+      "part_sources": [],
+      "expected": {
+        "id": "comment-text",
+        "file": "../../language/examples/reject/comment-text.hgl",
+        "mode": "test",
+        "expected_exit": 0,
+        "purpose": "Only actual standalone line comments form expectations; string and block-comment text is ignored.",
+        "preflight": false,
+        "rejection_results": [
+          {
+            "file": "../../language/examples/reject/comment-text.hgl",
+            "owner_line": 10,
+            "outcome": "passed",
+            "identity": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/comment-text.hgl:10"
+          }
+        ]
+      },
       "run": {
         "returncode": 0,
-        "stdout": "",
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/comment-text.hgl:10 consume ... ok [rejection]\n1 rejection cases, 0 failures\n",
         "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "mixed",
+      "file": "../../language/examples/reject/mixed.hgl",
+      "mode": "test",
+      "expected_exit": 0,
+      "source_sha256": "3feb453df570a170ecd39445737f4f8797a5f09375494697129b33503903a944",
+      "part_sources": [],
+      "expected": {
+        "id": "mixed",
+        "file": "../../language/examples/reject/mixed.hgl",
+        "mode": "test",
+        "expected_exit": 0,
+        "purpose": "Executable tests before and after declaration/test rejections run; annotated test never executes.",
+        "not_executed": [
+          "rejected_test"
+        ],
+        "preflight": false,
+        "runtime_results": [
+          {
+            "name": "before_rejections",
+            "outcome": "passed"
+          },
+          {
+            "name": "after_rejections",
+            "outcome": "passed"
+          }
+        ],
+        "rejection_results": [
+          {
+            "name": "rejected_test",
+            "outcome": "passed"
+          },
+          {
+            "file": "../../language/examples/reject/mixed.hgl",
+            "owner_line": 8,
+            "outcome": "passed",
+            "identity": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/mixed.hgl:8"
+          }
+        ]
+      },
+      "run": {
+        "returncode": 0,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/mixed.hgl:8 invalid_window ... ok [rejection]\nexamples.reject.mixed::rejected_test ... ok [rejection]\n2 rejection cases, 0 failures\nexamples.reject.mixed::before_rejections ... ok [executed]\nexamples.reject.mixed::after_rejections ... ok [executed]\n2 executed tests, 2 evaluations, 0 failures\n",
+        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused import: `super::*`\n --> src/main.rs:3:17\n  |\n3 | mod test1 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:873\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:3:872\n  |\n3 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "nested-context",
+      "file": "../../language/examples/reject/nested-context.hgl",
+      "mode": "test",
+      "expected_exit": 0,
+      "source_sha256": "0a3a4ea2b2abb54143d57dd5706afa2e4281fa705f9ca8310fdcb707646ab6cb",
+      "part_sources": [],
+      "expected": {
+        "id": "nested-context",
+        "file": "../../language/examples/reject/nested-context.hgl",
+        "mode": "test",
+        "expected_exit": 0,
+        "purpose": "Only annotated inner owners are excluded; surviving helpers remain visible inside and outside the context.",
+        "not_executed": [
+          "rejected_inner"
+        ],
+        "preflight": false,
+        "runtime_results": [
+          {
+            "name": "sibling_runs",
+            "outcome": "passed"
+          },
+          {
+            "name": "outside_runs",
+            "outcome": "passed"
+          }
+        ],
+        "rejection_results": [
+          {
+            "name": "rejected_inner",
+            "outcome": "passed"
+          },
+          {
+            "file": "../../language/examples/reject/nested-context.hgl",
+            "owner_line": 6,
+            "outcome": "passed",
+            "identity": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/nested-context.hgl:6"
+          }
+        ]
+      },
+      "run": {
+        "returncode": 0,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/nested-context.hgl:6 invalid_source ... ok [rejection]\nexamples.reject.nested_context::rejected_inner ... ok [rejection]\n2 rejection cases, 0 failures\nexamples.reject.nested_context::sibling_runs ... ok [executed]\nexamples.reject.nested_context::outside_runs ... ok [executed]\n2 executed tests, 2 evaluations, 0 failures\n",
+        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused import: `super::*`\n --> src/main.rs:3:17\n  |\n3 | mod test1 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:1081\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:3:1081\n  |\n3 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "missing-declaration-name",
+      "file": "../../language/examples/reject/missing-declaration-name.hgl",
+      "mode": "test",
+      "expected_exit": 0,
+      "source_sha256": "871c3f8138cb623a033b7142786e40c04b31beebc2910134bbc82b379ae1f2a0",
+      "part_sources": [],
+      "expected": {
+        "id": "missing-declaration-name",
+        "file": "../../language/examples/reject/missing-declaration-name.hgl",
+        "mode": "test",
+        "expected_exit": 0,
+        "purpose": "A reliably bounded malformed declaration need not have a name.",
+        "preflight": false,
+        "runtime_results": [
+          {
+            "name": "neighbour_runs",
+            "outcome": "passed"
+          }
+        ],
+        "rejection_results": [
+          {
+            "file": "../../language/examples/reject/missing-declaration-name.hgl",
+            "owner_line": 4,
+            "outcome": "passed",
+            "identity": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/missing-declaration-name.hgl:4"
+          }
+        ]
+      },
+      "run": {
+        "returncode": 0,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/missing-declaration-name.hgl:4 ... ok [rejection]\n1 rejection cases, 0 failures\nexamples.reject.missing_declaration_name::neighbour_runs ... ok [executed]\n1 executed tests, 1 evaluations, 0 failures\n",
+        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:497\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "invalid-import",
+      "file": "../../language/examples/reject/invalid-import.hgl",
+      "mode": "test",
+      "expected_exit": 0,
+      "source_sha256": "f13f18af92f621cb673fba5be00f49431114f903043d86c7478d12242593cc38",
+      "part_sources": [],
+      "expected": {
+        "id": "invalid-import",
+        "file": "../../language/examples/reject/invalid-import.hgl",
+        "mode": "test",
+        "expected_exit": 0,
+        "purpose": "A use declaration can own an isolated syntax rejection.",
+        "preflight": false,
+        "runtime_results": [
+          {
+            "name": "neighbour_runs",
+            "outcome": "passed"
+          }
+        ],
+        "rejection_results": [
+          {
+            "file": "../../language/examples/reject/invalid-import.hgl",
+            "owner_line": 4,
+            "outcome": "passed",
+            "identity": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/invalid-import.hgl:4"
+          }
+        ]
+      },
+      "run": {
+        "returncode": 0,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/invalid-import.hgl:4 example ... ok [rejection]\n1 rejection cases, 0 failures\nexamples.reject.invalid_import::neighbour_runs ... ok [executed]\n1 executed tests, 1 evaluations, 0 failures\n",
+        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:487\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "syntax-recovery",
+      "file": "../../language/examples/reject/syntax-recovery.hgl",
+      "mode": "test",
+      "expected_exit": 0,
+      "source_sha256": "a5baf7eb1e62df217174370ef6872d2516935961da9bf84fd81931b5a734c8d7",
+      "part_sources": [],
+      "expected": {
+        "id": "syntax-recovery",
+        "file": "../../language/examples/reject/syntax-recovery.hgl",
+        "mode": "test",
+        "expected_exit": 0,
+        "purpose": "A missing colon inside balanced parameters is isolated without absorbing the next test.",
+        "preflight": false,
+        "runtime_results": [
+          {
+            "name": "neighbour_runs",
+            "outcome": "passed"
+          }
+        ],
+        "rejection_results": [
+          {
+            "file": "../../language/examples/reject/syntax-recovery.hgl",
+            "owner_line": 4,
+            "outcome": "passed",
+            "identity": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/syntax-recovery.hgl:4"
+          }
+        ]
+      },
+      "run": {
+        "returncode": 0,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/syntax-recovery.hgl:4 invalid ... ok [rejection]\n1 rejection cases, 0 failures\nexamples.reject.syntax_recovery::neighbour_runs ... ok [executed]\n1 executed tests, 1 evaluations, 0 failures\n",
+        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:488\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "mixed-rejection-mismatch",
+      "file": "controls/mixed-rejection-mismatch.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "39a1bf7c4f465e389f719bba592984a0927239d3f6c44a59f393059891b6253e",
+      "part_sources": [],
+      "expected": {
+        "id": "mixed-rejection-mismatch",
+        "file": "controls/mixed-rejection-mismatch.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "A rejection mismatch fails its case but the admitted runtime sentinel still executes.",
+        "preflight": false,
+        "runtime_results": [
+          {
+            "name": "runtime_sentinel",
+            "outcome": "passed"
+          }
+        ],
+        "rejection_results": [
+          {
+            "file": "controls/mixed-rejection-mismatch.hgl",
+            "owner_line": 4,
+            "outcome": "failed",
+            "identity": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/mixed-rejection-mismatch.hgl:4"
+          }
+        ]
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/mixed-rejection-mismatch.hgl:4 invalid_window ... FAILED [rejection]\n1 rejection cases, 1 failures\nconformance.negative_testing.mixed_rejection_mismatch::runtime_sentinel ... ok [executed]\n1 executed tests, 1 evaluations, 0 failures\n",
+        "stderr": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/mixed-rejection-mismatch.hgl:4 invalid_window: unexpected /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/mixed-rejection-mismatch.hgl:4:43: type[rolling.size_kind]: rolling sizes require constants of the same i64 or duration kind\n/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/mixed-rejection-mismatch.hgl:4: missing type[rolling.size_bounds]\nwarning: unnecessary parentheses around assigned value\n  --> src/main.rs:80:12\n   |\n80 | ... = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n   |       ^                                                                                                                                ^\n   |\n   = note: `#[warn(unused_parens)]` (part of `#[warn(unused)]`) on by default\nhelp: remove these parentheses\n   |\n80 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n80 + let time = ((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0;\n   |\n\nwarning: unnecessary parentheses around function argument\n  --> src/main.rs:80:62\n   |\n80 | ...dex(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n   |                                ^                                                                       ^\n   |\nhelp: remove these parentheses\n   |\n80 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n80 + let time = (((*hgl_store::list_index(&(self.configuration0), (*self.generator_local0.as_ref().expect(\"initialized generator local\")))?)).0);\n   |\n\nwarning: unnecessary parentheses around assigned value\n  --> src/main.rs:81:64\n   |\n81 | ...figuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<Glo...\n   |                                ^                                                                       ^\n   |\nhelp: remove these parentheses\n   |\n81 - let payload = ({let parent=self.configuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n81 + let payload = ({let parent=self.configuration_slot0; let index=(*self.generator_local0.as_ref().expect(\"initialized generator local\")); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n   |\n\nwarning: unused variable: `layout`\n  --> src/main.rs:10:306\n   |\n10 | ...ots.1.flatten(field); let layout = rest; }\n   |                              ^^^^^^ help: if this is intentional, prefix it with an underscore: `_layout`\n   |\n   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `ports`\n   --> src/main.rs:107:10\n    |\n107 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError>{Err(hgl_describe::BuildError::InvalidNodeType {...\n    |          ^^^^^ help: if this is intentional, prefix it with an underscore: `_ports`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:127:20\n    |\n127 | let local0 = { let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items };\n    |                    ----^^^^^\n    |                    |\n    |                    help: remove this `mut`\n    |\n    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `now`\n   --> src/main.rs:135:48\n    |\n135 | {let prepared_item0=_ctx.evaluation_time();let now=_ctx.evaluation_time();let list=local1;let mut prepared=_ctx.prepared();let (obs...\n    |                                                ^^^ help: if this is intentional, prefix it with an underscore: `_now`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:151:90\n    |\n151 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n\nwarning: unused variable: `keys`\n   --> src/main.rs:173:19\n    |\n173 | fn prepare_static(keys:&mut hgl_store::Keys)->Result<(),String> { Ok(())}\n    |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_keys`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:188:960\n    |\n188 | ...{let value=(||->hgl_types::NodeResult<_>{Ok({ let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items })})().map_err...\n    |                                                      ----^^^^^\n    |                                                      |\n    |                                                      help: remove this `mut`\n\nwarning: unused variable: `empty`\n   --> src/main.rs:189:172\n    |\n189 | ...hgl_types::NodeResult {let empty=FiniteTopology::default();store.prepared().prepare_scalar::<i64>(built.outputs[graph.nodes.iter...\n    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_empty`\n\nwarning: associated functions `key_slot_id` and `copy_key` are never used\n  --> src/main.rs:39:4\n   |\n38 | impl GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e {\n   | ----------------------------------------------------------------------- associated functions in this implementation\n39 | fn key_slot_id(keys:&hgl_store::Keys,source:&hgl_store::ValueColumns,slot:hgl_store::ValueSlot<Self>)->hgl_types::NodeResult<i64> {k...\n   |    ^^^^^^^^^^^\n40 | fn copy_key(keys:&hgl_store::Keys,id:i64,columns:&mut hgl_store::ValueColumns,slot:hgl_store::ValueSlot<Self>)->hgl_types::NodeResul...\n   |    ^^^^^^^^\n   |\n   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:121:1\n    |\n119 | struct Node1 {\n    |        ----- field in this struct\n120 | global0: hgl_store::Global<hgl_store::List<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e, -1>>,\n121 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: function `register` is never used\n   --> src/main.rs:159:8\n    |\n159 | pub fn register(registry: &mut hgl_describe::Registry) -> Result<(),hgl_describe::BuildError> {\n    |        ^^^^^^^^\n\nwarning: field `children` is never read\n   --> src/main.rs:186:43\n    |\n186 | #[derive(Default)] struct FiniteTopology {children:std::collections::BTreeMap<i64,FiniteTopology>}\n    |                           --------------  ^^^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `limit0` is never read\n   --> src/main.rs:187:58\n    |\n187 | #[derive(Default)] struct FiniteCapacity {arrivals:usize,limit0:usize,limit1:usize,limit2:usize,limit3:usize,}\n    |                           --------------                 ^^^^^^\n    |                           |\n    |                           field in this struct\n\n1 rejection cases failed\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "runtime-failure-with-rejection",
+      "file": "controls/runtime-failure-with-rejection.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "7b3623bccfa4bdbdbde9ef5a95c6b1c41113229e62b76c334dab6478a6870847",
+      "part_sources": [],
+      "expected": {
+        "id": "runtime-failure-with-rejection",
+        "file": "controls/runtime-failure-with-rejection.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "Runtime assertion failure remains distinct from the passing source rejection.",
+        "preflight": false,
+        "runtime_results": [
+          {
+            "name": "runtime_failure",
+            "outcome": "failed"
+          }
+        ],
+        "rejection_results": [
+          {
+            "file": "controls/runtime-failure-with-rejection.hgl",
+            "owner_line": 4,
+            "outcome": "passed",
+            "identity": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/runtime-failure-with-rejection.hgl:4"
+          }
+        ]
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/runtime-failure-with-rejection.hgl:4 invalid_window ... ok [rejection]\n1 rejection cases, 0 failures\nconformance.negative_testing.runtime_failure_with_rejection::runtime_failure ... FAILED [executed]\n1 executed tests, 0 evaluations, 1 failures\n",
+        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:518\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nordinary assertion failed\nexecuted tests failed\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "dependency-on-excluded",
+      "file": "controls/dependency-on-excluded.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "19739484bfff5d809ff3fde7e5b20f7a76bf9f351533b19c0b797afaaf1b10cf",
+      "part_sources": [],
+      "expected": {
+        "id": "dependency-on-excluded",
+        "file": "controls/dependency-on-excluded.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "Residual source cannot depend on an excluded declaration; admission fails before execution.",
+        "not_executed": [
+          "must_not_run"
+        ],
+        "preflight": false,
+        "rejection_results": []
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "admission: /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/dependency-on-excluded.hgl:8:23: parse: conformance.negative_testing.dependency_on_excluded::excluded: expected one matching declaration, found 0: unknown callable excluded\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "unsafe-recovery",
+      "file": "controls/unsafe-recovery.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "77554f4a268d34cfbc19c09f62cc1ecf64b8389123fe3ee30bd51bdf6f297cca",
+      "part_sources": [],
+      "expected": {
+        "id": "unsafe-recovery",
+        "file": "controls/unsafe-recovery.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "Unclosed nested bodies cannot safely donate a boundary to a neighbouring test.",
+        "not_executed": [
+          "must_not_run"
+        ],
+        "preflight": false,
+        "rejection_results": []
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "admission: /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/unsafe-recovery.hgl: ambiguous rejection isolation: unclosed body or test context\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "select-rejection",
+      "file": "controls/selection.hgl",
+      "mode": "test",
+      "expected_exit": 0,
+      "source_sha256": "82b99a6bfd33197faf485e1a1dfd26793490811481f02097cebbe891053edef7",
+      "part_sources": [],
+      "expected": {
+        "id": "select-rejection",
+        "file": "controls/selection.hgl",
+        "mode": "test",
+        "expected_exit": 0,
+        "purpose": "Select a named rejection test; the unselected mismatched rejection is not checked.",
+        "select": [
+          "selected_rejection"
+        ],
+        "not_executed": [
+          "selected_rejection",
+          "mismatched_rejection",
+          "selected_runtime"
+        ],
+        "preflight": false,
+        "rejection_results": [
+          {
+            "name": "selected_rejection",
+            "outcome": "passed"
+          },
+          {
+            "file": "controls/selection.hgl",
+            "owner_line": 4,
+            "outcome": "passed",
+            "identity": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/selection.hgl:4"
+          }
+        ]
+      },
+      "run": {
+        "returncode": 0,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/selection.hgl:4 always_checked ... ok [rejection]\nconformance.negative_testing.selection::selected_rejection ... ok [rejection]\n2 rejection cases, 0 failures\n",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "select-runtime",
+      "file": "controls/selection.hgl",
+      "mode": "test",
+      "expected_exit": 0,
+      "source_sha256": "82b99a6bfd33197faf485e1a1dfd26793490811481f02097cebbe891053edef7",
+      "part_sources": [],
+      "expected": {
+        "id": "select-runtime",
+        "file": "controls/selection.hgl",
+        "mode": "test",
+        "expected_exit": 0,
+        "purpose": "Selected runtime test runs while unselected named rejection bodies are excluded.",
+        "select": [
+          "selected_runtime"
+        ],
+        "not_executed": [
+          "selected_rejection",
+          "mismatched_rejection"
+        ],
+        "preflight": false,
+        "runtime_results": [
+          {
+            "name": "selected_runtime",
+            "outcome": "passed"
+          }
+        ],
+        "rejection_results": [
+          {
+            "file": "controls/selection.hgl",
+            "owner_line": 4,
+            "outcome": "passed",
+            "identity": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/selection.hgl:4"
+          }
+        ]
+      },
+      "run": {
+        "returncode": 0,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/selection.hgl:4 always_checked ... ok [rejection]\n1 rejection cases, 0 failures\nconformance.negative_testing.selection::selected_runtime ... ok [executed]\n1 executed tests, 1 evaluations, 0 failures\n",
+        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:497\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "select-mismatch",
+      "file": "controls/selection.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "82b99a6bfd33197faf485e1a1dfd26793490811481f02097cebbe891053edef7",
+      "part_sources": [],
+      "expected": {
+        "id": "select-mismatch",
+        "file": "controls/selection.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "Selecting a normally successful annotated test fails its expected rejection.",
+        "select": [
+          "mismatched_rejection"
+        ],
+        "not_executed": [
+          "selected_rejection",
+          "mismatched_rejection",
+          "selected_runtime"
+        ],
+        "preflight": false,
+        "rejection_results": [
+          {
+            "name": "mismatched_rejection",
+            "outcome": "failed"
+          },
+          {
+            "file": "controls/selection.hgl",
+            "owner_line": 4,
+            "outcome": "passed",
+            "identity": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/selection.hgl:4"
+          }
+        ]
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/selection.hgl:4 always_checked ... ok [rejection]\nconformance.negative_testing.selection::mismatched_rejection ... FAILED [rejection]\n2 rejection cases, 1 failures\n",
+        "stderr": "conformance.negative_testing.selection::mismatched_rejection: /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/selection.hgl:13: missing type[test.raises_code]\n1 rejection cases failed\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "unknown-selector",
+      "file": "controls/selection.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "82b99a6bfd33197faf485e1a1dfd26793490811481f02097cebbe891053edef7",
+      "part_sources": [],
+      "expected": {
+        "id": "unknown-selector",
+        "file": "controls/selection.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "Unknown test selectors fail admission.",
+        "select": [
+          "missing_test"
+        ],
+        "not_executed": [
+          "selected_runtime"
+        ],
+        "preflight": false,
+        "rejection_results": []
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "admission: unknown test selector missing_test\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "invalid-metadata-unselected",
+      "file": "controls/invalid-metadata-unselected.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "e6387e5dae5f605ec6fb89d60c07f88b8de03472fa673ceec06087c90dc48de2",
+      "part_sources": [],
+      "expected": {
+        "id": "invalid-metadata-unselected",
+        "file": "controls/invalid-metadata-unselected.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "Selection cannot bypass invalid metadata in another named test.",
+        "select": [
+          "must_not_run"
+        ],
+        "not_executed": [
+          "must_not_run"
+        ],
+        "preflight": false,
+        "rejection_results": []
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "admission: /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/invalid-metadata-unselected.hgl: line 4: invalid expectation: unknown diagnostic category unknown\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "mixed-parts",
+      "file": "../../language/examples/reject/mixed-parts/main.hgl",
+      "mode": "test",
+      "expected_exit": 0,
+      "source_sha256": "05d6d6d48ca2cb6f8ecc063082b8845280f638f3eaa69e53ac0b89a584066c26",
+      "part_sources": [
+        {
+          "file": "../../language/examples/reject/mixed-parts/helpers.hgl",
+          "sha256": "63d33906015575310c60c5c502ac3232ef5e7cf50226f78210cd0c4767b7d347"
+        },
+        {
+          "file": "../../language/examples/reject/mixed-parts/cases.hgl",
+          "sha256": "cae3d50ceac97af5c88ae0a70c2d49f2e23d01c2e3a18dcf15e7fccd17b7c0b9"
+        }
+      ],
+      "expected": {
+        "id": "mixed-parts",
+        "file": "../../language/examples/reject/mixed-parts/main.hgl",
+        "mode": "test",
+        "expected_exit": 0,
+        "purpose": "Surviving helpers cross parts, while each expectation keeps its original file/line.",
+        "parts": [
+          "../../language/examples/reject/mixed-parts/helpers.hgl",
+          "../../language/examples/reject/mixed-parts/cases.hgl"
+        ],
+        "not_executed": [
+          "rejected_part_test"
+        ],
+        "preflight": false,
+        "runtime_results": [
+          {
+            "name": "from_main",
+            "outcome": "passed"
+          },
+          {
+            "name": "from_part",
+            "outcome": "passed"
+          }
+        ],
+        "rejection_results": [
+          {
+            "name": "rejected_part_test",
+            "outcome": "passed"
+          },
+          {
+            "file": "../../language/examples/reject/mixed-parts/cases.hgl",
+            "owner_line": 4,
+            "outcome": "passed",
+            "identity": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/mixed-parts/cases.hgl:4"
+          }
+        ]
+      },
+      "run": {
+        "returncode": 0,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/mixed-parts/cases.hgl:4 invalid_window ... ok [rejection]\nexamples.reject.mixed_parts::rejected_part_test ... ok [rejection]\n2 rejection cases, 0 failures\nexamples.reject.mixed_parts::from_main ... ok [executed]\nexamples.reject.mixed_parts::from_part ... ok [executed]\n2 executed tests, 2 evaluations, 0 failures\n",
+        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused import: `super::*`\n --> src/main.rs:3:17\n  |\n3 | mod test1 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:1075\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:3:1075\n  |\n3 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "mixed-parts-selection",
+      "file": "../../language/examples/reject/mixed-parts/main.hgl",
+      "mode": "test",
+      "expected_exit": 0,
+      "source_sha256": "05d6d6d48ca2cb6f8ecc063082b8845280f638f3eaa69e53ac0b89a584066c26",
+      "part_sources": [
+        {
+          "file": "../../language/examples/reject/mixed-parts/helpers.hgl",
+          "sha256": "63d33906015575310c60c5c502ac3232ef5e7cf50226f78210cd0c4767b7d347"
+        },
+        {
+          "file": "../../language/examples/reject/mixed-parts/cases.hgl",
+          "sha256": "cae3d50ceac97af5c88ae0a70c2d49f2e23d01c2e3a18dcf15e7fccd17b7c0b9"
+        }
+      ],
+      "expected": {
+        "id": "mixed-parts-selection",
+        "file": "../../language/examples/reject/mixed-parts/main.hgl",
+        "mode": "test",
+        "expected_exit": 0,
+        "purpose": "Selectors find named rejection tests in other explicit parts.",
+        "parts": [
+          "../../language/examples/reject/mixed-parts/helpers.hgl",
+          "../../language/examples/reject/mixed-parts/cases.hgl"
+        ],
+        "select": [
+          "rejected_part_test"
+        ],
+        "not_executed": [
+          "rejected_part_test",
+          "from_main",
+          "from_part"
+        ],
+        "preflight": false,
+        "rejection_results": [
+          {
+            "name": "rejected_part_test",
+            "outcome": "passed"
+          },
+          {
+            "file": "../../language/examples/reject/mixed-parts/cases.hgl",
+            "owner_line": 4,
+            "outcome": "passed",
+            "identity": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/mixed-parts/cases.hgl:4"
+          }
+        ]
+      },
+      "run": {
+        "returncode": 0,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/mixed-parts/cases.hgl:4 invalid_window ... ok [rejection]\nexamples.reject.mixed_parts::rejected_part_test ... ok [rejection]\n2 rejection cases, 0 failures\n",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "unnamed-context-header",
+      "file": "controls/unnamed-context-header.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "c8b5aa0cd8ae300f9bd6ea43f48e6828c9839d5dce1143b4f15ad1eaa82171cf",
+      "part_sources": [],
+      "expected": {
+        "id": "unnamed-context-header",
+        "file": "controls/unnamed-context-header.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "An annotation targeting an unnamed test-context header is invalid even when an inner helper starts on the same line.",
+        "not_executed": [
+          "must_not_run"
+        ],
+        "preflight": false,
+        "rejection_results": []
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "admission: /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/unnamed-context-header.hgl:4: orphaned expectation or invalid owner\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "generic-dependency-on-excluded",
+      "file": "controls/generic-dependency-on-excluded.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "62004491ffc9c753d7f8446a8f91a8e0cc06ee1b5bad716e6d59d578dc89b38c",
+      "part_sources": [],
+      "expected": {
+        "id": "generic-dependency-on-excluded",
+        "file": "controls/generic-dependency-on-excluded.hgl",
+        "mode": "test",
+        "expected_exit": 1,
+        "purpose": "Deferred generic specialization does not permit an unresolved dependency on an excluded declaration in surviving source.",
+        "not_executed": [
+          "must_not_run"
+        ],
+        "preflight": false,
+        "rejection_results": []
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "admission: /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/generic-dependency-on-excluded.hgl:6:34: parse: conformance.negative_testing.generic_dependency_on_excluded::excluded: expected one matching declaration, found 0: unknown callable excluded\n",
         "timed_out": false
       },
       "matches": true
