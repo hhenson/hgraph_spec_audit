@@ -34,7 +34,8 @@ def matches(case: dict, observed: dict) -> bool:
         checked = observed['source_check']
         if checked['timed_out'] or checked['returncode'] != 0:
             return False
-        if case['expected_exit'] == 1 and ' ... FAILED' not in result['stdout'] + result['stderr']:
+        marker = ' ... FAILED' if case['expected_exit'] == 1 else ' ... ok'
+        if marker not in result['stdout'] + result['stderr']:
             return False
     return True
 

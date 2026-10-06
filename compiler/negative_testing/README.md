@@ -8,7 +8,8 @@ the precise failure. These expectations are established before measurement.
 The fixtures exercise matching execution errors and continuation, nested
 assertions, source rejection and controls that must fail. Runtime controls are
 source-checked separately so a compiler rejection cannot stand in for an
-executed failing test; failing controls must also report a named test failure. Timeouts and abnormal process exits never match.
+executed failing test. Every runtime fixture must report a named test outcome;
+failing controls must report a named test failure. Timeouts and abnormal process exits never match.
 The observer preserves output, binary and source fingerprints, and mismatches;
 it does not infer error identifiers from human-readable messages.
 
@@ -57,7 +58,7 @@ fixture matched its recorded expectation, including controls expected to fail.
 
 All 25 shared cases matched their expected outcomes on Linux for C++
 `83fd507556b6c9c91d8af2d69a3edaf547962c0e` and Rust
-`d9a35cf0df76b3d4b0df7786342f817be5bf1a75`. This includes expected failures:
+`8e56c31bad2e29af32d5b1670cf268b1a9b5b248`. This includes expected failures:
 zero mismatches does not mean every fixture command returned zero.
 
 The catalogue currently covers two execution codes and six source diagnostic

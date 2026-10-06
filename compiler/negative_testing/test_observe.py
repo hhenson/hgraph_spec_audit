@@ -8,6 +8,11 @@ def result(code, stdout='', timed_out=False):
 
 
 class ExpectedFailureEvidence(unittest.TestCase):
+    def test_success_requires_an_executed_named_test(self):
+        case = dict(mode='test', expected_exit=0)
+        self.assertFalse(matches(case, dict(source_check=result(0), run=result(0))))
+        self.assertTrue(matches(case, dict(source_check=result(0), run=result(0, 'sample ... ok'))))
+
     def test_executed_failing_control(self):
         case = dict(mode='test', expected_exit=1)
         self.assertTrue(matches(case, dict(source_check=result(0), run=result(1, 'sample ... FAILED: wrong error'))))
