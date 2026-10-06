@@ -1,0 +1,492 @@
+{
+  "status": "Frozen before any new scenario execution; hypotheses and candidate expectations, not selected HGL semantics.",
+  "cases": [
+    {
+      "id": "empty_set",
+      "shape": "set",
+      "actions": [
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1,
+            2
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1,
+            2
+          ]
+        }
+      ],
+      "rationale": "Present empty publications remain events at each stage; no event on idle. This is the candidate event-preserving expectation, not inferred reference behavior."
+    },
+    {
+      "id": "empty_fixed",
+      "shape": "fixed",
+      "actions": [
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1,
+            2
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1,
+            2
+          ]
+        }
+      ],
+      "rationale": "Present empty publications remain events at each stage; no event on idle. This is the candidate event-preserving expectation, not inferred reference behavior."
+    },
+    {
+      "id": "empty_struct",
+      "shape": "struct",
+      "actions": [
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1,
+            2
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1,
+            2
+          ]
+        }
+      ],
+      "rationale": "Present empty publications remain events at each stage; no event on idle. This is the candidate event-preserving expectation, not inferred reference behavior."
+    },
+    {
+      "id": "empty_map",
+      "shape": "map",
+      "actions": [
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1,
+            2
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1,
+            2
+          ]
+        }
+      ],
+      "rationale": "Present empty publications remain events at each stage; no event on idle. This is the candidate event-preserving expectation, not inferred reference behavior."
+    },
+    {
+      "id": "empty_fixed_zero",
+      "shape": "fixed_zero",
+      "actions": [
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1,
+            2
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1,
+            2
+          ]
+        }
+      ],
+      "rationale": "Present empty publications remain events at each stage; no event on idle. This is the candidate event-preserving expectation, not inferred reference behavior."
+    },
+    {
+      "id": "empty_struct_zero",
+      "shape": "struct_zero",
+      "actions": [
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1,
+            2
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1,
+            2
+          ]
+        }
+      ],
+      "rationale": "Present empty publications remain events at each stage; no event on idle. This is the candidate event-preserving expectation, not inferred reference behavior."
+    },
+    {
+      "id": "whole_scalar",
+      "shape": "scalar",
+      "actions": [
+        "seed",
+        "invalidate",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "cycles.1.source.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        }
+      ],
+      "rationale": "Whole invalidation removes source validity. Guarded publication-only copying cannot read its delta and leaves the previously published destination value."
+    },
+    {
+      "id": "whole_set",
+      "shape": "set",
+      "actions": [
+        "seed",
+        "invalidate",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "cycles.1.source.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        }
+      ],
+      "rationale": "Whole invalidation removes source validity. Guarded publication-only copying cannot read its delta and leaves the previously published destination value."
+    },
+    {
+      "id": "whole_fixed",
+      "shape": "fixed",
+      "actions": [
+        "seed",
+        "invalidate",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "cycles.1.source.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        }
+      ],
+      "rationale": "Whole invalidation removes source validity. Guarded publication-only copying cannot read its delta and leaves the previously published destination value."
+    },
+    {
+      "id": "whole_struct",
+      "shape": "struct",
+      "actions": [
+        "seed",
+        "invalidate",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "cycles.1.source.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        }
+      ],
+      "rationale": "Whole invalidation removes source validity. Guarded publication-only copying cannot read its delta and leaves the previously published destination value."
+    },
+    {
+      "id": "whole_map",
+      "shape": "map",
+      "actions": [
+        "seed",
+        "invalidate",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "cycles.1.source.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        }
+      ],
+      "rationale": "Whole invalidation removes source validity. Guarded publication-only copying cannot read its delta and leaves the previously published destination value."
+    },
+    {
+      "id": "child_fixed",
+      "shape": "fixed",
+      "actions": [
+        "seed",
+        "invalidate_child",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "cycles.1.source.children.0.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.members",
+          "same_as": "cycles.0.source.members"
+        }
+      ],
+      "rationale": "Invalidating a child leaves position/field/key membership; publication-only copying cannot encode that loss of child validity."
+    },
+    {
+      "id": "child_struct",
+      "shape": "struct",
+      "actions": [
+        "seed",
+        "invalidate_child",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "cycles.1.source.children.left.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.left.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.members",
+          "same_as": "cycles.0.source.members"
+        }
+      ],
+      "rationale": "Invalidating a child leaves position/field/key membership; publication-only copying cannot encode that loss of child validity."
+    },
+    {
+      "id": "child_map",
+      "shape": "map",
+      "actions": [
+        "seed",
+        "invalidate_child",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "cycles.1.source.children.7.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.7.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.members",
+          "same_as": "cycles.0.source.members"
+        }
+      ],
+      "rationale": "Invalidating a child leaves position/field/key membership; publication-only copying cannot encode that loss of child validity."
+    },
+    {
+      "id": "invalid_member_map",
+      "shape": "map",
+      "actions": [
+        "seed",
+        "create_invalid",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "cycles.1.source.members",
+          "equals": [
+            "7",
+            "8",
+            "9"
+          ]
+        },
+        {
+          "path": "cycles.1.source.children.9.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.members",
+          "equals": [
+            "7",
+            "8"
+          ]
+        }
+      ],
+      "rationale": "Creating key 9 with no child value changes source membership, but bounded scalar publication data cannot carry that membership creation."
+    },
+    {
+      "id": "cancel_set",
+      "shape": "set",
+      "actions": [
+        "cancel",
+        "cancel",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1,
+            2
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1,
+            2
+          ]
+        }
+      ],
+      "rationale": "Add/remove cancellation creates a real modified empty source publication; repeated events should survive the candidate event-preserving copy."
+    },
+    {
+      "id": "capability_tuple",
+      "shape": "tuple",
+      "actions": [
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "capability",
+          "equals": "supported"
+        }
+      ],
+      "rationale": "Structural shape must be expressible by the genuine public authoring API; an unsupported surface is retained as a scope limit, not substituted with atomic values."
+    },
+    {
+      "id": "capability_growing",
+      "shape": "growing",
+      "actions": [
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "capability",
+          "equals": "supported"
+        }
+      ],
+      "rationale": "Structural shape must be expressible by the genuine public authoring API; an unsupported surface is retained as a scope limit, not substituted with atomic values."
+    }
+  ]
+}
