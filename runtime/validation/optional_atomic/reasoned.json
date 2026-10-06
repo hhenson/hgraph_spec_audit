@@ -1,0 +1,10 @@
+{
+  "contract": "Complete ordinary struct snapshots retain optional field presence, including unset versus zero or an empty list. Omitted optional fields construct unset; replacing an atomic snapshot does not retain old field contents. Owning captures recursively isolate present payloads. Dense silence is distinct from a present struct whose optional fields are unset.",
+  "cases": [
+    "OptionalRecord",
+    "DefaultNoneRecord",
+    "OptionalList"
+  ],
+  "expected_retention": "Earlier captures remain unchanged after source list mutation.",
+  "scope": "Finite atomic structs only; not structural field clearing, general nullable types, recursion or abstract families."
+}

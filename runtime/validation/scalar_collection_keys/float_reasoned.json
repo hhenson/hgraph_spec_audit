@@ -1,0 +1,7 @@
+{
+  "reasoning": "Signed zeros compare equal under ordinary floating equality; key hashes must agree. Positive and negative infinity are distinct reflexive values and should preserve ordinary membership. NaN is not reflexive and the HGL contract is explicitly open; record behavior without selecting an oracle as normative.",
+  "cases": ["signed_zero", "infinities", "nan"],
+  "expected_signed_zero_map_values": [[10], [20], []],
+  "expected_infinity_map_values": [[10, 20], [20]],
+  "nan_policy": "unresolved; observational only"
+}

@@ -1,0 +1,6 @@
+{
+  "reasoning": "An atomic abstract-family endpoint carries a complete value of an exact concrete descendant. Equal-layout descendants remain different values; replacing one member with another retains its concrete tag and all present fields. Equal values still tick, silence is distinct, and owning capture isolates nested mutable data. An abstract parent itself is not constructible. A historical authoring surface that cannot declare an abstract parent must report that absence, not substitute a concrete parent.",
+  "cases": ["declaration", "snapshots", "retention"],
+  "trace": ["First([1])", "First([1])", null, "Second([1])", "First([])"],
+  "excluded": ["multiple inheritance", "recursive abstract families", "cross-module closure", "references", "structural family roots"]
+}

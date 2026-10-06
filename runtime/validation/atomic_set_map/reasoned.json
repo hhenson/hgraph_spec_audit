@@ -1,0 +1,6 @@
+{
+  "reasoning": "Atomic set/map deltas are complete ordinary values. Publications replace the whole value; empty containers publish; repeated equal snapshots still tick; silence is not empty. Owned captures must recursively survive source changes, another capture and another eval.",
+  "cases": ["set_snapshots", "map_snapshots", "set_retention", "map_list_retention"],
+  "patterns": {"snapshots": ["full", "empty", null, "empty", "replacement"], "retention": ["shared", null, "shared"]},
+  "scope": "Finite ordinary set<int>, dict<str,int>, dict<str,list<int>> through TS, not temporal TSS/TSD deltas. Mutable alias divergence must remain explicit. No references or NaN members/keys."
+}

@@ -1,0 +1,13 @@
+{
+  "reasoning": "A growing list delta carries net removed tail positions and sparse modified children. Apply truncation first, then child updates. Appended children count as modified. Generic pass-through must own another output and cannot infer length from a held snapshot. Empty list payload is not an atomic snapshot in this temporal shape.",
+  "cases": {
+    "growth_update_shrink": [[1, 2], [null, 3, 4], null, [5]],
+    "shrink_empty_regrow": [[1, 2], [], [3]],
+    "repeat_child": [[1], [1]],
+    "all_silent": [null, null],
+    "empty": []
+  },
+  "native_size": -1,
+  "historical_size": "Size (FIXED_SIZE=False)",
+  "scope": "Actual public dynamic TSL schemas and sequence input application; preserve availability/errors. No references, child invalidation or claimed HGL syntax."
+}
