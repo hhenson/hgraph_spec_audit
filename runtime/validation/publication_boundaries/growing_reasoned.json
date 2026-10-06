@@ -1,0 +1,198 @@
+{
+  "status": "Frozen after baseline results but before any growing sequence execution. Historical variable-size formation alone was observed; population and membership transitions were not.",
+  "cases": [
+    {
+      "id": "empty_sequence",
+      "actions": [
+        {
+          "assign": []
+        },
+        {
+          "assign": []
+        },
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1,
+            2
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1,
+            2
+          ]
+        }
+      ],
+      "rationale": "Candidate event-preserving empty publications; sequence explicitly requests length zero."
+    },
+    {
+      "id": "invalid_position",
+      "actions": [
+        {
+          "assign": [
+            null
+          ]
+        },
+        "idle",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "cycles.0.source.members",
+          "equals": [
+            "0"
+          ]
+        },
+        {
+          "path": "cycles.0.source.children.0.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.0.forward.members",
+          "equals": []
+        }
+      ],
+      "rationale": "A newly created invalid position has membership with no valid child publication. A publication-only copy is expected to lose this information."
+    },
+    {
+      "id": "grow_invalid_suffix",
+      "actions": [
+        {
+          "assign": [
+            10,
+            20
+          ]
+        },
+        {
+          "assign": [
+            null,
+            null,
+            null
+          ]
+        },
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "cycles.1.source.members",
+          "equals": [
+            "0",
+            "1",
+            "2"
+          ]
+        },
+        {
+          "path": "cycles.1.source.children.2.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        }
+      ],
+      "rationale": "Sequence length grows while existing children retain values; trailing invalid membership is not a valid child publication."
+    },
+    {
+      "id": "whole_growing",
+      "actions": [
+        {
+          "assign": [
+            10,
+            20
+          ]
+        },
+        "invalidate",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "cycles.1.source.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "equals": [
+            10,
+            20
+          ]
+        }
+      ],
+      "rationale": "Whole invalidation cannot pass a guarded publication-only copy."
+    },
+    {
+      "id": "child_growing",
+      "actions": [
+        {
+          "assign": [
+            10,
+            20
+          ]
+        },
+        "invalidate_child",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "cycles.1.source.children.0.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.source.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.1.forward.children.0.valid",
+          "equals": true
+        }
+      ],
+      "rationale": "Child invalidation preserves length and is absent from valid child publication payloads."
+    },
+    {
+      "id": "truncate_control",
+      "actions": [
+        {
+          "assign": [
+            10,
+            20
+          ]
+        },
+        {
+          "assign": [
+            null
+          ]
+        },
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "cycles.1.source.members",
+          "equals": [
+            "0"
+          ]
+        },
+        {
+          "path": "cycles.1.forward.members",
+          "equals": [
+            "0"
+          ]
+        }
+      ],
+      "rationale": "A trailing removal represented explicitly by the runtime list delta should copy; this is a membership-removal control."
+    }
+  ]
+}
