@@ -40,7 +40,7 @@ def main():
         print('released wiring assessment reproduced')
         for folder in ('runtime/validation/descriptions', 'runtime/validation/fixed'):
             subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(work / folder)], check=True)
-    for folder in ('compiler/stdlib', 'compiler/stdlib_eval',
+    for folder in ('compiler/stdlib', 'compiler/stdlib_eval', 'compiler/negative_testing',
                    'runtime/validation/eval_timed_values', 'runtime/validation/generator_operands',
                    'runtime/validation/owned_deltas', 'runtime/validation/recorder_keys',
                    'runtime/validation/generator_negative', 'runtime/validation/generator_ordering',
@@ -70,6 +70,7 @@ def main():
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/recursive_atomic/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/abstract_atomic/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/composite_keys/check.py')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'compiler/negative_testing/check.py')], check=True)
     print('Recorded evidence checked; no fresh runtime measurements were made.')
 
 
