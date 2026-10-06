@@ -42,7 +42,7 @@ def main():
             subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(work / folder)], check=True)
     for folder in ('compiler/stdlib', 'compiler/stdlib_eval', 'compiler/negative_testing',
                    'runtime/validation/eval_timed_values', 'runtime/validation/generator_operands',
-                   'runtime/validation/owned_deltas', 'runtime/validation/recorder_keys',
+                   'runtime/validation/owned_deltas', 'runtime/validation/publication_boundaries', 'runtime/validation/recorder_keys',
                    'runtime/validation/generator_negative', 'runtime/validation/generator_ordering',
                    'runtime/validation/atomic_snapshots', 'runtime/validation/temporal_scalars', 'runtime/validation/strict_zone_names', 'runtime/validation/zoned_time', 'runtime/validation/enum_publications', 'runtime/validation/scalar_collection_keys', 'runtime/validation/atomic_set_map', 'runtime/validation/growing_list', 'runtime/validation/rolling_publications', 'runtime/validation/optional_atomic', 'runtime/validation/recursive_atomic', 'runtime/validation/abstract_atomic', 'runtime/validation/composite_keys'):
         subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(ROOT / folder)], check=True)
@@ -54,6 +54,7 @@ def main():
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/eval_timed_values/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/generator_operands/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/owned_deltas/check.py')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'runtime/validation/publication_boundaries/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/recorder_keys/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/generator_negative/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/generator_ordering/check.py')], check=True)

@@ -64,3 +64,85 @@ never establishes recorder allocation or absence of notifications. JSON null
 in a captured payload and null in the dense adapter must not be conflated;
 explicit sink entries provide publication counts and recorder raw values remain
 separate.
+
+## Narrow source options after measurement
+
+A general event algebra is **not required to test endpoint state**. Existing
+explicit handler selectors can drive a separate observer without requiring
+the watched input to be valid:
+
+```hgl
+fn observe_valid(step: i64, watched: map<i64, i64>) -> bool {
+    when modified(step) && valid(step) {
+        return valid(watched)
+    }
+}
+```
+
+`valid(step)` expressly narrows validity admission to step. Omitting it would
+implicitly require every input and defeat the invalid-state observation.
+For a valid map, `contains(watched, 9)` observes membership even when its child
+is invalid. `items(watched)` retains child identity, so `valid(child)` within
+iteration can return an ordinary scalar invalid-child count. These are
+existing source contracts, not proposed new selectors. Keeping the watched
+value as a dependency orders the observer after its producer; ticking step
+in an otherwise idle cycle exposes held state independently of publications.
+
+Existing `invalidate(out, key)` and `invalidate(out, index)` author map/list
+child invalidation. They preserve membership and do not create new children.
+Current mutation contracts do not expose these additional producer operations:
+
+- Whole-output invalidation (`invalidate(out)` would be a proposed spelling).
+- Named struct or tuple child invalidation.
+- Creating a key or appending a position with an initially invalid child:
+  current insert/upsert/push require an initializing payload.
+
+A later source extension can admit only the needed mutation operations and
+use scalar state observers for conformance. Its precise spelling, preconditions
+and notifications remain specification choices. No delta change is necessary
+for that testing scope. Creating a valid child and invalidating it in the same
+cycle is a distinct experiment, not evidence for creation without an initial
+publication.
+
+If full state **recording and replay** are required, there are two larger options:
+
+1. Preserve `delta<T>` as publication data. Add a distinct, explicitly typed
+   state-change representation only for the required operations and define
+   its independent capture/application API. Existing publication record/replay
+   remains publication-only. Merely adding a timestamp or a present flag cannot
+   encode invalidation or invalid membership.
+2. Redefine the temporal change accessor and delta algebra to include tagged
+   invalidation and membership operations. This would change the valid+modified
+   read domain and scalar `delta<T> = T` reduction, with broad source-contract and
+   generic-code implications. Payload null must not double as invalidation.
+
+These alternatives are not adopted by this audit. The narrow observer/mutation
+route is sufficient to validate state without choosing either full-state replay
+API. The measurements establish why existing publication replay cannot claim
+full-state reconstruction.
+
+Empty publications require a separate decision. The candidate rule “each
+supplied empty delta publishes” would change set/map repeat suppression and
+would introduce events for fixed/struct shapes that currently remain invalid
+when no child has published. It must specify parent validity independently
+of child validity, how zero-child structures behave, modified/time metadata,
+notification, and how apply preserves an empty event through another output.
+An ordinary stored empty delta alone does not settle any of those rules.
+
+Candidate mutation spellings for review (none adopted): `invalidate(out)` for
+the whole output; existing `invalidate(out, key/index)` extended with a
+compile-time field-name selector for a struct and a constant positional selector
+for a tuple; `ensure(out, key)` to create only absent map membership without an
+initial child value; and `push_invalid(out)` to append one invalid list child.
+A specification could choose different spellings. Typed selector checking and
+retention of existing membership/length must be stated explicitly; these do not
+imply that arbitrary writable child endpoint expressions are admitted.
+
+The smaller empty-data option is to retain shape-specific application: empty
+set/map data can establish a valid empty collection initially, repeated empty
+application can be silent, and empty fixed/struct/list data need not publish.
+That option preserves the observed application behavior but abandons the
+candidate event-preserving expectation for explicit empty records. The other
+option is explicit event presence on every application, with parent-validity
+and zero-child implications above. Both need an intentional specification
+choice; neither follows simply from forming an ordinary empty delta value.
