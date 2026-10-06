@@ -1,0 +1,404 @@
+{
+  "measured_at": "2026-10-06T08:07:39.147516+00:00",
+  "backend": "cpp",
+  "source_revision": "cc79c604c04f54b698b26111e2688667ff52983c",
+  "source_revision_verified_by_runner": false,
+  "compiler_sha256": "929c601758b5978a0c5cd1a50b56b66f97e9f927e9c90554dbc8d7a9ac16bf8f",
+  "observer_sha256": "44bbe15571d23a94910f8f188696aedcedbf49a00507cd8113fea6a1c0069382",
+  "manifest_sha256": "90adacf5a585cad2ce23ebb7ee3236133db098ca2bacc6f86f831cdc5187ee50",
+  "parts": [],
+  "cases": [
+    {
+      "id": "execution-errors",
+      "file": "../../language/examples/execution-errors.hgl",
+      "mode": "test",
+      "expected_exit": 0,
+      "source_sha256": "ccf47e7ee6f86e9b342dbd4e4660cb8a1d15a6bfbf5106fa8bf39e27e9e04f60",
+      "source_check": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "run": {
+        "returncode": 0,
+        "stdout": "expected_execution_errors ... ok\nnested_execution_errors ... ok\n2 tests, 0 failed\n",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "missing-parameter-close",
+      "file": "../../language/examples/reject/missing-parameter-close.hgl",
+      "mode": "reject",
+      "expected_exit": 0,
+      "source_sha256": "72e834a6db123392a041da8d802189dcbe1d005ab46dea52eb8f08e578a54f3a",
+      "run": {
+        "returncode": 0,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/missing-parameter-close.hgl: rejection expectations passed\n",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "raises-computed-code",
+      "file": "../../language/examples/reject/raises-computed-code.hgl",
+      "mode": "reject",
+      "expected_exit": 0,
+      "source_sha256": "0e800bf3b6fface6a7486dae9632a2a3cf3763daf03759a0273962fa9f316eca",
+      "run": {
+        "returncode": 0,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/raises-computed-code.hgl: rejection expectations passed\n",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "raises-unknown-code",
+      "file": "../../language/examples/reject/raises-unknown-code.hgl",
+      "mode": "reject",
+      "expected_exit": 0,
+      "source_sha256": "cd3392d599f9320ed469c41d78b6ff477ef6b5e3974e5a464ab6c8e7aa7aa3b5",
+      "run": {
+        "returncode": 0,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/raises-unknown-code.hgl: rejection expectations passed\n",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "rolling-size-bounds",
+      "file": "../../language/examples/reject/rolling-size-bounds.hgl",
+      "mode": "reject",
+      "expected_exit": 0,
+      "source_sha256": "d0e5aef99b000cdb7c4e078ac485db9ec2b1735b0daacaea841403c1dd6818ac",
+      "run": {
+        "returncode": 0,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/rolling-size-bounds.hgl: rejection expectations passed\n",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "rolling-size-kind",
+      "file": "../../language/examples/reject/rolling-size-kind.hgl",
+      "mode": "reject",
+      "expected_exit": 0,
+      "source_sha256": "3024a08bef10a91368c67c0993b73bb9cf117e5060ceb20500fd84f5a1add6dd",
+      "run": {
+        "returncode": 0,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/rolling-size-kind.hgl: rejection expectations passed\n",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "test-inject",
+      "file": "../../language/examples/reject/test-inject.hgl",
+      "mode": "reject",
+      "expected_exit": 0,
+      "source_sha256": "79ee9ede4ce2b6994a40564eb0ba8eeb08a5f893af640dbc6babea91fddc4c95",
+      "run": {
+        "returncode": 0,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/test-inject.hgl: rejection expectations passed\n",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "yield-time-type",
+      "file": "../../language/examples/reject/yield-time-type.hgl",
+      "mode": "reject",
+      "expected_exit": 0,
+      "source_sha256": "185612f0de0bbc3c7e9cc08c825c11b49d24fca7b3cdd6c0ac66f4715b9a54c0",
+      "run": {
+        "returncode": 0,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/yield-time-type.hgl: rejection expectations passed\n",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "runtime-normal-return",
+      "file": "controls/runtime-normal-return.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "e9f39aee6f3ea374ca2ddbb8f030287764bf9abeed0f1d5c8b8658220dbaecd7",
+      "source_check": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "normal_return ... FAILED\n    expected execution error 'yield.negative_duration', but block completed normally\n1 test, 1 failed\n",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "runtime-empty-block",
+      "file": "controls/runtime-empty-block.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "b76731cc438d7cdb851e947e82ba34f452d94fa87df6a7a38f2602fc237eaba0",
+      "source_check": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "empty_block ... FAILED\n    expected execution error 'yield.negative_duration', but block completed normally\n1 test, 1 failed\n",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "runtime-wrong-code",
+      "file": "controls/runtime-wrong-code.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "0665b6871168dfe9343bce70b991095763f45f324aa5d52ed9149f042a6b0270",
+      "source_check": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "wrong_code ... FAILED\n    expected execution error 'yield.non_increasing_time', received 'yield.negative_duration': eval of 'drive_negative' failed: node[1 'conformance.negative_testing.runtime_wrong_code.negative'] evaluate failed: negative duration produced by generator 'conformance.negative_testing.runtime_wrong_code.negative'\n    Activation Back Trace:\n    conformance.negative_testing.runtime_wrong_code.negative[1]\n1 test, 1 failed\n",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "runtime-assertion-failure",
+      "file": "controls/runtime-assertion-failure.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "a78834b2bf78a74550cc0c8b7c8cc00a9b69f24c43d955f8eea83acd240f0e83",
+      "source_check": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "assertion_failure ... FAILED\n    assert failed: false\n1 test, 1 failed\n",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "runtime-nested-failure",
+      "file": "controls/runtime-nested-failure.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "fb70936a4a524dce741f57e64ab614c036fb96b8561b7f9bccacdcacfacd43e2",
+      "source_check": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "nested_failure ... FAILED\n    expected execution error 'yield.negative_duration', but block completed normally\n1 test, 1 failed\n",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "runtime-consumed-inner",
+      "file": "controls/runtime-consumed-inner.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "81d9aaf96d343786e05c87f4ecffca52f699b5a5047fa70387da8d19558d83b9",
+      "source_check": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "consumed_inner ... FAILED\n    expected execution error 'yield.negative_duration', but block completed normally\n1 test, 1 failed\n",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-valid-source",
+      "file": "controls/reject-valid-source.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "aa6e26f6884b73368c37854e97beb6a98c800bb290c49eee9a57641b60672cf9",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-valid-source.hgl:4: missing expected type [rolling.size_kind]\n/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-valid-source.hgl: rejection fixture compiled successfully\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-wrong-code",
+      "file": "controls/reject-wrong-code.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "8655089b15cac6086269df27e36db8a0d3508b4b734501f061ea1cf9ecbea2a1",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "unexpected diagnostic: /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-wrong-code.hgl:4:36: type: [rolling.size_kind] rolling sizes must both be i64 or both be duration\n    fn consume(value: rolling<f64, 5m, 3>) { when { } }\n                                       ^\n/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-wrong-code.hgl:4: missing expected type [rolling.size_bounds]\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-wrong-location",
+      "file": "controls/reject-wrong-location.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "c81ba3511df9f3cc7a82481c04ca7a45f8e1c16218a1afae6b9cf71f766c2ec5",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "unexpected diagnostic: /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-wrong-location.hgl:5:36: type: [rolling.size_kind] rolling sizes must both be i64 or both be duration\n    fn consume(value: rolling<f64, 5m, 3>) { when { } }\n                                       ^\n/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-wrong-location.hgl:4: missing expected type [rolling.size_kind]\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-unexpected-error",
+      "file": "controls/reject-unexpected-error.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "669926b7e24a173cdf6e19c1c14ed5152641165b108cc259902d78cb270e9966",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "unexpected diagnostic: /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-unexpected-error.hgl:5:34: type: [rolling.size_bounds] a rolling minimum size must be positive and no larger than the maximum\n    fn second(value: rolling<f64, 3, 4>) { when { } }\n                                     ^\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-malformed-annotation",
+      "file": "controls/reject-malformed-annotation.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "acb3cdb3662bfe9532bb18f069f9a5016b581ffd390209ab920d3f07be8232de",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-malformed-annotation.hgl:3: invalid expect-error annotation\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-unknown-category",
+      "file": "controls/reject-unknown-category.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "bc06e43b58e46fa77e59990438f47e9d971f6c2a202e6e5e05bcf1ceb14ce6f2",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-unknown-category.hgl:3: unknown or incompatible expected diagnostic category/code\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-unknown-code",
+      "file": "controls/reject-unknown-code.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "1436da83e5d8246c1aab0e78dda6f3f1a939dfed8977158bb6cd0aae4f6e6720",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-unknown-code.hgl:3: unknown or incompatible expected diagnostic category/code\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-category-mismatch",
+      "file": "controls/reject-category-mismatch.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "a9e715376f52ca15eb2a537f5b5692abe8c7aff025f4e80f58ad42b2b175b681",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-category-mismatch.hgl:3: unknown or incompatible expected diagnostic category/code\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-build-category",
+      "file": "controls/reject-build-category.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "c27bc90d9c5fa9707053969fb400a551f84e5c69285360a1dd374ee4545bae29",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-build-category.hgl:3: unknown or incompatible expected diagnostic category/code\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-no-expectation",
+      "file": "controls/reject-no-expectation.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "5320dec0b875ec5bf7c89f705e7d7a81a8bb209ec924b42270de2377ca01d299",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-no-expectation.hgl: rejection fixture requires at least one expect-error annotation\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "comment-text",
+      "file": "../../language/examples/reject/comment-text.hgl",
+      "mode": "reject",
+      "expected_exit": 0,
+      "source_sha256": "7721e37a03f3d2ee7552877b1fe57adf7463c9e88b07af87fa573426b16cb296",
+      "run": {
+        "returncode": 0,
+        "stdout": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/language/examples/reject/comment-text.hgl: rejection expectations passed\n",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    }
+  ]
+}

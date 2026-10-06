@@ -1,0 +1,421 @@
+{
+  "measured_at": "2026-10-06T08:10:46.668736+00:00",
+  "backend": "rust",
+  "source_revision": "c04235ae9067a46472216a853c497854e7e4c715",
+  "source_revision_verified_by_runner": false,
+  "compiler_sha256": "86cb36a6fbc443d48dc3f15f868b8f6269b4b2d8bc63c476c2498267f7d093ed",
+  "observer_sha256": "44bbe15571d23a94910f8f188696aedcedbf49a00507cd8113fea6a1c0069382",
+  "manifest_sha256": "90adacf5a585cad2ce23ebb7ee3236133db098ca2bacc6f86f831cdc5187ee50",
+  "parts": [
+    {
+      "name": "replay_record.hgl",
+      "sha256": "d78b942477f7683661fdced78db84ebae3529f2e1e7aa35ac656d1671ccd7e9c"
+    },
+    {
+      "name": "replay_record.hgl",
+      "sha256": "4a416617e152ebe079118b5f6c7feb27964c84c9c692ca7dd2993e7fcb6ef06e"
+    },
+    {
+      "name": "control.hgl",
+      "sha256": "827431f1c8d100738acdc4df1319b2bab5115556295bbafac9ce2f793b8605b7"
+    },
+    {
+      "name": "control.hgl",
+      "sha256": "e0c1525d01a72e3cf2b5102afdc61217cf06af9b039bef27acbf93675aa07b94"
+    }
+  ],
+  "cases": [
+    {
+      "id": "execution-errors",
+      "file": "../../language/examples/execution-errors.hgl",
+      "mode": "test",
+      "expected_exit": 0,
+      "source_sha256": "ccf47e7ee6f86e9b342dbd4e4660cb8a1d15a6bfbf5106fa8bf39e27e9e04f60",
+      "source_check": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "run": {
+        "returncode": 0,
+        "stdout": "examples.execution_errors::expected_execution_errors ... ok\nexamples.execution_errors::nested_execution_errors ... ok\n2 tests, 6 evaluations, 0 failures\n",
+        "stderr": "warning: unnecessary parentheses around assigned value\n  --> src/main.rs:80:12\n   |\n80 | ... = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n   |       ^                                                                                                                                ^\n   |\n   = note: `#[warn(unused_parens)]` (part of `#[warn(unused)]`) on by default\nhelp: remove these parentheses\n   |\n80 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n80 + let time = ((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0;\n   |\n\nwarning: unnecessary parentheses around function argument\n  --> src/main.rs:80:62\n   |\n80 | ...dex(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n   |                                ^                                                                       ^\n   |\nhelp: remove these parentheses\n   |\n80 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n80 + let time = (((*hgl_store::list_index(&(self.configuration0), (*self.generator_local0.as_ref().expect(\"initialized generator local\")))?)).0);\n   |\n\nwarning: unnecessary parentheses around assigned value\n  --> src/main.rs:81:64\n   |\n81 | ...figuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<Glo...\n   |                                ^                                                                       ^\n   |\nhelp: remove these parentheses\n   |\n81 - let payload = ({let parent=self.configuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n81 + let payload = ({let parent=self.configuration_slot0; let index=(*self.generator_local0.as_ref().expect(\"initialized generator local\")); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n   |\n\nwarning: unnecessary parentheses around assigned value\n   --> src/main.rs:339:12\n    |\n339 | ... = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n    |       ^                                                                                                                                ^\n    |\nhelp: remove these parentheses\n    |\n339 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n339 + let time = ((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0;\n    |\n\nwarning: unnecessary parentheses around function argument\n   --> src/main.rs:339:62\n    |\n339 | ...ex(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n    |                               ^                                                                       ^\n    |\nhelp: remove these parentheses\n    |\n339 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n339 + let time = (((*hgl_store::list_index(&(self.configuration0), (*self.generator_local0.as_ref().expect(\"initialized generator local\")))?)).0);\n    |\n\nwarning: unnecessary parentheses around assigned value\n   --> src/main.rs:340:64\n    |\n340 | ...iguration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<Glo...\n    |                               ^                                                                       ^\n    |\nhelp: remove these parentheses\n    |\n340 - let payload = ({let parent=self.configuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n340 + let payload = ({let parent=self.configuration_slot0; let index=(*self.generator_local0.as_ref().expect(\"initialized generator local\")); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n    |\n\nwarning: unnecessary parentheses around assigned value\n   --> src/main.rs:501:12\n    |\n501 | ... = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n    |       ^                                                                                                                                ^\n    |\nhelp: remove these parentheses\n    |\n501 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n501 + let time = ((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0;\n    |\n\nwarning: unnecessary parentheses around function argument\n   --> src/main.rs:501:62\n    |\n501 | ...ex(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n    |                               ^                                                                       ^\n    |\nhelp: remove these parentheses\n    |\n501 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n501 + let time = (((*hgl_store::list_index(&(self.configuration0), (*self.generator_local0.as_ref().expect(\"initialized generator local\")))?)).0);\n    |\n\nwarning: unnecessary parentheses around assigned value\n   --> src/main.rs:502:64\n    |\n502 | ...iguration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<Glo...\n    |                               ^                                                                       ^\n    |\nhelp: remove these parentheses\n    |\n502 - let payload = ({let parent=self.configuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n502 + let payload = ({let parent=self.configuration_slot0; let index=(*self.generator_local0.as_ref().expect(\"initialized generator local\")); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n    |\n\nwarning: unnecessary parentheses around assigned value\n   --> src/main.rs:777:12\n    |\n777 | ... = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n    |       ^                                                                                                                                ^\n    |\nhelp: remove these parentheses\n    |\n777 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n777 + let time = ((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0;\n    |\n\nwarning: unnecessary parentheses around function argument\n   --> src/main.rs:777:62\n    |\n777 | ...ex(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n    |                               ^                                                                       ^\n    |\nhelp: remove these parentheses\n    |\n777 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n777 + let time = (((*hgl_store::list_index(&(self.configuration0), (*self.generator_local0.as_ref().expect(\"initialized generator local\")))?)).0);\n    |\n\nwarning: unnecessary parentheses around assigned value\n   --> src/main.rs:778:64\n    |\n778 | ...iguration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<Glo...\n    |                               ^                                                                       ^\n    |\nhelp: remove these parentheses\n    |\n778 - let payload = ({let parent=self.configuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n778 + let payload = ({let parent=self.configuration_slot0; let index=(*self.generator_local0.as_ref().expect(\"initialized generator local\")); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n    |\n\nwarning: unnecessary parentheses around assigned value\n   --> src/main.rs:939:12\n    |\n939 | ... = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n    |       ^                                                                                                                                ^\n    |\nhelp: remove these parentheses\n    |\n939 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n939 + let time = ((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0;\n    |\n\nwarning: unnecessary parentheses around function argument\n   --> src/main.rs:939:62\n    |\n939 | ...ex(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n    |                               ^                                                                       ^\n    |\nhelp: remove these parentheses\n    |\n939 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n939 + let time = (((*hgl_store::list_index(&(self.configuration0), (*self.generator_local0.as_ref().expect(\"initialized generator local\")))?)).0);\n    |\n\nwarning: unnecessary parentheses around assigned value\n   --> src/main.rs:940:64\n    |\n940 | ...iguration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<Glo...\n    |                               ^                                                                       ^\n    |\nhelp: remove these parentheses\n    |\n940 - let payload = ({let parent=self.configuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n940 + let payload = ({let parent=self.configuration_slot0; let index=(*self.generator_local0.as_ref().expect(\"initialized generator local\")); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n    |\n\nwarning: unnecessary parentheses around assigned value\n    --> src/main.rs:1198:12\n     |\n1198 | ... = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n     |       ^                                                                                                                                ^\n     |\nhelp: remove these parentheses\n     |\n1198 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n1198 + let time = ((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0;\n     |\n\nwarning: unnecessary parentheses around function argument\n    --> src/main.rs:1198:62\n     |\n1198 | ...ex(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n     |                               ^                                                                       ^\n     |\nhelp: remove these parentheses\n     |\n1198 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n1198 + let time = (((*hgl_store::list_index(&(self.configuration0), (*self.generator_local0.as_ref().expect(\"initialized generator local\")))?)).0);\n     |\n\nwarning: unnecessary parentheses around assigned value\n    --> src/main.rs:1199:64\n     |\n1199 | ...iguration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<Gl...\n     |                               ^                                                                       ^\n     |\nhelp: remove these parentheses\n     |\n1199 - let payload = ({let parent=self.configuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n1199 + let payload = ({let parent=self.configuration_slot0; let index=(*self.generator_local0.as_ref().expect(\"initialized generator local\")); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n     |\n\nwarning: unused variable: `layout`\n  --> src/main.rs:10:306\n   |\n10 | ...ots.1.flatten(field); let layout = rest; }\n   |                              ^^^^^^ help: if this is intentional, prefix it with an underscore: `_layout`\n   |\n   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `ports`\n   --> src/main.rs:107:10\n    |\n107 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError>{Err(hgl_describe::BuildError::InvalidNodeType {...\n    |          ^^^^^ help: if this is intentional, prefix it with an underscore: `_ports`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:144:90\n    |\n144 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n    |\n    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:219:20\n    |\n219 | let local0 = { let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items };\n    |                    ----^^^^^\n    |                    |\n    |                    help: remove this `mut`\n\nwarning: unused variable: `now`\n   --> src/main.rs:227:48\n    |\n227 | {let prepared_item0=_ctx.evaluation_time();let now=_ctx.evaluation_time();let list=local1;let mut prepared=_ctx.prepared();let (obs...\n    |                                                ^^^ help: if this is intentional, prefix it with an underscore: `_now`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:243:90\n    |\n243 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n\nwarning: unused variable: `keys`\n   --> src/main.rs:270:19\n    |\n270 | fn prepare_static(keys:&mut hgl_store::Keys)->Result<(),String> { Ok(())}\n    |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_keys`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:285:1284\n    |\n285 | ...{let value=(||->hgl_types::NodeResult<_>{Ok({ let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items })})().map_err...\n    |                                                      ----^^^^^\n    |                                                      |\n    |                                                      help: remove this `mut`\n\nwarning: unused variable: `empty`\n   --> src/main.rs:286:172\n    |\n286 | ...hgl_types::NodeResult {let empty=FiniteTopology::default();store.prepared().prepare_scalar::<i64>(built.outputs[graph.nodes.iter...\n    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_empty`\n\nwarning: unused variable: `ports`\n   --> src/main.rs:366:10\n    |\n366 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError>{Err(hgl_describe::BuildError::InvalidNodeType {...\n    |          ^^^^^ help: if this is intentional, prefix it with an underscore: `_ports`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:386:20\n    |\n386 | let local0 = { let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items };\n    |                    ----^^^^^\n    |                    |\n    |                    help: remove this `mut`\n\nwarning: unused variable: `now`\n   --> src/main.rs:394:48\n    |\n394 | {let prepared_item0=_ctx.evaluation_time();let now=_ctx.evaluation_time();let list=local1;let mut prepared=_ctx.prepared();let (obs...\n    |                                                ^^^ help: if this is intentional, prefix it with an underscore: `_now`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:410:90\n    |\n410 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n\nwarning: unused variable: `keys`\n   --> src/main.rs:432:19\n    |\n432 | fn prepare_static(keys:&mut hgl_store::Keys)->Result<(),String> { Ok(())}\n    |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_keys`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:447:960\n    |\n447 | ...{let value=(||->hgl_types::NodeResult<_>{Ok({ let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items })})().map_err...\n    |                                                      ----^^^^^\n    |                                                      |\n    |                                                      help: remove this `mut`\n\nwarning: unused variable: `empty`\n   --> src/main.rs:448:172\n    |\n448 | ...hgl_types::NodeResult {let empty=FiniteTopology::default();store.prepared().prepare_scalar::<i64>(built.outputs[graph.nodes.iter...\n    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_empty`\n\nwarning: unused variable: `ports`\n   --> src/main.rs:528:10\n    |\n528 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError>{Err(hgl_describe::BuildError::InvalidNodeType {...\n    |          ^^^^^ help: if this is intentional, prefix it with an underscore: `_ports`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:565:90\n    |\n565 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:657:20\n    |\n657 | let local0 = { let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items };\n    |                    ----^^^^^\n    |                    |\n    |                    help: remove this `mut`\n\nwarning: unused variable: `now`\n   --> src/main.rs:665:48\n    |\n665 | {let prepared_item0=_ctx.evaluation_time();let now=_ctx.evaluation_time();let list=local1;let mut prepared=_ctx.prepared();let (obs...\n    |                                                ^^^ help: if this is intentional, prefix it with an underscore: `_now`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:681:90\n    |\n681 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n\nwarning: unused variable: `keys`\n   --> src/main.rs:708:19\n    |\n708 | fn prepare_static(keys:&mut hgl_store::Keys)->Result<(),String> { Ok(())}\n    |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_keys`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:723:1606\n    |\n723 | ...{let value=(||->hgl_types::NodeResult<_>{Ok({ let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items })})().map_err...\n    |                                                      ----^^^^^\n    |                                                      |\n    |                                                      help: remove this `mut`\n\nwarning: unused variable: `empty`\n   --> src/main.rs:724:172\n    |\n724 | ...hgl_types::NodeResult {let empty=FiniteTopology::default();store.prepared().prepare_scalar::<i64>(built.outputs[graph.nodes.iter...\n    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_empty`\n\nwarning: unused variable: `ports`\n   --> src/main.rs:804:10\n    |\n804 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError>{Err(hgl_describe::BuildError::InvalidNodeType {...\n    |          ^^^^^ help: if this is intentional, prefix it with an underscore: `_ports`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:824:20\n    |\n824 | let local0 = { let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items };\n    |                    ----^^^^^\n    |                    |\n    |                    help: remove this `mut`\n\nwarning: unused variable: `now`\n   --> src/main.rs:832:48\n    |\n832 | {let prepared_item0=_ctx.evaluation_time();let now=_ctx.evaluation_time();let list=local1;let mut prepared=_ctx.prepared();let (obs...\n    |                                                ^^^ help: if this is intentional, prefix it with an underscore: `_now`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:848:90\n    |\n848 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n\nwarning: unused variable: `keys`\n   --> src/main.rs:870:19\n    |\n870 | fn prepare_static(keys:&mut hgl_store::Keys)->Result<(),String> { Ok(())}\n    |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_keys`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:885:960\n    |\n885 | ...{let value=(||->hgl_types::NodeResult<_>{Ok({ let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items })})().map_err...\n    |                                                      ----^^^^^\n    |                                                      |\n    |                                                      help: remove this `mut`\n\nwarning: unused variable: `empty`\n   --> src/main.rs:886:172\n    |\n886 | ...hgl_types::NodeResult {let empty=FiniteTopology::default();store.prepared().prepare_scalar::<i64>(built.outputs[graph.nodes.iter...\n    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_empty`\n\nwarning: unused variable: `ports`\n   --> src/main.rs:966:10\n    |\n966 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError>{Err(hgl_describe::BuildError::InvalidNodeType {...\n    |          ^^^^^ help: if this is intentional, prefix it with an underscore: `_ports`\n\nwarning: variable does not need to be mutable\n    --> src/main.rs:1003:90\n     |\n1003 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Valu...\n     |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n     |                                                                                          |\n     |                                                                                          help: remove this `mut`\n\nwarning: variable does not need to be mutable\n    --> src/main.rs:1078:20\n     |\n1078 | let local0 = { let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items };\n     |                    ----^^^^^\n     |                    |\n     |                    help: remove this `mut`\n\nwarning: unused variable: `now`\n    --> src/main.rs:1086:48\n     |\n1086 | {let prepared_item0=_ctx.evaluation_time();let now=_ctx.evaluation_time();let list=local1;let mut prepared=_ctx.prepared();let (ob...\n     |                                                ^^^ help: if this is intentional, prefix it with an underscore: `_now`\n\nwarning: variable does not need to be mutable\n    --> src/main.rs:1102:90\n     |\n1102 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Valu...\n     |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n     |                                                                                          |\n     |                                                                                          help: remove this `mut`\n\nwarning: unused variable: `keys`\n    --> src/main.rs:1129:19\n     |\n1129 | fn prepare_static(keys:&mut hgl_store::Keys)->Result<(),String> { Ok(())}\n     |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_keys`\n\nwarning: variable does not need to be mutable\n    --> src/main.rs:1144:1284\n     |\n1144 | ...let value=(||->hgl_types::NodeResult<_>{Ok({ let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items })})().map_err...\n     |                                                     ----^^^^^\n     |                                                     |\n     |                                                     help: remove this `mut`\n\nwarning: unused variable: `empty`\n    --> src/main.rs:1145:172\n     |\n1145 | ...gl_types::NodeResult {let empty=FiniteTopology::default();store.prepared().prepare_scalar::<i64>(built.outputs[graph.nodes.iter...\n     |                              ^^^^^ help: if this is intentional, prefix it with an underscore: `_empty`\n\nwarning: unused variable: `ports`\n    --> src/main.rs:1225:10\n     |\n1225 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError>{Err(hgl_describe::BuildError::InvalidNodeType ...\n     |          ^^^^^ help: if this is intentional, prefix it with an underscore: `_ports`\n\nwarning: variable does not need to be mutable\n    --> src/main.rs:1262:90\n     |\n1262 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Valu...\n     |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n     |                                                                                          |\n     |                                                                                          help: remove this `mut`\n\nwarning: variable does not need to be mutable\n    --> src/main.rs:1354:20\n     |\n1354 | let local0 = { let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items };\n     |                    ----^^^^^\n     |                    |\n     |                    help: remove this `mut`\n\nwarning: unused variable: `now`\n    --> src/main.rs:1362:48\n     |\n1362 | {let prepared_item0=_ctx.evaluation_time();let now=_ctx.evaluation_time();let list=local1;let mut prepared=_ctx.prepared();let (ob...\n     |                                                ^^^ help: if this is intentional, prefix it with an underscore: `_now`\n\nwarning: variable does not need to be mutable\n    --> src/main.rs:1378:90\n     |\n1378 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Valu...\n     |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n     |                                                                                          |\n     |                                                                                          help: remove this `mut`\n\nwarning: unused variable: `keys`\n    --> src/main.rs:1405:19\n     |\n1405 | fn prepare_static(keys:&mut hgl_store::Keys)->Result<(),String> { Ok(())}\n     |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_keys`\n\nwarning: variable does not need to be mutable\n    --> src/main.rs:1420:1606\n     |\n1420 | ...let value=(||->hgl_types::NodeResult<_>{Ok({ let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items })})().map_err...\n     |                                                     ----^^^^^\n     |                                                     |\n     |                                                     help: remove this `mut`\n\nwarning: unused variable: `empty`\n    --> src/main.rs:1421:172\n     |\n1421 | ...gl_types::NodeResult {let empty=FiniteTopology::default();store.prepared().prepare_scalar::<i64>(built.outputs[graph.nodes.iter...\n     |                              ^^^^^ help: if this is intentional, prefix it with an underscore: `_empty`\n\nwarning: associated functions `key_slot_id` and `copy_key` are never used\n  --> src/main.rs:39:4\n   |\n38 | impl GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e {\n   | ----------------------------------------------------------------------- associated functions in this implementation\n39 | fn key_slot_id(keys:&hgl_store::Keys,source:&hgl_store::ValueColumns,slot:hgl_store::ValueSlot<Self>)->hgl_types::NodeResult<i64> {k...\n   |    ^^^^^^^^^^^\n40 | fn copy_key(keys:&hgl_store::Keys,id:i64,columns:&mut hgl_store::ValueColumns,slot:hgl_store::ValueSlot<Self>)->hgl_types::NodeResul...\n   |    ^^^^^^^^\n   |\n   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:120:1\n    |\n119 | struct Node1 {\n    |        ----- field in this struct\n120 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: field `configuration0` is never read\n   --> src/main.rs:156:1\n    |\n150 | struct Node2 {\n    |        ----- field in this struct\n...\n156 | configuration0: i64,configuration_slot0:hgl_store::ValueSlot<i64>,\n    | ^^^^^^^^^^^^^^\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:213:1\n    |\n211 | struct Node3 {\n    |        ----- field in this struct\n212 | global0: hgl_store::Global<hgl_store::List<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e, -1>>,\n213 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: function `register` is never used\n   --> src/main.rs:251:8\n    |\n251 | pub fn register(registry: &mut hgl_describe::Registry) -> Result<(),hgl_describe::BuildError> {\n    |        ^^^^^^^^\n\nwarning: field `children` is never read\n   --> src/main.rs:283:43\n    |\n283 | #[derive(Default)] struct FiniteTopology {children:std::collections::BTreeMap<i64,FiniteTopology>}\n    |                           --------------  ^^^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `limit0` is never read\n   --> src/main.rs:284:58\n    |\n284 | #[derive(Default)] struct FiniteCapacity {arrivals:usize,limit0:usize,limit1:usize,limit2:usize,limit3:usize,limit4:usize,}\n    |                           --------------                 ^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:380:1\n    |\n378 | struct Node1 {\n    |        ----- field in this struct\n379 | global0: hgl_store::Global<hgl_store::List<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e, -1>>,\n380 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: function `register` is never used\n   --> src/main.rs:418:8\n    |\n418 | pub fn register(registry: &mut hgl_describe::Registry) -> Result<(),hgl_describe::BuildError> {\n    |        ^^^^^^^^\n\nwarning: field `children` is never read\n   --> src/main.rs:445:43\n    |\n445 | #[derive(Default)] struct FiniteTopology {children:std::collections::BTreeMap<i64,FiniteTopology>}\n    |                           --------------  ^^^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `limit0` is never read\n   --> src/main.rs:446:58\n    |\n446 | #[derive(Default)] struct FiniteCapacity {arrivals:usize,limit0:usize,limit1:usize,limit2:usize,limit3:usize,}\n    |                           --------------                 ^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:541:1\n    |\n540 | struct Node1 {\n    |        ----- field in this struct\n541 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: fields `configuration0` and `configuration1` are never read\n   --> src/main.rs:577:1\n    |\n571 | struct Node2 {\n    |        ----- fields in this struct\n...\n577 | configuration0: i64,configuration_slot0:hgl_store::ValueSlot<i64>,\n    | ^^^^^^^^^^^^^^\n578 | configuration1: i64,configuration_slot1:hgl_store::ValueSlot<i64>,\n    | ^^^^^^^^^^^^^^\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:651:1\n    |\n649 | struct Node3 {\n    |        ----- field in this struct\n650 | global0: hgl_store::Global<hgl_store::List<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e, -1>>,\n651 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: function `register` is never used\n   --> src/main.rs:689:8\n    |\n689 | pub fn register(registry: &mut hgl_describe::Registry) -> Result<(),hgl_describe::BuildError> {\n    |        ^^^^^^^^\n\nwarning: field `children` is never read\n   --> src/main.rs:721:43\n    |\n721 | #[derive(Default)] struct FiniteTopology {children:std::collections::BTreeMap<i64,FiniteTopology>}\n    |                           --------------  ^^^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `limit0` is never read\n   --> src/main.rs:722:58\n    |\n722 | #[derive(Default)] struct FiniteCapacity {arrivals:usize,limit0:usize,limit1:usize,limit2:usize,limit3:usize,limit4:usize,}\n    |                           --------------                 ^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:818:1\n    |\n816 | struct Node1 {\n    |        ----- field in this struct\n817 | global0: hgl_store::Global<hgl_store::List<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e, -1>>,\n818 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: function `register` is never used\n   --> src/main.rs:856:8\n    |\n856 | pub fn register(registry: &mut hgl_describe::Registry) -> Result<(),hgl_describe::BuildError> {\n    |        ^^^^^^^^\n\nwarning: field `children` is never read\n   --> src/main.rs:883:43\n    |\n883 | #[derive(Default)] struct FiniteTopology {children:std::collections::BTreeMap<i64,FiniteTopology>}\n    |                           --------------  ^^^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `limit0` is never read\n   --> src/main.rs:884:58\n    |\n884 | #[derive(Default)] struct FiniteCapacity {arrivals:usize,limit0:usize,limit1:usize,limit2:usize,limit3:usize,}\n    |                           --------------                 ^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:979:1\n    |\n978 | struct Node1 {\n    |        ----- field in this struct\n979 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: field `configuration0` is never read\n    --> src/main.rs:1015:1\n     |\n1009 | struct Node2 {\n     |        ----- field in this struct\n...\n1015 | configuration0: i64,configuration_slot0:hgl_store::ValueSlot<i64>,\n     | ^^^^^^^^^^^^^^\n\nwarning: field `configuration_columns` is never read\n    --> src/main.rs:1072:1\n     |\n1070 | struct Node3 {\n     |        ----- field in this struct\n1071 | global0: hgl_store::Global<hgl_store::List<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e, -1>>,\n1072 | configuration_columns:hgl_store::ValueColumns,\n     | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: function `register` is never used\n    --> src/main.rs:1110:8\n     |\n1110 | pub fn register(registry: &mut hgl_describe::Registry) -> Result<(),hgl_describe::BuildError> {\n     |        ^^^^^^^^\n\nwarning: field `children` is never read\n    --> src/main.rs:1142:43\n     |\n1142 | #[derive(Default)] struct FiniteTopology {children:std::collections::BTreeMap<i64,FiniteTopology>}\n     |                           --------------  ^^^^^^^^\n     |                           |\n     |                           field in this struct\n\nwarning: field `limit0` is never read\n    --> src/main.rs:1143:58\n     |\n1143 | #[derive(Default)] struct FiniteCapacity {arrivals:usize,limit0:usize,limit1:usize,limit2:usize,limit3:usize,limit4:usize,}\n     |                           --------------                 ^^^^^^\n     |                           |\n     |                           field in this struct\n\nwarning: field `configuration_columns` is never read\n    --> src/main.rs:1238:1\n     |\n1237 | struct Node1 {\n     |        ----- field in this struct\n1238 | configuration_columns:hgl_store::ValueColumns,\n     | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: fields `configuration0` and `configuration1` are never read\n    --> src/main.rs:1274:1\n     |\n1268 | struct Node2 {\n     |        ----- fields in this struct\n...\n1274 | configuration0: i64,configuration_slot0:hgl_store::ValueSlot<i64>,\n     | ^^^^^^^^^^^^^^\n1275 | configuration1: i64,configuration_slot1:hgl_store::ValueSlot<i64>,\n     | ^^^^^^^^^^^^^^\n\nwarning: field `configuration_columns` is never read\n    --> src/main.rs:1348:1\n     |\n1346 | struct Node3 {\n     |        ----- field in this struct\n1347 | global0: hgl_store::Global<hgl_store::List<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e, -1>>,\n1348 | configuration_columns:hgl_store::ValueColumns,\n     | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: function `register` is never used\n    --> src/main.rs:1386:8\n     |\n1386 | pub fn register(registry: &mut hgl_describe::Registry) -> Result<(),hgl_describe::BuildError> {\n     |        ^^^^^^^^\n\nwarning: field `children` is never read\n    --> src/main.rs:1418:43\n     |\n1418 | #[derive(Default)] struct FiniteTopology {children:std::collections::BTreeMap<i64,FiniteTopology>}\n     |                           --------------  ^^^^^^^^\n     |                           |\n     |                           field in this struct\n\nwarning: field `limit0` is never read\n    --> src/main.rs:1419:58\n     |\n1419 | #[derive(Default)] struct FiniteCapacity {arrivals:usize,limit0:usize,limit1:usize,limit2:usize,limit3:usize,limit4:usize,}\n     |                           --------------                 ^^^^^^\n     |                           |\n     |                           field in this struct\n\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "missing-parameter-close",
+      "file": "../../language/examples/reject/missing-parameter-close.hgl",
+      "mode": "reject",
+      "expected_exit": 0,
+      "source_sha256": "72e834a6db123392a041da8d802189dcbe1d005ab46dea52eb8f08e578a54f3a",
+      "run": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "raises-computed-code",
+      "file": "../../language/examples/reject/raises-computed-code.hgl",
+      "mode": "reject",
+      "expected_exit": 0,
+      "source_sha256": "0e800bf3b6fface6a7486dae9632a2a3cf3763daf03759a0273962fa9f316eca",
+      "run": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "raises-unknown-code",
+      "file": "../../language/examples/reject/raises-unknown-code.hgl",
+      "mode": "reject",
+      "expected_exit": 0,
+      "source_sha256": "cd3392d599f9320ed469c41d78b6ff477ef6b5e3974e5a464ab6c8e7aa7aa3b5",
+      "run": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "rolling-size-bounds",
+      "file": "../../language/examples/reject/rolling-size-bounds.hgl",
+      "mode": "reject",
+      "expected_exit": 0,
+      "source_sha256": "d0e5aef99b000cdb7c4e078ac485db9ec2b1735b0daacaea841403c1dd6818ac",
+      "run": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "rolling-size-kind",
+      "file": "../../language/examples/reject/rolling-size-kind.hgl",
+      "mode": "reject",
+      "expected_exit": 0,
+      "source_sha256": "3024a08bef10a91368c67c0993b73bb9cf117e5060ceb20500fd84f5a1add6dd",
+      "run": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "test-inject",
+      "file": "../../language/examples/reject/test-inject.hgl",
+      "mode": "reject",
+      "expected_exit": 0,
+      "source_sha256": "79ee9ede4ce2b6994a40564eb0ba8eeb08a5f893af640dbc6babea91fddc4c95",
+      "run": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "yield-time-type",
+      "file": "../../language/examples/reject/yield-time-type.hgl",
+      "mode": "reject",
+      "expected_exit": 0,
+      "source_sha256": "185612f0de0bbc3c7e9cc08c825c11b49d24fca7b3cdd6c0ac66f4715b9a54c0",
+      "run": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "runtime-normal-return",
+      "file": "controls/runtime-normal-return.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "e9f39aee6f3ea374ca2ddbb8f030287764bf9abeed0f1d5c8b8658220dbaecd7",
+      "source_check": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "1 tests, 0 evaluations, 1 failures\n",
+        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:575\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nconformance.negative_testing.runtime_normal_return::normal_return ... FAILED: expected yield.negative_duration, block completed normally\ntest build/run failed: exit status: 1\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "runtime-empty-block",
+      "file": "controls/runtime-empty-block.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "b76731cc438d7cdb851e947e82ba34f452d94fa87df6a7a38f2602fc237eaba0",
+      "source_check": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "1 tests, 0 evaluations, 1 failures\n",
+        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:436\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nconformance.negative_testing.runtime_empty_block::empty_block ... FAILED: expected yield.negative_duration, block completed normally\ntest build/run failed: exit status: 1\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "runtime-wrong-code",
+      "file": "controls/runtime-wrong-code.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "0665b6871168dfe9343bce70b991095763f45f324aa5d52ed9149f042a6b0270",
+      "source_check": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "1 tests, 0 evaluations, 1 failures\n",
+        "stderr": "warning: unnecessary parentheses around assigned value\n  --> src/main.rs:80:12\n   |\n80 | ... = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n   |       ^                                                                                                                                ^\n   |\n   = note: `#[warn(unused_parens)]` (part of `#[warn(unused)]`) on by default\nhelp: remove these parentheses\n   |\n80 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n80 + let time = ((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0;\n   |\n\nwarning: unnecessary parentheses around function argument\n  --> src/main.rs:80:62\n   |\n80 | ...dex(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n   |                                ^                                                                       ^\n   |\nhelp: remove these parentheses\n   |\n80 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n80 + let time = (((*hgl_store::list_index(&(self.configuration0), (*self.generator_local0.as_ref().expect(\"initialized generator local\")))?)).0);\n   |\n\nwarning: unnecessary parentheses around assigned value\n  --> src/main.rs:81:64\n   |\n81 | ...figuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<Glo...\n   |                                ^                                                                       ^\n   |\nhelp: remove these parentheses\n   |\n81 - let payload = ({let parent=self.configuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n81 + let payload = ({let parent=self.configuration_slot0; let index=(*self.generator_local0.as_ref().expect(\"initialized generator local\")); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n   |\n\nwarning: unused variable: `layout`\n  --> src/main.rs:10:306\n   |\n10 | ...ots.1.flatten(field); let layout = rest; }\n   |                              ^^^^^^ help: if this is intentional, prefix it with an underscore: `_layout`\n   |\n   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `ports`\n   --> src/main.rs:107:10\n    |\n107 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError>{Err(hgl_describe::BuildError::InvalidNodeType {...\n    |          ^^^^^ help: if this is intentional, prefix it with an underscore: `_ports`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:144:90\n    |\n144 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n    |\n    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:219:20\n    |\n219 | let local0 = { let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items };\n    |                    ----^^^^^\n    |                    |\n    |                    help: remove this `mut`\n\nwarning: unused variable: `now`\n   --> src/main.rs:227:48\n    |\n227 | {let prepared_item0=_ctx.evaluation_time();let now=_ctx.evaluation_time();let list=local1;let mut prepared=_ctx.prepared();let (obs...\n    |                                                ^^^ help: if this is intentional, prefix it with an underscore: `_now`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:243:90\n    |\n243 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n\nwarning: unused variable: `keys`\n   --> src/main.rs:270:19\n    |\n270 | fn prepare_static(keys:&mut hgl_store::Keys)->Result<(),String> { Ok(())}\n    |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_keys`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:285:1284\n    |\n285 | ...{let value=(||->hgl_types::NodeResult<_>{Ok({ let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items })})().map_err...\n    |                                                      ----^^^^^\n    |                                                      |\n    |                                                      help: remove this `mut`\n\nwarning: unused variable: `empty`\n   --> src/main.rs:286:172\n    |\n286 | ...hgl_types::NodeResult {let empty=FiniteTopology::default();store.prepared().prepare_scalar::<i64>(built.outputs[graph.nodes.iter...\n    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_empty`\n\nwarning: associated functions `key_slot_id` and `copy_key` are never used\n  --> src/main.rs:39:4\n   |\n38 | impl GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e {\n   | ----------------------------------------------------------------------- associated functions in this implementation\n39 | fn key_slot_id(keys:&hgl_store::Keys,source:&hgl_store::ValueColumns,slot:hgl_store::ValueSlot<Self>)->hgl_types::NodeResult<i64> {k...\n   |    ^^^^^^^^^^^\n40 | fn copy_key(keys:&hgl_store::Keys,id:i64,columns:&mut hgl_store::ValueColumns,slot:hgl_store::ValueSlot<Self>)->hgl_types::NodeResul...\n   |    ^^^^^^^^\n   |\n   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:120:1\n    |\n119 | struct Node1 {\n    |        ----- field in this struct\n120 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: field `configuration0` is never read\n   --> src/main.rs:156:1\n    |\n150 | struct Node2 {\n    |        ----- field in this struct\n...\n156 | configuration0: i64,configuration_slot0:hgl_store::ValueSlot<i64>,\n    | ^^^^^^^^^^^^^^\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:213:1\n    |\n211 | struct Node3 {\n    |        ----- field in this struct\n212 | global0: hgl_store::Global<hgl_store::List<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e, -1>>,\n213 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: function `register` is never used\n   --> src/main.rs:251:8\n    |\n251 | pub fn register(registry: &mut hgl_describe::Registry) -> Result<(),hgl_describe::BuildError> {\n    |        ^^^^^^^^\n\nwarning: field `children` is never read\n   --> src/main.rs:283:43\n    |\n283 | #[derive(Default)] struct FiniteTopology {children:std::collections::BTreeMap<i64,FiniteTopology>}\n    |                           --------------  ^^^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `limit0` is never read\n   --> src/main.rs:284:58\n    |\n284 | #[derive(Default)] struct FiniteCapacity {arrivals:usize,limit0:usize,limit1:usize,limit2:usize,limit3:usize,limit4:usize,}\n    |                           --------------                 ^^^^^^\n    |                           |\n    |                           field in this struct\n\nconformance.negative_testing.runtime_wrong_code::wrong_code ... FAILED: expected yield.non_increasing_time: NodeError { node: NodeId(1), label: \"conformance.negative_testing.runtime_wrong_code::negative#2\", phase: Eval, message: \"generator negative yield duration\", code: Some(\"yield.negative_duration\"), cleanup: [] }\ntest build/run failed: exit status: 1\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "runtime-assertion-failure",
+      "file": "controls/runtime-assertion-failure.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "a78834b2bf78a74550cc0c8b7c8cc00a9b69f24c43d955f8eea83acd240f0e83",
+      "source_check": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "1 tests, 0 evaluations, 1 failures\n",
+        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:584\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nconformance.negative_testing.runtime_assertion_failure::assertion_failure ... FAILED: expected yield.negative_duration: ordinary assertion failed\ntest build/run failed: exit status: 1\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "runtime-nested-failure",
+      "file": "controls/runtime-nested-failure.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "fb70936a4a524dce741f57e64ab614c036fb96b8561b7f9bccacdcacfacd43e2",
+      "source_check": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "1 tests, 0 evaluations, 1 failures\n",
+        "stderr": "warning: unused import: `super::*`\n --> src/main.rs:1:17\n  |\n1 | mod test0 { use super::*; pub fn test()->Result<usize,String> { let mut context=hgl_time_context::RunContext::from_bundled()?; let te...\n  |                 ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `prepared`\n --> src/main.rs:1:646\n  |\n1 | ...Error::Operation), |case,prepared|match case {_=>Err(\"unknown generated eval\".into())}) }\n  |                             ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_prepared`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nconformance.negative_testing.runtime_nested_failure::nested_failure ... FAILED: expected yield.negative_duration: expected yield.negative_duration, block completed normally\ntest build/run failed: exit status: 1\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "runtime-consumed-inner",
+      "file": "controls/runtime-consumed-inner.hgl",
+      "mode": "test",
+      "expected_exit": 1,
+      "source_sha256": "81d9aaf96d343786e05c87f4ecffca52f699b5a5047fa70387da8d19558d83b9",
+      "source_check": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "run": {
+        "returncode": 1,
+        "stdout": "1 tests, 0 evaluations, 1 failures\n",
+        "stderr": "warning: unnecessary parentheses around assigned value\n  --> src/main.rs:80:12\n   |\n80 | ... = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n   |       ^                                                                                                                                ^\n   |\n   = note: `#[warn(unused_parens)]` (part of `#[warn(unused)]`) on by default\nhelp: remove these parentheses\n   |\n80 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n80 + let time = ((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0;\n   |\n\nwarning: unnecessary parentheses around function argument\n  --> src/main.rs:80:62\n   |\n80 | ...dex(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n   |                                ^                                                                       ^\n   |\nhelp: remove these parentheses\n   |\n80 - let time = (((*hgl_store::list_index(&(self.configuration0), ((*self.generator_local0.as_ref().expect(\"initialized generator local\"))))?)).0);\n80 + let time = (((*hgl_store::list_index(&(self.configuration0), (*self.generator_local0.as_ref().expect(\"initialized generator local\")))?)).0);\n   |\n\nwarning: unnecessary parentheses around assigned value\n  --> src/main.rs:81:64\n   |\n81 | ...figuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<Glo...\n   |                                ^                                                                       ^\n   |\nhelp: remove these parentheses\n   |\n81 - let payload = ({let parent=self.configuration_slot0; let index=((*self.generator_local0.as_ref().expect(\"initialized generator local\"))); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n81 + let payload = ({let parent=self.configuration_slot0; let index=(*self.generator_local0.as_ref().expect(\"initialized generator local\")); hgl_store::ValueSlot::<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e>::bind(&mut hgl_store::list_index(self.configuration_columns.list(parent.fields()),index)?.as_slice())}).fields().1;\n   |\n\nwarning: unused variable: `layout`\n  --> src/main.rs:10:306\n   |\n10 | ...ots.1.flatten(field); let layout = rest; }\n   |                              ^^^^^^ help: if this is intentional, prefix it with an underscore: `_layout`\n   |\n   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused variable: `ports`\n   --> src/main.rs:107:10\n    |\n107 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError>{Err(hgl_describe::BuildError::InvalidNodeType {...\n    |          ^^^^^ help: if this is intentional, prefix it with an underscore: `_ports`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:144:90\n    |\n144 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n    |\n    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:219:20\n    |\n219 | let local0 = { let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items };\n    |                    ----^^^^^\n    |                    |\n    |                    help: remove this `mut`\n\nwarning: unused variable: `now`\n   --> src/main.rs:227:48\n    |\n227 | {let prepared_item0=_ctx.evaluation_time();let now=_ctx.evaluation_time();let list=local1;let mut prepared=_ctx.prepared();let (obs...\n    |                                                ^^^ help: if this is intentional, prefix it with an underscore: `_now`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:243:90\n    |\n243 | fn build(ports:&mut hgl_describe::Ports<'_>)->Result<Self,hgl_describe::BuildError> {let mut configuration_columns=hgl_store::Value...\n    |                                                                                          ----^^^^^^^^^^^^^^^^^^^^^\n    |                                                                                          |\n    |                                                                                          help: remove this `mut`\n\nwarning: unused variable: `keys`\n   --> src/main.rs:270:19\n    |\n270 | fn prepare_static(keys:&mut hgl_store::Keys)->Result<(),String> { Ok(())}\n    |                   ^^^^ help: if this is intentional, prefix it with an underscore: `_keys`\n\nwarning: variable does not need to be mutable\n   --> src/main.rs:285:1284\n    |\n285 | ...{let value=(||->hgl_types::NodeResult<_>{Ok({ let mut items: Vec<(hgl_types::EngineTime,i64,)> = Vec::new();items })})().map_err...\n    |                                                      ----^^^^^\n    |                                                      |\n    |                                                      help: remove this `mut`\n\nwarning: unused variable: `empty`\n   --> src/main.rs:286:172\n    |\n286 | ...hgl_types::NodeResult {let empty=FiniteTopology::default();store.prepared().prepare_scalar::<i64>(built.outputs[graph.nodes.iter...\n    |                               ^^^^^ help: if this is intentional, prefix it with an underscore: `_empty`\n\nwarning: associated functions `key_slot_id` and `copy_key` are never used\n  --> src/main.rs:39:4\n   |\n38 | impl GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e {\n   | ----------------------------------------------------------------------- associated functions in this implementation\n39 | fn key_slot_id(keys:&hgl_store::Keys,source:&hgl_store::ValueColumns,slot:hgl_store::ValueSlot<Self>)->hgl_types::NodeResult<i64> {k...\n   |    ^^^^^^^^^^^\n40 | fn copy_key(keys:&hgl_store::Keys,id:i64,columns:&mut hgl_store::ValueColumns,slot:hgl_store::ValueSlot<Self>)->hgl_types::NodeResul...\n   |    ^^^^^^^^\n   |\n   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:120:1\n    |\n119 | struct Node1 {\n    |        ----- field in this struct\n120 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: field `configuration0` is never read\n   --> src/main.rs:156:1\n    |\n150 | struct Node2 {\n    |        ----- field in this struct\n...\n156 | configuration0: i64,configuration_slot0:hgl_store::ValueSlot<i64>,\n    | ^^^^^^^^^^^^^^\n\nwarning: field `configuration_columns` is never read\n   --> src/main.rs:213:1\n    |\n211 | struct Node3 {\n    |        ----- field in this struct\n212 | global0: hgl_store::Global<hgl_store::List<GlobalStruct6867726170682e7374643a3a54696d656456616c75653c6936343e, -1>>,\n213 | configuration_columns:hgl_store::ValueColumns,\n    | ^^^^^^^^^^^^^^^^^^^^^\n\nwarning: function `register` is never used\n   --> src/main.rs:251:8\n    |\n251 | pub fn register(registry: &mut hgl_describe::Registry) -> Result<(),hgl_describe::BuildError> {\n    |        ^^^^^^^^\n\nwarning: field `children` is never read\n   --> src/main.rs:283:43\n    |\n283 | #[derive(Default)] struct FiniteTopology {children:std::collections::BTreeMap<i64,FiniteTopology>}\n    |                           --------------  ^^^^^^^^\n    |                           |\n    |                           field in this struct\n\nwarning: field `limit0` is never read\n   --> src/main.rs:284:58\n    |\n284 | #[derive(Default)] struct FiniteCapacity {arrivals:usize,limit0:usize,limit1:usize,limit2:usize,limit3:usize,limit4:usize,}\n    |                           --------------                 ^^^^^^\n    |                           |\n    |                           field in this struct\n\nconformance.negative_testing.runtime_consumed_inner::consumed_inner ... FAILED: expected yield.negative_duration, block completed normally\ntest build/run failed: exit status: 1\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-valid-source",
+      "file": "controls/reject-valid-source.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "aa6e26f6884b73368c37854e97beb6a98c800bb290c49eee9a57641b60672cf9",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-valid-source.hgl:4: missing type[rolling.size_kind]\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-wrong-code",
+      "file": "controls/reject-wrong-code.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "8655089b15cac6086269df27e36db8a0d3508b4b734501f061ea1cf9ecbea2a1",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "unexpected /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-wrong-code.hgl:4:36: type[rolling.size_kind]: rolling sizes require constants of the same i64 or duration kind\n/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-wrong-code.hgl:4: missing type[rolling.size_bounds]\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-wrong-location",
+      "file": "controls/reject-wrong-location.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "c81ba3511df9f3cc7a82481c04ca7a45f8e1c16218a1afae6b9cf71f766c2ec5",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "unexpected /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-wrong-location.hgl:5:36: type[rolling.size_kind]: rolling sizes require constants of the same i64 or duration kind\n/home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-wrong-location.hgl:4: missing type[rolling.size_kind]\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-unexpected-error",
+      "file": "controls/reject-unexpected-error.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "669926b7e24a173cdf6e19c1c14ed5152641165b108cc259902d78cb270e9966",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "unexpected /home/hhenson/.codex/worktrees/hgraph-specialization-audit/spec/compiler/negative_testing/controls/reject-unexpected-error.hgl:5:34: type[rolling.size_bounds]: rolling requires positive maximum, admitted minimum and Min <= Max\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-malformed-annotation",
+      "file": "controls/reject-malformed-annotation.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "acb3cdb3662bfe9532bb18f069f9a5016b581ffd390209ab920d3f07be8232de",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "line 3: invalid expectation: parse[syntax.expected_token]: expected ,, found \"rolling.size_kind\"\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-unknown-category",
+      "file": "controls/reject-unknown-category.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "bc06e43b58e46fa77e59990438f47e9d971f6c2a202e6e5e05bcf1ceb14ce6f2",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "line 3: invalid expectation: unknown diagnostic category unknown\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-unknown-code",
+      "file": "controls/reject-unknown-code.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "1436da83e5d8246c1aab0e78dda6f3f1a939dfed8977158bb6cd0aae4f6e6720",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "line 3: invalid expectation: unknown or mismatched category/code type[rolling.unknown]\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-category-mismatch",
+      "file": "controls/reject-category-mismatch.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "a9e715376f52ca15eb2a537f5b5692abe8c7aff025f4e80f58ad42b2b175b681",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "line 3: invalid expectation: unknown or mismatched category/code shape[rolling.size_kind]\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-build-category",
+      "file": "controls/reject-build-category.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "c27bc90d9c5fa9707053969fb400a551f84e5c69285360a1dd374ee4545bae29",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "line 3: invalid expectation: build is not an eligible source-rejection category\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "reject-no-expectation",
+      "file": "controls/reject-no-expectation.hgl",
+      "mode": "reject",
+      "expected_exit": 1,
+      "source_sha256": "5320dec0b875ec5bf7c89f705e7d7a81a8bb209ec924b42270de2377ca01d299",
+      "run": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "rejection fixture requires at least one expectation\n",
+        "timed_out": false
+      },
+      "matches": true
+    },
+    {
+      "id": "comment-text",
+      "file": "../../language/examples/reject/comment-text.hgl",
+      "mode": "reject",
+      "expected_exit": 0,
+      "source_sha256": "7721e37a03f3d2ee7552877b1fe57adf7463c9e88b07af87fa573426b16cb296",
+      "run": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "timed_out": false
+      },
+      "matches": true
+    }
+  ]
+}

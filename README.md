@@ -24,6 +24,13 @@ variation reports are retained. The check reproduces the historical fixed-collec
 unvalidated observations); it does not claim full conformance. A passing
 recorded-evidence check is not a fresh runtime measurement.
 
+## Negative testing evidence
+
+The [negative-testing audit](compiler/negative_testing/README.md) records the
+same 25 expected-error and source-rejection fixtures against both HGL compilers,
+including controls that must fail and checks that compiler failures cannot
+stand in for runtime exceptions.
+
 ## Delta evaluation evidence
 
 The [recorder-key collision audit](runtime/validation/recorder_keys/README.md)
