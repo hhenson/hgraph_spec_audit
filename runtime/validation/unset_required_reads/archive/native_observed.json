@@ -1,44 +1,15 @@
 {
   "binary_sha256": "c408feabbde2e92d450e118354b1780a0c5d09c896dc7ae71a10ffa84e0de86b",
-  "cmake_generator": "Unix Makefiles",
-  "cmake_sha256": "b5bfbb28c5796b1cef8f31eb46659564257a50dfe44606ae873617db7965e2a3",
-  "compile_command": [
-    "/usr/bin/c++",
-    "-DHGRAPH_ENABLE_PYTHON_USER_NODES=1",
-    "-DHGRAPH_TIME_ZONE_BACKEND_DATE=1",
-    "-DNB_SHARED",
-    "-DPy_LIMITED_API=0x030C0000",
-    "-isystem",
-    "<sdk>/include",
-    "-isystem",
-    "<sdk>/include/third_party",
-    "-isystem",
-    "/usr/include/python3.14",
-    "-isystem",
-    "<sdk>/nanobind/include",
-    "-isystem",
-    "<sdk>/pyarrow/include",
-    "-O3",
-    "-DNDEBUG",
-    "-std=gnu++23",
-    "-Wall",
-    "-Wextra",
-    "-Wpedantic",
-    "-Werror",
-    "-o",
-    "CMakeFiles/unset_required_reads_native.dir/native.cpp.o",
-    "-c",
-    "<source>/native.cpp"
-  ],
-  "compile_commands_sha256": "94731b8de3f3b9640ec846938f25cd861cad74e850441ccfac80e12c66b79086",
+  "cmake_sha256": "9f255fa2cb615da3bd649298e48823b909ffbec7008b412ec0ae7e2ee2ab1420",
   "compiler_sha256": "e6718f7e0c7d057c3ff77b550c603da9bc4030e3ede3c053705acce1293dbe4d",
   "compiler_version": "c++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+  "flags": "-O3 -DNDEBUG -std=gnu++23 -Wall -Wextra -Wpedantic -Werror",
   "loaded_libraries_sha256": {
     "libhgraph_runtime.so": "a7d73a5ebf72771506ce6a692a3a1ad79e5ec9e5dbdb9d2e6036e6bac47a9e8b",
     "libhgraph_stdlib.so": "d1bf1f3b389810a0235bf983256f4498df07959dcd7b4703bc72c823b2ca33f6",
     "libhgraph_wiring.so": "58799bb326b4e2f7a18f83a858caf11becf256ef6b2744253466ca6ae9e7a3a5"
   },
-  "measured_at": "2026-10-08T12:13:19.283677+00:00",
+  "measured_at": "2026-10-08T08:22:32.695346+00:00",
   "observations": {
     "bool_false": {
       "outcome": "value",
@@ -101,7 +72,7 @@
     }
   },
   "reasoned_sha256": "6c78705808ded668608ea367b6e823698aa4628bcd2519e7a5f563fe026d751e",
-  "recorder_sha256": "1c495741707e519ab70352f58569f29092b8374c2fd71a60e65e71488fa801f9",
+  "recorder_sha256": "fee3da9c12290bd55cdbac36ef268c2578736e3e1f8dbe7e03268bb46b14e9a2",
   "repeats": 3,
   "sdk_headers_sha256": {
     "fmt/args.h": "ce9705a22f68469891cba708b3c4ae459edb3f41c8a83f891e93013d485190f8",

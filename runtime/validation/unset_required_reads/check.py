@@ -2,8 +2,11 @@
 import hashlib
 import json
 from pathlib import Path
+import sys
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE.parent / "atomic_snapshots"))
+from provenance import validate_identity, digest, manifest
 
 def sha(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
@@ -12,6 +15,18 @@ def check():
     public = json.loads((HERE/'observed.json').read_text())
     native = json.loads((HERE/'native_observed.json').read_text())
     validate(cases, public, native)
+    ninja = json.loads((HERE/'native_ninja_observed.json').read_text())
+    validate(cases, public, ninja)
+    assert native['cmake_generator'] == 'Unix Makefiles'
+    assert ninja['cmake_generator'] == 'Ninja'
+    archive = HERE/'archive'
+    old = json.loads((archive/'native_observed.json').read_text())
+    assert old['recorder_sha256'] == sha(archive/'native_observe.py')
+    assert old['cmake_sha256'] == sha(archive/'CMakeLists.txt')
+    assert old['source_sha256'] == sha(HERE/'native.cpp')
+    assert old['observations'] == native['observations'] == ninja['observations']
+    assert old['loaded_libraries_sha256'] == native['loaded_libraries_sha256'] == ninja['loaded_libraries_sha256']
+    assert old['sdk_headers_sha256'] == native['sdk_headers_sha256'] == ninja['sdk_headers_sha256']
     print('Nine cases, two facade surfaces and native typed reads: recorded identities, controls and variations preserved')
 
 def validate(cases, public, native):
@@ -23,11 +38,18 @@ def validate(cases, public, native):
     assert native['recorder_sha256'] == sha(HERE/'native_observe.py')
     assert native['cmake_sha256'] == sha(HERE/'CMakeLists.txt')
     assert native['support_sha256'] == sha(HERE.parent/'fixed/native_loaded_libraries.h')
-    assert native['loaded_libraries_sha256'] and native['sdk_headers_sha256']
+    manifest(native['loaded_libraries_sha256'])
+    manifest(native['sdk_headers_sha256'])
+    for field in ('binary_sha256', 'compiler_sha256', 'compile_commands_sha256'): digest(native[field])
+    command = native['compile_command']
+    assert isinstance(command, list) and command and all(isinstance(arg, str) and arg for arg in command)
+    assert '<source>/native.cpp' in command and '-c' in command
+    assert any(arg.startswith('-std=') for arg in command)
     ids = {case['id'] for case in cases}
     assert set(native['observations']) == ids
+    assert set(public['engines']) == {'python', 'cpp'}
     for engine, group in public['engines'].items():
-        assert group['identity']['native'] == (engine == 'cpp')
+        validate_identity(group['identity'], engine)
         assert set(group['observations']) == ids
         for case in cases:
             observation = group['observations'][case['id']]

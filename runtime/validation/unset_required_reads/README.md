@@ -49,13 +49,32 @@ facade differences remain recorded variations. Errors are caught locally to
 observe controls: graph error propagation, stable HGL codes, failure cleanup
 and generated HGL execution are not established by this audit.
 
+## Build-command provenance refresh
+
+The original native record and its recorder/CMake inputs are preserved under
+`archive/`. The current recorder reads the native translation unit from CMake's
+`compile_commands.json`, preserving tokenized flags with private paths replaced
+by stable labels. It does not depend on Make's `flags.make`.
+
+The same frozen SDK was built with Unix Makefiles and Ninja, then each binary
+ran in three fresh processes. `native_observed.json` records Make and
+`native_ninja_observed.json` records Ninja. All nine observations, loaded native
+library hashes and SDK header hashes match the original record. Recorder and
+CMake hashes changed because command recording changed; the facade record and
+native probe source did not change. The archived recorder is historical input,
+not the current reproduction entry point.
+
+Offline checks require exactly the Python and C++ facade engines and validate
+their full package, runner-source and loaded-library identities. They also
+check both native records and preserve their agreement with archived results.
+
 ## Reproduction
 
 ```sh
 python3 runtime/validation/unset_required_reads/observe.py \
   --python /path/to/python-engine/bin/python --cpp /path/to/cpp-engine/bin/python \
   --output /tmp/unset-public.json
-cmake -S runtime/validation/unset_required_reads -B /tmp/unset-native \
+cmake -G Ninja -S runtime/validation/unset_required_reads -B /tmp/unset-native \
   -Dhgraph_DIR=/path/to/sdk/lib/cmake/hgraph \
   -DPython_EXECUTABLE=/path/to/cpp-engine/bin/python -DCMAKE_BUILD_TYPE=Release
 cmake --build /tmp/unset-native --parallel 2
@@ -66,6 +85,7 @@ python3 runtime/validation/unset_required_reads/native_observe.py \
 python3 runtime/validation/unset_required_reads/check.py
 ```
 
+Use `-G "Unix Makefiles"` for the other verified generator.
 Recorders require new destinations. Three-run equality and identity checks
 reject unstable measurements. Offline validation checks source/corpus hashes,
 present controls, absence preservation and every recorded variation; it is
