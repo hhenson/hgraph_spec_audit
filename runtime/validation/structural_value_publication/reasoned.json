@@ -1,0 +1,1307 @@
+{
+  "written_before_measurement": true,
+  "reasoning": "Proposed ordinary structural publication reconciles current source membership and child validity with a populated output; sparse delta control transports only publications/removals. Three distinct value surfaces are measured without substitution. Named struct and fixed-list B are independent initially-partial sources; A prepopulates the output. Map transitions retain a valid sibling key. No empty, wholly invalid, zero-child or new invalid membership case is included. Public all_valid query failures are retained independently from child-state observations; no derived Boolean replaces that accessor. copy_from and copy_from_input are distinct direct API probes, not fallbacks.",
+  "cases": [
+    {
+      "id": "struct_return_value",
+      "shape": "struct",
+      "mode": "return_value",
+      "expected_states": [
+        {
+          "left": {
+            "valid": true,
+            "value": 10
+          },
+          "right": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "left": {
+            "valid": true,
+            "value": 10
+          },
+          "right": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "struct_assign_value",
+      "shape": "struct",
+      "mode": "assign_value",
+      "expected_states": [
+        {
+          "left": {
+            "valid": true,
+            "value": 10
+          },
+          "right": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "left": {
+            "valid": true,
+            "value": 10
+          },
+          "right": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "struct_copy_from_input",
+      "shape": "struct",
+      "mode": "copy_from_input",
+      "expected_states": [
+        {
+          "left": {
+            "valid": true,
+            "value": 10
+          },
+          "right": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "left": {
+            "valid": true,
+            "value": 10
+          },
+          "right": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "struct_delta_control",
+      "shape": "struct",
+      "mode": "delta_control",
+      "expected_states": [
+        {
+          "left": {
+            "valid": true,
+            "value": 10
+          },
+          "right": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": true,
+            "value": 20
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "left": {
+            "valid": true,
+            "value": 10
+          },
+          "right": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "fixed_return_value",
+      "shape": "fixed",
+      "mode": "return_value",
+      "expected_states": [
+        {
+          "0": {
+            "valid": true,
+            "value": 10
+          },
+          "1": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "0": {
+            "valid": true,
+            "value": 10
+          },
+          "1": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "fixed_assign_value",
+      "shape": "fixed",
+      "mode": "assign_value",
+      "expected_states": [
+        {
+          "0": {
+            "valid": true,
+            "value": 10
+          },
+          "1": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "0": {
+            "valid": true,
+            "value": 10
+          },
+          "1": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "fixed_copy_from_input",
+      "shape": "fixed",
+      "mode": "copy_from_input",
+      "expected_states": [
+        {
+          "0": {
+            "valid": true,
+            "value": 10
+          },
+          "1": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "0": {
+            "valid": true,
+            "value": 10
+          },
+          "1": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "fixed_delta_control",
+      "shape": "fixed",
+      "mode": "delta_control",
+      "expected_states": [
+        {
+          "0": {
+            "valid": true,
+            "value": 10
+          },
+          "1": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": true,
+            "value": 20
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "0": {
+            "valid": true,
+            "value": 10
+          },
+          "1": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "map_remove_return_value",
+      "shape": "map_remove",
+      "mode": "return_value",
+      "expected_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "map_remove_assign_value",
+      "shape": "map_remove",
+      "mode": "assign_value",
+      "expected_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "map_remove_copy_from_input",
+      "shape": "map_remove",
+      "mode": "copy_from_input",
+      "expected_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "map_remove_delta_control",
+      "shape": "map_remove",
+      "mode": "delta_control",
+      "expected_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "map_invalid_return_value",
+      "shape": "map_invalid",
+      "mode": "return_value",
+      "expected_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "map_invalid_assign_value",
+      "shape": "map_invalid",
+      "mode": "assign_value",
+      "expected_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "map_invalid_copy_from_input",
+      "shape": "map_invalid",
+      "mode": "copy_from_input",
+      "expected_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "map_invalid_delta_control",
+      "shape": "map_invalid",
+      "mode": "delta_control",
+      "expected_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "struct_copy_from",
+      "shape": "struct",
+      "mode": "copy_from",
+      "expected_states": [
+        {
+          "left": {
+            "valid": true,
+            "value": 10
+          },
+          "right": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "left": {
+            "valid": true,
+            "value": 10
+          },
+          "right": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "left": {
+            "valid": true,
+            "value": 30
+          },
+          "right": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "fixed_copy_from",
+      "shape": "fixed",
+      "mode": "copy_from",
+      "expected_states": [
+        {
+          "0": {
+            "valid": true,
+            "value": 10
+          },
+          "1": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "0": {
+            "valid": true,
+            "value": 10
+          },
+          "1": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "0": {
+            "valid": true,
+            "value": 30
+          },
+          "1": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "map_remove_copy_from",
+      "shape": "map_remove",
+      "mode": "copy_from",
+      "expected_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "map_invalid_copy_from",
+      "shape": "map_invalid",
+      "mode": "copy_from",
+      "expected_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ],
+      "expected_source_states": [
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": true,
+            "value": 20
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": false,
+            "value": null
+          }
+        },
+        {
+          "7": {
+            "valid": true,
+            "value": 10
+          },
+          "8": {
+            "valid": false,
+            "value": null
+          }
+        }
+      ]
+    }
+  ],
+  "tuple_capability": "A missing public TST is unsupported, not an atomic tuple substitute."
+}

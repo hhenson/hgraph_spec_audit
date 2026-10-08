@@ -60,6 +60,10 @@ The [generator operand audit](runtime/validation/generator_operands/README.md)
 records operand evaluation and failure traces, retaining differences at the
 minimum start-time boundary.
 
+The [ordinary structural-value publication audit](runtime/validation/structural_value_publication/README.md)
+distinguishes retained-value return, value assignment, endpoint copy and native
+owned-value copy. It preserves differences in removed keys and invalid children.
+
 The [owned structural delta audit](runtime/validation/owned_deltas/README.md)
 measures sparse payload retention through native ordinary storage and
 separates Python aliasing and marker-copy failures from copied-input controls.
