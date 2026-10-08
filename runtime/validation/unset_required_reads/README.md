@@ -40,6 +40,10 @@ successfully and selects false. The invalid list/map failures occur when
 requesting the typed collection view, before size or iteration. This native
 surface preserves absence through retention; it uses no Python scalar coercion.
 
+The native Map items probe does not establish admission of ordinary retained
+Map iteration in HGL. The proposed HGL cases use only scalar reads and list
+length; scalar-child `let` retention is itself part of that source extension.
+
 This supports required-read failure by reasoning and native typed extraction;
 facade differences remain recorded variations. Errors are caught locally to
 observe controls: graph error propagation, stable HGL codes, failure cleanup
