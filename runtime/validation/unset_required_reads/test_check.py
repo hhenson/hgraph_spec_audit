@@ -58,6 +58,39 @@ class EvidenceIntegrity(unittest.TestCase):
                     else: identity[field] = {'invented.so': '0' * 64}
                     with self.assertRaises(AssertionError): validate(self.cases, evidence, self.native)
 
+    def test_defaulted_absence_with_unchanged_result_fails(self):
+        mutations = [('python', 'bool_unset', False, 'bool'),
+                     ('cpp', 'bool_unset', False, 'bool'),
+                     ('python', 'list_unset', [4, 5], 'tuple'),
+                     ('python', 'map_unset', None, 'NoneType')]
+        for engine, case, value, type_name in mutations:
+            for field in ('retained', 'payload'):
+                with self.subTest(engine=engine, case=case, field=field):
+                    evidence = copy.deepcopy(self.public)
+                    row = evidence['engines'][engine]['observations'][case]['reads'][1]
+                    row[field], row[field+'_type'] = value, type_name
+                    with self.assertRaises(AssertionError): validate(self.cases, evidence, self.native)
+
+    def test_absent_bundle_field_cannot_be_synthesized(self):
+        row = self.public['engines']['python']['observations']['bool_unset']['reads'][0]
+        row['retained']['child'] = None
+        with self.assertRaises(AssertionError): validate(self.cases, self.public, self.native)
+
+    def test_value_and_type_corruption_with_equal_python_values_fails(self):
+        for engine in ('python', 'cpp'):
+            for field, value in (('retained', 1), ('payload', 1), ('retained_type', 'int'), ('payload_type', 'int')):
+                with self.subTest(engine=engine, field=field):
+                    evidence = copy.deepcopy(self.public)
+                    evidence['engines'][engine]['observations']['bool_present']['reads'][1][field] = value
+                    with self.assertRaises(AssertionError): validate(self.cases, evidence, self.native)
+
+    def test_native_and_facade_library_mismatch_fails(self):
+        for library in ('libhgraph_runtime.so', 'libhgraph_wiring.so', 'libhgraph_stdlib.so'):
+            with self.subTest(library=library):
+                native = copy.deepcopy(self.native)
+                native['loaded_libraries_sha256'][library] = '0' * 64
+                with self.assertRaises(AssertionError): validate(self.cases, self.public, native)
+
     def test_missing_compile_command_fails(self):
         self.native['compile_command'] = []
         with self.assertRaises(AssertionError): validate(self.cases, self.public, self.native)

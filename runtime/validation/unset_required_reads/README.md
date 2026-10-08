@@ -65,8 +65,11 @@ native probe source did not change. The archived recorder is historical input,
 not the current reproduction entry point.
 
 Offline checks require exactly the Python and C++ facade engines and validate
-their full package, runner-source and loaded-library identities. They also
-check both native records and preserve their agreement with archived results.
+their full package, runner-source and loaded-library identities. The three native
+hgraph library hashes must match the C++ facade identity. Checks compare exact
+retained/payload values and types before derived results, so defaulting absence
+cannot hide behind an unchanged Boolean result or collection length. Both native
+records retain their agreement with archived results.
 
 ## Reproduction
 

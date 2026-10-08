@@ -29,6 +29,28 @@ def check():
     assert old['sdk_headers_sha256'] == native['sdk_headers_sha256'] == ninja['sdk_headers_sha256']
     print('Nine cases, two facade surfaces and native typed reads: recorded identities, controls and variations preserved')
 
+def validate_observation_values(case, engine, rows):
+    """Check absence and payloads before considering their derived results."""
+    payload, payload_type = None, 'NoneType'
+    if case['present']:
+        payload = {'scalar': 4, 'boolean': case.get('value', True),
+                   'fixed_list': [4, 5], 'map': {'7': 4}}[case['shape']]
+        payload_type = {'scalar': 'int', 'boolean': 'bool', 'fixed_list': 'tuple',
+                        'map': 'frozendict' if engine == 'python' else 'dict'}[case['shape']]
+    elif engine == 'python' and case['shape'] in ('fixed_list', 'map'):
+        payload, payload_type = ([None, None], 'tuple') if case['shape'] == 'fixed_list' else ({}, 'frozendict')
+    for row in rows:
+        bundle = row['surface'] == 'bundle_projection'
+        missing_field = bundle and engine == 'python' and not case['present']
+        retained = ({'sibling': 1} if missing_field else {'sibling': 1, 'child': payload}) if bundle else payload
+        expected = {'retained': retained, 'retained_type': 'dict' if bundle else payload_type,
+                    'phase': 'projection' if missing_field else 'operation'}
+        if not missing_field: expected.update(payload=payload, payload_type=payload_type)
+        actual = {key: row[key] for key in ('retained', 'retained_type', 'phase', 'payload', 'payload_type') if key in row}
+        # JSON spelling preserves distinctions such as false versus zero.
+        assert json.dumps(actual, sort_keys=True) == json.dumps(expected, sort_keys=True), (engine, case['id'], row['surface'])
+
+
 def validate(cases, public, native):
     assert public['repeats'] == native['repeats'] == 3
     assert public['reasoned_sha256'] == native['reasoned_sha256'] == sha(HERE/'reasoned.json')
@@ -50,6 +72,9 @@ def validate(cases, public, native):
     assert set(public['engines']) == {'python', 'cpp'}
     for engine, group in public['engines'].items():
         validate_identity(group['identity'], engine)
+        if engine == 'cpp':
+            for library in ('libhgraph_runtime.so', 'libhgraph_wiring.so', 'libhgraph_stdlib.so'):
+                assert native['loaded_libraries_sha256'][library] == group['identity']['loaded_hgraph_libraries'][library]
         assert set(group['observations']) == ids
         for case in cases:
             observation = group['observations'][case['id']]
@@ -57,6 +82,7 @@ def validate(cases, public, native):
             rows = observation['reads']
             assert [r['surface'] for r in rows] == ['bundle_projection','child_observation']
             assert all(r['child_valid'] == case['present'] for r in rows)
+            validate_observation_values(case, engine, rows)
             if case['present']:
                 assert all(r['outcome'] == 'value' and r['result'] == case['expected'] for r in rows)
             elif engine == 'python':
