@@ -1,0 +1,126 @@
+{
+  "written_before_measurement": true,
+  "surface": "Native installed-SDK TSDataMutationView.copy_value_from of an independently owned Value; genuine graph evaluation with independent step observer, not Python return/assignment or endpoint copy_from_input.",
+  "expected": {
+    "struct": [
+      {
+        "left": {
+          "valid": true,
+          "value": 10
+        },
+        "right": {
+          "valid": true,
+          "value": 20
+        }
+      },
+      {
+        "left": {
+          "valid": true,
+          "value": 30
+        },
+        "right": {
+          "valid": false,
+          "value": null
+        }
+      },
+      {
+        "left": {
+          "valid": true,
+          "value": 30
+        },
+        "right": {
+          "valid": false,
+          "value": null
+        }
+      }
+    ],
+    "fixed": [
+      {
+        "0": {
+          "valid": true,
+          "value": 10
+        },
+        "1": {
+          "valid": true,
+          "value": 20
+        }
+      },
+      {
+        "0": {
+          "valid": true,
+          "value": 30
+        },
+        "1": {
+          "valid": false,
+          "value": null
+        }
+      },
+      {
+        "0": {
+          "valid": true,
+          "value": 30
+        },
+        "1": {
+          "valid": false,
+          "value": null
+        }
+      }
+    ],
+    "map_remove": [
+      {
+        "7": {
+          "valid": true,
+          "value": 10
+        },
+        "8": {
+          "valid": true,
+          "value": 20
+        }
+      },
+      {
+        "7": {
+          "valid": true,
+          "value": 10
+        }
+      },
+      {
+        "7": {
+          "valid": true,
+          "value": 10
+        }
+      }
+    ],
+    "map_invalid": [
+      {
+        "7": {
+          "valid": true,
+          "value": 10
+        },
+        "8": {
+          "valid": true,
+          "value": 20
+        }
+      },
+      {
+        "7": {
+          "valid": true,
+          "value": 10
+        },
+        "8": {
+          "valid": false,
+          "value": null
+        }
+      },
+      {
+        "7": {
+          "valid": true,
+          "value": 10
+        },
+        "8": {
+          "valid": false,
+          "value": null
+        }
+      }
+    ]
+  }
+}
