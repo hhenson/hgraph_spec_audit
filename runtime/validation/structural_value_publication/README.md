@@ -1,7 +1,8 @@
 # Ordinary structural values at an output boundary
 
 Measured 2026-10-08, separately from ordinary tuple construction. The candidate
-HGL rule reconciles an output with an ordinary retained value's membership and
+[HGL rule](https://github.com/hhenson/hgraph_spec/blob/b11ff14910baf290ff1c2090c1d474f49748866d/language/docs/design/structural-value-publication.md)
+reconciles an output with an ordinary retained value's membership and
 child validity, while `delta<T>` remains sparse application. Existing HGL text
 calls a return a complete-output assignment but does not spell out these state
 transitions. The observations below inform an intentional source decision;
