@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.26)
+project(unset_required_reads LANGUAGES CXX)
+find_package(hgraph CONFIG REQUIRED)
+add_executable(unset_required_reads_native native.cpp)
+target_compile_features(unset_required_reads_native PRIVATE cxx_std_23)
+target_link_libraries(unset_required_reads_native PRIVATE hgraph::core)
+hgraph_link_python_embedding(unset_required_reads_native)

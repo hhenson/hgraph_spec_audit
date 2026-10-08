@@ -79,6 +79,9 @@ def main():
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/structural_value_publication/check.py')], check=True)
     subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s',
                     str(ROOT / 'runtime/validation/structural_value_publication')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'runtime/validation/unset_required_reads/check.py')], check=True)
+    subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s',
+                    str(ROOT / 'runtime/validation/unset_required_reads')], check=True)
     print('Recorded evidence checked; no fresh runtime measurements were made.')
 
 
