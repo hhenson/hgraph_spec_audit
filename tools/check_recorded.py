@@ -51,6 +51,7 @@ def main():
     subprocess.run([sys.executable, str(ROOT / 'compiler/contextual_bindings/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/value_sequences/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/constructor_order/check.py')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'runtime/validation/tuple_construction/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/eval_timed_values/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/generator_operands/check.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/owned_deltas/check.py')], check=True)

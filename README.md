@@ -52,6 +52,11 @@ The [constructor-order audit](runtime/validation/constructor_order/README.md)
 measures named scalar argument evaluation and early exceptions on both Python
 authoring surfaces, without claiming native C++ expression-order guarantees.
 
+The [ordinary tuple audit](runtime/validation/tuple_construction/README.md)
+records runtime atomic tuple values on both engines, Python expression order,
+mutable-child aliasing and an explicit C++ constructor-call order variation.
+It makes no structural TST parity claim.
+
 The [timed-value eval audit](runtime/validation/eval_timed_values/README.md)
 tests ordinary const timestamp/payload lists for all eight scalar types,
 keeping raw output separate from dense horizon materialization.
