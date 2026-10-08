@@ -1,0 +1,14 @@
+{
+  "written_before_measurement": true,
+  "reasoning": "HGL tuple construction should evaluate and independently retain each element once in written order, before proceeding. Prior effects remain on failure. Python tuple expressions sequence evaluation but ordinarily alias nested mutable values; native value builders may retain independently without defining native call argument order.",
+  "expected": {
+    "written_order": {"trace": [2, 1], "value": [2, 1]},
+    "first_failure": {"trace": [2], "constructed": false, "error_type": "ValueError"},
+    "nested_order": {"trace": [2, 1, 3], "value": [[2, 1], 3]},
+    "explicit_owned_copy": [[7], [7]],
+    "runtime_pair": {"status": "observed", "value": [[7, true], null, [-1, false], [0, false]]}
+  },
+  "descriptive_python_alias": [[7, 9], [7, 9]],
+  "native_call_target": {"success_trace": [2, 1], "failure_trace": [2]},
+  "limits": ["TS[tuple[int,bool]] is an ordinary atomic tuple carrier, not structural TST.", "Python authoring on a native engine does not establish C++ expression order.", "C++ std::tuple call arguments need not evaluate in written order.", "Retention and allocation failure injection are unmeasured."]
+}

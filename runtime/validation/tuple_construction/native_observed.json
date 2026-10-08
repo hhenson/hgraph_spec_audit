@@ -1,0 +1,38 @@
+{
+  "assessment": {
+    "failure_trace": "variation",
+    "success_trace": "variation"
+  },
+  "binary_sha256": "725d0170c31860101009b310967fe871b59a2e67ecc1d484151b9c00f5360209",
+  "compiler": "x86_64-linux-gnu-g++-15",
+  "compiler_sha256": "e6718f7e0c7d057c3ff77b550c603da9bc4030e3ede3c053705acce1293dbe4d",
+  "compiler_version": "x86_64-linux-gnu-g++-15 (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+  "flags": [
+    "-std=c++23",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "measured_at": "2026-10-08T05:08:55.014731+00:00",
+  "observed": {
+    "constructed": false,
+    "failure_trace": [
+      1,
+      2
+    ],
+    "success_trace": [
+      1,
+      2
+    ],
+    "value": [
+      2,
+      1
+    ]
+  },
+  "reasoned_sha256": "ee866ba8789f7cb492e8eda4aa03ff63d38ade0fdaf593fb540568de49ab5ce7",
+  "recorder_sha256": "9525179fdd2d16b15eb5bb87865e6be051cadf9a56247594d93f8afa059e0d10",
+  "repeats": 3,
+  "scope": "C++ standard-library tuple constructor argument expressions; no hgraph runtime or TST",
+  "source_sha256": "ec39f8c44c2f3c0a2d6126a8c289b71b53119202980e6575b7b878d3e306b34e"
+}
