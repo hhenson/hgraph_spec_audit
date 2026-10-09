@@ -3,8 +3,9 @@ import copy
 import tempfile
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 from check import validate
-from native_observe import compile_command
+from native_observe import compile_command, prepare_executable, target_artifact
 
 HERE = Path(__file__).resolve().parent
 
@@ -91,6 +92,15 @@ class EvidenceIntegrity(unittest.TestCase):
                 native['loaded_libraries_sha256'][library] = '0' * 64
                 with self.assertRaises(AssertionError): validate(self.cases, self.public, native)
 
+    def test_exception_rows_cannot_report_success(self):
+        rows = [(case, 0) for case in ('scalar_unset', 'bool_unset', 'list_unset', 'map_unset')]
+        rows.append(('scalar_unset', 1))
+        for case, index in rows:
+            with self.subTest(case=case, index=index):
+                evidence = copy.deepcopy(self.public)
+                evidence['engines']['python']['observations'][case]['reads'][index]['outcome'] = 'value'
+                with self.assertRaises(AssertionError): validate(self.cases, evidence, self.native)
+
     def test_missing_compile_command_fails(self):
         self.native['compile_command'] = []
         with self.assertRaises(AssertionError): validate(self.cases, self.public, self.native)
@@ -117,5 +127,51 @@ class CompileCommands(unittest.TestCase):
                 with self.subTest(entries=len(entries)):
                     (root/'compile_commands.json').write_text(json.dumps(entries))
                     with self.assertRaises(ValueError): compile_command(root, root/'native.cpp', root/'include')
+
+class TargetArtifacts(unittest.TestCase):
+    def test_other_build_executable_rejected_before_build(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            build, other = root/'build', root/'other-build'
+            build.mkdir(); other.mkdir()
+            expected = build/'unset_required_reads_native'
+            stale = other/'unset_required_reads_native'
+            expected.write_text('same binary content'); stale.write_text('same binary content')
+            (build/'unset_required_reads_target-Release.txt').write_text(str(expected)+'\n')
+            with patch('native_observe.subprocess.run') as run:
+                with self.assertRaises(ValueError): prepare_executable(build, stale)
+                run.assert_not_called()
+
+    def test_selected_target_is_built_before_use(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            build = Path(temporary)
+            executable = build/'unset_required_reads_native'
+            executable.write_text('stale binary')
+            manifest = build/'unset_required_reads_target-Release.txt'
+            manifest.write_text(str(executable)+'\n')
+            with patch('native_observe.subprocess.run', side_effect=lambda *a, **k: executable.write_text('rebuilt binary')) as run:
+                self.assertEqual(prepare_executable(build, executable), (executable, 'Release', manifest))
+                self.assertEqual(run.call_args.args[0], ['cmake', '--build', str(build), '--target', 'unset_required_reads_native', '--config', 'Release'])
+                self.assertTrue(run.call_args.kwargs['check'])
+            self.assertEqual(executable.read_text(), 'rebuilt binary')
+
+    def test_missing_or_ambiguous_target_metadata_fails(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            build = Path(temporary)
+            executable = build/'unset_required_reads_native'
+            with self.assertRaises(ValueError): target_artifact(build, executable)
+            for config in ('Debug', 'Release'):
+                (build/f'unset_required_reads_target-{config}.txt').write_text(str(executable)+'\n')
+            with self.assertRaises(ValueError): target_artifact(build, executable)
+
+    def test_failed_build_cannot_run_stale_executable(self):
+        import subprocess
+        with tempfile.TemporaryDirectory() as temporary:
+            build = Path(temporary)
+            executable = build/'unset_required_reads_native'
+            executable.write_text('stale binary')
+            (build/'unset_required_reads_target-Release.txt').write_text(str(executable)+'\n')
+            with patch('native_observe.subprocess.run', side_effect=subprocess.CalledProcessError(1, 'cmake')):
+                with self.assertRaises(subprocess.CalledProcessError): prepare_executable(build, executable)
 
 if __name__ == '__main__': unittest.main()

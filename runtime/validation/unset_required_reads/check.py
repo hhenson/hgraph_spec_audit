@@ -27,6 +27,15 @@ def check():
     assert old['observations'] == native['observations'] == ninja['observations']
     assert old['loaded_libraries_sha256'] == native['loaded_libraries_sha256'] == ninja['loaded_libraries_sha256']
     assert old['sdk_headers_sha256'] == native['sdk_headers_sha256'] == ninja['sdk_headers_sha256']
+    previous = archive/'compile_commands'
+    for name in ('native_observed.json', 'native_ninja_observed.json'):
+        prior = json.loads((previous/name).read_text())
+        assert prior['recorder_sha256'] == sha(previous/'native_observe.py')
+        assert prior['cmake_sha256'] == sha(previous/'CMakeLists.txt')
+        assert prior['source_sha256'] == native['source_sha256']
+        assert prior['observations'] == native['observations']
+        assert prior['loaded_libraries_sha256'] == native['loaded_libraries_sha256']
+        assert prior['sdk_headers_sha256'] == native['sdk_headers_sha256']
     print('Nine cases, two facade surfaces and native typed reads: recorded identities, controls and variations preserved')
 
 def validate_observation_values(case, engine, rows):
@@ -62,7 +71,12 @@ def validate(cases, public, native):
     assert native['support_sha256'] == sha(HERE.parent/'fixed/native_loaded_libraries.h')
     manifest(native['loaded_libraries_sha256'])
     manifest(native['sdk_headers_sha256'])
-    for field in ('binary_sha256', 'compiler_sha256', 'compile_commands_sha256'): digest(native[field])
+    for field in ('binary_sha256', 'compiler_sha256', 'compile_commands_sha256', 'target_manifest_sha256'): digest(native[field])
+    assert native['target_name'] == 'unset_required_reads_native'
+    assert isinstance(native['target_configuration'], str)
+    artifact = Path(native['target_artifact'])
+    assert not artifact.is_absolute() and '..' not in artifact.parts
+    assert artifact.name in ('unset_required_reads_native', 'unset_required_reads_native.exe')
     command = native['compile_command']
     assert isinstance(command, list) and command and all(isinstance(arg, str) and arg for arg in command)
     assert '<source>/native.cpp' in command and '-c' in command
@@ -86,9 +100,9 @@ def validate(cases, public, native):
             if case['present']:
                 assert all(r['outcome'] == 'value' and r['result'] == case['expected'] for r in rows)
             elif engine == 'python':
-                assert rows[0]['phase'] == 'projection' and rows[0]['error_type'] == 'KeyError'
+                assert rows[0]['outcome'] == 'failure' and rows[0]['phase'] == 'projection' and rows[0]['error_type'] == 'KeyError'
                 direct = rows[1]
-                if case['shape'] == 'scalar': assert direct['error_type'] == 'TypeError'
+                if case['shape'] == 'scalar': assert direct['outcome'] == 'failure' and direct['error_type'] == 'TypeError'
                 else:
                     assert direct['outcome'] == 'value'
                     assert direct['result'] == {'boolean':0,'fixed_list':2,'map':[]}[case['shape']]

@@ -71,6 +71,22 @@ retained/payload values and types before derived results, so defaulting absence
 cannot hide behind an unchanged Boolean result or collection length. Both native
 records retain their agreement with archived results.
 
+## Target-artifact provenance refresh
+
+The current recorder requires `--executable` to resolve to the artifact emitted
+by CMake's configured `unset_required_reads_native` target manifest, then builds
+that target before hashing and running it. A binary from another build is
+rejected even if its contents or linked SDK happen to match. Missing or ambiguous
+manifest data and failed builds prevent measurement. Records include the target,
+configuration, relative artifact path and manifest hash.
+
+The prior Make/Ninja records and their recorder/CMake inputs remain unchanged
+under `archive/compile_commands/`. New three-process runs for each generator use
+the same frozen SDK; observations and loaded-library/header identities match
+both historical rounds. This refresh changes build provenance, not expected
+results. Failure rows must report `outcome: failure` as well as their exception
+type; a contradictory success outcome fails offline validation.
+
 ## Reproduction
 
 ```sh
