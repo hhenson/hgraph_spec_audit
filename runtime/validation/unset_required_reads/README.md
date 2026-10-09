@@ -96,6 +96,21 @@ runs after an actual Ninja Release-to-Debug reconfiguration in a separate build;
 the obsolete Release manifest still names the same executable. All observations
 and SDK library/header identities agree with the earlier records.
 
+The next refresh preserves those three records and inputs unchanged under
+`archive/active_configuration/`. Compile-command selection now uses the chosen
+configuration's object output or `CMAKE_INTDIR` argument; conflicting clues,
+missing matches and duplicate matches fail. Multi-config commands without any
+configuration marker cannot stand in for the selected configuration. Existing
+single-config commands and quoted arguments keep their behavior.
+
+`native_multiconfig_debug_observed.json` and
+`native_multiconfig_release_observed.json` record three fresh runs each from
+one Ninja Multi-Config build. Their target paths, configurations and compiler
+commands agree. The Make, Ninja and reconfigured Debug records were also rerun
+with this recorder. All nine observations and SDK identities remain unchanged.
+For multi-config reproduction, use `-G "Ninja Multi-Config"` and select
+`Debug/unset_required_reads_native` or `Release/unset_required_reads_native`.
+
 ## Reproduction
 
 ```sh

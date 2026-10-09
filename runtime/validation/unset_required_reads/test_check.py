@@ -101,6 +101,12 @@ class EvidenceIntegrity(unittest.TestCase):
                 evidence['engines']['python']['observations'][case]['reads'][index]['outcome'] = 'value'
                 with self.assertRaises(AssertionError): validate(self.cases, evidence, self.native)
 
+    def test_multi_config_command_cannot_disagree_with_target(self):
+        native = json.loads((HERE/'native_multiconfig_debug_observed.json').read_text())
+        native['target_configuration'] = 'Release'
+        native['target_artifact'] = 'Release/unset_required_reads_native'
+        with self.assertRaises(AssertionError): validate(self.cases, self.public, native)
+
     def test_missing_compile_command_fails(self):
         self.native['compile_command'] = []
         with self.assertRaises(AssertionError): validate(self.cases, self.public, self.native)
@@ -118,6 +124,47 @@ class CompileCommands(unittest.TestCase):
                     (root/'compile_commands.json').write_text(json.dumps([{'directory':str(root), 'file':str(source), **form}]))
                     self.assertEqual(compile_command(root, source, sdk),
                         ['/usr/bin/c++', '-DNAME=two words', '-I<build>/sdk/include', '-c', '<source>/native.cpp'])
+
+    def test_multi_config_selects_exact_output_or_argument_configuration(self):
+        import shlex
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            for clue in ('output', 'arguments', 'command'):
+                entries = []
+                for config in ('Debug', 'Release', 'RelWithDebInfo'):
+                    args = ['c++', '-DNAME=two words', '-c', str(root/'native.cpp')]
+                    entry = {'directory':str(root), 'file':'native.cpp'}
+                    if clue == 'output': entry['output'] = f'CMakeFiles/unset_required_reads_native.dir/{config}/native.cpp.o'
+                    else: args.insert(1, f'-DCMAKE_INTDIR="{config}"')
+                    entry.update({'command':shlex.join(args)} if clue == 'command' else {'arguments':args})
+                    entries.append(entry)
+                (root/'compile_commands.json').write_text(json.dumps(entries))
+                for config in ('Debug', 'Release'):
+                    with self.subTest(clue=clue, config=config):
+                        actual = compile_command(root, root/'native.cpp', root/'include', config)
+                        self.assertIn('-DNAME=two words', actual)
+                        if clue != 'output': self.assertIn(f'-DCMAKE_INTDIR="{config}"', actual)
+                with self.assertRaises(ValueError): compile_command(root, root/'native.cpp', root/'include', 'Missing')
+                (root/'compile_commands.json').write_text(json.dumps([entries[0], entries[0]]))
+                with self.assertRaises(ValueError): compile_command(root, root/'native.cpp', root/'include', 'Debug')
+
+    def test_multi_config_missing_command_marker_cannot_fall_back(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root/'CMakeCache.txt').write_text('CMAKE_CONFIGURATION_TYPES:STRING=Debug;Release\n')
+            entry = {'directory':str(root), 'file':'native.cpp', 'arguments':['c++','-c','native.cpp']}
+            (root/'compile_commands.json').write_text(json.dumps([entry]))
+            with self.assertRaises(ValueError): compile_command(root, root/'native.cpp', root/'include', 'Debug')
+            with self.assertRaises(ValueError): compile_command(root, root/'native.cpp', root/'include')
+
+    def test_conflicting_output_and_argument_configuration_fails(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            entry = {'directory':str(root), 'file':'native.cpp',
+                     'output':'CMakeFiles/unset_required_reads_native.dir/Debug/native.cpp.o',
+                     'arguments':['c++','-DCMAKE_INTDIR="Release"','-c','native.cpp']}
+            (root/'compile_commands.json').write_text(json.dumps([entry]))
+            with self.assertRaises(ValueError): compile_command(root, root/'native.cpp', root/'include', 'Debug')
 
     def test_missing_or_ambiguous_source_command_fails(self):
         with tempfile.TemporaryDirectory() as temporary:

@@ -7,6 +7,7 @@ import sys
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "atomic_snapshots"))
 from provenance import validate_identity, digest, manifest
+from native_observe import command_configuration
 
 def sha(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
@@ -25,6 +26,13 @@ def check():
     assert debug['observations'] == native['observations']
     assert debug['loaded_libraries_sha256'] == native['loaded_libraries_sha256']
     assert debug['sdk_headers_sha256'] == native['sdk_headers_sha256']
+    for configuration in ('Debug', 'Release'):
+        multi = json.loads((HERE/f'native_multiconfig_{configuration.lower()}_observed.json').read_text())
+        validate(cases, public, multi)
+        assert multi['cmake_generator'] == 'Ninja Multi-Config'
+        assert multi['target_configuration'] == configuration
+        assert multi['observations'] == native['observations']
+        assert multi['sdk_headers_sha256'] == native['sdk_headers_sha256']
     archive = HERE/'archive'
     old = json.loads((archive/'native_observed.json').read_text())
     assert old['recorder_sha256'] == sha(archive/'native_observe.py')
@@ -33,9 +41,11 @@ def check():
     assert old['observations'] == native['observations'] == ninja['observations']
     assert old['loaded_libraries_sha256'] == native['loaded_libraries_sha256'] == ninja['loaded_libraries_sha256']
     assert old['sdk_headers_sha256'] == native['sdk_headers_sha256'] == ninja['sdk_headers_sha256']
-    for snapshot in ('compile_commands', 'target_identity'):
+    for snapshot in ('compile_commands', 'target_identity', 'active_configuration'):
         previous = archive/snapshot
-        for name in ('native_observed.json', 'native_ninja_observed.json'):
+        names = ['native_observed.json', 'native_ninja_observed.json']
+        if snapshot == 'active_configuration': names.append('native_reconfigured_observed.json')
+        for name in names:
             prior = json.loads((previous/name).read_text())
             assert prior['recorder_sha256'] == sha(previous/'native_observe.py')
             assert prior['cmake_sha256'] == sha(previous/'CMakeLists.txt')
@@ -88,6 +98,11 @@ def validate(cases, public, native):
     assert isinstance(command, list) and command and all(isinstance(arg, str) and arg for arg in command)
     assert '<source>/native.cpp' in command and '-c' in command
     assert any(arg.startswith('-std=') for arg in command)
+    configuration = command_configuration({}, command)
+    if native['cmake_generator'] == 'Ninja Multi-Config':
+        assert configuration == native['target_configuration']
+        assert artifact.parent.name == native['target_configuration']
+    else: assert configuration is None or configuration == native['target_configuration']
     ids = {case['id'] for case in cases}
     assert set(native['observations']) == ids
     assert set(public['engines']) == {'python', 'cpp'}
