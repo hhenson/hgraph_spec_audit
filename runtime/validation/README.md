@@ -79,3 +79,7 @@ and the unavailable native zoned-time authoring type remain explicit boundaries.
 
 The [strict zone-name follow-up](strict_zone_names/README.md) separates permissive
 zone construction/ad-hoc JSON decoding from exact provider-name validation.
+
+[Required unset reads](unset_required_reads/README.md) records retained partial
+observations through two Python authoring surfaces and genuine native typed
+extraction, preserving absent-field, collection and Boolean coercion differences.

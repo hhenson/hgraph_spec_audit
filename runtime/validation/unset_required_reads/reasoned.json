@@ -1,0 +1,74 @@
+{
+  "scope": "Required payload consumption from independently retained partial ordinary observations, with a valid sibling; no new HGL nullable type or direct input-admission rule.",
+  "cases": [
+    {
+      "id": "scalar_unset",
+      "shape": "scalar",
+      "present": false,
+      "operation": "add_one",
+      "expected": "failure"
+    },
+    {
+      "id": "scalar_present",
+      "shape": "scalar",
+      "present": true,
+      "operation": "add_one",
+      "expected": 5
+    },
+    {
+      "id": "bool_unset",
+      "shape": "boolean",
+      "present": false,
+      "operation": "branch",
+      "expected": "failure"
+    },
+    {
+      "id": "bool_present",
+      "shape": "boolean",
+      "present": true,
+      "operation": "branch",
+      "expected": 1
+    },
+    {
+      "id": "bool_false",
+      "shape": "boolean",
+      "present": true,
+      "value": false,
+      "operation": "branch",
+      "expected": 0
+    },
+    {
+      "id": "list_unset",
+      "shape": "fixed_list",
+      "present": false,
+      "operation": "len",
+      "expected": "failure"
+    },
+    {
+      "id": "list_present",
+      "shape": "fixed_list",
+      "present": true,
+      "operation": "len",
+      "expected": 2
+    },
+    {
+      "id": "map_unset",
+      "shape": "map",
+      "present": false,
+      "operation": "items",
+      "expected": "failure"
+    },
+    {
+      "id": "map_present",
+      "shape": "map",
+      "present": true,
+      "operation": "items",
+      "expected": [
+        [
+          7,
+          4
+        ]
+      ]
+    }
+  ]
+}
