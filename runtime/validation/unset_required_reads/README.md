@@ -111,6 +111,14 @@ with this recorder. All nine observations and SDK identities remain unchanged.
 For multi-config reproduction, use `-G "Ninja Multi-Config"` and select
 `Debug/unset_required_reads_native` or `Release/unset_required_reads_native`.
 
+`native_multiconfig_custom_debug_observed.json` records three fresh Debug runs
+with `CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG=<build>/artifacts`, using the same
+SDK. The target manifest binds `artifacts/unset_required_reads_native` to Debug;
+the directory need not be named after the configuration. Compile-command
+configuration and in-tree artifact checks remain enforced. Observations and SDK
+identities match the existing records, which remain byte-for-byte unchanged.
+The recorder and native probe are unchanged.
+
 ## Reproduction
 
 ```sh

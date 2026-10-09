@@ -107,6 +107,22 @@ class EvidenceIntegrity(unittest.TestCase):
         native['target_artifact'] = 'Release/unset_required_reads_native'
         with self.assertRaises(AssertionError): validate(self.cases, self.public, native)
 
+    def test_configured_output_directory_is_independent_of_configuration(self):
+        native = json.loads((HERE/'native_multiconfig_custom_debug_observed.json').read_text())
+        self.assertEqual(native['target_artifact'], 'artifacts/unset_required_reads_native')
+        self.assertEqual(native['target_configuration'], 'Debug')
+        validate(self.cases, self.public, native)
+        native['target_configuration'] = 'Release'
+        with self.assertRaises(AssertionError): validate(self.cases, self.public, native)
+
+    def test_artifact_must_remain_relative_and_inside_build(self):
+        for artifact in ('/tmp/unset_required_reads_native', '../unset_required_reads_native',
+                         'artifacts/../../unset_required_reads_native'):
+            with self.subTest(artifact=artifact):
+                native = copy.deepcopy(self.native)
+                native['target_artifact'] = artifact
+                with self.assertRaises(AssertionError): validate(self.cases, self.public, native)
+
     def test_missing_compile_command_fails(self):
         self.native['compile_command'] = []
         with self.assertRaises(AssertionError): validate(self.cases, self.public, self.native)

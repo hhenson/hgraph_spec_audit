@@ -33,6 +33,13 @@ def check():
         assert multi['target_configuration'] == configuration
         assert multi['observations'] == native['observations']
         assert multi['sdk_headers_sha256'] == native['sdk_headers_sha256']
+    custom = json.loads((HERE/'native_multiconfig_custom_debug_observed.json').read_text())
+    validate(cases, public, custom)
+    assert custom['cmake_generator'] == 'Ninja Multi-Config'
+    assert custom['target_configuration'] == 'Debug'
+    assert custom['target_artifact'] == 'artifacts/unset_required_reads_native'
+    assert custom['observations'] == native['observations']
+    assert custom['sdk_headers_sha256'] == native['sdk_headers_sha256']
     archive = HERE/'archive'
     old = json.loads((archive/'native_observed.json').read_text())
     assert old['recorder_sha256'] == sha(archive/'native_observe.py')
@@ -101,7 +108,6 @@ def validate(cases, public, native):
     configuration = command_configuration({}, command)
     if native['cmake_generator'] == 'Ninja Multi-Config':
         assert configuration == native['target_configuration']
-        assert artifact.parent.name == native['target_configuration']
     else: assert configuration is None or configuration == native['target_configuration']
     ids = {case['id'] for case in cases}
     assert set(native['observations']) == ids
