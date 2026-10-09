@@ -119,6 +119,16 @@ configuration and in-tree artifact checks remain enforced. Observations and SDK
 identities match the existing records, which remain byte-for-byte unchanged.
 The recorder and native probe are unchanged.
 
+`target_identities.json` separately retains each current record's measured
+configuration, relative artifact and target-manifest hash. These identities were
+cross-checked against the original build manifests; they are provenance, not
+reasoned behavioral expectations. Offline validation selects the identity by
+explicit record filename, never by mutable record fields, optimization flags or
+directory naming. It rejects changed target fields even for single-config
+commands without configuration markers. This closed corpus check does not
+remeasure a build; future measurements require explicit identity registration.
+Existing evidence and recorder inputs remain unchanged.
+
 ## Reproduction
 
 ```sh

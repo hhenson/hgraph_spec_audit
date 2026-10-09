@@ -16,37 +16,37 @@ class EvidenceIntegrity(unittest.TestCase):
         self.native = json.loads((HERE/'native_observed.json').read_text())
 
     def test_recorded_evidence(self):
-        validate(self.cases, self.public, self.native)
+        validate(self.cases, self.public, self.native, "native_observed.json")
 
     def test_false_cannot_be_mistaken_for_absence(self):
         self.native['observations']['bool_false']['retained_child_valid'] = False
-        with self.assertRaises(AssertionError): validate(self.cases, self.public, self.native)
+        with self.assertRaises(AssertionError): validate(self.cases, self.public, self.native, "native_observed.json")
 
     def test_collection_coercion_variation_is_not_repaired(self):
         self.public['engines']['python']['observations']['list_unset']['reads'][1]['result'] = 0
-        with self.assertRaises(AssertionError): validate(self.cases, self.public, self.native)
+        with self.assertRaises(AssertionError): validate(self.cases, self.public, self.native, "native_observed.json")
 
     def test_native_absence_cannot_be_defaulted(self):
         self.native['observations']['scalar_unset'].update(outcome='value',result=0)
-        with self.assertRaises(AssertionError): validate(self.cases, self.public, self.native)
+        with self.assertRaises(AssertionError): validate(self.cases, self.public, self.native, "native_observed.json")
 
     def test_missing_case_fails(self):
         del self.native['observations']['map_unset']
-        with self.assertRaises(AssertionError): validate(self.cases, self.public, self.native)
+        with self.assertRaises(AssertionError): validate(self.cases, self.public, self.native, "native_observed.json")
 
     def test_missing_empty_or_extra_engine_fails(self):
         for keys in ([], ['python'], ['cpp'], ['python', 'cpp', 'other']):
             with self.subTest(keys=keys):
                 evidence = copy.deepcopy(self.public)
                 evidence['engines'] = {key: copy.deepcopy(self.public['engines'].get(key, self.public['engines']['python'])) for key in keys}
-                with self.assertRaises(AssertionError): validate(self.cases, evidence, self.native)
+                with self.assertRaises(AssertionError): validate(self.cases, evidence, self.native, "native_observed.json")
 
     def test_stripped_engine_identity_fails(self):
         for engine in ('python', 'cpp'):
             with self.subTest(engine=engine):
                 evidence = copy.deepcopy(self.public)
                 evidence['engines'][engine]['identity'] = {'native': engine == 'cpp'}
-                with self.assertRaises((AssertionError, KeyError)): validate(self.cases, evidence, self.native)
+                with self.assertRaises((AssertionError, KeyError)): validate(self.cases, evidence, self.native, "native_observed.json")
 
     def test_corrupt_artifact_or_runner_identity_fails(self):
         for engine in ('python', 'cpp'):
@@ -57,7 +57,7 @@ class EvidenceIntegrity(unittest.TestCase):
                     if field == 'package': identity[field]['identity_sha256'] = '0' * 64
                     elif field == 'eval_node_source_sha256': identity[field] = '0' * 64
                     else: identity[field] = {'invented.so': '0' * 64}
-                    with self.assertRaises(AssertionError): validate(self.cases, evidence, self.native)
+                    with self.assertRaises(AssertionError): validate(self.cases, evidence, self.native, "native_observed.json")
 
     def test_defaulted_absence_with_unchanged_result_fails(self):
         mutations = [('python', 'bool_unset', False, 'bool'),
@@ -70,12 +70,12 @@ class EvidenceIntegrity(unittest.TestCase):
                     evidence = copy.deepcopy(self.public)
                     row = evidence['engines'][engine]['observations'][case]['reads'][1]
                     row[field], row[field+'_type'] = value, type_name
-                    with self.assertRaises(AssertionError): validate(self.cases, evidence, self.native)
+                    with self.assertRaises(AssertionError): validate(self.cases, evidence, self.native, "native_observed.json")
 
     def test_absent_bundle_field_cannot_be_synthesized(self):
         row = self.public['engines']['python']['observations']['bool_unset']['reads'][0]
         row['retained']['child'] = None
-        with self.assertRaises(AssertionError): validate(self.cases, self.public, self.native)
+        with self.assertRaises(AssertionError): validate(self.cases, self.public, self.native, "native_observed.json")
 
     def test_value_and_type_corruption_with_equal_python_values_fails(self):
         for engine in ('python', 'cpp'):
@@ -83,14 +83,14 @@ class EvidenceIntegrity(unittest.TestCase):
                 with self.subTest(engine=engine, field=field):
                     evidence = copy.deepcopy(self.public)
                     evidence['engines'][engine]['observations']['bool_present']['reads'][1][field] = value
-                    with self.assertRaises(AssertionError): validate(self.cases, evidence, self.native)
+                    with self.assertRaises(AssertionError): validate(self.cases, evidence, self.native, "native_observed.json")
 
     def test_native_and_facade_library_mismatch_fails(self):
         for library in ('libhgraph_runtime.so', 'libhgraph_wiring.so', 'libhgraph_stdlib.so'):
             with self.subTest(library=library):
                 native = copy.deepcopy(self.native)
                 native['loaded_libraries_sha256'][library] = '0' * 64
-                with self.assertRaises(AssertionError): validate(self.cases, self.public, native)
+                with self.assertRaises(AssertionError): validate(self.cases, self.public, native, "native_observed.json")
 
     def test_exception_rows_cannot_report_success(self):
         rows = [(case, 0) for case in ('scalar_unset', 'bool_unset', 'list_unset', 'map_unset')]
@@ -99,21 +99,27 @@ class EvidenceIntegrity(unittest.TestCase):
             with self.subTest(case=case, index=index):
                 evidence = copy.deepcopy(self.public)
                 evidence['engines']['python']['observations'][case]['reads'][index]['outcome'] = 'value'
-                with self.assertRaises(AssertionError): validate(self.cases, evidence, self.native)
+                with self.assertRaises(AssertionError): validate(self.cases, evidence, self.native, "native_observed.json")
 
     def test_multi_config_command_cannot_disagree_with_target(self):
         native = json.loads((HERE/'native_multiconfig_debug_observed.json').read_text())
         native['target_configuration'] = 'Release'
         native['target_artifact'] = 'Release/unset_required_reads_native'
-        with self.assertRaises(AssertionError): validate(self.cases, self.public, native)
+        with self.assertRaises(AssertionError): validate(self.cases, self.public, native, "native_multiconfig_debug_observed.json")
+
+    def test_compile_command_configuration_cannot_change_with_identity_unchanged(self):
+        name = 'native_multiconfig_custom_debug_observed.json'
+        native = json.loads((HERE/name).read_text())
+        native['compile_command'] = [arg.replace('Debug', 'Release') for arg in native['compile_command']]
+        with self.assertRaises(AssertionError): validate(self.cases, self.public, native, name)
 
     def test_configured_output_directory_is_independent_of_configuration(self):
         native = json.loads((HERE/'native_multiconfig_custom_debug_observed.json').read_text())
         self.assertEqual(native['target_artifact'], 'artifacts/unset_required_reads_native')
         self.assertEqual(native['target_configuration'], 'Debug')
-        validate(self.cases, self.public, native)
+        validate(self.cases, self.public, native, "native_multiconfig_custom_debug_observed.json")
         native['target_configuration'] = 'Release'
-        with self.assertRaises(AssertionError): validate(self.cases, self.public, native)
+        with self.assertRaises(AssertionError): validate(self.cases, self.public, native, "native_multiconfig_custom_debug_observed.json")
 
     def test_artifact_must_remain_relative_and_inside_build(self):
         for artifact in ('/tmp/unset_required_reads_native', '../unset_required_reads_native',
@@ -121,11 +127,32 @@ class EvidenceIntegrity(unittest.TestCase):
             with self.subTest(artifact=artifact):
                 native = copy.deepcopy(self.native)
                 native['target_artifact'] = artifact
-                with self.assertRaises(AssertionError): validate(self.cases, self.public, native)
+                with self.assertRaises(AssertionError): validate(self.cases, self.public, native, "native_observed.json")
+
+    def test_all_named_target_identities(self):
+        identities = json.loads((HERE/'target_identities.json').read_text())['records']
+        for name in identities:
+            with self.subTest(name=name):
+                validate(self.cases, self.public, json.loads((HERE/name).read_text()), name)
+
+    def test_single_config_target_field_corruption_fails(self):
+        for name in ('native_observed.json', 'native_ninja_observed.json', 'native_reconfigured_observed.json'):
+            for field, value in (('target_configuration', 'Invented'),
+                                 ('target_artifact', 'different/unset_required_reads_native'),
+                                 ('target_manifest_sha256', '0' * 64)):
+                with self.subTest(name=name, field=field):
+                    native = json.loads((HERE/name).read_text())
+                    native[field] = value
+                    with self.assertRaises(AssertionError): validate(self.cases, self.public, native, name)
+
+    def test_unknown_or_other_record_identity_cannot_be_selected(self):
+        for name in ('unregistered.json', 'native_reconfigured_observed.json'):
+            with self.subTest(name=name):
+                with self.assertRaises(AssertionError): validate(self.cases, self.public, self.native, name)
 
     def test_missing_compile_command_fails(self):
         self.native['compile_command'] = []
-        with self.assertRaises(AssertionError): validate(self.cases, self.public, self.native)
+        with self.assertRaises(AssertionError): validate(self.cases, self.public, self.native, "native_observed.json")
 
 class CompileCommands(unittest.TestCase):
     def test_command_and_arguments_keep_quoted_flags(self):

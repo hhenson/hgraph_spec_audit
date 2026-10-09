@@ -15,26 +15,26 @@ def check():
     cases = json.loads((HERE/'reasoned.json').read_text())['cases']
     public = json.loads((HERE/'observed.json').read_text())
     native = json.loads((HERE/'native_observed.json').read_text())
-    validate(cases, public, native)
+    validate(cases, public, native, "native_observed.json")
     ninja = json.loads((HERE/'native_ninja_observed.json').read_text())
-    validate(cases, public, ninja)
+    validate(cases, public, ninja, "native_ninja_observed.json")
     assert native['cmake_generator'] == 'Unix Makefiles'
     assert ninja['cmake_generator'] == 'Ninja'
     debug = json.loads((HERE/'native_reconfigured_observed.json').read_text())
-    validate(cases, public, debug)
+    validate(cases, public, debug, "native_reconfigured_observed.json")
     assert debug['cmake_generator'] == 'Ninja' and debug['target_configuration'] == 'Debug'
     assert debug['observations'] == native['observations']
     assert debug['loaded_libraries_sha256'] == native['loaded_libraries_sha256']
     assert debug['sdk_headers_sha256'] == native['sdk_headers_sha256']
     for configuration in ('Debug', 'Release'):
         multi = json.loads((HERE/f'native_multiconfig_{configuration.lower()}_observed.json').read_text())
-        validate(cases, public, multi)
+        validate(cases, public, multi, f"native_multiconfig_{configuration.lower()}_observed.json")
         assert multi['cmake_generator'] == 'Ninja Multi-Config'
         assert multi['target_configuration'] == configuration
         assert multi['observations'] == native['observations']
         assert multi['sdk_headers_sha256'] == native['sdk_headers_sha256']
     custom = json.loads((HERE/'native_multiconfig_custom_debug_observed.json').read_text())
-    validate(cases, public, custom)
+    validate(cases, public, custom, "native_multiconfig_custom_debug_observed.json")
     assert custom['cmake_generator'] == 'Ninja Multi-Config'
     assert custom['target_configuration'] == 'Debug'
     assert custom['target_artifact'] == 'artifacts/unset_required_reads_native'
@@ -84,7 +84,22 @@ def validate_observation_values(case, engine, rows):
         assert json.dumps(actual, sort_keys=True) == json.dumps(expected, sort_keys=True), (engine, case['id'], row['surface'])
 
 
-def validate(cases, public, native):
+def validate_target_identity(native, record_name):
+    identities = json.loads((HERE/'target_identities.json').read_text())
+    assert identities['schema_version'] == 1
+    assert set(identities['records']) == {
+        'native_observed.json', 'native_ninja_observed.json', 'native_reconfigured_observed.json',
+        'native_multiconfig_debug_observed.json', 'native_multiconfig_release_observed.json',
+        'native_multiconfig_custom_debug_observed.json'}
+    assert record_name in identities['records'], record_name
+    expected = identities['records'][record_name]
+    fields = {'target_configuration', 'target_artifact', 'target_manifest_sha256'}
+    assert set(expected) == fields
+    assert {field: native[field] for field in fields} == expected, record_name
+
+
+def validate(cases, public, native, record_name):
+    validate_target_identity(native, record_name)
     assert public['repeats'] == native['repeats'] == 3
     assert public['reasoned_sha256'] == native['reasoned_sha256'] == sha(HERE/'reasoned.json')
     assert public['harness_sha256'] == sha(HERE/'observe.py')
