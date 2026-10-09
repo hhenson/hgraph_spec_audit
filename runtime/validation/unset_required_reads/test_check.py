@@ -129,11 +129,17 @@ class CompileCommands(unittest.TestCase):
                     with self.assertRaises(ValueError): compile_command(root, root/'native.cpp', root/'include')
 
 class TargetArtifacts(unittest.TestCase):
+    def cache(self, build, config='Release', configurations=None, generator='Ninja'):
+        text = f'CMAKE_GENERATOR:INTERNAL={generator}\nCMAKE_BUILD_TYPE:STRING={config}\n'
+        if configurations is not None: text += f'CMAKE_CONFIGURATION_TYPES:STRING={configurations}\n'
+        (build/'CMakeCache.txt').write_text(text)
+
     def test_other_build_executable_rejected_before_build(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             build, other = root/'build', root/'other-build'
             build.mkdir(); other.mkdir()
+            self.cache(build)
             expected = build/'unset_required_reads_native'
             stale = other/'unset_required_reads_native'
             expected.write_text('same binary content'); stale.write_text('same binary content')
@@ -145,6 +151,7 @@ class TargetArtifacts(unittest.TestCase):
     def test_selected_target_is_built_before_use(self):
         with tempfile.TemporaryDirectory() as temporary:
             build = Path(temporary)
+            self.cache(build)
             executable = build/'unset_required_reads_native'
             executable.write_text('stale binary')
             manifest = build/'unset_required_reads_target-Release.txt'
@@ -158,16 +165,48 @@ class TargetArtifacts(unittest.TestCase):
     def test_missing_or_ambiguous_target_metadata_fails(self):
         with tempfile.TemporaryDirectory() as temporary:
             build = Path(temporary)
+            self.cache(build)
             executable = build/'unset_required_reads_native'
             with self.assertRaises(ValueError): target_artifact(build, executable)
+            self.cache(build, configurations='Debug;Release')
             for config in ('Debug', 'Release'):
                 (build/f'unset_required_reads_target-{config}.txt').write_text(str(executable)+'\n')
             with self.assertRaises(ValueError): target_artifact(build, executable)
+
+    def test_single_config_reconfigure_ignores_stale_manifest(self):
+        for generator in ('Ninja', 'Unix Makefiles'):
+            with self.subTest(generator=generator), tempfile.TemporaryDirectory() as temporary:
+                build = Path(temporary)
+                self.cache(build, config='Debug', generator=generator)
+                executable = build/'unset_required_reads_native'
+                for config in ('Release', 'Debug'):
+                    (build/f'unset_required_reads_target-{config}.txt').write_text(str(executable)+'\n')
+                self.assertEqual(target_artifact(build, executable)[1], 'Debug')
+                (build/'unset_required_reads_target-Debug.txt').unlink()
+                with self.assertRaises(ValueError): target_artifact(build, executable)
+
+    def test_multi_config_uses_only_configured_matching_artifact(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            build = Path(temporary)
+            self.cache(build, configurations='Debug;Release')
+            debug = build/'Debug'/'unset_required_reads_native'
+            release = build/'Release'/'unset_required_reads_native'
+            for config, executable in [('Debug', debug), ('Release', release), ('Retired', debug)]:
+                (build/f'unset_required_reads_target-{config}.txt').write_text(str(executable)+'\n')
+            self.assertEqual(target_artifact(build, debug)[1], 'Debug')
+            self.assertEqual(target_artifact(build, release)[1], 'Release')
+
+    def test_missing_active_configuration_fails(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            build = Path(temporary)
+            (build/'CMakeCache.txt').write_text('CMAKE_GENERATOR:INTERNAL=Ninja\n')
+            with self.assertRaises(ValueError): target_artifact(build, build/'unset_required_reads_native')
 
     def test_failed_build_cannot_run_stale_executable(self):
         import subprocess
         with tempfile.TemporaryDirectory() as temporary:
             build = Path(temporary)
+            self.cache(build)
             executable = build/'unset_required_reads_native'
             executable.write_text('stale binary')
             (build/'unset_required_reads_target-Release.txt').write_text(str(executable)+'\n')

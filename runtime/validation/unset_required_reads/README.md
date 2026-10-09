@@ -77,8 +77,10 @@ The current recorder requires `--executable` to resolve to the artifact emitted
 by CMake's configured `unset_required_reads_native` target manifest, then builds
 that target before hashing and running it. A binary from another build is
 rejected even if its contents or linked SDK happen to match. Missing or ambiguous
-manifest data and failed builds prevent measurement. Records include the target,
-configuration, relative artifact path and manifest hash.
+manifest data and failed builds prevent measurement. Single-config builds select
+only `CMAKE_BUILD_TYPE` from the cache; multi-config builds require one matching
+artifact among `CMAKE_CONFIGURATION_TYPES`. Stale manifests are ignored. Records
+include the target, configuration, relative artifact path and manifest hash.
 
 The prior Make/Ninja records and their recorder/CMake inputs remain unchanged
 under `archive/compile_commands/`. New three-process runs for each generator use
@@ -86,6 +88,13 @@ the same frozen SDK; observations and loaded-library/header identities match
 both historical rounds. This refresh changes build provenance, not expected
 results. Failure rows must report `outcome: failure` as well as their exception
 type; a contradictory success outcome fails offline validation.
+
+The preceding target-identity records and inputs are preserved byte-for-byte in
+`archive/target_identity/`. Fresh Make/Ninja Release records use the revised
+recorder. `native_reconfigured_observed.json` additionally records three Debug
+runs after an actual Ninja Release-to-Debug reconfiguration in a separate build;
+the obsolete Release manifest still names the same executable. All observations
+and SDK library/header identities agree with the earlier records.
 
 ## Reproduction
 

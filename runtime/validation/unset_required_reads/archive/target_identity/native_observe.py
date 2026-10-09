@@ -34,21 +34,11 @@ def compile_command(build_dir, source, sdk_include):
 
 def target_artifact(build_dir, executable):
     """Resolve only artifacts declared by the configured CMake target."""
-    cache = {}
-    for line in (build_dir/'CMakeCache.txt').read_text().splitlines():
-        if line and not line.startswith(('#', '//')) and '=' in line:
-            key, value = line.split('=', 1)
-            cache[key.split(':', 1)[0]] = value
-    configurations = [value for value in cache.get('CMAKE_CONFIGURATION_TYPES', '').split(';') if value]
-    if not configurations:
-        if 'CMAKE_BUILD_TYPE' not in cache: raise ValueError('Missing active CMake build configuration')
-        configurations = [cache['CMAKE_BUILD_TYPE']]
     matches = []
-    for config in configurations:
-        manifest = build_dir/f'unset_required_reads_target-{config}.txt'
-        if not manifest.is_file(): continue
+    for manifest in build_dir.glob('unset_required_reads_target-*.txt'):
         declared = Path(manifest.read_text().strip())
         if declared.is_absolute() and declared.resolve() == executable.resolve():
+            config = manifest.stem.removeprefix('unset_required_reads_target-')
             matches.append((declared.resolve(), config, manifest))
     if len(matches) != 1: raise ValueError('Executable is not one configured unset_required_reads_native target artifact')
     return matches[0]

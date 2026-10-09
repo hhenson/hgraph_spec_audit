@@ -19,6 +19,12 @@ def check():
     validate(cases, public, ninja)
     assert native['cmake_generator'] == 'Unix Makefiles'
     assert ninja['cmake_generator'] == 'Ninja'
+    debug = json.loads((HERE/'native_reconfigured_observed.json').read_text())
+    validate(cases, public, debug)
+    assert debug['cmake_generator'] == 'Ninja' and debug['target_configuration'] == 'Debug'
+    assert debug['observations'] == native['observations']
+    assert debug['loaded_libraries_sha256'] == native['loaded_libraries_sha256']
+    assert debug['sdk_headers_sha256'] == native['sdk_headers_sha256']
     archive = HERE/'archive'
     old = json.loads((archive/'native_observed.json').read_text())
     assert old['recorder_sha256'] == sha(archive/'native_observe.py')
@@ -27,15 +33,16 @@ def check():
     assert old['observations'] == native['observations'] == ninja['observations']
     assert old['loaded_libraries_sha256'] == native['loaded_libraries_sha256'] == ninja['loaded_libraries_sha256']
     assert old['sdk_headers_sha256'] == native['sdk_headers_sha256'] == ninja['sdk_headers_sha256']
-    previous = archive/'compile_commands'
-    for name in ('native_observed.json', 'native_ninja_observed.json'):
-        prior = json.loads((previous/name).read_text())
-        assert prior['recorder_sha256'] == sha(previous/'native_observe.py')
-        assert prior['cmake_sha256'] == sha(previous/'CMakeLists.txt')
-        assert prior['source_sha256'] == native['source_sha256']
-        assert prior['observations'] == native['observations']
-        assert prior['loaded_libraries_sha256'] == native['loaded_libraries_sha256']
-        assert prior['sdk_headers_sha256'] == native['sdk_headers_sha256']
+    for snapshot in ('compile_commands', 'target_identity'):
+        previous = archive/snapshot
+        for name in ('native_observed.json', 'native_ninja_observed.json'):
+            prior = json.loads((previous/name).read_text())
+            assert prior['recorder_sha256'] == sha(previous/'native_observe.py')
+            assert prior['cmake_sha256'] == sha(previous/'CMakeLists.txt')
+            assert prior['source_sha256'] == native['source_sha256']
+            assert prior['observations'] == native['observations']
+            assert prior['loaded_libraries_sha256'] == native['loaded_libraries_sha256']
+            assert prior['sdk_headers_sha256'] == native['sdk_headers_sha256']
     print('Nine cases, two facade surfaces and native typed reads: recorded identities, controls and variations preserved')
 
 def validate_observation_values(case, engine, rows):
