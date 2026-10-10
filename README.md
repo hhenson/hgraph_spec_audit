@@ -73,6 +73,11 @@ The [owned structural delta audit](runtime/validation/owned_deltas/README.md)
 measures sparse payload retention through native ordinary storage and
 separates Python aliasing and marker-copy failures from copied-input controls.
 
+The [remaining scalar audit](runtime/validation/last_scalar_types/README.md)
+measures byte publications, public object bridges, native boxed values and
+registered native atomic pass-through. Ownership and missing-capability
+agreements and disagreements remain explicit.
+
 ## Exercise the two reference implementations
 
 Both distributions import as `hgraph`, so use independent environments:

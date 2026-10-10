@@ -1,0 +1,42 @@
+{
+  "written_before_measurement": true,
+  "spec_revision": "7762aa1d46e1f91d284c79780a5bd4d0ecc48e01",
+  "scope": "Bytes publication and capabilities; public object-bridge observations remain separate from native atomic and HGL any conformance.",
+  "patterns": {
+    "equal_distinct": [
+      "a",
+      "a",
+      "b",
+      "a"
+    ],
+    "silence": [
+      null,
+      "a",
+      null,
+      "a",
+      "b",
+      null
+    ],
+    "all_silent": [
+      null,
+      null,
+      null
+    ],
+    "empty": []
+  },
+  "bytes": {
+    "a": [],
+    "b": [
+      0,
+      127,
+      128,
+      255
+    ]
+  },
+  "expectations": {
+    "bytes": "Present empty bytes, equal repeats and changed contents publish; absent inputs do not. Delta equals the whole bytes value. Dense results retain the input horizon; raw no-output results remain visible.",
+    "byte_constructor": "List octets 0..255 construct exact bytes; -1 and 256 fail. Byte content equality and lexicographic order preserve unsigned octets.",
+    "any_bridge": "Mixed object payload types may publish through an object-typed reference API. This is not evidence for HGL any boxing or a present empty box. Capture independence must be measured rather than assumed for mutable objects.",
+    "native_atomic": "Python bridge class values do not establish a registered native C++ atomic provider; public availability/errors are retained only."
+  }
+}
