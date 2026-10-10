@@ -71,6 +71,64 @@ retained/payload values and types before derived results, so defaulting absence
 cannot hide behind an unchanged Boolean result or collection length. Both native
 records retain their agreement with archived results.
 
+## Target-artifact provenance refresh
+
+The current recorder requires `--executable` to resolve to the artifact emitted
+by CMake's configured `unset_required_reads_native` target manifest, then builds
+that target before hashing and running it. A binary from another build is
+rejected even if its contents or linked SDK happen to match. Missing or ambiguous
+manifest data and failed builds prevent measurement. Single-config builds select
+only `CMAKE_BUILD_TYPE` from the cache; multi-config builds require one matching
+artifact among `CMAKE_CONFIGURATION_TYPES`. Stale manifests are ignored. Records
+include the target, configuration, relative artifact path and manifest hash.
+
+The prior Make/Ninja records and their recorder/CMake inputs remain unchanged
+under `archive/compile_commands/`. New three-process runs for each generator use
+the same frozen SDK; observations and loaded-library/header identities match
+both historical rounds. This refresh changes build provenance, not expected
+results. Failure rows must report `outcome: failure` as well as their exception
+type; a contradictory success outcome fails offline validation.
+
+The preceding target-identity records and inputs are preserved byte-for-byte in
+`archive/target_identity/`. Fresh Make/Ninja Release records use the revised
+recorder. `native_reconfigured_observed.json` additionally records three Debug
+runs after an actual Ninja Release-to-Debug reconfiguration in a separate build;
+the obsolete Release manifest still names the same executable. All observations
+and SDK library/header identities agree with the earlier records.
+
+The next refresh preserves those three records and inputs unchanged under
+`archive/active_configuration/`. Compile-command selection now uses the chosen
+configuration's object output or `CMAKE_INTDIR` argument; conflicting clues,
+missing matches and duplicate matches fail. Multi-config commands without any
+configuration marker cannot stand in for the selected configuration. Existing
+single-config commands and quoted arguments keep their behavior.
+
+`native_multiconfig_debug_observed.json` and
+`native_multiconfig_release_observed.json` record three fresh runs each from
+one Ninja Multi-Config build. Their target paths, configurations and compiler
+commands agree. The Make, Ninja and reconfigured Debug records were also rerun
+with this recorder. All nine observations and SDK identities remain unchanged.
+For multi-config reproduction, use `-G "Ninja Multi-Config"` and select
+`Debug/unset_required_reads_native` or `Release/unset_required_reads_native`.
+
+`native_multiconfig_custom_debug_observed.json` records three fresh Debug runs
+with `CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG=<build>/artifacts`, using the same
+SDK. The target manifest binds `artifacts/unset_required_reads_native` to Debug;
+the directory need not be named after the configuration. Compile-command
+configuration and in-tree artifact checks remain enforced. Observations and SDK
+identities match the existing records, which remain byte-for-byte unchanged.
+The recorder and native probe are unchanged.
+
+`target_identities.json` separately retains each current record's measured
+configuration, relative artifact and target-manifest hash. These identities were
+cross-checked against the original build manifests; they are provenance, not
+reasoned behavioral expectations. Offline validation selects the identity by
+explicit record filename, never by mutable record fields, optimization flags or
+directory naming. It rejects changed target fields even for single-config
+commands without configuration markers. This closed corpus check does not
+remeasure a build; future measurements require explicit identity registration.
+Existing evidence and recorder inputs remain unchanged.
+
 ## Reproduction
 
 ```sh

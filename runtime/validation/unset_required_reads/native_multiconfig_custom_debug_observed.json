@@ -1,6 +1,6 @@
 {
-  "binary_sha256": "c408feabbde2e92d450e118354b1780a0c5d09c896dc7ae71a10ffa84e0de86b",
-  "cmake_generator": "Ninja",
+  "binary_sha256": "1fbaa787f1b1045572042242f846861e4e2df781ff6abba7a91a007641fda9f2",
+  "cmake_generator": "Ninja Multi-Config",
   "cmake_sha256": "5b5ef19ee115b83b3d6ecec7f0fafe3f2e0261b00a1fb3dcf5324fc69d290d78",
   "compile_command": [
     "/usr/bin/c++",
@@ -8,6 +8,7 @@
     "-DHGRAPH_TIME_ZONE_BACKEND_DATE=1",
     "-DNB_SHARED",
     "-DPy_LIMITED_API=0x030C0000",
+    "-DCMAKE_INTDIR=\"Debug\"",
     "-isystem",
     "<sdk>/include",
     "-isystem",
@@ -18,19 +19,18 @@
     "<sdk>/nanobind/include",
     "-isystem",
     "<sdk>/pyarrow/include",
-    "-O3",
-    "-DNDEBUG",
+    "-g",
     "-std=gnu++23",
     "-Wall",
     "-Wextra",
     "-Wpedantic",
     "-Werror",
     "-o",
-    "CMakeFiles/unset_required_reads_native.dir/native.cpp.o",
+    "CMakeFiles/unset_required_reads_native.dir/Debug/native.cpp.o",
     "-c",
     "<source>/native.cpp"
   ],
-  "compile_commands_sha256": "d313a98d84b61a767a3d58e2b6229a8c834866100abc5111ba0a5fe79ec1eb48",
+  "compile_commands_sha256": "d166ff0de8742895dd0466284a50bcb9607707ffba08b1602a7d69373242660f",
   "compiler_sha256": "e6718f7e0c7d057c3ff77b550c603da9bc4030e3ede3c053705acce1293dbe4d",
   "compiler_version": "c++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
   "loaded_libraries_sha256": {
@@ -38,7 +38,7 @@
     "libhgraph_stdlib.so": "d1bf1f3b389810a0235bf983256f4498df07959dcd7b4703bc72c823b2ca33f6",
     "libhgraph_wiring.so": "58799bb326b4e2f7a18f83a858caf11becf256ef6b2744253466ca6ae9e7a3a5"
   },
-  "measured_at": "2026-10-09T04:54:27.159794+00:00",
+  "measured_at": "2026-10-09T05:04:56.595505+00:00",
   "observations": {
     "bool_false": {
       "outcome": "value",
@@ -492,8 +492,8 @@
   },
   "source_sha256": "7177a0fd1800d5a150dc3331d310fe7718b110191487b3a3486fb0dada45f853",
   "support_sha256": "2236c73b4419a980ebcef802ad98d9967681b831242cc68579e879e30ff32309",
-  "target_artifact": "unset_required_reads_native",
-  "target_configuration": "Release",
-  "target_manifest_sha256": "6d609317e423dde2d277162d8e2ed9780b58ed578bc48afcedcf6fc17af0745b",
+  "target_artifact": "artifacts/unset_required_reads_native",
+  "target_configuration": "Debug",
+  "target_manifest_sha256": "cb6722b5c8b0f2b046dc60ba27fc2b67ddd1a9ee5185396a7d3b0ddafaf5692f",
   "target_name": "unset_required_reads_native"
 }

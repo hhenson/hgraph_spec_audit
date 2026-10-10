@@ -11,48 +11,17 @@ HERE = Path(__file__).resolve().parent
 
 def sha(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
-def cache_values(build_dir):
-    cache = {}
-    for line in (build_dir/'CMakeCache.txt').read_text().splitlines():
-        if line and not line.startswith(('#', '//')) and '=' in line:
-            key, value = line.split('=', 1)
-            cache[key.split(':', 1)[0]] = value
-    return cache
-
-
-def command_configuration(entry, command):
-    """Require configuration clues from CMake's output and arguments to agree."""
-    clues = {arg.split('=', 1)[1].strip('\\"') for arg in command if arg.startswith('-DCMAKE_INTDIR=')}
-    outputs = [entry['output']] if 'output' in entry else []
-    outputs += [command[index+1] for index, arg in enumerate(command[:-1]) if arg == '-o']
-    for output in outputs:
-        parts = Path(output).parts
-        target = 'unset_required_reads_native.dir'
-        if target in parts:
-            tail = parts[parts.index(target)+1:]
-            if len(tail) > 1: clues.add(tail[0])
-    if len(clues) > 1: raise ValueError('Conflicting compile-command configurations')
-    return next(iter(clues), None)
-
-
-def compile_command(build_dir, source, sdk_include, configuration=None):
-    """Read exactly one command for the source and selected configuration."""
+def compile_command(build_dir, source, sdk_include):
+    """Read the native translation unit's command for Make or Ninja builds."""
     entries = json.loads((build_dir / 'compile_commands.json').read_text())
-    cache = cache_values(build_dir) if (build_dir/'CMakeCache.txt').is_file() else {}
-    multi = bool(cache.get('CMAKE_CONFIGURATION_TYPES'))
-    if multi and configuration is None: raise ValueError('Multi-config command requires selected configuration')
-    matches = []
-    for entry in entries:
-        if (Path(entry['directory']) / entry['file']).resolve() != source.resolve(): continue
-        command = entry.get('arguments')
-        if command is None: command = shlex.split(entry['command'])
-        if not isinstance(command, list) or not command or not all(isinstance(arg, str) for arg in command):
-            raise ValueError('Invalid compile command')
-        selected = command_configuration(entry, command)
-        if multi and selected is None: continue
-        if configuration is None or selected is None or selected == configuration: matches.append(command)
-    if len(matches) != 1: raise ValueError('Expected one native.cpp compile command for the selected configuration')
-    command = matches[0]
+    matches = [entry for entry in entries
+               if (Path(entry['directory']) / entry['file']).resolve() == source.resolve()]
+    if len(matches) != 1: raise ValueError('Expected one native.cpp compile command')
+    entry = matches[0]
+    command = entry.get('arguments')
+    if command is None: command = shlex.split(entry['command'])
+    if not isinstance(command, list) or not command or not all(isinstance(arg, str) for arg in command):
+        raise ValueError('Invalid compile command')
     paths = ((str(source.parent.resolve()), '<source>'),
              (str(build_dir.resolve()), '<build>'),
              (str(sdk_include.parent.resolve()), '<sdk>'),
@@ -65,7 +34,11 @@ def compile_command(build_dir, source, sdk_include, configuration=None):
 
 def target_artifact(build_dir, executable):
     """Resolve only artifacts declared by the configured CMake target."""
-    cache = cache_values(build_dir)
+    cache = {}
+    for line in (build_dir/'CMakeCache.txt').read_text().splitlines():
+        if line and not line.startswith(('#', '//')) and '=' in line:
+            key, value = line.split('=', 1)
+            cache[key.split(':', 1)[0]] = value
     configurations = [value for value in cache.get('CMAKE_CONFIGURATION_TYPES', '').split(';') if value]
     if not configurations:
         if 'CMAKE_BUILD_TYPE' not in cache: raise ValueError('Missing active CMake build configuration')
@@ -103,7 +76,7 @@ def main():
     def headers(): return {str(p.relative_to(args.sdk_include)): sha(p) for p in sorted(args.sdk_include.rglob('*')) if p.is_file()}
     executable, config, artifact_manifest = prepare_executable(args.build_dir, args.executable)
     artifact_hash = sha(artifact_manifest)
-    command = compile_command(args.build_dir, HERE/'native.cpp', args.sdk_include, config)
+    command = compile_command(args.build_dir, HERE/'native.cpp', args.sdk_include)
     command_hash = sha(args.build_dir/'compile_commands.json')
     before = headers()
     binary = sha(executable)
