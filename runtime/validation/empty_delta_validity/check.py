@@ -1,4 +1,5 @@
 """Verify preserved reference results without promoting disagreements to passes."""
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -15,23 +16,45 @@ boundary = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(boundary)
 
 
+def digest(value):
+    return hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
+
+
+def capability(observation):
+    result = {'capability': observation['capability']}
+    if observation['capability'] == 'error':
+        result.update(error_type=observation['error_type'], phase=observation['phase'],
+                      error_sha256=digest(observation['error']))
+    elif observation['capability'] == 'unsupported':
+        result.update(surface=observation['surface'], reason_sha256=digest(observation['reason']))
+    return result
+
+
 def validate(evidence):
     paths = {'reasoned_sha256': HERE / 'reasoned.json',
              'harness_sha256': HERE / 'observe.py', 'boundary_support_sha256': probe.BASE,
              'identity_support_sha256': HERE.parent / 'delta_eval' / 'observe.py'}
     for key, path in paths.items():
         assert evidence[key] == probe.support.sha(path)
+    capabilities = json.loads((HERE / 'capabilities.json').read_text())
+    assert capabilities['measured_at'] == evidence['measured_at']
+    assert capabilities['reasoned_sha256'] == evidence['reasoned_sha256']
+    assert set(capabilities['engines']) == set(evidence['engines'])
     cases = json.loads((HERE / 'reasoned.json').read_text())['cases']
     ids = {c['id'] for c in cases}
     assert len(ids) == len(cases) == 18
     assert evidence['repeats'] == 3 and set(evidence['engines']) == {'python', 'cpp'}
     for name, result in evidence['engines'].items():
         validate_identity(result['identity'], name)
+        recorded = capabilities['engines'][name]
+        assert recorded['identity_sha256'] == digest(result['identity'])
+        assert set(recorded['cases']) == ids
         assert set(result['observations']) == set(result['assessment']) == ids
         for case in cases:
             o = result['observations'][case['id']]
             assert boundary.equal(result['assessment'][case['id']], probe.support.assess(case, o))
             assert o['capability'] in ('supported', 'unsupported', 'error')
+            assert recorded['cases'][case['id']] == capability(o)
             if o['capability'] == 'unsupported':
                 assert case['shape'] == 'tuple' and o['surface'] == 'hgraph.TST'
                 assert 'raw_eval_node' not in o

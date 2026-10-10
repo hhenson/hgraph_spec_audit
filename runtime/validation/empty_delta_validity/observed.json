@@ -1703,6 +1703,62 @@
           {
             "path": "cycles.2.forward.children.1.modified",
             "status": "match"
+          },
+          {
+            "path": "cycles.0.source.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.source.children.0.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.children.1.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.children.0.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.children.1.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.source.children.0.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.source.children.1.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.forward.children.0.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.children.1.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.children.0.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.children.1.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.forward.children.0.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.forward.children.1.value",
+            "status": "match"
           }
         ],
         "initial_fixed_zero": [
@@ -1747,10 +1803,6 @@
             "status": "unobservable"
           },
           {
-            "path": "cycles.1.source.value",
-            "status": "unobservable"
-          },
-          {
             "path": "cycles.1.source.members",
             "status": "unobservable"
           },
@@ -1760,10 +1812,6 @@
           },
           {
             "path": "cycles.1.forward.modified",
-            "status": "unobservable"
-          },
-          {
-            "path": "cycles.1.forward.value",
             "status": "unobservable"
           },
           {
@@ -1779,10 +1827,6 @@
             "status": "unobservable"
           },
           {
-            "path": "cycles.2.source.value",
-            "status": "unobservable"
-          },
-          {
             "path": "cycles.2.source.members",
             "status": "unobservable"
           },
@@ -1795,11 +1839,39 @@
             "status": "unobservable"
           },
           {
-            "path": "cycles.2.forward.value",
+            "path": "cycles.2.forward.members",
             "status": "unobservable"
           },
           {
-            "path": "cycles.2.forward.members",
+            "path": "cycles.0.source.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.source.value",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.1.source.value",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.2.source.value",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.forward.value",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.1.forward.value",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.2.forward.value",
             "status": "unobservable"
           }
         ],
@@ -1845,10 +1917,6 @@
             "status": "divergence"
           },
           {
-            "path": "cycles.1.source.value",
-            "status": "match"
-          },
-          {
             "path": "cycles.1.source.members",
             "status": "match"
           },
@@ -1858,10 +1926,6 @@
           },
           {
             "path": "cycles.1.forward.modified",
-            "status": "match"
-          },
-          {
-            "path": "cycles.1.forward.value",
             "status": "match"
           },
           {
@@ -1877,10 +1941,6 @@
             "status": "match"
           },
           {
-            "path": "cycles.2.source.value",
-            "status": "match"
-          },
-          {
             "path": "cycles.2.source.members",
             "status": "match"
           },
@@ -1893,12 +1953,40 @@
             "status": "match"
           },
           {
-            "path": "cycles.2.forward.value",
+            "path": "cycles.2.forward.members",
             "status": "match"
           },
           {
-            "path": "cycles.2.forward.members",
-            "status": "match"
+            "path": "cycles.0.source.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.source.value",
+            "status": "divergence"
+          },
+          {
+            "path": "cycles.1.source.value",
+            "status": "divergence"
+          },
+          {
+            "path": "cycles.2.source.value",
+            "status": "divergence"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.forward.value",
+            "status": "divergence"
+          },
+          {
+            "path": "cycles.1.forward.value",
+            "status": "divergence"
+          },
+          {
+            "path": "cycles.2.forward.value",
+            "status": "divergence"
           }
         ],
         "initial_map": [
@@ -1943,10 +2031,6 @@
             "status": "match"
           },
           {
-            "path": "cycles.1.source.value",
-            "status": "match"
-          },
-          {
             "path": "cycles.1.source.members",
             "status": "match"
           },
@@ -1956,10 +2040,6 @@
           },
           {
             "path": "cycles.1.forward.modified",
-            "status": "match"
-          },
-          {
-            "path": "cycles.1.forward.value",
             "status": "match"
           },
           {
@@ -1975,10 +2055,6 @@
             "status": "match"
           },
           {
-            "path": "cycles.2.source.value",
-            "status": "match"
-          },
-          {
             "path": "cycles.2.source.members",
             "status": "match"
           },
@@ -1991,11 +2067,39 @@
             "status": "match"
           },
           {
-            "path": "cycles.2.forward.value",
+            "path": "cycles.2.forward.members",
             "status": "match"
           },
           {
-            "path": "cycles.2.forward.members",
+            "path": "cycles.0.source.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.forward.value",
             "status": "match"
           }
         ],
@@ -2033,19 +2137,11 @@
             "status": "match"
           },
           {
-            "path": "cycles.1.source.value",
-            "status": "match"
-          },
-          {
             "path": "cycles.1.forward.valid",
             "status": "match"
           },
           {
             "path": "cycles.1.forward.modified",
-            "status": "match"
-          },
-          {
-            "path": "cycles.1.forward.value",
             "status": "match"
           },
           {
@@ -2057,15 +2153,39 @@
             "status": "match"
           },
           {
-            "path": "cycles.2.source.value",
-            "status": "match"
-          },
-          {
             "path": "cycles.2.forward.valid",
             "status": "match"
           },
           {
             "path": "cycles.2.forward.modified",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.value",
             "status": "match"
           },
           {
@@ -2265,6 +2385,62 @@
           {
             "path": "cycles.2.forward.children.right.modified",
             "status": "match"
+          },
+          {
+            "path": "cycles.0.source.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.source.children.left.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.children.right.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.children.left.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.children.right.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.source.children.left.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.source.children.right.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.forward.children.left.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.children.right.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.children.left.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.children.right.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.forward.children.left.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.forward.children.right.value",
+            "status": "match"
           }
         ],
         "initial_struct_zero": [
@@ -2309,10 +2485,6 @@
             "status": "divergence"
           },
           {
-            "path": "cycles.1.source.value",
-            "status": "match"
-          },
-          {
             "path": "cycles.1.source.members",
             "status": "match"
           },
@@ -2322,10 +2494,6 @@
           },
           {
             "path": "cycles.1.forward.modified",
-            "status": "match"
-          },
-          {
-            "path": "cycles.1.forward.value",
             "status": "match"
           },
           {
@@ -2341,10 +2509,6 @@
             "status": "match"
           },
           {
-            "path": "cycles.2.source.value",
-            "status": "match"
-          },
-          {
             "path": "cycles.2.source.members",
             "status": "match"
           },
@@ -2357,12 +2521,40 @@
             "status": "match"
           },
           {
-            "path": "cycles.2.forward.value",
+            "path": "cycles.2.forward.members",
             "status": "match"
           },
           {
-            "path": "cycles.2.forward.members",
-            "status": "match"
+            "path": "cycles.0.source.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.source.value",
+            "status": "divergence"
+          },
+          {
+            "path": "cycles.1.source.value",
+            "status": "divergence"
+          },
+          {
+            "path": "cycles.2.source.value",
+            "status": "divergence"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.forward.value",
+            "status": "divergence"
+          },
+          {
+            "path": "cycles.1.forward.value",
+            "status": "divergence"
+          },
+          {
+            "path": "cycles.2.forward.value",
+            "status": "divergence"
           }
         ],
         "initial_tuple": [
@@ -2436,6 +2628,14 @@
           },
           {
             "path": "cycles.2.forward.value",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.source.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
             "status": "unobservable"
           }
         ],
@@ -10895,6 +11095,62 @@
           {
             "path": "cycles.2.forward.children.1.modified",
             "status": "match"
+          },
+          {
+            "path": "cycles.0.source.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.source.children.0.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.children.1.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.children.0.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.children.1.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.source.children.0.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.source.children.1.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.forward.children.0.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.children.1.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.children.0.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.children.1.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.forward.children.0.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.forward.children.1.value",
+            "status": "match"
           }
         ],
         "initial_fixed_zero": [
@@ -10939,10 +11195,6 @@
             "status": "divergence"
           },
           {
-            "path": "cycles.1.source.value",
-            "status": "match"
-          },
-          {
             "path": "cycles.1.source.members",
             "status": "match"
           },
@@ -10952,10 +11204,6 @@
           },
           {
             "path": "cycles.1.forward.modified",
-            "status": "match"
-          },
-          {
-            "path": "cycles.1.forward.value",
             "status": "match"
           },
           {
@@ -10971,10 +11219,6 @@
             "status": "match"
           },
           {
-            "path": "cycles.2.source.value",
-            "status": "match"
-          },
-          {
             "path": "cycles.2.source.members",
             "status": "match"
           },
@@ -10987,11 +11231,39 @@
             "status": "match"
           },
           {
-            "path": "cycles.2.forward.value",
+            "path": "cycles.2.forward.members",
             "status": "match"
           },
           {
-            "path": "cycles.2.forward.members",
+            "path": "cycles.0.source.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.forward.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.forward.value",
             "status": "match"
           }
         ],
@@ -11037,10 +11309,6 @@
             "status": "divergence"
           },
           {
-            "path": "cycles.1.source.value",
-            "status": "match"
-          },
-          {
             "path": "cycles.1.source.members",
             "status": "match"
           },
@@ -11050,10 +11318,6 @@
           },
           {
             "path": "cycles.1.forward.modified",
-            "status": "match"
-          },
-          {
-            "path": "cycles.1.forward.value",
             "status": "match"
           },
           {
@@ -11069,10 +11333,6 @@
             "status": "match"
           },
           {
-            "path": "cycles.2.source.value",
-            "status": "match"
-          },
-          {
             "path": "cycles.2.source.members",
             "status": "match"
           },
@@ -11085,11 +11345,39 @@
             "status": "match"
           },
           {
-            "path": "cycles.2.forward.value",
+            "path": "cycles.2.forward.members",
             "status": "match"
           },
           {
-            "path": "cycles.2.forward.members",
+            "path": "cycles.0.source.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.forward.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.forward.value",
             "status": "match"
           }
         ],
@@ -11135,10 +11423,6 @@
             "status": "match"
           },
           {
-            "path": "cycles.1.source.value",
-            "status": "match"
-          },
-          {
             "path": "cycles.1.source.members",
             "status": "match"
           },
@@ -11148,10 +11432,6 @@
           },
           {
             "path": "cycles.1.forward.modified",
-            "status": "match"
-          },
-          {
-            "path": "cycles.1.forward.value",
             "status": "match"
           },
           {
@@ -11167,10 +11447,6 @@
             "status": "match"
           },
           {
-            "path": "cycles.2.source.value",
-            "status": "match"
-          },
-          {
             "path": "cycles.2.source.members",
             "status": "match"
           },
@@ -11183,11 +11459,39 @@
             "status": "match"
           },
           {
-            "path": "cycles.2.forward.value",
+            "path": "cycles.2.forward.members",
             "status": "match"
           },
           {
-            "path": "cycles.2.forward.members",
+            "path": "cycles.0.source.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.forward.value",
             "status": "match"
           }
         ],
@@ -11225,19 +11529,11 @@
             "status": "match"
           },
           {
-            "path": "cycles.1.source.value",
-            "status": "match"
-          },
-          {
             "path": "cycles.1.forward.valid",
             "status": "match"
           },
           {
             "path": "cycles.1.forward.modified",
-            "status": "match"
-          },
-          {
-            "path": "cycles.1.forward.value",
             "status": "match"
           },
           {
@@ -11249,15 +11545,39 @@
             "status": "match"
           },
           {
-            "path": "cycles.2.source.value",
-            "status": "match"
-          },
-          {
             "path": "cycles.2.forward.valid",
             "status": "match"
           },
           {
             "path": "cycles.2.forward.modified",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.value",
             "status": "match"
           },
           {
@@ -11457,6 +11777,62 @@
           {
             "path": "cycles.2.forward.children.right.modified",
             "status": "match"
+          },
+          {
+            "path": "cycles.0.source.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.source.children.left.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.children.right.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.children.left.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.children.right.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.source.children.left.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.source.children.right.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.forward.children.left.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.children.right.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.children.left.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.children.right.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.forward.children.left.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.forward.children.right.value",
+            "status": "match"
           }
         ],
         "initial_struct_zero": [
@@ -11501,10 +11877,6 @@
             "status": "divergence"
           },
           {
-            "path": "cycles.1.source.value",
-            "status": "match"
-          },
-          {
             "path": "cycles.1.source.members",
             "status": "match"
           },
@@ -11514,10 +11886,6 @@
           },
           {
             "path": "cycles.1.forward.modified",
-            "status": "match"
-          },
-          {
-            "path": "cycles.1.forward.value",
             "status": "match"
           },
           {
@@ -11533,10 +11901,6 @@
             "status": "match"
           },
           {
-            "path": "cycles.2.source.value",
-            "status": "match"
-          },
-          {
             "path": "cycles.2.source.members",
             "status": "match"
           },
@@ -11549,11 +11913,39 @@
             "status": "match"
           },
           {
-            "path": "cycles.2.forward.value",
+            "path": "cycles.2.forward.members",
             "status": "match"
           },
           {
-            "path": "cycles.2.forward.members",
+            "path": "cycles.0.source.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.forward.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.2.forward.value",
             "status": "match"
           }
         ],
@@ -11628,6 +12020,14 @@
           },
           {
             "path": "cycles.2.forward.value",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.source.publication.payload",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
             "status": "unobservable"
           }
         ],
@@ -17836,7 +18236,7 @@
   },
   "harness_sha256": "9e044a8f71cadd9a3014eddff0b775465a51f2babd08b0562ab38d1f69177020",
   "identity_support_sha256": "c7d54b7dadcfd86fce648d4ddd5fd8decb64f7cf0e36a7700fb1195dfb3b7ead",
-  "measured_at": "2026-10-10T11:32:50.197028+00:00",
-  "reasoned_sha256": "4ae9ddc8467b4b0f23222829755ed4c092e2d996738b3d7d54559692ab284a17",
+  "measured_at": "2026-10-10T12:16:53.549434+00:00",
+  "reasoned_sha256": "37ea74d5fa6699eb9b7b6a7133cade05b595e51b6039e3fbef512405edc9f063",
   "repeats": 3
 }

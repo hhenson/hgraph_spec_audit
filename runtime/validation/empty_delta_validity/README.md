@@ -48,6 +48,7 @@ python3 -m unittest discover -s runtime/validation/empty_delta_validity
 
 The checker verifies identities, input hashes, state/publication consistency,
 complete notification traces (including invalidations), raw-result presence,
+empty publication payloads and the frozen [capability manifest](capabilities.json),
 dense horizons and recomputed assessments. Its corruption tests
 reject masking a disagreement, inventing a tick, substituting silence for an
 empty payload, dropping an unsupported case and changing the reasoning hash.

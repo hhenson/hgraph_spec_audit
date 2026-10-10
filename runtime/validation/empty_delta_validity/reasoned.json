@@ -47,20 +47,12 @@
           "equals": true
         },
         {
-          "path": "cycles.1.source.value",
-          "same_as": "cycles.0.source.value"
-        },
-        {
           "path": "cycles.1.forward.valid",
           "equals": true
         },
         {
           "path": "cycles.1.forward.modified",
           "equals": false
-        },
-        {
-          "path": "cycles.1.forward.value",
-          "same_as": "cycles.0.forward.value"
         },
         {
           "path": "cycles.2.source.valid",
@@ -71,10 +63,6 @@
           "equals": false
         },
         {
-          "path": "cycles.2.source.value",
-          "same_as": "cycles.0.source.value"
-        },
-        {
           "path": "cycles.2.forward.valid",
           "equals": true
         },
@@ -83,8 +71,42 @@
           "equals": false
         },
         {
+          "path": "cycles.0.source.publication.payload",
+          "equals": {
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "path": "cycles.0.source.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.1.source.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.2.source.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.0.forward.publication.payload",
+          "equals": {
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "path": "cycles.0.forward.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "equals": []
+        },
+        {
           "path": "cycles.2.forward.value",
-          "same_as": "cycles.0.forward.value"
+          "equals": []
         }
       ],
       "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
@@ -143,10 +165,6 @@
           "equals": true
         },
         {
-          "path": "cycles.1.source.value",
-          "same_as": "cycles.0.source.value"
-        },
-        {
           "path": "cycles.1.source.members",
           "equals": []
         },
@@ -157,10 +175,6 @@
         {
           "path": "cycles.1.forward.modified",
           "equals": false
-        },
-        {
-          "path": "cycles.1.forward.value",
-          "same_as": "cycles.0.forward.value"
         },
         {
           "path": "cycles.1.forward.members",
@@ -175,10 +189,6 @@
           "equals": false
         },
         {
-          "path": "cycles.2.source.value",
-          "same_as": "cycles.0.source.value"
-        },
-        {
           "path": "cycles.2.source.members",
           "equals": []
         },
@@ -191,12 +201,40 @@
           "equals": false
         },
         {
-          "path": "cycles.2.forward.value",
-          "same_as": "cycles.0.forward.value"
-        },
-        {
           "path": "cycles.2.forward.members",
           "equals": []
+        },
+        {
+          "path": "cycles.0.source.publication.payload",
+          "equals": {}
+        },
+        {
+          "path": "cycles.0.source.value",
+          "equals": {}
+        },
+        {
+          "path": "cycles.1.source.value",
+          "equals": {}
+        },
+        {
+          "path": "cycles.2.source.value",
+          "equals": {}
+        },
+        {
+          "path": "cycles.0.forward.publication.payload",
+          "equals": {}
+        },
+        {
+          "path": "cycles.0.forward.value",
+          "equals": {}
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "equals": {}
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "equals": {}
         }
       ],
       "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
@@ -423,6 +461,62 @@
         {
           "path": "cycles.2.forward.children.1.modified",
           "equals": false
+        },
+        {
+          "path": "cycles.0.source.publication.payload",
+          "equals": {}
+        },
+        {
+          "path": "cycles.0.source.children.0.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.0.source.children.1.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.1.source.children.0.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.1.source.children.1.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.2.source.children.0.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.2.source.children.1.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.0.forward.publication.payload",
+          "equals": {}
+        },
+        {
+          "path": "cycles.0.forward.children.0.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.0.forward.children.1.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.1.forward.children.0.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.1.forward.children.1.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.2.forward.children.0.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.2.forward.children.1.value",
+          "equals": null
         }
       ],
       "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
@@ -481,10 +575,6 @@
           "equals": true
         },
         {
-          "path": "cycles.1.source.value",
-          "same_as": "cycles.0.source.value"
-        },
-        {
           "path": "cycles.1.source.members",
           "equals": []
         },
@@ -495,10 +585,6 @@
         {
           "path": "cycles.1.forward.modified",
           "equals": false
-        },
-        {
-          "path": "cycles.1.forward.value",
-          "same_as": "cycles.0.forward.value"
         },
         {
           "path": "cycles.1.forward.members",
@@ -513,10 +599,6 @@
           "equals": false
         },
         {
-          "path": "cycles.2.source.value",
-          "same_as": "cycles.0.source.value"
-        },
-        {
           "path": "cycles.2.source.members",
           "equals": []
         },
@@ -529,11 +611,39 @@
           "equals": false
         },
         {
-          "path": "cycles.2.forward.value",
-          "same_as": "cycles.0.forward.value"
+          "path": "cycles.2.forward.members",
+          "equals": []
         },
         {
-          "path": "cycles.2.forward.members",
+          "path": "cycles.0.source.publication.payload",
+          "equals": {}
+        },
+        {
+          "path": "cycles.0.source.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.1.source.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.2.source.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.0.forward.publication.payload",
+          "equals": {}
+        },
+        {
+          "path": "cycles.0.forward.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.2.forward.value",
           "equals": []
         }
       ],
@@ -761,6 +871,62 @@
         {
           "path": "cycles.2.forward.children.right.modified",
           "equals": false
+        },
+        {
+          "path": "cycles.0.source.publication.payload",
+          "equals": {}
+        },
+        {
+          "path": "cycles.0.source.children.left.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.0.source.children.right.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.1.source.children.left.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.1.source.children.right.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.2.source.children.left.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.2.source.children.right.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.0.forward.publication.payload",
+          "equals": {}
+        },
+        {
+          "path": "cycles.0.forward.children.left.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.0.forward.children.right.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.1.forward.children.left.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.1.forward.children.right.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.2.forward.children.left.value",
+          "equals": null
+        },
+        {
+          "path": "cycles.2.forward.children.right.value",
+          "equals": null
         }
       ],
       "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
@@ -819,10 +985,6 @@
           "equals": true
         },
         {
-          "path": "cycles.1.source.value",
-          "same_as": "cycles.0.source.value"
-        },
-        {
           "path": "cycles.1.source.members",
           "equals": []
         },
@@ -833,10 +995,6 @@
         {
           "path": "cycles.1.forward.modified",
           "equals": false
-        },
-        {
-          "path": "cycles.1.forward.value",
-          "same_as": "cycles.0.forward.value"
         },
         {
           "path": "cycles.1.forward.members",
@@ -851,10 +1009,6 @@
           "equals": false
         },
         {
-          "path": "cycles.2.source.value",
-          "same_as": "cycles.0.source.value"
-        },
-        {
           "path": "cycles.2.source.members",
           "equals": []
         },
@@ -867,12 +1021,40 @@
           "equals": false
         },
         {
-          "path": "cycles.2.forward.value",
-          "same_as": "cycles.0.forward.value"
-        },
-        {
           "path": "cycles.2.forward.members",
           "equals": []
+        },
+        {
+          "path": "cycles.0.source.publication.payload",
+          "equals": {}
+        },
+        {
+          "path": "cycles.0.source.value",
+          "equals": {}
+        },
+        {
+          "path": "cycles.1.source.value",
+          "equals": {}
+        },
+        {
+          "path": "cycles.2.source.value",
+          "equals": {}
+        },
+        {
+          "path": "cycles.0.forward.publication.payload",
+          "equals": {}
+        },
+        {
+          "path": "cycles.0.forward.value",
+          "equals": {}
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "equals": {}
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "equals": {}
         }
       ],
       "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
@@ -931,10 +1113,6 @@
           "equals": true
         },
         {
-          "path": "cycles.1.source.value",
-          "same_as": "cycles.0.source.value"
-        },
-        {
           "path": "cycles.1.source.members",
           "equals": []
         },
@@ -945,10 +1123,6 @@
         {
           "path": "cycles.1.forward.modified",
           "equals": false
-        },
-        {
-          "path": "cycles.1.forward.value",
-          "same_as": "cycles.0.forward.value"
         },
         {
           "path": "cycles.1.forward.members",
@@ -963,10 +1137,6 @@
           "equals": false
         },
         {
-          "path": "cycles.2.source.value",
-          "same_as": "cycles.0.source.value"
-        },
-        {
           "path": "cycles.2.source.members",
           "equals": []
         },
@@ -979,11 +1149,39 @@
           "equals": false
         },
         {
-          "path": "cycles.2.forward.value",
-          "same_as": "cycles.0.forward.value"
+          "path": "cycles.2.forward.members",
+          "equals": []
         },
         {
-          "path": "cycles.2.forward.members",
+          "path": "cycles.0.source.publication.payload",
+          "equals": {}
+        },
+        {
+          "path": "cycles.0.source.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.1.source.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.2.source.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.0.forward.publication.payload",
+          "equals": {}
+        },
+        {
+          "path": "cycles.0.forward.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.2.forward.value",
           "equals": []
         }
       ],
@@ -1073,6 +1271,14 @@
         {
           "path": "cycles.2.forward.value",
           "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "cycles.0.source.publication.payload",
+          "equals": {}
+        },
+        {
+          "path": "cycles.0.forward.publication.payload",
+          "equals": {}
         }
       ],
       "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."

@@ -1,4 +1,5 @@
 """Evidence corruption must not hide a difference or invent a publication."""
+import copy
 import json
 from pathlib import Path
 import unittest
@@ -51,6 +52,32 @@ class EvidenceTests(unittest.TestCase):
                 with self.assertRaises(AssertionError):
                     validate(self.data)
                 self.data['engines']['cpp']['observations']['initial_set'][side + '_notifications'] = original
+
+    def test_supported_surface_cannot_be_relabeled_error(self):
+        o = self.data['engines']['python']['observations']['initial_set']
+        o.update(capability='error', phase='eval_node', error_type='InventedError', error='invented')
+        del o['raw_eval_node']
+        with self.assertRaises(AssertionError):
+            validate(self.data)
+
+    def test_consistent_nonempty_initial_publication_is_rejected(self):
+        o = self.data['engines']['cpp']['observations']['initial_set']
+        payload = {'added': [7], 'removed': []}
+        for item in o['producer']:
+            item['state']['value'] = [7]
+            if item['step'] == 1:
+                item['state']['publication']['payload'] = copy.deepcopy(payload)
+        for row in o['cycles']:
+            for side in ('source', 'forward'):
+                row[side]['value'] = [7]
+                if row['step'] == 1:
+                    row[side]['publication']['payload'] = copy.deepcopy(payload)
+        for side in ('source', 'forward'):
+            o[side + '_notifications'][0]['state'] = copy.deepcopy(o['cycles'][0][side])
+        o['raw_eval_node'][0] = copy.deepcopy(payload)
+        o['dense_from_input_horizon'][0] = copy.deepcopy(payload)
+        with self.assertRaises(AssertionError):
+            validate(self.data)
 
     def test_full_horizon_expectations_reject_retention_changes(self):
         cases = {c['id']: c for c in json.loads((Path(__file__).parent / 'reasoned.json').read_text())['cases']}
