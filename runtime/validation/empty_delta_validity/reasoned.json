@@ -1,0 +1,607 @@
+{
+  "status": "Frozen before execution. User ruling 2026-10-10: empty sparse deltas initialize invalid endpoints, otherwise do not tick. Reference differences must be preserved.",
+  "cases": [
+    {
+      "id": "initial_set",
+      "shape": "set",
+      "actions": [
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "cycles.0.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.modified",
+          "equals": false
+        }
+      ],
+      "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
+    },
+    {
+      "id": "initial_map",
+      "shape": "map",
+      "actions": [
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "cycles.0.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.modified",
+          "equals": false
+        }
+      ],
+      "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
+    },
+    {
+      "id": "initial_fixed",
+      "shape": "fixed",
+      "actions": [
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "cycles.0.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.modified",
+          "equals": false
+        }
+      ],
+      "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
+    },
+    {
+      "id": "initial_fixed_zero",
+      "shape": "fixed_zero",
+      "actions": [
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "cycles.0.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.modified",
+          "equals": false
+        }
+      ],
+      "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
+    },
+    {
+      "id": "initial_struct",
+      "shape": "struct",
+      "actions": [
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "cycles.0.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.modified",
+          "equals": false
+        }
+      ],
+      "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
+    },
+    {
+      "id": "initial_struct_zero",
+      "shape": "struct_zero",
+      "actions": [
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "cycles.0.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.modified",
+          "equals": false
+        }
+      ],
+      "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
+    },
+    {
+      "id": "initial_growing",
+      "shape": "growing",
+      "actions": [
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "cycles.0.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.modified",
+          "equals": false
+        }
+      ],
+      "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
+    },
+    {
+      "id": "initial_tuple",
+      "shape": "tuple",
+      "actions": [
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "cycles.0.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.modified",
+          "equals": false
+        }
+      ],
+      "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
+    },
+    {
+      "id": "held_set",
+      "shape": "set",
+      "actions": [
+        "seed",
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "cycles.1.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.1.source.modified",
+          "equals": false
+        }
+      ],
+      "rationale": "Empty sparse application preserves an already-valid endpoint and held children."
+    },
+    {
+      "id": "held_map",
+      "shape": "map",
+      "actions": [
+        "seed",
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "cycles.1.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.1.source.modified",
+          "equals": false
+        }
+      ],
+      "rationale": "Empty sparse application preserves an already-valid endpoint and held children."
+    },
+    {
+      "id": "held_fixed",
+      "shape": "fixed",
+      "actions": [
+        "seed",
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "cycles.1.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.1.source.modified",
+          "equals": false
+        }
+      ],
+      "rationale": "Empty sparse application preserves an already-valid endpoint and held children."
+    },
+    {
+      "id": "held_struct",
+      "shape": "struct",
+      "actions": [
+        "seed",
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "cycles.1.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.1.source.modified",
+          "equals": false
+        }
+      ],
+      "rationale": "Empty sparse application preserves an already-valid endpoint and held children."
+    },
+    {
+      "id": "held_growing",
+      "shape": "growing",
+      "actions": [
+        "seed",
+        "empty",
+        "empty",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "cycles.1.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.1.source.modified",
+          "equals": false
+        }
+      ],
+      "rationale": "Empty sparse application preserves an already-valid endpoint and held children."
+    },
+    {
+      "id": "revalidate_set",
+      "shape": "set",
+      "actions": [
+        "empty",
+        "idle",
+        "invalidate",
+        "empty",
+        "empty"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1,
+            4
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.source.modified",
+          "equals": true
+        }
+      ],
+      "rationale": "After explicit source invalidation, empty application revalidates it. Publication-only forwarding does not invalidate its already-valid output, so the second empty application there is silent."
+    },
+    {
+      "id": "revalidate_map",
+      "shape": "map",
+      "actions": [
+        "empty",
+        "idle",
+        "invalidate",
+        "empty",
+        "empty"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1,
+            4
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.source.modified",
+          "equals": true
+        }
+      ],
+      "rationale": "After explicit source invalidation, empty application revalidates it. Publication-only forwarding does not invalidate its already-valid output, so the second empty application there is silent."
+    },
+    {
+      "id": "revalidate_fixed",
+      "shape": "fixed",
+      "actions": [
+        "empty",
+        "idle",
+        "invalidate",
+        "empty",
+        "empty"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1,
+            4
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.source.modified",
+          "equals": true
+        }
+      ],
+      "rationale": "After explicit source invalidation, empty application revalidates it. Publication-only forwarding does not invalidate its already-valid output, so the second empty application there is silent."
+    },
+    {
+      "id": "revalidate_struct",
+      "shape": "struct",
+      "actions": [
+        "empty",
+        "idle",
+        "invalidate",
+        "empty",
+        "empty"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1,
+            4
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.source.modified",
+          "equals": true
+        }
+      ],
+      "rationale": "After explicit source invalidation, empty application revalidates it. Publication-only forwarding does not invalidate its already-valid output, so the second empty application there is silent."
+    },
+    {
+      "id": "cancel_set",
+      "shape": "set",
+      "actions": [
+        "cancel",
+        "cancel",
+        "idle"
+      ],
+      "expectations": [
+        {
+          "path": "source_events",
+          "equals": [
+            1,
+            2
+          ]
+        },
+        {
+          "path": "forward_events",
+          "equals": [
+            1
+          ]
+        }
+      ],
+      "rationale": "Actual mutations can cancel to an empty recorded source delta while retaining its tick. Applying that delta to an already-valid destination is silent."
+    }
+  ]
+}
