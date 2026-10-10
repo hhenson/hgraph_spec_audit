@@ -4,6 +4,7 @@ import contextlib
 from datetime import datetime, timezone
 import importlib.util
 import io
+import hashlib
 import json
 from pathlib import Path
 import subprocess
@@ -140,7 +141,8 @@ def main():
         assert all(run == runs[0] for run in runs), 'Fresh processes disagree'
         assert runs[0]['identity']['native'] == native, 'Wrong interpreter artifact'
         assessments = {name: 'error' if 'error_type' in case else 'match' if case['dense_from_input_horizon'] == corpus['cases'][name]['expected_dense'] else 'divergence' for name, case in runs[0]['cases'].items()}
-        record['engines'][engine] = {**runs[0], 'assessment': assessments}
+        run_hashes = [hashlib.sha256(json.dumps(run, sort_keys=True).encode()).hexdigest() for run in runs]
+        record['engines'][engine] = {**runs[0], 'runs_sha256': run_hashes, 'assessment': assessments}
         print(engine, assessments)
     assert sources == {name: support.sha(HERE / name) for name in sources}
     assert dependencies == {name: support.sha(HERE.parent / name) for name in dependencies}
