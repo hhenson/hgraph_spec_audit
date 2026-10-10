@@ -1,0 +1,55 @@
+{
+  "cpp": {
+    "earlier_parameter": "compile_reject",
+    "enclosing_name": [
+      9,
+      5
+    ],
+    "evaluation_phase": [
+      1,
+      2,
+      2
+    ],
+    "field_reference": [
+      99,
+      99
+    ],
+    "shadow_parameter": "compile_reject",
+    "template_parameter": [
+      7,
+      9
+    ],
+    "unevaluated_parameter": true
+  },
+  "hgl_proposal": "Defaults use the enclosing declaration binding closure and existing generic context, excluding ordinary instance fields and formal argument values. Preserve existing required-constant/cold phase and ownership contracts; no new numeric reification or generic-parameter defaults.",
+  "python": {
+    "earlier_parameter": "NameError",
+    "enclosing_name": [
+      7,
+      5
+    ],
+    "evaluation_phase": [
+      1,
+      1,
+      1
+    ],
+    "field_reference": [
+      99,
+      7
+    ],
+    "shadow_parameter": 11
+  },
+  "reasoning": [
+    "Python defaults use the defining scope and are evaluated once; ordinary formal values are not present at definition. A same-spelled outer value can supply a default.",
+    "C++ default argument lookup includes earlier formal names, which shadow outer names, but those formals cannot be potentially evaluated. Unevaluated sizeof can mention the formal.",
+    "C++ template values are distinct from ordinary function parameters and can bind a function default after specialization. HGL generic value reification is not inferred from this.",
+    "C++ ordinary defaults evaluate at each omitted call, while Python captures at definition.",
+    "Python class namespace can supply an earlier field class value; C++ default member initialization can read the earlier field of the constructed instance. Neither surface licenses HGL default reads of instance fields."
+  ],
+  "references": [
+    "https://docs.python.org/3.14/tutorial/controlflow.html#default-argument-values",
+    "https://eel.is/c++draft/dcl.fct.default"
+  ],
+  "scope": "Conventional ordinary Python/C++ default name binding and evaluation; evidence informs an explicitly chosen HGL declaration-closure rule but does not define HGL semantics.",
+  "written_before_measurement": true
+}
