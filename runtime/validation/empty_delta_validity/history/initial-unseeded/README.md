@@ -1,0 +1,1 @@
+These original records are retained unchanged. The fixed-list and struct revalidation cases did not seed their endpoints, so they establish repeated initial-empty behavior, not revalidation after a formerly valid value. The active corpus corrects that setup and was frozen before a new reference run.

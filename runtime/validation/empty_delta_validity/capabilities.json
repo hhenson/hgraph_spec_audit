@@ -1,0 +1,137 @@
+{
+  "engines": {
+    "cpp": {
+      "cases": {
+        "cancel_set": {
+          "capability": "supported"
+        },
+        "held_fixed": {
+          "capability": "supported"
+        },
+        "held_growing": {
+          "capability": "supported"
+        },
+        "held_map": {
+          "capability": "supported"
+        },
+        "held_set": {
+          "capability": "supported"
+        },
+        "held_struct": {
+          "capability": "supported"
+        },
+        "initial_fixed": {
+          "capability": "supported"
+        },
+        "initial_fixed_zero": {
+          "capability": "error",
+          "error_sha256": "8ec1d3cb295817ed336395cfb543ac98c6740097cf38ac176462eda8118bc9e5",
+          "error_type": "RuntimeError",
+          "phase": "eval_node"
+        },
+        "initial_growing": {
+          "capability": "supported"
+        },
+        "initial_map": {
+          "capability": "supported"
+        },
+        "initial_set": {
+          "capability": "supported"
+        },
+        "initial_struct": {
+          "capability": "supported"
+        },
+        "initial_struct_zero": {
+          "capability": "supported"
+        },
+        "initial_tuple": {
+          "capability": "unsupported",
+          "reason_sha256": "540850703e86052403e1e1c1cd7f000b2c66e20704ab5136082948b7d09ddfaf",
+          "surface": "hgraph.TST"
+        },
+        "revalidate_fixed": {
+          "capability": "supported"
+        },
+        "revalidate_map": {
+          "capability": "supported"
+        },
+        "revalidate_set": {
+          "capability": "supported"
+        },
+        "revalidate_struct": {
+          "capability": "supported"
+        }
+      },
+      "identity_sha256": "4e6f5de2831b24edcedf4b75b2902f8bd1941a85a08e663dd23dce39c650fe87"
+    },
+    "python": {
+      "cases": {
+        "cancel_set": {
+          "capability": "supported"
+        },
+        "held_fixed": {
+          "capability": "supported"
+        },
+        "held_growing": {
+          "capability": "error",
+          "error_sha256": "c563244ad85f588df26ee72a98a63bb6bc21ad82dd0c98a729a4244ca468d501",
+          "error_type": "NodeException",
+          "phase": "eval_node"
+        },
+        "held_map": {
+          "capability": "supported"
+        },
+        "held_set": {
+          "capability": "supported"
+        },
+        "held_struct": {
+          "capability": "supported"
+        },
+        "initial_fixed": {
+          "capability": "supported"
+        },
+        "initial_fixed_zero": {
+          "capability": "supported"
+        },
+        "initial_growing": {
+          "capability": "supported"
+        },
+        "initial_map": {
+          "capability": "supported"
+        },
+        "initial_set": {
+          "capability": "supported"
+        },
+        "initial_struct": {
+          "capability": "supported"
+        },
+        "initial_struct_zero": {
+          "capability": "supported"
+        },
+        "initial_tuple": {
+          "capability": "unsupported",
+          "reason_sha256": "540850703e86052403e1e1c1cd7f000b2c66e20704ab5136082948b7d09ddfaf",
+          "surface": "hgraph.TST"
+        },
+        "revalidate_fixed": {
+          "capability": "supported"
+        },
+        "revalidate_map": {
+          "capability": "supported"
+        },
+        "revalidate_set": {
+          "capability": "supported"
+        },
+        "revalidate_struct": {
+          "capability": "error",
+          "error_sha256": "2a6b52deb100ce35cef84b0af5ec37ed964441cc9bdb1bd22c5f2219bb43c548",
+          "error_type": "NodeException",
+          "phase": "eval_node"
+        }
+      },
+      "identity_sha256": "abaf613be1a8b5da39bf4e5eac6b1e85795b79005a1593509f259ce547ee9548"
+    }
+  },
+  "measured_at": "2026-10-10T12:23:29.855437+00:00",
+  "reasoned_sha256": "252ecc522d1071ec120de2ece4da88bd24f9954ded2f64efe45da0374cefcdae"
+}
