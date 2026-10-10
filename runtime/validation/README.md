@@ -83,3 +83,10 @@ zone construction/ad-hoc JSON decoding from exact provider-name validation.
 [Required unset reads](unset_required_reads/README.md) records retained partial
 observations through two Python authoring surfaces and genuine native typed
 extraction, preserving absent-field, collection and Boolean coercion differences.
+
+
+[Owned REF output routes](ref_owner_export/README.md) measures two composed
+conditional boundaries and an exported child-designation tree with sparse
+updates and partial retargeting. Python matches both frozen cases; the public
+C++ interpreter omits one required right-child sample. This is public bridge
+evidence, not direct native SDK or HGL execution.
