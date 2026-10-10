@@ -1,0 +1,43 @@
+{
+  "written_before_measurement": true,
+  "scope": "Direct installed native SDK Any and registered native atomic values; public Python object observations are recorded separately.",
+  "expected": {
+    "any_empty_present": true,
+    "any_empty_equal": true,
+    "any_empty_before_present": true,
+    "any_equal_hash": true,
+    "any_distinct_type_unequal": true,
+    "any_distinct_type_unordered": true,
+    "any_flattens": true,
+    "any_retained_independently": true,
+    "native_nominal_identity": true,
+    "native_retained_independently": true,
+    "native_equal_hash": true,
+    "native_order": true,
+    "any_erased_assignment_flattens": true
+  },
+  "capability_expectations": {
+    "any_missing_equality": "error",
+    "any_missing_hash": "error",
+    "any_missing_order": "error"
+  },
+  "graph_expected": {
+    "any": [
+      "empty",
+      "i64:0",
+      "bool:false",
+      "bytes:0",
+      "str:",
+      "native:one",
+      "native:one",
+      null
+    ],
+    "native": [
+      "one",
+      "one",
+      null,
+      "two",
+      null
+    ]
+  }
+}
