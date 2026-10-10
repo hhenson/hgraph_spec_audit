@@ -41,15 +41,26 @@ def validate(evidence):
             for row in o['cycles']:
                 boundary.check_state(row['source'])
                 boundary.check_state(row['forward'])
+            for side in ('source', 'forward'):
+                notifications = o[side + '_notifications']
+                for item in notifications:
+                    boundary.check_state(item['state'])
+                events = [item['step'] for item in notifications if item['state']['publication']['present']]
+                assert o[side + '_events'] == events
             if o['capability'] == 'error':
                 assert o['error_type'] and o['error'] and o['phase']
                 assert 'raw_eval_node' not in o
                 continue
             n = len(case['actions'])
             assert [row['step'] for row in o['cycles']] == list(range(1, n + 1))
+            assert [row['step'] for row in o['producer']] == list(range(1, n + 1))
             for side in ('source', 'forward'):
                 assert o[side + '_events'] == [row['step'] for row in o['cycles']
                                              if row[side]['publication']['present']]
+                cycles = {row['step']: row[side] for row in o['cycles']}
+                for item in o[side + '_notifications']:
+                    assert item['step'] in cycles
+                    assert boundary.equal(item['state'], cycles[item['step']])
             raw = o['raw_eval_node']
             assert raw is None or isinstance(raw, list)
             dense = [] if raw is None else list(raw)

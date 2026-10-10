@@ -38,6 +38,25 @@ class EvidenceTests(unittest.TestCase):
         with self.assertRaises(AssertionError):
             validate(self.data)
 
+    def test_missing_producer_rows(self):
+        self.data['engines']['python']['observations']['initial_set']['producer'] = []
+        with self.assertRaises(AssertionError):
+            validate(self.data)
+
+    def test_missing_notifications(self):
+        for side in ('source', 'forward'):
+            with self.subTest(side=side):
+                original = self.data['engines']['cpp']['observations']['initial_set'][side + '_notifications']
+                self.data['engines']['cpp']['observations']['initial_set'][side + '_notifications'] = []
+                with self.assertRaises(AssertionError):
+                    validate(self.data)
+                self.data['engines']['cpp']['observations']['initial_set'][side + '_notifications'] = original
+
+    def test_changed_notification_payload(self):
+        self.data['engines']['python']['observations']['initial_set']['source_notifications'][0]['state']['publication']['payload'] = {'added': [7], 'removed': []}
+        with self.assertRaises(AssertionError):
+            validate(self.data)
+
 
 if __name__ == '__main__':
     unittest.main()
