@@ -79,6 +79,22 @@ class EvidenceTests(unittest.TestCase):
         with self.assertRaises(AssertionError):
             validate(self.data)
 
+    def test_consistent_nonempty_revalidation_is_rejected(self):
+        for engine in ('python', 'cpp'):
+            for case_id, payload in (('revalidate_set', {'added': [7], 'removed': []}),
+                                     ('revalidate_map', {'7': 7})):
+                with self.subTest(engine=engine, case=case_id):
+                    original = copy.deepcopy(self.data)
+                    o = self.data['engines'][engine]['observations'][case_id]
+                    o['producer'][3]['state']['publication']['payload'] = copy.deepcopy(payload)
+                    o['cycles'][3]['source']['publication']['payload'] = copy.deepcopy(payload)
+                    for item in o['source_notifications']:
+                        if item['step'] == 4:
+                            item['state']['publication']['payload'] = copy.deepcopy(payload)
+                    with self.assertRaises(AssertionError):
+                        validate(self.data)
+                    self.data = original
+
     def test_full_horizon_expectations_reject_retention_changes(self):
         cases = {c['id']: c for c in json.loads((Path(__file__).parent / 'reasoned.json').read_text())['cases']}
         for case_id, path, mutate in (

@@ -83,6 +83,18 @@
           {
             "path": "cycles.2.forward.value",
             "status": "match"
+          },
+          {
+            "path": "cycles.0.source.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "match"
           }
         ],
         "held_fixed": [
@@ -2939,6 +2951,10 @@
           {
             "path": "cycles.4.forward.children.1.value",
             "status": "match"
+          },
+          {
+            "path": "cycles.3.source.publication.payload",
+            "status": "unobservable"
           }
         ],
         "revalidate_map": [
@@ -3065,6 +3081,34 @@
           {
             "path": "cycles.4.forward.members",
             "status": "match"
+          },
+          {
+            "path": "cycles.0.source.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.3.source.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.3.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.4.source.value",
+            "status": "match"
           }
         ],
         "revalidate_set": [
@@ -3170,6 +3214,34 @@
           },
           {
             "path": "cycles.4.forward.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.3.source.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.3.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.4.source.value",
             "status": "match"
           }
         ],
@@ -3473,6 +3545,10 @@
           {
             "path": "cycles.4.forward.children.right.value",
             "status": "match"
+          },
+          {
+            "path": "cycles.3.source.publication.payload",
+            "status": "unobservable"
           }
         ]
       },
@@ -9475,6 +9551,18 @@
           {
             "path": "cycles.2.forward.value",
             "status": "match"
+          },
+          {
+            "path": "cycles.0.source.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "match"
           }
         ],
         "held_fixed": [
@@ -12331,6 +12419,10 @@
           {
             "path": "cycles.4.forward.children.1.value",
             "status": "match"
+          },
+          {
+            "path": "cycles.3.source.publication.payload",
+            "status": "unobservable"
           }
         ],
         "revalidate_map": [
@@ -12457,6 +12549,34 @@
           {
             "path": "cycles.4.forward.members",
             "status": "match"
+          },
+          {
+            "path": "cycles.0.source.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.3.source.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.3.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.4.source.value",
+            "status": "match"
           }
         ],
         "revalidate_set": [
@@ -12562,6 +12682,34 @@
           },
           {
             "path": "cycles.4.forward.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.3.source.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.publication.payload",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.3.source.value",
+            "status": "match"
+          },
+          {
+            "path": "cycles.4.source.value",
             "status": "match"
           }
         ],
@@ -12864,6 +13012,10 @@
           },
           {
             "path": "cycles.4.forward.children.right.value",
+            "status": "unobservable"
+          },
+          {
+            "path": "cycles.3.source.publication.payload",
             "status": "unobservable"
           }
         ]
@@ -18236,7 +18388,7 @@
   },
   "harness_sha256": "9e044a8f71cadd9a3014eddff0b775465a51f2babd08b0562ab38d1f69177020",
   "identity_support_sha256": "c7d54b7dadcfd86fce648d4ddd5fd8decb64f7cf0e36a7700fb1195dfb3b7ead",
-  "measured_at": "2026-10-10T12:16:53.549434+00:00",
-  "reasoned_sha256": "37ea74d5fa6699eb9b7b6a7133cade05b595e51b6039e3fbef512405edc9f063",
+  "measured_at": "2026-10-10T12:23:29.855437+00:00",
+  "reasoned_sha256": "252ecc522d1071ec120de2ece4da88bd24f9954ded2f64efe45da0374cefcdae",
   "repeats": 3
 }

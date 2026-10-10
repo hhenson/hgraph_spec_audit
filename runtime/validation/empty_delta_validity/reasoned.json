@@ -3104,6 +3104,43 @@
         {
           "path": "cycles.4.forward.value",
           "equals": []
+        },
+        {
+          "path": "cycles.0.source.publication.payload",
+          "equals": {
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "path": "cycles.3.source.publication.payload",
+          "equals": {
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "path": "cycles.0.forward.publication.payload",
+          "equals": {
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "path": "cycles.0.source.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.1.source.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.3.source.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.4.source.value",
+          "equals": []
         }
       ],
       "rationale": "After explicit source invalidation, empty application revalidates it. Publication-only forwarding does not invalidate its already-valid output, so the second empty application there is silent."
@@ -3247,6 +3284,34 @@
         {
           "path": "cycles.4.forward.members",
           "equals": []
+        },
+        {
+          "path": "cycles.0.source.publication.payload",
+          "equals": {}
+        },
+        {
+          "path": "cycles.3.source.publication.payload",
+          "equals": {}
+        },
+        {
+          "path": "cycles.0.forward.publication.payload",
+          "equals": {}
+        },
+        {
+          "path": "cycles.0.source.value",
+          "equals": {}
+        },
+        {
+          "path": "cycles.1.source.value",
+          "equals": {}
+        },
+        {
+          "path": "cycles.3.source.value",
+          "equals": {}
+        },
+        {
+          "path": "cycles.4.source.value",
+          "equals": {}
         }
       ],
       "rationale": "After explicit source invalidation, empty application revalidates it. Publication-only forwarding does not invalidate its already-valid output, so the second empty application there is silent."
@@ -3596,6 +3661,10 @@
         {
           "path": "cycles.4.forward.children.1.value",
           "equals": 20
+        },
+        {
+          "path": "cycles.3.source.publication.payload",
+          "equals": {}
         }
       ],
       "rationale": "Seed a valid populated source before invalidation. Empty application must then revalidate it without initializing children. Publication-only forwarding retains its already-valid value and suppresses the empty application."
@@ -3945,6 +4014,10 @@
         {
           "path": "cycles.4.forward.children.right.value",
           "equals": 20
+        },
+        {
+          "path": "cycles.3.source.publication.payload",
+          "equals": {}
         }
       ],
       "rationale": "Seed a valid populated source before invalidation. Empty application must then revalidate it without initializing children. Publication-only forwarding retains its already-valid value and suppresses the empty application."
@@ -4042,6 +4115,27 @@
         {
           "path": "cycles.2.forward.value",
           "equals": []
+        },
+        {
+          "path": "cycles.0.source.publication.payload",
+          "equals": {
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "path": "cycles.1.source.publication.payload",
+          "equals": {
+            "added": [],
+            "removed": []
+          }
+        },
+        {
+          "path": "cycles.0.forward.publication.payload",
+          "equals": {
+            "added": [],
+            "removed": []
+          }
         }
       ],
       "rationale": "Actual mutations can cancel to an empty recorded source delta while retaining its tick. Applying that delta to an already-valid destination is silent."
