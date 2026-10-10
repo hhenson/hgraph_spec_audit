@@ -29,6 +29,62 @@
         {
           "path": "cycles.1.source.modified",
           "equals": false
+        },
+        {
+          "path": "cycles.0.source.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.2.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "same_as": "cycles.0.forward.value"
         }
       ],
       "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
@@ -61,6 +117,86 @@
         {
           "path": "cycles.1.source.modified",
           "equals": false
+        },
+        {
+          "path": "cycles.0.source.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.0.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.1.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.1.source.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "cycles.1.forward.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.2.source.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.2.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "cycles.2.forward.members",
+          "equals": []
         }
       ],
       "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
@@ -125,6 +261,168 @@
         {
           "path": "cycles.1.forward.children.1.valid",
           "equals": false
+        },
+        {
+          "path": "cycles.0.source.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.0.source.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.0.source.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.0.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.0.forward.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.0.forward.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.1.source.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.1.source.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.source.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "cycles.1.forward.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.1.forward.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.2.source.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.2.source.children.0.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.children.1.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "cycles.2.forward.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.2.forward.children.0.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.children.1.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.children.1.modified",
+          "equals": false
         }
       ],
       "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
@@ -157,6 +455,86 @@
         {
           "path": "cycles.1.source.modified",
           "equals": false
+        },
+        {
+          "path": "cycles.0.source.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.0.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.1.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.1.source.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "cycles.1.forward.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.2.source.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.2.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "cycles.2.forward.members",
+          "equals": []
         }
       ],
       "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
@@ -221,6 +599,168 @@
         {
           "path": "cycles.1.forward.children.right.valid",
           "equals": false
+        },
+        {
+          "path": "cycles.0.source.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.members",
+          "equals": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "path": "cycles.0.source.children.left.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.0.source.children.right.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.0.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.members",
+          "equals": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "path": "cycles.0.forward.children.left.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.0.forward.children.right.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.1.source.members",
+          "equals": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "path": "cycles.1.source.children.left.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.source.children.right.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "cycles.1.forward.members",
+          "equals": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "path": "cycles.1.forward.children.left.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.right.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.2.source.members",
+          "equals": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "path": "cycles.2.source.children.left.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.children.left.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.children.right.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.children.right.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "cycles.2.forward.members",
+          "equals": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "path": "cycles.2.forward.children.left.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.children.left.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.children.right.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.children.right.modified",
+          "equals": false
         }
       ],
       "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
@@ -253,6 +793,86 @@
         {
           "path": "cycles.1.source.modified",
           "equals": false
+        },
+        {
+          "path": "cycles.0.source.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.0.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.1.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.1.source.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "cycles.1.forward.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.2.source.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.2.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "cycles.2.forward.members",
+          "equals": []
         }
       ],
       "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
@@ -285,6 +905,86 @@
         {
           "path": "cycles.1.source.modified",
           "equals": false
+        },
+        {
+          "path": "cycles.0.source.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.0.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.1.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.1.source.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "cycles.1.forward.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.2.source.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.2.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "cycles.2.forward.members",
+          "equals": []
         }
       ],
       "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
@@ -317,6 +1017,62 @@
         {
           "path": "cycles.1.source.modified",
           "equals": false
+        },
+        {
+          "path": "cycles.0.source.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "same_as": "cycles.0.forward.value"
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.value",
+          "same_as": "cycles.0.source.value"
+        },
+        {
+          "path": "cycles.2.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "same_as": "cycles.0.forward.value"
         }
       ],
       "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
@@ -350,6 +1106,115 @@
         {
           "path": "cycles.1.source.modified",
           "equals": false
+        },
+        {
+          "path": "cycles.0.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.value",
+          "equals": [
+            1,
+            2
+          ]
+        },
+        {
+          "path": "cycles.0.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.value",
+          "equals": [
+            1,
+            2
+          ]
+        },
+        {
+          "path": "cycles.1.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "equals": [
+            1,
+            2
+          ]
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.value",
+          "equals": [
+            1,
+            2
+          ]
+        },
+        {
+          "path": "cycles.2.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "equals": [
+            1,
+            2
+          ]
+        },
+        {
+          "path": "cycles.3.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.value",
+          "equals": [
+            1,
+            2
+          ]
+        },
+        {
+          "path": "cycles.3.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.value",
+          "equals": [
+            1,
+            2
+          ]
         }
       ],
       "rationale": "Empty sparse application preserves an already-valid endpoint and held children."
@@ -383,6 +1248,363 @@
         {
           "path": "cycles.1.source.modified",
           "equals": false
+        },
+        {
+          "path": "cycles.0.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.value",
+          "equals": {
+            "7": 10,
+            "8": 20
+          }
+        },
+        {
+          "path": "cycles.0.source.members",
+          "equals": [
+            "7",
+            "8"
+          ]
+        },
+        {
+          "path": "cycles.0.source.children.7.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.7.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.7.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.0.source.children.8.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.8.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.8.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.0.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.value",
+          "equals": {
+            "7": 10,
+            "8": 20
+          }
+        },
+        {
+          "path": "cycles.0.forward.members",
+          "equals": [
+            "7",
+            "8"
+          ]
+        },
+        {
+          "path": "cycles.0.forward.children.7.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.7.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.7.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.0.forward.children.8.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.8.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.8.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.1.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.members",
+          "equals": [
+            "7",
+            "8"
+          ]
+        },
+        {
+          "path": "cycles.1.source.children.7.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.children.7.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.source.children.7.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.1.source.children.8.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.children.8.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.source.children.8.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "equals": {
+            "7": 10,
+            "8": 20
+          }
+        },
+        {
+          "path": "cycles.1.forward.members",
+          "equals": [
+            "7",
+            "8"
+          ]
+        },
+        {
+          "path": "cycles.1.forward.children.7.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.children.7.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.7.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.1.forward.children.8.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.children.8.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.8.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.value",
+          "equals": {
+            "7": 10,
+            "8": 20
+          }
+        },
+        {
+          "path": "cycles.2.source.members",
+          "equals": [
+            "7",
+            "8"
+          ]
+        },
+        {
+          "path": "cycles.2.source.children.7.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.children.7.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.children.7.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.2.source.children.8.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.children.8.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.children.8.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.2.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "equals": {
+            "7": 10,
+            "8": 20
+          }
+        },
+        {
+          "path": "cycles.2.forward.members",
+          "equals": [
+            "7",
+            "8"
+          ]
+        },
+        {
+          "path": "cycles.2.forward.children.7.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.children.7.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.children.7.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.2.forward.children.8.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.children.8.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.children.8.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.3.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.value",
+          "equals": {
+            "7": 10,
+            "8": 20
+          }
+        },
+        {
+          "path": "cycles.3.source.members",
+          "equals": [
+            "7",
+            "8"
+          ]
+        },
+        {
+          "path": "cycles.3.source.children.7.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.source.children.7.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.children.7.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.3.source.children.8.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.source.children.8.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.children.8.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.3.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.value",
+          "equals": {
+            "7": 10,
+            "8": 20
+          }
+        },
+        {
+          "path": "cycles.3.forward.members",
+          "equals": [
+            "7",
+            "8"
+          ]
+        },
+        {
+          "path": "cycles.3.forward.children.7.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.children.7.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.children.7.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.3.forward.children.8.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.children.8.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.children.8.value",
+          "equals": 20
         }
       ],
       "rationale": "Empty sparse application preserves an already-valid endpoint and held children."
@@ -416,6 +1638,363 @@
         {
           "path": "cycles.1.source.modified",
           "equals": false
+        },
+        {
+          "path": "cycles.0.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.value",
+          "equals": [
+            10,
+            20
+          ]
+        },
+        {
+          "path": "cycles.0.source.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.0.source.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.0.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.0.source.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.1.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.1.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.0.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.value",
+          "equals": [
+            10,
+            20
+          ]
+        },
+        {
+          "path": "cycles.0.forward.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.0.forward.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.0.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.0.forward.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.1.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.1.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.1.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.1.source.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.source.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.1.source.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.source.children.1.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "equals": [
+            10,
+            20
+          ]
+        },
+        {
+          "path": "cycles.1.forward.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.1.forward.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.1.forward.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.1.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.value",
+          "equals": [
+            10,
+            20
+          ]
+        },
+        {
+          "path": "cycles.2.source.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.2.source.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.2.source.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.children.1.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.2.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "equals": [
+            10,
+            20
+          ]
+        },
+        {
+          "path": "cycles.2.forward.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.2.forward.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.2.forward.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.children.1.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.3.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.value",
+          "equals": [
+            10,
+            20
+          ]
+        },
+        {
+          "path": "cycles.3.source.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.3.source.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.source.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.3.source.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.source.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.children.1.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.3.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.value",
+          "equals": [
+            10,
+            20
+          ]
+        },
+        {
+          "path": "cycles.3.forward.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.3.forward.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.3.forward.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.children.1.value",
+          "equals": 20
         }
       ],
       "rationale": "Empty sparse application preserves an already-valid endpoint and held children."
@@ -449,6 +2028,363 @@
         {
           "path": "cycles.1.source.modified",
           "equals": false
+        },
+        {
+          "path": "cycles.0.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.value",
+          "equals": {
+            "left": 10,
+            "right": 20
+          }
+        },
+        {
+          "path": "cycles.0.source.members",
+          "equals": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "path": "cycles.0.source.children.left.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.left.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.left.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.0.source.children.right.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.right.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.right.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.0.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.value",
+          "equals": {
+            "left": 10,
+            "right": 20
+          }
+        },
+        {
+          "path": "cycles.0.forward.members",
+          "equals": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "path": "cycles.0.forward.children.left.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.left.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.left.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.0.forward.children.right.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.right.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.right.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.1.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.members",
+          "equals": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "path": "cycles.1.source.children.left.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.children.left.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.source.children.left.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.1.source.children.right.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.children.right.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.source.children.right.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "equals": {
+            "left": 10,
+            "right": 20
+          }
+        },
+        {
+          "path": "cycles.1.forward.members",
+          "equals": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "path": "cycles.1.forward.children.left.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.children.left.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.left.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.1.forward.children.right.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.children.right.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.right.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.value",
+          "equals": {
+            "left": 10,
+            "right": 20
+          }
+        },
+        {
+          "path": "cycles.2.source.members",
+          "equals": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "path": "cycles.2.source.children.left.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.children.left.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.children.left.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.2.source.children.right.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.children.right.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.children.right.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.2.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "equals": {
+            "left": 10,
+            "right": 20
+          }
+        },
+        {
+          "path": "cycles.2.forward.members",
+          "equals": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "path": "cycles.2.forward.children.left.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.children.left.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.children.left.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.2.forward.children.right.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.children.right.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.children.right.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.3.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.value",
+          "equals": {
+            "left": 10,
+            "right": 20
+          }
+        },
+        {
+          "path": "cycles.3.source.members",
+          "equals": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "path": "cycles.3.source.children.left.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.source.children.left.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.children.left.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.3.source.children.right.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.source.children.right.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.children.right.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.3.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.value",
+          "equals": {
+            "left": 10,
+            "right": 20
+          }
+        },
+        {
+          "path": "cycles.3.forward.members",
+          "equals": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "path": "cycles.3.forward.children.left.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.children.left.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.children.left.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.3.forward.children.right.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.children.right.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.children.right.value",
+          "equals": 20
         }
       ],
       "rationale": "Empty sparse application preserves an already-valid endpoint and held children."
@@ -482,6 +2418,363 @@
         {
           "path": "cycles.1.source.modified",
           "equals": false
+        },
+        {
+          "path": "cycles.0.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.value",
+          "equals": [
+            10,
+            20
+          ]
+        },
+        {
+          "path": "cycles.0.source.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.0.source.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.0.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.0.source.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.1.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.1.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.0.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.value",
+          "equals": [
+            10,
+            20
+          ]
+        },
+        {
+          "path": "cycles.0.forward.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.0.forward.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.0.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.0.forward.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.1.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.1.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.1.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.1.source.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.source.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.1.source.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.source.children.1.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "equals": [
+            10,
+            20
+          ]
+        },
+        {
+          "path": "cycles.1.forward.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.1.forward.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.1.forward.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.1.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.value",
+          "equals": [
+            10,
+            20
+          ]
+        },
+        {
+          "path": "cycles.2.source.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.2.source.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.2.source.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.children.1.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.2.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "equals": [
+            10,
+            20
+          ]
+        },
+        {
+          "path": "cycles.2.forward.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.2.forward.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.2.forward.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.children.1.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.3.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.value",
+          "equals": [
+            10,
+            20
+          ]
+        },
+        {
+          "path": "cycles.3.source.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.3.source.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.source.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.3.source.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.source.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.children.1.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.3.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.value",
+          "equals": [
+            10,
+            20
+          ]
+        },
+        {
+          "path": "cycles.3.forward.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.3.forward.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.3.forward.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.children.1.value",
+          "equals": 20
         }
       ],
       "rationale": "Empty sparse application preserves an already-valid endpoint and held children."
@@ -521,6 +2814,90 @@
         {
           "path": "cycles.3.source.modified",
           "equals": true
+        },
+        {
+          "path": "cycles.0.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.1.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.2.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.3.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.4.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.4.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.4.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.forward.value",
+          "equals": []
         }
       ],
       "rationale": "After explicit source invalidation, empty application revalidates it. Publication-only forwarding does not invalidate its already-valid output, so the second empty application there is silent."
@@ -560,6 +2937,110 @@
         {
           "path": "cycles.3.source.modified",
           "equals": true
+        },
+        {
+          "path": "cycles.0.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.value",
+          "equals": {}
+        },
+        {
+          "path": "cycles.0.forward.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.1.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "equals": {}
+        },
+        {
+          "path": "cycles.1.forward.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.2.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "equals": {}
+        },
+        {
+          "path": "cycles.2.forward.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.3.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.value",
+          "equals": {}
+        },
+        {
+          "path": "cycles.3.forward.members",
+          "equals": []
+        },
+        {
+          "path": "cycles.4.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.4.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.4.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.forward.value",
+          "equals": {}
+        },
+        {
+          "path": "cycles.4.forward.members",
+          "equals": []
         }
       ],
       "rationale": "After explicit source invalidation, empty application revalidates it. Publication-only forwarding does not invalidate its already-valid output, so the second empty application there is silent."
@@ -603,6 +3084,312 @@
         {
           "path": "cycles.3.source.modified",
           "equals": true
+        },
+        {
+          "path": "cycles.0.source.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.value",
+          "equals": [
+            10,
+            20
+          ]
+        },
+        {
+          "path": "cycles.0.forward.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.0.forward.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.0.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.0.forward.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.1.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.1.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.1.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.source.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "equals": [
+            10,
+            20
+          ]
+        },
+        {
+          "path": "cycles.1.forward.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.1.forward.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.1.forward.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.1.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.2.source.children.0.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.children.1.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "equals": [
+            10,
+            20
+          ]
+        },
+        {
+          "path": "cycles.2.forward.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.2.forward.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.2.forward.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.children.1.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.3.source.children.0.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.children.1.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.value",
+          "equals": [
+            10,
+            20
+          ]
+        },
+        {
+          "path": "cycles.3.forward.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.3.forward.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.3.forward.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.children.1.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.4.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.4.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.source.children.0.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.source.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.source.children.1.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.source.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.4.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.forward.value",
+          "equals": [
+            10,
+            20
+          ]
+        },
+        {
+          "path": "cycles.4.forward.members",
+          "equals": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "path": "cycles.4.forward.children.0.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.4.forward.children.0.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.forward.children.0.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.4.forward.children.1.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.4.forward.children.1.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.forward.children.1.value",
+          "equals": 20
         }
       ],
       "rationale": "Seed a valid populated source before invalidation. Empty application must then revalidate it without initializing children. Publication-only forwarding retains its already-valid value and suppresses the empty application."
@@ -646,6 +3433,312 @@
         {
           "path": "cycles.3.source.modified",
           "equals": true
+        },
+        {
+          "path": "cycles.0.source.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.left.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.children.right.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.value",
+          "equals": {
+            "left": 10,
+            "right": 20
+          }
+        },
+        {
+          "path": "cycles.0.forward.members",
+          "equals": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "path": "cycles.0.forward.children.left.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.left.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.left.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.0.forward.children.right.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.right.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.children.right.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.1.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.source.children.left.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.children.right.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "equals": {
+            "left": 10,
+            "right": 20
+          }
+        },
+        {
+          "path": "cycles.1.forward.members",
+          "equals": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "path": "cycles.1.forward.children.left.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.children.left.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.left.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.1.forward.children.right.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.children.right.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.right.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.2.source.children.left.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.children.right.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "equals": {
+            "left": 10,
+            "right": 20
+          }
+        },
+        {
+          "path": "cycles.2.forward.members",
+          "equals": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "path": "cycles.2.forward.children.left.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.children.left.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.children.left.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.2.forward.children.right.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.children.right.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.children.right.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.3.source.children.left.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.children.left.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.children.right.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.source.children.right.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.value",
+          "equals": {
+            "left": 10,
+            "right": 20
+          }
+        },
+        {
+          "path": "cycles.3.forward.members",
+          "equals": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "path": "cycles.3.forward.children.left.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.children.left.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.children.left.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.3.forward.children.right.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.3.forward.children.right.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.3.forward.children.right.value",
+          "equals": 20
+        },
+        {
+          "path": "cycles.4.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.4.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.source.children.left.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.source.children.left.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.source.children.right.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.source.children.right.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.4.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.forward.value",
+          "equals": {
+            "left": 10,
+            "right": 20
+          }
+        },
+        {
+          "path": "cycles.4.forward.members",
+          "equals": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "path": "cycles.4.forward.children.left.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.4.forward.children.left.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.forward.children.left.value",
+          "equals": 10
+        },
+        {
+          "path": "cycles.4.forward.children.right.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.4.forward.children.right.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.4.forward.children.right.value",
+          "equals": 20
         }
       ],
       "rationale": "Seed a valid populated source before invalidation. Empty application must then revalidate it without initializing children. Publication-only forwarding retains its already-valid value and suppresses the empty application."
@@ -671,6 +3764,78 @@
           "equals": [
             1
           ]
+        },
+        {
+          "path": "cycles.0.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.source.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.0.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.0.forward.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.1.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.modified",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.source.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.1.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.1.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.2.source.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.source.value",
+          "equals": []
+        },
+        {
+          "path": "cycles.2.forward.valid",
+          "equals": true
+        },
+        {
+          "path": "cycles.2.forward.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.2.forward.value",
+          "equals": []
         }
       ],
       "rationale": "Actual mutations can cancel to an empty recorded source delta while retaining its tick. Applying that delta to an already-valid destination is silent."

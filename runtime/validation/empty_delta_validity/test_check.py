@@ -2,7 +2,7 @@
 import json
 from pathlib import Path
 import unittest
-from check import validate
+from check import validate, probe
 
 
 class EvidenceTests(unittest.TestCase):
@@ -51,6 +51,21 @@ class EvidenceTests(unittest.TestCase):
                 with self.assertRaises(AssertionError):
                     validate(self.data)
                 self.data['engines']['cpp']['observations']['initial_set'][side + '_notifications'] = original
+
+    def test_full_horizon_expectations_reject_retention_changes(self):
+        cases = {c['id']: c for c in json.loads((Path(__file__).parent / 'reasoned.json').read_text())['cases']}
+        for case_id, path, mutate in (
+            ('initial_set', 'cycles.1.source.valid', lambda o: o['cycles'][1]['source'].update(valid=False)),
+            ('held_fixed', 'cycles.2.source.value', lambda o: o['cycles'][2]['source'].update(value=[99, 20])),
+            ('revalidate_fixed', 'cycles.3.source.children.0.valid', lambda o: o['cycles'][3]['source']['children']['0'].update(valid=True)),
+        ):
+            with self.subTest(case=case_id):
+                o = self.data['engines']['cpp']['observations'][case_id]
+                mutate(o)
+                findings = {f['path']: f['status'] for f in probe.support.assess(cases[case_id], o)}
+                self.assertEqual(findings[path], 'divergence')
+                with self.assertRaises(AssertionError):
+                    validate(self.data)
 
     def test_suppressed_producer_tick(self):
         for name in ('python', 'cpp'):
