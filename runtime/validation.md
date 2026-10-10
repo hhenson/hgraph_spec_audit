@@ -1,5 +1,9 @@
 # Dynamic-case validation
 
+The separate [empty-delta validity campaign](validation/empty_delta_validity/README.md)
+records the 2026-10-10 ruling and reference differences. It supersedes the
+undecided empty-event policy without rewriting earlier observations.
+
 Status: completed 2026-09-21, with accepted variations and one user ruling.
 The owner reviewed the variation reports and accepted all proposed choices
 on 2026-09-21. These are the implementation baseline; the deviations remain
