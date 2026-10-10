@@ -52,6 +52,23 @@ class EvidenceTests(unittest.TestCase):
                     validate(self.data)
                 self.data['engines']['cpp']['observations']['initial_set'][side + '_notifications'] = original
 
+    def test_suppressed_producer_tick(self):
+        for name in ('python', 'cpp'):
+            with self.subTest(engine=name):
+                state = self.data['engines'][name]['observations']['cancel_set']['producer'][1]['state']
+                state['modified'] = False
+                state['publication'] = {'present': False}
+                with self.assertRaises(AssertionError):
+                    validate(self.data)
+
+    def test_child_validity_changes_assessment(self):
+        for name in ('python', 'cpp'):
+            with self.subTest(engine=name):
+                o = self.data['engines'][name]['observations']['initial_fixed']
+                o['cycles'][0]['source']['children']['0']['valid'] = True
+                with self.assertRaises(AssertionError):
+                    validate(self.data)
+
     def test_missing_invalidation_notification(self):
         for name in ('python', 'cpp'):
             with self.subTest(engine=name):

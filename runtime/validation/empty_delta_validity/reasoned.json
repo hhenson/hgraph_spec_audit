@@ -93,6 +93,38 @@
         {
           "path": "cycles.1.source.modified",
           "equals": false
+        },
+        {
+          "path": "cycles.0.source.children.0.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.0.source.children.1.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.0.forward.children.0.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.0.forward.children.1.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.source.children.0.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.source.children.1.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.0.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.1.valid",
+          "equals": false
         }
       ],
       "rationale": "The first empty application initializes an invalid parent; repeat is silent. Children are not initialized."
@@ -156,6 +188,38 @@
         },
         {
           "path": "cycles.1.source.modified",
+          "equals": false
+        },
+        {
+          "path": "cycles.0.source.children.left.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.0.source.children.right.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.0.forward.children.left.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.0.forward.children.right.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.source.children.left.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.source.children.right.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.left.valid",
+          "equals": false
+        },
+        {
+          "path": "cycles.1.forward.children.right.valid",
           "equals": false
         }
       ],

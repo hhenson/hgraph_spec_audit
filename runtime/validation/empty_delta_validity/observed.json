@@ -119,6 +119,38 @@
           {
             "path": "cycles.1.source.modified",
             "status": "match"
+          },
+          {
+            "path": "cycles.0.source.children.0.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.children.1.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.children.0.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.children.1.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.children.0.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.children.1.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.children.0.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.children.1.valid",
+            "status": "match"
           }
         ],
         "initial_fixed_zero": [
@@ -208,6 +240,38 @@
           },
           {
             "path": "cycles.1.source.modified",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.children.left.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.children.right.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.children.left.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.children.right.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.children.left.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.children.right.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.children.left.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.children.right.valid",
             "status": "match"
           }
         ],
@@ -6379,6 +6443,38 @@
           {
             "path": "cycles.1.source.modified",
             "status": "match"
+          },
+          {
+            "path": "cycles.0.source.children.0.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.children.1.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.children.0.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.children.1.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.children.0.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.children.1.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.children.0.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.children.1.valid",
+            "status": "match"
           }
         ],
         "initial_fixed_zero": [
@@ -6468,6 +6564,38 @@
           },
           {
             "path": "cycles.1.source.modified",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.children.left.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.source.children.right.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.children.left.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.0.forward.children.right.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.children.left.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.source.children.right.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.children.left.valid",
+            "status": "match"
+          },
+          {
+            "path": "cycles.1.forward.children.right.valid",
             "status": "match"
           }
         ],
@@ -11972,7 +12100,7 @@
   },
   "harness_sha256": "9e044a8f71cadd9a3014eddff0b775465a51f2babd08b0562ab38d1f69177020",
   "identity_support_sha256": "c7d54b7dadcfd86fce648d4ddd5fd8decb64f7cf0e36a7700fb1195dfb3b7ead",
-  "measured_at": "2026-10-10T10:59:53.321733+00:00",
-  "reasoned_sha256": "fd99852de4240bde25bb1f164e24423c5aaedc051d897d9268688bdf4648b89e",
+  "measured_at": "2026-10-10T11:08:05.584702+00:00",
+  "reasoned_sha256": "c67d4091fd46745bc6980eab32f8e9072efc8a29a246945dfd94f2449dfc64eb",
   "repeats": 3
 }

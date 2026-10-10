@@ -69,6 +69,15 @@ def validate(evidence):
                 for item in o[side + '_notifications']:
                     assert item['step'] in cycles
                     assert boundary.equal(item['state'], cycles[item['step']])
+            for producer, cycle in zip(o['producer'], o['cycles']):
+                assert producer['step'] == cycle['step']
+                state = producer['state']
+                source = cycle['source']
+                for key in ('valid', 'publication', 'value', 'members', 'children'):
+                    if key in state or key in source:
+                        assert boundary.equal(state.get(key), source.get(key))
+                if state['valid']:
+                    assert state['modified'] == source['modified']
             raw = o['raw_eval_node']
             assert (isinstance(raw, list) if o['forward_events'] else raw is None)
             dense = [] if raw is None else list(raw)
