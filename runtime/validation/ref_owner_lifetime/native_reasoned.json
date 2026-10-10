@@ -1,0 +1,8 @@
+{
+  "written_before_measurement": true,
+  "owned_followed": [7, 8, 8, null, null, null],
+  "outer_owner_control_followed": [7, 8, 20, 21, 9, 10],
+  "reference_identity": {"same_endpoint": true, "distinct_equal_endpoints": false},
+  "bool_operations": {"false_before_true": true, "equal_false_hash": true},
+  "scope": "Direct installed SDK graph; stopped child producer versus surviving outer input, explicit REF result. Independent steps read only when target is valid. Identity equality never reads target contents. Bool ordering is a proposed scalar capability, measured before documenting."
+}
