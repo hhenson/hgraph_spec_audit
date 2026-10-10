@@ -8,7 +8,7 @@ snapshots and rolling arrival payloads keep their existing publication rules.
 
 [reasoned.json](reasoned.json) was frozen before execution. Eighteen cases
 cover initial application, repeated application, held values, revalidation
-after invalidation, and same-cycle set cancellation. Each reference engine
+after invalidation of a seeded valid endpoint, and same-cycle set cancellation. Each reference engine
 ran in three fresh processes. The recorded identities fingerprint the installed
 packages and native binaries; they do not establish a Git source revision.
 
@@ -34,7 +34,9 @@ not validation of the new compiler implementations.
 [observed.json](observed.json) retains producer and endpoint metadata,
 notifications, raw eval results, input horizons, independent dense adaptation,
 and every failed or unsupported surface. Empty payloads remain distinct from
-absent publications. Historical publication-boundary evidence is unchanged.
+absent publications. Historical publication-boundary evidence is unchanged. The initial unseeded
+revalidation records are retained in [history/initial-unseeded](history/initial-unseeded/README.md);
+the active fixed-list and struct cases seed a valid endpoint before invalidating it.
 
 ```sh
 python3 runtime/validation/empty_delta_validity/observe.py \
@@ -44,6 +46,7 @@ python3 -m unittest discover -s runtime/validation/empty_delta_validity
 ```
 
 The checker verifies identities, input hashes, state/publication consistency,
-event traces, dense horizons and recomputed assessments. Its corruption tests
+complete notification traces (including invalidations), raw-result presence,
+dense horizons and recomputed assessments. Its corruption tests
 reject masking a disagreement, inventing a tick, substituting silence for an
 empty payload, dropping an unsupported case and changing the reasoning hash.

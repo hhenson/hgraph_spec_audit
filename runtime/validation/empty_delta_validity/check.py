@@ -58,11 +58,19 @@ def validate(evidence):
                 assert o[side + '_events'] == [row['step'] for row in o['cycles']
                                              if row[side]['publication']['present']]
                 cycles = {row['step']: row[side] for row in o['cycles']}
+                previous_valid = False
+                expected_notifications = []
+                for row in o['cycles']:
+                    state = row[side]
+                    if state['publication']['present'] or (previous_valid and not state['valid']):
+                        expected_notifications.append(row['step'])
+                    previous_valid = state['valid']
+                assert [item['step'] for item in o[side + '_notifications']] == expected_notifications
                 for item in o[side + '_notifications']:
                     assert item['step'] in cycles
                     assert boundary.equal(item['state'], cycles[item['step']])
             raw = o['raw_eval_node']
-            assert raw is None or isinstance(raw, list)
+            assert (isinstance(raw, list) if o['forward_events'] else raw is None)
             dense = [] if raw is None else list(raw)
             padding = max(0, n - len(dense))
             assert o['input_horizon'] == n and o['padding_added'] == padding

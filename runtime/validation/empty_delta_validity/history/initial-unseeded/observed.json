@@ -249,16 +249,12 @@
         ],
         "revalidate_fixed": [
           {
-            "path": "cycles.0.source.valid",
-            "status": "match"
-          },
-          {
             "path": "source_events",
             "status": "divergence"
           },
           {
             "path": "forward_events",
-            "status": "match"
+            "status": "divergence"
           },
           {
             "path": "cycles.2.source.valid",
@@ -319,16 +315,12 @@
         ],
         "revalidate_struct": [
           {
-            "path": "cycles.0.source.valid",
-            "status": "match"
-          },
-          {
             "path": "source_events",
             "status": "divergence"
           },
           {
             "path": "forward_events",
-            "status": "match"
+            "status": "divergence"
           },
           {
             "path": "cycles.2.source.valid",
@@ -4562,64 +4554,50 @@
               "forward": {
                 "children": {
                   "0": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   },
                   "1": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
                   "0",
                   "1"
                 ],
-                "modified": true,
+                "modified": false,
                 "publication": {
-                  "payload": {
-                    "0": 10,
-                    "1": 20
-                  },
-                  "present": true
+                  "present": false
                 },
-                "valid": true,
-                "value": [
-                  10,
-                  20
-                ]
+                "valid": false,
+                "value": null
               },
               "source": {
                 "children": {
                   "0": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   },
                   "1": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
                   "0",
                   "1"
                 ],
-                "modified": true,
+                "modified": false,
                 "publication": {
-                  "payload": {
-                    "0": 10,
-                    "1": 20
-                  },
-                  "present": true
+                  "present": false
                 },
-                "valid": true,
-                "value": [
-                  10,
-                  20
-                ]
+                "valid": false,
+                "value": null
               },
               "step": 1
             },
@@ -4628,13 +4606,13 @@
                 "children": {
                   "0": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "1": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -4645,23 +4623,20 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
-                "value": [
-                  10,
-                  20
-                ]
+                "valid": false,
+                "value": null
               },
               "source": {
                 "children": {
                   "0": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "1": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -4672,11 +4647,8 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
-                "value": [
-                  10,
-                  20
-                ]
+                "valid": false,
+                "value": null
               },
               "step": 2
             },
@@ -4685,13 +4657,13 @@
                 "children": {
                   "0": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "1": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -4702,11 +4674,8 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
-                "value": [
-                  10,
-                  20
-                ]
+                "valid": false,
+                "value": null
               },
               "source": {
                 "children": {
@@ -4725,7 +4694,7 @@
                   "0",
                   "1"
                 ],
-                "modified": true,
+                "modified": false,
                 "publication": {
                   "present": false
                 },
@@ -4739,13 +4708,13 @@
                 "children": {
                   "0": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "1": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -4756,11 +4725,8 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
-                "value": [
-                  10,
-                  20
-                ]
+                "valid": false,
+                "value": null
               },
               "source": {
                 "children": {
@@ -4793,13 +4759,13 @@
                 "children": {
                   "0": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "1": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -4810,11 +4776,8 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
-                "value": [
-                  10,
-                  20
-                ]
+                "valid": false,
+                "value": null
               },
               "source": {
                 "children": {
@@ -4844,103 +4807,29 @@
             }
           ],
           "dense_from_input_horizon": [
-            {
-              "0": 10,
-              "1": 20
-            },
+            null,
             null,
             null,
             null,
             null
           ],
-          "forward_events": [
-            1
-          ],
-          "forward_notifications": [
-            {
-              "state": {
-                "children": {
-                  "0": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
-                  },
-                  "1": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
-                  }
-                },
-                "members": [
-                  "0",
-                  "1"
-                ],
-                "modified": true,
-                "publication": {
-                  "payload": {
-                    "0": 10,
-                    "1": 20
-                  },
-                  "present": true
-                },
-                "valid": true,
-                "value": [
-                  10,
-                  20
-                ]
-              },
-              "step": 1
-            }
-          ],
+          "forward_events": [],
+          "forward_notifications": [],
           "input_horizon": 5,
-          "padding_added": 0,
+          "padding_added": 5,
           "producer": [
             {
               "state": {
                 "children": {
                   "0": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
-                  },
-                  "1": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
-                  }
-                },
-                "members": [
-                  "0",
-                  "1"
-                ],
-                "modified": true,
-                "publication": {
-                  "payload": {
-                    "0": 10,
-                    "1": 20
-                  },
-                  "present": true
-                },
-                "valid": true,
-                "value": [
-                  10,
-                  20
-                ]
-              },
-              "step": 1
-            },
-            {
-              "state": {
-                "children": {
-                  "0": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "1": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -4951,11 +4840,35 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
-                "value": [
-                  10,
-                  20
-                ]
+                "valid": false,
+                "value": null
+              },
+              "step": 1
+            },
+            {
+              "state": {
+                "children": {
+                  "0": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  },
+                  "1": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  }
+                },
+                "members": [
+                  "0",
+                  "1"
+                ],
+                "modified": false,
+                "publication": {
+                  "present": false
+                },
+                "valid": false,
+                "value": null
               },
               "step": 2
             },
@@ -5041,82 +4954,9 @@
               "step": 5
             }
           ],
-          "raw_eval_node": [
-            {
-              "0": 10,
-              "1": 20
-            },
-            null,
-            null,
-            null,
-            null
-          ],
-          "source_events": [
-            1
-          ],
-          "source_notifications": [
-            {
-              "state": {
-                "children": {
-                  "0": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
-                  },
-                  "1": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
-                  }
-                },
-                "members": [
-                  "0",
-                  "1"
-                ],
-                "modified": true,
-                "publication": {
-                  "payload": {
-                    "0": 10,
-                    "1": 20
-                  },
-                  "present": true
-                },
-                "valid": true,
-                "value": [
-                  10,
-                  20
-                ]
-              },
-              "step": 1
-            },
-            {
-              "state": {
-                "children": {
-                  "0": {
-                    "modified": false,
-                    "valid": false,
-                    "value": null
-                  },
-                  "1": {
-                    "modified": false,
-                    "valid": false,
-                    "value": null
-                  }
-                },
-                "members": [
-                  "0",
-                  "1"
-                ],
-                "modified": true,
-                "publication": {
-                  "present": false
-                },
-                "valid": false,
-                "value": null
-              },
-              "step": 3
-            }
-          ]
+          "raw_eval_node": null,
+          "source_events": [],
+          "source_notifications": []
         },
         "revalidate_map": {
           "capability": "supported",
@@ -5703,64 +5543,50 @@
               "forward": {
                 "children": {
                   "left": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   },
                   "right": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
                   "left",
                   "right"
                 ],
-                "modified": true,
+                "modified": false,
                 "publication": {
-                  "payload": {
-                    "left": 10,
-                    "right": 20
-                  },
-                  "present": true
+                  "present": false
                 },
-                "valid": true,
-                "value": {
-                  "left": 10,
-                  "right": 20
-                }
+                "valid": false,
+                "value": null
               },
               "source": {
                 "children": {
                   "left": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   },
                   "right": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
                   "left",
                   "right"
                 ],
-                "modified": true,
+                "modified": false,
                 "publication": {
-                  "payload": {
-                    "left": 10,
-                    "right": 20
-                  },
-                  "present": true
+                  "present": false
                 },
-                "valid": true,
-                "value": {
-                  "left": 10,
-                  "right": 20
-                }
+                "valid": false,
+                "value": null
               },
               "step": 1
             },
@@ -5769,13 +5595,13 @@
                 "children": {
                   "left": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "right": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -5786,23 +5612,20 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
-                "value": {
-                  "left": 10,
-                  "right": 20
-                }
+                "valid": false,
+                "value": null
               },
               "source": {
                 "children": {
                   "left": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "right": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -5813,11 +5636,8 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
-                "value": {
-                  "left": 10,
-                  "right": 20
-                }
+                "valid": false,
+                "value": null
               },
               "step": 2
             },
@@ -5826,13 +5646,13 @@
                 "children": {
                   "left": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "right": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -5843,11 +5663,8 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
-                "value": {
-                  "left": 10,
-                  "right": 20
-                }
+                "valid": false,
+                "value": null
               },
               "source": {
                 "children": {
@@ -5866,7 +5683,7 @@
                   "left",
                   "right"
                 ],
-                "modified": true,
+                "modified": false,
                 "publication": {
                   "present": false
                 },
@@ -5880,13 +5697,13 @@
                 "children": {
                   "left": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "right": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -5897,11 +5714,8 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
-                "value": {
-                  "left": 10,
-                  "right": 20
-                }
+                "valid": false,
+                "value": null
               },
               "source": {
                 "children": {
@@ -5934,13 +5748,13 @@
                 "children": {
                   "left": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "right": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -5951,11 +5765,8 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
-                "value": {
-                  "left": 10,
-                  "right": 20
-                }
+                "valid": false,
+                "value": null
               },
               "source": {
                 "children": {
@@ -5985,103 +5796,29 @@
             }
           ],
           "dense_from_input_horizon": [
-            {
-              "left": 10,
-              "right": 20
-            },
+            null,
             null,
             null,
             null,
             null
           ],
-          "forward_events": [
-            1
-          ],
-          "forward_notifications": [
-            {
-              "state": {
-                "children": {
-                  "left": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
-                  },
-                  "right": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
-                  }
-                },
-                "members": [
-                  "left",
-                  "right"
-                ],
-                "modified": true,
-                "publication": {
-                  "payload": {
-                    "left": 10,
-                    "right": 20
-                  },
-                  "present": true
-                },
-                "valid": true,
-                "value": {
-                  "left": 10,
-                  "right": 20
-                }
-              },
-              "step": 1
-            }
-          ],
+          "forward_events": [],
+          "forward_notifications": [],
           "input_horizon": 5,
-          "padding_added": 0,
+          "padding_added": 5,
           "producer": [
             {
               "state": {
                 "children": {
                   "left": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
-                  },
-                  "right": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
-                  }
-                },
-                "members": [
-                  "left",
-                  "right"
-                ],
-                "modified": true,
-                "publication": {
-                  "payload": {
-                    "left": 10,
-                    "right": 20
-                  },
-                  "present": true
-                },
-                "valid": true,
-                "value": {
-                  "left": 10,
-                  "right": 20
-                }
-              },
-              "step": 1
-            },
-            {
-              "state": {
-                "children": {
-                  "left": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "right": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -6092,11 +5829,35 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
-                "value": {
-                  "left": 10,
-                  "right": 20
-                }
+                "valid": false,
+                "value": null
+              },
+              "step": 1
+            },
+            {
+              "state": {
+                "children": {
+                  "left": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  },
+                  "right": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  }
+                },
+                "members": [
+                  "left",
+                  "right"
+                ],
+                "modified": false,
+                "publication": {
+                  "present": false
+                },
+                "valid": false,
+                "value": null
               },
               "step": 2
             },
@@ -6182,82 +5943,9 @@
               "step": 5
             }
           ],
-          "raw_eval_node": [
-            {
-              "left": 10,
-              "right": 20
-            },
-            null,
-            null,
-            null,
-            null
-          ],
-          "source_events": [
-            1
-          ],
-          "source_notifications": [
-            {
-              "state": {
-                "children": {
-                  "left": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
-                  },
-                  "right": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
-                  }
-                },
-                "members": [
-                  "left",
-                  "right"
-                ],
-                "modified": true,
-                "publication": {
-                  "payload": {
-                    "left": 10,
-                    "right": 20
-                  },
-                  "present": true
-                },
-                "valid": true,
-                "value": {
-                  "left": 10,
-                  "right": 20
-                }
-              },
-              "step": 1
-            },
-            {
-              "state": {
-                "children": {
-                  "left": {
-                    "modified": false,
-                    "valid": false,
-                    "value": null
-                  },
-                  "right": {
-                    "modified": false,
-                    "valid": false,
-                    "value": null
-                  }
-                },
-                "members": [
-                  "left",
-                  "right"
-                ],
-                "modified": true,
-                "publication": {
-                  "present": false
-                },
-                "valid": false,
-                "value": null
-              },
-              "step": 3
-            }
-          ]
+          "raw_eval_node": null,
+          "source_events": [],
+          "source_notifications": []
         }
       }
     },
@@ -6509,24 +6197,20 @@
         ],
         "revalidate_fixed": [
           {
-            "path": "cycles.0.source.valid",
-            "status": "match"
-          },
-          {
             "path": "source_events",
             "status": "divergence"
           },
           {
             "path": "forward_events",
-            "status": "match"
-          },
-          {
-            "path": "cycles.2.source.valid",
             "status": "divergence"
           },
           {
-            "path": "cycles.3.source.valid",
+            "path": "cycles.2.source.valid",
             "status": "match"
+          },
+          {
+            "path": "cycles.3.source.valid",
+            "status": "divergence"
           },
           {
             "path": "cycles.3.source.modified",
@@ -6579,28 +6263,24 @@
         ],
         "revalidate_struct": [
           {
-            "path": "cycles.0.source.valid",
-            "status": "match"
-          },
-          {
             "path": "source_events",
             "status": "divergence"
           },
           {
             "path": "forward_events",
-            "status": "match"
+            "status": "divergence"
           },
           {
             "path": "cycles.2.source.valid",
-            "status": "unobservable"
+            "status": "match"
           },
           {
             "path": "cycles.3.source.valid",
-            "status": "unobservable"
+            "status": "divergence"
           },
           {
             "path": "cycles.3.source.modified",
-            "status": "unobservable"
+            "status": "divergence"
           }
         ]
       },
@@ -10568,63 +10248,55 @@
               "forward": {
                 "children": {
                   "0": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   },
                   "1": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
                   "0",
                   "1"
                 ],
-                "modified": true,
+                "modified": false,
                 "publication": {
-                  "payload": {
-                    "0": 10,
-                    "1": 20
-                  },
-                  "present": true
+                  "present": false
                 },
-                "valid": true,
+                "valid": false,
                 "value": [
-                  10,
-                  20
+                  null,
+                  null
                 ]
               },
               "source": {
                 "children": {
                   "0": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   },
                   "1": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
                   "0",
                   "1"
                 ],
-                "modified": true,
+                "modified": false,
                 "publication": {
-                  "payload": {
-                    "0": 10,
-                    "1": 20
-                  },
-                  "present": true
+                  "present": false
                 },
-                "valid": true,
+                "valid": false,
                 "value": [
-                  10,
-                  20
+                  null,
+                  null
                 ]
               },
               "step": 1
@@ -10634,13 +10306,13 @@
                 "children": {
                   "0": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "1": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -10651,23 +10323,23 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
+                "valid": false,
                 "value": [
-                  10,
-                  20
+                  null,
+                  null
                 ]
               },
               "source": {
                 "children": {
                   "0": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "1": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -10678,10 +10350,10 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
+                "valid": false,
                 "value": [
-                  10,
-                  20
+                  null,
+                  null
                 ]
               },
               "step": 2
@@ -10691,13 +10363,13 @@
                 "children": {
                   "0": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "1": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -10708,10 +10380,10 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
+                "valid": false,
                 "value": [
-                  10,
-                  20
+                  null,
+                  null
                 ]
               },
               "source": {
@@ -10735,7 +10407,7 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
+                "valid": false,
                 "value": [
                   null,
                   null
@@ -10748,13 +10420,13 @@
                 "children": {
                   "0": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "1": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -10765,10 +10437,10 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
+                "valid": false,
                 "value": [
-                  10,
-                  20
+                  null,
+                  null
                 ]
               },
               "source": {
@@ -10792,7 +10464,7 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
+                "valid": false,
                 "value": [
                   null,
                   null
@@ -10805,13 +10477,13 @@
                 "children": {
                   "0": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "1": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -10822,10 +10494,10 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
+                "valid": false,
                 "value": [
-                  10,
-                  20
+                  null,
+                  null
                 ]
               },
               "source": {
@@ -10849,7 +10521,7 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
+                "valid": false,
                 "value": [
                   null,
                   null
@@ -10859,103 +10531,29 @@
             }
           ],
           "dense_from_input_horizon": [
-            {
-              "0": 10,
-              "1": 20
-            },
+            null,
             null,
             null,
             null,
             null
           ],
-          "forward_events": [
-            1
-          ],
-          "forward_notifications": [
-            {
-              "state": {
-                "children": {
-                  "0": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
-                  },
-                  "1": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
-                  }
-                },
-                "members": [
-                  "0",
-                  "1"
-                ],
-                "modified": true,
-                "publication": {
-                  "payload": {
-                    "0": 10,
-                    "1": 20
-                  },
-                  "present": true
-                },
-                "valid": true,
-                "value": [
-                  10,
-                  20
-                ]
-              },
-              "step": 1
-            }
-          ],
+          "forward_events": [],
+          "forward_notifications": [],
           "input_horizon": 5,
-          "padding_added": 0,
+          "padding_added": 5,
           "producer": [
             {
               "state": {
                 "children": {
                   "0": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
-                  },
-                  "1": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
-                  }
-                },
-                "members": [
-                  "0",
-                  "1"
-                ],
-                "modified": true,
-                "publication": {
-                  "payload": {
-                    "0": 10,
-                    "1": 20
-                  },
-                  "present": true
-                },
-                "valid": true,
-                "value": [
-                  10,
-                  20
-                ]
-              },
-              "step": 1
-            },
-            {
-              "state": {
-                "children": {
-                  "0": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "1": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -10966,10 +10564,40 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
+                "valid": false,
                 "value": [
-                  10,
-                  20
+                  null,
+                  null
+                ]
+              },
+              "step": 1
+            },
+            {
+              "state": {
+                "children": {
+                  "0": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  },
+                  "1": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  }
+                },
+                "members": [
+                  "0",
+                  "1"
+                ],
+                "modified": false,
+                "publication": {
+                  "present": false
+                },
+                "valid": false,
+                "value": [
+                  null,
+                  null
                 ]
               },
               "step": 2
@@ -10996,7 +10624,7 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
+                "valid": false,
                 "value": [
                   null,
                   null
@@ -11026,7 +10654,7 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
+                "valid": false,
                 "value": [
                   null,
                   null
@@ -11056,7 +10684,7 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
+                "valid": false,
                 "value": [
                   null,
                   null
@@ -11065,55 +10693,9 @@
               "step": 5
             }
           ],
-          "raw_eval_node": [
-            {
-              "0": 10,
-              "1": 20
-            },
-            null,
-            null,
-            null,
-            null
-          ],
-          "source_events": [
-            1
-          ],
-          "source_notifications": [
-            {
-              "state": {
-                "children": {
-                  "0": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
-                  },
-                  "1": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
-                  }
-                },
-                "members": [
-                  "0",
-                  "1"
-                ],
-                "modified": true,
-                "publication": {
-                  "payload": {
-                    "0": 10,
-                    "1": 20
-                  },
-                  "present": true
-                },
-                "valid": true,
-                "value": [
-                  10,
-                  20
-                ]
-              },
-              "step": 1
-            }
-          ]
+          "raw_eval_node": null,
+          "source_events": [],
+          "source_notifications": []
         },
         "revalidate_map": {
           "capability": "supported",
@@ -11694,70 +11276,56 @@
           ]
         },
         "revalidate_struct": {
-          "capability": "error",
+          "capability": "supported",
           "cycles": [
             {
               "forward": {
                 "children": {
                   "left": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   },
                   "right": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
                   "left",
                   "right"
                 ],
-                "modified": true,
+                "modified": false,
                 "publication": {
-                  "payload": {
-                    "left": 10,
-                    "right": 20
-                  },
-                  "present": true
+                  "present": false
                 },
-                "valid": true,
-                "value": {
-                  "left": 10,
-                  "right": 20
-                }
+                "valid": false,
+                "value": {}
               },
               "source": {
                 "children": {
                   "left": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   },
                   "right": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
                   "left",
                   "right"
                 ],
-                "modified": true,
+                "modified": false,
                 "publication": {
-                  "payload": {
-                    "left": 10,
-                    "right": 20
-                  },
-                  "present": true
+                  "present": false
                 },
-                "valid": true,
-                "value": {
-                  "left": 10,
-                  "right": 20
-                }
+                "valid": false,
+                "value": {}
               },
               "step": 1
             },
@@ -11766,13 +11334,13 @@
                 "children": {
                   "left": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "right": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -11783,23 +11351,20 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
-                "value": {
-                  "left": 10,
-                  "right": 20
-                }
+                "valid": false,
+                "value": {}
               },
               "source": {
                 "children": {
                   "left": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "right": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -11810,89 +11375,201 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
-                "value": {
-                  "left": 10,
-                  "right": 20
-                }
+                "valid": false,
+                "value": {}
               },
               "step": 2
-            }
-          ],
-          "error": "produce(step: TS[int], _output: OUT) -> TSB[Pair]labelled source at eval_node_graph.target :: During evaluation\nNodeError: 'PythonTimeSeriesBundleOutput' object has no attribute '_ts_value'\nStack trace:\nTraceback (most recent call last):\n  File \"<private-path>\", line 271, in evaluate_graph\n    node.eval()\n    ~~~~~~~~~^^\n  File \"<private-path>\", line 227, in eval\n    self.do_eval()\n    ~~~~~~~~~~~~^^\n  File \"<private-path>\", line 306, in do_eval\n    out = self.eval_fn(**self._kwargs)\n  File \"<private-path>\", line 84, in produce\n    elif action == 'invalidate': _output.invalidate()\n                                 ~~~~~~~~~~~~~~~~~~^^\n  File \"<private-path>\", line 90, in invalidate\n    self.mark_invalid()\n    ~~~~~~~~~~~~~~~~~^^\n  File \"<private-path>\", line 130, in mark_invalid\n    for v in self._ts_value.values():\n             ^^^^^^^^^^^^^^\n  File \"<private-path>\", line 436, in __getattr__\n    return super().__getattribute__(item)\n           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\nAttributeError: 'PythonTimeSeriesBundleOutput' object has no attribute '_ts_value'. Did you mean: '_ts_values'?\nActivation Back Trace:\neval_node_graph.target.source<1>: produce(*step*)\nstep:\n  eval_node_graph.replay_from_memory<0>: replay_from_memory(key, tp, is_operator, recordable_id)\n",
-          "error_type": "NodeException",
-          "forward_events": [
-            1
-          ],
-          "forward_notifications": [
+            },
             {
-              "state": {
+              "forward": {
                 "children": {
                   "left": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   },
                   "right": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
                   "left",
                   "right"
                 ],
-                "modified": true,
+                "modified": false,
                 "publication": {
-                  "payload": {
-                    "left": 10,
-                    "right": 20
-                  },
-                  "present": true
+                  "present": false
                 },
-                "valid": true,
-                "value": {
-                  "left": 10,
-                  "right": 20
-                }
+                "valid": false,
+                "value": {}
               },
-              "step": 1
+              "source": {
+                "children": {
+                  "left": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  },
+                  "right": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  }
+                },
+                "members": [
+                  "left",
+                  "right"
+                ],
+                "modified": false,
+                "publication": {
+                  "present": false
+                },
+                "valid": false,
+                "value": {}
+              },
+              "step": 3
+            },
+            {
+              "forward": {
+                "children": {
+                  "left": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  },
+                  "right": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  }
+                },
+                "members": [
+                  "left",
+                  "right"
+                ],
+                "modified": false,
+                "publication": {
+                  "present": false
+                },
+                "valid": false,
+                "value": {}
+              },
+              "source": {
+                "children": {
+                  "left": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  },
+                  "right": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  }
+                },
+                "members": [
+                  "left",
+                  "right"
+                ],
+                "modified": false,
+                "publication": {
+                  "present": false
+                },
+                "valid": false,
+                "value": {}
+              },
+              "step": 4
+            },
+            {
+              "forward": {
+                "children": {
+                  "left": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  },
+                  "right": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  }
+                },
+                "members": [
+                  "left",
+                  "right"
+                ],
+                "modified": false,
+                "publication": {
+                  "present": false
+                },
+                "valid": false,
+                "value": {}
+              },
+              "source": {
+                "children": {
+                  "left": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  },
+                  "right": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  }
+                },
+                "members": [
+                  "left",
+                  "right"
+                ],
+                "modified": false,
+                "publication": {
+                  "present": false
+                },
+                "valid": false,
+                "value": {}
+              },
+              "step": 5
             }
           ],
-          "phase": "eval_node",
+          "dense_from_input_horizon": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "forward_events": [],
+          "forward_notifications": [],
+          "input_horizon": 5,
+          "padding_added": 5,
           "producer": [
             {
               "state": {
                 "children": {
                   "left": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   },
                   "right": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
                   "left",
                   "right"
                 ],
-                "modified": true,
+                "modified": false,
                 "publication": {
-                  "payload": {
-                    "left": 10,
-                    "right": 20
-                  },
-                  "present": true
+                  "present": false
                 },
-                "valid": true,
-                "value": {
-                  "left": 10,
-                  "right": 20
-                }
+                "valid": false,
+                "value": {}
               },
               "step": 1
             },
@@ -11901,13 +11578,13 @@
                 "children": {
                   "left": {
                     "modified": false,
-                    "valid": true,
-                    "value": 10
+                    "valid": false,
+                    "value": null
                   },
                   "right": {
                     "modified": false,
-                    "valid": true,
-                    "value": 20
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
@@ -11918,61 +11595,103 @@
                 "publication": {
                   "present": false
                 },
-                "valid": true,
-                "value": {
-                  "left": 10,
-                  "right": 20
-                }
+                "valid": false,
+                "value": {}
               },
               "step": 2
-            }
-          ],
-          "source_events": [
-            1
-          ],
-          "source_notifications": [
+            },
             {
               "state": {
                 "children": {
                   "left": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 10
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   },
                   "right": {
-                    "modified": true,
-                    "valid": true,
-                    "value": 20
+                    "modified": false,
+                    "valid": false,
+                    "value": null
                   }
                 },
                 "members": [
                   "left",
                   "right"
                 ],
-                "modified": true,
+                "modified": false,
                 "publication": {
-                  "payload": {
-                    "left": 10,
-                    "right": 20
-                  },
-                  "present": true
+                  "present": false
                 },
-                "valid": true,
-                "value": {
-                  "left": 10,
-                  "right": 20
-                }
+                "valid": false,
+                "value": {}
               },
-              "step": 1
+              "step": 3
+            },
+            {
+              "state": {
+                "children": {
+                  "left": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  },
+                  "right": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  }
+                },
+                "members": [
+                  "left",
+                  "right"
+                ],
+                "modified": false,
+                "publication": {
+                  "present": false
+                },
+                "valid": false,
+                "value": {}
+              },
+              "step": 4
+            },
+            {
+              "state": {
+                "children": {
+                  "left": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  },
+                  "right": {
+                    "modified": false,
+                    "valid": false,
+                    "value": null
+                  }
+                },
+                "members": [
+                  "left",
+                  "right"
+                ],
+                "modified": false,
+                "publication": {
+                  "present": false
+                },
+                "valid": false,
+                "value": {}
+              },
+              "step": 5
             }
-          ]
+          ],
+          "raw_eval_node": null,
+          "source_events": [],
+          "source_notifications": []
         }
       }
     }
   },
   "harness_sha256": "9e044a8f71cadd9a3014eddff0b775465a51f2babd08b0562ab38d1f69177020",
   "identity_support_sha256": "c7d54b7dadcfd86fce648d4ddd5fd8decb64f7cf0e36a7700fb1195dfb3b7ead",
-  "measured_at": "2026-10-10T10:59:53.321733+00:00",
-  "reasoned_sha256": "fd99852de4240bde25bb1f164e24423c5aaedc051d897d9268688bdf4648b89e",
+  "measured_at": "2026-10-10T10:22:34.123516+00:00",
+  "reasoned_sha256": "f5090f065bc65d84f797c43938e66afef2e950691f57993a226bc7f63f09dde9",
   "repeats": 3
 }

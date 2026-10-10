@@ -504,17 +504,13 @@
       "id": "revalidate_fixed",
       "shape": "fixed",
       "actions": [
-        "seed",
+        "empty",
         "idle",
         "invalidate",
         "empty",
         "empty"
       ],
       "expectations": [
-        {
-          "path": "cycles.0.source.valid",
-          "equals": true
-        },
         {
           "path": "source_events",
           "equals": [
@@ -541,23 +537,19 @@
           "equals": true
         }
       ],
-      "rationale": "Seed a valid populated source before invalidation. Empty application must then revalidate it without initializing children. Publication-only forwarding retains its already-valid value and suppresses the empty application."
+      "rationale": "After explicit source invalidation, empty application revalidates it. Publication-only forwarding does not invalidate its already-valid output, so the second empty application there is silent."
     },
     {
       "id": "revalidate_struct",
       "shape": "struct",
       "actions": [
-        "seed",
+        "empty",
         "idle",
         "invalidate",
         "empty",
         "empty"
       ],
       "expectations": [
-        {
-          "path": "cycles.0.source.valid",
-          "equals": true
-        },
         {
           "path": "source_events",
           "equals": [
@@ -584,7 +576,7 @@
           "equals": true
         }
       ],
-      "rationale": "Seed a valid populated source before invalidation. Empty application must then revalidate it without initializing children. Publication-only forwarding retains its already-valid value and suppresses the empty application."
+      "rationale": "After explicit source invalidation, empty application revalidates it. Publication-only forwarding does not invalidate its already-valid output, so the second empty application there is silent."
     },
     {
       "id": "cancel_set",

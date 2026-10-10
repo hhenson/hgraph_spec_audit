@@ -52,6 +52,26 @@ class EvidenceTests(unittest.TestCase):
                     validate(self.data)
                 self.data['engines']['cpp']['observations']['initial_set'][side + '_notifications'] = original
 
+    def test_missing_invalidation_notification(self):
+        for name in ('python', 'cpp'):
+            with self.subTest(engine=name):
+                o = self.data['engines'][name]['observations']['revalidate_set']
+                original = o['source_notifications']
+                o['source_notifications'] = [n for n in original if n['step'] != 3]
+                with self.assertRaises(AssertionError):
+                    validate(self.data)
+                o['source_notifications'] = original
+
+    def test_null_raw_replaced_by_empty_list(self):
+        for name in ('python', 'cpp'):
+            with self.subTest(engine=name):
+                o = self.data['engines'][name]['observations']['initial_fixed']
+                self.assertIsNone(o['raw_eval_node'])
+                o['raw_eval_node'] = []
+                with self.assertRaises(AssertionError):
+                    validate(self.data)
+                o['raw_eval_node'] = None
+
     def test_changed_notification_payload(self):
         self.data['engines']['python']['observations']['initial_set']['source_notifications'][0]['state']['publication']['payload'] = {'added': [7], 'removed': []}
         with self.assertRaises(AssertionError):
