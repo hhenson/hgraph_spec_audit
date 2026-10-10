@@ -20,13 +20,14 @@ packages and native binaries; they do not establish a Git source revision.
 | Initial empty struct | No tick; remains invalid | Same |
 | Empty application after a populated value | Silent; held value retained | Same |
 | Empty after invalidating a set or map | Source revalidates and ticks; valid pass-through destination stays silent | Same |
-| Empty after invalidating a fixed list or struct | Source remains invalid | Same |
+| Invalidate a populated fixed list, then apply empty | Invalidation leaves the source valid; empty applications are silent | Source becomes invalid and remains invalid after empty |
+| Invalidate a populated struct, then apply empty | Invalidation raises a recorded `NodeException` | Source becomes invalid and remains invalid after empty |
 | Add then remove the same set member in each cycle | Producer ticks twice; pass-through records only the first empty application | Same |
 | Structural tuple | No public `TST` authoring marker | Same |
 | Populate a growing list through the tested public adapter | Authoring error | Supported |
 
-The list and struct initialization/revalidation differences are retained as
-differences from the accepted rule. Unsupported tuple authoring is not evidence
+The list and struct initialization differences, C++ revalidation differences,
+and Python invalidation limitations are retained against the accepted rule. Unsupported tuple authoring is not evidence
 about atomic tuples or compiled HGL structural tuples. The growing-list Python
 error is not converted to silence. These are public reference observations,
 not validation of the new compiler implementations.
