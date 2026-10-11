@@ -74,6 +74,11 @@ def check_native_provenance(native):
               'lib/cmake/hgraph/hgraphConfig.cmake',
               'lib/libhgraph_stdlib.a','lib/libhgraph_wiring.a','lib/libhgraph_runtime.a'}
     assert required<=set(native['sdk_files_sha256'])
+    selected=native['selected_sdk_headers_sha256']
+    manifest(selected)
+    assert {name for name in required if name.startswith('include/')}<=set(selected)
+    assert all(name.startswith('include/hgraph/') and value==native['sdk_files_sha256'].get(name)
+               for name,value in selected.items())
     assert native['support_sha256']=={'fixed/native_loaded_libraries.h':sha(HERE.parent/'fixed/native_loaded_libraries.h')}
     assert native['target_name']=='ref_owner_lifetime_native'
     artifact=Path(native['target_artifact'])

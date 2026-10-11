@@ -259,6 +259,21 @@ class RecordedEvidence(unittest.TestCase):
             native=copy.deepcopy(self.native)
             native[field]='changed'
             with self.subTest(field=field),self.assertRaises(AssertionError): check.check(self.public,native)
+    def test_selected_sdk_header_manifest_required_even_when_resealed(self):
+        native=copy.deepcopy(self.native)
+        del native['selected_sdk_headers_sha256']
+        self.reseal(native)
+        with self.assertRaises(KeyError): check.check(self.public,native)
+        for value in ({},{'foreign/hgraph/types/static_node.h':'0'*64},
+                      {'include/hgraph/types/static_node.h':'0'*64}):
+            native=copy.deepcopy(self.native)
+            native['selected_sdk_headers_sha256']=value
+            self.reseal(native)
+            with self.subTest(value=value),self.assertRaises(AssertionError): check.check(self.public,native)
+        native=copy.deepcopy(self.native)
+        native['selected_sdk_headers_sha256']['include/hgraph/types/static_node.h']='0'*64
+        self.reseal(native)
+        with self.assertRaises(AssertionError): check.check(self.public,native)
     def reseal(self,native):
         content={k:v for k,v in native.items() if k!='measurement_sha256'}
         native['measurement_sha256']=hashlib.sha256(json.dumps(content,sort_keys=True,separators=(',',':')).encode()).hexdigest()

@@ -57,6 +57,17 @@ SDK manifests, executable/compiler hashes, build metadata and observations are
 sealed together; the checker requires hexadecimal fingerprints and the SDK
 artifacts used by this probe. Fresh native measurements reproduce the original
 owner-expiry divergence with the same frozen SDK.
+Before and after its clean build, the recorder preprocesses the selected source
+with the configured command's include/definition options, response files and
+inherited environment. Compiler line directives identify every selected
+`hgraph` header; a same-named foreign header is rejected, and the selected SDK
+header hashes are sealed into the capture and checked against the SDK manifest.
+This handles [GCC's search ordering](https://gcc.gnu.org/onlinedocs/gcc/Directory-Options.html)
+without assuming that an earlier `-isystem` wins over `-I`. GNU-style
+preprocessing and [MSVC `/E` line directives](https://learn.microsoft.com/en-us/cpp/build/reference/e-preprocess-to-stdout)
+are supported; missing or unsuccessful header lookup cannot certify a build.
+Legitimate dependency directories remain admitted when the compiler selects
+the measured SDK's headers.
 
 Run the evidence-only checker with `python check.py`; run its corruption tests
 with `python -m unittest discover -s . -p test_check.py`. Measurement scripts
@@ -80,3 +91,6 @@ in [the archive](archive/pre-repeat-fingerprints/observed.json), including the
 Fresh repeats use matching installed runtime/SDK identities and preserve the
 Python partial failure and the C++ owner-expiry divergence. Isolated native
 build paths may change build metadata without changing the frozen SDK.
+The native capture and recorder before selected-header validation, together
+with their build helper, remain unchanged in
+[their archive](archive/pre-selected-headers/native_observed.json).

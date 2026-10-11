@@ -1,6 +1,8 @@
 """Bind the probe to its configured target, SDK and selected compile command."""
 import json
+import hashlib
 from pathlib import Path
+import re
 import shlex
 import subprocess
 
@@ -14,13 +16,16 @@ def cache_values(build_dir):
 
 def include_paths(command):
     paths = []
+    separate=('-I','-isystem','-iquote','-idirafter','--include-directory','--include-directory-after','/I','/external:I')
+    joined=('--include-directory-after=','--include-directory=','-isystem','-iquote','-idirafter','/external:I','-I','/I')
     for index, argument in enumerate(command):
-        if argument in ('-I', '-isystem') and index+1 < len(command):
+        if argument in separate and index+1 < len(command):
             paths.append(command[index+1])
-        elif argument.startswith('-I') and argument != '-I':
-            paths.append(argument[2:])
-        elif argument.startswith('-isystem') and argument != '-isystem':
-            paths.append(argument[len('-isystem'):])
+        else:
+            for prefix in joined:
+                if argument.startswith(prefix) and argument!=prefix:
+                    paths.append(argument[len(prefix):])
+                    break
     return paths
 
 def command_configuration(entry, command):
@@ -39,7 +44,7 @@ def command_configuration(entry, command):
     return next(iter(clues), None)
 
 
-def compile_command(build_dir, source, sdk_include, configuration=None):
+def compile_command(build_dir, source, sdk_include, configuration=None, redact_paths=True):
     """Read exactly one command for the source and selected configuration."""
     entries = json.loads((build_dir / 'compile_commands.json').read_text())
     cache = cache_values(build_dir) if (build_dir/'CMakeCache.txt').is_file() else {}
@@ -67,7 +72,54 @@ def compile_command(build_dir, source, sdk_include, configuration=None):
         return argument
     if not any((Path(directory) / include).resolve()==sdk_include.resolve() for include in include_paths(command)):
         raise ValueError('Probe compile command does not use supplied SDK headers')
+    if not redact_paths:
+        return command,Path(directory)
     return [redact(argument) for argument in command]
+
+def selected_sdk_headers(build_dir,source,sdk_include,configuration=None):
+    """Ask the selected compiler which SDK headers its actual lookup chooses.
+
+    Preprocessing retains the command's flags, response files and inherited
+    environment. Line directives work for GCC/Clang and MSVC without parsing
+    localized diagnostics or guessing the ordering of -I and -isystem.
+    """
+    command,directory=compile_command(build_dir,source,sdk_include,configuration,redact_paths=False)
+    msvc=any(Path(arg).name.lower() in {'cl','cl.exe','clang-cl','clang-cl.exe'} for arg in command[:3]) or '--driver-mode=cl' in command
+    options=[]
+    index=0
+    while index<len(command):
+        argument=command[index]
+        if argument in ('-o','/Fo'):
+            index+=2
+            continue
+        if argument in ('-c','/c') or argument.startswith('/Fo'):
+            index+=1
+            continue
+        options.append(argument)
+        index+=1
+    preprocess=[*options,*(['/E'] if msvc else ['-E','-o','-'])]
+    result=subprocess.run(preprocess,cwd=directory,capture_output=True,text=True,timeout=120)
+    if result.returncode!=0:
+        raise ValueError('Selected compile command could not establish header lookup')
+    expected={p.relative_to(sdk_include).as_posix():p.resolve() for p in (sdk_include/'hgraph').rglob('*') if p.is_file()}
+    selected={}
+    for match in re.finditer(r'^\s*#\s*(?:line\s+)?\d+\s+("(?:[^"\\]|\\.)*")',result.stdout,re.MULTILINE):
+        name=json.loads(match.group(1))
+        if name.startswith('<'): continue
+        path=(directory/name).resolve()
+        parts=path.parts
+        for index,part in enumerate(parts):
+            if part!='hgraph': continue
+            relative=Path(*parts[index:]).as_posix()
+            if relative not in expected: continue
+            if path!=expected[relative]:
+                raise ValueError('Foreign headers shadow the supplied SDK: '+relative)
+            selected['include/'+relative]=hashlib.sha256(path.read_bytes()).hexdigest()
+    direct={'include/hgraph/lib/testing/eval_node.h','include/hgraph/lib/std/std_operators.h',
+            'include/hgraph/lib/std/std_nodes.h','include/hgraph/types/static_node.h'}
+    if not direct<=set(selected):
+        raise ValueError('Selected compiler did not report every direct SDK header')
+    return selected
 
 
 def target_artifact(build_dir, executable):

@@ -8,8 +8,9 @@ import time
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
-from build_identity import prepare_executable, sdk_binding
+from build_identity import prepare_executable, sdk_binding, selected_sdk_headers, include_paths
 
 HERE = Path(__file__).resolve().parent
 
@@ -126,6 +127,78 @@ class BuildIdentityTests(unittest.TestCase):
                          'arguments': ['c++', '-c', 'other.cpp']})
         path.write_text(json.dumps(commands))
         self.assertEqual(sdk_binding(self.build, artifact, self.sdk)[0], artifact)
+
+    def headers(self,root):
+        for name in ('lib/testing/eval_node.h','lib/std/std_operators.h','lib/std/std_nodes.h','types/static_node.h'):
+            path=root/'hgraph'/name
+            path.parent.mkdir(parents=True,exist_ok=True)
+            path.write_text('#pragma once\n// '+name+'\n')
+
+    @unittest.skipUnless(shutil.which('c++'),'C++ preprocessor required')
+    def test_real_preprocessor_rejects_foreign_sdk_I_before_intended_isystem(self):
+        self.configure()
+        self.headers(self.sdk/'include')
+        foreign=self.root/'foreign sdk/include'
+        self.headers(foreign)
+        path=self.build/'compile_commands.json'
+        original=json.loads(path.read_text())
+        response=self.build/'includes.rsp'
+        response.write_text('-I"'+str(foreign)+'"\n')
+        for added in (['-I'+str(foreign)],['-I',str(foreign)],['--include-directory='+str(foreign)],['@'+str(response)]):
+            commands=json.loads(json.dumps(original))
+            commands[0]['arguments'][1:2]=['-isystem',str(self.sdk/'include'),*added]
+            path.write_text(json.dumps(commands))
+            # The intended SDK appears first in argv, but -I still wins.
+            with self.subTest(added=added),self.assertRaisesRegex(ValueError,'shadow'):
+                selected_sdk_headers(self.build,HERE/'native.cpp',self.sdk/'include','Release')
+
+    @unittest.skipUnless(shutil.which('c++'),'C++ preprocessor required')
+    def test_real_preprocessor_detects_environment_shadowing(self):
+        self.configure()
+        self.headers(self.sdk/'include')
+        foreign=self.root/'foreign/include'
+        self.headers(foreign)
+        path=self.build/'compile_commands.json'
+        commands=json.loads(path.read_text())
+        commands[0]['arguments'][1:2]=['-isystem',str(self.sdk/'include')]
+        path.write_text(json.dumps(commands))
+        with patch.dict(os.environ,{'CPATH':str(foreign)}),self.assertRaisesRegex(ValueError,'shadow'):
+            selected_sdk_headers(self.build,HERE/'native.cpp',self.sdk/'include','Release')
+        # The compiler puts this system environment path after explicit system
+        # directories; its unused foreign headers must not cause a false alarm.
+        with patch.dict(os.environ,{'CPATH':'','CPLUS_INCLUDE_PATH':str(foreign)}):
+            self.assertEqual(len(selected_sdk_headers(self.build,HERE/'native.cpp',self.sdk/'include','Release')),4)
+
+    @unittest.skipUnless(shutil.which('c++'),'C++ preprocessor required')
+    def test_legitimate_dependency_includes_do_not_hide_selected_sdk(self):
+        self.configure()
+        self.headers(self.sdk/'include')
+        dependencies=self.root/'dependencies'
+        dependencies.mkdir()
+        (dependencies/'dependency.h').write_text('#pragma once\n')
+        path=self.build/'compile_commands.json'
+        commands=json.loads(path.read_text())
+        commands[0]['arguments'][1:1]=['-I'+str(dependencies),'-include','dependency.h']
+        path.write_text(json.dumps(commands))
+        self.assertEqual(len(selected_sdk_headers(self.build,HERE/'native.cpp',self.sdk/'include','Release')),4)
+
+    def test_msvc_line_directives_and_portable_include_forms(self):
+        self.configure()
+        self.headers(self.sdk/'include')
+        path=self.build/'compile_commands.json'
+        commands=json.loads(path.read_text())
+        commands[0]['arguments'][0]='cl.exe'
+        commands[0]['arguments'][1:2]=['/external:I'+str(self.sdk/'include')]
+        path.write_text(json.dumps(commands))
+        lines='\n'.join('#line 1 '+json.dumps(str(p)) for p in (self.sdk/'include/hgraph').rglob('*.h'))
+        with patch('build_identity.subprocess.run',return_value=subprocess.CompletedProcess([],0,lines,'')) as invoked:
+            self.assertEqual(len(selected_sdk_headers(self.build,HERE/'native.cpp',self.sdk/'include','Release')),4)
+            self.assertEqual(invoked.call_args.args[0][-1],'/E')
+        for option in ('-I','-isystem','-iquote','-idirafter','--include-directory=','/I','/external:I'):
+            self.assertEqual(include_paths([option+'<sdk>/include']),['<sdk>/include'])
+        with patch('build_identity.subprocess.run',return_value=subprocess.CompletedProcess([],0,'','')):
+            with self.assertRaisesRegex(ValueError,'every direct'):
+                selected_sdk_headers(self.build,HERE/'native.cpp',self.sdk/'include','Release')
 
 
     @unittest.skipUnless(all(shutil.which(tool) for tool in ('cmake', 'c++', 'make', 'ninja')),

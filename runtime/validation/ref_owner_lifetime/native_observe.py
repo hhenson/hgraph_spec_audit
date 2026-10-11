@@ -5,7 +5,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
-from build_identity import cache_values, prepare_executable, sdk_binding
+from build_identity import cache_values, prepare_executable, sdk_binding, selected_sdk_headers
 
 HERE = Path(__file__).resolve().parent
 NAMES = ('native.cpp','native_reasoned.json','native_observe.py','CMakeLists.txt','build_identity.py')
@@ -32,9 +32,11 @@ def main():
     sources={name:sha(HERE/name) for name in NAMES}
     support={name:sha(HERE.parent/name) for name in SUPPORT}
     artifact,config,manifest,command,libraries=sdk_binding(args.build_dir,args.executable,args.sdk)
+    selected_headers=selected_sdk_headers(args.build_dir,HERE/'native.cpp',args.sdk/'include',config)
     sdk=sdk_hashes(args.sdk)
     prepare_executable(args.build_dir,args.executable)
     assert sdk_binding(args.build_dir,args.executable,args.sdk)==(artifact,config,manifest,command,libraries)
+    assert selected_headers==selected_sdk_headers(args.build_dir,HERE/'native.cpp',args.sdk/'include',config)
     manifest_hash=sha(manifest)
     command_hash=sha(args.build_dir/'compile_commands.json')
     cache_hash=sha(args.build_dir/'CMakeCache.txt')
@@ -62,6 +64,7 @@ def main():
     data={'measured_at':datetime.now(timezone.utc).isoformat(),'repeats':3,'sources_sha256':sources,
           'support_sha256':support,
           'sdk_files_sha256':sdk,'binary_sha256':binary,'compiler_sha256':compiler_hash,
+          'selected_sdk_headers_sha256':selected_headers,
           'compiler_version':compiler_version,
           'compile_command':command,'compile_commands_sha256':command_hash,
           'target_name':'ref_owner_lifetime_native','target_configuration':config,
