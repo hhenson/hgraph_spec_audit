@@ -8,7 +8,7 @@ from pathlib import Path, PurePosixPath
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 from evidence_identity import validate_identity
-from build_identity import shared_library
+from build_identity import include_paths, shared_library
 spec = importlib.util.spec_from_file_location('last_scalar_probe', HERE/'observe.py')
 probe = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(probe)
@@ -76,7 +76,7 @@ def validate_native(data):
     assert data['loaded_libraries_sha256']=={PurePosixPath(path).name:fingerprint for path,fingerprint in loaded.items()}
     assert {path for path in data['sdk_target_libraries'] if shared_library(path)}==set(loaded)
     command=data['compile_command']
-    assert any(arg=='-I<sdk>/include' or (arg in ('-I','-isystem') and index+1<len(command) and command[index+1]=='<sdk>/include') or arg=='-isystem<sdk>/include' for index,arg in enumerate(command))
+    assert '<sdk>/include' in [path.replace('\\','/') for path in include_paths(command)]
     assert 'include/hgraph/types/static_node.h' in data['sdk_files_sha256']
     assert any(PurePosixPath(path).name.startswith(('libhgraph_runtime.','hgraph_runtime.')) for path in data['sdk_target_libraries'])
     expected=json.loads((HERE/'native_reasoned.json').read_text())

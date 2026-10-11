@@ -9,7 +9,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from build_identity import loaded_sdk_libraries, prepare_executable, sdk_binding
+from build_identity import include_paths, loaded_sdk_libraries, prepare_executable, sdk_binding, split_windows_command
 
 HERE = Path(__file__).resolve().parent
 
@@ -107,6 +107,80 @@ class BuildIdentityTests(unittest.TestCase):
             path.write_text(json.dumps(commands))
             with self.subTest(argument=argument), self.assertRaisesRegex(ValueError, 'headers'):
                 sdk_binding(self.build, artifact, self.sdk)
+
+    def test_portable_include_operands_and_quoted_spaces(self):
+        # The real fixture path contains spaces; MSVC-style arguments must
+        # still bind to this exact SDK, not a similar directory or definition.
+        relocated=self.root/'SDK with spaces'
+        self.sdk.rename(relocated)
+        self.sdk=relocated
+        self.libraries=[self.sdk/'lib'/path.name for path in self.libraries]
+        include=str(self.sdk/'include')
+        for prefix in ('-I','-isystem','/I','/external:I'):
+            for arguments in ([prefix,include],[prefix+include],
+                              [prefix,'"'+include+'"'],[prefix+'"'+include+'"']):
+                with self.subTest(arguments=arguments):
+                    artifact=self.configure()
+                    path=self.build/'compile_commands.json'
+                    entries=json.loads(path.read_text())
+                    entries[0]['arguments'][1:2]=arguments
+                    path.write_text(json.dumps(entries))
+                    sdk_binding(self.build,artifact,self.sdk)
+
+    def test_msvc_command_string_preserves_backslashes_quotes_and_output(self):
+        command=r'"C:\Program Files\MSVC\cl.exe" /I"C:\SDK with spaces\include" /external:I "C:\external files" /Fo"CMakeFiles\last_scalar_types_native.dir\Release\native.cpp.obj" /c native.cpp'
+        tokens=split_windows_command(command)
+        self.assertEqual(tokens[0],r'C:\Program Files\MSVC\cl.exe')
+        self.assertEqual(include_paths(tokens),[r'C:\SDK with spaces\include',r'C:\external files'])
+        # Round-trip the platform-independent serializer's escaped quotes and
+        # trailing backslashes, which POSIX shlex would consume.
+        values=['C:\\SDK files\\', 'a"b', '', r'plain\path']
+        self.assertEqual(split_windows_command(subprocess.list2cmdline(values)),values)
+        self.assertEqual(split_windows_command('cl.exe "a""b"'),['cl.exe','a"b'])
+        with self.assertRaisesRegex(ValueError,'Unterminated'):
+            split_windows_command('cl.exe /I"C:\\unfinished')
+        artifact=self.configure('Ninja Multi-Config',True)
+        path=self.build/'compile_commands.json'
+        entries=json.loads(path.read_text())
+        for entry,config in zip(entries,('Debug','Release')):
+            entry.pop('arguments')
+            entry['command']='cl.exe /I"'+str(self.sdk/'include')+'" /DCMAKE_INTDIR=\\"'+config+'\\" /Fo"CMakeFiles\\last_scalar_types_native.dir\\'+config+'\\native.cpp.obj" /c "'+str(HERE/'native.cpp')+'"'
+        path.write_text(json.dumps(entries))
+        result=sdk_binding(self.build,artifact,self.sdk)
+        self.assertEqual(result[1],'Release')
+        self.assertIn('<sdk>/include',include_paths(result[3]))
+
+    def test_msvc_separate_output_and_unrelated_include_text(self):
+        artifact=self.configure()
+        path=self.build/'compile_commands.json'
+        entries=json.loads(path.read_text())
+        original=entries[0]['arguments']
+        entries[0]['arguments']=['cl.exe','/external:I',str(self.sdk/'include'),
+                                 '/Fo',r'CMakeFiles\last_scalar_types_native.dir\native.cpp.obj','/c',str(HERE/'native.cpp')]
+        path.write_text(json.dumps(entries))
+        sdk_binding(self.build,artifact,self.sdk)
+        for argument in ('/DFAKE=/I'+str(self.sdk/'include'),
+                         '-DFAKE=-I'+str(self.sdk/'include'),
+                         '/I'+str(self.sdk/'include-other'),
+                         '/external:I'+str(self.sdk/'include-other')):
+            entries[0]['arguments']=original.copy()
+            entries[0]['arguments'][1]=argument
+            path.write_text(json.dumps(entries))
+            with self.subTest(argument=argument),self.assertRaisesRegex(ValueError,'headers'):
+                sdk_binding(self.build,artifact,self.sdk)
+        for command in (['cl.exe','/I'],['cl.exe','/external:I']):
+            with self.subTest(command=command),self.assertRaisesRegex(ValueError,'operand'):
+                include_paths(command)
+
+    def test_relative_include_uses_selected_command_directory(self):
+        artifact=self.configure()
+        path=self.build/'compile_commands.json'
+        entries=json.loads(path.read_text())
+        entries[0]['arguments'][1:2]=['/I','../sdk/include']
+        entries.append({'directory':str(self.root/'unrelated/directory'),
+                        'file':'unrelated.cpp','arguments':['cl.exe','/I','../sdk/include']})
+        path.write_text(json.dumps(entries))
+        sdk_binding(self.build,artifact,self.sdk)
 
     def test_ambiguous_configuration_is_rejected(self):
         artifact = self.configure('Ninja Multi-Config', True)
