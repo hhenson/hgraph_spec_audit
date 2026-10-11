@@ -13,7 +13,7 @@ HERE = Path(__file__).resolve().parent
 class Evidence(unittest.TestCase):
     def setUp(self):
         self.record = json.loads((HERE / 'observed.json').read_text())
-    def rejected(self):
+    def reseal(self):
         # Reseal process digests to exercise semantic comparisons independently.
         p = self.record['python']
         p['runs_sha256'] = [check.digest({'identity': p['identity'], 'results': p['results']})] * 3
@@ -21,7 +21,18 @@ class Evidence(unittest.TestCase):
         for r in c['rejections'].values():
             r['runs_sha256'] = [check.digest(r['capture'])] * 3
         c['runs_sha256'] = [check.digest({k: v for k, v in c.items() if k != 'runs_sha256'})] * 3
+    def rejected(self):
+        self.reseal()
         with self.assertRaises(AssertionError): check.check(self.record)
+    def test_compiler_diagnostics_are_not_a_semantic_contract(self):
+        for rejection in self.record['cpp']['rejections'].values():
+            rejection['capture']['stderr'] = "error: default argument references parameter 'first'"
+            rejection['capture']['stdout'] = "diagnostic de compilation"
+        self.reseal()
+        self.assertTrue(check.check(self.record))
+    def test_boolean_is_not_a_compiler_exit_status(self):
+        self.record['cpp']['rejections']['earlier_parameter']['capture']['exit_code'] = True
+        self.rejected()
     def test_recorded(self): self.assertTrue(check.check(self.record))
     def test_python_default_cannot_be_current_argument(self):
         self.record['python']['results']['shadow_parameter'] = 99
