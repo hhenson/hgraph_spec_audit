@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "stdlib_revision": "3a2e0379f1134f969c850316f828d208af33cbc3",
+  "backends": {
+    "cpp": [],
+    "rust": [
+      {
+        "name": "hgraph",
+        "root": "hgl/hgraph",
+        "files": [
+          {
+            "file": "control.hgl",
+            "sha256": "827431f1c8d100738acdc4df1319b2bab5115556295bbafac9ce2f793b8605b7"
+          },
+          {
+            "file": "impl/control.hgl",
+            "sha256": "89b5cfa5de0be94b6ee5ce78b7c2ebdb3a130675f255b289c0b761b5026d401e"
+          },
+          {
+            "file": "impl/operators.hgl",
+            "sha256": "f41924dd4e096ab4020ff58ed9dfc936bacb850b41fb671001f6162d00d6acb7"
+          },
+          {
+            "file": "impl/replay_record.hgl",
+            "sha256": "4a416617e152ebe079118b5f6c7feb27964c84c9c692ca7dd2993e7fcb6ef06e"
+          },
+          {
+            "file": "impl/standard.hgl",
+            "sha256": "b7111e8aed5fa4791701250b503fca257bc803c5c5195ce819554d43b762d218"
+          },
+          {
+            "file": "impl/stream.hgl",
+            "sha256": "5d3ce3e8ec1fa097ec595a718dd32400298670d7b4cf6aaa6e3bb80d885ffed8"
+          },
+          {
+            "file": "impl/temporal.hgl",
+            "sha256": "12fe30b6325f37def9f0689f495e66dbcb7445c3df8a482d5135b6c88f13573c"
+          },
+          {
+            "file": "native/scalar_operators.hgl",
+            "sha256": "40e2950cf14e4f49ee114f3c0626104e4d97a4a7e8527233a83ecaade08ef2db"
+          },
+          {
+            "file": "native/scalar_values.hgl",
+            "sha256": "aa2d31b5f988f1528e3692c50e94c02b08a504328b37930c86560ab141f1c3df"
+          },
+          {
+            "file": "native/scalar_values_i64.hgl",
+            "sha256": "18395afe309bf778407d55fedbb3505e2ac239937b8521b6f708343d619bec92"
+          },
+          {
+            "file": "native/temporal_values.hgl",
+            "sha256": "cac890f075c9b2662f659b06151b1509327acdb9491cb523d6690f677677f6c5"
+          },
+          {
+            "file": "operators.hgl",
+            "sha256": "aca1803d45624620f01c74c65a542b598ae843a2324f60bf1b0c603afd316443"
+          },
+          {
+            "file": "replay_record.hgl",
+            "sha256": "d78b942477f7683661fdced78db84ebae3529f2e1e7aa35ac656d1671ccd7e9c"
+          },
+          {
+            "file": "standard.hgl",
+            "sha256": "acacccebe1031d202f3ed05532ff0639a158046af725dbeed666997affeaa5de"
+          },
+          {
+            "file": "stream.hgl",
+            "sha256": "5a7d6b0a73e56052ed004f90cd704214a196d1be0805bceaa920e04889b66a6f"
+          },
+          {
+            "file": "temporal.hgl",
+            "sha256": "6d7e7d3b7b01623f0682364fc0752179a3cbaf791bf29f7d87dedf46841ed226"
+          },
+          {
+            "file": "tests/abstract_atomic_values.hgl",
+            "sha256": "786356792e7c5de1de15d7086ba3ec0e5563b547b4944f42a25e7f2397d6570c"
+          },
+          {
+            "file": "tests/atomic_eval_values.hgl",
+            "sha256": "2ec53bc270c9dcf9b30a8a69062f4a614829bde9cf00f9992fd7ce3a3ccda2c5"
+          },
+          {
+            "file": "tests/atomic_replay_values.hgl",
+            "sha256": "98b724c3411ba9cc1ba46de2e6bfd0795920e6ee57b3e0243382878d28b74628"
+          },
+          {
+            "file": "tests/atomic_scalar_values.hgl",
+            "sha256": "f3c6dea1acf2651de7cf5b8e32b0e8711e4b6698f242178b8460904a9395010e"
+          },
+          {
+            "file": "tests/atomic_set_map_values.hgl",
+            "sha256": "2cd241f03f8939dd3706feb3eeaddca101b58c8d2cb4a66a632c180bd17909b0"
+          },
+          {
+            "file": "tests/composite_key_values.hgl",
+            "sha256": "7982cb06066dd4244626971dcfb6ec811ab38add8a6b526ffc54a65eca3c76a0"
+          },
+          {
+            "file": "tests/control.hgl",
+            "sha256": "12483de61747fb26cf27a94f02a3390227436c3a843acee1c49b121f2398fd0e"
+          },
+          {
+            "file": "tests/delta_identity_values.hgl",
+            "sha256": "299f8551576c4fb3cd2e5af26022e449b941c5fb789784997b7393b82e3c9ebb"
+          },
+          {
+            "file": "tests/empty_delta_validity.hgl",
+            "sha256": "e8ee0852fcc5d9cf8d057e70b6f775b3b15eaa96877c189822a4619a75b98cf0"
+          },
+          {
+            "file": "tests/enum_values.hgl",
+            "sha256": "80eeed2603b29976a24fd7900fa4bf94be43f52ff7b6774fe180191b2e44c41f"
+          },
+          {
+            "file": "tests/growing_list_values.hgl",
+            "sha256": "f054abd9af68f372ca7b3f51a9e0a0e972496f4fde8cfc7718cdf5625c4c0490"
+          },
+          {
+            "file": "tests/infinite_float_values.hgl",
+            "sha256": "2dea436b43472e49557191ee6122efede8ac5e3058c612acb950275d0614d2ec"
+          },
+          {
+            "file": "tests/nan_scalar_values.hgl",
+            "sha256": "1a3413e146c2db069f9d1da1e176ba23db809ec50270b36bbc635ed954cb3175"
+          },
+          {
+            "file": "tests/native_scalar_operators.hgl",
+            "sha256": "9c5e0d9addd33542dd64d20e20390c00a7644b8981f13526c0420ef29ca09a86"
+          },
+          {
+            "file": "tests/numeric_boundary_values.hgl",
+            "sha256": "c553e48938f5fcea9e417a81fe287d78083b087299d129e84573b44af8bc5fcd"
+          },
+          {
+            "file": "tests/operators.hgl",
+            "sha256": "c4b609b259513cb3cc04665dbeea1d6c13aa2c2469ef369698eddcb811f2e272"
+          },
+          {
+            "file": "tests/optional_atomic_values.hgl",
+            "sha256": "b3110611c8817e6b5f1e45db7862ae6a05d41b0217b5849ba1b249f770f6105c"
+          },
+          {
+            "file": "tests/ordinary_replay_values.hgl",
+            "sha256": "1b5764b8bba831824e26ee3d955fb19db63b870452195724854fdc42183e55fa"
+          },
+          {
+            "file": "tests/pass_through_defaults.hgl",
+            "sha256": "a66236493983f02cd36bad0f13d1b3cafb917f81c9739897fa1c952adf01cf90"
+          },
+          {
+            "file": "tests/pass_through_scalars.hgl",
+            "sha256": "e013e32e2ab170c918f94111abf46a0c347186b2fe3acee85761ebfcd79e7bfa"
+          },
+          {
+            "file": "tests/pass_through_structural.hgl",
+            "sha256": "402bcdf4caabb7bd0905a84f03b77adf3e384a5e75673f1578a53eda1eb48b29"
+          },
+          {
+            "file": "tests/prepared_key_alias_values.hgl",
+            "sha256": "12ccdd8288add8958db6fb036c922a11a7369d709209ab3a6d1c0f5e37202fc6"
+          },
+          {
+            "file": "tests/record_observation_values.hgl",
+            "sha256": "7a9d9864ceafddc21fa8b55ceffa3cf532787980bd722c1fffd2d7dd47947c36"
+          },
+          {
+            "file": "tests/recursive_atomic_values.hgl",
+            "sha256": "bdacef29b0e7f11aa6db2b6a3260499c30d48418652f905f245b9cdd6bd43c92"
+          },
+          {
+            "file": "tests/recursive_eval_values.hgl",
+            "sha256": "ac91c5dcf3087a693b2689e8b51fe10cb4822d69f249402c403b27c4592eb14a"
+          },
+          {
+            "file": "tests/replay_record.hgl",
+            "sha256": "fa49a1c2dac8f8adc02aac279cbf928b92ceaa50514e62838abe1de0b5b9181f"
+          },
+          {
+            "file": "tests/rolling_retention_values.hgl",
+            "sha256": "58b6e97b8198d1d4634d0b984af9d946b20edb2ae89df59a7947fc404072517c"
+          },
+          {
+            "file": "tests/rolling_structural_values.hgl",
+            "sha256": "d366ba1a97ed1013b3048f7ddbb8827b9eaa1e886824506e52e4d73ad4815faa"
+          },
+          {
+            "file": "tests/rolling_values.hgl",
+            "sha256": "aad51057f7b46b69b7749c641274855aaec5893c1ce75012c724db57bf046e3e"
+          },
+          {
+            "file": "tests/scalar_key_values.hgl",
+            "sha256": "2e80535ad17f8426470519d98746207e6aa2ddb4ab7ea5a6bee528a3e6d0ebb3"
+          },
+          {
+            "file": "tests/signal_observation_values.hgl",
+            "sha256": "ae81691fca97c8bd25df1c0638bdd4e3facd8c8089dc1da254ea0606913d898b"
+          },
+          {
+            "file": "tests/standard.hgl",
+            "sha256": "280ef1260b7561b1ee7c5a1b329b32bacc9b1ab8f705c3d01345e4a571f72574"
+          },
+          {
+            "file": "tests/state_observation_values.hgl",
+            "sha256": "1615abf342692a436539c1edada7051e9c93a0f40737d9501b7e311d8b6a198e"
+          },
+          {
+            "file": "tests/stream.hgl",
+            "sha256": "103d06d0c0571643186caac9183e98c7ca5fa17cdf2415b986bbabb9d9e58b51"
+          },
+          {
+            "file": "tests/structural_value_publication.hgl",
+            "sha256": "409f85ae176e2ee71f423d616c5843e44f93ded2115ea640ba6c031dbd5327de"
+          },
+          {
+            "file": "tests/temporal.hgl",
+            "sha256": "6556509e538724b04ef795b49d471baed248ce685a5c811245534d74d805fb20"
+          },
+          {
+            "file": "tests/temporal_retention_values.hgl",
+            "sha256": "35c37cf421d2b593f8aadac69be7e6b4cc1528827fa75b66f7f165963799a5b5"
+          },
+          {
+            "file": "tests/temporal_scalar_values.hgl",
+            "sha256": "ed59376b0870ee34d44fd3a88c954be50ee931dd4b0bad6cecf122b7b485bf85"
+          },
+          {
+            "file": "tests/temporal_structural_values.hgl",
+            "sha256": "19ddb8c660ded335425f55b76b3c5623b37b2207dfc81518786d1183e219e6cd"
+          },
+          {
+            "file": "tests/tuple_observation_values.hgl",
+            "sha256": "17360fe144ee3cdbb6b5b49a26717ab959b1218d2c469c986f5884ae0f00610d"
+          },
+          {
+            "file": "tests/unset_required_read_values.hgl",
+            "sha256": "caa6ce60698b7a6923db48f6f6b6502b237d8fa5bcf72a3b796b696e15b5a4da"
+          },
+          {
+            "file": "tests/zoned_time_values.hgl",
+            "sha256": "b27c77bd88e8f31dc94e0f9c0c9f9079e75eff645c7c155acd7f56aec7a20835"
+          }
+        ]
+      }
+    ]
+  }
+}
