@@ -65,12 +65,54 @@ sites. These totals include other standard-library smoke tests; they are not
 258 distinct pass-through type combinations. Counts are source call sites,
 not necessarily the number of dynamic eval invocations.
 
-C++ runs the same generated native module on all three platforms:
+Check the frozen report from the audit repository root without running a compiler:
 
 ```sh
+python3 compiler/delta_matrix/check.py
+python3 -m unittest discover -s compiler/delta_matrix
+```
+
+The checker requires every recorded backend/platform pair, exact shared case
+names, empty failure lists, consistent counts and the expected failing negative
+controls. [expected.json](expected.json) was independently extracted from the
+recorded standard-library and specification Git revisions.
+[provenance.json](provenance.json) anchors the original report bytes and this
+manifest. Raw logs/reports are represented by their recorded hashes; their
+contents are not vendored, and this check does not independently establish the
+compiler build chain or make a fresh execution claim.
+
+Fresh executions use the compiler repositories, whose CMake presets and Rust
+test runner are outside this audit. Start in a directory for sibling checkouts:
+
+```sh
+git clone https://github.com/hhenson/hgraph.git hgraph-matrix
+git -C hgraph-matrix checkout --detach 7375739918765b82ee119fa15a96efde40f685c7
+git clone https://github.com/hhenson/hgl.git hgl-matrix
+git -C hgl-matrix checkout --detach 0324243dbfaa7d0568e99eabd30c10ca09d8383d
+```
+
+Both compiler revisions pin specification
+`c0e55d1511f11a798acc07b9e47054c18beef5ae`, standard library
+`3a2e0379f1134f969c850316f828d208af33cbc3` and audit
+`6b3c6334188023b26542e1d75c40491f463ae1a3`. Their shared-artifact setup below
+initializes those dependencies at the recorded pins.
+
+C++ requires a C++23 toolchain, CMake supporting preset schema 6, Ninja and
+Python 3.12 or later with PyArrow 25. Prepare `.venv` at the compiler root with
+PyArrow (`python3 -m venv .venv`, then
+`.venv/bin/python -m pip install 'pyarrow==25.0.0'` on Unix). The preset selects
+that Python executable; on Windows override it with
+`-DPython_EXECUTABLE=/path/to/.venv/Scripts/python.exe` and use the platform's
+Python launcher. From the directory containing both clones, run the generated
+native module in the C++ checkout:
+
+```sh
+cd hgraph-matrix
+python3 tools/shared_artifacts.py
 cmake --preset cpp --fresh -DHGRAPH_BUILD_LANGUAGE=ON
 cmake --build --preset cpp --target hgl_std_matrix_tests --parallel
 ctest --preset cpp -R '^hgraph_language_generated_standard_matrix$' -V
+cd ..
 ```
 
 C++ passes all 258 shared tests on Linux, macOS and Windows. Rust passes the
@@ -78,14 +120,38 @@ same 258 shared tests within 280 executed tests / 679 evaluations on Linux.
 Both Linux compilers also match all 43 mixed negative-fixture expectations,
 including controls whose expected process exit is nonzero.
 
-Rust reruns its entire source suite on Linux:
+Rust requires rustup (the checkout pins Rust 1.98.1), Cargo and Python 3.
+From the directory containing both clones, run its source suite in the Rust
+checkout. The recorded Rust revision includes `tools/test_hgl.py`:
 
 ```sh
+cd hgl-matrix
+python3 tools/shared_artifacts.py
+cargo fetch --locked
 python3 tools/test_hgl.py --stdlib
+cd ..
 ```
 
 The Rust suite includes the same 258 standard cases plus native/operator
-cases. Prior full compiler/runtime gates on all three platforms remain the
+cases. To verify the stored source manifest against these exact checkout Git
+objects, run from the audit repository root (adjust sibling paths as needed):
+
+```sh
+python3 compiler/delta_matrix/check.py \
+  --stdlib-checkout ../hgraph-matrix/external/hgraph_std \
+  --spec-checkout ../hgraph-matrix/external/hgraph_spec
+```
+
+This verifies the recorded revision, regardless of each checkout's current
+working files. Fresh negative-fixture executions use
+`compiler/negative_testing/observe.py` from the pinned audit dependency and
+`external/hgraph_spec/compiler/negative_testing` from the compiler checkout;
+use the [observer commands](../negative_testing/README.md#reproduce) with the
+compiler revisions and dependency paths above, writing new reports outside
+this frozen report. `source_revision_verified_by_runner` remains false: the
+negative observer records caller-supplied source revision metadata.
+
+Prior full compiler/runtime gates on all three platforms remain the
 acceptance evidence for the implementation changes. This closeout reruns the
 shared matrix against merged main; it does not repeat the wheel/SDK gates or
 claim new full-runtime coverage.
