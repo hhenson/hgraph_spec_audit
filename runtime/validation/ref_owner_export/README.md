@@ -44,3 +44,6 @@ is unchanged.
 Run `python check.py` and `python -m unittest discover -s . -p test_check.py`
 for recorded-evidence verification. Measurement requires explicit independent
 `--python`, `--cpp`, and new `--output` paths; no private host paths are tracked.
+
+These successful captures must remain successful; even identical fresh-process
+errors cannot replace their recorded match or divergence evidence.

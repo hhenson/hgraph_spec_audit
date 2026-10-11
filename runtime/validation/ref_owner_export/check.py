@@ -43,26 +43,23 @@ def check(record=None):
         for name, captured in cases.items():
             required = corpus['cases'][name]
             assert captured['input_horizon'] == required['input_horizon']
-            if 'error_type' in captured:
-                assert set(captured) == {'input_horizon', 'events', 'error_type', 'message'}
-                assessment = 'error'
-            else:
-                raw = captured['raw_eval_node']
-                assert raw is None or isinstance(raw, list)
-                assert raw is None or all(row is None or isinstance(row, str) for row in raw)
-                decoded = [] if raw is None else [None if row is None else json.loads(row) for row in raw]
-                padding = max(0, required['input_horizon'] - len(decoded))
-                assert captured['decoded_eval_node'] == decoded
-                assert captured['padding_added'] == padding
-                assert captured['dense_from_input_horizon'] == decoded + [None] * padding
-                assert len(captured['dense_from_input_horizon']) == required['input_horizon']
-                assert captured['events'] == [row for row in decoded if row is not None]
-                # Recorded observation boundary, never a replacement requirement.
-                observed_dense = list(required['expected_dense'])
-                if engine == 'cpp' and required['kind'] == 'tree':
-                    observed_dense[3] = None
-                assert captured['dense_from_input_horizon'] == observed_dense
-                assessment = 'match' if captured['dense_from_input_horizon'] == required['expected_dense'] else 'divergence'
+            assert 'error_type' not in captured, 'Successful REF export evidence became a probe error'
+            raw = captured['raw_eval_node']
+            assert raw is None or isinstance(raw, list)
+            assert raw is None or all(row is None or isinstance(row, str) for row in raw)
+            decoded = [] if raw is None else [None if row is None else json.loads(row) for row in raw]
+            padding = max(0, required['input_horizon'] - len(decoded))
+            assert captured['decoded_eval_node'] == decoded
+            assert captured['padding_added'] == padding
+            assert captured['dense_from_input_horizon'] == decoded + [None] * padding
+            assert len(captured['dense_from_input_horizon']) == required['input_horizon']
+            assert captured['events'] == [row for row in decoded if row is not None]
+            # Recorded observation boundary, never a replacement requirement.
+            observed_dense = list(required['expected_dense'])
+            if engine == 'cpp' and required['kind'] == 'tree':
+                observed_dense[3] = None
+            assert captured['dense_from_input_horizon'] == observed_dense
+            assessment = 'match' if captured['dense_from_input_horizon'] == required['expected_dense'] else 'divergence'
             assert measured['assessment'][name] == assessment
         assert cases['nested_scalar_first'] == cases['nested_scalar_fresh']
         assert cases['exported_tree_first'] == cases['exported_tree_fresh']
