@@ -9,7 +9,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from build_identity import include_paths, loaded_sdk_libraries, prepare_executable, sdk_binding, split_windows_command
+from build_identity import compile_command, include_paths, loaded_sdk_libraries, prepare_executable, sdk_binding, split_windows_command
 
 HERE = Path(__file__).resolve().parent
 
@@ -116,7 +116,7 @@ class BuildIdentityTests(unittest.TestCase):
         self.sdk=relocated
         self.libraries=[self.sdk/'lib'/path.name for path in self.libraries]
         include=str(self.sdk/'include')
-        for prefix in ('-I','-isystem','/I','/external:I'):
+        for prefix in ('-I','-isystem','/I','/external:I','-external:I'):
             for arguments in ([prefix,include],[prefix+include],
                               [prefix,'"'+include+'"'],[prefix+'"'+include+'"']):
                 with self.subTest(arguments=arguments):
@@ -182,6 +182,18 @@ class BuildIdentityTests(unittest.TestCase):
         path.write_text(json.dumps(entries))
         sdk_binding(self.build,artifact,self.sdk)
 
+    def test_sdk_nested_in_source_keeps_sdk_redaction_label(self):
+        self.configure()
+        source=self.root/'native.cpp'
+        source.write_text('// metadata fixture\n')
+        path=self.build/'compile_commands.json'
+        entries=json.loads(path.read_text())
+        entries[0]['file']=str(source)
+        entries[0]['arguments'][-1]=str(source)
+        path.write_text(json.dumps(entries))
+        command=compile_command(self.build,source,self.sdk/'include','Release')
+        self.assertEqual(include_paths(command),['<sdk>/include'])
+
     def test_ambiguous_configuration_is_rejected(self):
         artifact = self.configure('Ninja Multi-Config', True)
         path = self.build / 'compile_commands.json'
@@ -197,6 +209,10 @@ class BuildIdentityTests(unittest.TestCase):
         relative=library.relative_to(self.sdk).as_posix()
         fingerprints={relative:hashlib.sha256(library.read_bytes()).hexdigest()}
         self.assertEqual(loaded_sdk_libraries([str(library)],self.sdk,fingerprints,[relative]),fingerprints)
+        dependency=self.sdk/'lib/libhgraph_dependency.so'
+        dependency.write_bytes(b'transitive shared fixture')
+        all_hashes={**fingerprints,dependency.relative_to(self.sdk).as_posix():hashlib.sha256(dependency.read_bytes()).hexdigest()}
+        self.assertEqual(loaded_sdk_libraries([str(library),str(dependency)],self.sdk,all_hashes,[relative]),all_hashes)
         foreign=self.root/library.name
         foreign.write_bytes(library.read_bytes())
         with self.assertRaisesRegex(ValueError,'belong'):
