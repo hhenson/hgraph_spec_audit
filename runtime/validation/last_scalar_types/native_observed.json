@@ -20,7 +20,7 @@
     "native_retained_independently": "match"
   },
   "binary_sha256": "ae1ec2bbc0c58190b1417fde9afa920f10c80563bfa78dcc664ab264dd6af8e6",
-  "cmake_cache_sha256": "af008134f06ba45365cac722fa693ad97aecb98d524b131e56be581231d539fe",
+  "cmake_cache_sha256": "ddd716864090be0ee3e3ec5654b3238cc6f91ec35d17d5c5e5438bff13c85bfa",
   "cmake_generator": "Unix Makefiles",
   "compile_command": [
     "/usr/bin/c++",
@@ -59,7 +59,7 @@
     "-c",
     "<source>/native.cpp"
   ],
-  "compile_commands_sha256": "3604392162df8b5c82f3ef0d32455c0d07571457dc7f2381a88fed85eb572456",
+  "compile_commands_sha256": "71f277d2649049c27e3ea7c3b0acf0aca9a9b5efaade010ed8243ca6f5d5672d",
   "compiler_sha256": "e6718f7e0c7d057c3ff77b550c603da9bc4030e3ede3c053705acce1293dbe4d",
   "compiler_version": "x86_64-linux-gnu-g++-15 (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
   "graphs": {
@@ -82,8 +82,9 @@
     ]
   },
   "loaded_libraries_sha256": {},
-  "measured_at": "2026-10-11T06:44:25.503378+00:00",
-  "measurement_sha256": "2d5b94e2f70e2b60df642e596d1a2b506682e248a62c6f4b08a4583c5f77d60e",
+  "loaded_sdk_libraries_sha256": {},
+  "measured_at": "2026-10-11T07:07:25.302516+00:00",
+  "measurement_sha256": "dc2c57a389e63262332d83d5957e249fd280f23a1f5a80fbcd4c1d4366d8a74f",
   "observed": {
     "any_distinct_type_unequal": true,
     "any_distinct_type_unordered": true,
@@ -508,13 +509,13 @@
   "source_sha256": "015e9ba5e546ab715b01a775b27f528abffd7cf2f1d49f88aeecccd1272ff655",
   "sources_sha256": {
     "CMakeLists.txt": "e5fa9e91939d90920d91b1e72f550784cbdee5da63f01927f97a071da7f8a1e4",
-    "build_identity.py": "bf9566c3fadc870389432325c398c749a43318cf63d01f7d6e4b05c95b2de65e",
+    "build_identity.py": "8a174f53360c40389ab6251c024f2b3eeea48a900aa5dc7e0e0cb399fbb5176f",
     "native.cpp": "015e9ba5e546ab715b01a775b27f528abffd7cf2f1d49f88aeecccd1272ff655",
-    "native_observe.py": "bf9aeccc3f99b411229e80edd922ba1e4b1d99f57eb0a72631aa6b484a727266",
+    "native_observe.py": "fae03538a04a0d852140b643e4e46eac00ef6240d45aa5c9e78249a3841c81eb",
     "native_reasoned.json": "f7524bd98368516ef0b4b0270878486e8acc8249691874eacc54af9acafcbb2e"
   },
   "target_artifact": "last_scalar_types_native",
   "target_configuration": "Release",
-  "target_manifest_sha256": "ef262949d6fc4d7688ba2aebf6d67b06048b959a90f2000968d008a26e86fa97",
+  "target_manifest_sha256": "413c8368bf34cff3dcd301272021a66b08b989c27a00259362e413d54a18246f",
   "target_name": "last_scalar_types_native"
 }

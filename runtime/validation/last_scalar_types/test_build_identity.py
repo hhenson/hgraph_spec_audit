@@ -9,7 +9,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from build_identity import prepare_executable, sdk_binding
+from build_identity import loaded_sdk_libraries, prepare_executable, sdk_binding
 
 HERE = Path(__file__).resolve().parent
 
@@ -116,6 +116,60 @@ class BuildIdentityTests(unittest.TestCase):
         path.write_text(json.dumps(commands))
         with self.assertRaisesRegex(ValueError, 'one native.cpp'):
             sdk_binding(self.build, artifact, self.sdk)
+
+    def test_loaded_library_must_match_sdk_path_and_bytes(self):
+        library=self.sdk/'lib/libhgraph_runtime.so'
+        library.write_bytes(b'shared fixture')
+        relative=library.relative_to(self.sdk).as_posix()
+        fingerprints={relative:hashlib.sha256(library.read_bytes()).hexdigest()}
+        self.assertEqual(loaded_sdk_libraries([str(library)],self.sdk,fingerprints,[relative]),fingerprints)
+        foreign=self.root/library.name
+        foreign.write_bytes(library.read_bytes())
+        with self.assertRaisesRegex(ValueError,'belong'):
+            loaded_sdk_libraries([str(foreign)],self.sdk,fingerprints,[])
+        library.write_bytes(b'changed after SDK fingerprint')
+        with self.assertRaisesRegex(ValueError,'manifest'):
+            loaded_sdk_libraries([str(library)],self.sdk,fingerprints,[])
+
+    def test_configured_shared_targets_must_be_loaded(self):
+        for target in ('lib/libhgraph_runtime.so','lib/libhgraph_runtime.so.1',
+                       'lib/libhgraph_runtime.dylib','bin/hgraph_runtime.dll'):
+            with self.subTest(target=target),self.assertRaisesRegex(ValueError,'not loaded'):
+                loaded_sdk_libraries([],self.sdk,{},[target])
+        self.assertEqual(loaded_sdk_libraries([],self.sdk,{},['lib/libhgraph_runtime.a']),{})
+
+    @unittest.skipUnless(os.name=='posix' and Path('/proc/self/maps').exists() and shutil.which('c++'),
+                         'Linux compiler and loader are required for the runtime override control')
+    def test_ld_library_path_override_is_rejected(self):
+        source=self.root/'library.cpp'
+        source.write_text('extern "C" int probe_value() { return PROBE_VALUE; }\n')
+        directories=[self.sdk/'lib',self.root/'foreign']
+        for directory,value in zip(directories,(1,2)):
+            directory.mkdir(exist_ok=True)
+            subprocess.run(['c++','-shared','-fPIC','-DPROBE_VALUE='+str(value),str(source),
+                            '-o',str(directory/'libhgraph_runtime.so')],check=True,capture_output=True)
+        probe=self.root/'loader.cpp'
+        probe.write_text('#include <dlfcn.h>\n#include <iostream>\n'
+                         'extern "C" int probe_value();\nint main() { Dl_info info{}; '
+                         'if (!dladdr((void*)&probe_value, &info)) return 1; '
+                         'std::cout << probe_value() << "\\n" << info.dli_fname << "\\n"; }\n')
+        executable=self.root/'loader'
+        subprocess.run(['c++',str(probe),'-L'+str(directories[0]),'-lhgraph_runtime','-ldl',
+                        '-Wl,--enable-new-dtags','-Wl,-rpath,'+str(directories[0]),'-o',str(executable)],
+                       check=True,capture_output=True)
+        sdk_library=directories[0]/'libhgraph_runtime.so'
+        relative=sdk_library.relative_to(self.sdk).as_posix()
+        fingerprints={relative:hashlib.sha256(sdk_library.read_bytes()).hexdigest()}
+        for directory,value in zip(directories,('1','2')):
+            environment=dict(os.environ,LD_LIBRARY_PATH=str(directory))
+            lines=subprocess.check_output([str(executable)],env=environment,text=True).splitlines()
+            self.assertEqual(lines[0],value)
+            self.assertEqual(Path(lines[1]).resolve(),directory/'libhgraph_runtime.so')
+            if value=='1':
+                self.assertEqual(loaded_sdk_libraries(lines[1:],self.sdk,fingerprints,[relative]),fingerprints)
+            else:
+                with self.assertRaisesRegex(ValueError,'belong'):
+                    loaded_sdk_libraries(lines[1:],self.sdk,fingerprints,[relative])
 
 
     @unittest.skipUnless(all(shutil.which(tool) for tool in ('cmake', 'c++', 'make', 'ninja')),

@@ -1,8 +1,38 @@
 """Bind the probe to its configured target, SDK and selected compile command."""
+import hashlib
 import json
 from pathlib import Path
 import shlex
 import subprocess
+
+def shared_library(path):
+    name = Path(path).name.lower()
+    return name.endswith(('.dll', '.dylib', '.so')) or '.so.' in name
+
+
+def loaded_sdk_libraries(paths, sdk, sdk_hashes, target_libraries):
+    """Bind actual loader paths and bytes to the supplied SDK, not basenames."""
+    sdk = sdk.resolve()
+    loaded = {}
+    names = set()
+    for value in paths:
+        path = Path(value).resolve(strict=True)
+        if not path.is_relative_to(sdk):
+            raise ValueError('Loaded hgraph library does not belong to supplied SDK')
+        relative = path.relative_to(sdk).as_posix()
+        fingerprint = hashlib.sha256(path.read_bytes()).hexdigest()
+        if relative not in sdk_hashes or sdk_hashes[relative] != fingerprint:
+            raise ValueError('Loaded hgraph library does not match supplied SDK manifest')
+        if path.name in names:
+            raise ValueError('Duplicate loaded hgraph library basename')
+        names.add(path.name)
+        loaded[relative] = fingerprint
+    required = {path for path in target_libraries if shared_library(path)}
+    if not required <= set(loaded):
+        raise ValueError('Configured hgraph shared target library was not loaded')
+    if set(loaded) != required:
+        raise ValueError('Loaded hgraph library is not a configured shared target')
+    return loaded
 
 def cache_values(build_dir):
     cache = {}
@@ -108,10 +138,10 @@ def sdk_binding(build_dir, executable, sdk):
     if package != sdk/'lib/cmake/hgraph':
         raise ValueError('Configured hgraph package does not belong to the supplied SDK')
     libraries = [Path(row).resolve() for row in rows[2:]]
-    if len(set(libraries)) != 3 or any(not path.is_file() or not path.is_relative_to(sdk/'lib') for path in libraries):
+    if len(set(libraries)) != 3 or any(not path.is_file() or not any(path.is_relative_to(sdk/directory) for directory in ('lib','bin')) for path in libraries):
         raise ValueError('Configured hgraph targets do not belong to the supplied SDK')
     cache = cache_values(build_dir)
     if Path(cache['CMAKE_HOME_DIRECTORY']).resolve() != Path(__file__).resolve().parent:
         raise ValueError('Build directory belongs to another probe source')
     command = compile_command(build_dir, Path(__file__).with_name('native.cpp'), sdk/'include', config)
-    return artifact, config, manifest, command, [str(path.relative_to(sdk)) for path in libraries]
+    return artifact, config, manifest, command, [path.relative_to(sdk).as_posix() for path in libraries]
