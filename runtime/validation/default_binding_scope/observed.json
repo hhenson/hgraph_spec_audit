@@ -21,10 +21,22 @@
           "stderr": "<probe>/earlier_parameter.cpp:1:36: error: parameter \u2018first\u2019 may not appear in this context\n    1 | int choose(int first, int second = first) { return second; }\n      |                                    ^~~~~\n<probe>/earlier_parameter.cpp: In function \u2018int choose(int, int)\u2019:\n<probe>/earlier_parameter.cpp:1:16: warning: unused parameter \u2018first\u2019 [-Wunused-parameter]\n    1 | int choose(int first, int second = first) { return second; }\n      |            ~~~~^~~~~\n",
           "stdout": ""
         },
+        "invocation": {
+          "compiler_sha256": "e6718f7e0c7d057c3ff77b550c603da9bc4030e3ede3c053705acce1293dbe4d",
+          "flags": [
+            "-std=c++20",
+            "-O0",
+            "-Wall",
+            "-Wextra",
+            "-fsyntax-only"
+          ],
+          "source": "earlier_parameter.cpp",
+          "source_sha256": "c14865d990cb9bfdf9b1362b960cf065a5c20406e57ee40928555b572795cf4b"
+        },
         "runs_sha256": [
-          "909f31b5e8d3f6fbce1d401574ebf9270acb740801481d1fc08d7832a14fb984",
-          "909f31b5e8d3f6fbce1d401574ebf9270acb740801481d1fc08d7832a14fb984",
-          "909f31b5e8d3f6fbce1d401574ebf9270acb740801481d1fc08d7832a14fb984"
+          "8777e472cde9582095396bbdbff27c426e2e33b7a135973667738d1d17335aa7",
+          "8777e472cde9582095396bbdbff27c426e2e33b7a135973667738d1d17335aa7",
+          "8777e472cde9582095396bbdbff27c426e2e33b7a135973667738d1d17335aa7"
         ]
       },
       "shadow_parameter": {
@@ -33,10 +45,22 @@
           "stderr": "<probe>/shadow_parameter.cpp:2:36: error: parameter \u2018first\u2019 may not appear in this context\n    2 | int choose(int first, int second = first) { return second; }\n      |                                    ^~~~~\n<probe>/shadow_parameter.cpp: In function \u2018int choose(int, int)\u2019:\n<probe>/shadow_parameter.cpp:2:16: warning: unused parameter \u2018first\u2019 [-Wunused-parameter]\n    2 | int choose(int first, int second = first) { return second; }\n      |            ~~~~^~~~~\n",
           "stdout": ""
         },
+        "invocation": {
+          "compiler_sha256": "e6718f7e0c7d057c3ff77b550c603da9bc4030e3ede3c053705acce1293dbe4d",
+          "flags": [
+            "-std=c++20",
+            "-O0",
+            "-Wall",
+            "-Wextra",
+            "-fsyntax-only"
+          ],
+          "source": "shadow_parameter.cpp",
+          "source_sha256": "4da1d363235704810a142c30a849de33664c9a12447da93fa4489ffc14bc69ae"
+        },
         "runs_sha256": [
-          "81226cb4ed43a9f45649f99b21d05e0a5678eb0e145e936aa446318a331d86be",
-          "81226cb4ed43a9f45649f99b21d05e0a5678eb0e145e936aa446318a331d86be",
-          "81226cb4ed43a9f45649f99b21d05e0a5678eb0e145e936aa446318a331d86be"
+          "bdc579b9da281fdc08a492e9e0f776f9a2f1087fe9a003f3841d43b542804c9e",
+          "bdc579b9da281fdc08a492e9e0f776f9a2f1087fe9a003f3841d43b542804c9e",
+          "bdc579b9da281fdc08a492e9e0f776f9a2f1087fe9a003f3841d43b542804c9e"
         ]
       }
     },
@@ -61,12 +85,36 @@
       "unevaluated_parameter": true
     },
     "runs_sha256": [
-      "a7fa60745b16b5b16a21fd51060b54799fb3d33d50df9bf9a87b11e00c5eab59",
-      "a7fa60745b16b5b16a21fd51060b54799fb3d33d50df9bf9a87b11e00c5eab59",
-      "a7fa60745b16b5b16a21fd51060b54799fb3d33d50df9bf9a87b11e00c5eab59"
-    ]
+      "17d492bbd26310a838c510f7c8c2bb76f010245079306a672e84245c671218c5",
+      "17d492bbd26310a838c510f7c8c2bb76f010245079306a672e84245c671218c5",
+      "17d492bbd26310a838c510f7c8c2bb76f010245079306a672e84245c671218c5"
+    ],
+    "syntax_control": {
+      "capture": {
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      "invocation": {
+        "compiler_sha256": "e6718f7e0c7d057c3ff77b550c603da9bc4030e3ede3c053705acce1293dbe4d",
+        "flags": [
+          "-std=c++20",
+          "-O0",
+          "-Wall",
+          "-Wextra",
+          "-fsyntax-only"
+        ],
+        "source": "positive.cpp",
+        "source_sha256": "f0b3c929978b88eae53b7316c7254e275bcbaded1a2ba7f4d99971efffd40d6e"
+      },
+      "runs_sha256": [
+        "38536111f48954880ae1d0e4c6a764680826deaab9feaa7fc52e596d015545fd",
+        "38536111f48954880ae1d0e4c6a764680826deaab9feaa7fc52e596d015545fd",
+        "38536111f48954880ae1d0e4c6a764680826deaab9feaa7fc52e596d015545fd"
+      ]
+    }
   },
-  "measured_at": "2026-10-11T06:01:39.989627+00:00",
+  "measured_at": "2026-10-11T07:46:01.805753+00:00",
   "python": {
     "identity": {
       "eval_node_module": "hgraph.test._node_unit_tester",
@@ -824,7 +872,7 @@
   "repeats": 3,
   "sources_sha256": {
     "earlier_parameter.cpp": "c14865d990cb9bfdf9b1362b960cf065a5c20406e57ee40928555b572795cf4b",
-    "observe.py": "3ed8cd267dac0b523633f4b095aeaa1cc9d54054695c05a730f59cc8d37e9e29",
+    "observe.py": "809b9504b6dffd26cefd9d62aeec372514d55f8f3fca15b0b1dab4f7d6239291",
     "positive.cpp": "f0b3c929978b88eae53b7316c7254e275bcbaded1a2ba7f4d99971efffd40d6e",
     "python_probe.py": "042e67d59cf4a83cc58a1aed2b1d38bdb8c3b1745753939e1cfc1ac02a0f492f",
     "reasoned.json": "f94770d0f38742e20d59e038d0ef948a70a55f11068354add732251645ab7907",

@@ -17,6 +17,17 @@ def digest(value):
 def valid_sha(value):
     assert isinstance(value, str) and re.fullmatch(r'[0-9a-f]{64}', value)
 
+def check_syntax_capture(probe, cpp, source):
+    invocation = probe['invocation']
+    assert invocation == {'compiler_sha256': cpp['compiler_sha256'],
+                          'flags': [*cpp['flags'], '-fsyntax-only'],
+                          'source': source, 'source_sha256': sha(HERE / source)}
+    capture = probe['capture']
+    assert isinstance(capture['stdout'], str) and isinstance(capture['stderr'], str)
+    assert type(capture['exit_code']) is int
+    assert probe['runs_sha256'] == [digest({'invocation': invocation, 'capture': capture})] * 3
+    return capture
+
 def check(record=None):
     record = record if record is not None else json.loads((HERE / 'observed.json').read_text())
     expected = json.loads((HERE / 'reasoned.json').read_text())
@@ -44,11 +55,12 @@ def check(record=None):
     assert isinstance(cpp['compiler_version'], str) and cpp['compiler_version'].strip()
     assert cpp['flags'] == ['-std=c++20', '-O0', '-Wall', '-Wextra']
     assert cpp['build']['exit_code'] == 0
+    control = check_syntax_capture(cpp['syntax_control'], cpp, 'positive.cpp')
+    assert control['exit_code'] == 0
     assert set(cpp['rejections']) == {'earlier_parameter', 'shadow_parameter'}
     results = dict(cpp['results'])
     for name, rejection in cpp['rejections'].items():
-        capture = rejection['capture']
-        assert rejection['runs_sha256'] == [digest(capture)] * 3
+        capture = check_syntax_capture(rejection, cpp, name + '.cpp')
         assert type(capture['exit_code']) is int and 0 < capture['exit_code'] <= 255
         assert isinstance(capture['stdout'], str) and isinstance(capture['stderr'], str)
         assert capture['stdout'].strip() or capture['stderr'].strip()
