@@ -8,8 +8,34 @@ sys.path.insert(0,str(HERE.parent))
 from evidence_identity import digest, manifest, validate_identity
 from build_identity import command_configuration, include_paths
 SUPPORT_NAMES=('delta_eval/observe.py','fixed/reference_identity.py','fixed/native_identity.py')
+OWNED_REQUIREMENT=(7,8,8,None,None,None)
 
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+
+def load_requirements():
+    return (json.loads((HERE/'reasoned.json').read_text()),
+            json.loads((HERE/'native_reasoned.json').read_text()))
+
+def check_requirements(reasoned,native_reasoned):
+    assert reasoned['written_before_measurement'] is True
+    assert native_reasoned['written_before_measurement'] is True
+    # This audit's frozen TS-23 requirement expires at the next cycle. Updating
+    # capture fingerprints cannot redefine it to match a delayed runtime expiry.
+    assert reasoned['expected_followed']==native_reasoned['owned_followed']==list(OWNED_REQUIREMENT)
+    assert reasoned['outer_owner_control']['expected_followed']==native_reasoned['outer_owner_control_followed']
+
+def assess_owned(case,expected):
+    if 'error_type' in case:
+        return 'error'
+    return 'match' if [row['value'] for row in case['events']]==expected else 'divergence'
+
+def assess_native(native,reasoned,native_reasoned):
+    return {
+        'owned':assess_owned({'events':native['owned']},reasoned['expected_followed']),
+        'outer_owner_control':'match' if [row['value'] for row in native['outer_owner_control']]==reasoned['outer_owner_control']['expected_followed'] else 'divergence',
+        'reference_identity':'match' if native['identity']==[native_reasoned['reference_identity']] else 'divergence',
+        'bool_operations':'match' if native['bool_operations']==native_reasoned['bool_operations'] else 'divergence',
+    }
 
 def check_flags(events, expected):
     fields=('reference_valid','data_valid','reference_modified','data_modified')
@@ -63,8 +89,8 @@ def check(public=None,native=None):
         public=json.loads((HERE/'observed.json').read_text())
     if native is None:
         native=json.loads((HERE/'native_observed.json').read_text())
-    reasoned=json.loads((HERE/'reasoned.json').read_text())
-    native_reasoned=json.loads((HERE/'native_reasoned.json').read_text())
+    reasoned,native_reasoned=load_requirements()
+    check_requirements(reasoned,native_reasoned)
     for record,names in [(public,('observe.py','reasoned.json')),(native,('native.cpp','native_reasoned.json','native_observe.py','CMakeLists.txt','build_identity.py'))]:
         assert record['repeats']==3
         assert record['sources_sha256']=={name:sha(HERE/name) for name in names}
@@ -83,6 +109,8 @@ def check(public=None,native=None):
         assert scalar['reference_identity']==native_reasoned['reference_identity']
         assert scalar['bool_operations']==native_reasoned['bool_operations']
         owned=cases['owned']
+        assessment=assess_owned(owned,reasoned['expected_followed'])
+        assert assessment==('error' if engine=='python' else 'divergence')
         # Preserve measured flags, including the C++ target's late invalidation;
         # these are evidence checks, not the reasoned owner-expiry requirement.
         owned_flags=[(True,True,True,True),(True,True,False,True),(True,True,False,False)]
@@ -102,8 +130,9 @@ def check(public=None,native=None):
     assert native['outer_owner_control']==public['engines']['cpp']['cases']['outer_owner_control']['events']
     assert native['identity']==[native_reasoned['reference_identity']]
     assert native['bool_operations']==native_reasoned['bool_operations']
-    assert native['assessment']=={'owned':'divergence','outer_owner_control':'match','reference_identity':'match','bool_operations':'match'}
-    assert [row['value'] for row in native['owned']]!=native_reasoned['owned_followed']
+    assessment=assess_native(native,reasoned,native_reasoned)
+    assert native['assessment']==assessment
+    assert assessment=={'owned':'divergence','outer_owner_control':'match','reference_identity':'match','bool_operations':'match'}
     return True
 
 if __name__=='__main__':

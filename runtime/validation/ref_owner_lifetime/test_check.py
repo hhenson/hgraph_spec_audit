@@ -3,6 +3,7 @@ import hashlib
 import json
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 import check
 HERE=Path(__file__).resolve().parent
 
@@ -12,6 +13,47 @@ class RecordedEvidence(unittest.TestCase):
         self.native=json.loads((HERE/'native_observed.json').read_text())
     def test_recorded(self): self.assertTrue(check.check(self.public,self.native))
     def test_default_records(self): self.assertTrue(check.check())
+    def test_owned_assessments_derive_from_requirement_without_padding_python_error(self):
+        reasoned,native_reasoned=check.load_requirements()
+        check.check_requirements(reasoned,native_reasoned)
+        self.assertEqual(check.assess_owned(self.public['engines']['python']['cases']['owned'],reasoned['expected_followed']),'error')
+        self.assertEqual(check.assess_owned(self.public['engines']['cpp']['cases']['owned'],reasoned['expected_followed']),'divergence')
+        self.assertEqual(check.assess_native(self.native,reasoned,native_reasoned),self.native['assessment'])
+        self.assertEqual(len(self.public['engines']['python']['cases']['owned']['events']),3)
+    def test_changed_owned_requirement_rejected_after_coordinated_recapture(self):
+        original_sha=check.sha
+        for expected in ([7,8,8,8,None,None],[7,8,8],[7,8,None,None,None,None],[7,8,8,8,8,None]):
+            for update_native in (False,True):
+                with self.subTest(expected=expected,update_native=update_native):
+                    reasoned,native_reasoned=check.load_requirements()
+                    public=copy.deepcopy(self.public)
+                    native=copy.deepcopy(self.native)
+                    reasoned['expected_followed']=expected
+                    changed={'reasoned.json':hashlib.sha256(json.dumps(reasoned).encode()).hexdigest()}
+                    public['sources_sha256']['reasoned.json']=changed['reasoned.json']
+                    if update_native:
+                        native_reasoned['owned_followed']=expected
+                        changed['native_reasoned.json']=hashlib.sha256(json.dumps(native_reasoned).encode()).hexdigest()
+                        native['sources_sha256']['native_reasoned.json']=changed['native_reasoned.json']
+                        native['assessment']['owned']='match' if [row['value'] for row in native['owned']]==expected else 'divergence'
+                    self.reseal(native)
+                    with patch.object(check,'load_requirements',return_value=(reasoned,native_reasoned)),patch.object(check,'sha',side_effect=lambda path:changed[path.name] if path.name in changed else original_sha(path)):
+                        with self.assertRaises(AssertionError): check.check(public,native)
+    def test_divergence_assessment_cannot_be_relabeled_after_resealing(self):
+        self.native['assessment']['owned']='match'
+        self.reseal(self.native)
+        with self.assertRaises(AssertionError): check.check(self.public,self.native)
+    def test_cpp_and_native_observations_cannot_be_repaired_into_a_requirement_match(self):
+        owned=self.public['engines']['cpp']['cases']['owned']
+        owned['events'][3]['value']=None
+        owned['events'][3]['data_valid']=False
+        owned['raw']=[json.dumps(row,sort_keys=True) for row in owned['events']]
+        self.native['owned']=copy.deepcopy(owned['events'])
+        self.native['assessment']['owned']='match'
+        self.reseal(self.native)
+        reasoned,_=check.load_requirements()
+        self.assertEqual(check.assess_owned(owned,reasoned['expected_followed']),'match')
+        with self.assertRaises(AssertionError): check.check(self.public,self.native)
     def test_empty_public_record_is_not_replaced(self):
         with self.assertRaises(KeyError): check.check({},self.native)
     def test_empty_native_record_is_not_replaced(self):

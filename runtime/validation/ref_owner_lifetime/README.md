@@ -34,6 +34,11 @@ For successful captures, every parsed raw published row must match the process-l
 rows exactly, with no missing, extra or duplicated publications. The failed
 Python owned-reference capture preserves its partial events and error without
 claiming a successful raw result.
+The checker derives the public/native owned assessments from the frozen
+next-cycle expiry requirement and checks that both reasoned corpora agree.
+Refreshing source fingerprints cannot move expiry to the later observed C++
+cycle or turn its divergence into a match. The Python exception remains an
+error with three partial events, without padding it into a completed trace.
 
 The native recorder accepts only the executable declared by its configured
 `ref_owner_lifetime_native` CMake target. It verifies the supplied SDK package,
