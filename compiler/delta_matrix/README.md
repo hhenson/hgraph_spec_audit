@@ -145,7 +145,8 @@ objects, run from the audit repository root (adjust sibling paths as needed):
 ```sh
 python3 compiler/delta_matrix/check.py \
   --stdlib-checkout ../hgraph-matrix/external/hgraph_std \
-  --spec-checkout ../hgraph-matrix/external/hgraph_spec
+  --spec-checkout ../hgraph-matrix/external/hgraph_spec \
+  --rust-checkout ../hgl-matrix
 ```
 
 This verifies the recorded revision, regardless of each checkout's current
@@ -166,3 +167,12 @@ Negative fixture and part hashes are derived from the pinned Spec Git blobs in
 `negative_sources.json` and checked against both original backend reports.
 `--spec-checkout` also checks the selected working files against those blobs.
 The compiler revision supplied to the original runners remains unverified.
+
+The ordered command-wide Rust parts, `native/stdlib/interfaces.hgl` and
+`native/stdlib/rust.hgl`, are independently derived from tracked blobs at the
+pinned Rust revision in [negative_global_parts.json](negative_global_parts.json).
+Its provenance digest seals their paths, names, order and hashes; both original
+reports must match it, including C++'s empty global-part list. `--rust-checkout`
+verifies those Git blobs and the selected working input files, regardless of
+checkout HEAD. This input-content proof does not certify the original compiler
+binary's build revision. Original reports and measurements remain unchanged.

@@ -9,6 +9,7 @@ import re
 import subprocess
 
 HERE = Path(__file__).resolve().parent
+RUST_GLOBAL_PARTS = ('native/stdlib/interfaces.hgl', 'native/stdlib/rust.hgl')
 
 
 def sha(data):
@@ -77,7 +78,45 @@ def verify_negative_checkout(checkout, sources):
             require(sha(path.read_bytes()) == source['sha256'], 'negative checkout source differs from pinned blob')
 
 
-def validate_negative(summary, report, manifest, sources=None):
+def negative_global_parts(checkout, revision):
+    """Derive the ordered Rust command-wide parts from immutable Git blobs."""
+    return {'schema_version': 1, 'rust_revision': revision, 'backends': {
+        'cpp': [], 'rust': [{'file': path, 'name': Path(path).name,
+                             'sha256': sha(git_bytes(checkout, revision, path))}
+                            for path in RUST_GLOBAL_PARTS]}}
+
+
+def validate_global_parts(parts, revision):
+    require(isinstance(parts, dict) and set(parts) == {'schema_version', 'rust_revision', 'backends'}, 'global part inventory fields changed')
+    require(type(parts['schema_version']) is int and parts['schema_version'] == 1, 'global part inventory schema changed')
+    require(parts['rust_revision'] == revision, 'global part inventory revision changed')
+    require(isinstance(parts['backends'], dict) and set(parts['backends']) == {'cpp', 'rust'} and parts['backends']['cpp'] == [], 'C++ global parts must be absent')
+    rows = parts['backends']['rust']
+    require(isinstance(rows, list) and len(rows) == len(RUST_GLOBAL_PARTS), 'Rust global part count changed')
+    for row, path in zip(rows, RUST_GLOBAL_PARTS):
+        require(isinstance(row, dict) and set(row) == {'file', 'name', 'sha256'}, 'Rust global part fields changed')
+        require(row['file'] == path and row['name'] == Path(path).name, 'Rust global part identity or order changed')
+        require(isinstance(row['sha256'], str) and re.fullmatch('[0-9a-f]{64}', row['sha256']) is not None,
+                'invalid Rust global part fingerprint')
+
+
+def load_global_parts(revision):
+    data = (HERE / 'negative_global_parts.json').read_bytes()
+    provenance = json.loads((HERE / 'provenance.json').read_text())
+    require(sha(data) == provenance['negative_global_parts_sha256'], 'pinned global part inventory changed')
+    parts = json.loads(data)
+    validate_global_parts(parts, revision)
+    return parts
+
+
+def verify_global_parts_checkout(checkout, parts):
+    """Verify the selected working inputs, independently of checkout HEAD."""
+    for source in parts['backends']['rust']:
+        require(sha((Path(checkout) / source['file']).read_bytes()) == source['sha256'],
+                'Rust global part checkout source differs from pinned blob')
+
+
+def validate_negative(summary, report, manifest, sources=None, global_parts=None):
     """Derive matches from original process output using the measured observer."""
     observer_path = HERE.parent / 'negative_testing/observe.py'
     require(sha(observer_path.read_bytes()) == summary['observer_sha256'], 'negative matching observer changed')
@@ -87,6 +126,12 @@ def validate_negative(summary, report, manifest, sources=None):
     for field in ('backend', 'source_revision', 'source_revision_verified_by_runner',
                   'compiler_sha256', 'observer_sha256', 'manifest_sha256'):
         require(report[field] == summary[field], f'original negative report changed {field}')
+    if global_parts is None:
+        revision = json.loads((HERE / 'expected.json').read_text())['revisions']['rust']
+        global_parts = load_global_parts(revision)
+    expected_parts = [{'name': part['name'], 'sha256': part['sha256']}
+                      for part in global_parts['backends'][report['backend']]]
+    require(report.get('parts') == expected_parts, 'original negative global parts differ from pinned blobs')
     cases = manifest['cases']
     if sources is None:
         sources = json.loads((HERE / 'negative_sources.json').read_text())
@@ -152,7 +197,7 @@ def validate(report, expected):
             require(re.fullmatch('[0-9a-f]{64}', row[field]) is not None, f'invalid {field}')
 
 
-def check(report=None, stdlib_checkout=None, spec_checkout=None):
+def check(report=None, stdlib_checkout=None, spec_checkout=None, rust_checkout=None):
     provenance = json.loads((HERE / 'provenance.json').read_text())
     expected_bytes = (HERE / 'expected.json').read_bytes()
     require(sha(expected_bytes) == provenance['expected_sha256'], 'pinned source manifest integrity changed')
@@ -161,6 +206,7 @@ def check(report=None, stdlib_checkout=None, spec_checkout=None):
     require(sha(source_bytes) == provenance['negative_sources_sha256'], 'pinned negative source inventory changed')
     sources = json.loads(source_bytes)
     require(sources['spec_revision'] == expected['revisions']['spec'], 'negative source inventory revision changed')
+    global_parts = load_global_parts(expected['revisions']['rust'])
     manifest_bytes = (HERE / 'negative_manifest.json').read_bytes()
     require(sha(manifest_bytes) == expected['negative_manifest_sha256'], 'pinned detailed negative manifest changed')
     manifest = json.loads(manifest_bytes)
@@ -171,7 +217,7 @@ def check(report=None, stdlib_checkout=None, spec_checkout=None):
     for summary in report['negative_measurements']:
         original_bytes = (HERE / f'negative_{summary["backend"]}.json').read_bytes()
         require(sha(original_bytes) == summary['raw_report_sha256'], 'original negative report bytes changed')
-        validate_negative(summary, json.loads(original_bytes), manifest, sources)
+        validate_negative(summary, json.loads(original_bytes), manifest, sources, global_parts)
     if raw is not None:
         require(sha(raw) == provenance['results_sha256'], 'frozen report bytes changed')
     require(sha(json.dumps(report, sort_keys=True, separators=(',', ':')).encode()) == provenance['results_semantic_sha256'], 'frozen report content changed')
@@ -182,6 +228,10 @@ def check(report=None, stdlib_checkout=None, spec_checkout=None):
         require(digest == expected['negative_manifest_sha256'] and cases == expected['negative_cases'], 'pinned negative fixtures differ from manifest')
         require(negative_sources(spec_checkout, expected['revisions']['spec']) == sources, 'pinned negative source blobs differ from inventory')
         verify_negative_checkout(spec_checkout, sources)
+    if rust_checkout is not None:
+        require(negative_global_parts(rust_checkout, expected['revisions']['rust']) == global_parts,
+                'pinned Rust global part blobs differ from inventory')
+        verify_global_parts_checkout(rust_checkout, global_parts)
     return True
 
 
@@ -189,6 +239,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--stdlib-checkout', type=Path)
     parser.add_argument('--spec-checkout', type=Path)
+    parser.add_argument('--rust-checkout', type=Path)
     args = parser.parse_args()
-    check(stdlib_checkout=args.stdlib_checkout, spec_checkout=args.spec_checkout)
+    check(stdlib_checkout=args.stdlib_checkout, spec_checkout=args.spec_checkout, rust_checkout=args.rust_checkout)
     print('Frozen HGL matrix: 258 named tests on four backend/platform pairs, 43 negative controls per Linux backend; no fresh execution.')

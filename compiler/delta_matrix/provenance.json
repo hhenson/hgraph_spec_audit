@@ -7,5 +7,7 @@
   "manifest_derivation": "Source hashes, named tests and eval call sites were independently extracted from the recorded standard-library Git revision with check.source_manifest. Negative identities/exits and observer hash were extracted from the recorded specification/audit Git revisions. No compiler or runtime executed.",
   "limitation": "Original standard-module compiler logs are represented by their recorded hashes; their contents are not vendored or independently reconstructed. Negative observer source revisions remain caller-supplied rather than independently certified build-chain provenance.",
   "negative_reports": "The original C++ and Rust process reports were recovered and archived byte-for-byte; their SHA256 digests match the original frozen results.json raw_report_sha256 fields. Matches are re-derived using the fingerprinted observer and byte-identical pinned fixture manifest. No compiler or runtime executed.",
-  "negative_sources_sha256": "41b6a7680d84b63bf04d1ba92d585a0963e7dc1ed8ca863d8d3d04a11c2c4d9b"
+  "negative_sources_sha256": "41b6a7680d84b63bf04d1ba92d585a0963e7dc1ed8ca863d8d3d04a11c2c4d9b",
+  "negative_global_parts_sha256": "986274a413eb796a204250278f6908a8c723963c1bbf5c4882b49bf1c478d2d0",
+  "negative_global_parts_derivation": "The ordered report-level Rust --part inputs were independently extracted from native/stdlib/interfaces.hgl and native/stdlib/rust.hgl Git blobs at the pinned Rust revision with check.negative_global_parts. Their names and hashes match the original report; the original C++ report has no global parts. This verifies input content, not the original caller-supplied compiler build revision. No compiler or runtime executed."
 }

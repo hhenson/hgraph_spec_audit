@@ -17,6 +17,7 @@ class MatrixEvidence(unittest.TestCase):
         self.report = json.loads((HERE / 'results.json').read_text())
         self.expected = json.loads((HERE / 'expected.json').read_text())
         self.manifest = json.loads((HERE / 'negative_manifest.json').read_text())
+        self.global_parts = json.loads((HERE / 'negative_global_parts.json').read_text())
         self.negatives = {backend: json.loads((HERE / f'negative_{backend}.json').read_text())
                           for backend in ('cpp', 'rust')}
 
@@ -182,7 +183,7 @@ class MatrixEvidence(unittest.TestCase):
     def test_original_report_hash_is_required(self):
         with tempfile.TemporaryDirectory() as folder:
             target = Path(folder)
-            for name in ('provenance.json', 'expected.json', 'negative_manifest.json', 'negative_sources.json'):
+            for name in ('provenance.json', 'expected.json', 'negative_manifest.json', 'negative_sources.json', 'negative_global_parts.json'):
                 (target / name).write_bytes((HERE / name).read_bytes())
             (target / 'negative_cpp.json').write_text('{}')
             with patch.object(check, 'HERE', target):
@@ -246,6 +247,89 @@ class MatrixEvidence(unittest.TestCase):
             with patch.object(check, 'HERE', target):
                 with self.assertRaisesRegex(ValueError, 'source inventory changed'):
                     check.check(self.report)
+
+    def test_original_global_parts_missing_extra_hash_order_and_name_rejected(self):
+        for summary in self.report['negative_measurements']:
+            original=self.negatives[summary['backend']]
+            mutations=[lambda r:r.pop('parts'),lambda r:r.update(parts=None),
+                       lambda r:r['parts'].append({'name':'foreign.hgl','sha256':'0'*64})]
+            if summary['backend']=='rust':
+                mutations.extend([lambda r:r['parts'].pop(),lambda r:r['parts'].reverse(),
+                                  lambda r:r['parts'][0].update(sha256='0'*64),
+                                  lambda r:r['parts'][0].update(name='renamed.hgl')])
+            for mutation in mutations:
+                report=copy.deepcopy(original);mutation(report)
+                with self.subTest(backend=summary['backend'],mutation=mutation),self.assertRaisesRegex(ValueError,'global parts'):
+                    check.validate_negative(summary,report,self.manifest)
+
+    def test_global_part_inventory_schema_paths_order_and_digests(self):
+        mutations=[lambda p:p.update(rust_revision='0'*40),
+                   lambda p:p['backends'].update(cpp=[{'name':'foreign.hgl'}]),
+                   lambda p:p['backends']['rust'].pop(),
+                   lambda p:p['backends']['rust'].reverse(),
+                   lambda p:p['backends']['rust'].append(p['backends']['rust'][0]),
+                   lambda p:p['backends']['rust'][0].update(file='../interfaces.hgl'),
+                   lambda p:p['backends']['rust'][0].update(name='renamed.hgl'),
+                   lambda p:p['backends']['rust'][0].update(sha256='z'*64),
+                   lambda p:p['backends']['rust'][0].update(sha256=0)]
+        for mutation in mutations:
+            parts=copy.deepcopy(self.global_parts);mutation(parts)
+            with self.subTest(mutation=mutation),self.assertRaises(ValueError):
+                check.validate_global_parts(parts,self.expected['revisions']['rust'])
+
+    def test_global_part_inventory_cannot_be_resealed_with_changed_valid_hash(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target=Path(directory)
+            for name in ('provenance.json','expected.json','negative_manifest.json','negative_sources.json','negative_cpp.json','negative_rust.json'):
+                (target/name).write_bytes((HERE/name).read_bytes())
+            parts=copy.deepcopy(self.global_parts)
+            parts['backends']['rust'][0]['sha256']='0'*64
+            data=json.dumps(parts).encode()
+            (target/'negative_global_parts.json').write_bytes(data)
+            provenance=json.loads((target/'provenance.json').read_text())
+            provenance['negative_global_parts_sha256']=check.sha(data)
+            (target/'provenance.json').write_text(json.dumps(provenance))
+            # Loading a well-formed resealed manifest succeeds, but the
+            # unchanged original report independently rejects its false hash.
+            with patch.object(check,'HERE',target):
+                loaded=check.load_global_parts(self.expected['revisions']['rust'])
+            summary=next(r for r in self.report['negative_measurements'] if r['backend']=='rust')
+            with self.assertRaisesRegex(ValueError,'global parts differ'):
+                check.validate_negative(summary,self.negatives['rust'],self.manifest,global_parts=loaded)
+
+    def test_pinned_global_part_inventory_cannot_be_replaced(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target=Path(directory)
+            (target/'provenance.json').write_bytes((HERE/'provenance.json').read_bytes())
+            (target/'negative_global_parts.json').write_text('{}')
+            with patch.object(check,'HERE',target),self.assertRaisesRegex(ValueError,'global part inventory changed'):
+                check.load_global_parts(self.expected['revisions']['rust'])
+
+    def test_rust_global_parts_git_blobs_and_selected_working_files(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            for name in check.RUST_GLOBAL_PARTS:
+                path=root/name;path.parent.mkdir(parents=True,exist_ok=True)
+                path.write_text('part '+Path(name).stem+'\n')
+            def git(*args):
+                return subprocess.check_output(['git','-C',str(root),*args],stderr=subprocess.DEVNULL)
+            git('init','-q');git('add','.')
+            git('-c','user.name=Fixture','-c','user.email=fixture@example.com','commit','-qm','Frozen global inputs')
+            revision=git('rev-parse','HEAD').decode().strip()
+            frozen=check.negative_global_parts(root,revision)
+            check.validate_global_parts(frozen,revision)
+            check.verify_global_parts_checkout(root,frozen)
+            for name in check.RUST_GLOBAL_PARTS:
+                path=root/name;original=path.read_bytes();path.write_bytes(original+b'# changed working input\n')
+                self.assertEqual(check.negative_global_parts(root,revision),frozen)
+                with self.assertRaisesRegex(ValueError,'checkout source differs'):
+                    check.verify_global_parts_checkout(root,frozen)
+                path.write_bytes(original)
+            (root/check.RUST_GLOBAL_PARTS[1]).write_text('part changed\n')
+            git('add','.')
+            git('-c','user.name=Fixture','-c','user.email=fixture@example.com','commit','-qm','Changed global input')
+            changed=git('rev-parse','HEAD').decode().strip()
+            self.assertNotEqual(check.negative_global_parts(root,changed),frozen)
 
     def test_expected_manifest_cannot_be_replaced(self):
         with tempfile.TemporaryDirectory() as folder:
