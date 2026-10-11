@@ -72,6 +72,9 @@ def negative_sources(checkout, revision):
 
 def verify_negative_checkout(checkout, sources):
     """The selected working files must also be the blobs that the runner reads."""
+    manifest = 'compiler/negative_testing/cases.json'
+    require(sha((Path(checkout) / manifest).read_bytes()) == sha(git_bytes(checkout, sources['spec_revision'], manifest)),
+            'negative checkout manifest differs from pinned blob')
     for case in sources['cases']:
         for source in [{'file': case['file'], 'sha256': case['source_sha256']}, *case['part_sources']]:
             path = Path(checkout) / posixpath.normpath('compiler/negative_testing/' + source['file'])
@@ -116,7 +119,55 @@ def verify_global_parts_checkout(checkout, parts):
                 'Rust global part checkout source differs from pinned blob')
 
 
-def validate_negative(summary, report, manifest, sources=None, global_parts=None):
+def negative_libraries(checkout, revision):
+    """Mirror the observer's recursive .hgl inventory, without module filters."""
+    root = 'hgl/hgraph'
+    paths = subprocess.check_output(['git', '-C', str(checkout), 'ls-tree', '-r', '--name-only', revision, root], text=True).splitlines()
+    files = [{'file': path.removeprefix(root + '/'), 'sha256': sha(git_bytes(checkout, revision, path))}
+             for path in sorted(paths) if path.endswith('.hgl')]
+    return {'schema_version': 1, 'stdlib_revision': revision, 'backends': {
+        'cpp': [], 'rust': [{'name': 'hgraph', 'root': root, 'files': files}]}}
+
+
+def validate_libraries(libraries, revision):
+    require(isinstance(libraries, dict) and set(libraries) == {'schema_version', 'stdlib_revision', 'backends'}, 'negative library inventory fields changed')
+    require(type(libraries['schema_version']) is int and libraries['schema_version'] == 1, 'negative library schema changed')
+    require(libraries['stdlib_revision'] == revision, 'negative library inventory revision changed')
+    backends = libraries['backends']
+    require(isinstance(backends, dict) and set(backends) == {'cpp', 'rust'} and backends['cpp'] == [], 'C++ negative libraries must be absent')
+    require(isinstance(backends['rust'], list) and len(backends['rust']) == 1, 'Rust negative library count changed')
+    library = backends['rust'][0]
+    require(isinstance(library, dict) and set(library) == {'name', 'root', 'files'} and library['name'] == 'hgraph' and library['root'] == 'hgl/hgraph', 'Rust negative library identity changed')
+    require(isinstance(library['files'], list) and library['files'], 'empty negative library inventory')
+    paths = []
+    for source in library['files']:
+        require(isinstance(source, dict) and set(source) == {'file', 'sha256'}, 'negative library source fields changed')
+        path = source['file']
+        require(isinstance(path, str) and path.endswith('.hgl') and not path.startswith('/') and '\\' not in path
+                and all(part not in ('', '.', '..') for part in path.split('/')), 'unsafe negative library source path')
+        require(isinstance(source['sha256'], str) and re.fullmatch('[0-9a-f]{64}', source['sha256']) is not None, 'invalid negative library fingerprint')
+        paths.append(path)
+    require(paths == sorted(set(paths)), 'negative library source order or duplicates changed')
+
+
+def load_libraries(revision):
+    data = (HERE / 'negative_libraries.json').read_bytes()
+    provenance = json.loads((HERE / 'provenance.json').read_text())
+    require(sha(data) == provenance['negative_libraries_sha256'], 'pinned negative library inventory changed')
+    libraries = json.loads(data)
+    validate_libraries(libraries, revision)
+    return libraries
+
+
+def verify_libraries_checkout(checkout, libraries):
+    for library in libraries['backends']['rust']:
+        root = Path(checkout) / library['root']
+        selected = [{'file': path.relative_to(root).as_posix(), 'sha256': sha(path.read_bytes())}
+                    for path in sorted(root.rglob('*.hgl'))]
+        require(selected == library['files'], 'negative library checkout inputs differ from pinned blobs')
+
+
+def validate_negative(summary, report, manifest, sources=None, global_parts=None, libraries=None):
     """Derive matches from original process output using the measured observer."""
     observer_path = HERE.parent / 'negative_testing/observe.py'
     require(sha(observer_path.read_bytes()) == summary['observer_sha256'], 'negative matching observer changed')
@@ -132,6 +183,11 @@ def validate_negative(summary, report, manifest, sources=None, global_parts=None
     expected_parts = [{'name': part['name'], 'sha256': part['sha256']}
                       for part in global_parts['backends'][report['backend']]]
     require(report.get('parts') == expected_parts, 'original negative global parts differ from pinned blobs')
+    if libraries is None:
+        revision = json.loads((HERE / 'expected.json').read_text())['revisions']['stdlib']
+        libraries = load_libraries(revision)
+    expected_libraries = [{'name': row['name'], 'files': row['files']} for row in libraries['backends'][report['backend']]]
+    require(report.get('libraries') == expected_libraries, 'original negative libraries differ from pinned blobs')
     cases = manifest['cases']
     if sources is None:
         sources = json.loads((HERE / 'negative_sources.json').read_text())
@@ -207,6 +263,7 @@ def check(report=None, stdlib_checkout=None, spec_checkout=None, rust_checkout=N
     sources = json.loads(source_bytes)
     require(sources['spec_revision'] == expected['revisions']['spec'], 'negative source inventory revision changed')
     global_parts = load_global_parts(expected['revisions']['rust'])
+    libraries = load_libraries(expected['revisions']['stdlib'])
     manifest_bytes = (HERE / 'negative_manifest.json').read_bytes()
     require(sha(manifest_bytes) == expected['negative_manifest_sha256'], 'pinned detailed negative manifest changed')
     manifest = json.loads(manifest_bytes)
@@ -217,12 +274,14 @@ def check(report=None, stdlib_checkout=None, spec_checkout=None, rust_checkout=N
     for summary in report['negative_measurements']:
         original_bytes = (HERE / f'negative_{summary["backend"]}.json').read_bytes()
         require(sha(original_bytes) == summary['raw_report_sha256'], 'original negative report bytes changed')
-        validate_negative(summary, json.loads(original_bytes), manifest, sources, global_parts)
+        validate_negative(summary, json.loads(original_bytes), manifest, sources, global_parts, libraries)
     if raw is not None:
         require(sha(raw) == provenance['results_sha256'], 'frozen report bytes changed')
     require(sha(json.dumps(report, sort_keys=True, separators=(',', ':')).encode()) == provenance['results_semantic_sha256'], 'frozen report content changed')
     if stdlib_checkout is not None:
         require(source_manifest(stdlib_checkout, expected['revisions']['stdlib']) == expected['sources'], 'pinned standard-library sources differ from manifest')
+        require(negative_libraries(stdlib_checkout, expected['revisions']['stdlib']) == libraries, 'pinned negative library blobs differ from inventory')
+        verify_libraries_checkout(stdlib_checkout, libraries)
     if spec_checkout is not None:
         digest, cases = negative_manifest(spec_checkout, expected['revisions']['spec'])
         require(digest == expected['negative_manifest_sha256'] and cases == expected['negative_cases'], 'pinned negative fixtures differ from manifest')

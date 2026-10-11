@@ -166,6 +166,8 @@ claim new full-runtime coverage.
 Negative fixture and part hashes are derived from the pinned Spec Git blobs in
 `negative_sources.json` and checked against both original backend reports.
 `--spec-checkout` also checks the selected working files against those blobs.
+It requires the working `compiler/negative_testing/cases.json` bytes to equal
+the pinned Git blob, including expectation metadata and file/part selection.
 The compiler revision supplied to the original runners remains unverified.
 
 The ordered command-wide Rust parts, `native/stdlib/interfaces.hgl` and
@@ -176,3 +178,12 @@ reports must match it, including C++'s empty global-part list. `--rust-checkout`
 verifies those Git blobs and the selected working input files, regardless of
 checkout HEAD. This input-content proof does not certify the original compiler
 binary's build revision. Original reports and measurements remain unchanged.
+
+The complete Rust negative-run library directory inventory is independently
+derived from pinned standard-library Git blobs in
+[negative_libraries.json](negative_libraries.json). Its provenance digest seals
+all 58 ordered relative paths and hashes, including native provider files that
+the narrower standard-matrix module selection excludes. The archived Rust
+`libraries` array must match exactly, and C++ must retain an empty array.
+`--stdlib-checkout` verifies the pinned full inventory and the actual recursive
+working `.hgl` inputs, rejecting changes, removals, renames and additional files.
