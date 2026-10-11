@@ -33,8 +33,10 @@ silent positions. [Native reasoning](native_reasoned.json) precedes the
 [record](native_observed.json); installed SDK headers, archives and compiler
 identity are fingerprinted without claiming a Git build identity. The recorder
 requires the executable declared by the configured CMake target and the supplied
-SDK package, imported archives and headers; it rebuilds that target before
-measurement. Compile commands select the matching configuration on Makefiles,
+SDK package, imported archives and headers; it uses
+`cmake --build --clean-first` to rebuild that target before measurement. A newer
+executable copied over the target cannot masquerade as the configured build.
+Compile commands select the matching configuration on Makefiles,
 Ninja and Ninja Multi-Config. An executable from another build or a different
 SDK is rejected before it runs. Build metadata and provenance are sealed with
 the observations.

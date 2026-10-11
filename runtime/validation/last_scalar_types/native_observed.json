@@ -20,7 +20,7 @@
     "native_retained_independently": "match"
   },
   "binary_sha256": "ae1ec2bbc0c58190b1417fde9afa920f10c80563bfa78dcc664ab264dd6af8e6",
-  "cmake_cache_sha256": "57e0071b5902c518629664c78c56d7e0e39243c9c26c94a8aa8fcde952fb9dad",
+  "cmake_cache_sha256": "af008134f06ba45365cac722fa693ad97aecb98d524b131e56be581231d539fe",
   "cmake_generator": "Unix Makefiles",
   "compile_command": [
     "/usr/bin/c++",
@@ -59,7 +59,7 @@
     "-c",
     "<source>/native.cpp"
   ],
-  "compile_commands_sha256": "fa21d70c3ca700dca3c5ca3179857648ace467dbdaae48ffbcb7081b1af01181",
+  "compile_commands_sha256": "3604392162df8b5c82f3ef0d32455c0d07571457dc7f2381a88fed85eb572456",
   "compiler_sha256": "e6718f7e0c7d057c3ff77b550c603da9bc4030e3ede3c053705acce1293dbe4d",
   "compiler_version": "x86_64-linux-gnu-g++-15 (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
   "graphs": {
@@ -82,8 +82,8 @@
     ]
   },
   "loaded_libraries_sha256": {},
-  "measured_at": "2026-10-11T06:14:00.124892+00:00",
-  "measurement_sha256": "a1200605bf6d699b2f29d65434ed884f8ee3446a9665902d15f647d4fb2ef93d",
+  "measured_at": "2026-10-11T06:44:25.503378+00:00",
+  "measurement_sha256": "2d5b94e2f70e2b60df642e596d1a2b506682e248a62c6f4b08a4583c5f77d60e",
   "observed": {
     "any_distinct_type_unequal": true,
     "any_distinct_type_unordered": true,
@@ -508,13 +508,13 @@
   "source_sha256": "015e9ba5e546ab715b01a775b27f528abffd7cf2f1d49f88aeecccd1272ff655",
   "sources_sha256": {
     "CMakeLists.txt": "e5fa9e91939d90920d91b1e72f550784cbdee5da63f01927f97a071da7f8a1e4",
-    "build_identity.py": "9053fb1efb1724b41ec07d99cffe5ac5b75ed03ef02dbfb139724cd000532060",
+    "build_identity.py": "bf9566c3fadc870389432325c398c749a43318cf63d01f7d6e4b05c95b2de65e",
     "native.cpp": "015e9ba5e546ab715b01a775b27f528abffd7cf2f1d49f88aeecccd1272ff655",
     "native_observe.py": "bf9aeccc3f99b411229e80edd922ba1e4b1d99f57eb0a72631aa6b484a727266",
     "native_reasoned.json": "f7524bd98368516ef0b4b0270878486e8acc8249691874eacc54af9acafcbb2e"
   },
   "target_artifact": "last_scalar_types_native",
   "target_configuration": "Release",
-  "target_manifest_sha256": "51945985245e06c887f05f2f55a6f9de219efe276590866d316bb3c3c28de094",
+  "target_manifest_sha256": "ef262949d6fc4d7688ba2aebf6d67b06048b959a90f2000968d008a26e86fa97",
   "target_name": "last_scalar_types_native"
 }
