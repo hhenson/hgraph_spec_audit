@@ -24,7 +24,10 @@ def capability(observation):
     result = {'capability': observation['capability']}
     if observation['capability'] == 'error':
         result.update(error_type=observation['error_type'], phase=observation['phase'],
-                      error_sha256=digest(observation['error']))
+                      error_sha256=digest(observation['error']),
+                      partial_trace_sha256=digest({name: observation[name] for name in
+                          ('producer', 'cycles', 'source_notifications', 'forward_notifications',
+                           'source_events', 'forward_events')}))
     elif observation['capability'] == 'unsupported':
         result.update(surface=observation['surface'], reason_sha256=digest(observation['reason']))
     return result

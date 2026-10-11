@@ -13,6 +13,29 @@ class EvidenceTests(unittest.TestCase):
     def test_recorded_evidence(self):
         validate(self.data)
 
+    def test_error_prefix_cannot_be_erased_after_recomputing_assessment(self):
+        cases = {c['id']: c for c in json.loads((Path(__file__).parent / 'reasoned.json').read_text())['cases']}
+        result = self.data['engines']['python']
+        observation = result['observations']['revalidate_struct']
+        self.assertEqual(len(observation['cycles']), 2)
+        for name in ('producer', 'cycles', 'source_notifications', 'forward_notifications',
+                     'source_events', 'forward_events'):
+            observation[name] = []
+        result['assessment']['revalidate_struct'] = probe.support.assess(cases['revalidate_struct'], observation)
+        with self.assertRaises(AssertionError):
+            validate(self.data)
+
+    def test_each_error_prefix_component_is_frozen(self):
+        original = copy.deepcopy(self.data)
+        for name in ('producer', 'cycles', 'source_notifications', 'forward_notifications',
+                     'source_events', 'forward_events'):
+            with self.subTest(component=name):
+                self.data = copy.deepcopy(original)
+                observation = self.data['engines']['python']['observations']['revalidate_struct']
+                observation[name] = [] if observation[name] else [1]
+                with self.assertRaises(AssertionError):
+                    validate(self.data)
+
     def test_masked_difference(self):
         self.data['engines']['python']['assessment']['initial_fixed'][0]['status'] = 'match'
         with self.assertRaises(AssertionError):
