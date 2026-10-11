@@ -43,7 +43,7 @@ def unquote(value):
 
 def include_paths(command):
     """Extract actual include operands for GCC/Clang and MSVC."""
-    prefixes = ('-isystem', '-I', '/external:I', '/I')
+    prefixes = ('-isystem', '-external:I', '-I', '/external:I', '/I')
     paths = []
     index = 0
     while index < len(command):
@@ -72,6 +72,8 @@ def loaded_sdk_libraries(paths, sdk, sdk_hashes, target_libraries):
     names = set()
     for value in paths:
         path = Path(value).resolve(strict=True)
+        if not shared_library(path):
+            raise ValueError('Loaded hgraph library is not a shared artifact')
         if not path.is_relative_to(sdk):
             raise ValueError('Loaded hgraph library does not belong to supplied SDK')
         relative = path.relative_to(sdk).as_posix()
@@ -85,8 +87,6 @@ def loaded_sdk_libraries(paths, sdk, sdk_hashes, target_libraries):
     required = {path for path in target_libraries if shared_library(path)}
     if not required <= set(loaded):
         raise ValueError('Configured hgraph shared target library was not loaded')
-    if set(loaded) != required:
-        raise ValueError('Loaded hgraph library is not a configured shared target')
     return loaded
 
 def cache_values(build_dir):
@@ -151,7 +151,7 @@ def compile_command(build_dir, source, sdk_include, configuration=None):
              (str(sdk_include.parent.resolve()), '<sdk>'),
              (str(Path.home()), '<home>'))
     def redact(argument):
-        for path, label in paths:
+        for path, label in sorted(paths, key=lambda item:len(item[0]), reverse=True):
             argument = argument.replace(path, label).replace(path.replace('\\','/'), label)
         return argument
     includes = include_paths(command)

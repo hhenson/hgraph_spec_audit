@@ -73,6 +73,12 @@ class ScalarEvidenceTests(unittest.TestCase):
         reseal(data)
         # A metadata control, not a claim that the archived SDK was dynamic.
         validate_native(data)
+        dependency='lib/libhgraph_dependency.so'
+        data['sdk_files_sha256'][dependency]=fingerprint
+        data['loaded_sdk_libraries_sha256'][dependency]=fingerprint
+        data['loaded_libraries_sha256']['libhgraph_dependency.so']=fingerprint
+        reseal(data)
+        validate_native(data)
         mutations=[lambda d:d.update(loaded_sdk_libraries_sha256={},loaded_libraries_sha256={}),
                    lambda d:d['loaded_sdk_libraries_sha256'].update({runtime:'0'*64}),
                    lambda d:d['loaded_libraries_sha256'].update({'libhgraph_runtime.so':'0'*64}),
@@ -80,6 +86,20 @@ class ScalarEvidenceTests(unittest.TestCase):
         for mutation in mutations:
             corrupted=copy.deepcopy(data);mutation(corrupted);reseal(corrupted)
             with self.subTest(mutation=mutation),self.assertRaises(AssertionError):validate_native(corrupted)
+
+    def test_compiler_profile_and_support_fingerprints_required(self):
+        original=json.loads((Path(__file__).parent/'native_observed.json').read_text())
+        mutations=[lambda d:d['compiler_identity'].update(exit_code=2),
+                   lambda d:d['compiler_identity'].update(profile='unknown'),
+                   lambda d:d['compiler_identity'].update(arguments=[]),
+                   lambda d:d['compiler_identity'].update(stderr_sha256='z'*64),
+                   lambda d:d['support_sha256'].pop('fixed/compiler_identity.py'),
+                   lambda d:d['support_sha256'].update({'fixed/compiler_identity.py':'0'*64})]
+        for mutation in mutations:
+            data=copy.deepcopy(original);mutation(data)
+            sealed={key:value for key,value in data.items() if key!='measurement_sha256'}
+            data['measurement_sha256']=hashlib.sha256(json.dumps(sealed,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+            with self.subTest(mutation=mutation),self.assertRaises(AssertionError):validate_native(data)
 
     def test_corruption(self):
         mutations = [
