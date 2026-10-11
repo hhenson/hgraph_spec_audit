@@ -2415,7 +2415,7 @@
           "marker": "all_",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/control.h",
-          "line": 100
+          "line": 103
         }
       ],
       "registration_sites": [
@@ -2890,7 +2890,7 @@
           "marker": "any_",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/control.h",
-          "line": 113
+          "line": 116
         }
       ],
       "registration_sites": [
@@ -18049,7 +18049,7 @@
           "marker": "if_",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/control.h",
-          "line": 127
+          "line": 130
         }
       ],
       "registration_sites": [
@@ -18119,7 +18119,7 @@
           "marker": "if_cmp",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/control.h",
-          "line": 185
+          "line": 188
         }
       ],
       "registration_sites": [
@@ -18203,7 +18203,7 @@
           "marker": "if_then_else",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/control.h",
-          "line": 170
+          "line": 173
         }
       ],
       "registration_sites": [
@@ -18281,7 +18281,7 @@
           "marker": "if_true",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/control.h",
-          "line": 153
+          "line": 156
         }
       ],
       "registration_sites": [
@@ -25347,7 +25347,7 @@
           "marker": "merge",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/control.h",
-          "line": 48
+          "line": 51
         }
       ],
       "registration_sites": [
@@ -31605,7 +31605,7 @@
           "marker": "race",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/control.h",
-          "line": 87
+          "line": 90
         }
       ],
       "registration_sites": [
@@ -33923,7 +33923,7 @@
           "marker": "reduce_tsd_of_bundles_with_race",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/control.h",
-          "line": 73
+          "line": 76
         }
       ],
       "registration_sites": [
@@ -33986,7 +33986,7 @@
           "marker": "reduce_tsd_with_race",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/control.h",
-          "line": 60
+          "line": 63
         }
       ],
       "registration_sites": [
@@ -35148,7 +35148,7 @@
           "marker": "route_by_index",
           "scope": "core",
           "source": "include/hgraph/lib/std/operators/control.h",
-          "line": 139
+          "line": 142
         }
       ],
       "registration_sites": [
@@ -42820,6 +42820,60 @@
     }
   ],
   "hgl_native_substrate": [
+    {
+      "module": "hgraph.std",
+      "name": "token",
+      "kind": "native-value",
+      "form": null,
+      "source": "external/hgraph_std/hgl/hgraph/native/atomic_values_fixture.hgl",
+      "line": 10,
+      "declaration": "native const fn token(text: str) -> Token"
+    },
+    {
+      "module": "hgraph.std",
+      "name": "token_text",
+      "kind": "native-value",
+      "form": null,
+      "source": "external/hgraph_std/hgl/hgraph/native/atomic_values_fixture.hgl",
+      "line": 11,
+      "declaration": "native const fn token_text(value: Token) -> str"
+    },
+    {
+      "module": "hgraph.std",
+      "name": "token_other",
+      "kind": "native-value",
+      "form": null,
+      "source": "external/hgraph_std/hgl/hgraph/native/atomic_values_fixture.hgl",
+      "line": 12,
+      "declaration": "native const fn token_other(text: str) -> TokenOther"
+    },
+    {
+      "module": "hgraph.std",
+      "name": "token_other_text",
+      "kind": "native-value",
+      "form": null,
+      "source": "external/hgraph_std/hgl/hgraph/native/atomic_values_fixture.hgl",
+      "line": 13,
+      "declaration": "native const fn token_other_text(value: TokenOther) -> str"
+    },
+    {
+      "module": "hgraph.std",
+      "name": "text_only",
+      "kind": "native-value",
+      "form": null,
+      "source": "external/hgraph_std/hgl/hgraph/native/atomic_values_fixture.hgl",
+      "line": 14,
+      "declaration": "native const fn text_only(text: str) -> TextOnly"
+    },
+    {
+      "module": "hgraph.std",
+      "name": "text_only_text",
+      "kind": "native-value",
+      "form": null,
+      "source": "external/hgraph_std/hgl/hgraph/native/atomic_values_fixture.hgl",
+      "line": 15,
+      "declaration": "native const fn text_only_text(value: TextOnly) -> str"
+    },
     {
       "module": "hgraph.native",
       "name": "add",
