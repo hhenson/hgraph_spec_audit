@@ -25,8 +25,35 @@ shows that stopping a forwarding relay must not invalidate a surviving target.
 The captured reference output remains designation-valid after the target
 expires; the followed ordinary input becomes invalid. Independent step ticks
 separate those observations and allow silence to be checked.
+The checker validates both installed engine identities, including package
+sources, distribution artifacts and loaded native libraries. For successful
+captures, every parsed raw published row must match the process-local event
+rows exactly, with no missing, extra or duplicated publications. The failed
+Python owned-reference capture preserves its partial events and error without
+claiming a successful raw result.
+
+The native recorder accepts only the executable declared by its configured
+`ref_owner_lifetime_native` CMake target. It verifies the supplied SDK package,
+three imported archives and exact header search path, then rebuilds that target.
+Compile-command selection supports Makefiles, Ninja and Ninja Multi-Config,
+including the selected configuration. Source and loaded-library support hashes,
+SDK manifests, executable/compiler hashes, build metadata and observations are
+sealed together; the checker requires hexadecimal fingerprints and the SDK
+artifacts used by this probe. Fresh native measurements reproduce the original
+owner-expiry divergence with the same frozen SDK.
 
 Run the evidence-only checker with `python check.py`; run its corruption tests
 with `python -m unittest discover -s . -p test_check.py`. Measurement scripts
 require independent interpreter paths or an installed SDK/binary, provided
 through command arguments; private host paths are not tracked.
+
+```sh
+cmake -S runtime/validation/ref_owner_lifetime -B <build> -DCMAKE_PREFIX_PATH=<sdk>
+python3 runtime/validation/ref_owner_lifetime/native_observe.py \
+  --executable <build>/ref_owner_lifetime_native --sdk <sdk> --build-dir <build> \
+  --output <new-native-result.json>
+python3 -m unittest discover -s runtime/validation/ref_owner_lifetime
+```
+
+For a multi-configuration build, supply its selected artifact, for example
+`<build>/Release/ref_owner_lifetime_native`.
