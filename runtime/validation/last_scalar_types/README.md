@@ -37,7 +37,12 @@ SDK package, imported archives and headers; it uses
 `cmake --build --clean-first` to rebuild that target before measurement. A newer
 executable copied over the target cannot masquerade as the configured build.
 Compile commands select the matching configuration on Makefiles,
-Ninja and Ninja Multi-Config. An executable from another build or a different
+Ninja and Ninja Multi-Config. Header binding recognizes GCC/Clang `-I` and
+`-isystem`, and MSVC `/I` and `/external:I`, with separate or attached operands.
+MSVC command strings preserve quoted spaces and Windows backslashes; `/Fo`
+object paths identify the declared target and configuration. These parser controls
+run on Linux; native MSVC builds have not been measured by this follow-up.
+An executable from another build or a different
 SDK is rejected before it runs. Build metadata and provenance are sealed with
 the observations.
 

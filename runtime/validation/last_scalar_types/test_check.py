@@ -49,6 +49,16 @@ class ScalarEvidenceTests(unittest.TestCase):
             with self.subTest(field=field), self.assertRaises(AssertionError):
                 validate_native(data)
 
+    def test_recorded_portable_include_operands(self):
+        original=json.loads((Path(__file__).parent/'native_observed.json').read_text())
+        for operand in (['/I','<sdk>\\include'],['/I"<sdk>/include"'],
+                        ['/external:I','<sdk>/include'],['/external:I"<sdk>\\include"']):
+            data=copy.deepcopy(original)
+            data['compile_command']=['cl.exe',*operand]
+            sealed={key:value for key,value in data.items() if key!='measurement_sha256'}
+            data['measurement_sha256']=hashlib.sha256(json.dumps(sealed,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+            with self.subTest(operand=operand):validate_native(data)
+
     def test_shared_target_manifest_requires_matching_loaded_artifacts(self):
         data=json.loads((Path(__file__).parent/'native_observed.json').read_text())
         runtime='lib/libhgraph_runtime.so'

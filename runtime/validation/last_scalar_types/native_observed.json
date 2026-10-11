@@ -20,7 +20,7 @@
     "native_retained_independently": "match"
   },
   "binary_sha256": "ae1ec2bbc0c58190b1417fde9afa920f10c80563bfa78dcc664ab264dd6af8e6",
-  "cmake_cache_sha256": "ddd716864090be0ee3e3ec5654b3238cc6f91ec35d17d5c5e5438bff13c85bfa",
+  "cmake_cache_sha256": "01aa391fb259c71a8523ef159df6926210490afd16d7fdccec6c88bc2acfc576",
   "cmake_generator": "Unix Makefiles",
   "compile_command": [
     "/usr/bin/c++",
@@ -59,7 +59,7 @@
     "-c",
     "<source>/native.cpp"
   ],
-  "compile_commands_sha256": "71f277d2649049c27e3ea7c3b0acf0aca9a9b5efaade010ed8243ca6f5d5672d",
+  "compile_commands_sha256": "c0593b840e4fbe0dcc8f9e2f177dcdc383a40bee24368bef017036931db03762",
   "compiler_sha256": "e6718f7e0c7d057c3ff77b550c603da9bc4030e3ede3c053705acce1293dbe4d",
   "compiler_version": "x86_64-linux-gnu-g++-15 (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
   "graphs": {
@@ -83,8 +83,8 @@
   },
   "loaded_libraries_sha256": {},
   "loaded_sdk_libraries_sha256": {},
-  "measured_at": "2026-10-11T07:07:25.302516+00:00",
-  "measurement_sha256": "dc2c57a389e63262332d83d5957e249fd280f23a1f5a80fbcd4c1d4366d8a74f",
+  "measured_at": "2026-10-11T07:12:31.342526+00:00",
+  "measurement_sha256": "275748a1eac659df57f50287c6c8a7199e07d552e9a21989db8fee86aff83a0a",
   "observed": {
     "any_distinct_type_unequal": true,
     "any_distinct_type_unordered": true,
@@ -509,13 +509,13 @@
   "source_sha256": "015e9ba5e546ab715b01a775b27f528abffd7cf2f1d49f88aeecccd1272ff655",
   "sources_sha256": {
     "CMakeLists.txt": "e5fa9e91939d90920d91b1e72f550784cbdee5da63f01927f97a071da7f8a1e4",
-    "build_identity.py": "8a174f53360c40389ab6251c024f2b3eeea48a900aa5dc7e0e0cb399fbb5176f",
+    "build_identity.py": "638e77ca3c7e1ee2e66375357c7a3465e11f2d435b9e217d6dba9301fe764217",
     "native.cpp": "015e9ba5e546ab715b01a775b27f528abffd7cf2f1d49f88aeecccd1272ff655",
     "native_observe.py": "fae03538a04a0d852140b643e4e46eac00ef6240d45aa5c9e78249a3841c81eb",
     "native_reasoned.json": "f7524bd98368516ef0b4b0270878486e8acc8249691874eacc54af9acafcbb2e"
   },
   "target_artifact": "last_scalar_types_native",
   "target_configuration": "Release",
-  "target_manifest_sha256": "413c8368bf34cff3dcd301272021a66b08b989c27a00259362e413d54a18246f",
+  "target_manifest_sha256": "fcb4b201ae717e26b07b771423920049938d444bced4f10fcaad74e666998ac7",
   "target_name": "last_scalar_types_native"
 }
