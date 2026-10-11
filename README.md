@@ -27,11 +27,17 @@ recorded-evidence check is not a fresh runtime measurement.
 ## Negative testing evidence
 
 The [negative-testing audit](compiler/negative_testing/README.md) records the
-same 25 expected-error and source-rejection fixtures against both HGL compilers,
+same 43 mixed expected-error and source-rejection fixtures against both HGL compilers,
 including controls that must fail and checks that compiler failures cannot
 stand in for runtime exceptions.
 
 ## Delta evaluation evidence
+
+The [merged-main HGL matrix](compiler/delta_matrix/README.md) lists tested types,
+scenarios and remaining scope limits. The 258 shared standard cases pass on
+Linux, macOS and Windows C++; Rust executes the same cases within its larger
+source suite. Fresh Linux executions also match the 43 mixed negative fixtures.
+
 
 The [recorder-key collision audit](runtime/validation/recorder_keys/README.md)
 measures within-run same-type interference, preserving overwritten user state,

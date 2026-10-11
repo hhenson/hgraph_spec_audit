@@ -91,6 +91,9 @@ def main():
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/last_scalar_types/check.py')], check=True)
     subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s',
                     str(ROOT / 'runtime/validation/last_scalar_types')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'compiler/delta_matrix/check.py')], check=True)
+    subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s',
+                    str(ROOT / 'compiler/delta_matrix')], check=True)
     print('Recorded evidence checked; no fresh runtime measurements were made.')
 
 
