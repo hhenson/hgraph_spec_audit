@@ -15,6 +15,9 @@ class MatrixEvidence(unittest.TestCase):
     def setUp(self):
         self.report = json.loads((HERE / 'results.json').read_text())
         self.expected = json.loads((HERE / 'expected.json').read_text())
+        self.manifest = json.loads((HERE / 'negative_manifest.json').read_text())
+        self.negatives = {backend: json.loads((HERE / f'negative_{backend}.json').read_text())
+                          for backend in ('cpp', 'rust')}
 
     def reject(self, mutation, message):
         report = copy.deepcopy(self.report)
@@ -107,8 +110,83 @@ class MatrixEvidence(unittest.TestCase):
                 report = copy.deepcopy(self.report)
                 report[collection][0][field] = '0' * 64
                 check.validate(report, self.expected)
-                with self.assertRaisesRegex(ValueError, 'frozen report content changed'):
+                with self.assertRaisesRegex(ValueError, 'changed'):
                     check.check(report)
+
+    def test_original_negative_reports_match_pinned_detailed_expectations(self):
+        for summary in self.report['negative_measurements']:
+            check.validate_negative(summary, self.negatives[summary['backend']], self.manifest)
+
+    def test_deleted_duplicated_renamed_and_wrong_outcomes_rejected_with_same_exit(self):
+        for summary in self.report['negative_measurements']:
+            for kind in ('executed', 'rejection'):
+                original = self.negatives[summary['backend']]
+                case_index = next(i for i, case in enumerate(original['cases'])
+                                  if f'[{kind}]' in case['run']['stdout'])
+                for mutation in ('delete', 'duplicate', 'rename', 'outcome', 'kind'):
+                    with self.subTest(backend=summary['backend'], kind=kind, mutation=mutation):
+                        report = copy.deepcopy(original)
+                        case = report['cases'][case_index]
+                        lines = case['run']['stdout'].splitlines(keepends=True)
+                        line_index = next(i for i, line in enumerate(lines) if f'[{kind}]' in line)
+                        line = lines[line_index]
+                        if mutation == 'delete':
+                            del lines[line_index]
+                        elif mutation == 'duplicate':
+                            lines.insert(line_index, line)
+                        elif mutation == 'rename':
+                            lines[line_index] = 'invented_identity ... ' + line.split(' ... ', 1)[1]
+                        elif mutation == 'outcome':
+                            lines[line_index] = line.replace(' ... ok [', ' ... FAILED [') if ' ... ok [' in line else line.replace(' ... FAILED [', ' ... ok [')
+                        else:
+                            other = 'rejection' if kind == 'executed' else 'executed'
+                            lines[line_index] = line.replace(f'[{kind}]', f'[{other}]')
+                        case['run']['stdout'] = ''.join(lines)
+                        self.assertTrue(case['matches'])
+                        self.assertEqual(case['run']['returncode'], case['expected_exit'])
+                        with self.assertRaisesRegex(ValueError, 'detailed outcomes mismatch'):
+                            check.validate_negative(summary, report, self.manifest)
+
+    def test_preflight_failure_or_timeout_cannot_be_hidden_by_match_flag(self):
+        for summary in self.report['negative_measurements']:
+            original = self.negatives[summary['backend']]
+            case_index = next(i for i, case in enumerate(original['cases']) if 'source_check' in case)
+            for field, value in [('returncode', 1), ('timed_out', True)]:
+                with self.subTest(backend=summary['backend'], field=field):
+                    report = copy.deepcopy(original)
+                    report['cases'][case_index]['source_check'][field] = value
+                    with self.assertRaisesRegex(ValueError, 'detailed outcomes mismatch'):
+                        check.validate_negative(summary, report, self.manifest)
+
+    def test_forbidden_execution_cannot_pass_with_expected_exit_and_claimed_match(self):
+        for summary in self.report['negative_measurements']:
+            report = copy.deepcopy(self.negatives[summary['backend']])
+            case = next(case for case in report['cases'] if case['expected'].get('not_executed'))
+            name = case['expected']['not_executed'][0]
+            case['run']['stdout'] += f'\n{name} ... ok [executed]\n'
+            self.assertTrue(case['matches'])
+            self.assertEqual(case['run']['returncode'], case['expected_exit'])
+            with self.assertRaisesRegex(ValueError, 'detailed outcomes mismatch'):
+                check.validate_negative(summary, report, self.manifest)
+
+    def test_original_expectations_cannot_be_rewritten_to_match_wrong_outputs(self):
+        for summary in self.report['negative_measurements']:
+            report = copy.deepcopy(self.negatives[summary['backend']])
+            case = report['cases'][0]
+            case['expected']['runtime_results'] = []
+            case['run']['stdout'] = ''
+            with self.assertRaisesRegex(ValueError, 'outcome expectations changed'):
+                check.validate_negative(summary, report, self.manifest)
+
+    def test_original_report_hash_is_required(self):
+        with tempfile.TemporaryDirectory() as folder:
+            target = Path(folder)
+            for name in ('provenance.json', 'expected.json', 'negative_manifest.json'):
+                (target / name).write_bytes((HERE / name).read_bytes())
+            (target / 'negative_cpp.json').write_text('{}')
+            with patch.object(check, 'HERE', target):
+                with self.assertRaisesRegex(ValueError, 'original negative report bytes changed'):
+                    check.check(self.report)
 
     def test_expected_manifest_cannot_be_replaced(self):
         with tempfile.TemporaryDirectory() as folder:

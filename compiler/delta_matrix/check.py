@@ -1,6 +1,7 @@
 """Verify the frozen matrix report and pinned source manifest; no compilers run."""
 import argparse
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import re
@@ -49,6 +50,30 @@ def negative_manifest(checkout, revision):
     data = git_bytes(checkout, revision, 'compiler/negative_testing/cases.json')
     manifest = json.loads(data)
     return sha(data), [{'id': row['id'], 'expected_exit': row['expected_exit']} for row in manifest['cases']]
+
+
+def validate_negative(summary, report, manifest):
+    """Derive matches from original process output using the measured observer."""
+    observer_path = HERE.parent / 'negative_testing/observe.py'
+    require(sha(observer_path.read_bytes()) == summary['observer_sha256'], 'negative matching observer changed')
+    spec = importlib.util.spec_from_file_location('matrix_negative_observer', observer_path)
+    observer = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(observer)
+    for field in ('backend', 'source_revision', 'source_revision_verified_by_runner',
+                  'compiler_sha256', 'observer_sha256', 'manifest_sha256'):
+        require(report[field] == summary[field], f'original negative report changed {field}')
+    cases = manifest['cases']
+    require(len(report['cases']) == len(cases) == len(summary['cases']), 'original negative report case count changed')
+    for case, observed, condensed in zip(cases, report['cases'], summary['cases']):
+        for field in ('id', 'file', 'mode', 'expected_exit'):
+            require(observed[field] == case[field], f'original negative case changed {field}')
+        required = observer.expectations(case, report['cases_directory'])
+        require(observed['expected'] == required, f'negative outcome expectations changed: {case["id"]}')
+        matched = observer.matches(required, observed)
+        require(matched and observed['matches'] is matched, f'negative detailed outcomes mismatch: {case["id"]}')
+        require(condensed == {'id': case['id'], 'expected_exit': case['expected_exit'],
+                              'observed_exit': observed['run']['returncode'], 'matched': matched},
+                f'negative summary differs from original outcomes: {case["id"]}')
 
 
 def validate(report, expected):
@@ -101,10 +126,17 @@ def check(report=None, stdlib_checkout=None, spec_checkout=None):
     expected_bytes = (HERE / 'expected.json').read_bytes()
     require(sha(expected_bytes) == provenance['expected_sha256'], 'pinned source manifest integrity changed')
     expected = json.loads(expected_bytes)
+    manifest_bytes = (HERE / 'negative_manifest.json').read_bytes()
+    require(sha(manifest_bytes) == expected['negative_manifest_sha256'], 'pinned detailed negative manifest changed')
+    manifest = json.loads(manifest_bytes)
     raw = (HERE / 'results.json').read_bytes() if report is None else None
     if report is None:
         report = json.loads(raw)
     validate(report, expected)
+    for summary in report['negative_measurements']:
+        original_bytes = (HERE / f'negative_{summary["backend"]}.json').read_bytes()
+        require(sha(original_bytes) == summary['raw_report_sha256'], 'original negative report bytes changed')
+        validate_negative(summary, json.loads(original_bytes), manifest)
     if raw is not None:
         require(sha(raw) == provenance['results_sha256'], 'frozen report bytes changed')
     require(sha(json.dumps(report, sort_keys=True, separators=(',', ':')).encode()) == provenance['results_semantic_sha256'], 'frozen report content changed')

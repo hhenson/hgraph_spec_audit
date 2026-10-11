@@ -77,9 +77,15 @@ names, empty failure lists, consistent counts and the expected failing negative
 controls. [expected.json](expected.json) was independently extracted from the
 recorded standard-library and specification Git revisions.
 [provenance.json](provenance.json) anchors the original report bytes and this
-manifest. Raw logs/reports are represented by their recorded hashes; their
-contents are not vendored, and this check does not independently establish the
-compiler build chain or make a fresh execution claim.
+manifest. The original detailed [C++](negative_cpp.json) and
+[Rust](negative_rust.json) negative reports are archived byte-for-byte, with
+hashes matching `results.json`. The checker derives exact executed and rejection
+outcomes from their original process output using the fingerprinted observer
+and [pinned fixture manifest](negative_manifest.json); it checks preflight,
+selection, forbidden executions and expected failures before accepting the
+summary's match flags. The standard-module raw logs remain represented by their
+recorded hashes. This check does not independently establish the compiler build
+chain or make a fresh execution claim.
 
 Fresh executions use the compiler repositories, whose CMake presets and Rust
 test runner are outside this audit. Start in a directory for sibling checkouts:
