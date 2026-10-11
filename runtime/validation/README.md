@@ -89,3 +89,8 @@ extraction, preserving absent-field, collection and Boolean coercion differences
 Python defining-scope constants from C++ parameter/template scope, unevaluated
 controls, per-omission execution and instance member defaults. It informs an
 explicit HGL declaration-scope choice and claims no HGL execution.
+[Owned REF output routes](ref_owner_export/README.md) measures two composed
+conditional boundaries and an exported child-designation tree with sparse
+updates and partial retargeting. Python matches both frozen cases; the public
+C++ interpreter omits one required right-child sample. This is public bridge
+evidence, not direct native SDK or HGL execution.
