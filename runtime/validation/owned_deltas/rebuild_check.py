@@ -9,7 +9,10 @@ import subprocess
 import tempfile
 
 HERE = Path(__file__).resolve().parent
-CMAKE_ARGUMENT = re.compile(r'^-(D[A-Za-z0-9_.-]+(?::[A-Z]+)?=[^;&|`$<>]*|G[A-Za-z0-9 ._-]+)$')
+# The option structure is what is validated: a definition or a generator. The
+# value is passed as one argv element without a shell, and CMake values are
+# often semicolon-separated lists, so no value bytes are excluded.
+CMAKE_ARGUMENT = re.compile(r'^-(D[A-Za-z0-9_.-]+(?::[A-Z]+)?=.*|G.+)$', re.S)
 
 
 def cmake_argument(text):
