@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
 
@@ -13,10 +14,12 @@ def digest(data: bytes) -> str:
 
 
 def inside(root: Path, name: str) -> Path:
-    path = (root / name).resolve()
-    if Path(name).is_absolute() or not path.is_relative_to(root.resolve()) or path == root.resolve():
+    """The canonical path of ``name`` strictly beneath ``root``, or an error."""
+    base = os.path.realpath(root)
+    path = os.path.realpath(os.path.join(base, name))
+    if Path(name).is_absolute() or not path.startswith(base + os.sep):
         raise ValueError(f"path escapes repository: {name}")
-    return path
+    return Path(path)
 
 
 def materialize(root: Path, check: bool = False) -> int:

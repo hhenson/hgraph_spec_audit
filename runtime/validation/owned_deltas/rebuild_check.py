@@ -2,17 +2,26 @@
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 import shutil
 import subprocess
 import tempfile
 
 HERE = Path(__file__).resolve().parent
+CMAKE_ARGUMENT = re.compile(r'^-(D[A-Za-z0-9_.-]+(?::[A-Z]+)?=[^;&|`$<>]*|G[A-Za-z0-9 ._-]+)$')
+
+
+def cmake_argument(text):
+    """A configure definition (-DNAME[:TYPE]=value) or generator (-Gname), nothing else."""
+    if not CMAKE_ARGUMENT.match(text):
+        raise argparse.ArgumentTypeError(f'not a cmake definition or generator: {text!r}')
+    return text
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--cmake-arg', action='append', default=[],
+    parser.add_argument('--cmake-arg', action='append', default=[], type=cmake_argument,
                         help='Configure argument, e.g. --cmake-arg=-Dhgraph_DIR=/sdk/cmake/hgraph')
     args = parser.parse_args()
     with tempfile.TemporaryDirectory(prefix='owned-deltas-rebuild-') as temporary:
