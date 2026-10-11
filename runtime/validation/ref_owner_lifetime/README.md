@@ -68,6 +68,12 @@ preprocessing and [MSVC `/E` line directives](https://learn.microsoft.com/en-us/
 are supported; missing or unsuccessful header lookup cannot certify a build.
 Legitimate dependency directories remain admitted when the compiler selects
 the measured SDK's headers.
+MSVC command strings retain Windows quoting and path separators. Attached or
+separate `/Fo` operands identify the configured target even when the compile
+database omits its optional `output` field; conflicting configuration clues
+are rejected. The recorder shares `fixed/compiler_identity.py`: GCC/Clang use
+`--version`, while bare `cl` supplies its stderr banner. Successful status and
+complete stdout/stderr digests are recorded, and the helper bytes are sealed.
 
 Run the evidence-only checker with `python check.py`; run its corruption tests
 with `python -m unittest discover -s . -p test_check.py`. Measurement scripts
@@ -94,3 +100,11 @@ build paths may change build metadata without changing the frozen SDK.
 The native capture and recorder before selected-header validation, together
 with their build helper, remain unchanged in
 [their archive](archive/pre-selected-headers/native_observed.json).
+The capture and helpers before Windows compiler identity handling remain
+unchanged in [their archive](archive/pre-windows-compiler-identity/native_observed.json).
+A supplemental Windows Ninja control compiled and preprocessed a temporary
+four-header fixture with MSVC. Removing the generated entry's optional
+`output` field verified its actual `/Fo` operand; bare-compiler identity capture
+also passed. This control supplies no REF runtime observations. The fresh
+three-process Linux capture retains the same SDK, compiler, executable, repeat
+digests and owner-expiry divergence.

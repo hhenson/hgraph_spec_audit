@@ -50,6 +50,15 @@
     "<source>/native.cpp"
   ],
   "compile_commands_sha256": "507b0f607dc7880f7b293cd931a7038f94adbd96aad3e5b0cf8b7afee307486e",
+  "compiler_identity": {
+    "arguments": [
+      "--version"
+    ],
+    "exit_code": 0,
+    "profile": "version",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "e61c12990ebd03da62165bc47b2e2bb1470b3a6500f703aa912b9364a145caa3"
+  },
   "compiler_sha256": "e6718f7e0c7d057c3ff77b550c603da9bc4030e3ede3c053705acce1293dbe4d",
   "compiler_version": "x86_64-linux-gnu-g++-15 (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
   "identity": [
@@ -59,8 +68,8 @@
     }
   ],
   "loaded_libraries_sha256": {},
-  "measured_at": "2026-10-11T08:31:20.418547+00:00",
-  "measurement_sha256": "f83a588feba5ca46cc98f300ea8a729abb70969f9aebf1c4e7c0eac70ae64580",
+  "measured_at": "2026-10-11T08:57:21.983766+00:00",
+  "measurement_sha256": "6497197d678adb06a389af0068471356890d0519e30abc0a734f6d8f126c4d5a",
   "outer_owner_control": [
     {
       "data_modified": true,
@@ -725,12 +734,13 @@
   "source_sha256": "e6408de49426359a750d3e96ca5954f03439011c35c54478d4820af4656b97b6",
   "sources_sha256": {
     "CMakeLists.txt": "b331468daa930cc7f3f07c12516ec7da8458596e28fd3856ea89bab41429471c",
-    "build_identity.py": "a3fe027e494a9a44231d7f82c96a711aa08ac6cb5c8bda2929ddfd0a7e078959",
+    "build_identity.py": "cbc1acde733880484c72ea10cb40f1713cc095e253be6d87282686785c0176a7",
     "native.cpp": "e6408de49426359a750d3e96ca5954f03439011c35c54478d4820af4656b97b6",
-    "native_observe.py": "bded16f054d8c2f0f9cba0a0d07db3d45e74b649684a5c31b9dd29ce06e71efc",
+    "native_observe.py": "6fffbf80950b521723b1691904c6d4078fc506f41175df5c0ebf67614f2432d9",
     "native_reasoned.json": "a71e2273caf5536bb2e1b0df75bb2ec0cef6fbc5f2f36e864b02b7f29eeb8b99"
   },
   "support_sha256": {
+    "fixed/compiler_identity.py": "f666e74969fe2eaeda5f0640e7cd0b94ff06fa02178026a85b8ec1e5ae7bf1a7",
     "fixed/native_loaded_libraries.h": "2236c73b4419a980ebcef802ad98d9967681b831242cc68579e879e30ff32309"
   },
   "target_artifact": "ref_owner_lifetime_native",

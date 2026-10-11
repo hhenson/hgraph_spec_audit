@@ -7,6 +7,7 @@ HERE=Path(__file__).resolve().parent
 sys.path.insert(0,str(HERE.parent))
 from evidence_identity import digest, manifest, validate_identity
 from build_identity import command_configuration, include_paths
+from fixed.compiler_identity import validate_compiler_identity
 SUPPORT_NAMES=('delta_eval/observe.py','fixed/reference_identity.py','fixed/native_identity.py')
 OWNED_REQUIREMENT=(7,8,8,None,None,None)
 NATIVE_CAPTURE_FIELDS=('source_sha256','owned','outer_owner_control','identity','bool_operations','loaded_libraries_sha256')
@@ -79,7 +80,8 @@ def check_native_provenance(native):
     assert {name for name in required if name.startswith('include/')}<=set(selected)
     assert all(name.startswith('include/hgraph/') and value==native['sdk_files_sha256'].get(name)
                for name,value in selected.items())
-    assert native['support_sha256']=={'fixed/native_loaded_libraries.h':sha(HERE.parent/'fixed/native_loaded_libraries.h')}
+    assert native['support_sha256']=={name:sha(HERE.parent/name) for name in ('fixed/native_loaded_libraries.h','fixed/compiler_identity.py')}
+    validate_compiler_identity(native)
     assert native['target_name']=='ref_owner_lifetime_native'
     artifact=Path(native['target_artifact'])
     assert not artifact.is_absolute() and '..' not in artifact.parts

@@ -1,10 +1,46 @@
 """Bind the probe to its configured target, SDK and selected compile command."""
 import json
 import hashlib
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 import re
 import shlex
 import subprocess
+
+def split_windows_command(value):
+    """Split CMake's MSVC command using Windows backslash/quote rules."""
+    arguments = []
+    index = 0
+    while index < len(value):
+        while index < len(value) and value[index].isspace(): index += 1
+        if index == len(value): break
+        token = []
+        quoted = False
+        while index < len(value) and (quoted or not value[index].isspace()):
+            slashes = 0
+            while index < len(value) and value[index] == '\\':
+                slashes += 1
+                index += 1
+            if index < len(value) and value[index] == '"':
+                token.extend('\\' * (slashes // 2))
+                if slashes % 2: token.append('"')
+                elif quoted and index+1 < len(value) and value[index+1] == '"':
+                    token.append('"')
+                    index += 1
+                else: quoted = not quoted
+                index += 1
+            else:
+                token.extend('\\' * slashes)
+                if index < len(value) and (quoted or not value[index].isspace()):
+                    token.append(value[index])
+                    index += 1
+        if quoted: raise ValueError('Unterminated Windows command quote')
+        arguments.append(''.join(token))
+    return arguments
+
+
+def unquote(value):
+    return value[1:-1] if len(value) >= 2 and value[0] == value[-1] == '"' else value
+
 
 def cache_values(build_dir):
     cache = {}
@@ -16,8 +52,8 @@ def cache_values(build_dir):
 
 def include_paths(command):
     paths = []
-    separate=('-I','-isystem','-iquote','-idirafter','--include-directory','--include-directory-after','/I','/external:I')
-    joined=('--include-directory-after=','--include-directory=','-isystem','-iquote','-idirafter','/external:I','-I','/I')
+    separate=('-I','-isystem','-iquote','-idirafter','-external:I','--include-directory','--include-directory-after','/I','/external:I')
+    joined=('--include-directory-after=','--include-directory=','-isystem','-iquote','-idirafter','-external:I','/external:I','-I','/I')
     for index, argument in enumerate(command):
         if argument in separate and index+1 < len(command):
             paths.append(command[index+1])
@@ -30,12 +66,17 @@ def include_paths(command):
 
 def command_configuration(entry, command):
     """Require configuration clues from CMake's output and arguments to agree."""
-    clues = {arg.split('=', 1)[1].strip('\\"') for arg in command if arg.startswith('-DCMAKE_INTDIR=')}
+    clues = {arg.split('=', 1)[1].strip('\\"') for arg in command if arg.startswith(('-DCMAKE_INTDIR=', '/DCMAKE_INTDIR='))}
     outputs = [entry['output']] if 'output' in entry else []
     outputs += [command[index+1] for index, arg in enumerate(command[:-1]) if arg == '-o']
+    for index, argument in enumerate(command):
+        if argument == '/Fo':
+            if index+1 == len(command): raise ValueError('Missing compile output operand')
+            outputs.append(unquote(command[index+1]))
+        elif argument.startswith('/Fo'): outputs.append(unquote(argument[3:]))
     if not outputs: raise ValueError('Missing declared target compile output')
     for output in outputs:
-        parts = Path(output).parts
+        parts = PureWindowsPath(output).parts if '\\' in output else Path(output).parts
         target = 'ref_owner_lifetime_native.dir'
         if target not in parts: raise ValueError('Compile output belongs to another target')
         tail = parts[parts.index(target)+1:]
@@ -54,7 +95,13 @@ def compile_command(build_dir, source, sdk_include, configuration=None, redact_p
     for entry in entries:
         if (Path(entry['directory']) / entry['file']).resolve() != source.resolve(): continue
         command = entry.get('arguments')
-        if command is None: command = shlex.split(entry['command'])
+        if command is None:
+            raw=entry['command']
+            leading=raw.lstrip()
+            first=leading.split('"',2)[1] if leading.startswith('"') else leading.split()[0]
+            windows=any(PureWindowsPath(value).name.lower() in ('cl','cl.exe','clang-cl','clang-cl.exe')
+                        for value in (first,cache.get('CMAKE_CXX_COMPILER','')))
+            command=split_windows_command(raw) if windows else shlex.split(raw)
         if not isinstance(command, list) or not command or not all(isinstance(arg, str) for arg in command):
             raise ValueError('Invalid compile command')
         selected = command_configuration(entry, command)
@@ -68,7 +115,8 @@ def compile_command(build_dir, source, sdk_include, configuration=None, redact_p
              (str(sdk_include.parent.resolve()), '<sdk>'),
              (str(Path.home()), '<home>'))
     def redact(argument):
-        for path, label in paths: argument = argument.replace(path, label)
+        for path, label in sorted(paths,key=lambda item:len(item[0]),reverse=True):
+            argument = argument.replace(path,label).replace(path.replace('\\','/'),label)
         return argument
     if not any((Path(directory) / include).resolve()==sdk_include.resolve() for include in include_paths(command)):
         raise ValueError('Probe compile command does not use supplied SDK headers')
@@ -84,7 +132,7 @@ def selected_sdk_headers(build_dir,source,sdk_include,configuration=None):
     localized diagnostics or guessing the ordering of -I and -isystem.
     """
     command,directory=compile_command(build_dir,source,sdk_include,configuration,redact_paths=False)
-    msvc=any(Path(arg).name.lower() in {'cl','cl.exe','clang-cl','clang-cl.exe'} for arg in command[:3]) or '--driver-mode=cl' in command
+    msvc=any(PureWindowsPath(arg).name.lower() in {'cl','cl.exe','clang-cl','clang-cl.exe'} for arg in command[:3]) or '--driver-mode=cl' in command
     options=[]
     index=0
     while index<len(command):
