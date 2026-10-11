@@ -26,8 +26,11 @@ The captured reference output remains designation-valid after the target
 expires; the followed ordinary input becomes invalid. Independent step ticks
 separate those observations and allow silence to be checked.
 The checker validates both installed engine identities, including package
-sources, distribution artifacts and loaded native libraries. For successful
-captures, every parsed raw published row must match the process-local event
+sources, distribution artifacts and loaded native libraries. The public recorder
+fingerprints `delta_eval/observe.py`, `fixed/reference_identity.py` and
+`fixed/native_identity.py` before and after measurement; the checker requires
+exactly these support dependencies with their current hexadecimal SHA-256 hashes.
+For successful captures, every parsed raw published row must match the process-local event
 rows exactly, with no missing, extra or duplicated publications. The failed
 Python owned-reference capture preserves its partial events and error without
 claiming a successful raw result.

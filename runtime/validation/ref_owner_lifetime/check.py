@@ -7,6 +7,7 @@ HERE=Path(__file__).resolve().parent
 sys.path.insert(0,str(HERE.parent))
 from evidence_identity import digest, manifest, validate_identity
 from build_identity import command_configuration, include_paths
+SUPPORT_NAMES=('delta_eval/observe.py','fixed/reference_identity.py','fixed/native_identity.py')
 
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -67,6 +68,8 @@ def check(public=None,native=None):
     for record,names in [(public,('observe.py','reasoned.json')),(native,('native.cpp','native_reasoned.json','native_observe.py','CMakeLists.txt','build_identity.py'))]:
         assert record['repeats']==3
         assert record['sources_sha256']=={name:sha(HERE/name) for name in names}
+    manifest(public['support_sha256'])
+    assert public['support_sha256']=={name:sha(HERE.parent/name) for name in SUPPORT_NAMES}
     assert set(public['engines'])=={'python','cpp'}
     for engine,record in public['engines'].items():
         validate_identity(record['identity'],engine)

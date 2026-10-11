@@ -86,6 +86,34 @@ class RecordedEvidence(unittest.TestCase):
     def test_source_fingerprint_required(self):
         self.native['sources_sha256']['native.cpp']='0'*64
         with self.assertRaises(AssertionError): check.check(self.public,self.native)
+    def test_public_support_manifest_required(self):
+        del self.public['support_sha256']
+        with self.assertRaises(KeyError): check.check(self.public,self.native)
+    def test_public_support_manifest_must_be_a_dictionary(self):
+        for value in (None,[],list(check.SUPPORT_NAMES),'support',False):
+            public=copy.deepcopy(self.public)
+            public['support_sha256']=value
+            with self.subTest(value=value),self.assertRaises(AssertionError):
+                check.check(public,self.native)
+    def test_public_support_manifest_exact_dependencies(self):
+        mutations=[lambda manifest:manifest.clear(),
+                   lambda manifest:manifest.update({'arbitrary.py':'0'*64}),
+                   lambda manifest:manifest.update({'../fixed/native_identity.py':'0'*64})]
+        for name in check.SUPPORT_NAMES:
+            mutations.extend([lambda manifest,name=name:manifest.pop(name),
+                              lambda manifest,name=name:manifest.update({name:'0'*64})])
+        for mutation in mutations:
+            public=copy.deepcopy(self.public)
+            mutation(public['support_sha256'])
+            with self.subTest(mutation=mutation),self.assertRaises(AssertionError):
+                check.check(public,self.native)
+    def test_public_support_manifest_hex_digests(self):
+        for name in check.SUPPORT_NAMES:
+            for value in ('z'*64,'0'*63,0,None):
+                public=copy.deepcopy(self.public)
+                public['support_sha256'][name]=value
+                with self.subTest(name=name,value=value),self.assertRaises(AssertionError):
+                    check.check(public,self.native)
     def test_missing_and_corrupt_engine_fingerprints(self):
         for engine in ('python','cpp'):
             for field in ('package','eval_node_source_sha256','native_artifacts','loaded_hgraph_libraries'):

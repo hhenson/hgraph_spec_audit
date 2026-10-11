@@ -10,6 +10,7 @@ from pathlib import Path
 import subprocess
 import sys
 HERE=Path(__file__).resolve().parent
+SUPPORT_NAMES=('delta_eval/observe.py','fixed/reference_identity.py','fixed/native_identity.py')
 spec=importlib.util.spec_from_file_location('support',HERE.parent/'delta_eval/observe.py')
 support=importlib.util.module_from_spec(spec);spec.loader.exec_module(support)
 
@@ -88,7 +89,9 @@ def main():
         print(json.dumps({'owned':probe(),'outer_owner_control':probe(True),'scalar_and_reference_identity':identity_probe()},sort_keys=True));return
     if not args.python or not args.cpp or not args.output or args.output.exists():p.error('Independent interpreters and a new output path required')
     sources={name:support.sha(HERE/name) for name in ('reasoned.json','observe.py')}
-    result={'measured_at':datetime.now(timezone.utc).isoformat(),'sources_sha256':sources,'repeats':3,'engines':{}}
+    dependencies={name:support.sha(HERE.parent/name) for name in SUPPORT_NAMES}
+    result={'measured_at':datetime.now(timezone.utc).isoformat(),'sources_sha256':sources,
+            'support_sha256':dependencies,'repeats':3,'engines':{}}
     for name,executable,native in [('python',args.python,False),('cpp',args.cpp,True)]:
         runs=[json.loads(subprocess.check_output([str(executable.absolute()),__file__,'--probe'],text=True).strip().splitlines()[-1]) for _ in range(3)]
         assert all(run==runs[0] for run in runs) and all(v['identity']['native']==native for v in runs[0].values())
@@ -98,6 +101,7 @@ def main():
         result['engines'][name]={'identity':identity,'cases':cases}
         print(name,cases)
     assert sources=={name:support.sha(HERE/name) for name in sources}
+    assert dependencies=={name:support.sha(HERE.parent/name) for name in SUPPORT_NAMES}
     args.output.write_text(json.dumps(result,sort_keys=True,indent=2)+'\n')
 
 if __name__=='__main__':main()

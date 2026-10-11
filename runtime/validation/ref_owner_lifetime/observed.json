@@ -1604,10 +1604,15 @@
       }
     }
   },
-  "measured_at": "2026-10-10T16:29:32.833587+00:00",
+  "measured_at": "2026-10-11T07:02:37.185573+00:00",
   "repeats": 3,
   "sources_sha256": {
-    "observe.py": "4f4c61240b8e7fc2090e7abd0d195fd06a0d91bca64f46fe0a9962450be96a82",
+    "observe.py": "a62c8be91770025c68a639b8fe448eb4c185ffb37a6f5e1128481d1761c08504",
     "reasoned.json": "86e33691061f58b40f8b6d5f0187646562e58336a2c0ded93b59ea20f226d07b"
+  },
+  "support_sha256": {
+    "delta_eval/observe.py": "c7d54b7dadcfd86fce648d4ddd5fd8decb64f7cf0e36a7700fb1195dfb3b7ead",
+    "fixed/native_identity.py": "54a736283c80ad16d38c8d92bfde123ae088ae571cf8d423aa46bddb05a39ee1",
+    "fixed/reference_identity.py": "a03b798d594899b129269f26daa4151f68cc465ffb6073f5330da87ec6682d28"
   }
 }
