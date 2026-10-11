@@ -87,7 +87,9 @@ def target_artifact(build_dir, executable):
 
 def prepare_executable(build_dir, executable):
     artifact, config, manifest = target_artifact(build_dir, executable)
-    command = ['cmake', '--build', str(build_dir.absolute()), '--target', 'last_scalar_types_native']
+    # A newer foreign executable or object can make an incremental build lie
+    # about provenance. Rebuild the configured target from clean outputs.
+    command = ['cmake', '--build', str(build_dir.absolute()), '--clean-first', '--target', 'last_scalar_types_native']
     if config: command += ['--config', config]
     subprocess.run(command, check=True, capture_output=True, text=True)
     if target_artifact(build_dir, executable) != (artifact, config, manifest):
