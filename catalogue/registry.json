@@ -1,5 +1,5 @@
 {
-  "source_fingerprint": "e2b4b94b6c01e5cd9b5396df0f606c162b0764973b88d7eab2a377bf4ba73d4b",
+  "source_fingerprint": "cab604537c325b7dcfa889cae5de267e4d2fd0caf9d76c4527cfed4d5c31aa84",
   "operators": {
     "__apply_value_callable": [
       {
@@ -10417,6 +10417,38 @@
           {
             "name": "ts",
             "kind": "temporal",
+            "type": "~__erased_port_0",
+            "default": false,
+            "carrier": null
+          },
+          {
+            "name": "attr",
+            "kind": "scalar",
+            "type": "str",
+            "default": false,
+            "carrier": null
+          }
+        ],
+        "variadic": false,
+        "positional_count": 2,
+        "positional_cardinality": [
+          0,
+          null
+        ],
+        "kwargs": false,
+        "keyword_cardinality": [
+          0,
+          null
+        ],
+        "kwargs_type": null,
+        "output": "~__out__",
+        "id": "getattr_:c8ace3be7fd9"
+      },
+      {
+        "parameters": [
+          {
+            "name": "ts",
+            "kind": "temporal",
             "type": "TS[~COMPOUND_SCALAR]",
             "default": false,
             "carrier": null
@@ -10520,38 +10552,6 @@
           {
             "name": "ts",
             "kind": "temporal",
-            "type": "REF[~S]",
-            "default": false,
-            "carrier": null
-          },
-          {
-            "name": "attr",
-            "kind": "scalar",
-            "type": "str",
-            "default": false,
-            "carrier": null
-          }
-        ],
-        "variadic": false,
-        "positional_count": 2,
-        "positional_cardinality": [
-          0,
-          null
-        ],
-        "kwargs": false,
-        "keyword_cardinality": [
-          0,
-          null
-        ],
-        "kwargs_type": null,
-        "output": "~__out__",
-        "id": "getattr_:e6f6ad808817"
-      },
-      {
-        "parameters": [
-          {
-            "name": "ts",
-            "kind": "temporal",
             "type": "TSD[~K, ~S]",
             "default": false,
             "carrier": null
@@ -10618,7 +10618,7 @@
           {
             "name": "ts",
             "kind": "temporal",
-            "type": "REF[~S]",
+            "type": "~__erased_port_0",
             "default": false,
             "carrier": null
           },
@@ -10643,7 +10643,7 @@
         ],
         "kwargs_type": null,
         "output": "~__out__",
-        "id": "getitem_:1c0d495f9f4e"
+        "id": "getitem_:20e7dce8571b"
       },
       {
         "parameters": [
@@ -11194,7 +11194,7 @@
           {
             "name": "ts",
             "kind": "temporal",
-            "type": "REF[~S]",
+            "type": "~__erased_port_0",
             "default": false,
             "carrier": null
           },
@@ -11219,7 +11219,39 @@
         ],
         "kwargs_type": null,
         "output": "~__out__",
-        "id": "getitem_:c9221f1300a5"
+        "id": "getitem_:d2726bfd02f0"
+      },
+      {
+        "parameters": [
+          {
+            "name": "ts",
+            "kind": "temporal",
+            "type": "~__erased_port_0",
+            "default": false,
+            "carrier": null
+          },
+          {
+            "name": "key",
+            "kind": "scalar",
+            "type": "int",
+            "default": false,
+            "carrier": null
+          }
+        ],
+        "variadic": false,
+        "positional_count": 2,
+        "positional_cardinality": [
+          0,
+          null
+        ],
+        "kwargs": false,
+        "keyword_cardinality": [
+          0,
+          null
+        ],
+        "kwargs_type": null,
+        "output": "~__out__",
+        "id": "getitem_:d2726bfd02f0"
       },
       {
         "parameters": [
