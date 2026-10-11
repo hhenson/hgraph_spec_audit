@@ -49,8 +49,9 @@ def check(record=None):
     for name, rejection in cpp['rejections'].items():
         capture = rejection['capture']
         assert rejection['runs_sha256'] == [digest(capture)] * 3
-        assert type(capture['exit_code']) is int and capture['exit_code'] != 0
+        assert type(capture['exit_code']) is int and 0 < capture['exit_code'] <= 255
         assert isinstance(capture['stdout'], str) and isinstance(capture['stderr'], str)
+        assert capture['stdout'].strip() or capture['stderr'].strip()
         results[name] = 'compile_reject'
     assert results == expected['cpp']
     return True

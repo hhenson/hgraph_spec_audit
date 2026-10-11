@@ -30,6 +30,17 @@ class Evidence(unittest.TestCase):
             rejection['capture']['stdout'] = "diagnostic de compilation"
         self.reseal()
         self.assertTrue(check.check(self.record))
+    def test_abnormal_process_termination_cannot_be_source_rejection(self):
+        for code in (-9, -11, 3221225477):
+            with self.subTest(code=code):
+                self.record = json.loads((HERE / 'observed.json').read_text())
+                capture = self.record['cpp']['rejections']['earlier_parameter']['capture']
+                capture.update(exit_code=code, stdout='', stderr='')
+                self.rejected()
+    def test_normal_status_without_any_diagnostic_cannot_certify_rejection(self):
+        capture = self.record['cpp']['rejections']['earlier_parameter']['capture']
+        capture.update(exit_code=1, stdout='', stderr='')
+        self.rejected()
     def test_boolean_is_not_a_compiler_exit_status(self):
         self.record['cpp']['rejections']['earlier_parameter']['capture']['exit_code'] = True
         self.rejected()

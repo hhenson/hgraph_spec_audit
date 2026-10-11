@@ -45,5 +45,6 @@ paths and new isolated build/evidence destinations; private host paths are not
 tracked. These checks and their corruption controls also run through
 `python tools/check_recorded.py` from the repository root.
 
-Rejection is determined by the selected compiler’s nonzero exit status. Its
+Rejection requires a normal positive exit status and a diagnostic in either
+stream; signal termination and Windows exception statuses cannot certify it. Its
 diagnostics are preserved as evidence without requiring GCC-specific wording.
