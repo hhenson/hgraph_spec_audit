@@ -27,6 +27,7 @@
           "capability": "error",
           "error_sha256": "8ec1d3cb295817ed336395cfb543ac98c6740097cf38ac176462eda8118bc9e5",
           "error_type": "RuntimeError",
+          "partial_trace_sha256": "97647f6552b29a6a286244c7df82f16c5074ce9d2b5b6dedd9d7bdba55d86b38",
           "phase": "eval_node"
         },
         "initial_growing": {
@@ -76,6 +77,7 @@
           "capability": "error",
           "error_sha256": "c563244ad85f588df26ee72a98a63bb6bc21ad82dd0c98a729a4244ca468d501",
           "error_type": "NodeException",
+          "partial_trace_sha256": "97647f6552b29a6a286244c7df82f16c5074ce9d2b5b6dedd9d7bdba55d86b38",
           "phase": "eval_node"
         },
         "held_map": {
@@ -126,6 +128,7 @@
           "capability": "error",
           "error_sha256": "2a6b52deb100ce35cef84b0af5ec37ed964441cc9bdb1bd22c5f2219bb43c548",
           "error_type": "NodeException",
+          "partial_trace_sha256": "a858835f795a5db65f39ab5753a7a582e43abe77315f344cba6d0406bc1c697b",
           "phase": "eval_node"
         }
       },
