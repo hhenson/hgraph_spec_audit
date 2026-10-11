@@ -1,7 +1,9 @@
 """Ordinary Python defaults, measured in an isolated public-reference interpreter."""
 import importlib.util
+import hashlib
 import json
 from pathlib import Path
+import sys
 
 HERE = Path(__file__).resolve().parent
 spec = importlib.util.spec_from_file_location('support', HERE.parent / 'delta_eval/observe.py')
@@ -39,8 +41,14 @@ result = [choose(), choose(), count]
 ''',
 }
 
+def identity():
+    # Hash the binary behind a venv symlink, retaining no private executable path.
+    executable = Path(sys.executable).resolve()
+    return {**support.identity(),
+            'executable_sha256': hashlib.sha256(executable.read_bytes()).hexdigest()}
+
 def main():
-    identity = support.identity()
+    before = identity()
     results = {}
     for name, source in CASES.items():
         namespace = {}
@@ -49,8 +57,8 @@ def main():
             results[name] = namespace['result']
         except Exception as exc:
             results[name] = {'error_type': type(exc).__name__, 'message': str(exc)}
-    assert identity == support.identity()
-    print(json.dumps({'identity': identity, 'results': results}, sort_keys=True))
+    assert before == identity()
+    print(json.dumps({'identity': before, 'results': results}, sort_keys=True))
 
 if __name__ == '__main__':
     main()

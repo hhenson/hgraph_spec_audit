@@ -4,8 +4,14 @@ Reasoned cases were committed before measurement at
 `37f4094a8ed7fb80ff807d1754ff922e4ed15ed3`. Three fresh isolated Python
 processes, three fresh ordinary C++ executions and three syntax-only compiler
 processes per rejected case agree with those cases. The Python interpreter is
-the public-reference environment, fingerprinted before and after measurement;
-the ordinary C++ probe records compiler, source and binary fingerprints.
+the public-reference environment, with the exact resolved interpreter binary
+and installed package fingerprinted before and after measurement. The selected
+venv launcher preserves that package environment; neither executable path is
+published. The ordinary C++ probe records compiler, source and binary fingerprints.
+Each C++ run digest covers results, compiler hash/version, binary hash, flags,
+build capture and rejected-source captures. The checker requires executable
+hashes to be 64 lowercase hexadecimal characters and rejects provenance changes
+that retain the recorded run digests.
 No HGL compiler or native hgraph SDK is executed.
 
 | Case | Python observation | C++ observation |
@@ -36,4 +42,5 @@ numeric generic reification or generic-parameter-default syntax.
 Run `python check.py` and `python -m unittest discover -s . -p test_check.py`
 for recorded-evidence checks. Measurement takes explicit interpreter/compiler
 paths and new isolated build/evidence destinations; private host paths are not
-tracked.
+tracked. These checks and their corruption controls also run through
+`python tools/check_recorded.py` from the repository root.

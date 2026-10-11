@@ -61,16 +61,17 @@
       "unevaluated_parameter": true
     },
     "runs_sha256": [
-      "e3a6d9214baf4350aa27dffcd756db0cb510711be8cc86c0398988b4d88712e7",
-      "e3a6d9214baf4350aa27dffcd756db0cb510711be8cc86c0398988b4d88712e7",
-      "e3a6d9214baf4350aa27dffcd756db0cb510711be8cc86c0398988b4d88712e7"
+      "a7fa60745b16b5b16a21fd51060b54799fb3d33d50df9bf9a87b11e00c5eab59",
+      "a7fa60745b16b5b16a21fd51060b54799fb3d33d50df9bf9a87b11e00c5eab59",
+      "a7fa60745b16b5b16a21fd51060b54799fb3d33d50df9bf9a87b11e00c5eab59"
     ]
   },
-  "measured_at": "2026-10-10T18:58:18.635719+00:00",
+  "measured_at": "2026-10-11T06:01:39.989627+00:00",
   "python": {
     "identity": {
       "eval_node_module": "hgraph.test._node_unit_tester",
       "eval_node_source_sha256": "d76716a60d617841886899923c1c4cda4bcd80d0295a7c67ddbf91a1875d0abe",
+      "executable_sha256": "52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41",
       "hgraph": "0.5.41",
       "loaded_hgraph_libraries": {},
       "native": false,
@@ -815,17 +816,17 @@
       "shadow_parameter": 11
     },
     "runs_sha256": [
-      "a64181b8e49e74269f2768558eb3172a5b2ed81682b902f6cb3a2f7be1249a7e",
-      "a64181b8e49e74269f2768558eb3172a5b2ed81682b902f6cb3a2f7be1249a7e",
-      "a64181b8e49e74269f2768558eb3172a5b2ed81682b902f6cb3a2f7be1249a7e"
+      "ff18186e34e7ffc50d67f5b1de31c65dfe7a462688ad98ef525b7019b7ac8c21",
+      "ff18186e34e7ffc50d67f5b1de31c65dfe7a462688ad98ef525b7019b7ac8c21",
+      "ff18186e34e7ffc50d67f5b1de31c65dfe7a462688ad98ef525b7019b7ac8c21"
     ]
   },
   "repeats": 3,
   "sources_sha256": {
     "earlier_parameter.cpp": "c14865d990cb9bfdf9b1362b960cf065a5c20406e57ee40928555b572795cf4b",
-    "observe.py": "a3c4965da9ca8bc0d1034f1d8f45ce714892ecdf786cc5925cd64a349e57a9d8",
+    "observe.py": "3ed8cd267dac0b523633f4b095aeaa1cc9d54054695c05a730f59cc8d37e9e29",
     "positive.cpp": "f0b3c929978b88eae53b7316c7254e275bcbaded1a2ba7f4d99971efffd40d6e",
-    "python_probe.py": "b079bcf5baa401835c4f6c855ce7e5063573beecb207e60a8380a5c7710a7877",
+    "python_probe.py": "042e67d59cf4a83cc58a1aed2b1d38bdb8c3b1745753939e1cfc1ac02a0f492f",
     "reasoned.json": "f94770d0f38742e20d59e038d0ef948a70a55f11068354add732251645ab7907",
     "shadow_parameter.cpp": "4da1d363235704810a142c30a849de33664c9a12447da93fa4489ffc14bc69ae"
   },
