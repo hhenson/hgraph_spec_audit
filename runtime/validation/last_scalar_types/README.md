@@ -31,7 +31,13 @@ pass-through for native atomic values and heterogeneous `Any` boxes. Empty
 boxes, false/zero/empty payloads and equal repeats publish independently of
 silent positions. [Native reasoning](native_reasoned.json) precedes the
 [record](native_observed.json); installed SDK headers, archives and compiler
-identity are fingerprinted without claiming a Git build identity.
+identity are fingerprinted without claiming a Git build identity. The recorder
+requires the executable declared by the configured CMake target and the supplied
+SDK package, imported archives and headers; it rebuilds that target before
+measurement. Compile commands select the matching configuration on Makefiles,
+Ninja and Ninja Multi-Config. An executable from another build or a different
+SDK is rejected before it runs. Build metadata and provenance are sealed with
+the observations.
 
 Explicit `AnyView` assignment nests an already boxed value; erased assignment
 flattens it. Both observations are retained. Equality and ordering of boxed

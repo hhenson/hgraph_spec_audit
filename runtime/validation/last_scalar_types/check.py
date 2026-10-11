@@ -1,5 +1,6 @@
 """Check byte traces and preserve the measured object-bridge boundary."""
 import importlib.util
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -49,13 +50,23 @@ def validate(data):
 
 
 def validate_native(data):
+    sealed = {key:value for key,value in data.items() if key!='measurement_sha256'}
+    assert data['measurement_sha256']==hashlib.sha256(json.dumps(sealed,sort_keys=True,separators=(',',':')).encode()).hexdigest()
     for name,digest in data['sources_sha256'].items():
         assert digest==probe.support.sha(HERE/name)
-    assert set(data['sources_sha256'])=={'native.cpp','native_reasoned.json','native_observe.py','CMakeLists.txt'}
+    assert set(data['sources_sha256'])=={'native.cpp','native_reasoned.json','native_observe.py','CMakeLists.txt','build_identity.py'}
     assert data['source_sha256']==data['sources_sha256']['native.cpp']
-    assert data['repeats']==3 and data['compiler_version'] and data['flags']
-    for digest in [data['binary_sha256'],data['compiler_sha256'],*data['sdk_files_sha256'].values(),*data['loaded_libraries_sha256'].values()]:
+    assert data['repeats']==3 and data['compiler_version'] and data['compile_command']
+    for digest in [data['binary_sha256'],data['compiler_sha256'],data['compile_commands_sha256'],data['target_manifest_sha256'],data['cmake_cache_sha256'],*data['sdk_files_sha256'].values(),*data['loaded_libraries_sha256'].values()]:
         assert len(digest)==64 and set(digest)<=set('0123456789abcdef')
+    assert data['target_name']=='last_scalar_types_native'
+    assert data['target_artifact'].split('/')[-1] in {'last_scalar_types_native','last_scalar_types_native.exe'}
+    assert not Path(data['target_artifact']).is_absolute() and '..' not in Path(data['target_artifact']).parts
+    assert data['cmake_generator'] and isinstance(data['target_configuration'],str)
+    assert len(data['sdk_target_libraries'])==3 and len(set(data['sdk_target_libraries']))==3
+    assert all(path.startswith('lib/') and path in data['sdk_files_sha256'] for path in data['sdk_target_libraries'])
+    command=data['compile_command']
+    assert any(arg=='-I<sdk>/include' or (arg in ('-I','-isystem') and index+1<len(command) and command[index+1]=='<sdk>/include') or arg=='-isystem<sdk>/include' for index,arg in enumerate(command))
     assert 'include/hgraph/types/static_node.h' in data['sdk_files_sha256']
     assert 'lib/libhgraph_runtime.a' in data['sdk_files_sha256']
     expected=json.loads((HERE/'native_reasoned.json').read_text())

@@ -1,6 +1,7 @@
 """Corrupted reference records must fail rather than broaden scalar coverage."""
 import copy
 import json
+import hashlib
 from pathlib import Path
 import unittest
 from check import validate, validate_native
@@ -25,11 +26,24 @@ class ScalarEvidenceTests(unittest.TestCase):
             lambda d:d['graphs']['native'].__setitem__(1,None),
             lambda d:d['assessment'].update(any_missing_order='match'),
             lambda d:d['sdk_files_sha256'].pop('lib/libhgraph_runtime.a'),
+            lambda d:d.update(target_name='another_probe'),
+            lambda d:d.update(compile_command=['c++','-DFAKE=<sdk>/include']),
+            lambda d:d.update(compile_command=['c++','-I<sdk>/include-other']),
         ]
         for mutation in mutations:
             with self.subTest(mutation=mutation):
                 data=copy.deepcopy(original);mutation(data)
+                sealed={key:value for key,value in data.items() if key!='measurement_sha256'}
+                data['measurement_sha256']=hashlib.sha256(json.dumps(sealed,sort_keys=True,separators=(',',':')).encode()).hexdigest()
                 with self.assertRaises(AssertionError):validate_native(data)
+
+    def test_native_provenance_cannot_change_without_run_digest(self):
+        original=json.loads((Path(__file__).parent/'native_observed.json').read_text())
+        for field in ('compiler_sha256','binary_sha256','compile_commands_sha256','target_manifest_sha256','cmake_cache_sha256','compiler_version','target_configuration','cmake_generator'):
+            data=copy.deepcopy(original)
+            data[field]='changed'
+            with self.subTest(field=field), self.assertRaises(AssertionError):
+                validate_native(data)
 
     def test_corruption(self):
         mutations = [
