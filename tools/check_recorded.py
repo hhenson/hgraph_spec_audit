@@ -85,6 +85,9 @@ def main():
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/empty_delta_validity/check.py')], check=True)
     subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s',
                     str(ROOT / 'runtime/validation/empty_delta_validity')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'runtime/validation/default_binding_scope/check.py')], check=True)
+    subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s',
+                    str(ROOT / 'runtime/validation/default_binding_scope')], check=True)
     print('Recorded evidence checked; no fresh runtime measurements were made.')
 
 

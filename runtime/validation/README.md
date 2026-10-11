@@ -83,3 +83,9 @@ zone construction/ad-hoc JSON decoding from exact provider-name validation.
 [Required unset reads](unset_required_reads/README.md) records retained partial
 observations through two Python authoring surfaces and genuine native typed
 extraction, preserving absent-field, collection and Boolean coercion differences.
+
+
+[Conventional default binding](default_binding_scope/README.md) separates
+Python defining-scope constants from C++ parameter/template scope, unevaluated
+controls, per-omission execution and instance member defaults. It informs an
+explicit HGL declaration-scope choice and claims no HGL execution.
