@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import posixpath
 from pathlib import Path
 import re
 import subprocess
@@ -52,7 +53,31 @@ def negative_manifest(checkout, revision):
     return sha(data), [{'id': row['id'], 'expected_exit': row['expected_exit']} for row in manifest['cases']]
 
 
-def validate_negative(summary, report, manifest):
+
+def negative_sources(checkout, revision):
+    """Bind every executed fixture and part to the selected immutable Git blobs."""
+    manifest = json.loads(git_bytes(checkout, revision, 'compiler/negative_testing/cases.json'))
+    require(manifest['path_base'] == 'manifest_directory', 'unsupported negative path base')
+    def fingerprint(path):
+        require(not path.startswith('/'), 'absolute negative source path')
+        relative = posixpath.normpath('compiler/negative_testing/' + path)
+        require(not relative.startswith('../'), 'negative source escapes repository')
+        return sha(git_bytes(checkout, revision, relative))
+    return {'spec_revision': revision, 'cases': [
+        {'id': case['id'], 'file': case['file'], 'source_sha256': fingerprint(case['file']),
+         'part_sources': [{'file': part, 'sha256': fingerprint(part)} for part in case.get('parts', [])]}
+        for case in manifest['cases']]}
+
+
+def verify_negative_checkout(checkout, sources):
+    """The selected working files must also be the blobs that the runner reads."""
+    for case in sources['cases']:
+        for source in [{'file': case['file'], 'sha256': case['source_sha256']}, *case['part_sources']]:
+            path = Path(checkout) / posixpath.normpath('compiler/negative_testing/' + source['file'])
+            require(sha(path.read_bytes()) == source['sha256'], 'negative checkout source differs from pinned blob')
+
+
+def validate_negative(summary, report, manifest, sources=None):
     """Derive matches from original process output using the measured observer."""
     observer_path = HERE.parent / 'negative_testing/observe.py'
     require(sha(observer_path.read_bytes()) == summary['observer_sha256'], 'negative matching observer changed')
@@ -63,8 +88,14 @@ def validate_negative(summary, report, manifest):
                   'compiler_sha256', 'observer_sha256', 'manifest_sha256'):
         require(report[field] == summary[field], f'original negative report changed {field}')
     cases = manifest['cases']
+    if sources is None:
+        sources = json.loads((HERE / 'negative_sources.json').read_text())
+    require(len(sources['cases']) == len(cases), 'negative source inventory count changed')
     require(len(report['cases']) == len(cases) == len(summary['cases']), 'original negative report case count changed')
-    for case, observed, condensed in zip(cases, report['cases'], summary['cases']):
+    for case, observed, condensed, source in zip(cases, report['cases'], summary['cases'], sources['cases']):
+        require(source['id'] == case['id'] and source['file'] == case['file'], 'negative source inventory identity changed')
+        require(observed['source_sha256'] == source['source_sha256'], f'negative fixture source differs from pinned blob: {case["id"]}')
+        require(observed['part_sources'] == source['part_sources'], f'negative fixture parts differ from pinned blobs: {case["id"]}')
         for field in ('id', 'file', 'mode', 'expected_exit'):
             require(observed[field] == case[field], f'original negative case changed {field}')
         required = observer.expectations(case, report['cases_directory'])
@@ -126,6 +157,10 @@ def check(report=None, stdlib_checkout=None, spec_checkout=None):
     expected_bytes = (HERE / 'expected.json').read_bytes()
     require(sha(expected_bytes) == provenance['expected_sha256'], 'pinned source manifest integrity changed')
     expected = json.loads(expected_bytes)
+    source_bytes = (HERE / 'negative_sources.json').read_bytes()
+    require(sha(source_bytes) == provenance['negative_sources_sha256'], 'pinned negative source inventory changed')
+    sources = json.loads(source_bytes)
+    require(sources['spec_revision'] == expected['revisions']['spec'], 'negative source inventory revision changed')
     manifest_bytes = (HERE / 'negative_manifest.json').read_bytes()
     require(sha(manifest_bytes) == expected['negative_manifest_sha256'], 'pinned detailed negative manifest changed')
     manifest = json.loads(manifest_bytes)
@@ -136,7 +171,7 @@ def check(report=None, stdlib_checkout=None, spec_checkout=None):
     for summary in report['negative_measurements']:
         original_bytes = (HERE / f'negative_{summary["backend"]}.json').read_bytes()
         require(sha(original_bytes) == summary['raw_report_sha256'], 'original negative report bytes changed')
-        validate_negative(summary, json.loads(original_bytes), manifest)
+        validate_negative(summary, json.loads(original_bytes), manifest, sources)
     if raw is not None:
         require(sha(raw) == provenance['results_sha256'], 'frozen report bytes changed')
     require(sha(json.dumps(report, sort_keys=True, separators=(',', ':')).encode()) == provenance['results_semantic_sha256'], 'frozen report content changed')
@@ -145,6 +180,8 @@ def check(report=None, stdlib_checkout=None, spec_checkout=None):
     if spec_checkout is not None:
         digest, cases = negative_manifest(spec_checkout, expected['revisions']['spec'])
         require(digest == expected['negative_manifest_sha256'] and cases == expected['negative_cases'], 'pinned negative fixtures differ from manifest')
+        require(negative_sources(spec_checkout, expected['revisions']['spec']) == sources, 'pinned negative source blobs differ from inventory')
+        verify_negative_checkout(spec_checkout, sources)
     return True
 
 

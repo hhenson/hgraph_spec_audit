@@ -1,6 +1,7 @@
 """Corrupted matrix summaries must fail recorded-evidence validation."""
 import copy
 import json
+import subprocess
 from pathlib import Path
 import tempfile
 import unittest
@@ -181,11 +182,69 @@ class MatrixEvidence(unittest.TestCase):
     def test_original_report_hash_is_required(self):
         with tempfile.TemporaryDirectory() as folder:
             target = Path(folder)
-            for name in ('provenance.json', 'expected.json', 'negative_manifest.json'):
+            for name in ('provenance.json', 'expected.json', 'negative_manifest.json', 'negative_sources.json'):
                 (target / name).write_bytes((HERE / name).read_bytes())
             (target / 'negative_cpp.json').write_text('{}')
             with patch.object(check, 'HERE', target):
                 with self.assertRaisesRegex(ValueError, 'original negative report bytes changed'):
+                    check.check(self.report)
+
+    def test_fixture_and_part_hashes_must_match_pinned_sources(self):
+        for summary in self.report['negative_measurements']:
+            original = self.negatives[summary['backend']]
+            for field in ('source_sha256', 'part_sources'):
+                report = copy.deepcopy(original)
+                index = next(i for i, case in enumerate(report['cases']) if case['part_sources'])
+                if field == 'source_sha256':
+                    report['cases'][index][field] = '0' * 64
+                else:
+                    report['cases'][index][field][0]['sha256'] = '0' * 64
+                with self.subTest(backend=summary['backend'], field=field):
+                    with self.assertRaisesRegex(ValueError, 'pinned blob'):
+                        check.validate_negative(summary, report, self.manifest)
+
+    def test_checkout_main_and_parts_match_immutable_git_blobs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            cases = root / 'compiler/negative_testing'
+            cases.mkdir(parents=True)
+            manifest = {'path_base': 'manifest_directory', 'cases': [
+                {'id': 'probe', 'file': 'main.hgl', 'parts': ['part.hgl']}]}
+            (cases / 'cases.json').write_text(json.dumps(manifest))
+            (cases / 'main.hgl').write_text('module probe\n')
+            (cases / 'part.hgl').write_text('part probe\n')
+            def git(*args):
+                return subprocess.check_output(['git', '-C', str(root), *args], stderr=subprocess.DEVNULL)
+            git('init', '-q')
+            git('add', '.')
+            git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.com',
+                'commit', '-qm', 'Frozen fixture sources')
+            revision = git('rev-parse', 'HEAD').decode().strip()
+            frozen = check.negative_sources(root, revision)
+            check.verify_negative_checkout(root, frozen)
+            for name in ('main.hgl', 'part.hgl'):
+                path = cases / name
+                old = path.read_bytes()
+                path.write_bytes(old + b'# changed source\n')
+                self.assertEqual(check.negative_sources(root, revision), frozen)
+                with self.assertRaisesRegex(ValueError, 'checkout source differs'):
+                    check.verify_negative_checkout(root, frozen)
+                path.write_bytes(old)
+            (cases / 'part.hgl').write_text('part changed\n')
+            git('add', '.')
+            git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.com',
+                'commit', '-qm', 'Changed part; unchanged cases manifest')
+            changed_revision = git('rev-parse', 'HEAD').decode().strip()
+            self.assertNotEqual(check.negative_sources(root, changed_revision)['cases'], frozen['cases'])
+
+    def test_pinned_negative_source_inventory_cannot_be_replaced(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory)
+            for name in ('provenance.json', 'expected.json'):
+                (target / name).write_bytes((HERE / name).read_bytes())
+            (target / 'negative_sources.json').write_text('{}')
+            with patch.object(check, 'HERE', target):
+                with self.assertRaisesRegex(ValueError, 'source inventory changed'):
                     check.check(self.report)
 
     def test_expected_manifest_cannot_be_replaced(self):

@@ -161,3 +161,8 @@ Prior full compiler/runtime gates on all three platforms remain the
 acceptance evidence for the implementation changes. This closeout reruns the
 shared matrix against merged main; it does not repeat the wheel/SDK gates or
 claim new full-runtime coverage.
+
+Negative fixture and part hashes are derived from the pinned Spec Git blobs in
+`negative_sources.json` and checked against both original backend reports.
+`--spec-checkout` also checks the selected working files against those blobs.
+The compiler revision supplied to the original runners remains unverified.
