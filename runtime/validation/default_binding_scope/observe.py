@@ -20,6 +20,17 @@ def digest(value):
 def normalized(text, build):
     return text.replace(str(HERE), '<probe>').replace(str(build), '<build>')
 
+def syntax_capture(compiler, compiler_sha, source, build):
+    invocation = {'compiler_sha256': compiler_sha, 'flags': [*FLAGS, '-fsyntax-only'],
+                  'source': source, 'source_sha256': sha(HERE / source)}
+    runs = [subprocess.run([str(compiler), *invocation['flags'], str(HERE / source)],
+                          capture_output=True, text=True, timeout=60) for _ in range(3)]
+    captures = [{'exit_code': run.returncode, 'stdout': normalized(run.stdout, build),
+                 'stderr': normalized(run.stderr, build)} for run in runs]
+    assert all(run == captures[0] for run in captures)
+    return {'invocation': invocation, 'capture': captures[0],
+            'runs_sha256': [digest({'invocation': invocation, 'capture': run}) for run in captures]}
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--python', type=Path, required=True)
@@ -49,18 +60,17 @@ def main():
     binary_sha = sha(binary)
     cpp = [json.loads(subprocess.check_output([str(binary)], text=True, timeout=60)) for _ in range(3)]
     assert all(run == cpp[0] for run in cpp)
+    syntax_control = syntax_capture(compiler, compiler_sha, 'positive.cpp', args.build_dir)
+    assert syntax_control['capture']['exit_code'] == 0, syntax_control['capture']
     rejected = {}
     for name in ('earlier_parameter', 'shadow_parameter'):
-        runs = [subprocess.run([str(compiler), *FLAGS, '-fsyntax-only', str(HERE / (name + '.cpp'))], capture_output=True, text=True, timeout=60) for _ in range(3)]
-        captures = [{'exit_code': run.returncode, 'stdout': normalized(run.stdout, args.build_dir), 'stderr': normalized(run.stderr, args.build_dir)} for run in runs]
-        assert all(run == captures[0] for run in captures)
-        rejected[name] = {'capture': captures[0], 'runs_sha256': [digest(run) for run in captures]}
+        rejected[name] = syntax_capture(compiler, compiler_sha, name + '.cpp', args.build_dir)
     assert sources == {name: sha(HERE / name) for name in NAMES}
     assert support == {name: sha(HERE.parent / name) for name in SUPPORT}
     assert python_launcher.resolve() == python_executable and python_sha == sha(python_executable)
     assert compiler_sha == sha(compiler) and binary_sha == sha(binary)
     assert compiler_version == subprocess.check_output([str(compiler), '--version'], text=True).splitlines()[0]
-    cpp_provenance = {'rejections': rejected, 'binary_sha256': binary_sha,
+    cpp_provenance = {'rejections': rejected, 'syntax_control': syntax_control, 'binary_sha256': binary_sha,
                       'compiler_sha256': compiler_sha, 'compiler_version': compiler_version,
                       'flags': list(FLAGS), 'build': {'exit_code': build.returncode,
                       'stdout': normalized(build.stdout, args.build_dir),

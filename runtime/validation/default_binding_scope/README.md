@@ -3,13 +3,15 @@
 Reasoned cases were committed before measurement at
 `37f4094a8ed7fb80ff807d1754ff922e4ed15ed3`. Three fresh isolated Python
 processes, three fresh ordinary C++ executions and three syntax-only compiler
-processes per rejected case agree with those cases. The Python interpreter is
+processes for the positive control and each rejected case agree with those cases. The Python interpreter is
 the public-reference environment, with the exact resolved interpreter binary
 and installed package fingerprinted before and after measurement. The selected
 venv launcher preserves that package environment; neither executable path is
 published. The ordinary C++ probe records compiler, source and binary fingerprints.
 Each C++ run digest covers results, compiler hash/version, binary hash, flags,
-build capture and rejected-source captures. The checker requires executable
+build capture, successful syntax-only control and rejected-source captures.
+Each syntax-only invocation records the same compiler fingerprint and exact
+options, its source fingerprint and three matching process digests. The checker requires executable
 hashes to be 64 lowercase hexadecimal characters and rejects provenance changes
 that retain the recorded run digests.
 No HGL compiler or native hgraph SDK is executed.
@@ -44,3 +46,16 @@ for recorded-evidence checks. Measurement takes explicit interpreter/compiler
 paths and new isolated build/evidence destinations; private host paths are not
 tracked. These checks and their corruption controls also run through
 `python tools/check_recorded.py` from the repository root.
+
+Rejection first requires `positive.cpp` to succeed with the identical compiler
+and syntax-only options in three fresh processes. A driver rejecting an option
+cannot certify either invalid fixture. Each rejection then requires a normal
+positive exit status and a diagnostic in either stream; signal termination and
+Windows exception statuses cannot certify it. Diagnostics are preserved as
+evidence without requiring compiler-specific wording.
+
+The [previous capture](archive/pre-syntax-control/observed.json) and its
+[observer](archive/pre-syntax-control/observe.py) remain archived unchanged.
+The new observation repeats all probes with the same resolved GCC and Python
+interpreter/package fingerprints, preserving every semantic result and the
+earlier rejection captures while adding the successful syntax-only control.
