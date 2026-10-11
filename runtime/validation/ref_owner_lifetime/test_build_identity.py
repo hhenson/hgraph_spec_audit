@@ -1,10 +1,15 @@
 """Reject unrelated binaries/SDKs and select the actual build configuration."""
 import json
+import hashlib
+import os
+import shutil
+import subprocess
+import time
 from pathlib import Path
 import tempfile
 import unittest
 
-from build_identity import sdk_binding
+from build_identity import prepare_executable, sdk_binding
 
 HERE = Path(__file__).resolve().parent
 
@@ -121,6 +126,49 @@ class BuildIdentityTests(unittest.TestCase):
                          'arguments': ['c++', '-c', 'other.cpp']})
         path.write_text(json.dumps(commands))
         self.assertEqual(sdk_binding(self.build, artifact, self.sdk)[0], artifact)
+
+
+    @unittest.skipUnless(all(shutil.which(tool) for tool in ('cmake', 'c++', 'make', 'ninja')),
+                         'CMake, C++ compiler, Make and Ninja are required for the replacement control')
+    def test_clean_rebuild_replaces_newer_foreign_same_source_executable(self):
+        source = self.root / 'source'
+        source.mkdir()
+        target = 'ref_owner_lifetime_native'
+        (source / 'native.cpp').write_text('#include <iostream>\nint main() { std::cout << PROBE_MESSAGE; }\n')
+        (source / 'CMakeLists.txt').write_text(
+            'cmake_minimum_required(VERSION 3.26)\nproject(replacement LANGUAGES CXX)\n'
+            'add_executable(' + target + ' native.cpp)\n'
+            'target_compile_definitions(' + target + ' PRIVATE PROBE_MESSAGE="${PROBE_MESSAGE}")\n'
+            'file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/ref_owner_lifetime_target-$<CONFIG>.txt" '
+            'CONTENT "$<TARGET_FILE:' + target + '>\\n")\n')
+        for generator, multi in [('Unix Makefiles', False), ('Ninja', False), ('Ninja Multi-Config', True)]:
+            with self.subTest(generator=generator):
+                tag = generator.replace(' ', '-')
+                builds = [self.root / (tag + '-declared'), self.root / (tag + '-foreign')]
+                artifacts = []
+                for build, message in zip(builds, ('declared', 'foreign')):
+                    subprocess.run(['cmake', '-S', str(source), '-B', str(build), '-G', generator,
+                                    '-DCMAKE_BUILD_TYPE=Release', '-DPROBE_MESSAGE=' + message],
+                                   check=True, capture_output=True, text=True)
+                    subprocess.run(['cmake', '--build', str(build), '--target', target, '--config', 'Release'],
+                                   check=True, capture_output=True, text=True)
+                    artifacts.append(build / 'Release' / target if multi else build / target)
+                declared, foreign = artifacts
+                foreign_hash = hashlib.sha256(foreign.read_bytes()).hexdigest()
+                shutil.copy2(foreign, declared)
+                future = time.time() + 86400
+                os.utime(declared, (future, future))
+                self.assertEqual(subprocess.check_output([str(declared)], text=True), 'foreign')
+                # Make leaves this newer foreign output untouched. Ninja may
+                # detect its build-log mismatch, so demonstrate the incremental
+                # failure on Make and require clean replacement on all three.
+                if generator == 'Unix Makefiles':
+                    subprocess.run(['cmake', '--build', str(builds[0]), '--target', target, '--config', 'Release'],
+                                   check=True, capture_output=True, text=True)
+                    self.assertEqual(subprocess.check_output([str(declared)], text=True), 'foreign')
+                prepare_executable(builds[0], declared)
+                self.assertEqual(subprocess.check_output([str(declared)], text=True), 'declared')
+                self.assertNotEqual(hashlib.sha256(declared.read_bytes()).hexdigest(), foreign_hash)
 
 
 if __name__ == '__main__':
