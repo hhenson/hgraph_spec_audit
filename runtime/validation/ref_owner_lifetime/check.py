@@ -9,8 +9,18 @@ from evidence_identity import digest, manifest, validate_identity
 from build_identity import command_configuration, include_paths
 SUPPORT_NAMES=('delta_eval/observe.py','fixed/reference_identity.py','fixed/native_identity.py')
 OWNED_REQUIREMENT=(7,8,8,None,None,None)
+NATIVE_CAPTURE_FIELDS=('source_sha256','owned','outer_owner_control','identity','bool_operations','loaded_libraries_sha256')
 
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+
+def capture_digest(value):
+    return hashlib.sha256(json.dumps(value,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+
+def check_repeats(record,payload):
+    runs=record['runs_sha256']
+    assert isinstance(runs,list) and len(runs)==3
+    for value in runs: digest(value)
+    assert runs==[capture_digest(payload)]*3
 
 def load_requirements():
     return (json.loads((HERE/'reasoned.json').read_text()),
@@ -92,7 +102,7 @@ def check(public=None,native=None):
     reasoned,native_reasoned=load_requirements()
     check_requirements(reasoned,native_reasoned)
     for record,names in [(public,('observe.py','reasoned.json')),(native,('native.cpp','native_reasoned.json','native_observe.py','CMakeLists.txt','build_identity.py'))]:
-        assert record['repeats']==3
+        assert type(record['repeats']) is int and record['repeats']==3
         assert record['sources_sha256']=={name:sha(HERE/name) for name in names}
     manifest(public['support_sha256'])
     assert public['support_sha256']=={name:sha(HERE.parent/name) for name in SUPPORT_NAMES}
@@ -100,6 +110,7 @@ def check(public=None,native=None):
     for engine,record in public['engines'].items():
         validate_identity(record['identity'],engine)
         cases=record['cases']
+        check_repeats(record,{'identity':record['identity'],'cases':cases})
         assert set(cases)=={'owned','outer_owner_control','scalar_and_reference_identity'}
         control=cases['outer_owner_control']
         assert [row['value'] for row in control['events']]==reasoned['outer_owner_control']['expected_followed']
@@ -126,6 +137,7 @@ def check(public=None,native=None):
         check_flags(owned['events'],owned_flags)
     assert native['source_sha256']==native['sources_sha256']['native.cpp']
     check_native_provenance(native)
+    check_repeats(native,{field:native[field] for field in NATIVE_CAPTURE_FIELDS})
     assert native['owned']==public['engines']['cpp']['cases']['owned']['events']
     assert native['outer_owner_control']==public['engines']['cpp']['cases']['outer_owner_control']['events']
     assert native['identity']==[native_reasoned['reference_identity']]

@@ -14,6 +14,9 @@ SUPPORT = ('fixed/native_loaded_libraries.h',)
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
+def capture_digest(value):
+    return hashlib.sha256(json.dumps(value,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+
 def sdk_hashes(root):
     return {str(p.relative_to(root)): sha(p) for directory in ('include','lib')
             for p in sorted((root/directory).rglob('*')) if p.is_file()}
@@ -66,7 +69,7 @@ def main():
           'target_manifest_sha256':manifest_hash,'cmake_cache_sha256':cache_hash,
           'cmake_generator':cache_values(args.build_dir)['CMAKE_GENERATOR'],
           'sdk_target_libraries':libraries,
-          **runs[0],'assessment':assessment}
+          **runs[0],'assessment':assessment,'runs_sha256':[capture_digest(run) for run in runs]}
     data['measurement_sha256']=hashlib.sha256(json.dumps(data,sort_keys=True,separators=(',',':')).encode()).hexdigest()
     args.output.write_text(json.dumps(data,sort_keys=True,indent=2)+'\n')
     print(assessment)

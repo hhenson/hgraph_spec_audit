@@ -34,6 +34,12 @@ For successful captures, every parsed raw published row must match the process-l
 rows exactly, with no missing, extra or duplicated publications. The failed
 Python owned-reference capture preserves its partial events and error without
 claiming a successful raw result.
+Each public engine retains the ordered SHA-256 fingerprints of all three
+process payloads, covering its identity and every case. Native repeats cover
+the source identity, loaded libraries and all observations; their fingerprints
+are also covered by the native measurement seal. The checker requires exactly
+three matching fingerprints derived from the recorded payload, rather than
+accepting a repeat count alone.
 The checker derives the public/native owned assessments from the frozen
 next-cycle expiry requirement and checks that both reasoned corpora agree.
 Refreshing source fingerprints cannot move expiry to the later observed C++
@@ -67,3 +73,10 @@ python3 -m unittest discover -s runtime/validation/ref_owner_lifetime
 
 For a multi-configuration build, supply its selected artifact, for example
 `<build>/Release/ref_owner_lifetime_native`.
+
+The captures and recorders preceding per-process fingerprints remain unchanged
+in [the archive](archive/pre-repeat-fingerprints/observed.json), including the
+[native capture](archive/pre-repeat-fingerprints/native_observed.json).
+Fresh repeats use matching installed runtime/SDK identities and preserve the
+Python partial failure and the C++ owner-expiry divergence. Isolated native
+build paths may change build metadata without changing the frozen SDK.

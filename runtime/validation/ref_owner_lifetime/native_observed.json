@@ -10,7 +10,7 @@
     "equal_false_hash": true,
     "false_before_true": true
   },
-  "cmake_cache_sha256": "bf2545d75c1b7ab3776217f66ba9856eba986db08a71c0d57cb761f5910c1227",
+  "cmake_cache_sha256": "1abab06c54655f0f7222249416e96441187fc1f0c839a572de735fac04980d9d",
   "cmake_generator": "Unix Makefiles",
   "compile_command": [
     "/usr/bin/c++",
@@ -32,11 +32,11 @@
     "-isystem",
     "<home>/hgraph/.venv/lib/python3.12/site-packages/pyarrow/include",
     "-isystem",
-    "<build>/_deps/simdjson-src/include",
+    "/tmp/native-probe-clean-review-20261011/ref/make/_deps/simdjson-src/include",
     "-isystem",
-    "<build>/_deps/fmt-src/include",
+    "/tmp/native-probe-clean-review-20261011/ref/make/_deps/fmt-src/include",
     "-isystem",
-    "<build>/_deps/spdlog-src/include",
+    "/tmp/native-probe-clean-review-20261011/ref/make/_deps/spdlog-src/include",
     "-O3",
     "-DNDEBUG",
     "-std=gnu++23",
@@ -49,7 +49,7 @@
     "-c",
     "<source>/native.cpp"
   ],
-  "compile_commands_sha256": "bf360d6365679382e7b194d5e3fb7b5e9e58a159924f2378a468b18616371ce1",
+  "compile_commands_sha256": "507b0f607dc7880f7b293cd931a7038f94adbd96aad3e5b0cf8b7afee307486e",
   "compiler_sha256": "e6718f7e0c7d057c3ff77b550c603da9bc4030e3ede3c053705acce1293dbe4d",
   "compiler_version": "x86_64-linux-gnu-g++-15 (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
   "identity": [
@@ -59,8 +59,8 @@
     }
   ],
   "loaded_libraries_sha256": {},
-  "measured_at": "2026-10-11T06:44:28.666422+00:00",
-  "measurement_sha256": "3f1010e72f58f94bde411bc1d723936c3fe1faac135ac987242073eb535f2161",
+  "measured_at": "2026-10-11T07:53:47.612125+00:00",
+  "measurement_sha256": "8d4a39c86ce6b299e13475e966da8c9b24ce20ebe40826e8b4ce3e20a2fe6999",
   "outer_owner_control": [
     {
       "data_modified": true,
@@ -150,6 +150,11 @@
     }
   ],
   "repeats": 3,
+  "runs_sha256": [
+    "5a76b2ee0e4b6731128a3ef2c622460f2aeb27d447c04aabbc9d96e5c2502dd9",
+    "5a76b2ee0e4b6731128a3ef2c622460f2aeb27d447c04aabbc9d96e5c2502dd9",
+    "5a76b2ee0e4b6731128a3ef2c622460f2aeb27d447c04aabbc9d96e5c2502dd9"
+  ],
   "sdk_files_sha256": {
     "include/date/date.h": "bb1e68b8f17f900508e151844221050cbbdf33f39d160410c9bc8fbd6a612ae7",
     "include/date/islamic.h": "aa2637f7bcfc52c09f35f9ae13e7db1503e3a1d7b706f9e7faed841598debf90",
@@ -555,7 +560,7 @@
     "CMakeLists.txt": "b331468daa930cc7f3f07c12516ec7da8458596e28fd3856ea89bab41429471c",
     "build_identity.py": "b04550ced07b93197c27daa2ff2b73ff9ad28ae1ff24d8ef51f46dde2882db95",
     "native.cpp": "e6408de49426359a750d3e96ca5954f03439011c35c54478d4820af4656b97b6",
-    "native_observe.py": "f197ffc33e07540fb788ded586b782d13850e552ddf25f82bf648523c970cc7a",
+    "native_observe.py": "bdf07f0c247334994acd897024592796fe17e688f5136a3221d7440559bbf2e9",
     "native_reasoned.json": "a71e2273caf5536bb2e1b0df75bb2ec0cef6fbc5f2f36e864b02b7f29eeb8b99"
   },
   "support_sha256": {
@@ -563,6 +568,6 @@
   },
   "target_artifact": "ref_owner_lifetime_native",
   "target_configuration": "Release",
-  "target_manifest_sha256": "6f3d785cff52f5de5cf85c7701b93aa240f1e3d82d74f9033e9ab0945e00e2d7",
+  "target_manifest_sha256": "b2b269611c68c84a10beb10664478f694d8706a0191645d4d35cb71d6ebdf52c",
   "target_name": "ref_owner_lifetime_native"
 }

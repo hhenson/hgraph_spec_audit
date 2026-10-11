@@ -780,7 +780,12 @@
           "version": "0.0.0"
         },
         "python": "3.14.4"
-      }
+      },
+      "runs_sha256": [
+        "22063a7b376a545c519b4cb4b7111e8d4936b95be2c79e050257ffdfa5d23841",
+        "22063a7b376a545c519b4cb4b7111e8d4936b95be2c79e050257ffdfa5d23841",
+        "22063a7b376a545c519b4cb4b7111e8d4936b95be2c79e050257ffdfa5d23841"
+      ]
     },
     "python": {
       "cases": {
@@ -1601,13 +1606,18 @@
           "version": "0.5.41"
         },
         "python": "3.14.4"
-      }
+      },
+      "runs_sha256": [
+        "c15e0dea4a41cdee7965644830f2d9b6c858be7299b85ebe10710cd0d0938a7e",
+        "c15e0dea4a41cdee7965644830f2d9b6c858be7299b85ebe10710cd0d0938a7e",
+        "c15e0dea4a41cdee7965644830f2d9b6c858be7299b85ebe10710cd0d0938a7e"
+      ]
     }
   },
-  "measured_at": "2026-10-11T07:02:37.185573+00:00",
+  "measured_at": "2026-10-11T07:53:08.757965+00:00",
   "repeats": 3,
   "sources_sha256": {
-    "observe.py": "a62c8be91770025c68a639b8fe448eb4c185ffb37a6f5e1128481d1761c08504",
+    "observe.py": "2622266ca0838891d3981f566ba35b6aea51ba9f3b331288264925826a777c26",
     "reasoned.json": "86e33691061f58b40f8b6d5f0187646562e58336a2c0ded93b59ea20f226d07b"
   },
   "support_sha256": {

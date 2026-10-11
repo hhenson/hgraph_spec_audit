@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 import importlib.util
 import io
+import hashlib
 import json
 from pathlib import Path
 import subprocess
@@ -14,6 +15,8 @@ SUPPORT_NAMES=('delta_eval/observe.py','fixed/reference_identity.py','fixed/nati
 spec=importlib.util.spec_from_file_location('support',HERE.parent/'delta_eval/observe.py')
 support=importlib.util.module_from_spec(spec);spec.loader.exec_module(support)
 
+def capture_digest(value):
+    return hashlib.sha256(json.dumps(value,sort_keys=True,separators=(',',':')).encode()).hexdigest()
 
 def probe(control=False):
     import hgraph as hg
@@ -98,7 +101,11 @@ def main():
         identity=runs[0]['owned']['identity']
         assert all(run['identity']==identity for run in runs[0].values())
         cases={case:{k:v for k,v in run.items() if k!='identity'} for case,run in runs[0].items()}
-        result['engines'][name]={'identity':identity,'cases':cases}
+        payloads=[{'identity':run['owned']['identity'],
+                   'cases':{case:{k:v for k,v in captured.items() if k!='identity'}
+                            for case,captured in run.items()}} for run in runs]
+        result['engines'][name]={'identity':identity,'cases':cases,
+                                 'runs_sha256':[capture_digest(run) for run in payloads]}
         print(name,cases)
     assert sources=={name:support.sha(HERE/name) for name in sources}
     assert dependencies=={name:support.sha(HERE.parent/name) for name in SUPPORT_NAMES}

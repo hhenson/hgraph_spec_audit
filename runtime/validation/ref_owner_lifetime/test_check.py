@@ -13,6 +13,62 @@ class RecordedEvidence(unittest.TestCase):
         self.native=json.loads((HERE/'native_observed.json').read_text())
     def test_recorded(self): self.assertTrue(check.check(self.public,self.native))
     def test_default_records(self): self.assertTrue(check.check())
+    def test_repeat_fingerprints_are_required(self):
+        for engine in ('python','cpp'):
+            public=copy.deepcopy(self.public)
+            del public['engines'][engine]['runs_sha256']
+            with self.subTest(engine=engine),self.assertRaises(KeyError): check.check(public,self.native)
+        del self.native['runs_sha256']
+        self.reseal(self.native)
+        with self.assertRaises(KeyError): check.check(self.public,self.native)
+    def test_repeat_count_must_be_exact_integer_three(self):
+        for value in (1,2,4,3.0,'3',True,None):
+            public=copy.deepcopy(self.public)
+            public['repeats']=value
+            with self.subTest(surface='public',value=value),self.assertRaises(AssertionError): check.check(public,self.native)
+            native=copy.deepcopy(self.native)
+            native['repeats']=value
+            self.reseal(native)
+            with self.subTest(surface='native',value=value),self.assertRaises(AssertionError): check.check(self.public,native)
+    def test_exactly_three_ordered_public_repeat_fingerprints(self):
+        for engine in ('python','cpp'):
+            correct=self.public['engines'][engine]['runs_sha256'][0]
+            for value in ([],[correct],[correct]*2,[correct]*4,None,correct,{},['z'*64]*3):
+                public=copy.deepcopy(self.public)
+                public['engines'][engine]['runs_sha256']=value
+                with self.subTest(engine=engine,value=value),self.assertRaises(AssertionError): check.check(public,self.native)
+            for index in range(3):
+                public=copy.deepcopy(self.public)
+                public['engines'][engine]['runs_sha256'][index]='0'*64
+                with self.subTest(engine=engine,index=index),self.assertRaises(AssertionError): check.check(public,self.native)
+    def test_exactly_three_ordered_native_repeat_fingerprints_even_when_resealed(self):
+        correct=self.native['runs_sha256'][0]
+        for value in ([],[correct],[correct]*2,[correct]*4,None,correct,{},['z'*64]*3):
+            native=copy.deepcopy(self.native)
+            native['runs_sha256']=value
+            self.reseal(native)
+            with self.subTest(value=value),self.assertRaises(AssertionError): check.check(self.public,native)
+        for index in range(3):
+            native=copy.deepcopy(self.native)
+            native['runs_sha256'][index]='0'*64
+            self.reseal(native)
+            with self.subTest(index=index),self.assertRaises(AssertionError): check.check(self.public,native)
+    def test_public_repeat_digest_covers_identity_and_all_case_payloads(self):
+        for engine in ('python','cpp'):
+            record=self.public['engines'][engine]
+            payloads=[record['identity'],record['cases'],{'identity':record['identity'],'cases':{'owned':record['cases']['owned']}}]
+            for payload in payloads:
+                public=copy.deepcopy(self.public)
+                public['engines'][engine]['runs_sha256']=[check.capture_digest(payload)]*3
+                with self.subTest(engine=engine,payload=payload.keys()),self.assertRaises(AssertionError): check.check(public,self.native)
+    def test_native_repeat_digest_covers_all_captured_fields(self):
+        payload={field:self.native[field] for field in check.NATIVE_CAPTURE_FIELDS}
+        for field in check.NATIVE_CAPTURE_FIELDS:
+            incomplete={key:value for key,value in payload.items() if key!=field}
+            native=copy.deepcopy(self.native)
+            native['runs_sha256']=[check.capture_digest(incomplete)]*3
+            self.reseal(native)
+            with self.subTest(field=field),self.assertRaises(AssertionError): check.check(self.public,native)
     def test_owned_assessments_derive_from_requirement_without_padding_python_error(self):
         reasoned,native_reasoned=check.load_requirements()
         check.check_requirements(reasoned,native_reasoned)
@@ -191,6 +247,8 @@ class RecordedEvidence(unittest.TestCase):
                         with self.assertRaises(AssertionError): check.check(public,self.native)
                 public=copy.deepcopy(self.public)
                 del public['engines'][engine]['cases'][case]['raw']
+                record=public['engines'][engine]
+                record['runs_sha256']=[check.capture_digest({'identity':record['identity'],'cases':record['cases']})]*3
                 with self.assertRaises(KeyError): check.check(public,self.native)
     def test_failed_python_capture_cannot_claim_successful_raw(self):
         self.public['engines']['python']['cases']['owned']['raw']=[]
