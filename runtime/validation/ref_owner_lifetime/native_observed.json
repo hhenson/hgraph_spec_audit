@@ -10,16 +10,48 @@
     "equal_false_hash": true,
     "false_before_true": true
   },
-  "compiler_sha256": "e6718f7e0c7d057c3ff77b550c603da9bc4030e3ede3c053705acce1293dbe4d",
-  "compiler_version": "c++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
-  "flags": [
+  "cmake_cache_sha256": "034559f43b487da5e23f547edf47b2cdbd95338153bbfdb5171db9d9dbbe6f57",
+  "cmake_generator": "Unix Makefiles",
+  "compile_command": [
+    "/usr/bin/c++",
+    "-DHAS_STRING_VIEW=1",
+    "-DHGRAPH_ENABLE_PYTHON_USER_NODES=0",
+    "-DHGRAPH_STATIC_DEFINE",
+    "-DHGRAPH_TIME_ZONE_BACKEND_DATE=1",
+    "-DONLY_C_LOCALE=0",
+    "-DSIMDJSON_DEVELOPMENT_CHECKS",
+    "-DSIMDJSON_THREADS_ENABLED=1",
+    "-DSOURCE_SHA256=\"e6408de49426359a750d3e96ca5954f03439011c35c54478d4820af4656b97b6\"",
+    "-DSPDLOG_COMPILED_LIB",
+    "-DSPDLOG_FMT_EXTERNAL",
+    "-DUSE_OS_TZDB=1",
+    "-isystem",
+    "<sdk>/include",
+    "-isystem",
+    "<sdk>/include/third_party",
+    "-isystem",
+    "<home>/hgraph/.venv/lib/python3.12/site-packages/pyarrow/include",
+    "-isystem",
+    "<build>/_deps/simdjson-src/include",
+    "-isystem",
+    "<build>/_deps/fmt-src/include",
+    "-isystem",
+    "<build>/_deps/spdlog-src/include",
     "-O3",
+    "-DNDEBUG",
     "-std=gnu++23",
     "-Wall",
     "-Wextra",
     "-Wpedantic",
-    "-Werror"
+    "-Werror",
+    "-o",
+    "CMakeFiles/ref_owner_lifetime_native.dir/native.cpp.o",
+    "-c",
+    "<source>/native.cpp"
   ],
+  "compile_commands_sha256": "cae98dae0444810a9bb993df1f9d3599ac2e62c37c604376abee02d1d00c0c20",
+  "compiler_sha256": "e6718f7e0c7d057c3ff77b550c603da9bc4030e3ede3c053705acce1293dbe4d",
+  "compiler_version": "x86_64-linux-gnu-g++-15 (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
   "identity": [
     {
       "distinct_equal_endpoints": false,
@@ -27,7 +59,8 @@
     }
   ],
   "loaded_libraries_sha256": {},
-  "measured_at": "2026-10-10T16:29:43.131686+00:00",
+  "measured_at": "2026-10-11T06:30:04.208390+00:00",
+  "measurement_sha256": "6bbcb195f4834135de082e21e608096e8169710b35b96c62dc50ce30990a8cb8",
   "outer_owner_control": [
     {
       "data_modified": true,
@@ -512,11 +545,24 @@
     "lib/pkgconfig/rdkafka++-static.pc": "ebf48894823899441ffd6417a4968ae2ade041d5cfb22d20e30a7b396a61b37f",
     "lib/pkgconfig/rdkafka-static.pc": "8020ce2f0a8e1a88b190f06a41ac522e03b2edae174a1fe492f34b057d72151d"
   },
+  "sdk_target_libraries": [
+    "lib/libhgraph_stdlib.a",
+    "lib/libhgraph_wiring.a",
+    "lib/libhgraph_runtime.a"
+  ],
   "source_sha256": "e6408de49426359a750d3e96ca5954f03439011c35c54478d4820af4656b97b6",
   "sources_sha256": {
-    "CMakeLists.txt": "3e85697296d533f8b34d653264b677c07ce11bf73d885a00d7960528f911d41e",
+    "CMakeLists.txt": "b331468daa930cc7f3f07c12516ec7da8458596e28fd3856ea89bab41429471c",
+    "build_identity.py": "ed4a9f9d63460a0ac7be14b8a11c3f22f1e086f7473839ddccb6947a6442298c",
     "native.cpp": "e6408de49426359a750d3e96ca5954f03439011c35c54478d4820af4656b97b6",
-    "native_observe.py": "19dbe959f82cf85c6759fb10280ca22d9a9e43379a2ea42f090c57aca3b86844",
+    "native_observe.py": "f197ffc33e07540fb788ded586b782d13850e552ddf25f82bf648523c970cc7a",
     "native_reasoned.json": "a71e2273caf5536bb2e1b0df75bb2ec0cef6fbc5f2f36e864b02b7f29eeb8b99"
-  }
+  },
+  "support_sha256": {
+    "fixed/native_loaded_libraries.h": "2236c73b4419a980ebcef802ad98d9967681b831242cc68579e879e30ff32309"
+  },
+  "target_artifact": "ref_owner_lifetime_native",
+  "target_configuration": "Release",
+  "target_manifest_sha256": "881ae8962362eef7836b1ceb8253b5f6f6f5544cd890536e18e601c32a57c3dd",
+  "target_name": "ref_owner_lifetime_native"
 }

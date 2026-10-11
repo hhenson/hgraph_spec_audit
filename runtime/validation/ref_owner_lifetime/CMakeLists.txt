@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.26)
 project(ref_owner_lifetime LANGUAGES CXX)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 find_package(hgraph CONFIG REQUIRED)
 add_executable(ref_owner_lifetime_native native.cpp)
 target_compile_features(ref_owner_lifetime_native PRIVATE cxx_std_23)
@@ -7,3 +8,5 @@ target_link_libraries(ref_owner_lifetime_native PRIVATE hgraph::core hgraph::std
 set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/native.cpp")
 file(SHA256 "${CMAKE_CURRENT_SOURCE_DIR}/native.cpp" source_hash)
 target_compile_definitions(ref_owner_lifetime_native PRIVATE SOURCE_SHA256="${source_hash}")
+file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/ref_owner_lifetime_target-$<CONFIG>.txt"
+     CONTENT "$<TARGET_FILE:ref_owner_lifetime_native>\n${hgraph_DIR}\n$<TARGET_FILE:hgraph::stdlib>\n$<TARGET_FILE:hgraph::wiring>\n$<TARGET_FILE:hgraph::runtime>\n")
