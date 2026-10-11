@@ -53,7 +53,10 @@ def check(record=None):
             assert captured['padding_added'] == padding
             assert captured['dense_from_input_horizon'] == decoded + [None] * padding
             assert len(captured['dense_from_input_horizon']) == required['input_horizon']
-            assert captured['events'] == [row for row in decoded if row is not None]
+            # Presence comes from the raw slot. A published JSON null is still
+            # an event, even though decoding it yields the silence placeholder.
+            assert captured['events'] == ([] if raw is None else
+                [json.loads(row) for row in raw if row is not None])
             # Recorded observation boundary, never a replacement requirement.
             observed_dense = list(required['expected_dense'])
             if engine == 'cpp' and required['kind'] == 'tree':

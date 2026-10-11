@@ -33,6 +33,13 @@ class RecordedCaptures(unittest.TestCase):
     def test_error_cannot_be_added_to_unchanged_successful_capture(self):
         self.record['engines']['python']['cases']['nested_scalar_first']['error_type'] = 'RuntimeError'
         self.rejected()
+    def test_published_json_null_cannot_replace_a_silent_slot(self):
+        measured = self.record['engines']['cpp']
+        for name in ('exported_tree_first', 'exported_tree_fresh'):
+            case = measured['cases'][name]
+            self.assertIsNone(case['raw_eval_node'][3])
+            case['raw_eval_node'][3] = 'null'
+        self.rejected()
     def test_nested_current_value_cannot_be_replaced_with_inactive_source(self):
         self.record['engines']['python']['cases']['nested_scalar_first']['events'][1] = 8
         self.rejected()
