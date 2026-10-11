@@ -13,16 +13,71 @@ HERE = Path(__file__).resolve().parent
 class Evidence(unittest.TestCase):
     def setUp(self):
         self.record = json.loads((HERE / 'observed.json').read_text())
-    def rejected(self):
+    def reseal(self):
         # Reseal process digests to exercise semantic comparisons independently.
         p = self.record['python']
         p['runs_sha256'] = [check.digest({'identity': p['identity'], 'results': p['results']})] * 3
         c = self.record['cpp']
-        for r in c['rejections'].values():
-            r['runs_sha256'] = [check.digest(r['capture'])] * 3
+        for r in [c['syntax_control'], *c['rejections'].values()]:
+            r['runs_sha256'] = [check.digest({'invocation': r['invocation'], 'capture': r['capture']})] * 3
         c['runs_sha256'] = [check.digest({k: v for k, v in c.items() if k != 'runs_sha256'})] * 3
+    def rejected(self):
+        self.reseal()
         with self.assertRaises(AssertionError): check.check(self.record)
+    def test_compiler_diagnostics_are_not_a_semantic_contract(self):
+        for rejection in self.record['cpp']['rejections'].values():
+            rejection['capture']['stderr'] = "error: default argument references parameter 'first'"
+            rejection['capture']['stdout'] = "diagnostic de compilation"
+        self.reseal()
+        self.assertTrue(check.check(self.record))
+    def test_abnormal_process_termination_cannot_be_source_rejection(self):
+        for code in (-9, -11, 3221225477):
+            with self.subTest(code=code):
+                self.record = json.loads((HERE / 'observed.json').read_text())
+                capture = self.record['cpp']['rejections']['earlier_parameter']['capture']
+                capture.update(exit_code=code, stdout='', stderr='')
+                self.rejected()
+    def test_normal_status_without_any_diagnostic_cannot_certify_rejection(self):
+        capture = self.record['cpp']['rejections']['earlier_parameter']['capture']
+        capture.update(exit_code=1, stdout='', stderr='')
+        self.rejected()
+    def test_boolean_is_not_a_compiler_exit_status(self):
+        self.record['cpp']['rejections']['earlier_parameter']['capture']['exit_code'] = True
+        self.rejected()
     def test_recorded(self): self.assertTrue(check.check(self.record))
+    def test_unsupported_syntax_option_cannot_certify_source_rejection(self):
+        for probe in [self.record['cpp']['syntax_control'], *self.record['cpp']['rejections'].values()]:
+            probe['capture'].update(exit_code=1, stdout='', stderr='driver diagnostic')
+        self.rejected()
+    def test_successful_syntax_control_is_required(self):
+        del self.record['cpp']['syntax_control']
+        c=self.record['cpp']
+        c['runs_sha256']=[check.digest({k:v for k,v in c.items() if k!='runs_sha256'})]*3
+        with self.assertRaises(KeyError): check.check(self.record)
+    def test_control_status_must_be_normal_zero_even_when_resealed(self):
+        for code in (1, -9, 3221225477, False, None):
+            with self.subTest(code=code):
+                self.record=json.loads((HERE/'observed.json').read_text())
+                self.record['cpp']['syntax_control']['capture']['exit_code']=code
+                self.rejected()
+    def test_control_and_each_rejection_share_exact_driver_options_and_sources(self):
+        for name in ('syntax_control','earlier_parameter','shadow_parameter'):
+            for field,value in [('compiler_sha256','0'*64),('flags',['-std=c++20']),
+                                ('source','another.cpp'),('source_sha256','0'*64)]:
+                with self.subTest(name=name,field=field):
+                    self.record=json.loads((HERE/'observed.json').read_text())
+                    cpp=self.record['cpp']
+                    probe=cpp[name] if name=='syntax_control' else cpp['rejections'][name]
+                    probe['invocation'][field]=value
+                    self.rejected()
+    def test_control_repeat_digests_cannot_be_dropped_or_changed(self):
+        for values in ([], ['0'*64]*3, ['0'*64]*2):
+            with self.subTest(values=values):
+                self.record=json.loads((HERE/'observed.json').read_text())
+                self.record['cpp']['syntax_control']['runs_sha256']=values
+                c=self.record['cpp']
+                c['runs_sha256']=[check.digest({k:v for k,v in c.items() if k!='runs_sha256'})]*3
+                with self.assertRaises(AssertionError): check.check(self.record)
     def test_python_default_cannot_be_current_argument(self):
         self.record['python']['results']['shadow_parameter'] = 99
         self.rejected()

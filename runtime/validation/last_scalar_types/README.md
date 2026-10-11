@@ -37,9 +37,34 @@ SDK package, imported archives and headers; it uses
 `cmake --build --clean-first` to rebuild that target before measurement. A newer
 executable copied over the target cannot masquerade as the configured build.
 Compile commands select the matching configuration on Makefiles,
-Ninja and Ninja Multi-Config. An executable from another build or a different
+Ninja and Ninja Multi-Config. Header binding recognizes GCC/Clang `-I` and
+`-isystem`, and MSVC `/I` and `/external:I`, with separate or attached operands.
+The Windows Ninja fixture also exercises CMake's `-external:I` spelling.
+MSVC command strings preserve quoted spaces and Windows backslashes; `/Fo`
+object paths identify the declared target and configuration. These parser controls
+run on Linux; native MSVC builds have not been measured by this follow-up.
+An executable from another build or a different
 SDK is rejected before it runs. Build metadata and provenance are sealed with
 the observations.
+
+Actual loaded hgraph shared libraries must resolve inside that supplied SDK and
+match its file hashes. The record preserves SDK-relative paths, requires loaded
+configured shared targets, permits additional shared dependencies from that same
+SDK manifest and rejects loader overrides from another SDK. A Linux
+shared-library control exercises `LD_LIBRARY_PATH` substitution. The archived SDK
+probe links static archives, so its empty loaded-library map does not establish
+dynamic-library behavior on Linux, macOS or Windows.
+
+Cold compiler identity uses GCC/Clang `--version`, or MSVC's no-input invocation:
+`cl` must return success with its compiler banner on stderr. Nonzero exit statuses
+fail capture; localized usage and diagnostics are preserved without English text
+filters. The configured build separately requires that compiler to produce the
+probe, with its existing warning policy. Both complete streams and the
+resolved compiler executable are fingerprinted; the shared compiler helper and
+loaded-library enumeration header are sealed as support dependencies. An isolated
+Windows Ninja fixture verifies compiler metadata and quoted SDK include binding;
+it does not establish Windows conformance for the historical native SDK campaign.
+Visual Studio generators, which do not export compile commands, remain unsupported.
 
 Explicit `AnyView` assignment nests an already boxed value; erased assignment
 flattens it. Both observations are retained. Equality and ordering of boxed

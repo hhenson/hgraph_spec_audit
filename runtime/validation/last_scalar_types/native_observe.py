@@ -5,15 +5,19 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
-from build_identity import cache_values, prepare_executable, sdk_binding
+import sys
+from build_identity import cache_values, loaded_sdk_libraries, prepare_executable, sdk_binding
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE.parent/'fixed'))
+from compiler_identity import capture_compiler_identity
+SUPPORT_NAMES=('fixed/compiler_identity.py','fixed/native_loaded_libraries.h')
 
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 def sdk_hashes(root):
-    return {str(p.relative_to(root)): sha(p) for directory in ('include','lib')
+    return {p.relative_to(root).as_posix(): sha(p) for directory in ('include','lib','bin')
             for p in sorted((root/directory).rglob('*')) if p.is_file()}
 
 def main():
@@ -25,6 +29,7 @@ def main():
     args=parser.parse_args()
     if args.output.exists(): parser.error('New evidence destination required')
     sources={name:sha(HERE/name) for name in ('native.cpp','native_reasoned.json','native_observe.py','CMakeLists.txt','build_identity.py')}
+    support={name:sha(HERE.parent/name) for name in SUPPORT_NAMES}
     artifact, config, manifest, command, libraries = sdk_binding(args.build_dir, args.executable, args.sdk)
     sdk=sdk_hashes(args.sdk)
     prepare_executable(args.build_dir, args.executable)
@@ -34,17 +39,20 @@ def main():
     command_hash=sha(args.build_dir/'compile_commands.json')
     cache_hash=sha(args.build_dir/'CMakeCache.txt')
     compiler=Path(cache_values(args.build_dir)['CMAKE_CXX_COMPILER']).resolve()
-    compiler_hash=sha(compiler)
-    compiler_version=subprocess.check_output([str(compiler),'--version'],text=True).splitlines()[0]
+    compiler_identity=capture_compiler_identity(compiler)
+    compiler_hash=compiler_identity['compiler_sha256']
     binary=sha(artifact)
     runs=[]
     for _ in range(3):
         result=json.loads(subprocess.check_output([str(artifact)],text=True,timeout=60))
         assert result['source_sha256']==sources['native.cpp']
-        result['loaded_libraries_sha256']={Path(p).name:sha(p) for p in result.pop('libraries')}
+        loaded=loaded_sdk_libraries(result.pop('libraries'), args.sdk, sdk, libraries)
+        result['loaded_sdk_libraries_sha256']=loaded
+        result['loaded_libraries_sha256']={Path(p).name:fingerprint for p,fingerprint in loaded.items()}
         runs.append(result)
     assert all(run==runs[0] for run in runs)
     assert sources=={name:sha(HERE/name) for name in sources}
+    assert support=={name:sha(HERE.parent/name) for name in SUPPORT_NAMES}
     assert sdk==sdk_hashes(args.sdk) and binary==sha(args.executable)
     reasoned=json.loads((HERE/'native_reasoned.json').read_text())
     assessment={name:'match' if runs[0]['observed'][name]==value else 'divergence'
@@ -57,11 +65,10 @@ def main():
     assert cache_hash==sha(args.build_dir/'CMakeCache.txt') and compiler_hash==sha(compiler)
     assert sdk_binding(args.build_dir, args.executable, args.sdk) == (artifact, config, manifest, command, libraries)
     data={'measured_at':datetime.now(timezone.utc).isoformat(),'repeats':3,'sources_sha256':sources,
-          'sdk_files_sha256':sdk,'binary_sha256':binary,'compiler_sha256':compiler_hash,
-          'compiler_version':compiler_version,
+          'support_sha256':support,'sdk_files_sha256':sdk,'binary_sha256':binary,**compiler_identity,
           'compile_command':command,'compile_commands_sha256':command_hash,
           'target_name':'last_scalar_types_native','target_configuration':config,
-          'target_artifact':str(artifact.relative_to(args.build_dir.resolve())),
+          'target_artifact':artifact.relative_to(args.build_dir.resolve()).as_posix(),
           'target_manifest_sha256':manifest_hash,'cmake_cache_sha256':cache_hash,
           'cmake_generator':cache_values(args.build_dir)['CMAKE_GENERATOR'],
           'sdk_target_libraries':libraries,

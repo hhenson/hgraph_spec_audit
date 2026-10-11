@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "rust_revision": "0324243dbfaa7d0568e99eabd30c10ca09d8383d",
+  "backends": {
+    "cpp": [],
+    "rust": [
+      {
+        "file": "native/stdlib/interfaces.hgl",
+        "name": "interfaces.hgl",
+        "sha256": "a3dd13853c0104b658e324932a76276b822b88243d32972254fa054e8eb0f720"
+      },
+      {
+        "file": "native/stdlib/rust.hgl",
+        "name": "rust.hgl",
+        "sha256": "a195064647e1b1e504ffe89c027561c8070f8645cb4cd0c31304cc7769cde43a"
+      }
+    ]
+  }
+}

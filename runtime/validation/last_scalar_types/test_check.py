@@ -29,6 +29,10 @@ class ScalarEvidenceTests(unittest.TestCase):
             lambda d:d.update(target_name='another_probe'),
             lambda d:d.update(compile_command=['c++','-DFAKE=<sdk>/include']),
             lambda d:d.update(compile_command=['c++','-I<sdk>/include-other']),
+            lambda d:d.update(loaded_libraries_sha256={'libhgraph_runtime.so':'0'*64}),
+            lambda d:d.update(loaded_sdk_libraries_sha256={'../foreign/libhgraph_runtime.so':'0'*64}),
+            lambda d:d.update(loaded_sdk_libraries_sha256={'lib/arbitrary.so':'0'*64}),
+            lambda d:d.update(loaded_sdk_libraries_sha256={'lib/libhgraph_runtime.a':'0'*64}),
         ]
         for mutation in mutations:
             with self.subTest(mutation=mutation):
@@ -44,6 +48,58 @@ class ScalarEvidenceTests(unittest.TestCase):
             data[field]='changed'
             with self.subTest(field=field), self.assertRaises(AssertionError):
                 validate_native(data)
+
+    def test_recorded_portable_include_operands(self):
+        original=json.loads((Path(__file__).parent/'native_observed.json').read_text())
+        for operand in (['/I','<sdk>\\include'],['/I"<sdk>/include"'],
+                        ['/external:I','<sdk>/include'],['/external:I"<sdk>\\include"']):
+            data=copy.deepcopy(original)
+            data['compile_command']=['cl.exe',*operand]
+            sealed={key:value for key,value in data.items() if key!='measurement_sha256'}
+            data['measurement_sha256']=hashlib.sha256(json.dumps(sealed,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+            with self.subTest(operand=operand):validate_native(data)
+
+    def test_shared_target_manifest_requires_matching_loaded_artifacts(self):
+        data=json.loads((Path(__file__).parent/'native_observed.json').read_text())
+        runtime='lib/libhgraph_runtime.so'
+        fingerprint=data['sdk_files_sha256']['lib/libhgraph_runtime.a']
+        data['sdk_files_sha256'][runtime]=fingerprint
+        data['sdk_target_libraries']=[runtime if p=='lib/libhgraph_runtime.a' else p for p in data['sdk_target_libraries']]
+        data['loaded_sdk_libraries_sha256']={runtime:fingerprint}
+        data['loaded_libraries_sha256']={'libhgraph_runtime.so':fingerprint}
+        def reseal(record):
+            sealed={key:value for key,value in record.items() if key!='measurement_sha256'}
+            record['measurement_sha256']=hashlib.sha256(json.dumps(sealed,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+        reseal(data)
+        # A metadata control, not a claim that the archived SDK was dynamic.
+        validate_native(data)
+        dependency='lib/libhgraph_dependency.so'
+        data['sdk_files_sha256'][dependency]=fingerprint
+        data['loaded_sdk_libraries_sha256'][dependency]=fingerprint
+        data['loaded_libraries_sha256']['libhgraph_dependency.so']=fingerprint
+        reseal(data)
+        validate_native(data)
+        mutations=[lambda d:d.update(loaded_sdk_libraries_sha256={},loaded_libraries_sha256={}),
+                   lambda d:d['loaded_sdk_libraries_sha256'].update({runtime:'0'*64}),
+                   lambda d:d['loaded_libraries_sha256'].update({'libhgraph_runtime.so':'0'*64}),
+                   lambda d:d['loaded_sdk_libraries_sha256'].update({'bin/libhgraph_runtime.so':fingerprint})]
+        for mutation in mutations:
+            corrupted=copy.deepcopy(data);mutation(corrupted);reseal(corrupted)
+            with self.subTest(mutation=mutation),self.assertRaises(AssertionError):validate_native(corrupted)
+
+    def test_compiler_profile_and_support_fingerprints_required(self):
+        original=json.loads((Path(__file__).parent/'native_observed.json').read_text())
+        mutations=[lambda d:d['compiler_identity'].update(exit_code=2),
+                   lambda d:d['compiler_identity'].update(profile='unknown'),
+                   lambda d:d['compiler_identity'].update(arguments=[]),
+                   lambda d:d['compiler_identity'].update(stderr_sha256='z'*64),
+                   lambda d:d['support_sha256'].pop('fixed/compiler_identity.py'),
+                   lambda d:d['support_sha256'].update({'fixed/compiler_identity.py':'0'*64})]
+        for mutation in mutations:
+            data=copy.deepcopy(original);mutation(data)
+            sealed={key:value for key,value in data.items() if key!='measurement_sha256'}
+            data['measurement_sha256']=hashlib.sha256(json.dumps(sealed,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+            with self.subTest(mutation=mutation),self.assertRaises(AssertionError):validate_native(data)
 
     def test_corruption(self):
         mutations = [

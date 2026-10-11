@@ -9,7 +9,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from build_identity import prepare_executable, sdk_binding
+from build_identity import compile_command, include_paths, loaded_sdk_libraries, prepare_executable, sdk_binding, split_windows_command
 
 HERE = Path(__file__).resolve().parent
 
@@ -108,6 +108,92 @@ class BuildIdentityTests(unittest.TestCase):
             with self.subTest(argument=argument), self.assertRaisesRegex(ValueError, 'headers'):
                 sdk_binding(self.build, artifact, self.sdk)
 
+    def test_portable_include_operands_and_quoted_spaces(self):
+        # The real fixture path contains spaces; MSVC-style arguments must
+        # still bind to this exact SDK, not a similar directory or definition.
+        relocated=self.root/'SDK with spaces'
+        self.sdk.rename(relocated)
+        self.sdk=relocated
+        self.libraries=[self.sdk/'lib'/path.name for path in self.libraries]
+        include=str(self.sdk/'include')
+        for prefix in ('-I','-isystem','/I','/external:I','-external:I'):
+            for arguments in ([prefix,include],[prefix+include],
+                              [prefix,'"'+include+'"'],[prefix+'"'+include+'"']):
+                with self.subTest(arguments=arguments):
+                    artifact=self.configure()
+                    path=self.build/'compile_commands.json'
+                    entries=json.loads(path.read_text())
+                    entries[0]['arguments'][1:2]=arguments
+                    path.write_text(json.dumps(entries))
+                    sdk_binding(self.build,artifact,self.sdk)
+
+    def test_msvc_command_string_preserves_backslashes_quotes_and_output(self):
+        command=r'"C:\Program Files\MSVC\cl.exe" /I"C:\SDK with spaces\include" /external:I "C:\external files" /Fo"CMakeFiles\last_scalar_types_native.dir\Release\native.cpp.obj" /c native.cpp'
+        tokens=split_windows_command(command)
+        self.assertEqual(tokens[0],r'C:\Program Files\MSVC\cl.exe')
+        self.assertEqual(include_paths(tokens),[r'C:\SDK with spaces\include',r'C:\external files'])
+        # Round-trip the platform-independent serializer's escaped quotes and
+        # trailing backslashes, which POSIX shlex would consume.
+        values=['C:\\SDK files\\', 'a"b', '', r'plain\path']
+        self.assertEqual(split_windows_command(subprocess.list2cmdline(values)),values)
+        self.assertEqual(split_windows_command('cl.exe "a""b"'),['cl.exe','a"b'])
+        with self.assertRaisesRegex(ValueError,'Unterminated'):
+            split_windows_command('cl.exe /I"C:\\unfinished')
+        artifact=self.configure('Ninja Multi-Config',True)
+        path=self.build/'compile_commands.json'
+        entries=json.loads(path.read_text())
+        for entry,config in zip(entries,('Debug','Release')):
+            entry.pop('arguments')
+            entry['command']='cl.exe /I"'+str(self.sdk/'include')+'" /DCMAKE_INTDIR=\\"'+config+'\\" /Fo"CMakeFiles\\last_scalar_types_native.dir\\'+config+'\\native.cpp.obj" /c "'+str(HERE/'native.cpp')+'"'
+        path.write_text(json.dumps(entries))
+        result=sdk_binding(self.build,artifact,self.sdk)
+        self.assertEqual(result[1],'Release')
+        self.assertIn('<sdk>/include',include_paths(result[3]))
+
+    def test_msvc_separate_output_and_unrelated_include_text(self):
+        artifact=self.configure()
+        path=self.build/'compile_commands.json'
+        entries=json.loads(path.read_text())
+        original=entries[0]['arguments']
+        entries[0]['arguments']=['cl.exe','/external:I',str(self.sdk/'include'),
+                                 '/Fo',r'CMakeFiles\last_scalar_types_native.dir\native.cpp.obj','/c',str(HERE/'native.cpp')]
+        path.write_text(json.dumps(entries))
+        sdk_binding(self.build,artifact,self.sdk)
+        for argument in ('/DFAKE=/I'+str(self.sdk/'include'),
+                         '-DFAKE=-I'+str(self.sdk/'include'),
+                         '/I'+str(self.sdk/'include-other'),
+                         '/external:I'+str(self.sdk/'include-other')):
+            entries[0]['arguments']=original.copy()
+            entries[0]['arguments'][1]=argument
+            path.write_text(json.dumps(entries))
+            with self.subTest(argument=argument),self.assertRaisesRegex(ValueError,'headers'):
+                sdk_binding(self.build,artifact,self.sdk)
+        for command in (['cl.exe','/I'],['cl.exe','/external:I']):
+            with self.subTest(command=command),self.assertRaisesRegex(ValueError,'operand'):
+                include_paths(command)
+
+    def test_relative_include_uses_selected_command_directory(self):
+        artifact=self.configure()
+        path=self.build/'compile_commands.json'
+        entries=json.loads(path.read_text())
+        entries[0]['arguments'][1:2]=['/I','../sdk/include']
+        entries.append({'directory':str(self.root/'unrelated/directory'),
+                        'file':'unrelated.cpp','arguments':['cl.exe','/I','../sdk/include']})
+        path.write_text(json.dumps(entries))
+        sdk_binding(self.build,artifact,self.sdk)
+
+    def test_sdk_nested_in_source_keeps_sdk_redaction_label(self):
+        self.configure()
+        source=self.root/'native.cpp'
+        source.write_text('// metadata fixture\n')
+        path=self.build/'compile_commands.json'
+        entries=json.loads(path.read_text())
+        entries[0]['file']=str(source)
+        entries[0]['arguments'][-1]=str(source)
+        path.write_text(json.dumps(entries))
+        command=compile_command(self.build,source,self.sdk/'include','Release')
+        self.assertEqual(include_paths(command),['<sdk>/include'])
+
     def test_ambiguous_configuration_is_rejected(self):
         artifact = self.configure('Ninja Multi-Config', True)
         path = self.build / 'compile_commands.json'
@@ -116,6 +202,64 @@ class BuildIdentityTests(unittest.TestCase):
         path.write_text(json.dumps(commands))
         with self.assertRaisesRegex(ValueError, 'one native.cpp'):
             sdk_binding(self.build, artifact, self.sdk)
+
+    def test_loaded_library_must_match_sdk_path_and_bytes(self):
+        library=self.sdk/'lib/libhgraph_runtime.so'
+        library.write_bytes(b'shared fixture')
+        relative=library.relative_to(self.sdk).as_posix()
+        fingerprints={relative:hashlib.sha256(library.read_bytes()).hexdigest()}
+        self.assertEqual(loaded_sdk_libraries([str(library)],self.sdk,fingerprints,[relative]),fingerprints)
+        dependency=self.sdk/'lib/libhgraph_dependency.so'
+        dependency.write_bytes(b'transitive shared fixture')
+        all_hashes={**fingerprints,dependency.relative_to(self.sdk).as_posix():hashlib.sha256(dependency.read_bytes()).hexdigest()}
+        self.assertEqual(loaded_sdk_libraries([str(library),str(dependency)],self.sdk,all_hashes,[relative]),all_hashes)
+        foreign=self.root/library.name
+        foreign.write_bytes(library.read_bytes())
+        with self.assertRaisesRegex(ValueError,'belong'):
+            loaded_sdk_libraries([str(foreign)],self.sdk,fingerprints,[])
+        library.write_bytes(b'changed after SDK fingerprint')
+        with self.assertRaisesRegex(ValueError,'manifest'):
+            loaded_sdk_libraries([str(library)],self.sdk,fingerprints,[])
+
+    def test_configured_shared_targets_must_be_loaded(self):
+        for target in ('lib/libhgraph_runtime.so','lib/libhgraph_runtime.so.1',
+                       'lib/libhgraph_runtime.dylib','bin/hgraph_runtime.dll'):
+            with self.subTest(target=target),self.assertRaisesRegex(ValueError,'not loaded'):
+                loaded_sdk_libraries([],self.sdk,{},[target])
+        self.assertEqual(loaded_sdk_libraries([],self.sdk,{},['lib/libhgraph_runtime.a']),{})
+
+    @unittest.skipUnless(os.name=='posix' and Path('/proc/self/maps').exists() and shutil.which('c++'),
+                         'Linux compiler and loader are required for the runtime override control')
+    def test_ld_library_path_override_is_rejected(self):
+        source=self.root/'library.cpp'
+        source.write_text('extern "C" int probe_value() { return PROBE_VALUE; }\n')
+        directories=[self.sdk/'lib',self.root/'foreign']
+        for directory,value in zip(directories,(1,2)):
+            directory.mkdir(exist_ok=True)
+            subprocess.run(['c++','-shared','-fPIC','-DPROBE_VALUE='+str(value),str(source),
+                            '-o',str(directory/'libhgraph_runtime.so')],check=True,capture_output=True)
+        probe=self.root/'loader.cpp'
+        probe.write_text('#include <dlfcn.h>\n#include <iostream>\n'
+                         'extern "C" int probe_value();\nint main() { Dl_info info{}; '
+                         'if (!dladdr((void*)&probe_value, &info)) return 1; '
+                         'std::cout << probe_value() << "\\n" << info.dli_fname << "\\n"; }\n')
+        executable=self.root/'loader'
+        subprocess.run(['c++',str(probe),'-L'+str(directories[0]),'-lhgraph_runtime','-ldl',
+                        '-Wl,--enable-new-dtags','-Wl,-rpath,'+str(directories[0]),'-o',str(executable)],
+                       check=True,capture_output=True)
+        sdk_library=directories[0]/'libhgraph_runtime.so'
+        relative=sdk_library.relative_to(self.sdk).as_posix()
+        fingerprints={relative:hashlib.sha256(sdk_library.read_bytes()).hexdigest()}
+        for directory,value in zip(directories,('1','2')):
+            environment=dict(os.environ,LD_LIBRARY_PATH=str(directory))
+            lines=subprocess.check_output([str(executable)],env=environment,text=True).splitlines()
+            self.assertEqual(lines[0],value)
+            self.assertEqual(Path(lines[1]).resolve(),directory/'libhgraph_runtime.so')
+            if value=='1':
+                self.assertEqual(loaded_sdk_libraries(lines[1:],self.sdk,fingerprints,[relative]),fingerprints)
+            else:
+                with self.assertRaisesRegex(ValueError,'belong'):
+                    loaded_sdk_libraries(lines[1:],self.sdk,fingerprints,[relative])
 
 
     @unittest.skipUnless(all(shutil.which(tool) for tool in ('cmake', 'c++', 'make', 'ninja')),

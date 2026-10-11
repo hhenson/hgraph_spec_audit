@@ -3,11 +3,14 @@ import importlib.util
 import hashlib
 import json
 import sys
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 from evidence_identity import validate_identity
+from build_identity import include_paths, shared_library
+sys.path.insert(0, str(HERE.parent/'fixed'))
+from compiler_identity import validate_compiler_identity
 spec = importlib.util.spec_from_file_location('last_scalar_probe', HERE/'observe.py')
 probe = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(probe)
@@ -56,6 +59,8 @@ def validate_native(data):
         assert digest==probe.support.sha(HERE/name)
     assert set(data['sources_sha256'])=={'native.cpp','native_reasoned.json','native_observe.py','CMakeLists.txt','build_identity.py'}
     assert data['source_sha256']==data['sources_sha256']['native.cpp']
+    assert data['support_sha256']=={name:probe.support.sha(HERE.parent/name) for name in ('fixed/compiler_identity.py','fixed/native_loaded_libraries.h')}
+    validate_compiler_identity(data)
     assert data['repeats']==3 and data['compiler_version'] and data['compile_command']
     for digest in [data['binary_sha256'],data['compiler_sha256'],data['compile_commands_sha256'],data['target_manifest_sha256'],data['cmake_cache_sha256'],*data['sdk_files_sha256'].values(),*data['loaded_libraries_sha256'].values()]:
         assert len(digest)==64 and set(digest)<=set('0123456789abcdef')
@@ -64,11 +69,21 @@ def validate_native(data):
     assert not Path(data['target_artifact']).is_absolute() and '..' not in Path(data['target_artifact']).parts
     assert data['cmake_generator'] and isinstance(data['target_configuration'],str)
     assert len(data['sdk_target_libraries'])==3 and len(set(data['sdk_target_libraries']))==3
-    assert all(path.startswith('lib/') and path in data['sdk_files_sha256'] for path in data['sdk_target_libraries'])
+    assert all(path.startswith(('lib/','bin/')) and '..' not in PurePosixPath(path).parts and path in data['sdk_files_sha256'] for path in data['sdk_target_libraries'])
+    loaded=data['loaded_sdk_libraries_sha256']
+    assert isinstance(loaded,dict)
+    for path,fingerprint in loaded.items():
+        assert path.startswith(('lib/','bin/')) and '..' not in PurePosixPath(path).parts
+        assert shared_library(path)
+        assert path in data['sdk_files_sha256']
+        assert data['sdk_files_sha256'][path]==fingerprint
+    assert len({PurePosixPath(path).name for path in loaded})==len(loaded)
+    assert data['loaded_libraries_sha256']=={PurePosixPath(path).name:fingerprint for path,fingerprint in loaded.items()}
+    assert {path for path in data['sdk_target_libraries'] if shared_library(path)}<=set(loaded)
     command=data['compile_command']
-    assert any(arg=='-I<sdk>/include' or (arg in ('-I','-isystem') and index+1<len(command) and command[index+1]=='<sdk>/include') or arg=='-isystem<sdk>/include' for index,arg in enumerate(command))
+    assert '<sdk>/include' in [path.replace('\\','/') for path in include_paths(command)]
     assert 'include/hgraph/types/static_node.h' in data['sdk_files_sha256']
-    assert 'lib/libhgraph_runtime.a' in data['sdk_files_sha256']
+    assert any(PurePosixPath(path).name.startswith(('libhgraph_runtime.','hgraph_runtime.')) for path in data['sdk_target_libraries'])
     expected=json.loads((HERE/'native_reasoned.json').read_text())
     assert set(data['observed'])==set(expected['expected'])|set(expected['capability_expectations'])
     assert set(data['graphs'])==set(expected['graph_expected'])
