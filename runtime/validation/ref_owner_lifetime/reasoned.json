@@ -1,0 +1,47 @@
+{
+  "written_before_measurement": true,
+  "rules": [
+    "TS-23",
+    "GRF-25",
+    "conditional branch lifecycle and explicit REF results"
+  ],
+  "scope": "A reference to a producer owned by a stopped switch child graph; capture designation once, then observe with an independent step.",
+  "keys": [
+    "a",
+    "a",
+    "b",
+    "b",
+    "a",
+    "a"
+  ],
+  "values": [
+    7,
+    8,
+    20,
+    21,
+    9,
+    10
+  ],
+  "expected_followed": [
+    7,
+    8,
+    8,
+    null,
+    null,
+    null
+  ],
+  "expectation": "The old target remains observable in its stop cycle and expires from the next engine cycle. A fresh instance of branch a never revives or retargets that captured designation.",
+  "inference": "TS-23 states this timing for dictionary-child removal; the no-lifetime-extension rule and GRF-25 logical finalization imply the same for a stopped nested endpoint owner. The narrower wording must be clarified before a new HGL conformance assertion.",
+  "boundaries": "Only capture a branch REF result published through its parent graph boundary. Do not directly access an endpoint inside a parallel graph. Raw observations/errors are retained independently of expected traces.",
+  "outer_owner_control": {
+    "expected_followed": [
+      7,
+      8,
+      20,
+      21,
+      9,
+      10
+    ],
+    "expectation": "Both branch relays designate the surviving outer input. Stopping a relay must not expire its upstream endpoint or prevent continued following."
+  }
+}

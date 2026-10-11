@@ -1,0 +1,170 @@
+import copy
+import hashlib
+import json
+from pathlib import Path
+import unittest
+import check
+HERE=Path(__file__).resolve().parent
+
+class RecordedEvidence(unittest.TestCase):
+    def setUp(self):
+        self.public=json.loads((HERE/'observed.json').read_text())
+        self.native=json.loads((HERE/'native_observed.json').read_text())
+    def test_recorded(self): self.assertTrue(check.check(self.public,self.native))
+    def test_default_records(self): self.assertTrue(check.check())
+    def test_empty_public_record_is_not_replaced(self):
+        with self.assertRaises(KeyError): check.check({},self.native)
+    def test_empty_native_record_is_not_replaced(self):
+        with self.assertRaises(KeyError): check.check(self.public,{})
+    def test_missing_engine_rejected(self):
+        for engine in ('python','cpp'):
+            with self.subTest(engine=engine):
+                public=copy.deepcopy(self.public)
+                del public['engines'][engine]
+                with self.assertRaises(AssertionError): check.check(public,self.native)
+    def test_empty_engines_rejected(self):
+        self.public['engines']={}
+        with self.assertRaises(AssertionError): check.check(self.public,self.native)
+    def test_extra_engine_rejected(self):
+        self.public['engines']['unsupported']=copy.deepcopy(self.public['engines']['python'])
+        with self.assertRaises(AssertionError): check.check(self.public,self.native)
+    def test_public_owned_flags_cannot_change(self):
+        for engine,record in self.public['engines'].items():
+            for index,event in enumerate(record['cases']['owned']['events']):
+                for field in ('reference_valid','data_valid','reference_modified','data_modified'):
+                    with self.subTest(engine=engine,index=index,field=field):
+                        public=copy.deepcopy(self.public)
+                        public['engines'][engine]['cases']['owned']['events'][index][field]=not event[field]
+                        with self.assertRaises(AssertionError): check.check(public,self.native)
+    def test_native_owned_flags_cannot_change(self):
+        for index,event in enumerate(self.native['owned']):
+            for field in ('reference_valid','data_valid','reference_modified','data_modified'):
+                with self.subTest(index=index,field=field):
+                    native=copy.deepcopy(self.native)
+                    native['owned'][index][field]=not event[field]
+                    with self.assertRaises(AssertionError): check.check(self.public,native)
+    def test_matching_cpp_and_native_owned_flag_corruption_rejected(self):
+        for index,event in enumerate(self.native['owned']):
+            for field in ('reference_valid','data_valid','reference_modified','data_modified'):
+                with self.subTest(index=index,field=field):
+                    public=copy.deepcopy(self.public)
+                    native=copy.deepcopy(self.native)
+                    public['engines']['cpp']['cases']['owned']['events'][index][field]=not event[field]
+                    native['owned'][index][field]=not event[field]
+                    with self.assertRaises(AssertionError): check.check(public,native)
+    def test_owned_flags_must_be_booleans(self):
+        for field in ('reference_valid','data_valid','reference_modified','data_modified'):
+            with self.subTest(field=field):
+                public=copy.deepcopy(self.public)
+                native=copy.deepcopy(self.native)
+                public['engines']['cpp']['cases']['owned']['events'][0][field]=1
+                native['owned'][0][field]=1
+                with self.assertRaises(AssertionError): check.check(public,native)
+    def test_outer_owner_control_flags_cannot_change(self):
+        for engine,record in self.public['engines'].items():
+            for index,event in enumerate(record['cases']['outer_owner_control']['events']):
+                for field in ('reference_valid','data_valid','reference_modified','data_modified'):
+                    with self.subTest(engine=engine,index=index,field=field):
+                        public=copy.deepcopy(self.public)
+                        native=copy.deepcopy(self.native)
+                        public['engines'][engine]['cases']['outer_owner_control']['events'][index][field]=not event[field]
+                        if engine=='cpp':
+                            native['outer_owner_control'][index][field]=not event[field]
+                        with self.assertRaises(AssertionError): check.check(public,native)
+    def test_stale_capture_cannot_be_reported_as_expired(self):
+        self.native['owned'][3]['value']=None
+        with self.assertRaises(AssertionError): check.check(self.public,self.native)
+    def test_live_outer_owner_cannot_be_expired(self):
+        self.public['engines']['python']['cases']['outer_owner_control']['events'][3]['value']=None
+        with self.assertRaises(AssertionError): check.check(self.public,self.native)
+    def test_identity_cannot_be_payload_equality(self):
+        self.native['identity'][0]['distinct_equal_endpoints']=True
+        with self.assertRaises(AssertionError): check.check(self.public,self.native)
+    def test_false_bool_order_cannot_pass(self):
+        self.native['bool_operations']['false_before_true']=False
+        with self.assertRaises(AssertionError): check.check(self.public,self.native)
+    def test_source_fingerprint_required(self):
+        self.native['sources_sha256']['native.cpp']='0'*64
+        with self.assertRaises(AssertionError): check.check(self.public,self.native)
+    def test_missing_and_corrupt_engine_fingerprints(self):
+        for engine in ('python','cpp'):
+            for field in ('package','eval_node_source_sha256','native_artifacts','loaded_hgraph_libraries'):
+                with self.subTest(engine=engine,field=field):
+                    public=copy.deepcopy(self.public)
+                    del public['engines'][engine]['identity'][field]
+                    with self.assertRaises((AssertionError,KeyError)): check.check(public,self.native)
+            public=copy.deepcopy(self.public)
+            public['engines'][engine]['identity']['eval_node_source_sha256']='z'*64
+            with self.assertRaises(AssertionError): check.check(public,self.native)
+    def test_package_digest_and_native_manifest_corruption(self):
+        for engine in ('python','cpp'):
+            public=copy.deepcopy(self.public)
+            public['engines'][engine]['identity']['package']['identity_sha256']='0'*64
+            with self.subTest(engine=engine),self.assertRaises(AssertionError): check.check(public,self.native)
+        public=copy.deepcopy(self.public)
+        public['engines']['cpp']['identity']['native_artifacts']={}
+        with self.assertRaises(AssertionError): check.check(public,self.native)
+        public=copy.deepcopy(self.public)
+        public['engines']['cpp']['identity']['loaded_hgraph_libraries']={}
+        with self.assertRaises(AssertionError): check.check(public,self.native)
+    def test_publication_rows_must_match_events(self):
+        for engine,record in self.public['engines'].items():
+            for case,values in record['cases'].items():
+                if 'raw' not in values: continue
+                mutations=[lambda raw:raw.pop(),lambda raw:raw.append(raw[-1]),
+                           lambda raw:raw.__setitem__(0,'{}'),lambda raw:raw.__setitem__(0,None),
+                           lambda raw:raw.__setitem__(0,raw[0].replace('true','1'))]
+                for mutation in mutations:
+                    with self.subTest(engine=engine,case=case,mutation=mutation):
+                        public=copy.deepcopy(self.public)
+                        mutation(public['engines'][engine]['cases'][case]['raw'])
+                        with self.assertRaises(AssertionError): check.check(public,self.native)
+                public=copy.deepcopy(self.public)
+                del public['engines'][engine]['cases'][case]['raw']
+                with self.assertRaises(KeyError): check.check(public,self.native)
+    def test_failed_python_capture_cannot_claim_successful_raw(self):
+        self.public['engines']['python']['cases']['owned']['raw']=[]
+        with self.assertRaises(AssertionError): check.check(self.public,self.native)
+    def test_native_provenance_is_sealed(self):
+        for field in ('binary_sha256','compiler_sha256','compiler_version','compile_command',
+                      'target_configuration','sdk_target_libraries','cmake_generator'):
+            native=copy.deepcopy(self.native)
+            native[field]='changed'
+            with self.subTest(field=field),self.assertRaises(AssertionError): check.check(self.public,native)
+    def reseal(self,native):
+        content={k:v for k,v in native.items() if k!='measurement_sha256'}
+        native['measurement_sha256']=hashlib.sha256(json.dumps(content,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+    def test_nonhex_native_fingerprints_rejected_even_when_resealed(self):
+        for field in ('binary_sha256','compiler_sha256','compile_commands_sha256','target_manifest_sha256','cmake_cache_sha256'):
+            native=copy.deepcopy(self.native)
+            native[field]='z'*64
+            self.reseal(native)
+            with self.subTest(field=field),self.assertRaises(AssertionError): check.check(self.public,native)
+        native=copy.deepcopy(self.native)
+        native['sdk_files_sha256']['lib/libhgraph_runtime.a']='z'*64
+        self.reseal(native)
+        with self.assertRaises(AssertionError): check.check(self.public,native)
+    def test_native_sdk_and_build_metadata_required_even_when_resealed(self):
+        mutations=[lambda n:n.update(sdk_files_sha256={'arbitrary':'0'*64}),
+                   lambda n:n['sdk_files_sha256'].pop('include/hgraph/types/static_node.h'),
+                   lambda n:n['sdk_files_sha256'].pop('lib/libhgraph_runtime.a'),
+                   lambda n:n.update(compiler_version=''),lambda n:n.update(cmake_generator=''),
+                   lambda n:n.update(target_name='another_target'),lambda n:n.update(target_artifact='../ref_owner_lifetime_native'),
+                   lambda n:n.update(sdk_target_libraries=['lib/arbitrary.a']*3),
+                   lambda n:n.update(target_configuration='Different')]
+        for mutation in mutations:
+            native=copy.deepcopy(self.native)
+            mutation(native)
+            # A nonempty single-generator configuration cannot be inferred
+            # from its flags; force an explicit contradictory clue for this control.
+            if native['target_configuration']=='Different':
+                native['compile_command'].append('-DCMAKE_INTDIR="Release"')
+            self.reseal(native)
+            with self.subTest(mutation=mutation),self.assertRaises(AssertionError): check.check(self.public,native)
+        for field in ('compile_command','target_configuration','cmake_cache_sha256'):
+            native=copy.deepcopy(self.native)
+            del native[field]
+            self.reseal(native)
+            with self.subTest(field=field),self.assertRaises(KeyError): check.check(self.public,native)
+
+if __name__=='__main__': unittest.main()

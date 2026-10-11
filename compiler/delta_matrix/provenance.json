@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "results_commit": "34015e8831f7350f25a1bf9b8c996d8abc0eae14",
+  "results_sha256": "1affea9c9fe67cc2f4a9bbf70ed13e2f85e0e978cdbae6ff6af316eb4a9abfd1",
+  "results_semantic_sha256": "d177c657b93bd19626ea7456b26937b7fc4c35a8d62817837aa246a3e4f4e400",
+  "expected_sha256": "208bc8d0840227646adbfa7bbeef79dee5716ac6ca94528b11c8c0db84ddda0f",
+  "manifest_derivation": "Source hashes, named tests and eval call sites were independently extracted from the recorded standard-library Git revision with check.source_manifest. Negative identities/exits and observer hash were extracted from the recorded specification/audit Git revisions. No compiler or runtime executed.",
+  "limitation": "Original standard-module compiler logs are represented by their recorded hashes; their contents are not vendored or independently reconstructed. Negative observer source revisions remain caller-supplied rather than independently certified build-chain provenance.",
+  "negative_reports": "The original C++ and Rust process reports were recovered and archived byte-for-byte; their SHA256 digests match the original frozen results.json raw_report_sha256 fields. Matches are re-derived using the fingerprinted observer and byte-identical pinned fixture manifest. No compiler or runtime executed."
+}
