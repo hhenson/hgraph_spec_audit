@@ -5,7 +5,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
-from build_identity import cache_values, prepare_executable, sdk_binding
+from build_identity import cache_values, loaded_sdk_libraries, prepare_executable, sdk_binding
 
 HERE = Path(__file__).resolve().parent
 
@@ -13,7 +13,7 @@ def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 def sdk_hashes(root):
-    return {str(p.relative_to(root)): sha(p) for directory in ('include','lib')
+    return {p.relative_to(root).as_posix(): sha(p) for directory in ('include','lib','bin')
             for p in sorted((root/directory).rglob('*')) if p.is_file()}
 
 def main():
@@ -41,7 +41,9 @@ def main():
     for _ in range(3):
         result=json.loads(subprocess.check_output([str(artifact)],text=True,timeout=60))
         assert result['source_sha256']==sources['native.cpp']
-        result['loaded_libraries_sha256']={Path(p).name:sha(p) for p in result.pop('libraries')}
+        loaded=loaded_sdk_libraries(result.pop('libraries'), args.sdk, sdk, libraries)
+        result['loaded_sdk_libraries_sha256']=loaded
+        result['loaded_libraries_sha256']={Path(p).name:fingerprint for p,fingerprint in loaded.items()}
         runs.append(result)
     assert all(run==runs[0] for run in runs)
     assert sources=={name:sha(HERE/name) for name in sources}
@@ -61,7 +63,7 @@ def main():
           'compiler_version':compiler_version,
           'compile_command':command,'compile_commands_sha256':command_hash,
           'target_name':'last_scalar_types_native','target_configuration':config,
-          'target_artifact':str(artifact.relative_to(args.build_dir.resolve())),
+          'target_artifact':artifact.relative_to(args.build_dir.resolve()).as_posix(),
           'target_manifest_sha256':manifest_hash,'cmake_cache_sha256':cache_hash,
           'cmake_generator':cache_values(args.build_dir)['CMAKE_GENERATOR'],
           'sdk_target_libraries':libraries,

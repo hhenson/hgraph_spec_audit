@@ -41,6 +41,13 @@ Ninja and Ninja Multi-Config. An executable from another build or a different
 SDK is rejected before it runs. Build metadata and provenance are sealed with
 the observations.
 
+Actual loaded hgraph shared libraries must resolve inside that supplied SDK and
+match its file hashes. The record preserves SDK-relative paths, requires loaded
+configured shared targets and rejects loader overrides from another SDK. A Linux
+shared-library control exercises `LD_LIBRARY_PATH` substitution. The archived SDK
+probe links static archives, so its empty loaded-library map does not establish
+dynamic-library behavior on Linux, macOS or Windows.
+
 Explicit `AnyView` assignment nests an already boxed value; erased assignment
 flattens it. Both observations are retained. Equality and ordering of boxed
 values lacking those capabilities return false/unordered; hash fails. The
