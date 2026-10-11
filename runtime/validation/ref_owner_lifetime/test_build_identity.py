@@ -10,7 +10,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from build_identity import prepare_executable, sdk_binding, selected_sdk_headers, include_paths
+from build_identity import prepare_executable, sdk_binding, selected_sdk_headers, include_paths, command_configuration, compile_command, split_windows_command
 
 HERE = Path(__file__).resolve().parent
 
@@ -127,6 +127,37 @@ class BuildIdentityTests(unittest.TestCase):
                          'arguments': ['c++', '-c', 'other.cpp']})
         path.write_text(json.dumps(commands))
         self.assertEqual(sdk_binding(self.build, artifact, self.sdk)[0], artifact)
+
+    def test_windows_output_forms_without_compile_database_output_field(self):
+        target=r'CMakeFiles\ref_owner_lifetime_native.dir\Release\native.cpp.obj'
+        for output in (['/Fo'+target],['/Fo',target],['/Fo"'+target+'"']):
+            command=['cl.exe','/DCMAKE_INTDIR="Release"',*output,'/c','native.cpp']
+            with self.subTest(output=output):
+                self.assertEqual(command_configuration({},command),'Release')
+        for command in (['cl.exe','/Fo'],['cl.exe','/Foother.dir\\native.cpp.obj'],
+                        ['cl.exe','/DCMAKE_INTDIR="Debug"','/Fo'+target],
+                        ['cl.exe','/Fo'+target,'-o','CMakeFiles/ref_owner_lifetime_native.dir/Debug/native.cpp.obj']):
+            with self.subTest(command=command),self.assertRaises(ValueError):
+                command_configuration({},command)
+
+    def test_windows_command_string_retains_quoted_paths_and_backslashes(self):
+        raw=r'"C:\Program Files\Compiler\cl.exe" /I"C:\SDK path\include" /Fo"CMakeFiles\ref_owner_lifetime_native.dir\native.cpp.obj" /c native.cpp'
+        command=split_windows_command(raw)
+        self.assertEqual(command[0],r'C:\Program Files\Compiler\cl.exe')
+        self.assertEqual(include_paths(command),[r'C:\SDK path\include'])
+        self.assertIsNone(command_configuration({},command))
+        with self.assertRaises(ValueError):split_windows_command('cl.exe /I"unterminated')
+
+    def test_msvc_compile_database_command_without_output_field(self):
+        self.configure()
+        path=self.build/'compile_commands.json'
+        commands=json.loads(path.read_text())
+        commands[0].pop('arguments')
+        commands[0]['command']='cl.exe /nologo -external:I"'+str(self.sdk/'include')+'" /FoCMakeFiles\\ref_owner_lifetime_native.dir\\native.cpp.obj /c "'+str(HERE/'native.cpp')+'"'
+        path.write_text(json.dumps(commands))
+        selected=compile_command(self.build,HERE/'native.cpp',self.sdk/'include','Release')
+        self.assertIn('-external:I<sdk>/include',selected)
+        self.assertIn('/FoCMakeFiles\\ref_owner_lifetime_native.dir\\native.cpp.obj',selected)
 
     def headers(self,root):
         for name in ('lib/testing/eval_node.h','lib/std/std_operators.h','lib/std/std_nodes.h','types/static_node.h'):

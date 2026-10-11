@@ -5,11 +5,14 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+import sys
 from build_identity import cache_values, prepare_executable, sdk_binding, selected_sdk_headers
 
 HERE = Path(__file__).resolve().parent
 NAMES = ('native.cpp','native_reasoned.json','native_observe.py','CMakeLists.txt','build_identity.py')
-SUPPORT = ('fixed/native_loaded_libraries.h',)
+sys.path.insert(0,str(HERE.parent/'fixed'))
+from compiler_identity import capture_compiler_identity
+SUPPORT = ('fixed/native_loaded_libraries.h','fixed/compiler_identity.py')
 
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
@@ -41,8 +44,8 @@ def main():
     command_hash=sha(args.build_dir/'compile_commands.json')
     cache_hash=sha(args.build_dir/'CMakeCache.txt')
     compiler=Path(cache_values(args.build_dir)['CMAKE_CXX_COMPILER']).resolve()
-    compiler_hash=sha(compiler)
-    compiler_version=subprocess.check_output([str(compiler),'--version'],text=True).splitlines()[0]
+    compiler_identity=capture_compiler_identity(compiler)
+    compiler_hash=compiler_identity['compiler_sha256']
     binary=sha(artifact)
     runs=[]
     for _ in range(3):
@@ -63,9 +66,8 @@ def main():
     assert sdk_binding(args.build_dir,args.executable,args.sdk)==(artifact,config,manifest,command,libraries)
     data={'measured_at':datetime.now(timezone.utc).isoformat(),'repeats':3,'sources_sha256':sources,
           'support_sha256':support,
-          'sdk_files_sha256':sdk,'binary_sha256':binary,'compiler_sha256':compiler_hash,
+          'sdk_files_sha256':sdk,'binary_sha256':binary,**compiler_identity,
           'selected_sdk_headers_sha256':selected_headers,
-          'compiler_version':compiler_version,
           'compile_command':command,'compile_commands_sha256':command_hash,
           'target_name':'ref_owner_lifetime_native','target_configuration':config,
           'target_artifact':str(artifact.relative_to(args.build_dir.resolve())),

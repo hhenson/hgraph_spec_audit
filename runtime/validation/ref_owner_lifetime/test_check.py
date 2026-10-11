@@ -274,6 +274,18 @@ class RecordedEvidence(unittest.TestCase):
         native['selected_sdk_headers_sha256']['include/hgraph/types/static_node.h']='0'*64
         self.reseal(native)
         with self.assertRaises(AssertionError): check.check(self.public,native)
+    def test_compiler_identity_profiles_and_stream_hashes_are_required(self):
+        native=copy.deepcopy(self.native)
+        del native['compiler_identity']
+        self.reseal(native)
+        with self.assertRaises(KeyError):check.check(self.public,native)
+        for field,value in (('profile','unsupported'),('arguments',[]),('exit_code',1),
+                            ('exit_code',False),('stdout_sha256','bad'),('stderr_sha256','bad')):
+            native=copy.deepcopy(self.native)
+            native['compiler_identity'][field]=value
+            self.reseal(native)
+            with self.subTest(field=field),self.assertRaises(AssertionError):check.check(self.public,native)
+
     def reseal(self,native):
         content={k:v for k,v in native.items() if k!='measurement_sha256'}
         native['measurement_sha256']=hashlib.sha256(json.dumps(content,sort_keys=True,separators=(',',':')).encode()).hexdigest()
