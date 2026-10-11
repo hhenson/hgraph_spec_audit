@@ -34,7 +34,9 @@ claiming a successful raw result.
 
 The native recorder accepts only the executable declared by its configured
 `ref_owner_lifetime_native` CMake target. It verifies the supplied SDK package,
-three imported archives and exact header search path, then rebuilds that target.
+three imported archives and exact header search path, then uses
+`cmake --build --clean-first` to rebuild that target. A newer executable copied
+over the target cannot masquerade as the configured build.
 Compile-command selection supports Makefiles, Ninja and Ninja Multi-Config,
 including the selected configuration. Source and loaded-library support hashes,
 SDK manifests, executable/compiler hashes, build metadata and observations are

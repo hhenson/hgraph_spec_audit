@@ -10,7 +10,7 @@
     "equal_false_hash": true,
     "false_before_true": true
   },
-  "cmake_cache_sha256": "034559f43b487da5e23f547edf47b2cdbd95338153bbfdb5171db9d9dbbe6f57",
+  "cmake_cache_sha256": "bf2545d75c1b7ab3776217f66ba9856eba986db08a71c0d57cb761f5910c1227",
   "cmake_generator": "Unix Makefiles",
   "compile_command": [
     "/usr/bin/c++",
@@ -49,7 +49,7 @@
     "-c",
     "<source>/native.cpp"
   ],
-  "compile_commands_sha256": "cae98dae0444810a9bb993df1f9d3599ac2e62c37c604376abee02d1d00c0c20",
+  "compile_commands_sha256": "bf360d6365679382e7b194d5e3fb7b5e9e58a159924f2378a468b18616371ce1",
   "compiler_sha256": "e6718f7e0c7d057c3ff77b550c603da9bc4030e3ede3c053705acce1293dbe4d",
   "compiler_version": "x86_64-linux-gnu-g++-15 (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
   "identity": [
@@ -59,8 +59,8 @@
     }
   ],
   "loaded_libraries_sha256": {},
-  "measured_at": "2026-10-11T06:30:04.208390+00:00",
-  "measurement_sha256": "6bbcb195f4834135de082e21e608096e8169710b35b96c62dc50ce30990a8cb8",
+  "measured_at": "2026-10-11T06:44:28.666422+00:00",
+  "measurement_sha256": "3f1010e72f58f94bde411bc1d723936c3fe1faac135ac987242073eb535f2161",
   "outer_owner_control": [
     {
       "data_modified": true,
@@ -553,7 +553,7 @@
   "source_sha256": "e6408de49426359a750d3e96ca5954f03439011c35c54478d4820af4656b97b6",
   "sources_sha256": {
     "CMakeLists.txt": "b331468daa930cc7f3f07c12516ec7da8458596e28fd3856ea89bab41429471c",
-    "build_identity.py": "ed4a9f9d63460a0ac7be14b8a11c3f22f1e086f7473839ddccb6947a6442298c",
+    "build_identity.py": "b04550ced07b93197c27daa2ff2b73ff9ad28ae1ff24d8ef51f46dde2882db95",
     "native.cpp": "e6408de49426359a750d3e96ca5954f03439011c35c54478d4820af4656b97b6",
     "native_observe.py": "f197ffc33e07540fb788ded586b782d13850e552ddf25f82bf648523c970cc7a",
     "native_reasoned.json": "a71e2273caf5536bb2e1b0df75bb2ec0cef6fbc5f2f36e864b02b7f29eeb8b99"
@@ -563,6 +563,6 @@
   },
   "target_artifact": "ref_owner_lifetime_native",
   "target_configuration": "Release",
-  "target_manifest_sha256": "881ae8962362eef7836b1ceb8253b5f6f6f5544cd890536e18e601c32a57c3dd",
+  "target_manifest_sha256": "6f3d785cff52f5de5cf85c7701b93aa240f1e3d82d74f9033e9ab0945e00e2d7",
   "target_name": "ref_owner_lifetime_native"
 }
