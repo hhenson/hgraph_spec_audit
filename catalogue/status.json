@@ -495,9 +495,9 @@
     "convert": {
       "status": "implemented-slice",
       "priority": 2,
-      "reason": "Six bool/i64/f64 cross-conversions and Date/DateTime projections via native value functions; named to_int/to_float/to_bool/to_date/to_datetime. Remaining: general type-directed overloads and owned/container conversions.",
+      "reason": "Six bool/i64/f64 cross-conversions and Date/DateTime projections via native value functions; named to_int/to_float/to_bool/to_date/to_datetime; the identity pass_through is generic over every type. Remaining: general type-directed overloads and owned/container conversions.",
       "completed_domains": [
-        "Six bool/i64/f64 cross-conversions and Date/DateTime projections via native value functions; named to_int/to_float/to_bool/to_date/to_datetime."
+        "Six bool/i64/f64 cross-conversions and Date/DateTime projections via native value functions; named to_int/to_float/to_bool/to_date/to_datetime; the identity pass_through is generic over every type."
       ],
       "blockers": [
         "B3",
@@ -754,9 +754,9 @@
     "eq_": {
       "status": "implemented-slice",
       "priority": 2,
-      "reason": "bool/i64/str/date/datetime/duration and mixed numeric equality; floating tolerance, including explicit const epsilon alias. Remaining: arbitrary registered scalars and structural domains.",
+      "reason": "bool/i64/str/date/time/datetime/duration and mixed numeric equality; floating tolerance, including explicit const epsilon alias. Remaining: arbitrary registered scalars and structural domains.",
       "completed_domains": [
-        "bool/i64/str/date/datetime/duration and mixed numeric equality; floating tolerance, including explicit const epsilon alias."
+        "bool/i64/str/date/time/datetime/duration and mixed numeric equality; floating tolerance, including explicit const epsilon alias."
       ],
       "blockers": [
         "B3",
@@ -1429,9 +1429,9 @@
       ]
     },
     "lshift_": {
-      "status": "implemented",
+      "status": "implemented-slice",
       "priority": 1,
-      "reason": "i64 body through the checked `shift_left` native binding; negative and too-large counts raise the native kernel's exception (ADR 0009). Itemwise TSL/TSB candidates remain (B4).",
+      "reason": "i64 body through the checked `shift_left` native binding; negative and too-large counts raise the native kernel's exception (ADR 0009). Remaining: the itemwise TSL/TSB candidates (B4).",
       "completed_domains": [
         "i64 body through the checked `shift_left` native binding."
       ],
@@ -1728,9 +1728,9 @@
     "ne_": {
       "status": "implemented-slice",
       "priority": 2,
-      "reason": "Materialized numeric, string and legacy temporal scalar comparisons; ne_ also bool. Remaining: enum/arbitrary scalar and structural candidates.",
+      "reason": "Materialized numeric, string and legacy temporal scalar comparisons; ne_ also bool and time. Remaining: enum/arbitrary scalar and structural candidates.",
       "completed_domains": [
-        "Materialized numeric, string and legacy temporal scalar comparisons; ne_ also bool."
+        "Materialized numeric, string and legacy temporal scalar comparisons; ne_ also bool and time."
       ],
       "blockers": [
         "B3",
@@ -2032,11 +2032,12 @@
       ]
     },
     "record": {
-      "status": "blocked",
+      "status": "native-provider",
       "priority": 3,
-      "reason": "Callable, logging/formatting, recording or engine-control capability.",
+      "reason": "Runtime recording provider, the counterpart of replay; native ownership remains appropriate. hgraph_std's HGL record<T>(ts, const key) appends each delta with its evaluation time to a global-state list named key; it is the test recording form, not the native contract with a recordable context, recordable_id, sparse and a model backend.",
       "completed_domains": [],
       "blockers": [
+        "B2",
         "B5"
       ],
       "evidence": [
@@ -2106,7 +2107,7 @@
     "replay": {
       "status": "native-provider",
       "priority": 3,
-      "reason": "Runtime source/materialization or recovery provider. HGL surface needs startup and provider lifecycle; native ownership remains appropriate.",
+      "reason": "Runtime source/materialization or recovery provider. HGL surface needs startup and provider lifecycle; native ownership remains appropriate. hgraph_std's HGL replay<T>(const values) yields a constant list of timed values; it is the test replay form, not the native contract that reads a key from the recordable context.",
       "completed_domains": [],
       "blockers": [
         "B2",
@@ -2191,9 +2192,9 @@
       ]
     },
     "rshift_": {
-      "status": "implemented",
+      "status": "implemented-slice",
       "priority": 1,
-      "reason": "i64 body through the checked `shift_right` native binding; negative and too-large counts raise the native kernel's exception (ADR 0009). Itemwise TSL/TSB candidates remain (B4).",
+      "reason": "i64 body through the checked `shift_right` native binding; negative and too-large counts raise the native kernel's exception (ADR 0009). Remaining: the itemwise TSL/TSB candidates (B4).",
       "completed_domains": [
         "i64 body through the checked `shift_right` native binding."
       ],
@@ -2816,7 +2817,7 @@
     },
     "B3": {
       "priority": 2,
-      "summary": "Open value/schema domains: runtime generic value operations, type carriers, arbitrary registered scalar/enum/Any and compound atomic schemas need native type mappings and residual generic constraints. Concrete admitted scalar slices are catalogued separately. CivilDateTime/ZonedDateTime/TimeZone value emission currently fails closed in cpp_emitter.cpp; ZonedTime is also unimplemented.",
+      "summary": "Open value/schema domains: runtime generic value operations, type carriers, arbitrary registered scalar and compound atomic schemas need native type mappings and residual generic constraints. Concrete admitted scalar slices are catalogued separately. Enum, Any and bytes values and the CivilDateTime/ZonedDateTime/ZonedTime/TimeZone types compile and are exercised by hgraph_std's value tests, but no operator domain is instantiated over them yet; a provider-dependent zoned literal inside a node hook still fails closed in cpp_emitter.cpp.",
       "evidence": [
         "language/docs/design/roadmap.md",
         "external/hgraph_spec/language/docs/design/native-surface-proposal.md",
@@ -2825,7 +2826,7 @@
     },
     "B4": {
       "priority": 2,
-      "summary": "Structural/reference parity: general delta transport, reference equality/reselection, recordable non-scalar state, output invalidation and shape-dependent policies are not yet covered by the admitted HGL implementation. Existing structural queries and bounded membership/index slices are credited separately.",
+      "summary": "Structural/reference parity: reference designation, equality and selection between held references are admitted and exercised by hgraph_std's reference tests, and default_ref is authored over the scalar types. Still missing: the library operators built on selection (if_then_else, if_, route_by_index, merge, race), general delta transport, recordable non-scalar state, output invalidation and shape-dependent policies. Existing structural queries and bounded membership/index slices are credited separately.",
       "evidence": [
         "language/docs/design/roadmap.md",
         "external/hgraph_spec/language/docs/design/language-model.md",
@@ -2834,7 +2835,7 @@
     },
     "B5": {
       "priority": 3,
-      "summary": "Native-backed domain types and resources: JSON trees, table/frame/series metadata, callable providers, range/period/zone policies, I/O and callbacks need public HGL native type/lifecycle bindings. Native providers remain the implementation owners; thin temporal delegations do not complete authoring.",
+      "summary": "Native-backed domain types and resources: owning native scalar types (`native type` with `native const fn` accessors) are admitted and tested. JSON trees, table/frame/series metadata, callable providers, range/period policies, I/O and callbacks still need native resource and lifecycle bindings. Native providers remain the implementation owners; thin temporal delegations do not complete authoring.",
       "evidence": [
         "external/hgraph_spec/language/docs/design/native-interface.md",
         "language/docs/design/roadmap.md"
