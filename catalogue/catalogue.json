@@ -5,10 +5,11 @@
   "blockers": {
     "B1": {
       "priority": 1,
-      "summary": "Native errors and owned results: the exception half is admitted (ADR 0009: `throws` natives, descriptor policy `translated`, a raise ends the evaluation under hgraph's node error model) and scalar results including `str` are returned by value. Still missing: owned sequence/collection results (`split`), regex and formatting kernels that carry compiled state or packs (`match_`, `replace`, `format_`), and the coupled quotient/remainder result of `divmod_`.",
+      "summary": "Native errors and owned results: the accepted contract uses result<T,error> for recoverable data and the operational graph failure channel with capture for evaluation failures. Source throws is retired. Scalar results, including str, are owned values. Remaining bindings: owned sequence/collection results (split), regex and formatting kernels with compiled state or packs (match_, replace, format_), and the coupled quotient/remainder result of divmod_.",
       "evidence": [
-        "external/hgraph_spec/language/docs/design/decisions/0009-native-errors-and-the-node-error-model.md",
-        "external/hgraph_spec/language/docs/design/native-interface.md",
+        "external/hgraph_spec/language/docs/design/result-errors.md",
+        "external/hgraph_spec/language/docs/design/error-capture.md",
+        "external/hgraph_spec/language/docs/design/native-interfaces.md",
         "include/hgraph/lib/std/operators/impl/string_impl.h"
       ]
     },
@@ -3042,9 +3043,9 @@
       "review": {
         "status": "implemented-slice",
         "priority": 1,
-        "reason": "Boolean condition with a constant message, raising through the native raise_error under the node error model (ADR 0009). Remaining: formatted messages (format_).",
+        "reason": "Boolean condition with a constant message; native raise_error ends evaluation through the operational failure channel. Remaining: formatted messages (format_).",
         "completed_domains": [
-          "Boolean condition with a constant message, raising through the native raise_error under the node error model (ADR 0009)."
+          "Boolean condition with a constant message; native raise_error ends evaluation through the operational failure channel."
         ],
         "blockers": [
           "B1"
@@ -21569,7 +21570,7 @@
       "review": {
         "status": "implemented-slice",
         "priority": 1,
-        "reason": "i64 body through the checked `shift_left` native binding; negative and too-large counts raise the native kernel's exception (ADR 0009). Remaining: the itemwise TSL/TSB candidates (B4).",
+        "reason": "i64 body through the checked shift_left native binding; invalid counts fail evaluation through the operational failure channel. Remaining: the itemwise TSL/TSB candidates (B4).",
         "completed_domains": [
           "i64 body through the checked `shift_left` native binding."
         ],
@@ -30942,7 +30943,7 @@
       "review": {
         "status": "implemented-slice",
         "priority": 1,
-        "reason": "i64/f64 and mixed numeric bodies through the checked `power` native binding; the native exceptions (negative integer exponent, overflow, zero to a negative power) are raised identically (ADR 0009). Remaining: the `divide_by_zero` policy parameter (enum, B3) and itemwise TSL/TSB candidates (B4).",
+        "reason": "i64/f64 and mixed numeric bodies through the checked power native binding; invalid integer exponents, overflow and zero to a negative power fail evaluation through the operational failure channel. Remaining: the divide_by_zero policy parameter (enum, B3) and itemwise TSL/TSB candidates (B4).",
         "completed_domains": [
           "i64/f64 and mixed numeric bodies through the checked `power` native binding."
         ],
@@ -35244,7 +35245,7 @@
       "review": {
         "status": "implemented-slice",
         "priority": 1,
-        "reason": "i64 body through the checked `shift_right` native binding; negative and too-large counts raise the native kernel's exception (ADR 0009). Remaining: the itemwise TSL/TSB candidates (B4).",
+        "reason": "i64 body through the checked shift_right native binding; invalid counts fail evaluation through the operational failure channel. Remaining: the itemwise TSL/TSB candidates (B4).",
         "completed_domains": [
           "i64 body through the checked `shift_right` native binding."
         ],
