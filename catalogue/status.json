@@ -689,7 +689,7 @@
     "divmod_": {
       "status": "blocked",
       "priority": 1,
-      "reason": "Integer result needs fixed-list indexed output writes; floating result additionally needs the coupled throwing quotient/remainder value kernel.",
+      "reason": "Integer result needs fixed-list indexed output writes; floating result additionally needs a coupled quotient/remainder value kernel that reports operational failure.",
       "completed_domains": [],
       "blockers": [
         "B1",

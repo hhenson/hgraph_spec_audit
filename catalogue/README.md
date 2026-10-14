@@ -72,7 +72,7 @@ Implemented means the recorded domain is authored and tested; it does not promis
 | `difference` | blocked | — | Generic keyed/structural transformations, aggregate startup and delta policies. [B4](#b4) |
 | `dispatch_` | blocked | — | Dynamic callable and nested graph ownership contracts. [B6](#b6) |
 | `div_` | implemented-slice | hgl-runtime | Numeric i64/f64 pairs (including mixed inputs); add_ also str/str. Remaining: checked temporal and structural/open scalar overloads. [B1](#b1), [B3](#b3), [B4](#b4) |
-| `divmod_` | blocked | — | Integer result needs fixed-list indexed output writes; floating result additionally needs the coupled throwing quotient/remainder value kernel. [B1](#b1), [B4](#b4) |
+| `divmod_` | blocked | — | Integer result needs fixed-list indexed output writes; floating result additionally needs a coupled quotient/remainder value kernel that reports operational failure. [B1](#b1), [B4](#b4) |
 | `downcast_` | blocked | — | Type-directed output, arbitrary scalar/compound conversion and lifecycle semantics. [B3](#b3) |
 | `downcast_ref` | blocked | — | Type-directed output, arbitrary scalar/compound conversion and lifecycle semantics. [B3](#b3) |
 | `drop` | implemented-slice | hgl-runtime | bool/i64/f64/str/date/time/datetime/duration scalar forwarding bodies. Remaining: open value, structural delta and reference domains. [B3](#b3), [B4](#b4) |
