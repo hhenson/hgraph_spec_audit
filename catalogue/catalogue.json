@@ -5,10 +5,11 @@
   "blockers": {
     "B1": {
       "priority": 1,
-      "summary": "Native errors and owned results: the exception half is admitted (ADR 0009: `throws` natives, descriptor policy `translated`, a raise ends the evaluation under hgraph's node error model) and scalar results including `str` are returned by value. Still missing: owned sequence/collection results (`split`), regex and formatting kernels that carry compiled state or packs (`match_`, `replace`, `format_`), and the coupled quotient/remainder result of `divmod_`.",
+      "summary": "Native errors and owned results: the accepted contract uses result<T,error> for recoverable data and the operational graph failure channel with capture for evaluation failures. Source throws is retired. Scalar results, including str, are owned values. Remaining bindings: owned sequence/collection results (split), regex and formatting kernels with compiled state or packs (match_, replace, format_), and the coupled quotient/remainder result of divmod_.",
       "evidence": [
-        "external/hgraph_spec/language/docs/design/decisions/0009-native-errors-and-the-node-error-model.md",
-        "external/hgraph_spec/language/docs/design/native-interface.md",
+        "external/hgraph_spec/language/docs/design/result-errors.md",
+        "external/hgraph_spec/language/docs/design/error-capture.md",
+        "external/hgraph_spec/language/docs/design/native-interfaces.md",
         "include/hgraph/lib/std/operators/impl/string_impl.h"
       ]
     },
@@ -3042,9 +3043,9 @@
       "review": {
         "status": "implemented-slice",
         "priority": 1,
-        "reason": "Boolean condition with a constant message, raising through the native raise_error under the node error model (ADR 0009). Remaining: formatted messages (format_).",
+        "reason": "Boolean condition with a constant message; native raise_error ends evaluation through the operational failure channel. Remaining: formatted messages (format_).",
         "completed_domains": [
-          "Boolean condition with a constant message, raising through the native raise_error under the node error model (ADR 0009)."
+          "Boolean condition with a constant message; native raise_error ends evaluation through the operational failure channel."
         ],
         "blockers": [
           "B1"
@@ -11840,7 +11841,7 @@
       "review": {
         "status": "blocked",
         "priority": 1,
-        "reason": "Integer result needs fixed-list indexed output writes; floating result additionally needs the coupled throwing quotient/remainder value kernel.",
+        "reason": "Integer result needs fixed-list indexed output writes; floating result additionally needs a coupled quotient/remainder value kernel that reports operational failure.",
         "completed_domains": [],
         "blockers": [
           "B1",
@@ -13251,7 +13252,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/operators.hgl",
-          "line": 575,
+          "line": 571,
           "declaration": "impl fn eq_epsilon(lhs: f64, rhs: f64, const epsilon: f64 = 1e-10) -> bool"
         },
         {
@@ -13260,7 +13261,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/operators.hgl",
-          "line": 581,
+          "line": 577,
           "declaration": "impl fn eq_epsilon(lhs: i64, rhs: f64, const epsilon: f64 = 1e-10) -> bool"
         },
         {
@@ -13269,7 +13270,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/operators.hgl",
-          "line": 587,
+          "line": 583,
           "declaration": "impl fn eq_epsilon(lhs: f64, rhs: i64, const epsilon: f64 = 1e-10) -> bool"
         },
         {
@@ -21569,7 +21570,7 @@
       "review": {
         "status": "implemented-slice",
         "priority": 1,
-        "reason": "i64 body through the checked `shift_left` native binding; negative and too-large counts raise the native kernel's exception (ADR 0009). Remaining: the itemwise TSL/TSB candidates (B4).",
+        "reason": "i64 body through the checked shift_left native binding; invalid counts fail evaluation through the operational failure channel. Remaining: the itemwise TSL/TSB candidates (B4).",
         "completed_domains": [
           "i64 body through the checked `shift_left` native binding."
         ],
@@ -21801,7 +21802,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/operators.hgl",
-          "line": 550,
+          "line": 546,
           "declaration": "impl fn lshift_(lhs: i64, rhs: i64) -> i64"
         },
         {
@@ -25298,7 +25299,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/operators.hgl",
-          "line": 556,
+          "line": 552,
           "declaration": "impl fn mean(lhs: i64, rhs: i64) -> f64"
         },
         {
@@ -25307,7 +25308,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/operators.hgl",
-          "line": 559,
+          "line": 555,
           "declaration": "impl fn mean(lhs: f64, rhs: f64) -> f64"
         },
         {
@@ -25316,7 +25317,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/operators.hgl",
-          "line": 562,
+          "line": 558,
           "declaration": "impl fn mean(lhs: i64, rhs: f64) -> f64"
         },
         {
@@ -25325,7 +25326,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/operators.hgl",
-          "line": 565,
+          "line": 561,
           "declaration": "impl fn mean(lhs: f64, rhs: i64) -> f64"
         },
         {
@@ -30922,7 +30923,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/operators.hgl",
-          "line": 568,
+          "line": 564,
           "declaration": "impl fn pos_(ts: duration) -> duration"
         },
         {
@@ -30942,7 +30943,7 @@
       "review": {
         "status": "implemented-slice",
         "priority": 1,
-        "reason": "i64/f64 and mixed numeric bodies through the checked `power` native binding; the native exceptions (negative integer exponent, overflow, zero to a negative power) are raised identically (ADR 0009). Remaining: the `divide_by_zero` policy parameter (enum, B3) and itemwise TSL/TSB candidates (B4).",
+        "reason": "i64/f64 and mixed numeric bodies through the checked power native binding; invalid integer exponents, overflow and zero to a negative power fail evaluation through the operational failure channel. Remaining: the divide_by_zero policy parameter (enum, B3) and itemwise TSL/TSB candidates (B4).",
         "completed_domains": [
           "i64/f64 and mixed numeric bodies through the checked `power` native binding."
         ],
@@ -31483,7 +31484,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/operators.hgl",
-          "line": 537,
+          "line": 533,
           "declaration": "impl fn pow_(lhs: i64, rhs: i64) -> i64"
         },
         {
@@ -31492,7 +31493,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/operators.hgl",
-          "line": 540,
+          "line": 536,
           "declaration": "impl fn pow_(lhs: f64, rhs: f64) -> f64"
         },
         {
@@ -31501,7 +31502,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/operators.hgl",
-          "line": 543,
+          "line": 539,
           "declaration": "impl fn pow_(lhs: i64, rhs: f64) -> f64"
         },
         {
@@ -31510,7 +31511,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/operators.hgl",
-          "line": 546,
+          "line": 542,
           "declaration": "impl fn pow_(lhs: f64, rhs: i64) -> f64"
         },
         {
@@ -35244,7 +35245,7 @@
       "review": {
         "status": "implemented-slice",
         "priority": 1,
-        "reason": "i64 body through the checked `shift_right` native binding; negative and too-large counts raise the native kernel's exception (ADR 0009). Remaining: the itemwise TSL/TSB candidates (B4).",
+        "reason": "i64 body through the checked shift_right native binding; invalid counts fail evaluation through the operational failure channel. Remaining: the itemwise TSL/TSB candidates (B4).",
         "completed_domains": [
           "i64 body through the checked `shift_right` native binding."
         ],
@@ -35476,7 +35477,7 @@
           "kind": "implementation",
           "form": "hgl-runtime",
           "source": "external/hgraph_std/hgl/hgraph/impl/operators.hgl",
-          "line": 553,
+          "line": 549,
           "declaration": "impl fn rshift_(lhs: i64, rhs: i64) -> i64"
         },
         {
@@ -43030,7 +43031,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_operators.hgl",
       "line": 16,
-      "declaration": "native const fn div(lhs: i64, rhs: i64) -> f64 throws"
+      "declaration": "native const fn div(lhs: i64, rhs: i64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -43039,7 +43040,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_operators.hgl",
       "line": 17,
-      "declaration": "native const fn div(lhs: i64, rhs: f64) -> f64 throws"
+      "declaration": "native const fn div(lhs: i64, rhs: f64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -43048,7 +43049,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_operators.hgl",
       "line": 18,
-      "declaration": "native const fn div(lhs: f64, rhs: i64) -> f64 throws"
+      "declaration": "native const fn div(lhs: f64, rhs: i64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -43057,7 +43058,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_operators.hgl",
       "line": 19,
-      "declaration": "native const fn div(lhs: f64, rhs: f64) -> f64 throws"
+      "declaration": "native const fn div(lhs: f64, rhs: f64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -43066,7 +43067,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_operators.hgl",
       "line": 20,
-      "declaration": "native const fn floordiv(lhs: i64, rhs: i64) -> i64 throws"
+      "declaration": "native const fn floordiv(lhs: i64, rhs: i64) -> i64"
     },
     {
       "module": "hgraph.native",
@@ -43075,7 +43076,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_operators.hgl",
       "line": 21,
-      "declaration": "native const fn floordiv(lhs: i64, rhs: f64) -> f64 throws"
+      "declaration": "native const fn floordiv(lhs: i64, rhs: f64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -43084,7 +43085,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_operators.hgl",
       "line": 22,
-      "declaration": "native const fn floordiv(lhs: f64, rhs: i64) -> f64 throws"
+      "declaration": "native const fn floordiv(lhs: f64, rhs: i64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -43093,7 +43094,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_operators.hgl",
       "line": 23,
-      "declaration": "native const fn floordiv(lhs: f64, rhs: f64) -> f64 throws"
+      "declaration": "native const fn floordiv(lhs: f64, rhs: f64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -43102,7 +43103,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_operators.hgl",
       "line": 24,
-      "declaration": "native const fn mod(lhs: i64, rhs: i64) -> i64 throws"
+      "declaration": "native const fn mod(lhs: i64, rhs: i64) -> i64"
     },
     {
       "module": "hgraph.native",
@@ -43111,7 +43112,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_operators.hgl",
       "line": 25,
-      "declaration": "native const fn mod(lhs: i64, rhs: f64) -> f64 throws"
+      "declaration": "native const fn mod(lhs: i64, rhs: f64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -43120,7 +43121,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_operators.hgl",
       "line": 26,
-      "declaration": "native const fn mod(lhs: f64, rhs: i64) -> f64 throws"
+      "declaration": "native const fn mod(lhs: f64, rhs: i64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -43129,7 +43130,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_operators.hgl",
       "line": 27,
-      "declaration": "native const fn mod(lhs: f64, rhs: f64) -> f64 throws"
+      "declaration": "native const fn mod(lhs: f64, rhs: f64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -43417,7 +43418,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_operators.hgl",
       "line": 59,
-      "declaration": "native const fn add(lhs: str, rhs: str) -> str throws"
+      "declaration": "native const fn add(lhs: str, rhs: str) -> str"
     },
     {
       "module": "hgraph.native",
@@ -43714,7 +43715,7 @@
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
       "line": 33,
-      "declaration": "native const fn round_decimal(value: f64, digits: i64) -> f64 throws"
+      "declaration": "native const fn round_decimal(value: f64, digits: i64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -43794,8 +43795,8 @@
       "kind": "native-value",
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
-      "line": 113,
-      "declaration": "native const fn require_positive_delay(delay: duration) throws"
+      "line": 108,
+      "declaration": "native const fn require_positive_delay(delay: duration)"
     },
     {
       "module": "hgraph.native",
@@ -43803,8 +43804,8 @@
       "kind": "native-value",
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
-      "line": 115,
-      "declaration": "native const fn power(lhs: i64, rhs: i64) -> i64 throws"
+      "line": 110,
+      "declaration": "native const fn power(lhs: i64, rhs: i64) -> i64"
     },
     {
       "module": "hgraph.native",
@@ -43812,8 +43813,8 @@
       "kind": "native-value",
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
-      "line": 117,
-      "declaration": "native const fn power(lhs: f64, rhs: f64) -> f64 throws"
+      "line": 112,
+      "declaration": "native const fn power(lhs: f64, rhs: f64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -43821,8 +43822,8 @@
       "kind": "native-value",
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
-      "line": 119,
-      "declaration": "native const fn shift_left(lhs: i64, rhs: i64) -> i64 throws"
+      "line": 114,
+      "declaration": "native const fn shift_left(lhs: i64, rhs: i64) -> i64"
     },
     {
       "module": "hgraph.native",
@@ -43830,8 +43831,8 @@
       "kind": "native-value",
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
-      "line": 121,
-      "declaration": "native const fn shift_right(lhs: i64, rhs: i64) -> i64 throws"
+      "line": 116,
+      "declaration": "native const fn shift_right(lhs: i64, rhs: i64) -> i64"
     },
     {
       "module": "hgraph.native",
@@ -43839,7 +43840,7 @@
       "kind": "native-value",
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
-      "line": 125,
+      "line": 120,
       "declaration": "native const fn slice(value: str, begin: i64, end: i64) -> str"
     },
     {
@@ -43848,7 +43849,7 @@
       "kind": "native-value",
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
-      "line": 150,
+      "line": 145,
       "declaration": "native const fn as_int(value: f64) -> i64"
     },
     {
@@ -43857,7 +43858,7 @@
       "kind": "native-value",
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
-      "line": 152,
+      "line": 147,
       "declaration": "native const fn as_float(value: bool) -> f64"
     },
     {
@@ -43866,7 +43867,7 @@
       "kind": "native-value",
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
-      "line": 154,
+      "line": 149,
       "declaration": "native const fn as_float(value: i64) -> f64"
     },
     {
@@ -43875,7 +43876,7 @@
       "kind": "native-value",
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
-      "line": 165,
+      "line": 160,
       "declaration": "native const fn as_str(value: bool) -> str"
     },
     {
@@ -43884,7 +43885,7 @@
       "kind": "native-value",
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
-      "line": 170,
+      "line": 165,
       "declaration": "native const fn as_str(value: i64) -> str"
     },
     {
@@ -43893,7 +43894,7 @@
       "kind": "native-value",
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
-      "line": 175,
+      "line": 170,
       "declaration": "native const fn as_str(value: f64) -> str"
     },
     {
@@ -43902,7 +43903,7 @@
       "kind": "native-value",
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
-      "line": 180,
+      "line": 175,
       "declaration": "native const fn as_str(value: str) -> str"
     },
     {
@@ -43911,7 +43912,7 @@
       "kind": "native-value",
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
-      "line": 185,
+      "line": 180,
       "declaration": "native const fn as_str(value: date) -> str"
     },
     {
@@ -43920,7 +43921,7 @@
       "kind": "native-value",
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
-      "line": 190,
+      "line": 185,
       "declaration": "native const fn as_str(value: time) -> str"
     },
     {
@@ -43929,7 +43930,7 @@
       "kind": "native-value",
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
-      "line": 195,
+      "line": 190,
       "declaration": "native const fn as_str(value: datetime) -> str"
     },
     {
@@ -43938,7 +43939,7 @@
       "kind": "native-value",
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
-      "line": 200,
+      "line": 195,
       "declaration": "native const fn as_str(value: duration) -> str"
     },
     {
@@ -43947,7 +43948,7 @@
       "kind": "native-value",
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
-      "line": 212,
+      "line": 207,
       "declaration": "native const fn print_line(text: str)"
     },
     {
@@ -43956,8 +43957,8 @@
       "kind": "native-value",
       "form": null,
       "source": "external/hgraph_std/hgl/hgraph/native/scalar_values.hgl",
-      "line": 224,
-      "declaration": "native const fn raise_error(message: str) throws"
+      "line": 219,
+      "declaration": "native const fn raise_error(message: str)"
     },
     {
       "module": "hgraph.native",
@@ -44517,7 +44518,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_operators.hgl",
       "line": 15,
-      "declaration": "native const fn div(lhs: i64, rhs: i64) -> f64 throws"
+      "declaration": "native const fn div(lhs: i64, rhs: i64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -44526,7 +44527,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_operators.hgl",
       "line": 16,
-      "declaration": "native const fn div(lhs: i64, rhs: f64) -> f64 throws"
+      "declaration": "native const fn div(lhs: i64, rhs: f64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -44535,7 +44536,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_operators.hgl",
       "line": 17,
-      "declaration": "native const fn div(lhs: f64, rhs: i64) -> f64 throws"
+      "declaration": "native const fn div(lhs: f64, rhs: i64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -44544,7 +44545,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_operators.hgl",
       "line": 18,
-      "declaration": "native const fn div(lhs: f64, rhs: f64) -> f64 throws"
+      "declaration": "native const fn div(lhs: f64, rhs: f64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -44553,7 +44554,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_operators.hgl",
       "line": 19,
-      "declaration": "native const fn floordiv(lhs: i64, rhs: i64) -> i64 throws"
+      "declaration": "native const fn floordiv(lhs: i64, rhs: i64) -> i64"
     },
     {
       "module": "hgraph.native",
@@ -44562,7 +44563,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_operators.hgl",
       "line": 20,
-      "declaration": "native const fn floordiv(lhs: i64, rhs: f64) -> f64 throws"
+      "declaration": "native const fn floordiv(lhs: i64, rhs: f64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -44571,7 +44572,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_operators.hgl",
       "line": 21,
-      "declaration": "native const fn floordiv(lhs: f64, rhs: i64) -> f64 throws"
+      "declaration": "native const fn floordiv(lhs: f64, rhs: i64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -44580,7 +44581,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_operators.hgl",
       "line": 22,
-      "declaration": "native const fn floordiv(lhs: f64, rhs: f64) -> f64 throws"
+      "declaration": "native const fn floordiv(lhs: f64, rhs: f64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -44589,7 +44590,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_operators.hgl",
       "line": 23,
-      "declaration": "native const fn mod(lhs: i64, rhs: i64) -> i64 throws"
+      "declaration": "native const fn mod(lhs: i64, rhs: i64) -> i64"
     },
     {
       "module": "hgraph.native",
@@ -44598,7 +44599,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_operators.hgl",
       "line": 24,
-      "declaration": "native const fn mod(lhs: i64, rhs: f64) -> f64 throws"
+      "declaration": "native const fn mod(lhs: i64, rhs: f64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -44607,7 +44608,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_operators.hgl",
       "line": 25,
-      "declaration": "native const fn mod(lhs: f64, rhs: i64) -> f64 throws"
+      "declaration": "native const fn mod(lhs: f64, rhs: i64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -44616,7 +44617,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_operators.hgl",
       "line": 26,
-      "declaration": "native const fn mod(lhs: f64, rhs: f64) -> f64 throws"
+      "declaration": "native const fn mod(lhs: f64, rhs: f64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -44904,7 +44905,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_operators.hgl",
       "line": 58,
-      "declaration": "native const fn add(lhs: str, rhs: str) -> str throws"
+      "declaration": "native const fn add(lhs: str, rhs: str) -> str"
     },
     {
       "module": "hgraph.native",
@@ -45201,7 +45202,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values.hgl",
       "line": 15,
-      "declaration": "native const fn round_decimal(value: f64, digits: i64) -> f64 throws"
+      "declaration": "native const fn round_decimal(value: f64, digits: i64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -45282,7 +45283,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values.hgl",
       "line": 24,
-      "declaration": "native const fn require_positive_delay(delay: duration) throws"
+      "declaration": "native const fn require_positive_delay(delay: duration)"
     },
     {
       "module": "hgraph.native",
@@ -45291,7 +45292,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values.hgl",
       "line": 25,
-      "declaration": "native const fn power(lhs: i64, rhs: i64) -> i64 throws"
+      "declaration": "native const fn power(lhs: i64, rhs: i64) -> i64"
     },
     {
       "module": "hgraph.native",
@@ -45300,7 +45301,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values.hgl",
       "line": 26,
-      "declaration": "native const fn power(lhs: f64, rhs: f64) -> f64 throws"
+      "declaration": "native const fn power(lhs: f64, rhs: f64) -> f64"
     },
     {
       "module": "hgraph.native",
@@ -45309,7 +45310,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values.hgl",
       "line": 27,
-      "declaration": "native const fn shift_left(lhs: i64, rhs: i64) -> i64 throws"
+      "declaration": "native const fn shift_left(lhs: i64, rhs: i64) -> i64"
     },
     {
       "module": "hgraph.native",
@@ -45318,7 +45319,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values.hgl",
       "line": 28,
-      "declaration": "native const fn shift_right(lhs: i64, rhs: i64) -> i64 throws"
+      "declaration": "native const fn shift_right(lhs: i64, rhs: i64) -> i64"
     },
     {
       "module": "hgraph.native",
@@ -45444,7 +45445,7 @@
       "form": "value",
       "source": "language/stdlib/hgl/hgraph/native/impl/cpp_scalar_values.hgl",
       "line": 42,
-      "declaration": "native const fn raise_error(message: str) throws"
+      "declaration": "native const fn raise_error(message: str)"
     },
     {
       "module": "hgraph.native",
@@ -45714,12 +45715,12 @@
     },
     {
       "source": "external/hgraph_std/hgl/hgraph/impl/operators.hgl",
-      "line": 573,
+      "line": 569,
       "declaration": "instantiate eq_<date, date>, eq_<datetime, datetime>, eq_<duration, duration>, ne_<date, date>, ne_<datetime, datetime>, ne_<duration, duration>, lt_<date, date>, lt_<datetime, datetime>, lt_<duration, duration>, le_<date, date>, le_<datetime, datetime>, le_<duration, duration>, gt_<date, date>, gt_<datetime, datetime>, gt_<duration, duration>, ge_<date, date>, ge_<datetime, datetime>, ge_<duration, duration>"
     },
     {
       "source": "external/hgraph_std/hgl/hgraph/impl/operators.hgl",
-      "line": 594,
+      "line": 590,
       "declaration": "instantiate eq_<time, time>, ne_<time, time>"
     },
     {

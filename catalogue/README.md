@@ -38,7 +38,7 @@ Implemented means the recorded domain is authored and tested; it does not promis
 | `and_` | implemented-slice | hgl-runtime | Closed bool/i64/f64/str truthiness and native mixed numeric binary domains. Remaining: atomic containers and arbitrary registered scalar truthiness. [B3](#b3) |
 | `any_` | blocked | contract only | Existing HGL variadic contract only. Native binary and collection candidates schedule an initial result. [B2](#b2) |
 | `apply` | blocked | — | Callable, logging/formatting, recording or engine-control capability. [B5](#b5) |
-| `assert_` | implemented-slice | hgl-runtime | Boolean condition with a constant message, raising through the native raise_error under the node error model (ADR 0009). Remaining: formatted messages (format_). [B1](#b1) |
+| `assert_` | implemented-slice | hgl-runtime | Boolean condition with a constant message; native raise_error ends evaluation through the operational failure channel. Remaining: formatted messages (format_). [B1](#b1) |
 | `at_zone` | blocked | — | Temporal range, civil/zone policy or owned formatting native bindings. [B5](#b5) |
 | `batch` | blocked | — | Scheduling, passivation, buffered deltas or callable lifecycle. [B2](#b2) |
 | `bit_and` | implemented-slice | hgl-runtime | Native bool/i64 scalar bit projections in HGL bodies. Remaining: set/itemwise overload domains where registered. [B3](#b3), [B4](#b4) |
@@ -72,7 +72,7 @@ Implemented means the recorded domain is authored and tested; it does not promis
 | `difference` | blocked | — | Generic keyed/structural transformations, aggregate startup and delta policies. [B4](#b4) |
 | `dispatch_` | blocked | — | Dynamic callable and nested graph ownership contracts. [B6](#b6) |
 | `div_` | implemented-slice | hgl-runtime | Numeric i64/f64 pairs (including mixed inputs); add_ also str/str. Remaining: checked temporal and structural/open scalar overloads. [B1](#b1), [B3](#b3), [B4](#b4) |
-| `divmod_` | blocked | — | Integer result needs fixed-list indexed output writes; floating result additionally needs the coupled throwing quotient/remainder value kernel. [B1](#b1), [B4](#b4) |
+| `divmod_` | blocked | — | Integer result needs fixed-list indexed output writes; floating result additionally needs a coupled quotient/remainder value kernel that reports operational failure. [B1](#b1), [B4](#b4) |
 | `downcast_` | blocked | — | Type-directed output, arbitrary scalar/compound conversion and lifecycle semantics. [B3](#b3) |
 | `downcast_ref` | blocked | — | Type-directed output, arbitrary scalar/compound conversion and lifecycle semantics. [B3](#b3) |
 | `drop` | implemented-slice | hgl-runtime | bool/i64/f64/str/date/time/datetime/duration scalar forwarding bodies. Remaining: open value, structural delta and reference domains. [B3](#b3), [B4](#b4) |
@@ -128,7 +128,7 @@ Implemented means the recorded domain is authored and tested; it does not promis
 | `len_` | implemented-slice | hgl-runtime | Previously implemented str, fixed/unbounded list, set and map query bodies. Remaining: collection startup parity, rolling materialization and TSB schema domains. [B2](#b2), [B3](#b3), [B4](#b4) |
 | `ln` | implemented | hgl-runtime | f64 natural logarithm (native value binding).  |
 | `log_` | implemented-slice | hgl-runtime | A plain string logged at INFO as [last modified] text through logger.info, with sample_count. Remaining: format arguments and the level (format_; the C++ backend emits logger.info only). [B1](#b1) |
-| `lshift_` | implemented-slice | hgl-runtime | i64 body through the checked `shift_left` native binding; negative and too-large counts raise the native kernel's exception (ADR 0009). Remaining: the itemwise TSL/TSB candidates (B4). [B4](#b4) |
+| `lshift_` | implemented-slice | hgl-runtime | i64 body through the checked shift_left native binding; invalid counts fail evaluation through the operational failure channel. Remaining: the itemwise TSL/TSB candidates (B4). [B4](#b4) |
 | `lt_` | implemented-slice | hgl-runtime | Materialized numeric, string and legacy temporal scalar comparisons; ne_ also bool. Remaining: enum/arbitrary scalar and structural candidates. [B3](#b3), [B4](#b4) |
 | `make_tsd` | implemented-slice | hgl-runtime | Scalar key/value domains across the eight emitted types, with explicit remove-key variant. Remaining: generic structural child delta/value transport. [B3](#b3), [B4](#b4) |
 | `map_` | blocked | — | Dynamic callable and nested graph ownership contracts. [B6](#b6) |
@@ -157,7 +157,7 @@ Implemented means the recorded domain is authored and tested; it does not promis
 | `or_` | implemented-slice | hgl-runtime | Closed bool/i64/f64/str truthiness and native mixed numeric binary domains. Remaining: atomic containers and arbitrary registered scalar truthiness. [B3](#b3) |
 | `partition` | blocked | — | Generic keyed/structural transformations, aggregate startup and delta policies. [B4](#b4) |
 | `pos_` | implemented-slice | hgl-runtime | i64, f64 and duration identity bodies. Remaining: itemwise TSL/TSB candidates and their child-delta policies. [B4](#b4) |
-| `pow_` | implemented-slice | hgl-runtime | i64/f64 and mixed numeric bodies through the checked `power` native binding; the native exceptions (negative integer exponent, overflow, zero to a negative power) are raised identically (ADR 0009). Remaining: the `divide_by_zero` policy parameter (enum, B3) and itemwise TSL/TSB candidates (B4). [B3](#b3), [B4](#b4) |
+| `pow_` | implemented-slice | hgl-runtime | i64/f64 and mixed numeric bodies through the checked power native binding; invalid integer exponents, overflow and zero to a negative power fail evaluation through the operational failure channel. Remaining: the divide_by_zero policy parameter (enum, B3) and itemwise TSL/TSB candidates (B4). [B3](#b3), [B4](#b4) |
 | `print_` | implemented-slice | hgl-runtime | A plain string printed verbatim through the native print_line. Remaining: format arguments (format_). [B1](#b1) |
 | `race` | blocked | contract only | Reference selection/reselection or structural merge/race semantics. [B4](#b4) |
 | `range_adjacent` | blocked | — | Temporal range, civil/zone policy or owned formatting native bindings. [B5](#b5) |
@@ -185,7 +185,7 @@ Implemented means the recorded domain is authored and tested; it does not promis
 | `resolve_civil` | blocked | — | Temporal range, civil/zone policy or owned formatting native bindings. [B5](#b5) |
 | `round_` | implemented | hgl-runtime | f64 with temporal i64 decimal places, native formatting-round algorithm.  |
 | `route_by_index` | blocked | — | Reference selection/reselection or structural merge/race semantics. [B4](#b4) |
-| `rshift_` | implemented-slice | hgl-runtime | i64 body through the checked `shift_right` native binding; negative and too-large counts raise the native kernel's exception (ADR 0009). Remaining: the itemwise TSL/TSB candidates (B4). [B4](#b4) |
+| `rshift_` | implemented-slice | hgl-runtime | i64 body through the checked shift_right native binding; invalid counts fail evaluation through the operational failure channel. Remaining: the itemwise TSL/TSB candidates (B4). [B4](#b4) |
 | `sample` | implemented-slice | hgl-runtime | bool/i64/f64/str/date/time/datetime/duration scalar forwarding bodies. Remaining: open value, structural delta and reference domains. [B3](#b3), [B4](#b4) |
 | `schedule` | implemented-slice | hgl-runtime | Constant-delay source with initial_delay, max_ticks, use_wall_clock and positive-delay validation implemented. Simulation recovery preserves finite progress and original pending deadlines through repeated checkpoints (ADR 0011). Remaining: HGL time-series delay and start-time overloads; wall-clock recovery. [B2](#b2), [B3](#b3) |
 | `second` | implemented | hgl-runtime | Time/DateTime clock fields.  |
@@ -237,9 +237,9 @@ Implemented means the recorded domain is authored and tested; it does not promis
 
 ### B1
 
-Priority 1. Native errors and owned results: the exception half is admitted (ADR 0009: `throws` natives, descriptor policy `translated`, a raise ends the evaluation under hgraph's node error model) and scalar results including `str` are returned by value. Still missing: owned sequence/collection results (`split`), regex and formatting kernels that carry compiled state or packs (`match_`, `replace`, `format_`), and the coupled quotient/remainder result of `divmod_`.
+Priority 1. Native errors and owned results: the accepted contract uses result<T,error> for recoverable data and the operational graph failure channel with capture for evaluation failures. Source throws is retired. Scalar results, including str, are owned values. Remaining bindings: owned sequence/collection results (split), regex and formatting kernels with compiled state or packs (match_, replace, format_), and the coupled quotient/remainder result of divmod_.
 
-Evidence: [0009-native-errors-and-the-node-error-model.md](https://github.com/hhenson/hgraph/blob/main/external/hgraph_spec/language/docs/design/decisions/0009-native-errors-and-the-node-error-model.md), [native-interface.md](https://github.com/hhenson/hgraph/blob/main/external/hgraph_spec/language/docs/design/native-interface.md), [string_impl.h](https://github.com/hhenson/hgraph/blob/main/include/hgraph/lib/std/operators/impl/string_impl.h)
+Evidence: [result-errors.md](https://github.com/hhenson/hgraph/blob/main/external/hgraph_spec/language/docs/design/result-errors.md), [error-capture.md](https://github.com/hhenson/hgraph/blob/main/external/hgraph_spec/language/docs/design/error-capture.md), [native-interfaces.md](https://github.com/hhenson/hgraph/blob/main/external/hgraph_spec/language/docs/design/native-interfaces.md), [string_impl.h](https://github.com/hhenson/hgraph/blob/main/include/hgraph/lib/std/operators/impl/string_impl.h)
 
 ### B2
 
