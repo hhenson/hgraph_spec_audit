@@ -1,0 +1,12 @@
+{
+  "spec_base": "a7d42059b0ba51bf190f13f344419ec228c3551a",
+  "spec_contract": "b6bcc26de0cb4619276483e654ce6b20e284c767",
+  "cpp_source_context": "6d604a0708e86b2bb90ab952a85146bd2467d1f8",
+  "cpp_merged_tree_context": "70ee7b88283e506115b94d693ad502cbe8c565f3",
+  "source_context_boundary": "Owner-verified source/tree context; loaded artifact hashes in observed.json identify execution. No direct native SDK or HGL compiler claim.",
+  "history_sha256": {
+    "history/2026-10-13/observe.py": "27390f9d693bfa39a7ba9c8bdf57607616688959ff52a84cab48af4e4ce9a389",
+    "history/2026-10-13/observed.json": "016c62cfc1c60d2ac7477a0475176ad675f1d571ef0b8ca0a5d0bae5124da427",
+    "history/2026-10-13/reasoned.json": "d64013cb9a4cfeebd607bd83136f5aaf1b8ace9b853dabb3c44a763b5748c9fb"
+  }
+}

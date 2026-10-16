@@ -1,0 +1,477 @@
+{
+  "rule": "MAP-CONN-1\u20134 plus TS-11/14/16/17/23 separate live connection membership from point-in-time LOOKUP-1\u20134 dictionary reads.",
+  "decision": "A readable absent key publishes empty REF even before the map publishes; membership/retargeting selects identities rather than payload values.",
+  "columns": [
+    "reference_valid",
+    "reference_modified",
+    "data_valid",
+    "data_modified",
+    "value",
+    "member"
+  ],
+  "held_columns": [
+    "held_valid",
+    "held_modified",
+    "held_value"
+  ],
+  "cases": {
+    "membership": {
+      "map": [
+        {},
+        {
+          "bid": 10
+        },
+        {
+          "ask": 30
+        },
+        {
+          "bid": 11
+        },
+        {
+          "bid": {
+            "remove": true
+          }
+        },
+        null,
+        {
+          "bid": 12
+        },
+        null
+      ],
+      "key": [
+        "bid"
+      ],
+      "expected": [
+        [
+          true,
+          true,
+          false,
+          false,
+          null,
+          false
+        ],
+        [
+          true,
+          true,
+          true,
+          true,
+          10,
+          true
+        ],
+        [
+          true,
+          false,
+          true,
+          false,
+          10,
+          true
+        ],
+        [
+          true,
+          false,
+          true,
+          true,
+          11,
+          true
+        ],
+        [
+          true,
+          true,
+          false,
+          false,
+          null,
+          false
+        ],
+        [
+          true,
+          false,
+          false,
+          false,
+          null,
+          false
+        ],
+        [
+          true,
+          true,
+          true,
+          true,
+          12,
+          true
+        ],
+        [
+          true,
+          false,
+          true,
+          false,
+          12,
+          true
+        ]
+      ],
+      "kind": "ordinary_selection"
+    },
+    "key_changes": {
+      "map": [
+        {
+          "bid": 7,
+          "ask": 7
+        },
+        null,
+        null,
+        null,
+        {
+          "other": 99
+        },
+        {
+          "foo": 7
+        },
+        {
+          "bid": 8
+        }
+      ],
+      "key": [
+        "bid",
+        "ask",
+        "foo",
+        "foo"
+      ],
+      "expected": [
+        [
+          true,
+          true,
+          true,
+          true,
+          7,
+          true
+        ],
+        [
+          true,
+          true,
+          true,
+          true,
+          7,
+          true
+        ],
+        [
+          true,
+          true,
+          false,
+          false,
+          null,
+          false
+        ],
+        [
+          true,
+          false,
+          false,
+          false,
+          null,
+          false
+        ],
+        [
+          true,
+          false,
+          false,
+          false,
+          null,
+          false
+        ],
+        [
+          true,
+          true,
+          true,
+          true,
+          7,
+          true
+        ],
+        [
+          true,
+          false,
+          true,
+          false,
+          7,
+          true
+        ]
+      ],
+      "kind": "ordinary_selection"
+    },
+    "unpublished_map": {
+      "map": [
+        null,
+        null,
+        {
+          "bid": 10
+        }
+      ],
+      "key": [
+        "bid"
+      ],
+      "expected": [
+        [
+          true,
+          true,
+          false,
+          false,
+          null,
+          false
+        ],
+        [
+          true,
+          false,
+          false,
+          false,
+          null,
+          false
+        ],
+        [
+          true,
+          true,
+          true,
+          true,
+          10,
+          true
+        ]
+      ],
+      "kind": "ordinary_selection"
+    },
+    "invalid_child_membership": {
+      "kind": "invalid_child",
+      "steps": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "key": [
+        "bid"
+      ],
+      "actions": [
+        "create_invalid",
+        "publish_7",
+        "invalidate_child",
+        "publish_8",
+        "remove",
+        "create_invalid",
+        "publish_8"
+      ],
+      "expected": [
+        [
+          true,
+          true,
+          false,
+          false,
+          null,
+          true
+        ],
+        [
+          true,
+          false,
+          true,
+          true,
+          7,
+          true
+        ],
+        [
+          true,
+          false,
+          false,
+          false,
+          null,
+          true
+        ],
+        [
+          true,
+          false,
+          true,
+          true,
+          8,
+          true
+        ],
+        [
+          true,
+          true,
+          false,
+          false,
+          null,
+          false
+        ],
+        [
+          true,
+          true,
+          false,
+          false,
+          null,
+          true
+        ],
+        [
+          true,
+          false,
+          true,
+          true,
+          8,
+          true
+        ]
+      ]
+    },
+    "held_removal_readd": {
+      "kind": "held_selection",
+      "map": [
+        {},
+        {
+          "bid": 7
+        },
+        {
+          "ask": 9
+        },
+        {
+          "bid": 8
+        },
+        {
+          "bid": {
+            "remove": true
+          }
+        },
+        null,
+        {
+          "bid": 8
+        },
+        null
+      ],
+      "key": [
+        "bid"
+      ],
+      "expected": [
+        [
+          true,
+          true,
+          false,
+          false,
+          null,
+          false,
+          false,
+          false,
+          null
+        ],
+        [
+          true,
+          true,
+          true,
+          true,
+          7,
+          true,
+          true,
+          true,
+          7
+        ],
+        [
+          true,
+          false,
+          true,
+          false,
+          7,
+          true,
+          true,
+          false,
+          7
+        ],
+        [
+          true,
+          false,
+          true,
+          true,
+          8,
+          true,
+          true,
+          true,
+          8
+        ],
+        [
+          true,
+          true,
+          false,
+          false,
+          null,
+          false,
+          true,
+          false,
+          8
+        ],
+        [
+          true,
+          false,
+          false,
+          false,
+          null,
+          false,
+          false,
+          false,
+          null
+        ],
+        [
+          true,
+          true,
+          true,
+          true,
+          8,
+          true,
+          false,
+          false,
+          null
+        ],
+        [
+          true,
+          false,
+          true,
+          false,
+          8,
+          true,
+          false,
+          false,
+          null
+        ]
+      ]
+    }
+  },
+  "scalar_dictionary": {
+    "inputs": [
+      {
+        "bid": 0
+      },
+      {},
+      {
+        "bid": 10
+      }
+    ],
+    "key": [
+      "bid"
+    ],
+    "safe_expected": [
+      {
+        "present": true,
+        "value": 0
+      },
+      {
+        "present": false,
+        "value": null
+      },
+      {
+        "present": true,
+        "value": 10
+      }
+    ],
+    "fallback": 5,
+    "fallback_expected": [
+      0,
+      5,
+      10
+    ],
+    "strict_present_expected": [
+      0,
+      10
+    ],
+    "strict_missing_failure": true,
+    "boundary": "These callbacks read real TS[dict[str,int]] inputs on each engine; a returned null observation is encoded as data, not conflated with node silence. Python bridge lookup does not establish native SDK/HGL failure-code or optional-storage conformance."
+  }
+}

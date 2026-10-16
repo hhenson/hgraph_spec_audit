@@ -1,0 +1,22 @@
+{
+  "rule": "Graph selection routes a non-atomic map child; scalar dictionary lookup reads a value.",
+  "columns": ["reference_valid", "reference_modified", "data_valid", "data_modified", "value"],
+  "cases": {
+    "membership": {
+      "map": [{}, {"bid": 10}, {"ask": 30}, {"bid": 11}, {"bid": {"remove": true}}, null, {"bid": 12}, null],
+      "key": ["bid"],
+      "expected": [[true, true, false, false, null], [true, true, true, true, 10], [true, false, true, false, 10], [true, false, true, true, 11], [true, true, false, false, null], [true, false, false, false, null], [true, true, true, true, 12], [true, false, true, false, 12]]
+    },
+    "key_changes": {
+      "map": [{"bid": 7, "ask": 7}, null, null, null, {"other": 99}, {"foo": 7}, {"bid": 8}],
+      "key": ["bid", "ask", "foo", "foo"],
+      "expected": [[true, true, true, true, 7], [true, true, true, true, 7], [true, true, false, false, null], [true, false, false, false, null], [true, false, false, false, null], [true, true, true, true, 7], [true, false, true, false, 7]]
+    },
+    "unpublished_map": {
+      "map": [null, null, {"bid": 10}],
+      "key": ["bid"],
+      "expected": [[true, true, false, false, null], [true, false, false, false, null], [true, true, true, true, 10]]
+    }
+  },
+  "scalar_dictionary": {"present": 10, "missing_error": "KeyError", "missing_default": null}
+}
