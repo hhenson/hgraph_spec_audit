@@ -60,6 +60,13 @@ class RecordedMapSelection(unittest.TestCase):
         self.record['engines']['cpp']['scalar_dictionary']['strict_missing']['failures'] = []
         self.reject()
 
+    def test_strict_lookup_failure_cannot_also_return_raw_output(self):
+        for engine in ('cpp', 'python'):
+            with self.subTest(engine=engine):
+                self.record = json.loads((HERE / 'observed.json').read_text())
+                self.record['engines'][engine]['scalar_dictionary']['strict_missing']['raw_eval_node'] = ['0']
+                self.reject()
+
     def test_null_cannot_be_replaced_by_silence(self):
         self.record['engines']['python']['scalar_dictionary']['safe']['raw_eval_node'][1] = None
         self.reject()

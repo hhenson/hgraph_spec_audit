@@ -54,6 +54,7 @@ def check(record=None):
                 assert actual['events'] == [json.loads(row) for row in actual['raw_eval_node'] if row is not None]
         for mode, actual in measured['scalar_dictionary'].items():
             if mode == 'strict_missing':
+                assert 'raw_eval_node' not in actual
                 assert measured['assessment']['scalar_dictionary.' + mode] == 'match'
                 assert actual['error_type'] == ('RuntimeError' if engine == 'cpp' else 'NodeException')
                 assert 'KeyError' in actual['error']
