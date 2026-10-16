@@ -94,3 +94,7 @@ conditional boundaries and an exported child-designation tree with sparse
 updates and partial retargeting. Python matches both frozen cases; the public
 C++ interpreter omits one required right-child sample. This is public bridge
 evidence, not direct native SDK or HGL execution.
+
+[Live map key selection](map_key_selection/README.md) separates empty REF
+selection, child membership/validity, held-reference expiry and scalar dictionary
+lookup, preserving Python and C++ variations with independent artifact identities.

@@ -100,6 +100,9 @@ def main():
     subprocess.run([sys.executable, str(ROOT / 'runtime/validation/ref_owner_export/check.py')], check=True)
     subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s',
                     str(ROOT / 'runtime/validation/ref_owner_export')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'runtime/validation/map_key_selection/check.py')], check=True)
+    subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s',
+                    str(ROOT / 'runtime/validation/map_key_selection')], check=True)
     print('Recorded evidence checked; no fresh runtime measurements were made.')
 
 
