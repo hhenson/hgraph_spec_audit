@@ -1,0 +1,157 @@
+{
+  "relocated_on": "2026-10-17",
+  "source_repository": "https://github.com/hhenson/hgraph_spec",
+  "source_revision": "95292403cd8066a375b6747609f868402616f123",
+  "note_path": "docs/implementation-notes/2026-10-17-cleanup.md",
+  "files": [
+    {
+      "source_path": "language/examples/README.md",
+      "source_sha256": "fee865bf5015ea7ee70e36306f55df4407094004d7c0a45925c6a5e57eeb020b"
+    },
+    {
+      "source_path": "runtime/injectables.md",
+      "source_sha256": "6f5e5a56e00092601ae9df2e2f180c0b613b79e449912129df4db04c26a3b323"
+    },
+    {
+      "source_path": "runtime/node.md",
+      "source_sha256": "776ceefc0e7231dd2fdf242df720b68d1a05e186f9a35d0eb64becaac8bf484c"
+    }
+  ],
+  "excerpts": [
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 1,
+      "text": "# Language examples\n\nThese HGL files describe language behaviour. Compiler validation runs in\n[hgraph's language tests](https://github.com/hhenson/hgraph/blob/main/language/tests/CMakeLists.txt)\nafter shared-source setup. That suite discovers examples, checks them, runs\nsupported `test` blocks and compiles generated fixtures. Native test support\nvaries by platform; this source-only repository has no CMake/CTest project.\nThe entries below identify the implementation tests for each example.\n[Source-rejection examples](reject/README.md) use ordinary `hgl test`;\nannotations isolate expected source errors alongside executable tests."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 72,
+      "text": "- [`mutable-values.hgl`](mutable-values.hgl) specifies writable ordinary\n  `var` contents, recursive read-only `let` access, and independent owning\n  copies and construction. Its `test` uses value functions and does not\n  invoke eval. It belongs to the proposed\n  [value-mutability contract](../docs/design/value-mutability.md).\n  This is a normative source example; compiler acceptance and execution of\n  the extended content-mutation cases have not yet been validated."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 79,
+      "text": "- [`test-contexts.hgl`](test-contexts.hgl) keeps a runtime helper and a\n  test-local struct in a module-wide test scope shared by two contexts. Its\n  two cases run through `hgraph_language_test_test-contexts`; cross-part\n  visibility and production exclusion of helpers and test-local types are\n  covered by `hgraph_language_test_contexts` and emitter tests."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 84,
+      "text": "- [`midpoint.hgl`](midpoint.hgl) uses an internal helper, `export fn`, an\n  atomic tuple, a `const` window, and a `test` of the unexported helper. It\n  imports `hgraph.analytics`. Tests: 1 `test` under `hgl test`\n  (`hgraph_language_test_midpoint`, gated on `hgraph::analytics`) and\n  `generated_example_tests.cpp`."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 89,
+      "text": "- [`runtime-choice.hgl`](runtime-choice.hgl) contrasts a wiring-time topology\n  choice, explicit time-series selection, and a `when` runtime function. It\n  imports `hgraph.analytics`. Tests: none in the file;\n  `generated_example_tests.cpp` builds it."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 93,
+      "text": "- [`pull-sources.hgl`](pull-sources.hgl) drives sources without temporal\n  input: `inject alarm` for a one-shot wake-up, and `yield` generator sources\n  with `while` loops, a bare `return`, an absolute time and a skipped past\n  time ([ADR 0015](../docs/design/decisions/0015-pull-sources.md)). Tests:\n  2 `test` blocks under `hgl test` (`hgraph_language_test_pull-sources`),\n  discovered once hgraph's pin of this repository follows hgraph PR #1670."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 99,
+      "text": "- [`stateful-node.hgl`](stateful-node.hgl) demonstrates aggregate state,\n  grouped injectables, lifecycle blocks, ordered handlers, previous output,\n  and incremental collection output. Tests: none in the file; native behaviour\n  in `generated_example_tests.cpp`, and the `--dump-hir` /\n  `--dump-hgraph-ir` CTest cases read this example."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 104,
+      "text": "- [`when-defaults.hgl`](when-defaults.hgl) makes omitted and zero-argument\n  handler selectors executable: `when {}` matches\n  `when modified() && valid()`, while either omitted selector expands over all\n  temporal parameters. Tests: 3 `test` blocks under `hgl test`\n  (`hgraph_language_test_when-defaults`) plus focused generated-code checks."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 109,
+      "text": "- [`collection-views.hgl`](collection-views.hgl) demonstrates dual-phase\n  `key_set`, runtime `keys`/`values`/`elements`/`items`, built-in and inline\n  predicates,\n  `last_modified`, and mutable lexical `var`. Tests: none in the file; native\n  behaviour in `generated_example_tests.cpp`."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 114,
+      "text": "- [`const-debug.hgl`](const-debug.hgl) connects an HGL constant source to an\n  HGL printing sink. Only integer printing is native; select the C++\n  part under `impl/`. Tests: `generated_const_debug_tests.cpp` compiles the\n  C++ binding and checks source ticks, duplicate sink ticks and fresh runs."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 122,
+      "text": "- [`bytes-values.hgl`](bytes-values.hgl) specifies byte construction, exact\n  values, equal/empty publication ticks, silence and executed octet range errors."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 124,
+      "text": "- [`native-provider.hgl`](native-provider.hgl) separates native scalar declarations\n  from their providers and exercises injectable propagation through helpers.\n  Implementations and provider binding tests live with each compiler/runtime."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 127,
+      "text": "- [`operators-and-generics.hgl`](operators-and-generics.hgl) demonstrates a\n  nominal bodyless `operator`, a generic `impl fn` implementation, const-generic\n  rolling-window sizes, an exported exact function, the default minimum window\n  size, and a duration window. Operators, functions, and structs may carry\n  the agreed `requires` constraint syntax. Tests: none in the file; generic\n  resolution and window ticks in `generated_generic_tests.cpp` and, on the\n  direct backend, `../tests/wiring/backend_coverage_tests.cpp`."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 134,
+      "text": "- [`structural-types.hgl`](structural-types.hgl) demonstrates a recursively\n  temporal struct, `atomic<S>`, a type-generic struct, closed-set requirements,\n  abstract-only inheritance with a default override, and a sparse delta in a\n  runtime function, alongside temporal maps and an anonymous `fn`. Tests: none\n  in the file; `generated_structural_tests.cpp`, and direct-wiring struct\n  cases in `../tests/wiring/backend_tests.cpp`."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 140,
+      "text": "- [`recursive-fields.hgl`](recursive-fields.hgl) declares recursive struct\n  fields (ADR 0012): a linked list and a generic tree whose edges are optional\n  `atomic` fields, a construction whose edge is a port, and field access\n  through an edge. Tests: 3 `test` blocks under `hgl test`\n  (`hgraph_language_test_recursive-fields`), asserted again on the generated\n  C++ in `generated_recursive_tests.cpp`."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 156,
+      "text": "- [`reference-routing.hgl`](reference-routing.hgl) demonstrates `ref<T>`\n  parameters and results in runtime functions: forwarding a reference, and\n  routing one element of a `list<ref<T>, 3>` by a temporal index. Tests: none\n  in the file; routing ticks in `generated_reference_tests.cpp` and, for the\n  composition shapes, `../tests/wiring/backend_coverage_tests.cpp`."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 161,
+      "text": "- [`fixed-list-iteration.hgl`](fixed-list-iteration.hgl) demonstrates a\n  graph-phase `for` over a fixed temporal list with `elements` and `items`,\n  wiring one body per child connection. Tests: none in the file; per-child\n  wiring in `generated_iteration_tests.cpp` and\n  `../tests/wiring/backend_tests.cpp`."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 166,
+      "text": "- [`dynamic-collection-iteration.hgl`](dynamic-collection-iteration.hgl)\n  demonstrates a graph-phase `for` over a temporal map and an unbounded list,\n  one sink child graph per key or index, with shared captures passed whole.\n  Tests: none in the file; child-map ownership in\n  `generated_iteration_tests.cpp` and recorded child ticks in\n  `../tests/wiring/backend_coverage_tests.cpp`."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 172,
+      "text": "- [`conditional-result.hgl`](conditional-result.hgl),\n  [`conditional-results.hgl`](conditional-results.hgl), and\n  [`conditional-mixed-results.hgl`](conditional-mixed-results.hgl) exercise\n  temporal branch results, escaping assignments, structural result packing,\n  and remapping in both compiler backends. Tests: none in the files; ticks in\n  `generated_tests.cpp` and `../tests/wiring/backend_tests.cpp`."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 178,
+      "text": "- [`conditional-forwarding.hgl`](conditional-forwarding.hgl) preserves an\n  initialized result through an implicit or explicit unassigned branch and\n  exercises independent reference forwarding for structural result fields.\n  Tests: none in the file; ticks in `generated_tests.cpp` and\n  `../tests/wiring/backend_tests.cpp`."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 183,
+      "text": "- [`conditional-omitted-else.hgl`](conditional-omitted-else.hgl) shows that a\n  consumed temporal conditional without `else` produces no tick while false,\n  using a type-resolved `nothing` branch in both compiler backends. Tests:\n  1 `test` under `hgl test` (`hgraph_language_test_conditional-omitted-else`)\n  and `generated_tests.cpp`."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 188,
+      "text": "- [`conditional-early-return.hgl`](conditional-early-return.hgl) returns from\n  one temporal branch and composes the rest of the body as the other branch's\n  continuation, for top-level, nested, tail, assigned, and outputless forms.\n  Tests: 8 `test` blocks under `hgl test`\n  (`hgraph_language_test_conditional-early-return`) and `generated_tests.cpp`."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 193,
+      "text": "- [`conditional-sinks.hgl`](conditional-sinks.hgl) controls child-graph\n  lifetime with an outputless temporal conditional through the native sink\n  switch, keeps a second sink outside it, and discards a sink conditional\n  inside a value-producing graph. Tests: none in the file; `generated_tests.cpp`\n  and `../tests/wiring/backend_tests.cpp`.\n\nAs compiler slices land, each example should advance from parsing and typed IR\ncoverage through `hgl test` to generated C++ behavior and backend parity.\nThe backend-parity module that is built both ways lives in\n`../tests/codegen/parity.hgl`; the expression-embedded temporal conditional\nis pinned there. The acceptance sequence is defined in the\n[Developer Guide](https://github.com/hhenson/hgraph/blob/main/language/docs/developer-guide/testing-and-compatibility.md#documentation-examples)."
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "start_line": 211,
+      "text": "- [`reference-owner-export.hgl`](reference-owner-export.hgl) follows an explicit\n  REF branch result that preserves a branch-owned scalar endpoint through its\n  owning output boundary. Two evals specify current routing and fresh runs;\n  validation is static only. See the [route matrix](../../compiler/cases_reference_owner_export.md)."
+    },
+    {
+      "source_path": "runtime/injectables.md",
+      "start_line": 63,
+      "text": "The agreed [language capability contract](https://github.com/hhenson/hgraph_spec/blob/main/language/docs/design/native-interfaces.md#implementation-parts-and-injectables)\nalso permits context services in value functions. Its requirements are visible\nto the checker, without adding caller-supplied arguments. Selected native implementation parts declare their own requests; only those\nservices need provisioning. Helpers borrow access for the call and acquire no node of their\nown. Calls silently upgrade the caller's injectable list. The C++ compiler\nsupports value-helper logger/clock forwarding from the selected part."
+    },
+    {
+      "source_path": "runtime/node.md",
+      "start_line": 135,
+      "text": "**State** is a private value. It exists from instantiation until disposal,\nit is read and written only by the node, it never ticks, and nothing outside\nthe node can see it. It is a cache: a node must behave the same whether its\nstate survived or was rebuilt from equivalent inputs, recordable history and\npending work. The same future events must give the same observations and\neffects. A lost running total is not a cache. Native `State` does not enforce\nthis distinction."
+    },
+    {
+      "source_path": "runtime/node.md",
+      "start_line": 160,
+      "text": "In HGL, `state` is recordable state and `cache` is state. HGL hides the\nintended machinery: to the code, a `state` is a variable that is read and\nassigned, and that it is a time-series underneath \u2014 ticking, recordable, restorable \u2014\ndoes not show. Mixed HGL state/cache lowering remains separate work; see\n[implementation evidence](https://github.com/hhenson/hgraph_spec_audit/blob/main/runtime/evidence.md)."
+    }
+  ]
+}
