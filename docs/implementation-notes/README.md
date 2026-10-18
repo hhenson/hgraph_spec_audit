@@ -68,3 +68,5 @@ portable examples remain owned by the specification and standard library.
   ([provenance](runtime/case-cleanup-2026-10-18.provenance.json)).
 - [18 October 2026: state/cache storage and lowering notes](language/state-cache-cleanup-2026-10-18.md)
   ([provenance](language/state-cache-cleanup-2026-10-18.provenance.json)).
+- [18 October 2026: pull-source and scheduler implementation notes](language/pull-source-cleanup-2026-10-18.md)
+  ([provenance](language/pull-source-cleanup-2026-10-18.provenance.json)).
