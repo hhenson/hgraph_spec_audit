@@ -1,0 +1,321 @@
+{
+  "relocated_on": "2026-10-18",
+  "source_repository": "https://github.com/hhenson/hgraph_spec",
+  "source_revision": "5d27402d0992873e9fa1d4eacfdcb7d79ebe6aa5",
+  "note_path": "docs/implementation-notes/runtime-evidence-cleanup-2026-10-18.md",
+  "sources": [
+    {
+      "source_path": "wiring/wiring.md",
+      "source_sha256": "64147399b82206c36b0d6c1092e97699ad424956a0154bc939179ebe687b071a",
+      "excerpts": [
+        {
+          "start_line": 6,
+          "start_column": 1,
+          "text": "resolution (Part 2), projections (WIR-5) and candidate selection (WIR-16 to\nWIR-18) are validated against two independent implementations\n([wiring validation](https://github.com/hhenson/hgraph_spec_audit/blob/main/runtime/validation/wiring/README.md)); the Evidence table\nsays which rules rest on cases and which on source reading only."
+        },
+        {
+          "start_line": 408,
+          "start_column": 1,
+          "text": "Parts of wiring that hgraph provides and the rules above do not yet cover.\nThe first four are next: code generated for HGL calls operators that rely\non them, so they need rules and cases as type resolution has."
+        },
+        {
+          "start_line": 451,
+          "start_column": 1,
+          "text": "[Wiring cases](cases_wiring.md) derive each decision from the rules; the\n[wiring validation](https://github.com/hhenson/hgraph_spec_audit/blob/main/runtime/validation/wiring/README.md) records the observations\non hgraph's Python implementation (0.5.41) and its C++ implementation, and\non the HGL front end.\n\nImplementation comparisons and test coverage are maintained in the\n[audit evidence](https://github.com/hhenson/hgraph_spec_audit/blob/main/runtime/validation/wiring/README.md)."
+        }
+      ]
+    },
+    {
+      "source_path": "wiring/cases_wiring.md",
+      "source_sha256": "3ca3d7bb522442e2b720e49602eed71650eeb4c27c2f47ff3f909e5b0abc1eb4",
+      "excerpts": [
+        {
+          "start_line": 3,
+          "start_column": 1,
+          "text": "Status: validated expectations with recorded variations; rewritten for\nclarity on 2026-09-30 with the case names, rule references and expected\ndecisions unchanged. The observations are in the\n[wiring validation](https://github.com/hhenson/hgraph_spec_audit/blob/main/runtime/validation/wiring/README.md)."
+        },
+        {
+          "start_line": 19,
+          "start_column": 1,
+          "text": "reference to a time-series of type `X`, and `T` a type variable. In the\nrecorded runs these are hgraph's Python spellings (`TS[int]`,\n`TSD[str, REF[TS[int]]]`); the correspondence is one to one."
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/injectables.md",
+      "source_sha256": "a97a0f10284b6d5eabac596e11eeb7f5043f266e0db9ce3b54a50a6d470a034d",
+      "excerpts": [
+        {
+          "start_line": 210,
+          "start_column": 1,
+          "text": "**Logger.** Follows the shape common to logging interfaces \u2014 Python's\n`logging`, spdlog \u2014 and no more than that:"
+        },
+        {
+          "start_line": 313,
+          "start_column": 1,
+          "text": "1. **Writing the output in start.** Reading is settled (INJ-8). Writing in\n   start is possible in principle, and hgraph does not do it:\n\n   - Of the node implementations in hgraph's C++ standard library, 59 have a\n     start that is handed the output. Every one of them only *reads its\n     type* \u2014 to work out, once, how values of that type are built or\n     converted, and keep the answer in state. None writes a value.\n   - No stop is handed the output at all.\n   - What a write in start would mean is clear enough:"
+        },
+        {
+          "start_line": 339,
+          "start_column": 1,
+          "text": "   extension, so it lands in hgraph first."
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/open_points.md",
+      "source_sha256": "51af629c4b415b8dcd7428a197a4f83c6dcdc495110823ee7417e835fd230a2a",
+      "excerpts": [
+        {
+          "start_line": 44,
+          "start_column": 1,
+          "text": "| 16 | `lag` on HGL's clock | Injectables 2 | A language extension; lands in hgraph first |"
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/node.md",
+      "source_sha256": "8a8dd10eafe3b9c95d962f64e160b5b8ba3eec3c0dabd7755f05439f0dc8660c",
+      "excerpts": [
+        {
+          "start_line": 499,
+          "start_column": 1,
+          "text": "2. **The output on a cycle that fails.** hgraph says what was written before\n   the failure stands, and calls the result \"unspecified\" in places. NOD-19\n   says it stands. Should a failing eval instead leave no tick on the main\n   output at all?\n3. **A request for the past** is quietly ignored by hgraph's scheduler but is\n   an error in hgraph's graph schedule (see Graph, point 7)."
+        },
+        {
+          "start_line": 511,
+          "start_column": 1,
+          "text": "5. **Structural inputs.** Settled 2026-09-30: defined above and in NOD-28,\n   from hgraph's third input activity."
+        },
+        {
+          "start_line": 515,
+          "start_column": 1,
+          "text": "6. **Error capture for nested nodes.** Settled 2026-09-30 from hgraph's\n   `try_except` and keyed `map_` capture: NOD-29. hgraph does not yet capture\n   for switch and mesh; that is an implementation gap, not a rule."
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/graph.md",
+      "source_sha256": "5b7d03bb46c3f7583921e814af5b716a844622a8bd26653a9eb7cc32a1561451",
+      "excerpts": [
+        {
+          "start_line": 566,
+          "start_column": 1,
+          "text": "   description and of the builder boundary (Overview, point 3). In hgraph today a node's behaviour is held as function\n   pointers and a process-local token; the builder can also retain opaque\n   extension state. None of that can be written out, which is why hgraph's\n   RFC 0022 manifest can identify a wired graph but not rebuild one. A stable\n   identity needs"
+        },
+        {
+          "start_line": 580,
+          "start_column": 1,
+          "text": "3. **How types appear.** hgraph refers to types by interned address. A\n   storable description must carry them \u2014 by value, as a table of the types\n   it uses, or by canonical name. It must also carry, for each abstract\n   struct family, the closed set of concrete members wiring knew about:\n   hgraph freezes that set when wiring finishes, and a graph ignores members\n   registered later."
+        },
+        {
+          "start_line": 588,
+          "start_column": 1,
+          "text": "   position is a non-peered parent. hgraph stores the peering explicitly;\n   what cannot be derived from edges is a **local** input,"
+        },
+        {
+          "start_line": 591,
+          "start_column": 1,
+          "text": "5. **Structural inputs** are listed because hgraph's node type has them. They\n   need a definition in Time-series types before they can stay."
+        },
+        {
+          "start_line": 596,
+          "start_column": 1,
+          "text": "7. **Scheduling in the past.** hgraph's graph treats it as an error; hgraph's\n   node scheduler quietly ignores a request for a time that is not in the\n   future. GRF-12 takes the first. Should a node's scheduler be as strict?"
+        },
+        {
+          "start_line": 601,
+          "start_column": 1,
+          "text": "   considered once with nothing due. hgraph accepts this. It is harmless but\n   observable: the node's evaluation runs."
+        },
+        {
+          "start_line": 612,
+          "start_column": 1,
+          "text": "    reclaimable from the start of the next. hgraph keeping a switch's old\n    branch until the next switch, or holding two address spaces for a switch,\n    is a design option ([Design options](design_options.md))."
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/time_series.md",
+      "source_sha256": "0aaf9c7f391a794f98079d3f44de4f4e9042edbea11165f9d7dd745dee99f8d5",
+      "excerpts": [
+        {
+          "start_line": 576,
+          "start_column": 1,
+          "text": "- **How the two directions of reference binding are carried out.** hgraph\n  has the *output* own a converted view of itself for each kind of input that\n  asks; that is a mechanism, and only what an input sees is specified here."
+        },
+        {
+          "start_line": 586,
+          "start_column": 1,
+          "text": "   ticked, and in hgraph stays valid even if its only valid field is later"
+        },
+        {
+          "start_line": 617,
+          "start_column": 1,
+          "text": "In hgraph: `docs/source/developer_guide/data_structures/schemas/\ntime_series.rst` (tick semantics, value and delta by kind);\n`data_structures/plans_and_ops/time_series.rst` and `linking_strategies.rst`\n(binding, sampling, keyed unbinds, delta visibility);\n`developer_guide/binding_vocabulary.rst`; RFC 0031 (growing lists), RFC 0036\n(references); the ruling of 2026-09-19 on `all_valid`; HGL's\n`language-model.md` (canonical temporal types, temporal metadata, collection\ntraversal).\n"
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/scalar_types.md",
+      "source_sha256": "93fa22518a64943dccfa3672fda53824d4b71c781abe9e45e95521124244b9ed",
+      "excerpts": [
+        {
+          "start_line": 290,
+          "start_column": 1,
+          "text": "- **Serial forms.** hgraph has a binary form and a JSON form, registered per\n  atomic type. They are needed for recording, replay and distribution, and\n  go with those."
+        },
+        {
+          "start_line": 297,
+          "start_column": 1,
+          "text": "- **Cyclic buffer and queue.** hgraph has both as value kinds. They exist to\n  implement windows (TSW) \u2014 they are the changing store behind one, not\n  values a graph passes around \u2014 and so are an implementation's concern.\n- **Shared and owned handles** to struct values. hgraph uses a shared handle\n  to avoid copying large values, and an owned one-pointer handle as the way a\n  struct holds a field of its own type. Both are mechanisms: VAL-18 is the\n  concept the second one serves."
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/representations.md",
+      "source_sha256": "bdcb986b790bfcfbd5ac3ccdf8b752c40ebabe93745229ea7f27ae6154a8df97",
+      "excerpts": [
+        {
+          "start_line": 75,
+          "start_column": 1,
+          "text": "| AtomicCell | ATOMIC-RETENTION, ATOMIC-ZERO | [AtomicStorage](layout_example.md) | proposed; no native implementation |\n| MapQuote | QUOTE-HISTORY | NodeMap | proposed; no native implementation |\n| PivotQuote | QUOTE-HISTORY | FlatPivot | proposed; no native implementation |"
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/overview.md",
+      "source_sha256": "d8d028202c9f2e724119440e3b33bb660da4b2b5fd013b4653676d6ee68c36c8",
+      "excerpts": [
+        {
+          "start_line": 280,
+          "start_column": 1,
+          "text": "process-local. hgraph does not do this today; it is a goal the description is\nspecified to allow."
+        },
+        {
+          "start_line": 514,
+          "start_column": 1,
+          "text": "   instantiated on demand. A first pass at its contents, taken from hgraph's\n   graph builder, is in [Graph](graph.md). The hard part it leaves open is\n   how a description names what implements a node: hgraph holds behaviour as\n   process-local function pointers, which is why its RFC 0022 manifest can\n   *identify* a wired program but not rebuild one."
+        },
+        {
+          "start_line": 526,
+          "start_column": 1,
+          "text": "   - *The compiler emits code that does the wiring when run* \u2014 what has been\n     done so far."
+        },
+        {
+          "start_line": 564,
+          "start_column": 1,
+          "text": "  buffer and queue are not: hgraph has them to implement windows, and they\n  are an implementation's concern."
+        },
+        {
+          "start_line": 577,
+          "start_column": 1,
+          "text": "In hgraph: `docs/source/developer_guide/architecture.rst` (the engine, the\ncycle, lifecycle); `developer_guide/data_structures/` and\n`binding_vocabulary.rst` (time-series and values); `developer_guide/\nnested_graphs.rst` (for the components nested nodes rely on, not the nodes);\nthe RFCs, notably 0002 (temporal types), 0022 (serialisable graph manifest),\n0027 (push queues), 0031 (unbounded lists), 0036 (reference transparency); the Python implementation for design\nintent; the older `docs/source/specification/` chapters for framing;\n`language/docs/design/` for the names HGL gives these concepts; and the\n`.hgspec` runtime-contract draft (PR #796).\n\n[Dynamic-case validation](https://github.com/hhenson/hgraph_spec_audit/blob/main/runtime/validation.md) records the TSD, REF and nested-graph\nexpectations, executed traces and implementation variations.\n\n[Fixed collection cases](cases_fixed.md) validate the next TSL/TSB slice,\nincluding nesting and whole-output versus child bindings. User rulings\nand recorded variations are in its [comparison report](https://github.com/hhenson/hgraph_spec_audit/blob/main/runtime/validation/fixed/README.md).\n"
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/design_options.md",
+      "source_sha256": "20f458b35be75b521b64091df890bfc79b056127e82d9a7552f8d7f0121bfe7b",
+      "excerpts": [
+        {
+          "start_line": 20,
+          "start_column": 1,
+          "text": "and is reclaimed no earlier than the start of the next. hgraph goes further\nand reclaims lazily:"
+        },
+        {
+          "start_line": 41,
+          "start_column": 1,
+          "text": "hgraph keeps the old branch until the next switch, and an implementation may\ngo further and hold two fully built address spaces, A and B, alternating"
+        },
+        {
+          "start_line": 61,
+          "start_column": 1,
+          "text": "from child events. hgraph maintains them: a child notification updates the\nparent's change time, and a read costs nothing beyond a field."
+        },
+        {
+          "start_line": 76,
+          "start_column": 1,
+          "text": "collection and owns an output, to which every consumer binds. hgraph folds\nthe assembly into the consumer when there is one consumer, and may share a\nnode when there are several."
+        },
+        {
+          "start_line": 92,
+          "start_column": 1,
+          "text": "hgraph gives such a node no scheduler storage at all: the alarm is a view\nover the graph's schedule, constructed on demand, and the node's memory\nholds no request."
+        },
+        {
+          "start_line": 105,
+          "start_column": 1,
+          "text": "owner's inputs are bound to, with nothing in between. hgraph compiles the\nchild against placeholders for those inputs and binds them at instantiation,\nrather than inserting a forwarding node."
+        },
+        {
+          "start_line": 120,
+          "start_column": 1,
+          "text": "find the newcomer. hgraph guards reuse with an invalidation subscription;\nthe Rust store stamps each slot with a generation that a reference carries\nand checks."
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/execution_engine.md",
+      "source_sha256": "eed3cc0062873c32fe564198a18e55bd929e23ee405c83b9c5801ec114da91e8",
+      "excerpts": [
+        {
+          "start_line": 397,
+          "start_column": 6,
+          "text": "values and the schedule as they were when the node failed. In Python the\n     failed run is kept alive by the raised exception and torn down when the\n     exception is released."
+        },
+        {
+          "start_line": 352,
+          "start_column": 1,
+          "text": "Facilities hgraph's engine has that no concept above needs yet. Each is\nspecified when an implementation requires it,"
+        },
+        {
+          "start_line": 364,
+          "start_column": 3,
+          "text": "profiling and diagnostics are built on them. hgraph pairs every *before*\n  with an *after* for evaluation and stop even on failure, but not for start."
+        },
+        {
+          "start_line": 374,
+          "start_column": 1,
+          "text": "- **Pausing a cycle.** hgraph lets a node pause the cycle it is in and have\n  it resumed at the same evaluation time (mesh uses this while waiting on a\n  dependency). ENG-2 assumes no such thing exists."
+        },
+        {
+          "start_line": 384,
+          "start_column": 1,
+          "text": "1. **Failure handling: is *report, then stop* a concept?** What hgraph does:"
+        },
+        {
+          "start_line": 389,
+          "start_column": 1,
+          "text": "   - hgraph's `cleanup_on_error` option chooses the **order**. *True* (the\n     default): stop first, then report \u2014 by the time the caller sees the\n     failure, every stop hook has run. *False*: report first \u2014 the caller\n     receives the failure together with the failed run, still started, and\n     the stop happens when the caller lets go of it."
+        },
+        {
+          "start_line": 403,
+          "start_column": 1,
+          "text": "   - hgraph has a second, separate setting alongside it: how much context the\n     report of an escaped failure carries \u2014 how far upstream of the failing\n     node to walk, and whether to include the input values found there. That\n     is the content of a node error and belongs in Node."
+        },
+        {
+          "start_line": 412,
+          "start_column": 1,
+          "text": "2. **Pausing a cycle, for mesh.** hgraph's mesh pauses the cycle while a\n   dependency is resolved. Either pausing becomes an optional engine facility"
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/conformance.md",
+      "source_sha256": "4d92752caaf8599c200e3f194a2a2290c7a6b2594eccedae732f1d737336fbe2",
+      "excerpts": [
+        {
+          "start_line": 3,
+          "start_column": 1,
+          "text": "Status: proposed methodology; the bounded [dynamic cases](https://github.com/hhenson/hgraph_spec_audit/blob/main/runtime/validation.md) have\nrecorded Python/C++ runs. Other cases retain their stated evidence limits."
+        },
+        {
+          "start_line": 127,
+          "start_column": 1,
+          "text": "Core integration then needs public C++/Python coverage and the full acceptance\ngates."
+        }
+      ]
+    }
+  ]
+}
