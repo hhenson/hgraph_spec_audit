@@ -58,7 +58,7 @@ not restore right's old cached time. In `*_latest_invalid`, the parent stays
 valid and retains t2 through the idle t3. These are observable rules; caching
 is how an implementation may maintain them.
 
-The earlier [reasoning corrections](https://github.com/hhenson/hgraph_spec/blob/main/runtime/validation/fixed/reasoning_corrections.json) remain as
+The earlier [reasoning corrections](reasoning_corrections.json) remain as
 history; user rulings take precedence. Missing Python observations after the
 exception remain missing, even where C++ matches the chosen contract.
 

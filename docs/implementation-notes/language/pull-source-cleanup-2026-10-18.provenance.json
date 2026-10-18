@@ -1,0 +1,132 @@
+{
+  "relocated_on": "2026-10-18",
+  "source_repository": "https://github.com/hhenson/hgraph_spec",
+  "source_revision": "0f3bc6e56cb5f7bebe4ca7d3629aea547a89ecab",
+  "note_path": "docs/implementation-notes/language/pull-source-cleanup-2026-10-18.md",
+  "sources": [
+    {
+      "source_path": "language/docs/design/decisions/0015-pull-sources.md",
+      "source_sha256": "23e7c8593866ea7588d09649e83245598384397e4c92132e8a79dc6c6cc95192",
+      "excerpts": [
+        {
+          "start_line": 10,
+          "start_column": 1,
+          "text": "to publish one value, and `scheduler` binds hgraph's `NodeScheduler`: a\nper-node state slot of tagged pending events that checkpoints capture and\nrestore."
+        },
+        {
+          "start_line": 27,
+          "start_column": 1,
+          "text": "`alarm` is an injectable that maps to `SingleShotScheduler`. It offers"
+        },
+        {
+          "start_line": 57,
+          "start_column": 1,
+          "text": "| Node state | none | pending events (tagged inside hgraph; tags are not exposed, ADR 0010) |"
+        },
+        {
+          "start_line": 103,
+          "start_column": 1,
+          "text": "  bare `return` finishes the source. `for` is not admitted (see the open\n  questions): its iteration owns the body, so a suspension inside it could\n  not resume."
+        },
+        {
+          "start_line": 107,
+          "start_column": 1,
+          "text": "  statement. It cannot sit inside a value (an `if` used as an expression,\n  a lambda), where a backend has no resume point to jump to."
+        },
+        {
+          "start_line": 128,
+          "start_column": 1,
+          "text": "  recorded. After a restore the body restarts from its first statement,\n  which is what hgraph's generator does."
+        },
+        {
+          "start_line": 159,
+          "start_column": 1,
+          "text": "Audit evidence: [negative durations](https://github.com/hhenson/hgraph_spec_audit/blob/9967125fe6fad385e2d120e40049348402e0c686/runtime/validation/generator_negative/README.md)\nand [target ordering](https://github.com/hhenson/hgraph_spec_audit/blob/9967125fe6fad385e2d120e40049348402e0c686/runtime/validation/generator_ordering/README.md).\n"
+        },
+        {
+          "start_line": 176,
+          "start_column": 1,
+          "text": "A generator needs no runtime node kind. The compiler lowers the body to a\nstate machine: a resume position and the hoisted locals in node-local\nstorage, one parked value, and the stateless scheduler for the wake-up. A\ngenerator is therefore sugar over decision 1, and the only runtime change\nboth decisions need is exposing `SingleShotScheduler` to HGL.\n\n"
+        },
+        {
+          "start_line": 213,
+          "start_column": 1,
+          "text": "## Possible realization\n\nAn implementation could represent a generator by its resume position, live\nlocals and a pending publication. At a future yield it saves that state and\nschedules resumption; at a due yield it publishes and continues in source\norder. It must preserve skipped past absolute times, negative-duration and\nduplicate-time errors, loops, conditionals and termination. Native coroutines and explicit state machines\nare possible realizations, not language requirements.\n\n"
+        },
+        {
+          "start_line": 224,
+          "start_column": 1,
+          "text": "- Whether a generator may carry a `stop` block. hgraph's `@generator.stop`\n  exists; the block would run at teardown with the `const` parameters only.\n- Whether an absolute `yield` time in the past should be a diagnostic\n  rather than skipped. hgraph skips silently; this record follows it.\n- `for` inside a generator, which hgraph's replay generators use over a\n  constant collection. It needs the loop index hoisted beside the locals\n  and an index-based loop in each backend; until then the checker rejects\n  it and points to `while`."
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/decisions/0010-lifecycle-capabilities.md",
+      "source_sha256": "69d3a8cb3710910c39c1ff89db32abc187edd0b3df0b42916babd8640e8ffefc",
+      "excerpts": [
+        {
+          "start_line": 7,
+          "start_column": 1,
+          "text": "The language agreed the injectable names `clock` and `scheduler` with no\nsurface behind them, and the migration catalogue holds thirty-six core\noperators under blocker B2 (lifecycle and activation). Three things were\nmissing, and they are what the native stream nodes actually use:\n\n- an evaluation clock (`EvaluationClockView`: evaluation time, wall-clock\n  time, next cycle);\n- the node scheduler (`NodeScheduler`: schedule after a delay or at a time,\n  on the engine or the wall clock; query the next alarm; know whether the\n  current evaluation is the alarm firing); and\n- input activity: a node that has seen enough ticks stops listening to an\n  input (`make_passive`) and may listen again later (`make_active`)."
+        },
+        {
+          "start_line": 53,
+          "start_column": 1,
+          "text": "   `next_scheduled_time(scheduler)` returns `datetime`. Wall-clock alarms\n   follow hgraph's rule: only a real-time executor accepts them, and a due\n   alarm fires on the next evaluatable cycle. Tags are not exposed."
+        },
+        {
+          "start_line": 59,
+          "start_column": 1,
+          "text": "   and is true when the current evaluation is the node's alarm firing\n   (`is_scheduled_now`). A source on the stateless `alarm` of"
+        },
+        {
+          "start_line": 76,
+          "start_column": 1,
+          "text": "   for evaluation in the starting cycle, which is how a static node's\n   `schedule_on_start` is spelled. Its default all-input validity requirement"
+        },
+        {
+          "start_line": 85,
+          "start_column": 1,
+          "text": "   evaluation-only: `start` and `stop` have no temporal input access. They\n   lower to the input view's `make_passive()` / `make_active()`. A passive\n   input still holds its value and validity; it just no longer activates the\n   node. The node's static activation policy is unchanged; activity is a\n   per-evaluation effect, exactly as in a hand-written node."
+        },
+        {
+          "start_line": 93,
+          "start_column": 1,
+          "text": "- `freeze`, `take` and `until_true` become authorable as parallel identities.\n  `schedule` remains blocked: its native counter is non-recordable `State<Int>`,\n  while HGL `state` is checkpointed. The cache declarations in ADR 0008 and\n  positive-delay validation in `start` are still required.\n  Likewise, `throttle`, `batch`, `gate`, `lag` and `window` still\n  need the buffered-delta and queue state contracts (MIG-005) and remain B2."
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/decisions/0011-cache-declarations.md",
+      "source_sha256": "47724945be064c78e7c14448f0dc3acce5b05a06118ad5d3852ff6a92e97ab72",
+      "excerpts": [
+        {
+          "start_line": 30,
+          "start_column": 1,
+          "text": "`SingleShotScheduler` is best effort. Its schedules are neither stored nor\nrecovered; its normal `start` behaviour is unchanged."
+        },
+        {
+          "start_line": 39,
+          "start_column": 1,
+          "text": "The native time-series-delay overloads also retain their progress. A fresh\n`start` input still resets their emission budget and re-bases the grid. Scalar configuration participates in\ncheckpoint compatibility, so changing a delay or budget requires a new run."
+        },
+        {
+          "start_line": 43,
+          "start_column": 1,
+          "text": "Generated HGL scheduler sources receive an explicit checkpoint contract only\nwhen their runtime state consists of endpoints and pending alarms. Sources\nwith caches, clock injection, or logger injection remain refused. This does\nnot implement general native-resource recovery. Wall-clock recovery remains\noutside the simulation-only component contract; `SingleShotScheduler` retains\nits best-effort exception."
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/language-model.md",
+      "source_sha256": "633ba59228247465667aff63083e8770f46ab143d20475890ee48335602bf01b",
+      "excerpts": [
+        {
+          "start_line": 719,
+          "start_column": 1,
+          "text": "body to inspect or incrementally update its output. Other injectables, such as\n`logger`, `clock`, `scheduler` and `alarm`, map to their hgraph selector\ncontracts (`LoggerView`, `EvaluationClockView`, `NodeScheduler`,\n`SingleShotScheduler`; ADR 0010 fixes the clock property and scheduler function\nsurfaces, [ADR 0015](decisions/0015-pull-sources.md) the alarm's)."
+        }
+      ]
+    }
+  ]
+}

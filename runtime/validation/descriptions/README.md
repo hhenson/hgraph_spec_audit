@@ -32,7 +32,7 @@ and outputs, live dictionary members and removed members.
 - Python's owned TSB `all_valid` accessor raises `AttributeError`; C++ matches
   the expected false value. These missing reads are retained explicitly.
 - Both engines detach the removed input's root. The initial expectation that
-  retention implied peering was wrong. [Corrections](https://github.com/hhenson/hgraph_spec/blob/main/runtime/validation/descriptions/corrections.json) separate
+  retention implied peering was wrong. [Corrections](corrections.json) separate
   detached binding from retained data; Python also confirms child detachment.
 
 [assessment.json](assessment.json) contains every difference. [rulings.json](https://github.com/hhenson/hgraph_spec/blob/main/runtime/validation/descriptions/rulings.json)

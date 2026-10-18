@@ -1,0 +1,396 @@
+{
+  "relocated_on": "2026-10-18",
+  "source_repository": "https://github.com/hhenson/hgraph_spec",
+  "source_revision": "4f0facee5aaa9e26abfcecefe3f877110211ddad",
+  "note_path": "docs/implementation-notes/source-contract-cleanup-2026-10-18.md",
+  "sources": [
+    {
+      "source_path": "language/docs/user-guide/types-and-expressions.md",
+      "source_sha256": "380e433dad2593e97f76ada3f7e490a46b0e3be532de093afd35dbf5ac39e1c3",
+      "excerpts": [
+        {
+          "start_line": 194,
+          "start_column": 1,
+          "text": "This is Python-style call spelling, not a blanket agreement on Python's\nformatting, encoding arguments, implicit conversions, or custom `__str__`\nmethods. The enum member-name rule is unchanged. Existing reference opacity and\n`signal` payload restrictions also remain: conversion is not an escape from\nthem. See the [HGL/C++ mappings](https://github.com/hhenson/hgraph/blob/main/language/docs/developer-guide/enum-cpp-mappings.md#conversion-in-nodes-and-graphs)."
+        },
+        {
+          "start_line": 1389,
+          "start_column": 1,
+          "text": "error behavior independently of C++ debug or release settings."
+        },
+        {
+          "start_line": 202,
+          "start_column": 1,
+          "text": "The temporal scalars are hgraph's RFC 0002 core types."
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/user-guide/functions.md",
+      "source_sha256": "f51b2eeddab3f0ddc57a8cc97c390ff8eba5bc818b359d6fdc54c1c63dea19dc",
+      "excerpts": [
+        {
+          "start_line": 80,
+          "start_column": 1,
+          "text": "includes an HGL caller and expected C++ lowering."
+        },
+        {
+          "start_line": 838,
+          "start_column": 1,
+          "text": "agreed design; compiler implementation remains separate work. See"
+        },
+        {
+          "start_line": 940,
+          "start_column": 1,
+          "text": "finite-schedule progress must survive recovery; current native parity alone\ndoes not establish that guarantee."
+        },
+        {
+          "start_line": 1163,
+          "start_column": 1,
+          "text": "responsibility of C++ extensions."
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/user-guide/README.md",
+      "source_sha256": "c410c90c10859ded150ae85adcf06b32d4e5559358e6fd162d5a90d22032f6f8",
+      "excerpts": [
+        {
+          "start_line": 118,
+          "start_column": 1,
+          "text": "adaptors remain C++ extension responsibilities."
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/developer-guide/syntax-and-semantics.md",
+      "source_sha256": "7eaa4b2792339e329610cf79a6b2e0032681e6fa34f976830fac841d6f707642",
+      "excerpts": [
+        {
+          "start_line": 664,
+          "start_column": 1,
+          "text": "`zoned_time` is not part of RFC 0002. It is the language's one hgraph-side\naddition to the temporal types: a core scalar (`CivilTime` plus `ZoneId`,\nregistered name `zoned_time`) with the resolution operations listed below, a\nJSON form of the time followed by the bracketed zone, and a Python wrapper.\nIt is tracked with the other hgraph-side requirements in the roadmap until an\nRFC promotes it."
+        },
+        {
+          "start_line": 746,
+          "start_column": 1,
+          "text": "  a value silently read as UTC, and Python's naive-means-UTC convention never"
+        },
+        {
+          "start_line": 838,
+          "start_column": 104,
+          "text": "as Python `date` arithmetic and hgraph's operators do: "
+        },
+        {
+          "start_line": 1557,
+          "start_column": 1,
+          "text": "This agreement covers the one-value Python-style spelling, not Python's\nadditional `str` forms or an unrestricted guarantee of Python formatting."
+        },
+        {
+          "start_line": 1562,
+          "start_column": 1,
+          "text": "operation. No compiler or runtime implementation is changed by this record."
+        },
+        {
+          "start_line": 1898,
+          "start_column": 1,
+          "text": "The compiler may consume these calls while deriving node input policies, so\nthey need not remain as runtime calls in generated C++. `valid(value)` tests"
+        },
+        {
+          "start_line": 1473,
+          "start_column": 1,
+          "text": "lower to native C++ control flow; temporal graph dispatch uses native `switch_`\nwith the same capture, result-schema, REF adaptation, and continuation analysis"
+        },
+        {
+          "start_line": 876,
+          "start_column": 1,
+          "text": "other call, not syntax. The zone operations are hgraph's:"
+        },
+        {
+          "start_line": 879,
+          "start_column": 1,
+          "text": "(hgraph's `resolve_civil`, with the same policy enumerations), and, as a\nroadmap ask, `resolve(date, zoned_time, ambiguous:, nonexistent:)`,"
+        },
+        {
+          "start_line": 868,
+          "start_column": 1,
+          "text": "runtime raises through hgraph's checked temporal arithmetic; the language's\nruntime scalar error behaviour is an open question shared with the numeric"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/type-extensions.md",
+      "source_sha256": "90dc79830452b9aee36b6172012b65b06df9292c15114708c8fabd95b0d2bf36",
+      "excerpts": [
+        {
+          "start_line": 19,
+          "start_column": 1,
+          "text": "uses the agreed Python-style `str(value)` spelling."
+        },
+        {
+          "start_line": 65,
+          "start_column": 1,
+          "text": "The assigned numbers are `-1`, `0`, and `1`. The\n[range and overflow examples](https://github.com/hhenson/hgraph/blob/main/language/docs/developer-guide/enum-cpp-mappings.md#signed-range-and-overflow)\nalso cover both endpoints, a reset after the maximum, and rejected values."
+        },
+        {
+          "start_line": 70,
+          "start_column": 1,
+          "text": "resolved signed number and each required automatic increment before native\nemission; do not inherit C++ literal or overflow behavior accidentally."
+        },
+        {
+          "start_line": 80,
+          "start_column": 1,
+          "text": "that name unambiguous within an enum. The source call uses Python-style\n`str(value)`:"
+        },
+        {
+          "start_line": 87,
+          "start_column": 1,
+          "text": "This produces the constant string `\"first\"`. The spelling follows Python;\nit does not change the agreed enum representation to Python's qualified enum\ndisplay or require Python execution. `str` remains the string type name in\ntype positions and is the conversion operation in this expression position."
+        },
+        {
+          "start_line": 94,
+          "start_column": 1,
+          "text": "[Numbered source examples and C++ mappings](https://github.com/hhenson/hgraph/blob/main/language/docs/developer-guide/enum-cpp-mappings.md)\nshow explicit values, automatic values starting at zero, stringification,\nand duplicate-number errors. The positive and intentionally invalid HGL\ndeclarations are also in the [standard-library design corpus](https://github.com/hhenson/hgraph/blob/main/language/stdlib/README.md#enum-values)."
+        },
+        {
+          "start_line": 153,
+          "start_column": 1,
+          "text": "already-typed native enum value arriving through an import boundary. The\n[paired HGL/C++ conversion examples](https://github.com/hhenson/hgraph/blob/main/language/docs/developer-guide/enum-cpp-mappings.md#checked-conversion-into-an-enum)\ninclude successful lookups and rejected constants. Compiler support remains\nseparate work."
+        },
+        {
+          "start_line": 210,
+          "start_column": 1,
+          "text": "[switch coverage](switch.md#duplicate-cases-and-enum-coverage) and the\n[paired HGL/C++ examples](https://github.com/hhenson/hgraph/blob/main/language/docs/developer-guide/enum-switch-cpp-mappings.md)."
+        },
+        {
+          "start_line": 189,
+          "start_column": 1,
+          "text": "declared member. The [out-of-order numbering example](https://github.com/hhenson/hgraph/blob/main/language/docs/developer-guide/enum-cpp-mappings.md#declaration-order-enumeration)\nmakes this distinction explicit."
+        },
+        {
+          "start_line": 198,
+          "start_column": 1,
+          "text": "Compiler support for enum enumeration remains separate work.\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/operators.md",
+      "source_sha256": "eafc0290e69ec9d96b0faf804e429b69c814afd4832b614ffeccaf080b2f257b",
+      "excerpts": [
+        {
+          "start_line": 33,
+          "start_column": 22,
+          "text": "Floor-based modulo, not C++ truncating remainder."
+        },
+        {
+          "start_line": 190,
+          "start_column": 1,
+          "text": "scalar operation. See the [paired HGL/C++ examples](https://github.com/hhenson/hgraph/blob/main/language/docs/developer-guide/operator-cpp-mappings.md)."
+        },
+        {
+          "start_line": 192,
+          "start_column": 1,
+          "text": "The executable [operator module](https://github.com/hhenson/hgraph_std/blob/main/hgl/hgraph/operators.hgl) declares\nthe 16 arithmetic/comparison/Boolean hooks (including floor division),\ndelegates implementations to production native candidates, and materializes\nthe supported primitive combinations. The native-call requirements therefore\nbelong to those delegating `impl fn` candidates, not the public contracts. Its\n`hgraph.operators.*` identities are parallel migration contracts, not\nreplacements for the native system identities."
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/iteration.md",
+      "source_sha256": "1883e78a22cf72c58e1a3f0c25cfe67f03fbf7dda7a1af78a55f95524ae2c565",
+      "excerpts": [
+        {
+          "start_line": 20,
+          "start_column": 133,
+          "text": "Describes one child graph per key or index through native mapping."
+        },
+        {
+          "start_line": 40,
+          "start_column": 1,
+          "text": "descriptor. Runtime-node traversal uses the same source model over hgraph's\nexisting `Args<>`/TSL and `Kwargs<>`/TSB input views. Positional `items` converts\nthe private one-based field numbering to a zero-based HGL `i64` index."
+        },
+        {
+          "start_line": 49,
+          "start_column": 1,
+          "text": "agreed source behavior awaiting enum/compiler support, not an expansion of\ndynamic graph-loop lowering."
+        },
+        {
+          "start_line": 88,
+          "start_column": 1,
+          "text": "An illustrative native realization is recorded in the audit:\n\n[Native example 1](https://github.com/hhenson/hgraph_spec_audit/blob/main/examples/documentation/language/docs/design/iteration.md#example-1)\n\n"
+        },
+        {
+          "start_line": 126,
+          "start_column": 1,
+          "text": "An illustrative C++ mapping uses the existing public added-member range:\n\n[Native example 2](https://github.com/hhenson/hgraph_spec_audit/blob/main/examples/documentation/language/docs/design/iteration.md#example-2)\n\n"
+        },
+        {
+          "start_line": 131,
+          "start_column": 1,
+          "text": "tick produces no output tick. The loop counts scalar members in the native\ndelta range, without imposing set order or wiring a child graph per member.\nThe count is evaluation-local, not persistent state or a graph reduction.\nThese C++ illustrations can be syntax-checked independently of HGL support;\nthey are not new native graph execution tests."
+        },
+        {
+          "start_line": 141,
+          "start_column": 1,
+          "text": "initial design lowers the loop through the native map machinery: one child\ngraph per map key or dynamic-list index, with membership controlling child"
+        },
+        {
+          "start_line": 156,
+          "start_column": 1,
+          "text": "Here the body is outputless, so the lowering uses a sink map. The runnable"
+        },
+        {
+          "start_line": 168,
+          "start_column": 1,
+          "text": "the native lifetime protocol. Surviving children retain their own node state."
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/control-flow.md",
+      "source_sha256": "b326db056c639724bd5d0117cb616f9fe6ce4fcb2b998f42b8ac54e9bde33af0",
+      "excerpts": [
+        {
+          "start_line": 407,
+          "start_column": 1,
+          "text": "The runnable [conditional-sinks.hgl](../../examples/conditional-sinks.hgl)\nexample exercises this wiring model in both compiler backends."
+        },
+        {
+          "start_line": 487,
+          "start_column": 1,
+          "text": "agreement does not require new source-level closure syntax. The initial\nimplementation gives both generated branches one consistent explicit temporal\nsignature formed from the stable first-use union. Unused branch parameters are\nmarked in generated C++, and hgraph's switch boundary binds the same slots to\nboth branches. Scalar specialization and the more selective native\ncapture-boundary form remain later work."
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/switch.md",
+      "source_sha256": "94203c64f0ff42246813c12072ed594fea1e5ba982415a46e6a9204a4ae9bae6",
+      "excerpts": [
+        {
+          "start_line": 8,
+          "start_column": 1,
+          "text": "Compiler implementation remains separate work.\n"
+        },
+        {
+          "start_line": 10,
+          "start_column": 1,
+          "text": "[Paired HGL and C++ examples](https://github.com/hhenson/hgraph/blob/main/language/docs/developer-guide/control-flow-cpp-mappings.md)\ndescribe node and graph scenarios, captures and results, defaults and failures,\nsinks, early returns, and state lifetime. The source examples also live in the\n[standard-library design corpus](../../stdlib/examples/switch-scenarios.hgl)."
+        },
+        {
+          "start_line": 112,
+          "start_column": 1,
+          "text": "[Paired enum-switch HGL/C++ examples](https://github.com/hhenson/hgraph/blob/main/language/docs/developer-guide/enum-switch-cpp-mappings.md)\ncover exhaustive and partial dispatch, a supplied default, and intentional\nduplicate/type errors. No new source syntax or compiler implementation is\nintroduced by these checks.\n\n"
+        },
+        {
+          "start_line": 127,
+          "start_column": 42,
+          "text": "Wire native `switch_` with generated branch callables and boundary signatures."
+        },
+        {
+          "start_line": 142,
+          "start_column": 1,
+          "text": "For a temporal graph switch, the selector must bind to the native `switch_`\nscalar-key input, and the case values must be compatible with the selected key\ncontract. The native input is `TS<ScalarVar<K>>`; source compatibility and any\nREF binding adaptation must use the existing type and wiring rules."
+        },
+        {
+          "start_line": 154,
+          "start_column": 1,
+          "text": "is not fixed here. A backend's ability to emit a particular C++ statement is\nnot by itself evidence that every source type has a valid switch-key contract."
+        },
+        {
+          "start_line": 157,
+          "start_column": 1,
+          "text": "## Node-style lowering to C++\n\nA node-style switch must lower to native C++ dispatch within the generated\nnode's evaluation code. It must not require Python execution or create a\ngraph-level `switch_` merely to implement local control flow.\n\nThe generated C++ may use a C++ `switch` where the admitted selector and case\ntypes permit that statement. For other admitted types, equivalent native C++\ncomparison-based dispatch may be needed. This is a code-generation distinction,\nnot an agreement to admit additional selector types or new source syntax."
+        },
+        {
+          "start_line": 187,
+          "start_column": 1,
+          "text": "   escaping assignments. Zero results use the native outputless switch path;"
+        },
+        {
+          "start_line": 196,
+          "start_column": 1,
+          "text": "also apply. Underlying type compatibility must not hide mismatched native\nbundle fields. If the public native API cannot express a required adaptation,\nthe compiler must reject that lowering until the support exists."
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/decisions/0006-multi-file-module-parts.md",
+      "source_sha256": "1e427c3f73cf37dcad3bdd5398ae7c35745324a0d0edb4035e900d748fcc47af",
+      "excerpts": [
+        {
+          "start_line": 42,
+          "start_column": 1,
+          "text": "The command line names additional files explicitly with repeatable `--part`\noptions. `hgl_add_module()` exposes the same contract with one anchor in `HGL`\nand the remaining files in `PARTS`. The anchor filename determines generated\nartifact names; it does not receive special source visibility or affect the\nmodule identity."
+        },
+        {
+          "start_line": 53,
+          "start_column": 1,
+          "text": "- A large library can have one module descriptor, generated C++ namespace,"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/decisions/0007-parameter-packs.md",
+      "source_sha256": "a7b34b9e2cb4fdfd7a39f7ad792ad1b71bf6490de884078a9f108687eab1ce7e",
+      "excerpts": [
+        {
+          "start_line": 45,
+          "start_column": 1,
+          "text": "specificity is fixed arity before a homogeneous pack before a heterogeneous\npositional pack. HGL emits `In`/`VarIn`/`VarKwIn` selectors and does not\nreimplement native overload ranking."
+        },
+        {
+          "start_line": 51,
+          "start_column": 1,
+          "text": "The positional heterogeneous view behaves as `tuple<...>` even if generated\nC++ uses a private bundle representation:"
+        },
+        {
+          "start_line": 74,
+          "start_column": 1,
+          "text": "Runtime packs use hgraph's existing structural node inputs; HGL does not define\na second aggregate ABI:\n\n| HGL parameter | Generated C++ node input | HGL source view |\n| --- | --- | --- |\n| `values: ...T` | `In<\"values\", Args<S>>` where `S` is the temporal schema for `T` | fixed homogeneous list |\n| `values: ...Ts` | `In<\"values\", Kwargs<...>>` with private `_1`, `_2`, ... fields | heterogeneous tuple |\n| `values: ...{Fields}` | `In<\"values\", Kwargs<...>>` with the supplied field names | heterogeneous bundle |\n\n`Args` is resolved by hgraph as a fixed `TSL` and `Kwargs` as an unnamed TSB.\nThe existing `TSLInputView` and `TSBInputView` own runtime traversal, child\nvalidity and modification metadata, and evaluation-local borrowing. The HGL\ncompiler is responsible only for lowering to those selectors and preserving the\nsource abstraction. In particular, positional `items(values)` returns a\nzero-based `i64` index even though its private C++ field is numbered from `_1`."
+        },
+        {
+          "start_line": 92,
+          "start_column": 1,
+          "text": "runtime function is diagnosed before C++ emission until the native static-node\nABI can bind two independent aggregate inputs."
+        },
+        {
+          "start_line": 97,
+          "start_column": 1,
+          "text": "This requires the core runtime to represent a fixed-empty `TSL` separately from\nan unbounded `TSL`: the unbounded extent uses hgraph's original `-1` sentinel,\nleaving zero as an ordinary fixed extent. Runtime-node pack lowering is\navailable because the core contract preserves this distinction."
+        },
+        {
+          "start_line": 158,
+          "start_column": 1,
+          "text": "immutable borrowed handle which lowers directly to each existing C++ child\nendpoint's `TSValueTypeMetaData`. The view preserves the pack's tuple or bundle"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/decisions/0008-temporal-contracts-and-target-mappings.md",
+      "source_sha256": "df47d7bc738c3eaa9f1890f890abacdd10585f04daa23868d8a3ad12689f3d64",
+      "excerpts": [
+        {
+          "start_line": 68,
+          "start_column": 1,
+          "text": "### HGL example and C++ expectation"
+        },
+        {
+          "start_line": 83,
+          "start_column": 1,
+          "text": "The expected C++ shape is a plain value helper called by the containing node's\nevaluation hook, not another node. Illustrative lowering, not current emitter\noutput:\n\n[Native example 1](https://github.com/hhenson/hgraph_spec_audit/blob/main/examples/documentation/language/docs/design/decisions/0008-temporal-contracts-and-target-mappings.md#example-1)\n\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/decisions/0012-recursive-struct-fields.md",
+      "source_sha256": "4a3fe7685cb047693ff92f5ec11c29c097ee665abbcb27c6530021e8ed3ff122",
+      "excerpts": [
+        {
+          "start_line": 136,
+          "start_column": 1,
+          "text": "  the graph in the parity corpus, observed through scalar `eval` results,\n  with identical ticks from direct wiring and generated C++;"
+        }
+      ]
+    }
+  ]
+}
