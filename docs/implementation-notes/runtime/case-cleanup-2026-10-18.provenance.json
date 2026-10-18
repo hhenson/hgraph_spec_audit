@@ -1,0 +1,87 @@
+{
+  "relocated_on": "2026-10-18",
+  "source_repository": "https://github.com/hhenson/hgraph_spec",
+  "source_revision": "61eb6b8be0a9b989f00b9bace8b12ac74d403506",
+  "note_path": "docs/implementation-notes/runtime/case-cleanup-2026-10-18.md",
+  "sources": [
+    {
+      "source_path": "runtime/cases_nested.md",
+      "source_sha256": "f7d13ed1ea24de342134af92c9bdc1674d3becd78ffcd157a471722559ad8a72",
+      "excerpts": [
+        {
+          "start_line": 3,
+          "start_column": 1,
+          "text": "Status: validated on Python and C++ hgraph; see [results](https://github.com/hhenson/hgraph_spec_audit/blob/main/runtime/validation.md)."
+        },
+        {
+          "start_line": 41,
+          "start_column": 1,
+          "text": "The fixture uses native/Python `STATE` to observe instance lifetime. This does\nnot validate recording, recovery or HGL's state/cache lowering."
+        },
+        {
+          "start_line": 61,
+          "start_column": 1,
+          "text": "exclusive run end. These cases validate deadline propagation and cancellation;\nthey do not establish memory bounds or absence of physical allocations."
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/cases_references.md",
+      "source_sha256": "47df8dce757fd76bd8e55bd7901a3449b0703827ce72bf1b9000a26eed7d029b",
+      "excerpts": [
+        {
+          "start_line": 3,
+          "start_column": 1,
+          "text": "Status: validated expectations with recorded variations; see [results](https://github.com/hhenson/hgraph_spec_audit/blob/main/runtime/validation.md)."
+        },
+        {
+          "start_line": 53,
+          "start_column": 1,
+          "text": "These expectations are accepted observation by observation: Python supports\nthe complete removal delta; C++ supports invalidity on withdrawal. Neither\nimplementation's complete withdrawal row currently conforms.\n\n"
+        },
+        {
+          "start_line": 67,
+          "start_column": 1,
+          "text": "The expiry rule was confirmed by the user on 2026-09-21. Python raises when\nthe expired reference is used; C++ retains 7 at 3 and expires it at 4.\nBoth are variations, not alternative permitted results."
+        },
+        {
+          "start_line": 71,
+          "start_column": 1,
+          "text": "The saved-reference case does not prove allocator slot reuse or generation\nwrap handling. Those need storage tests when the Rust realization exists."
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/cases_fixed.md",
+      "source_sha256": "39acc8a8f2fd23ea032118e6766d3b2bcc477d80cbe6c9e71a38b4a43e4802b5",
+      "excerpts": [
+        {
+          "start_line": 1,
+          "start_column": 1,
+          "text": "Fixed collections: validation cases\n==================================\n\nStatus: 44 cases compared with Python and C++; user rulings recorded.\nSee the [comparison report](https://github.com/hhenson/hgraph_spec_audit/blob/main/runtime/validation/fixed/README.md).\nThe prototype slice covers fixed-size TSL and TSB. Growing TSL is separate."
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/cases_collections.md",
+      "source_sha256": "6411c90691d8dab1248e9b4041b27d1edfe2f89793fe6a931de91c7228851cd0",
+      "excerpts": [
+        {
+          "start_line": 3,
+          "start_column": 1,
+          "text": "Status: mixed. QUOTE-HISTORY, MEMBERSHIP-INDEPENDENT and same-cycle restoration\nhave [executed evidence and variations](https://github.com/hhenson/hgraph_spec_audit/blob/main/runtime/validation.md). Other cases remain\nproposed unless separately identified."
+        },
+        {
+          "start_line": 68,
+          "start_column": 1,
+          "text": "[Evidence](https://github.com/hhenson/hgraph_spec_audit/blob/main/runtime/evidence.md) names the C++ surfaces. This case extends beyond\nQUOTE-HISTORY."
+        },
+        {
+          "start_line": 77,
+          "start_column": 1,
+          "text": "this is a new child. See the `restore` input and observations in the evidence."
+        }
+      ]
+    }
+  ]
+}
