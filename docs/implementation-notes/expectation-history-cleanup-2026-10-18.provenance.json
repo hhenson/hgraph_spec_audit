@@ -719,6 +719,27 @@
           "text": "A declared optional parameter may be absent from a candidate. The C++ declaration cleanup and the registration check follow (WV-6)."
         }
       ]
+    },
+    {
+      "source_path": "PROVENANCE.json",
+      "source_sha256": "05ed28d80f8d6760995090cd9a3ea51a74fe982ecae25395acee3df47b4455d7",
+      "excerpts": [
+        {
+          "start_line": 153,
+          "start_column": 1,
+          "text": "    {\n      \"path\": \"runtime/validation/fixed/reasoning_corrections.json\",\n      \"source_project\": \"hgraph\",\n      \"source_path\": \"docs/source/runtime_spec/validation/fixed/reasoning_corrections.json\",\n      \"source_revision\": \"2738ca7688ec13602a97dd33489f3842ab757618\"\n    },\n"
+        },
+        {
+          "start_line": 573,
+          "start_column": 1,
+          "text": "    {\n      \"path\": \"runtime/validation/descriptions/corrections.json\",\n      \"source_project\": \"hgl\",\n      \"source_path\": \"docs/runtime_spec/validation/descriptions/corrections.json\",\n      \"source_revision\": \"6718df0b9f01a36cd7c7c47aa878cc780016b6f8\"\n    },\n"
+        },
+        {
+          "start_line": 1257,
+          "start_column": 1,
+          "text": "    {\n      \"path\": \"runtime/validation/fixed/reasoning_corrections.json\",\n      \"source_project\": \"hgl\",\n      \"source_path\": \"docs/runtime_spec/validation/fixed/reasoning_corrections.json\",\n      \"source_revision\": \"6718df0b9f01a36cd7c7c47aa878cc780016b6f8\"\n    },\n"
+        }
+      ]
     }
   ]
 }
