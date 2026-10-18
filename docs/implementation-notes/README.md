@@ -66,3 +66,5 @@ portable examples remain owned by the specification and standard library.
   ([provenance](library/operator-contracts-cleanup-2026-10-17.provenance.json)).
 - [18 October 2026: runtime case execution and fixture notes](runtime/case-cleanup-2026-10-18.md)
   ([provenance](runtime/case-cleanup-2026-10-18.provenance.json)).
+- [18 October 2026: state/cache storage and lowering notes](language/state-cache-cleanup-2026-10-18.md)
+  ([provenance](language/state-cache-cleanup-2026-10-18.provenance.json)).
