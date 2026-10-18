@@ -76,3 +76,5 @@ portable examples remain owned by the specification and standard library.
   ([provenance](source-contract-cleanup-2026-10-18.provenance.json)).
 - [18 October 2026: native-binding contracts and implementation evidence](native-binding-cleanup-2026-10-18.md)
   ([provenance](native-binding-cleanup-2026-10-18.provenance.json)).
+- [18 October 2026: expected observations and historical corrections](expectation-history-cleanup-2026-10-18.md)
+  ([provenance](expectation-history-cleanup-2026-10-18.provenance.json)).
