@@ -1,0 +1,73 @@
+{
+  "relocated_on": "2026-10-18",
+  "source_repository": "https://github.com/hhenson/hgraph_spec",
+  "source_revision": "61eb6b8be0a9b989f00b9bace8b12ac74d403506",
+  "note_path": "docs/implementation-notes/language/state-cache-cleanup-2026-10-18.md",
+  "sources": [
+    {
+      "source_path": "language/docs/developer-guide/syntax-and-semantics.md",
+      "source_sha256": "6937b82b7cb1ec9209b8b3ebb8ee99de7e498dff5f2f9619e057875b9074ced9",
+      "excerpts": [
+        {
+          "start_line": 1278,
+          "start_column": 1,
+          "text": "and one `stop` block. A `cache` is node-local data outside record/replay,\nre-initialized on every start; multiple scalar cache fields share a generated struct in one native\n`State<>` slot. A function may declare both: the two storages are planned\nindependently, as native static nodes admit one `State<>` and one\n`RecordableState<>`, and `start` seeds a state field only when it is not\nalready valid while assigning every cache field unconditionally -- so a\nrestored state survives and its cache is rebuilt from it\n([ADR 0011](../design/decisions/0011-cache-declarations.md)). It permits multiple function-level `when` blocks and preserves their\nsource order; a `when` nested in another block is rejected because it cannot"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/language-model.md",
+      "source_sha256": "1838113b07ccfb3ecf1c5ce473f4674fc5b191c968f6d98e7ea28cc17d970aa3",
+      "excerpts": [
+        {
+          "start_line": 702,
+          "start_column": 1,
+          "text": "All state variables aggregate into one typed state value. State initializers\nlower to replay-aware startup initialization and do not overwrite restored\nstate. `state` is by definition a time series and is always recordable: the\nlanguage sets as its default the practice hgraph's own library applies only to\nloopback state. Reconstructible node-local data has the separate agreed\n`cache<T>` concept, mapped to native `State<T>` rather than\n`RecordableState<TSchema>`. It need not be global or module-owned. Cache does\nnot require recordability, but rebuilding it must preserve observable\ncomputation; arbitrary resources still need a native ownership/lifecycle\ncontract. `cache name[: T] = init` is the declaration\n([ADR 0011](decisions/0011-cache-declarations.md)): scalar cache fields share one generated native struct, re-initialized on\nevery start, and may be declared beside `state`.\nBoth cache and state storage/objects must be constructed before `start`,\nseparately from logical initialization or restore. See\n[ADR 0008](decisions/0008-temporal-contracts-and-target-mappings.md#cache-versus-recordable-state)\nfor the reconstruction contract. Native nodes support both state selectors, and\na function declaring `state` and `cache` lowers to both: a restored state field\nwins over its initializer, a cache field is rebuilt by every start."
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/decisions/0008-temporal-contracts-and-target-mappings.md",
+      "source_sha256": "f0f5ae7edfb87da1a7f2b887a5d46d20df1ad8325bdad20f8eacba473f3fc7fc",
+      "excerpts": [
+        {
+          "start_line": 166,
+          "start_column": 1,
+          "text": "| HGL concept | Meaning | Current native counterpart | Record/replay |\n| --- | --- | --- | --- |\n| `state` | Persistent data needed to determine subsequent computation | `RecordableState<TSchema>` | Recorded and restored |\n| `cache<T>` | Node-local data reconstructible independently of missing history | `State<T>` | Excluded; rebuilt after restart |\n\n`cache<T>` names the agreed concept. The scalar declaration and initializer grammar is settled in\n[ADR 0011](0011-cache-declarations.md). It does not rename C++ `State` or introduce\na native `Cache` selector."
+        },
+        {
+          "start_line": 215,
+          "start_column": 1,
+          "text": "Native static nodes destroy constructed slots after a failed `start`, without\ncalling that node's `stop`; partial resource acquisition must use RAII or a\nrollback guard. Generic HGL native construction hooks remain future work."
+        },
+        {
+          "start_line": 226,
+          "start_column": 1,
+          "text": "A node may declare both recordable history and a derived cache. Restoration\nprecedes `start`; cache rebuilding uses the restored state. Their storage may\nbe planned independently, but that choice must not change initialization order\nor observable recovery behavior."
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/decisions/0011-cache-declarations.md",
+      "source_sha256": "e8645aa3665e0a4248f66759f1770cf4b37aca6cef7df4b33cbd6885a9ad3364",
+      "excerpts": [
+        {
+          "start_line": 17,
+          "start_column": 1,
+          "text": "across state and cache, so each can read earlier declarations. An implementation\ncould group cache fields in one storage object, provided that these rules hold."
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/native-interface.md",
+      "source_sha256": "1b3924d54f55b8dc0b99ed558da0dd70fbd2af6e1bebcb1ba80957c1aeeb306a",
+      "excerpts": [
+        {
+          "start_line": 175,
+          "start_column": 1,
+          "text": "Reconstructible non-recordable data belongs in HGL cache (native `State<T>`);\nsemantic history belongs in HGL `state` (native `RecordableState<TSchema>`) and\nrequires recordable types. Native nodes support both selectors with independent\nstorage and restore recordable state before `start` rebuilds the cache. Mixed\nHGL lowering and the opaque-type lifecycle bridge remain implementation work."
+        }
+      ]
+    }
+  ]
+}
