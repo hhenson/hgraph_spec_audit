@@ -72,3 +72,5 @@ portable examples remain owned by the specification and standard library.
   ([provenance](language/pull-source-cleanup-2026-10-18.provenance.json)).
 - [18 October 2026: runtime and wiring implementation evidence](runtime-evidence-cleanup-2026-10-18.md)
   ([provenance](runtime-evidence-cleanup-2026-10-18.provenance.json)).
+- [18 October 2026: source-language contracts and target mappings](source-contract-cleanup-2026-10-18.md)
+  ([provenance](source-contract-cleanup-2026-10-18.provenance.json)).
