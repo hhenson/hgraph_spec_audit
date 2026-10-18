@@ -19947,3 +19947,38 @@ excerpts resolve to that specification revision.
 [Source, line 106](https://github.com/hhenson/hgraph_spec/blob/b295f39c94403dc4093a1d8c009cdcc6f2549a24/runtime/validation/wiring/decisions.json#L106).
 
 > A declared optional parameter may be absent from a candidate. The C++ declaration cleanup and the registration check follow (WV-6).
+
+## PROVENANCE.json
+
+### Excerpt 1
+
+[Source, line 153](https://github.com/hhenson/hgraph_spec/blob/b295f39c94403dc4093a1d8c009cdcc6f2549a24/PROVENANCE.json#L153).
+
+>     {
+>       "path": "runtime/validation/fixed/reasoning_corrections.json",
+>       "source_project": "hgraph",
+>       "source_path": "docs/source/runtime_spec/validation/fixed/reasoning_corrections.json",
+>       "source_revision": "2738ca7688ec13602a97dd33489f3842ab757618"
+>     },
+
+### Excerpt 2
+
+[Source, line 573](https://github.com/hhenson/hgraph_spec/blob/b295f39c94403dc4093a1d8c009cdcc6f2549a24/PROVENANCE.json#L573).
+
+>     {
+>       "path": "runtime/validation/descriptions/corrections.json",
+>       "source_project": "hgl",
+>       "source_path": "docs/runtime_spec/validation/descriptions/corrections.json",
+>       "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+>     },
+
+### Excerpt 3
+
+[Source, line 1257](https://github.com/hhenson/hgraph_spec/blob/b295f39c94403dc4093a1d8c009cdcc6f2549a24/PROVENANCE.json#L1257).
+
+>     {
+>       "path": "runtime/validation/fixed/reasoning_corrections.json",
+>       "source_project": "hgl",
+>       "source_path": "docs/runtime_spec/validation/fixed/reasoning_corrections.json",
+>       "source_revision": "6718df0b9f01a36cd7c7c47aa878cc780016b6f8"
+>     },
