@@ -64,3 +64,5 @@ portable examples remain owned by the specification and standard library.
   [`95292403cd80`](https://github.com/hhenson/hgraph_spec/tree/95292403cd8066a375b6747609f868402616f123).
 - [17 October 2026: library operator contract comparisons](library/operator-contracts-cleanup-2026-10-17.md)
   ([provenance](library/operator-contracts-cleanup-2026-10-17.provenance.json)).
+- [18 October 2026: runtime case execution and fixture notes](runtime/case-cleanup-2026-10-18.md)
+  ([provenance](runtime/case-cleanup-2026-10-18.provenance.json)).
