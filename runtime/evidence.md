@@ -5,8 +5,9 @@ This source audit read code and tests; it did not run runtime suites.
 The later [dynamic-case validation](validation.md) records executed Python/C++
 traces, native endpoint checks, accepted variations and their exact scope.
 
-Current C++ rulings and accepted records take precedence over older prose.
-These are implementation findings at the pinned revision.
+At extraction, current C++ rulings and accepted records took precedence over
+older prose. These are implementation findings at the pinned revision; the
+[specification](https://github.com/hhenson/hgraph_spec) defines the contract.
 
 | Subject | Source | Finding |
 |---|---|---|

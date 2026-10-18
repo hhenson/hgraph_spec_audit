@@ -1,0 +1,77 @@
+{
+  "relocated_on": "2026-10-18",
+  "source_repository": "https://github.com/hhenson/hgraph_spec",
+  "source_revision": "cde1c4ea9316cf52a7ac58d4cbb7a28bb81048bd",
+  "note_path": "docs/implementation-notes/specification-authority-2026-10-18.md",
+  "sources": [
+    {
+      "source_path": "README.md",
+      "source_sha256": "9a52a04e50c04f5ce9ddb57ad78145a1bb5e9616bc5ca6298330beae821ebcb3",
+      "excerpts": [
+        {
+          "start_line": 4,
+          "start_column": 1,
+          "text": "reasoned traces and accepted decisions. No Python, C++ or Rust code lives here."
+        },
+        {
+          "start_line": 26,
+          "start_column": 1,
+          "text": "Python/C++ probes, experiments and measured results. Accepted expected traces\nstay here; observations never silently replace them."
+        },
+        {
+          "start_line": 36,
+          "start_column": 1,
+          "text": "and test locations belong in"
+        },
+        {
+          "start_line": 39,
+          "start_column": 1,
+          "text": "[PROVENANCE.json](PROVENANCE.json). This repository is a source/data package;\nit has no importable Python package or native implementation."
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/overview.md",
+      "source_sha256": "09c3f6eecee12550495f804e0c2c2955b12b4cd1e0d66c3ff8a5b0b38ba86652",
+      "excerpts": [
+        {
+          "start_line": 424,
+          "start_column": 1,
+          "text": "These are intended rules. Proposals and implementation gaps are marked in\n[Evidence](https://github.com/hhenson/hgraph_spec_audit/blob/main/runtime/evidence.md); the written cases do not certify a runtime."
+        },
+        {
+          "start_line": 465,
+          "start_column": 1,
+          "text": "**Which hgraph.** The C++ runtime's design rulings win. The Python\nimplementation holds the original design intent and is used to disambiguate\nwhere the C++ documents are silent or unclear. hgraph's older specification\nchapters describe the Python-era runtime and are used for framing only. The\nknown disagreements are listed in\n[evidence and compatibility record](https://github.com/hhenson/hgraph_spec_audit/blob/main/runtime/evidence.md)."
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/conformance.md",
+      "source_sha256": "b7422dfa79b6182ecc2fbbbbe05a6d0bbfce4732db2ac2d0397ba42ce4cfbd1f",
+      "excerpts": [
+        {
+          "start_line": 37,
+          "start_column": 1,
+          "text": "**optional** behaviour (owner, 2026-09-30):"
+        },
+        {
+          "start_line": 100,
+          "start_column": 1,
+          "text": "State the expected observations and their rule derivation before execution.\nCompare each observation with isolated Python and C++ runs:\n\n- Reasoning matches both: accept.\n- Reasoning matches either: accept; retain the other result as a variation.\n- Python and C++ agree against reasoning: recheck the derivation and adapter.\n  Record why an expectation changed; never regenerate it from actual output.\n- No pair agrees: ask the user and preserve all three results. A user ruling\n  accepts the contract, not a claim that either implementation conforms.\n- An explicit user ruling supersedes an earlier acceptance. Retain the old\n  expectation, the ruling and both measured results; do not rewrite history.\n\nPython has the stronger testing history and is the preferred guide where\nreasoning leaves an interpretation open. Compare fields separately: one\nmatching field does not validate the whole trace. An unavailable observation,\ncrash or harness failure is not a matching value. Record the failed phase.\n\nA variation names the case, rules, exact input and observation point, expected\nand actual results, implementation identities, repeats and any remaining\nuncertainty about the adapter or native core. Keep it until reviewed.\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/decisions/0014-native-implementation-interfaces.md",
+      "source_sha256": "1420a7571a5f62ecc9749116d0f550a03eae3453018f312adf7b574c653c354b",
+      "excerpts": [
+        {
+          "start_line": 177,
+          "start_column": 1,
+          "text": "[conformance acceptance policy]"
+        }
+      ]
+    }
+  ]
+}

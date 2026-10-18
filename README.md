@@ -7,6 +7,12 @@ probes, harnesses and measured results live here. HGL inputs come from the
 pinned specification and standard library; this repository owns no HGL files. Native implementations of
 the standard library remain with their runtime.
 
+The specification states the contract. This audit records where rules came
+from and how implementations agree or conform. Existing-code extraction
+follows the agreed [acceptance method](docs/spec-extraction.md);
+additional rules come from the project owner. The kernel and tests of
+specified behavior belong in the specification repository.
+
 ## Reproduce recorded evidence
 
 ```sh
