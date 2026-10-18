@@ -56,3 +56,11 @@ portable examples remain owned by the specification and standard library.
 - [runtime/representations.md](runtime/representations.md)
 - [runtime/scalar_types.md](runtime/scalar_types.md)
 - [wiring/wiring.md](wiring/wiring.md)
+
+## Later relocations
+
+- [17 October 2026: examples index, injectables and node state](2026-10-17-cleanup.md)
+  ([provenance](2026-10-17-cleanup.provenance.json)), from specification revision
+  [`95292403cd80`](https://github.com/hhenson/hgraph_spec/tree/95292403cd8066a375b6747609f868402616f123).
+- [17 October 2026: library operator contract comparisons](library/operator-contracts-cleanup-2026-10-17.md)
+  ([provenance](library/operator-contracts-cleanup-2026-10-17.provenance.json)).

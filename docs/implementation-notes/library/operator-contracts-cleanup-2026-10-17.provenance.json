@@ -1,0 +1,85 @@
+{
+  "relocated_on": "2026-10-17",
+  "source_repository": "https://github.com/hhenson/hgraph_spec",
+  "source_revision": "990261ff840014f7eb1ef221a6f8d843152908da",
+  "source_path": "library/operator_contracts.md",
+  "source_sha256": "d0d3d140459ee07ef58cf62ca5fb78b97bf3a647bbc61113ed394846f38af7fd",
+  "note_path": "docs/implementation-notes/library/operator-contracts-cleanup-2026-10-17.md",
+  "excerpts": [
+    {
+      "start_line": 6,
+      "start_column": 40,
+      "text": "Derived while triaging the open\nparity issues; covers the operator families those issues exercised. The\nrest of the library remains open"
+    },
+    {
+      "start_line": 10,
+      "start_column": 1,
+      "text": "[Parity validation](https://github.com/hhenson/hgraph_spec_audit/blob/main/runtime/validation/parity/README.md) records each derivation\nagainst the Python 0.5.41 and C++ observations.\n"
+    },
+    {
+      "start_line": 37,
+      "start_column": 1,
+      "text": "names its arguments. `mean` over a dictionary names its whole input: Python\n0.5.41 defines it as `default(div_(sum_, len_), NaN)`, so a dictionary that\nhas never ticked has a NaN mean. Its `sum_`, `min_` and `max_` name nothing\nand publish nothing."
+    },
+    {
+      "start_line": 44,
+      "start_column": 1,
+      "text": "the valid elements only (the accepted valid-subset reduce, issue #95)."
+    },
+    {
+      "start_line": 53,
+      "start_column": 1,
+      "text": "(ruling 2026-07-17, enforced 2026-09-15; `roadmap.rst`)."
+    },
+    {
+      "start_line": 72,
+      "start_column": 1,
+      "text": "tick. Both runtimes already do this for sets. Python 0.5.41 does it for\n`difference` and `intersection` of dictionaries, but not for their `^` and\n`|`, which it builds on `map_`."
+    },
+    {
+      "start_line": 82,
+      "start_column": 1,
+      "text": "number of operands; `difference` takes exactly two. Python 0.5.41 cannot\nfold intersection or symmetric difference: it has no zero for the fold. It\nrejects three TSS operands at wiring, and three TSD operands to symmetric\ndifference never publish. The fold is an accepted superset\n(`parity_matrix.rst`). Over dictionaries a fold whose intermediate result is\nempty also depends on point to settle 1."
+    },
+    {
+      "start_line": 140,
+      "start_column": 1,
+      "text": "`str_` gives Python's `str` of the value. A string at the top level is its\nown text. Inside a container a string is written as Python's `repr` writes\nit: quoted as Python chooses, with the backslash, quote and every character\nthat Python's `str.isprintable` rejects escaped. `\\t`, `\\n` and `\\r` are\nnamed; other characters below U+0100 are `\\xNN`; others below U+10000 are\n`\\uNNNN`, and the rest `\\UNNNNNNNN`. A map or a set is unordered, so its\ntext lists its members in no specified order: Python writes insertion order,\nthe C++ runtime storage order (ruling 2026-09-24). Printability follows the Unicode version\nthe implementation records; a character whose category differs\nbetween Unicode versions may render differently under another Python."
+    },
+    {
+      "start_line": 156,
+      "start_column": 1,
+      "text": "results. Python 0.5.41 raises `ValueError` from `math.log`. Accepted\ndeviation (`parity_matrix.rst`)."
+    },
+    {
+      "start_line": 175,
+      "start_column": 1,
+      "text": "- Removing a partition costs the keys that partition owns, never the size of\n  the output (guardrail iv, `CLAUDE.md`)."
+    },
+    {
+      "start_line": 178,
+      "start_column": 1,
+      "text": "Python 0.5.41 keeps a removed partition's keys. Each holds a reference that\ndesignates nothing from the next engine cycle (TS-23), so a consumer bound\nthrough it unbinds without a tick (TS-15) while the key stays in the\ndictionary; a nested dictionary child reports its elements removed instead of\nits key. Accepted deviation (`parity_matrix.rst`).\n\n\n"
+    },
+    {
+      "start_line": 239,
+      "start_column": 1,
+      "text": "- **OP-9** `str_` of a container renders each string as Python's `repr`,\n  escaping every character `str.isprintable` rejects. The members of a map or\n  a set appear in no specified order."
+    },
+    {
+      "start_line": 275,
+      "start_column": 1,
+      "text": "   although its value is well defined (#978). Both runtimes already\n   publish the empty first result for sets."
+    },
+    {
+      "start_line": 279,
+      "start_column": 1,
+      "text": "   text is unspecified (Scalar types, Text; OP-9). Python writes insertion\n   order and the C++ runtime storage order; both conform. A set has no order\n   either (VAL-8) and is treated the same way."
+    },
+    {
+      "start_line": 282,
+      "start_column": 1,
+      "text": "3. **The emptiness of an invalid set.** `is_empty` of a never-ticked set is\n   `True` in both runtimes. OP-1 would publish nothing. Both runtimes agree,\n   no parity issue depends on it, and nothing here changes it."
+    }
+  ]
+}
