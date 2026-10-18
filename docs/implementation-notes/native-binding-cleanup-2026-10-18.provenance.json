@@ -1,0 +1,185 @@
+{
+  "relocated_on": "2026-10-18",
+  "source_repository": "https://github.com/hhenson/hgraph_spec",
+  "source_revision": "54e252dfb4d0bfe740349fcca2f8b24753beb01f",
+  "note_path": "docs/implementation-notes/native-binding-cleanup-2026-10-18.md",
+  "sources": [
+    {
+      "source_path": "language/docs/design/decisions/0014-native-implementation-interfaces.md",
+      "source_sha256": "d1e6b5ba1de724103dbe7bd60092c198b537ef3821a9bb7d8dcc34edea8ad480",
+      "excerpts": [
+        {
+          "start_line": 8,
+          "start_column": 1,
+          "text": "body, header, crate path or symbol map. C++ and Rust implement the same contract\nin ordinary source files. Native-library builds own their dependencies."
+        },
+        {
+          "start_line": 41,
+          "start_column": 1,
+          "text": "The compiler generates the implementation interface. A C++ library supplies a\nclass with static members and binds it through the generated `bind<T>()`:\n\n[Native example 1](https://github.com/hhenson/hgraph_spec_audit/blob/main/examples/documentation/language/docs/design/decisions/0014-native-implementation-interfaces.md#example-1)\n\nThe corresponding Rust library implements the generated trait:\n\nRust implements the corresponding contract through its native binding interface.\n\nBoth may delegate to existing native functions. Generated checks include the\nresolved parameter/result types, temporal role and declared failure contract. C++\nimplicit conversions cannot satisfy a mismatched signature."
+        },
+        {
+          "start_line": 87,
+          "start_column": 1,
+          "text": "The compiler checks these contracts; temporal execution still needs its provider\nABI. Value helpers support logger/clock in C++ and logger in Rust traits."
+        },
+        {
+          "start_line": 99,
+          "start_column": 1,
+          "text": "implementation part owns injectable requests and lifecycle hooks. C++ may\nrequest `out, logger` while Rust requests only `out`; each generated interface\nuses its selected requirements."
+        },
+        {
+          "start_line": 133,
+          "start_column": 1,
+          "text": "Illustrative target signatures for the declarations above (not existing APIs):\n\n[Native example 3](https://github.com/hhenson/hgraph_spec_audit/blob/main/examples/documentation/language/docs/design/decisions/0014-native-implementation-interfaces.md#example-3)\n\nRust implements the corresponding contract through its native binding interface.\n\nC++ `bind<Implementation>()` and the Rust trait check their target's generated\nsignatures. The examples show implementations requesting both capabilities;\nneither requires all targets to use that same parameter list. The selected\nimplementation part supplies the target requirements.\nThe first implementation publishes through `out`; its native `void`/unit result\ndoes not remove the HGL temporal result. The second returns a scalar string.\nThe adapter for temporal implementations returning a complete value, and the\nfull lifecycle ABI, remain separate implementation work."
+        },
+        {
+          "start_line": 171,
+          "start_column": 1,
+          "text": "Acceptance expectations. Value-helper inference, imports, logger forwarding,\nclock reads and ordinary/native call checks have executable coverage. Temporal\nprovider output and borrowed-output cases remain pending. Target-specific\nrequests, graph/node shape and lifecycle metadata have compiler coverage."
+        },
+        {
+          "start_line": 185,
+          "start_column": 1,
+          "text": "| C++ uses `out, logger`; Rust uses only `out` |"
+        },
+        {
+          "start_line": 195,
+          "start_column": 1,
+          "text": "Language diagnostics have no Python/C++ runtime oracle. For runtime cases,\nrecord values, ticks, effects and owner identity against reasoned, Python and\nC++ results before implementing bindings. Accept two-way agreement with a\nvariation report; if Python and C++ agree against reasoning, revisit reasoning.\nEscalate three-way disagreement. The [helper reference traces](https://github.com/hhenson/hgl/blob/codex/native-interface-bindings/docs/compiler/capabilities/README.md)\nagree across reasoning, Python and C++ for duplicate/idle ticks, helper call\ncounts and evaluation-clock reads. Compiler diagnostics are validated separately."
+        },
+        {
+          "start_line": 206,
+          "start_column": 1,
+          "text": "once. Native imports stay in C++/Rust source; dependencies stay in that library's\nordinary CMake/Cargo build."
+        },
+        {
+          "start_line": 218,
+          "start_column": 1,
+          "text": "| Value `bit_and(6, 3)` | `2` in C++ and Rust |"
+        },
+        {
+          "start_line": 234,
+          "start_column": 1,
+          "text": "Record reasoned results before execution. Preserve existing scalar operator\ntraces against Python and C++; this migration must not change their ticks."
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/node-authoring.md",
+      "source_sha256": "997be1ea3e7ed2c48507183cf3ba1f582e818567c3799215acf362c1b0895aaa",
+      "excerpts": [
+        {
+          "start_line": 25,
+          "start_column": 1,
+          "text": "- **NAT-2:** Generate the implementation interface from the HGL contract. C++\n  uses a checked `bind<T>()` adapter; Rust implements a generated trait. Keep\n  implementations in native source and dependencies in its normal library build."
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/native-interfaces.md",
+      "source_sha256": "da525ce4db2f50d20f123284a448b054c8429b87067c255dad8b14e633956c1a",
+      "excerpts": [
+        {
+          "start_line": 38,
+          "start_column": 1,
+          "text": "Acceptance: preserve the reasoned/Python/C++/Rust bitwise traces in"
+        },
+        {
+          "start_line": 74,
+          "start_column": 1,
+          "text": "C++ and Rust parts may request different services."
+        },
+        {
+          "start_line": 82,
+          "start_column": 1,
+          "text": "Native constructors/destructors and Rust `Drop` do not replace start/stop."
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/native-implementation-parts.md",
+      "source_sha256": "a207d556a18793374c8b58ef0a05ba8d03e04602bad92c6111f967d8ea7ff4c2",
+      "excerpts": [
+        {
+          "start_line": 50,
+          "start_column": 1,
+          "text": "  scopes. Hooks are not C++ constructors/destructors or Rust `Drop`."
+        },
+        {
+          "start_line": 56,
+          "start_column": 1,
+          "text": "These are compiler contracts, not new tick semantics. The existing matching\nreasoned/Python/C++ helper and clock traces remain the runtime oracle."
+        },
+        {
+          "start_line": 66,
+          "start_column": 1,
+          "text": "| Select C++ logger part or Rust empty part |"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/native-interface.md",
+      "source_sha256": "6fe1423c0cea1840e2f8fea7bb57c73e696a7bb6dc700f3407764b0de7ee9f9e",
+      "excerpts": [
+        {
+          "start_line": 142,
+          "start_column": 1,
+          "text": "candidate before HGraph IR lowering."
+        },
+        {
+          "start_line": 146,
+          "start_column": 1,
+          "text": "The generated C++ calls the declared symbol, its package-provided wrapper, or a\nsource-native generated function directly. It never subclasses an operator to\nrepresent an exact helper. The direct-wiring backend does not emulate native\nC++: a runtime-bearing program follows the existing generated, compiled, and\nloaded image path."
+        },
+        {
+          "start_line": 231,
+          "start_column": 1,
+          "text": "A small helper owned by an HGL module can be implemented directly. The HGL\nsignature remains the public contract and the C++ projection states the exact\nnative ABI used by the generated call:\n\n[Native example 3](https://github.com/hhenson/hgraph_spec_audit/blob/main/examples/documentation/language/docs/design/native-interface.md#example-3)\n\nFor a separately built native package, an imported descriptor supplies the\nsame call-site contract."
+        },
+        {
+          "start_line": 269,
+          "start_column": 1,
+          "text": "value: the selected C++ overload reads `value.size()` from the live input view."
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/native-surface-proposal.md",
+      "source_sha256": "ea85aa2943b46a0306b9e1fed12c4e8e979a9d7a27de795f15bab999cbd00b59",
+      "excerpts": [
+        {
+          "start_line": 137,
+          "start_column": 1,
+          "text": "  predicates; preserve existing C++ semantics and flag genuinely undecided\n  names or policies separately."
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/const-debug-bootstrap.md",
+      "source_sha256": "896b1448803c4391021eaaa12cf558d8b66e5355d1b7812b8af8caa3a675cb57",
+      "excerpts": [
+        {
+          "start_line": 6,
+          "start_column": 1,
+          "text": "The graph connects `const_(42)` to `debug_print`. `const` is a reserved word, so\nthe authored source uses `const_`."
+        },
+        {
+          "start_line": 12,
+          "start_column": 1,
+          "text": "`hgraph` supplies the C++ part and provider; `hgl` supplies its own Rust pair.\nOnly the shared HGL source is mirrored between them.\n"
+        },
+        {
+          "start_line": 26,
+          "start_column": 1,
+          "text": "| Source with bare `when` | No modified inputs, so no publication even if scheduled |"
+        },
+        {
+          "start_line": 30,
+          "start_column": 1,
+          "text": "Validate the source and generated C++ on hgraph first. Then compile the same\nHGL with the Rust compiler and run emitted nodes and graph construction on the\nRust engine. Compare ticks and effects, not generated names or output handles.\nPython and C++ operator comparisons cover the source and sink behaviour;\nreference debug-print prefixes are excluded from the integer-payload comparison.\nThe bootstrap itself prints only the integer and a newline."
+        }
+      ]
+    }
+  ]
+}
