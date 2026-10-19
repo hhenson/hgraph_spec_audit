@@ -1,6 +1,7 @@
 import importlib.util
 import json
 from pathlib import Path
+import subprocess
 import tempfile
 import unittest
 
@@ -69,3 +70,15 @@ class MaterializationTests(unittest.TestCase):
         (self.root / 'docs/a').write_text('first')
         shared.materialize(self.root)
         self.assertFalse((self.root / 'docs/a').exists())
+
+    def test_retire_preserves_file_transferred_to_repository(self):
+        shared.materialize(self.root)
+        subprocess.run(['git', 'init', '--quiet', str(self.root)], check=True)
+        subprocess.run(['git', 'add', 'docs/a'], cwd=self.root, check=True)
+        (self.root / 'docs/a').write_text('audit-owned adapter')
+        self.manifest['files'] = {}
+        self.save()
+        shared.materialize(self.root)
+        self.assertEqual((self.root / 'docs/a').read_text(), 'audit-owned adapter')
+        self.assertEqual(json.loads((self.root / '.shared-artifacts-state.json').read_text()), {})
+        shared.materialize(self.root, True)

@@ -1,0 +1,88 @@
+{
+  "recorded_on": "2026-10-19",
+  "source_repository": "https://github.com/hhenson/hgraph_spec",
+  "source_revision": "8d36eb4ae8d6e53620fe6fbbd9ede31fb4162b9a",
+  "reason": "Owner combines core declarations and implementations in core; std can extend core operators.",
+  "sources": [
+    {
+      "source_path": "language/docs/design/operators.md",
+      "source_sha256": "c7f9426b79022a8bb7add5ae00164aa603d2d16293af029fa1fa2e01097248cc"
+    },
+    {
+      "source_path": "language/docs/design/modules.md",
+      "source_sha256": "db66978750b81e96e37d5fb78341609f8855edc356d4691008d279c2c2cad797"
+    },
+    {
+      "source_path": "library/README.md",
+      "source_sha256": "ec81f23cdd11a46546b4a10f56668147285dc703eea004192a4223aaca392400"
+    },
+    {
+      "source_path": "README.md",
+      "source_sha256": "358962bc2de8703db36d5edb440ed30912c98a40062a8b3ba84cc2678a788e85"
+    },
+    {
+      "source_path": "language/docs/user-guide/testing-and-running.md",
+      "source_sha256": "54bb9a7dde680c33b49feb46594c747acb73f6d8c47ecb708e42e7c158b9c0e6"
+    },
+    {
+      "source_path": "compiler/stdlib_graph/README.md",
+      "source_sha256": "7d78393b60b61092868d1e9d034ecfff81756c9ab8d88d0c12da8b20bbab5470"
+    },
+    {
+      "source_path": "language/docs/design/decisions/0006-multi-file-module-parts.md",
+      "source_sha256": "1d2677f6293780da89e214397e427aac5c2ea277f1eddd0a647df28fec9ff950"
+    },
+    {
+      "source_path": "language/docs/developer-guide/syntax-and-semantics.md",
+      "source_sha256": "53ea25753f23b74357f6d7bd83d2ad1218d306d0d79a64384ac875c311daf024"
+    },
+    {
+      "source_path": "language/docs/user-guide/functions.md",
+      "source_sha256": "d0ad6c347c81b8f0abcd6a63160f0fa5293d475166e4728e9f989a94b7dc836a"
+    },
+    {
+      "source_path": "language/docs/user-guide/language-tour.md",
+      "source_sha256": "ef18914846e8d8113c9f412b7961b5e83d3efa825ae34b028d064d312d9c6681"
+    },
+    {
+      "source_path": "language/docs/user-guide/modules-and-tools.md",
+      "source_sha256": "cd1513aa8de4cd2dc989771a7830881cb1fe64933870b01bcaf3ffb87ac4d264"
+    },
+    {
+      "source_path": "language/examples/conditional-early-return.hgl",
+      "source_sha256": "0ec6d3cb2de1579c93b2e40381e038529df334a980b00ee42ce9da22f7104a2c"
+    },
+    {
+      "source_path": "language/examples/conditional-sinks.hgl",
+      "source_sha256": "23770b7122a678cff311583f4522e426a6588bdc86df294eac634c4c580817f6"
+    },
+    {
+      "source_path": "language/examples/dynamic-collection-iteration.hgl",
+      "source_sha256": "8edbb85c027073c5f2051378c6cf8f9967ce0d3384cf940e5c68cddbbfe8f7d5"
+    },
+    {
+      "source_path": "language/examples/fixed-list-iteration.hgl",
+      "source_sha256": "f207083f566ce160308cbaa3f16213d3e54acecf2b5282a79cd1a234989e0719"
+    },
+    {
+      "source_path": "language/examples/operators-and-generics.hgl",
+      "source_sha256": "6c4fc8ae299803c025c5f0afbffd49b119224cbdf12db9ee70d1817207b76d3d"
+    },
+    {
+      "source_path": "language/examples/runtime-choice.hgl",
+      "source_sha256": "1794255ee9abbfbc4ee2cb0ad00a95b0a8dc047f03c8f9cfdae6d1bbe507a010"
+    },
+    {
+      "source_path": "language/examples/stdlib-const-debug.hgl",
+      "source_sha256": "e00f1d78dde784ffbe564406c7364edbf1e869b698e713a65b78157b03dad037"
+    },
+    {
+      "source_path": "language/examples/structural-types.hgl",
+      "source_sha256": "2c1a02ec6dc3a17e5c39da23828f9bb4b2bc8d136aaf2b719801117a1328e5de"
+    }
+  ],
+  "superseded_policy": {
+    "source_path": "language/docs/design/operators.md",
+    "text": "Core operator declarations belong directly in `hgraph`. This level is reserved\nfor core operators. Standard-library operators belong in `hgraph.std`.\n\nThe core includes every operator required by language syntax, such as `+`\nmapping to `hgraph.add_`. It also includes essential named operations, such as\n`abs`, that are broadly needed to write reasonably complex programs. Keep this\nset small: inclusion must justify requiring every engine to provide a baseline\nimplementation. Other operators belong in `hgraph.std`;\nusefulness alone does not make an operator core.\n\nEvery engine must provide a baseline implementation in `hgraph.kernel` for\nevery core operator, covering the execution roles and type domains required by\nthat operator's contract. `hgraph.kernel` contains their implementation\ncandidates, with no operator declarations of its own. A candidate implements\nthe operator declared in `hgraph`; it does not create another operator identity\nin the kernel. Additional candidates may extend supported domains or provide\noptimizations while preserving the applicable contract.\n"
+  }
+}

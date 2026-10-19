@@ -1,0 +1,250 @@
+{
+  "recorded_on": "2026-10-19",
+  "source_repository": "https://github.com/hhenson/hgraph_spec",
+  "source_revision": "244d76ce2d157fe4b5c5b169638afeaf19f4474b",
+  "reason": "Historical namespace edits and their corrections. The final owner decision combines declarations and baseline implementations in core; std may extend core operators.",
+  "sources": [
+    {
+      "source_path": "compiler/stdlib_graph/README.md",
+      "source_sha256": "7d78393b60b61092868d1e9d034ecfff81756c9ab8d88d0c12da8b20bbab5470",
+      "excerpts": [
+        {
+          "start_line": 4,
+          "start_column": 1,
+          "text": "`debug_print` from `hgraph.std`. It uses their HGL implementations, with only\n",
+          "replacement": "`debug_print` from `std`. It uses their HGL implementations, with only\n",
+          "corrected_replacement": "`debug_print` from `hgraph.std`. It uses their HGL implementations, with only\n",
+          "current_replacement": "`debug_print` from `std`. It uses their HGL implementations, with only\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/decisions/0006-multi-file-module-parts.md",
+      "source_sha256": "1d2677f6293780da89e214397e427aac5c2ea277f1eddd0a647df28fec9ff950",
+      "excerpts": [
+        {
+          "start_line": 19,
+          "start_column": 1,
+          "text": "module hgraph.std part arithmetic\n",
+          "replacement": "module std part arithmetic\n",
+          "corrected_replacement": "module hgraph.std part arithmetic\n",
+          "current_replacement": "module std part arithmetic\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/modules.md",
+      "source_sha256": "8131e34127e1afe528ff88e24b48fe56cec7598f7eb5ac03fe4182f6e0b9e3b0",
+      "excerpts": [
+        {
+          "start_line": 100,
+          "start_column": 1,
+          "text": "module hgraph.std part arithmetic\n",
+          "replacement": "module std part arithmetic\n",
+          "corrected_replacement": "module hgraph.std part arithmetic\n",
+          "current_replacement": "module std part arithmetic\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/developer-guide/syntax-and-semantics.md",
+      "source_sha256": "078ed3b93d6d14d1f0bb90452861ce03d2e59a1577dd0a375cd224b6d659350a",
+      "excerpts": [
+        {
+          "start_line": 1010,
+          "start_column": 1,
+          "text": "use hgraph.std::{add_}\n",
+          "replacement": "use hgraph::{add_}\n",
+          "corrected_replacement": "use hgraph::{add_}\n",
+          "current_replacement": "use core::{add_}\n"
+        },
+        {
+          "start_line": 2589,
+          "start_column": 1,
+          "text": "module: 'export impl fn add' is invalid; the implementation is public through hgraph.std::add\n",
+          "replacement": "module: 'export impl fn add_' is invalid; the implementation is public through hgraph::add_\n",
+          "corrected_replacement": "module: 'export impl fn add_' is invalid; the implementation is public through hgraph::add_\n",
+          "current_replacement": "module: 'export impl fn add_' is invalid; the implementation is public through core.add_\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/user-guide/functions.md",
+      "source_sha256": "aaa6834a5dad38cf603aee0ff0bb4f0e37e720d00f9958a45f37e354ee0d600a",
+      "excerpts": [
+        {
+          "start_line": 321,
+          "start_column": 1,
+          "text": "use hgraph.std::{add_}\n",
+          "replacement": "use hgraph::{add_}\n",
+          "corrected_replacement": "use hgraph::{add_}\n",
+          "current_replacement": "use core::{add_}\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/user-guide/language-tour.md",
+      "source_sha256": "91fe38343377f036768d055c93a4d5d0d7f69f478c4f0800add642b2b6352ec1",
+      "excerpts": [
+        {
+          "start_line": 129,
+          "start_column": 1,
+          "text": "use hgraph.std::{add_}\n",
+          "replacement": "use hgraph::{add_}\n",
+          "corrected_replacement": "use hgraph::{add_}\n",
+          "current_replacement": "use core::{add_}\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/user-guide/modules-and-tools.md",
+      "source_sha256": "cd1513aa8de4cd2dc989771a7830881cb1fe64933870b01bcaf3ffb87ac4d264",
+      "excerpts": [
+        {
+          "start_line": 56,
+          "start_column": 1,
+          "text": "use hgraph.std::{if_then_else}\n",
+          "replacement": "use std::{if_then_else}\n",
+          "corrected_replacement": "use hgraph.std::{if_then_else}\n",
+          "current_replacement": "use std::{if_then_else}\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/user-guide/testing-and-running.md",
+      "source_sha256": "54bb9a7dde680c33b49feb46594c747acb73f6d8c47ecb708e42e7c158b9c0e6",
+      "excerpts": [
+        {
+          "start_line": 273,
+          "start_column": 1,
+          "text": "use hgraph.std::{mean}\n",
+          "replacement": "use std::{mean}\n",
+          "corrected_replacement": "use hgraph.std::{mean}\n",
+          "current_replacement": "use std::{mean}\n"
+        },
+        {
+          "start_line": 296,
+          "start_column": 1,
+          "text": "use hgraph.std::{schedule}\n",
+          "replacement": "use std::{schedule}\n",
+          "corrected_replacement": "use hgraph.std::{schedule}\n",
+          "current_replacement": "use std::{schedule}\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/conditional-early-return.hgl",
+      "source_sha256": "0ec6d3cb2de1579c93b2e40381e038529df334a980b00ee42ce9da22f7104a2c",
+      "excerpts": [
+        {
+          "start_line": 6,
+          "start_column": 1,
+          "text": "use hgraph.std::{null_sink}\n",
+          "replacement": "use std::{null_sink}\n",
+          "corrected_replacement": "use hgraph.std::{null_sink}\n",
+          "current_replacement": "use std::{null_sink}\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/conditional-sinks.hgl",
+      "source_sha256": "23770b7122a678cff311583f4522e426a6588bdc86df294eac634c4c580817f6",
+      "excerpts": [
+        {
+          "start_line": 6,
+          "start_column": 1,
+          "text": "use hgraph.std::{debug_print}\n",
+          "replacement": "use std::{debug_print}\n",
+          "corrected_replacement": "use hgraph.std::{debug_print}\n",
+          "current_replacement": "use std::{debug_print}\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/dynamic-collection-iteration.hgl",
+      "source_sha256": "8edbb85c027073c5f2051378c6cf8f9967ce0d3384cf940e5c68cddbbfe8f7d5",
+      "excerpts": [
+        {
+          "start_line": 6,
+          "start_column": 1,
+          "text": "use hgraph.std::{null_sink}\n",
+          "replacement": "use std::{null_sink}\n",
+          "corrected_replacement": "use hgraph.std::{null_sink}\n",
+          "current_replacement": "use std::{null_sink}\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/fixed-list-iteration.hgl",
+      "source_sha256": "f207083f566ce160308cbaa3f16213d3e54acecf2b5282a79cd1a234989e0719",
+      "excerpts": [
+        {
+          "start_line": 6,
+          "start_column": 1,
+          "text": "use hgraph.std::{null_sink}\n",
+          "replacement": "use std::{null_sink}\n",
+          "corrected_replacement": "use hgraph.std::{null_sink}\n",
+          "current_replacement": "use std::{null_sink}\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/operators-and-generics.hgl",
+      "source_sha256": "6c4fc8ae299803c025c5f0afbffd49b119224cbdf12db9ee70d1817207b76d3d",
+      "excerpts": [
+        {
+          "start_line": 5,
+          "start_column": 1,
+          "text": "use hgraph.std::{mean}\n",
+          "replacement": "use std::{mean}\n",
+          "corrected_replacement": "use hgraph.std::{mean}\n",
+          "current_replacement": "use std::{mean}\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/runtime-choice.hgl",
+      "source_sha256": "1794255ee9abbfbc4ee2cb0ad00a95b0a8dc047f03c8f9cfdae6d1bbe507a010",
+      "excerpts": [
+        {
+          "start_line": 6,
+          "start_column": 1,
+          "text": "use hgraph.std::{if_then_else}\n",
+          "replacement": "use std::{if_then_else}\n",
+          "corrected_replacement": "use hgraph.std::{if_then_else}\n",
+          "current_replacement": "use std::{if_then_else}\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/stdlib-const-debug.hgl",
+      "source_sha256": "e00f1d78dde784ffbe564406c7364edbf1e869b698e713a65b78157b03dad037",
+      "excerpts": [
+        {
+          "start_line": 3,
+          "start_column": 1,
+          "text": "use hgraph.std::{const, debug_print}\n",
+          "replacement": "use std::{const, debug_print}\n",
+          "corrected_replacement": "use hgraph.std::{const, debug_print}\n",
+          "current_replacement": "use std::{const, debug_print}\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/structural-types.hgl",
+      "source_sha256": "2c1a02ec6dc3a17e5c39da23828f9bb4b2bc8d136aaf2b719801117a1328e5de",
+      "excerpts": [
+        {
+          "start_line": 5,
+          "start_column": 1,
+          "text": "use hgraph.std::{map}\n",
+          "replacement": "use std::{map}\n",
+          "corrected_replacement": "use hgraph.std::{map}\n",
+          "current_replacement": "use std::{map}\n"
+        }
+      ]
+    }
+  ],
+  "correction": "replacement and corrected_replacement preserve intermediate decisions. current_replacement follows the final core/std decision. The current_replacement_revision pins the source used to verify current_replacement; other archives retain their own earlier source revisions.",
+  "current_replacement_revision": "fb36dfe67ac39425120e2393435c44a8cfb05f8a"
+}

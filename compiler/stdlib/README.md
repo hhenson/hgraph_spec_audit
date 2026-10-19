@@ -1,8 +1,10 @@
 # Standard-library conformance
 
-The shared HGL wrappers import `bit_and`, `sample` and `dedup` from the actual
-standard library. No node body or native implementation is copied into this
-audit. Sources and independently reasoned expectations belong to
+The audit-owned [adapter](nodes.hgl) binds the shared cases to the pinned
+standard library. It preserves an implementation migration arrangement, not a
+specified public namespace; see the [migration history](../../docs/implementation-notes/operator-namespace-2026-10-19.md).
+No node body or native implementation is copied into this audit. Cases and
+independently reasoned expectations belong to
 [hgraph_spec](https://github.com/hhenson/hgraph_spec/tree/main/compiler/stdlib).
 
 Current results: four scenarios, 23 tick cells match reasoning on Python
