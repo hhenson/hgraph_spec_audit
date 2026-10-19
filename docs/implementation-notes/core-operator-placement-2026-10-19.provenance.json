@@ -64,7 +64,7 @@
           "text": "module: 'export impl fn add' is invalid; the implementation is public through hgraph.std::add\n",
           "replacement": "module: 'export impl fn add_' is invalid; the implementation is public through hgraph::add_\n",
           "corrected_replacement": "module: 'export impl fn add_' is invalid; the implementation is public through hgraph::add_\n",
-          "current_replacement": "module: 'export impl fn add_' is invalid; the implementation is public through core::add_\n"
+          "current_replacement": "module: 'export impl fn add_' is invalid; the implementation is public through core.add_\n"
         }
       ]
     },

@@ -1,0 +1,178 @@
+{
+  "recorded_on": "2026-10-19",
+  "source_repository": "https://github.com/hhenson/hgraph_spec",
+  "source_revision": "d1dadc731f4b2f6799f890ba4d3bb0e7aea3a814",
+  "sources": [
+    {
+      "source_path": "README.md",
+      "source_sha256": "40271da3d6bbcee3aa367f7d7084a6d8ea7bc88afcf23088b724e475562ad0dd",
+      "excerpts": [
+        {
+          "start_line": 23,
+          "start_column": 1,
+          "text": "- [Library contracts](library/README.md): what standard library operators publish\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/decisions/0008-temporal-contracts-and-target-mappings.md",
+      "source_sha256": "386e9ee694bba3540d970111d95b35a742c5f777a68181d019d5756b8bad7e29",
+      "excerpts": [
+        {
+          "start_line": 136,
+          "start_column": 1,
+          "text": "an overload on each tick. The existing hgraph resolver remains the owner of\ntemporal candidate matching/ranking. Extending the model to value candidates\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/modules.md",
+      "source_sha256": "d33446a72e329ce2e6377c659b906f425a8f1672e645d1e8ad13d84ced9aa433",
+      "excerpts": [
+        {
+          "start_line": 7,
+          "start_column": 1,
+          "text": "Hgraph and its native extensions provide the capabilities from which language\n"
+        },
+        {
+          "start_line": 25,
+          "start_column": 1,
+          "text": "- compatible hgraph SDK and descriptor-format versions;\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/native-interface.md",
+      "source_sha256": "0bc8dca6392e6b4a739b9fa1bd4389b5d852bf108ece1c0e3621ac7170b9b025",
+      "excerpts": [
+        {
+          "start_line": 247,
+          "start_column": 1,
+          "text": "its runtime implementation:\n"
+        },
+        {
+          "start_line": 250,
+          "start_column": 1,
+          "text": "use hgraph.native as native\n"
+        },
+        {
+          "start_line": 269,
+          "start_column": 1,
+          "text": "use hgraph.native as native\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/native-interfaces.md",
+      "source_sha256": "6445476a7cfa313ffea612eb58011f7bc8d983ba47a8d29ba83666637da68180",
+      "excerpts": [
+        {
+          "start_line": 30,
+          "start_column": 1,
+          "text": "module hgraph.native\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/native-surface-proposal.md",
+      "source_sha256": "3e434595479864bc197d350a87eee0234b3ce2bcee915e2c6491f79197ce415a",
+      "excerpts": [
+        {
+          "start_line": 108,
+          "start_column": 1,
+          "text": "use hgraph.native as native\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/node-authoring.md",
+      "source_sha256": "8d30c5ef46bfc3feb505fb4aabf1e6ecd05d2d08d3f5ca65cd87dc94d60d3629",
+      "excerpts": [
+        {
+          "start_line": 8,
+          "start_column": 1,
+          "text": "A temporal operator can call a scalar native helper:\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/developer-guide/syntax-and-semantics.md",
+      "source_sha256": "83fa789a8989cf74a8c056a2f970cc7619bc8d54a2e04ce3b05bf60d86382027",
+      "excerpts": [
+        {
+          "start_line": 2589,
+          "start_column": 1,
+          "text": "module: 'export impl fn add_' is invalid; the implementation is public through core::add_\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/user-guide/README.md",
+      "source_sha256": "fda25dee99f73d73377f4d8058df1494a8341e209e77696607ecca66fbc575b6",
+      "excerpts": [
+        {
+          "start_line": 6,
+          "start_column": 1,
+          "text": "how source calls reach hgraph.\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/user-guide/language-tour.md",
+      "source_sha256": "e0a2d1c150ada0677e185d7c7b96266f867aa6e7a70b6800c5ce0191232caa03",
+      "excerpts": [
+        {
+          "start_line": 35,
+          "start_column": 1,
+          "text": "`window` is marked `const`, so it is an ordinary `i64` available while hgraph\nconstructs the function. It cannot change from tick to tick.\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/user-guide/modules-and-tools.md",
+      "source_sha256": "8c177531007db40bd85268014579fe6a6a12221a43145ef1de15b1b107174b30",
+      "excerpts": [
+        {
+          "start_line": 3,
+          "start_column": 1,
+          "text": "Modules make hgraph and extension capabilities available without exposing a\n"
+        },
+        {
+          "start_line": 78,
+          "start_column": 1,
+          "text": "expression operator bindings come from the implicit hgraph prelude. Exported\n"
+        },
+        {
+          "start_line": 98,
+          "start_column": 1,
+          "text": "The `hgraph.native` module provides `len` and `is_empty` for `str`,\n"
+        },
+        {
+          "start_line": 101,
+          "start_column": 1,
+          "text": "Additional string and window queries live in parts of the same module; see\nthe [native inventory](https://github.com/hhenson/hgraph/blob/main/language/stdlib/hgl/hgraph/README.md). Value operations keep\n"
+        },
+        {
+          "start_line": 107,
+          "start_column": 1,
+          "text": "use hgraph.native as native\n"
+        },
+        {
+          "start_line": 116,
+          "start_column": 1,
+          "text": "The native library must be included in the package that runs the program.\nFor build configuration, see the\n[package-authoring guide](https://github.com/hhenson/hgraph/blob/main/language/docs/developer-guide/native-modules-and-packages.md#building-a-package).\nThe [module inventory](https://github.com/hhenson/hgraph/blob/main/language/stdlib/hgl/hgraph/README.md) lists available\nfunctions and current type restrictions.\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/README.md",
+      "source_sha256": "9e2dad9c3892a264e632075e91841f7b44160625ecf42727f8bf50e03a2740d7",
+      "excerpts": []
+    }
+  ],
+  "owner_clarifications": {
+    "core_helpers": "core.native",
+    "additional_standard_library_helpers": "std.native",
+    "analytics": "Placement deferred; existing example module name remains provisional."
+  }
+}

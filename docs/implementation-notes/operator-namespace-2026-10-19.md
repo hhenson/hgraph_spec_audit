@@ -20,6 +20,10 @@ operations, such as `abs`, whose inclusion justifies the universal obligation.
 `std` owns the broader library and may add candidates for operators declared in
 `core`, retaining their original operator identities.
 
+Native helpers used by core implementations belong in `core.native`;
+additional helpers needed by the standard library belong in `std.native`.
+Analytics placement is deferred; its example module name remains provisional.
+
 This explicitly replaces the earlier `hgraph` / `hgraph.kernel` split and the
 `hgraph.std` spelling with `core` and `std`. The recorded adapter remains at its
 measured namespace arrangement; it is historical evidence, not a new source
