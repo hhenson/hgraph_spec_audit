@@ -1,8 +1,8 @@
 # Operator namespace migration history
 
 `hgraph.operators` was an implementation migration arrangement, not an
-agreed public namespace. It is removed from the specification without
-selecting a replacement. Operator behavior and expected ticks are unchanged.
+agreed public namespace. The specification removes that arrangement and records
+the core operator policy described below. Expected ticks are unchanged.
 
 The existing [conformance adapter](../../compiler/stdlib/nodes.hgl) is retained
 here byte for byte for the pinned implementation. Its imports do not define
@@ -10,6 +10,22 @@ the standard library namespace. Recorded measurements are unchanged.
 
 Source revision: `00772fa17a63c0befcd6d002611b9405fec71105`. The [provenance manifest](operator-namespace-2026-10-19.provenance.json)
 preserves source hashes, removed text and the former adapter metadata.
+
+## Project owner decision, 19 October 2026
+
+Core operators are declared directly in `hgraph`; `hgraph.kernel` contains their
+implementations and no operator declarations. Every engine must provide a
+baseline implementation of every core operator. The core includes operators
+required by language syntax and essential named operations, such as `abs`,
+whose inclusion justifies that universal obligation. Keep the core small;
+other operators belong in `std`. This decision does not enumerate the complete
+inventory or select new implementation machinery.
+
+Documentation examples now import core `add_` from `hgraph` and standard-library
+operators from `std`. Their earlier `hgraph.std` spellings are preserved in the
+[placement provenance](core-operator-placement-2026-10-19.provenance.json), pinned
+to specification revision `244d76ce2d157fe4b5c5b169638afeaf19f4474b`. The recorded
+audit adapter remains unchanged at its measured namespace arrangement.
 
 ## language/docs/design/operators.md
 
