@@ -1,0 +1,49 @@
+{
+  "relocated_on": "2026-10-19",
+  "source_repository": "https://github.com/hhenson/hgraph_spec",
+  "source_revision": "00772fa17a63c0befcd6d002611b9405fec71105",
+  "note_path": "docs/implementation-notes/operator-namespace-2026-10-19.md",
+  "sources": [
+    {
+      "source_path": "language/docs/design/operators.md",
+      "source_sha256": "0bf343d1c612e3abc6e552b8fbfaebb2df61910898a8aa2ab0068f1b7e5001df",
+      "excerpts": [
+        {
+          "start_line": 192,
+          "start_column": 1,
+          "text": "Native-call requirements belong to the delegating `impl fn` candidates,\nnot the public operator contracts. The `hgraph.operators.*` identities are\nparallel migration contracts, not replacements for system identities.\nThe existing `getitem_`/`getattr_` projections are not redeclared as scalar binary\narithmetic. Broader temporal, collection, and downstream scalar domains remain\nin the native registry until their HGL materializations are covered."
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/node-authoring.md",
+      "source_sha256": "43fe49916ca4cbdb94f211407889297ed72d502c616bab3c196077aede19e589",
+      "excerpts": [
+        {
+          "start_line": 21,
+          "start_column": 1,
+          "text": "- **NAT-1:** Select by canonical module/declaration identity, full signature and\n  role. `native const fn hgraph.native.bit_and(i64,i64)->i64` is a value helper;\n  `hgraph.operators.bit_and` is a temporal operator. Neither substitutes for\n  the other. Resolve candidates in the checker, retain the selection in IR."
+        }
+      ]
+    },
+    {
+      "source_path": "compiler/stdlib/nodes.hgl",
+      "source_sha256": "a73bb76bb8790c274130eab128ea5e14375877493b24d5dc36081702a1b0ff90",
+      "excerpts": [
+        {
+          "start_line": 1,
+          "start_column": 1,
+          "text": "module conformance.stdlib\n\nuse hgraph.operators as operators\nuse hgraph.std as std\n\nexport fn bit_and_i64(lhs: i64, rhs: i64) -> i64 => operators::bit_and(lhs, rhs)\nexport fn sample_i64(signal: i64, ts: i64) -> i64 => std::sample(signal, ts)\nexport fn dedup_i64(ts: i64) -> i64 => std::dedup(ts)\n"
+        }
+      ]
+    }
+  ],
+  "relocated_metadata": {
+    "files": [
+      {
+        "path": "compiler/stdlib/nodes.hgl",
+        "note": "Current conformance wrappers import the canonical standard library; no copied node implementations."
+      }
+    ]
+  }
+}

@@ -82,3 +82,5 @@ portable examples remain owned by the specification and standard library.
   ([provenance](final-editorial-cleanup-2026-10-18.provenance.json)).
 - [18 October 2026: specification authority and extraction history](specification-authority-2026-10-18.md)
   ([provenance](specification-authority-2026-10-18.provenance.json)).
+- [19 October 2026: operator namespace migration history](operator-namespace-2026-10-19.md)
+  ([provenance](operator-namespace-2026-10-19.provenance.json)).

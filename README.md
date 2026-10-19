@@ -3,9 +3,9 @@
 Executable conformance checks and recorded evidence for
 [hgraph_spec](https://github.com/hhenson/hgraph_spec) and
 [hgraph_std](https://github.com/hhenson/hgraph_std). Python/C++ examples,
-probes, harnesses and measured results live here. HGL inputs come from the
-pinned specification and standard library; this repository owns no HGL files. Native implementations of
-the standard library remain with their runtime.
+probes, harnesses and measured results live here. HGL cases and library code
+come from the pinned specification and standard library. Implementation-specific
+audit adapters live here; native library implementations remain with their runtime.
 
 The specification states the contract. This audit records where rules came
 from and how implementations agree or conform. Existing-code extraction

@@ -48,6 +48,13 @@ def materialize(root: Path, check: bool = False) -> int:
         if target not in next_state:
             destination = inside(root, target)
             if destination.exists():
+                tracked = subprocess.run(
+                    ['git', 'ls-files', '--error-unmatch', '--', target], cwd=root,
+                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                ).returncode == 0
+                if tracked:
+                    # A tracked file has transferred to this repository's ownership.
+                    continue
                 if digest(destination.read_bytes()) != previous:
                     raise ValueError(f"edited retired shared file: {target}")
                 if check:
