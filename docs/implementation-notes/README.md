@@ -91,3 +91,5 @@ library; implementation-specific audit adapters live here.
   ([provenance](operator-review-clarifications-2026-10-19.provenance.json)).
 - [19 October 2026: base-layer proposal alignment](base-layer-alignment-2026-10-19.md)
   ([provenance](base-layer-alignment-2026-10-19.provenance.json)).
+- [19 October 2026: map call order correction](map-call-order-2026-10-19.md)
+  ([provenance](map-call-order-2026-10-19.provenance.json)).

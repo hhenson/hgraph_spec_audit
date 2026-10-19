@@ -1,0 +1,68 @@
+{
+  "recorded_on": "2026-10-19",
+  "source_repository": "https://github.com/hhenson/hgraph_spec",
+  "source_revision": "e6306d2cc6e6083f4aa19f6cbc393f4a92221c12",
+  "owner_correction": "map takes the function first: map(fn(p) => body, c).",
+  "sources": [
+    {
+      "source_path": "language/docs/design/base-layer.md",
+      "source_sha256": "ce72b6537fb3ff8370e34226371a76b1f28e32bb240f883684059b09d75f6c4e",
+      "excerpts": [
+        {
+          "start_line": 419,
+          "start_column": 1,
+          "text": "- **MAP-1 Form.** `map(c, fn(p) => body)`, in graph composition. `c` is a\n  non-atomic temporal `map<K, V>`. The second argument is an anonymous\n"
+        },
+        {
+          "start_line": 1012,
+          "start_column": 1,
+          "text": "   - a named-function argument, `map(xs, child)`;\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/developer-guide/syntax-and-semantics.md",
+      "source_sha256": "df4300ee31e344593c3f7e8bf0a48ef460467e42e1b57cd76615b0c2b50913c5",
+      "excerpts": [
+        {
+          "start_line": 141,
+          "start_column": 1,
+          "text": "as in `map(values, fn(value) => value * 2.0)`. `in` is contextual: it is the\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/user-guide/functions.md",
+      "source_sha256": "6e8c6cb73cbfa13ec8d2a8f3681ee39179efb812e5c8262833715cdabbe90e65",
+      "excerpts": [
+        {
+          "start_line": 526,
+          "start_column": 1,
+          "text": "map(values, fn(value) => value * 2.0)\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/user-guide/language-tour.md",
+      "source_sha256": "374466038af5dd861fc5e659759ef33bdc6bd5db9f05b859993e17012a8ea367",
+      "excerpts": [
+        {
+          "start_line": 165,
+          "start_column": 1,
+          "text": "        quantities,\n        fn(price, quantity) => price * quantity\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/structural-types.hgl",
+      "source_sha256": "8dd305dbd8bd1468ccb6f91668e0a60939d6755bb919cea51673fdfc25902d22",
+      "excerpts": [
+        {
+          "start_line": 71,
+          "start_column": 1,
+          "text": "        quantities,\n        fn(price, quantity) => price * quantity\n"
+        }
+      ]
+    }
+  ]
+}
