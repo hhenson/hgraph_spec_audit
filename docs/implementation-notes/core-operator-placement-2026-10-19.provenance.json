@@ -2,7 +2,7 @@
   "recorded_on": "2026-10-19",
   "source_repository": "https://github.com/hhenson/hgraph_spec",
   "source_revision": "244d76ce2d157fe4b5c5b169638afeaf19f4474b",
-  "reason": "Core declarations belong in hgraph, baseline implementations in hgraph.kernel, and standard-library operators retain hgraph.std. The intermediate top-level std rename was an interpretation error, corrected after owner clarification.",
+  "reason": "Historical namespace edits and their corrections. The final owner decision combines declarations and baseline implementations in core; std may extend core operators.",
   "sources": [
     {
       "source_path": "compiler/stdlib_graph/README.md",
@@ -13,7 +13,8 @@
           "start_column": 1,
           "text": "`debug_print` from `hgraph.std`. It uses their HGL implementations, with only\n",
           "replacement": "`debug_print` from `std`. It uses their HGL implementations, with only\n",
-          "corrected_replacement": "`debug_print` from `hgraph.std`. It uses their HGL implementations, with only\n"
+          "corrected_replacement": "`debug_print` from `hgraph.std`. It uses their HGL implementations, with only\n",
+          "current_replacement": "`debug_print` from `std`. It uses their HGL implementations, with only\n"
         }
       ]
     },
@@ -26,7 +27,8 @@
           "start_column": 1,
           "text": "module hgraph.std part arithmetic\n",
           "replacement": "module std part arithmetic\n",
-          "corrected_replacement": "module hgraph.std part arithmetic\n"
+          "corrected_replacement": "module hgraph.std part arithmetic\n",
+          "current_replacement": "module std part arithmetic\n"
         }
       ]
     },
@@ -39,7 +41,8 @@
           "start_column": 1,
           "text": "module hgraph.std part arithmetic\n",
           "replacement": "module std part arithmetic\n",
-          "corrected_replacement": "module hgraph.std part arithmetic\n"
+          "corrected_replacement": "module hgraph.std part arithmetic\n",
+          "current_replacement": "module std part arithmetic\n"
         }
       ]
     },
@@ -52,14 +55,16 @@
           "start_column": 1,
           "text": "use hgraph.std::{add_}\n",
           "replacement": "use hgraph::{add_}\n",
-          "corrected_replacement": "use hgraph::{add_}\n"
+          "corrected_replacement": "use hgraph::{add_}\n",
+          "current_replacement": "use core::{add_}\n"
         },
         {
           "start_line": 2589,
           "start_column": 1,
           "text": "module: 'export impl fn add' is invalid; the implementation is public through hgraph.std::add\n",
           "replacement": "module: 'export impl fn add_' is invalid; the implementation is public through hgraph::add_\n",
-          "corrected_replacement": "module: 'export impl fn add_' is invalid; the implementation is public through hgraph::add_\n"
+          "corrected_replacement": "module: 'export impl fn add_' is invalid; the implementation is public through hgraph::add_\n",
+          "current_replacement": "module: 'export impl fn add_' is invalid; the implementation is public through core::add_\n"
         }
       ]
     },
@@ -72,7 +77,8 @@
           "start_column": 1,
           "text": "use hgraph.std::{add_}\n",
           "replacement": "use hgraph::{add_}\n",
-          "corrected_replacement": "use hgraph::{add_}\n"
+          "corrected_replacement": "use hgraph::{add_}\n",
+          "current_replacement": "use core::{add_}\n"
         }
       ]
     },
@@ -85,7 +91,8 @@
           "start_column": 1,
           "text": "use hgraph.std::{add_}\n",
           "replacement": "use hgraph::{add_}\n",
-          "corrected_replacement": "use hgraph::{add_}\n"
+          "corrected_replacement": "use hgraph::{add_}\n",
+          "current_replacement": "use core::{add_}\n"
         }
       ]
     },
@@ -98,7 +105,8 @@
           "start_column": 1,
           "text": "use hgraph.std::{if_then_else}\n",
           "replacement": "use std::{if_then_else}\n",
-          "corrected_replacement": "use hgraph.std::{if_then_else}\n"
+          "corrected_replacement": "use hgraph.std::{if_then_else}\n",
+          "current_replacement": "use std::{if_then_else}\n"
         }
       ]
     },
@@ -111,14 +119,16 @@
           "start_column": 1,
           "text": "use hgraph.std::{mean}\n",
           "replacement": "use std::{mean}\n",
-          "corrected_replacement": "use hgraph.std::{mean}\n"
+          "corrected_replacement": "use hgraph.std::{mean}\n",
+          "current_replacement": "use std::{mean}\n"
         },
         {
           "start_line": 296,
           "start_column": 1,
           "text": "use hgraph.std::{schedule}\n",
           "replacement": "use std::{schedule}\n",
-          "corrected_replacement": "use hgraph.std::{schedule}\n"
+          "corrected_replacement": "use hgraph.std::{schedule}\n",
+          "current_replacement": "use std::{schedule}\n"
         }
       ]
     },
@@ -131,7 +141,8 @@
           "start_column": 1,
           "text": "use hgraph.std::{null_sink}\n",
           "replacement": "use std::{null_sink}\n",
-          "corrected_replacement": "use hgraph.std::{null_sink}\n"
+          "corrected_replacement": "use hgraph.std::{null_sink}\n",
+          "current_replacement": "use std::{null_sink}\n"
         }
       ]
     },
@@ -144,7 +155,8 @@
           "start_column": 1,
           "text": "use hgraph.std::{debug_print}\n",
           "replacement": "use std::{debug_print}\n",
-          "corrected_replacement": "use hgraph.std::{debug_print}\n"
+          "corrected_replacement": "use hgraph.std::{debug_print}\n",
+          "current_replacement": "use std::{debug_print}\n"
         }
       ]
     },
@@ -157,7 +169,8 @@
           "start_column": 1,
           "text": "use hgraph.std::{null_sink}\n",
           "replacement": "use std::{null_sink}\n",
-          "corrected_replacement": "use hgraph.std::{null_sink}\n"
+          "corrected_replacement": "use hgraph.std::{null_sink}\n",
+          "current_replacement": "use std::{null_sink}\n"
         }
       ]
     },
@@ -170,7 +183,8 @@
           "start_column": 1,
           "text": "use hgraph.std::{null_sink}\n",
           "replacement": "use std::{null_sink}\n",
-          "corrected_replacement": "use hgraph.std::{null_sink}\n"
+          "corrected_replacement": "use hgraph.std::{null_sink}\n",
+          "current_replacement": "use std::{null_sink}\n"
         }
       ]
     },
@@ -183,7 +197,8 @@
           "start_column": 1,
           "text": "use hgraph.std::{mean}\n",
           "replacement": "use std::{mean}\n",
-          "corrected_replacement": "use hgraph.std::{mean}\n"
+          "corrected_replacement": "use hgraph.std::{mean}\n",
+          "current_replacement": "use std::{mean}\n"
         }
       ]
     },
@@ -196,7 +211,8 @@
           "start_column": 1,
           "text": "use hgraph.std::{if_then_else}\n",
           "replacement": "use std::{if_then_else}\n",
-          "corrected_replacement": "use hgraph.std::{if_then_else}\n"
+          "corrected_replacement": "use hgraph.std::{if_then_else}\n",
+          "current_replacement": "use std::{if_then_else}\n"
         }
       ]
     },
@@ -209,7 +225,8 @@
           "start_column": 1,
           "text": "use hgraph.std::{const, debug_print}\n",
           "replacement": "use std::{const, debug_print}\n",
-          "corrected_replacement": "use hgraph.std::{const, debug_print}\n"
+          "corrected_replacement": "use hgraph.std::{const, debug_print}\n",
+          "current_replacement": "use std::{const, debug_print}\n"
         }
       ]
     },
@@ -222,10 +239,11 @@
           "start_column": 1,
           "text": "use hgraph.std::{map}\n",
           "replacement": "use std::{map}\n",
-          "corrected_replacement": "use hgraph.std::{map}\n"
+          "corrected_replacement": "use hgraph.std::{map}\n",
+          "current_replacement": "use std::{map}\n"
         }
       ]
     }
   ],
-  "correction": "The replacement fields preserve the intermediate edit. corrected_replacement records the clarified namespace spelling."
+  "correction": "replacement and corrected_replacement preserve intermediate decisions. current_replacement follows the final core/std decision."
 }

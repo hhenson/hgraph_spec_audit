@@ -11,7 +11,23 @@ the standard library namespace. Recorded measurements are unchanged.
 Source revision: `00772fa17a63c0befcd6d002611b9405fec71105`. The [provenance manifest](operator-namespace-2026-10-19.provenance.json)
 preserves source hashes, removed text and the former adapter metadata.
 
-## Project owner decision, 19 October 2026
+## Final project owner decision, 19 October 2026
+
+`core` owns both operator declarations and their required baseline
+implementations. Every engine must provide that baseline for every core
+operator. The core remains small: syntax-required operators and essential named
+operations, such as `abs`, whose inclusion justifies the universal obligation.
+`std` owns the broader library and may add candidates for operators declared in
+`core`, retaining their original operator identities.
+
+This explicitly replaces the earlier `hgraph` / `hgraph.kernel` split and the
+`hgraph.std` spelling with `core` and `std`. The recorded adapter remains at its
+measured namespace arrangement; it is historical evidence, not a new source
+example for the current module names.
+The [decision provenance](core-std-decision-2026-10-19.provenance.json) records
+the superseded policy and source revision.
+
+## Earlier decisions and corrections (superseded)
 
 Core operators are declared directly in `hgraph`; `hgraph.kernel` contains their
 implementations and no operator declarations. Every engine must provide a
