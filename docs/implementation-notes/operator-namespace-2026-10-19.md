@@ -18,14 +18,15 @@ implementations and no operator declarations. Every engine must provide a
 baseline implementation of every core operator. The core includes operators
 required by language syntax and essential named operations, such as `abs`,
 whose inclusion justifies that universal obligation. Keep the core small;
-other operators belong in `std`. This decision does not enumerate the complete
+other operators belong in `hgraph.std`. This decision does not enumerate the complete
 inventory or select new implementation machinery.
 
-Documentation examples now import core `add_` from `hgraph` and standard-library
-operators from `std`. Their earlier `hgraph.std` spellings are preserved in the
-[placement provenance](core-operator-placement-2026-10-19.provenance.json), pinned
-to specification revision `244d76ce2d157fe4b5c5b169638afeaf19f4474b`. The recorded
-audit adapter remains unchanged at its measured namespace arrangement.
+Documentation examples import core `add_` from `hgraph`. Standard-library
+operators retain `hgraph.std`; the owner's use of “std” was shorthand, not a
+namespace rename. The initial top-level `std` edits were an interpretation
+error and have been corrected. The [placement provenance](core-operator-placement-2026-10-19.provenance.json)
+retains those intermediate edits and their corrections. The recorded audit
+adapter remains unchanged at its measured namespace arrangement.
 
 ## language/docs/design/operators.md
 
