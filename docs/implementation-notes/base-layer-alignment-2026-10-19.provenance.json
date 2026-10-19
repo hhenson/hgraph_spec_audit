@@ -1,0 +1,589 @@
+{
+  "recorded_on": "2026-10-19",
+  "source_repository": "https://github.com/hhenson/hgraph_spec",
+  "source_revision": "ddb8a31e5a83d9950144f547fc9bbb9c997731d2",
+  "sources": [
+    {
+      "source_path": "language/docs/design/base-layer.md",
+      "source_sha256": "cf9b9e18d608611c12f7339ab9aec27e1cafdb599c009a1368f99e563f4ff32b",
+      "excerpts": [
+        {
+          "start_line": 5,
+          "start_column": 1,
+          "text": "This record defines the base layer: the language plus the mandatory kernel\nmodule, `hgraph.kernel`. It also defines the conformance pack, the spec's\n"
+        },
+        {
+          "start_line": 9,
+          "start_column": 1,
+          "text": "**Decision** (owner, 2026-10-18):\n"
+        },
+        {
+          "start_line": 13,
+          "start_column": 1,
+          "text": "- The standard library builds on the base layer.\n- The kernel module is named `hgraph.kernel`.\n"
+        },
+        {
+          "start_line": 21,
+          "start_column": 1,
+          "text": "**Decision** (owner, 2026-10-18, conformance):\n"
+        },
+        {
+          "start_line": 23,
+          "start_column": 1,
+          "text": "- The kernel's conformance tests form one module, `hgraph.conformance`,\n"
+        },
+        {
+          "start_line": 29,
+          "start_column": 1,
+          "text": "- Rejection cases form a second module, `hgraph.conformance.rejections`.\n"
+        },
+        {
+          "start_line": 31,
+          "start_column": 1,
+          "text": "Everything else here is proposed.\n"
+        },
+        {
+          "start_line": 38,
+          "start_column": 1,
+          "text": "| Kernel module `hgraph.kernel` | Prelude, injectables, system operators, language-form realisation, eval support, test host | This record | Each implementation. hgraph_spec `kernel/` holds a reference realisation in HGL |\n| Standard library | `hgraph.std`, `hgraph.operators`, `hgraph.native` | [Library contracts](../../../library/README.md) and hgraph_std | hgraph_std HGL, plus a native provider for each target |\n| Conformance pack | The spec's executable cases, as the module `hgraph.conformance` | `conformance/README.md` | hgraph_spec `conformance/` |\n"
+        },
+        {
+          "start_line": 42,
+          "start_column": 1,
+          "text": "The **base layer** is the language plus the kernel. Library HGL is written\n"
+        },
+        {
+          "start_line": 46,
+          "start_column": 1,
+          "text": "## The kernel module\n"
+        },
+        {
+          "start_line": 48,
+          "start_column": 1,
+          "text": "`hgraph.kernel` is the \"one mandatory module for the hgraph kernel\"\n([modules.md](modules.md), Boundary), made explicit. It is not a second\nmodule:\n- A single mandatory module is already the rule.\n- Eval needs replay and record wherever a test can be written. A separate\n  harness module would be mandatory in all but name.\n- Parts ([ADR 0006](decisions/0006-multi-file-module-parts.md)) and native\n  implementation parts\n  ([ADR 0014](decisions/0014-native-implementation-interfaces.md)) already\n  combine portable and native code in one module.\n"
+        },
+        {
+          "start_line": 62,
+          "start_column": 1,
+          "text": "| Public interface | `use hgraph.kernel::{...}` or a module alias | The 16 system operator contracts; `TimedValue`, `replay` and `record` (\u00a75) |\n"
+        },
+        {
+          "start_line": 84,
+          "start_column": 1,
+          "text": "These stay in the library's `hgraph.native`, because only library bodies use\nthem:\n"
+        },
+        {
+          "start_line": 97,
+          "start_column": 1,
+          "text": "2. Lookup steps 1\u20134 shadow every other prelude name (existing).\n3. A direct capability receiver selects the capability meaning, even when a\n"
+        },
+        {
+          "start_line": 101,
+          "start_column": 1,
+          "text": "   receivers are `alarm`, `scheduler`, `global_state` and `out`.\n"
+        },
+        {
+          "start_line": 122,
+          "start_column": 1,
+          "text": "The kernel declares the sixteen system operators below. They keep the\nsignatures the standard library declares today, so existing named calls still\nbind. `and_`, `or_` and `not_` also constrain their operands to `bool`\n(proposed; see **Logical operators**).\n"
+        },
+        {
+          "start_line": 169,
+          "start_column": 1,
+          "text": "`getitem_` and `getattr_` are kernel identities with no source declaration.\n"
+        },
+        {
+          "start_line": 174,
+          "start_column": 1,
+          "text": "implementation designates for the domains below are the kernel's\n**realisation**. The kernel descriptor names them, so `hgl check` and a native\n"
+        },
+        {
+          "start_line": 179,
+          "start_column": 1,
+          "text": "The kernel fixes the behaviour of these identities over the domains below, not\ntheir candidate set (owner, 2026-10-18). Implementations and libraries may add\n"
+        },
+        {
+          "start_line": 182,
+          "start_column": 1,
+          "text": "imported kernel identity ([modules.md](modules.md), Nominal operator binding).\n"
+        },
+        {
+          "start_line": 184,
+          "start_column": 1,
+          "text": "locked dependency closure, the kernel and the selected native packages. A\n"
+        },
+        {
+          "start_line": 191,
+          "start_column": 1,
+          "text": "**Kernel-domain calls.** A kernel-domain call is a call to a kernel identity,\n"
+        },
+        {
+          "start_line": 201,
+          "start_column": 1,
+          "text": "  lifted to one. Structural temporal operands are outside the kernel domains:\n"
+        },
+        {
+          "start_line": 203,
+          "start_column": 1,
+          "text": "- Every use of a mapped token is a call of its kernel identity, whatever\n"
+        },
+        {
+          "start_line": 207,
+          "start_column": 1,
+          "text": "  (WIR-22), is not a kernel-domain call.\n"
+        },
+        {
+          "start_line": 213,
+          "start_column": 1,
+          "text": "| Value level | Native-required, over the domains below. The spec has no form for value-level candidates yet ([operators](operators.md), Execution role and native implementations; [ADR 0008](decisions/0008-temporal-contracts-and-target-mappings.md), Operators and native implementations), so node evaluation and folding use the kernel's own operations |\n"
+        },
+        {
+          "start_line": 237,
+          "start_column": 1,
+          "text": "[operator contracts](../../../library/operator_contracts.md) and become kernel\nrules. OP-9 governs the text that `str(x)` produces.\n"
+        },
+        {
+          "start_line": 243,
+          "start_column": 1,
+          "text": "this of the temporal and floor rows. The kernel extends it to every row\n"
+        },
+        {
+          "start_line": 265,
+          "start_column": 1,
+          "text": "**Equality.** Equality is exact. A kernel-domain `==` is true only for equal\n"
+        },
+        {
+          "start_line": 268,
+          "start_column": 1,
+          "text": "kernel-domain call applies a tolerance, whichever candidate realises it. A\n"
+        },
+        {
+          "start_line": 276,
+          "start_column": 1,
+          "text": "kernel-domain call, an expected type does not request another one: it binds\n"
+        },
+        {
+          "start_line": 294,
+          "start_column": 1,
+          "text": "**Stability.** *(Decision, owner, 2026-10-18.)* A conformance case asserts the\n"
+        },
+        {
+          "start_line": 299,
+          "start_column": 1,
+          "text": "The kernel makes this precise (proposed). In a conformance run no candidate\nchanges the behaviour of a kernel-domain call: the realisation gives it,\n"
+        },
+        {
+          "start_line": 302,
+          "start_column": 1,
+          "text": "stay off kernel rows (Pack check). That behaviour is:\n"
+        },
+        {
+          "start_line": 325,
+          "start_column": 1,
+          "text": "So the trace compared for a kernel-domain call is its output, not what runs\ninside it. For a kernel identity, the \"operator selection\" in ADR 0008's\n"
+        },
+        {
+          "start_line": 330,
+          "start_column": 1,
+          "text": "kernel-domain call, and the kernel descriptor names it. A tie inside it is the\n"
+        },
+        {
+          "start_line": 334,
+          "start_column": 1,
+          "text": "candidate reaches a case. Whether a library's candidates may change a\nkernel-domain call in a program that loads the library is cross-module\ncoherence, which [modules.md](modules.md) leaves open. This record does not\nsettle it (open point 15).\n"
+        },
+        {
+          "start_line": 339,
+          "start_column": 1,
+          "text": "**Not kernel calls.** These spellings are language forms with their own rules.\n"
+        },
+        {
+          "start_line": 350,
+          "start_column": 1,
+          "text": "**Outside the kernel domains.** An implementation or library may give an\n"
+        },
+        {
+          "start_line": 355,
+          "start_column": 1,
+          "text": "its result. The rejected rows above are kernel-domain calls, not extensions: no\n"
+        },
+        {
+          "start_line": 440,
+          "start_column": 1,
+          "text": "  module shadows it there (\u00a71, step 2). No module re-exports the kernel's\n"
+        },
+        {
+          "start_line": 452,
+          "start_column": 1,
+          "text": "The kernel declares\n"
+        },
+        {
+          "start_line": 456,
+          "start_column": 1,
+          "text": "together with OP-11. Those contracts move from `library/` to kernel status.\n"
+        },
+        {
+          "start_line": 458,
+          "start_column": 1,
+          "text": "- **Binding.** Eval binds the kernel's own replay and record realisation.\n"
+        },
+        {
+          "start_line": 471,
+          "start_column": 1,
+          "text": "- **Reference realisation.** hgraph_spec `kernel/` holds `TimedValue`, `replay`\n  and `record` in HGL. The bodies are the standard library's existing HGL\n  bodies, unchanged. An implementation may substitute a native realisation\n  that passes the kernel cases.\n"
+        },
+        {
+          "start_line": 479,
+          "start_column": 1,
+          "text": "  - kernel declarations.\n"
+        },
+        {
+          "start_line": 488,
+          "start_column": 1,
+          "text": "| `assert` | Takes a wiring-time `bool`. A failure reports the first differing cycle. Harness equality is not a kernel call: it is exact, compares presence first and follows the harness rules of each shape ([syntax and semantics](../developer-guide/syntax-and-semantics.md)). No candidate changes it |\n"
+        },
+        {
+          "start_line": 498,
+          "start_column": 1,
+          "text": "  the kernel. A conformance claim names one hgraph_spec revision.\n- **One module.** *(Decision, owner, 2026-10-18.)* The pack's tests form one\n  module, `hgraph.conformance`, assembled from parts\n"
+        },
+        {
+          "start_line": 507,
+          "start_column": 1,
+          "text": "  `hgraph.kernel`, so its tests see only the kernel's public interface and the\n"
+        },
+        {
+          "start_line": 509,
+          "start_column": 1,
+          "text": "  - **Test-only.** *(Decision.)* The module exists only for conformance. No\n    implementation ships, registers or links `hgraph.conformance` or a module\n"
+        },
+        {
+          "start_line": 533,
+          "start_column": 1,
+          "text": "- **Fixtures.** *(Decision, owner, 2026-10-18: shared fixtures are shared, no\n  copies are kept in step by a lint, and the fixtures are the module's public\n  declarations.)* A fixture is a function that two or more case parts, or a\n"
+        },
+        {
+          "start_line": 604,
+          "start_column": 1,
+          "text": "  `hgraph.conformance.` groups listings only, and gives no access to the pack\n"
+        },
+        {
+          "start_line": 608,
+          "start_column": 1,
+          "text": "    `hgraph.conformance.rejections`, assembled from parts in the same way\n    *(Decision, owner, 2026-10-18)*. In the pack module, a boundary that an\n"
+        },
+        {
+          "start_line": 621,
+          "start_column": 1,
+          "text": "    prelude name shadows it in every part (\u00a71, step 2; MAP-7).\n"
+        },
+        {
+          "start_line": 623,
+          "start_column": 1,
+          "text": "  A separate module imports the fixtures it uses from `hgraph.conformance`. Its\n"
+        },
+        {
+          "start_line": 628,
+          "start_column": 1,
+          "text": "- **Dependency.** A pack file imports only `hgraph.kernel`, and a separate\n  module also `hgraph.conformance`. In the pack module only `conformance.hgl`\n"
+        },
+        {
+          "start_line": 636,
+          "start_column": 1,
+          "text": "- **Runs.** *(Decision, owner, 2026-10-18: a conformance run loads no\n  library.)* A pack run supplies only `hgraph.kernel`, the files `pack.json`\n"
+        },
+        {
+          "start_line": 640,
+          "start_column": 1,
+          "text": "  does not need the library. No other run supplies `hgraph.conformance`.\n"
+        },
+        {
+          "start_line": 650,
+          "start_column": 1,
+          "text": "- **Imports.** An import resolves only against the kernel and the modules the\n"
+        },
+        {
+          "start_line": 666,
+          "start_column": 1,
+          "text": "  - an `impl fn` of a kernel identity with no operand of a type its own part\n"
+        },
+        {
+          "start_line": 668,
+          "start_column": 1,
+          "text": "    part's kernel-domain calls;\n"
+        },
+        {
+          "start_line": 670,
+          "start_column": 1,
+          "text": "    kernel public name or a fixture's name. The language lets it shadow\n"
+        },
+        {
+          "start_line": 691,
+          "start_column": 1,
+          "text": "    `hgraph.conformance::pass_through` (proposed), so they survive moving a\n"
+        },
+        {
+          "start_line": 697,
+          "start_column": 1,
+          "text": "- **Operator cases.** A case on a kernel identity asserts behaviour only\n"
+        },
+        {
+          "start_line": 701,
+          "start_column": 1,
+          "text": "  - It asserts nothing outside the kernel domains, except a result over a type\n"
+        },
+        {
+          "start_line": 707,
+          "start_column": 1,
+          "text": "  - It makes each kernel-domain assertion twice, once with the token and once\n    with the named call: `a + b` and `add_(a, b)`.\n"
+        },
+        {
+          "start_line": 762,
+          "start_column": 1,
+          "text": "- **Imports.** Library HGL imports kernel declarations and never redeclares\n"
+        },
+        {
+          "start_line": 765,
+          "start_column": 1,
+          "text": "  operators then implement the kernel identities.\n  - Those that duplicate a kernel row add nothing once the kernel realises it,\n"
+        },
+        {
+          "start_line": 770,
+          "start_column": 1,
+          "text": "  - A tolerant `eq_` on `f64` would make `==` tolerant in any program that\n    loads the library. The library drops it, and tolerance stays with\n    `eq_epsilon`, which takes an explicit parameter.\n"
+        },
+        {
+          "start_line": 774,
+          "start_column": 1,
+          "text": "    the `bool`-only kernel identities (\u00a73). The library moves them to a\n"
+        },
+        {
+          "start_line": 778,
+          "start_column": 1,
+          "text": "- **What the library keeps:**\n  - every `hgraph.std` contract;\n  - the named `hgraph.operators` operators, `abs_` to `substr`;\n  - the `hgraph.native` helpers, including `bound`, `active`, `is_empty`,\n    temporal `len` and the windows;\n  - `pass_through`, `null_sink`, `nothing`, `const` and `tick_count`, as\n    library operators.\n"
+        },
+        {
+          "start_line": 789,
+          "start_column": 1,
+          "text": "- **Higher-order `map`.** One-collection `map(...)` is a kernel prelude form\n"
+        },
+        {
+          "start_line": 795,
+          "start_column": 1,
+          "text": "  `use hgraph.std::{map}` and stays excluded by name. The explicit `map_`\n"
+        },
+        {
+          "start_line": 799,
+          "start_column": 1,
+          "text": "  and record become kernel cases. Tests of library contracts stay with the\n"
+        },
+        {
+          "start_line": 806,
+          "start_column": 1,
+          "text": "The kernel's closure rests on records that are still proposed:\n"
+        },
+        {
+          "start_line": 832,
+          "start_column": 1,
+          "text": "     kernel's language forms (\u00a74), `map(...)` among them, are realised by\n"
+        },
+        {
+          "start_line": 834,
+          "start_column": 1,
+          "text": "   - `kernel/`;\n"
+        },
+        {
+          "start_line": 838,
+          "start_column": 1,
+          "text": "       kernel-domain call binds no result parameter;\n"
+        },
+        {
+          "start_line": 840,
+          "start_column": 1,
+          "text": "       kernel-domain call is its output, not the nodes that realise it;\n"
+        },
+        {
+          "start_line": 842,
+          "start_column": 1,
+          "text": "       Target boundary: for a kernel identity, operator selection is accepted\n"
+        },
+        {
+          "start_line": 845,
+          "start_column": 1,
+          "text": "       the 16 system identities are kernel contracts (\u00a73);\n"
+        },
+        {
+          "start_line": 847,
+          "start_column": 1,
+          "text": "       OP-3 move to the kernel.\n"
+        },
+        {
+          "start_line": 856,
+          "start_column": 1,
+          "text": "     `module hgraph.conformance part X` and gains a documentation comment.\n"
+        },
+        {
+          "start_line": 866,
+          "start_column": 1,
+          "text": "- **BASE-1** *(Decision.)* A conformance test depends only on the language and\n  `hgraph.kernel`.\n- **BASE-2** *(Decision.)* The mandatory kernel module is `hgraph.kernel`. No\n  other module is mandatory. It is supplied without an import or a build\n  request.\n- **BASE-3** The kernel has three surfaces: the prelude, the public interface\n"
+        },
+        {
+          "start_line": 875,
+          "start_column": 1,
+          "text": "- **BASE-5** System operators are kernel identities, declared as \u00a73 gives and\n  bound per target. Declaring them creates no runtime operator. The kernel\n"
+        },
+        {
+          "start_line": 888,
+          "start_column": 1,
+          "text": "- **BASE-8** Eval wires the kernel's own replay and record and builds\n"
+        },
+        {
+          "start_line": 890,
+          "start_column": 1,
+          "text": "- **BASE-9** `kernel/` is a reference realisation. Native substitution that\n  passes the kernel cases conforms. A reference body is closed over the\n  language, the prelude, the injectables and kernel declarations.\n"
+        },
+        {
+          "start_line": 894,
+          "start_column": 1,
+          "text": "- **BASE-11** An import resolves only against the kernel and the modules the\n"
+        },
+        {
+          "start_line": 896,
+          "start_column": 1,
+          "text": "- **BASE-12** *(Decision.)* A conformance run loads no library. A pack run\n  supplies only `hgraph.kernel`, the files `conformance/pack.json` lists for it\n  and the pack's own native provider, and no other run supplies\n  `hgraph.conformance`. The rest is proposed. A pack file imports only\n  `hgraph.kernel`, and a separate module also `hgraph.conformance`, except for\n"
+        },
+        {
+          "start_line": 903,
+          "start_column": 1,
+          "text": "- **BASE-13** *(Decision.)* The kernel's conformance tests form one module,\n  `hgraph.conformance`, assembled from the parts `pack.json` lists. It is\n"
+        },
+        {
+          "start_line": 908,
+          "start_column": 1,
+          "text": "  `hgraph.conformance.rejections`, which imports the fixtures it uses. The rest\n"
+        },
+        {
+          "start_line": 915,
+          "start_column": 1,
+          "text": "- **BASE-15** *(Decision.)* The library builds on the base. Its HGL imports the\n  kernel and never redeclares it. Its native parts may use runtime facilities.\n- **BASE-16** *(Decision.)* A conformance case asserts the behaviour an\n"
+        },
+        {
+          "start_line": 921,
+          "start_column": 1,
+          "text": "  kernel-domain call. That behaviour is its output trace (values, deltas,\n"
+        },
+        {
+          "start_line": 925,
+          "start_column": 1,
+          "text": "  token is a call of its kernel identity, whatever `requires` clause is active.\n"
+        },
+        {
+          "start_line": 927,
+          "start_column": 1,
+          "text": "  kernel-domain call, and the kernel descriptor names it.\n"
+        },
+        {
+          "start_line": 929,
+          "start_column": 1,
+          "text": "  predicates and structural projections are not kernel calls, and no candidate\n  changes them. Outside the kernel domains, an implementation or library may\n"
+        },
+        {
+          "start_line": 933,
+          "start_column": 1,
+          "text": "  concrete candidate. The rejected rows of \u00a73 are kernel-domain calls and stay\n"
+        },
+        {
+          "start_line": 935,
+          "start_column": 1,
+          "text": "- **BASE-19** `map(...)` is a kernel prelude form: the keyed child graph with a\n"
+        },
+        {
+          "start_line": 943,
+          "start_column": 1,
+          "text": "1. **Kernel candidate set.** *Closed.* It is a lower bound (owner ruling,\n   2026-10-18): the kernel fixes behaviour over its domains, not a candidate\n"
+        },
+        {
+          "start_line": 948,
+          "start_column": 1,
+          "text": "   need not hide its candidates outside the kernel domains. It must still\n"
+        },
+        {
+          "start_line": 964,
+          "start_column": 1,
+          "text": "   Candidates outside the kernel's projection rows are allowed. One question\n"
+        },
+        {
+          "start_line": 967,
+          "start_column": 1,
+          "text": "4. **Truthiness candidates.** *Closed.* They leave the kernel identities\n"
+        },
+        {
+          "start_line": 1001,
+          "start_column": 1,
+          "text": "    results. The named `eq_` on `f64` is a kernel-domain call and must be\n"
+        },
+        {
+          "start_line": 1013,
+          "start_column": 1,
+          "text": "    this is decided, mixed comparisons are not kernel-domain calls and pack\n"
+        },
+        {
+          "start_line": 1015,
+          "start_column": 1,
+          "text": "13. **Tolerant `f64` equality in a realisation.** \u00a73 requires a kernel-domain\n"
+        },
+        {
+          "start_line": 1018,
+          "start_column": 1,
+          "text": "    kernel-domain calls without adding a second operator. A call that passes\n"
+        },
+        {
+          "start_line": 1020,
+          "start_column": 1,
+          "text": "    kernel-domain call (WIR-22) and may stay tolerant.\n"
+        },
+        {
+          "start_line": 1039,
+          "start_column": 1,
+          "text": "15. **Kernel coherence.** *Closed* (owner, 2026-10-18). A conformance run loads\n    no library, so no library candidate can change a case, and the pack keeps\n    its own candidates off kernel rows (Pack check). Whether a library's\n    candidates may change kernel-domain calls in a program that loads it is\n    cross-module coherence ([modules.md](modules.md)), outside this record.\n16. **Rejection cases.** *Closed* (owner, 2026-10-18). They form the second\n    module `hgraph.conformance.rejections`, which imports any fixture it needs\n    from `hgraph.conformance`.\n"
+        }
+      ]
+    }
+  ],
+  "owner_clarifications": {
+    "core": "Declarations and baseline implementations share core; std may add candidates under ordinary ranking.",
+    "helpers": "core.native for core; std.native for additional standard-library helpers.",
+    "conformance_modules": [
+      "conformance",
+      "conformance.rejections"
+    ]
+  },
+  "preserved_rule_identifiers": [
+    "MAP-1",
+    "MAP-2",
+    "MAP-3",
+    "MAP-4",
+    "MAP-5",
+    "MAP-6",
+    "MAP-7",
+    "BASE-1",
+    "BASE-2",
+    "BASE-3",
+    "BASE-4",
+    "BASE-5",
+    "BASE-6",
+    "BASE-7",
+    "BASE-8",
+    "BASE-9",
+    "BASE-10",
+    "BASE-11",
+    "BASE-12",
+    "BASE-13",
+    "BASE-14",
+    "BASE-15",
+    "BASE-16",
+    "BASE-17",
+    "BASE-18",
+    "BASE-19"
+  ]
+}

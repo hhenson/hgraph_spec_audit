@@ -89,3 +89,5 @@ library; implementation-specific audit adapters live here.
   ([provenance](namespace-consistency-review-2026-10-19.provenance.json)).
 - [19 October 2026: operator review clarifications](operator-review-clarifications-2026-10-19.md)
   ([provenance](operator-review-clarifications-2026-10-19.provenance.json)).
+- [19 October 2026: base-layer proposal alignment](base-layer-alignment-2026-10-19.md)
+  ([provenance](base-layer-alignment-2026-10-19.provenance.json)).
