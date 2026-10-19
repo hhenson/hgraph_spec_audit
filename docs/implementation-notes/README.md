@@ -87,3 +87,5 @@ library; implementation-specific audit adapters live here.
   ([provenance](operator-namespace-2026-10-19.provenance.json)).
 - [19 October 2026: core/std consistency review](namespace-consistency-review-2026-10-19.md)
   ([provenance](namespace-consistency-review-2026-10-19.provenance.json)).
+- [19 October 2026: operator review clarifications](operator-review-clarifications-2026-10-19.md)
+  ([provenance](operator-review-clarifications-2026-10-19.provenance.json)).

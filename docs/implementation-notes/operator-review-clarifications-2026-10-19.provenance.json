@@ -1,0 +1,29 @@
+{
+  "recorded_on": "2026-10-19",
+  "source_repository": "https://github.com/hhenson/hgraph_spec",
+  "source_revision": "fb36dfe67ac39425120e2393435c44a8cfb05f8a",
+  "sources": [
+    {
+      "source_path": "language/docs/design/operators.md",
+      "source_sha256": "ef52cd2b2d23015d0dc6b85f98e1532548bfb255645e94ad840d64cbdbe2c84b",
+      "excerpts": [
+        {
+          "start_line": 43,
+          "start_column": 1,
+          "text": "`core` identity and applicable contract. They may extend supported domains or\nprovide optimizations without redeclaring the operator in `std`.\nCandidate selection follows the ordinary resolution rules.\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/developer-guide/syntax-and-semantics.md",
+      "source_sha256": "05ce3fe5ee1759a2b3e604a086241bb5d256ff79c5435e903760b03987740a76",
+      "excerpts": [
+        {
+          "start_line": 868,
+          "start_column": 1,
+          "text": "Field accessors (`year`, `month`, `day`, `weekday`, `hour`, `minute`,\n`second`, `microsecond`, `days`, `seconds`, `total_seconds`), `abs`, the\n"
+        }
+      ]
+    }
+  ]
+}

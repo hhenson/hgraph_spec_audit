@@ -245,5 +245,6 @@
       ]
     }
   ],
-  "correction": "replacement and corrected_replacement preserve intermediate decisions. current_replacement follows the final core/std decision."
+  "correction": "replacement and corrected_replacement preserve intermediate decisions. current_replacement follows the final core/std decision. The current_replacement_revision pins the source used to verify current_replacement; other archives retain their own earlier source revisions.",
+  "current_replacement_revision": "fb36dfe67ac39425120e2393435c44a8cfb05f8a"
 }
