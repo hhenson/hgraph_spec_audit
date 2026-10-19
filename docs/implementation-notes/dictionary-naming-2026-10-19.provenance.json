@@ -1,0 +1,1318 @@
+{
+  "recorded_on": "2026-10-19",
+  "source_repository": "https://github.com/hhenson/hgraph_spec",
+  "source_revision": "f2d6d513f71e333757768e3ed1f7aed6e682539f",
+  "owner_decision": "Use dict<K, V> for keyed containers and map(...) for mapping; retire the separate public map_ spelling. Additional mapping forms remain unresolved.",
+  "sources": [
+    {
+      "source_path": "compiler/cases_atomic_set_map_publications.md",
+      "source_sha256": "1568d72facceab50dc723c8f64c5aa7483e155e0cad29a21f512631f80ebf7b6",
+      "excerpts": [
+        {
+          "start_line": 7,
+          "start_column": 1,
+          "text": "| Exact `set<K>(items: [...])` or `map<K,V>(items: [key: value,...])` | Construct the complete ordinary type; exact K/V do not depend on runtime contents. |\n"
+        },
+        {
+          "start_line": 13,
+          "start_column": 1,
+          "text": "| `map<str,list<i64>>(items: [\"a\": [1, 2], \"b\": [3]])` followed by complete `map<str,list<i64>>(items: [\"a\": [4]])` | Second held state has only \"a\", whose complete child is [4]; do not retain \"b\" or merge \"a\"'s list. |\n"
+        }
+      ]
+    },
+    {
+      "source_path": "compiler/cases_map_key_connections.md",
+      "source_sha256": "90851a620d4081e53f3b2bf1744dac6dbc58d261535244c9032a492e06809279",
+      "excerpts": [
+        {
+          "start_line": 8,
+          "start_column": 1,
+          "text": "leaves, including below an outer `ref<map<K,V>>`.\n"
+        },
+        {
+          "start_line": 41,
+          "start_column": 1,
+          "text": "| Select a key through `ref<map<K,V>>` in graph composition | Compose WIR-5 with live selection; parent-map retargeting reselects the child for the held key, including equal-valued targets, missing membership and a silent key. |\n"
+        }
+      ]
+    },
+    {
+      "source_path": "compiler/cases_scalar_collection_keys.md",
+      "source_sha256": "cd82e33cc999dcc02ae4c03091d821be1d472dab3b16f2d5f5c5ff8c3b819140",
+      "excerpts": [
+        {
+          "start_line": 8,
+          "start_column": 1,
+          "text": "| Each admitted scalar K and declared enum as `set<K>` and `map<K, i64>` | Accept canonical nonempty add/upsert/remove traces with silence and retain exact K. |\n"
+        }
+      ]
+    },
+    {
+      "source_path": "compiler/cases_struct_shape_arguments.md",
+      "source_sha256": "cbbe0230c003f533a25acbbf49e40aeb56ebc8489af836c4c75c353503442a5b",
+      "excerpts": [
+        {
+          "start_line": 8,
+          "start_column": 1,
+          "text": "| `Publication<map<i64, i64>>` | Ordinary field has exact `delta<map<i64, i64>>` type. |\n| `Batch<map<i64, i64>>` | Forwarded delta-formation requirement is satisfied. |\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/atomic-set-map-publications.md",
+      "source_sha256": "0ae58dfbbd2f755e4f87af9990df608f773cb15ee3d0cf2844682573d0a6eb12",
+      "excerpts": [
+        {
+          "start_line": 4,
+          "start_column": 1,
+          "text": "`map<K, V>`. K uses the [scalar-key contract](scalar-collection-keys.md) and its\n"
+        },
+        {
+          "start_line": 17,
+          "start_column": 1,
+          "text": "map<str, list<i64>>(items: [\"alpha\": [1, 2], \"beta\": []])\n"
+        },
+        {
+          "start_line": 19,
+          "start_column": 1,
+          "text": "map<str, i64>(items: [])\n"
+        },
+        {
+          "start_line": 49,
+          "start_column": 1,
+          "text": "For `atomic<set<K>>` and `atomic<map<K, V>>`, the delta is the complete ordinary\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/base-layer.md",
+      "source_sha256": "c601a78e2e2ed05ddbd00832cec2ac5a7158c15399fb66da78d26dd0ff809b3a",
+      "excerpts": [
+        {
+          "start_line": 420,
+          "start_column": 1,
+          "text": "  non-atomic temporal `map<K, V>`. The first argument is an anonymous\n"
+        },
+        {
+          "start_line": 425,
+          "start_column": 1,
+          "text": "  The result is `map<K, R>`. An outputless body is refused: that is `for`.\n"
+        },
+        {
+          "start_line": 800,
+          "start_column": 1,
+          "text": "- **Provided by no layer yet:** `map_`, `switch_`, `reduce`, `mesh_`,\n"
+        },
+        {
+          "start_line": 810,
+          "start_column": 1,
+          "text": "  `use std::{map}` and stays excluded by name. The explicit `map_`\n  operator, with its key parameter and `no_key`, stays in no layer.\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/contextual-collection-deltas.md",
+      "source_sha256": "5e93a88e6207d1ed1ac920b51db70a992a9e3a64c431e8f045a685ea2a8ec30a",
+      "excerpts": [
+        {
+          "start_line": 22,
+          "start_column": 1,
+          "text": "- `map<K, S>` for those same scalar keys;\n"
+        },
+        {
+          "start_line": 75,
+          "start_column": 1,
+          "text": "| Map | `delta<map<i64, i64>>(upsert: [7: 10], remove: [9])` |\n| Recursive child | `delta<map<i64, Quote>>(upsert: [7: delta<Quote>(bid: 1)])` |\n"
+        },
+        {
+          "start_line": 145,
+          "start_column": 1,
+          "text": "`delta<map<i64, map<i64, i64>>>(upsert: [7: delta<map<i64, i64>>(upsert: [1: 11])])`\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/eval-collection-deltas.md",
+      "source_sha256": "7d33020e7485807bd299a6be325f6600adbbcb68dae4c419b3d495dcbedf02ba",
+      "excerpts": [
+        {
+          "start_line": 44,
+          "start_column": 1,
+          "text": "`delta<map<i64, i64>>(upsert: [1: 11])` supplies that sparse update, not a\n"
+        },
+        {
+          "start_line": 95,
+          "start_column": 1,
+          "text": "fn forward_map(value: map<i64, i64>) -> map<i64, i64> => pass_through(value)\n"
+        },
+        {
+          "start_line": 99,
+          "start_column": 1,
+          "text": "        delta<map<i64, i64>>(upsert: [1: 10, 2: 20]),\n        delta<map<i64, i64>>(upsert: [1: 11]),\n        delta<map<i64, i64>>(remove: [2]),\n"
+        },
+        {
+          "start_line": 104,
+          "start_column": 1,
+          "text": "        delta<map<i64, i64>>(upsert: [1: 10, 2: 20]),\n        delta<map<i64, i64>>(upsert: [1: 11]),\n        delta<map<i64, i64>>(remove: [2]),\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/iteration.md",
+      "source_sha256": "af4e9378a10220e8cd162ff783190081940bb7a5157cac6c5f1e0de654ce9a7e",
+      "excerpts": [
+        {
+          "start_line": 134,
+          "start_column": 1,
+          "text": "fn observe(book: map<str, f64>, offset: f64) {\n"
+        },
+        {
+          "start_line": 176,
+          "start_column": 1,
+          "text": "fn total(samples: map<str, f64>, factor: f64) -> f64 {\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/language-model.md",
+      "source_sha256": "68284dc7871079af15bc596e5a5368f4b2f6837e2873f910cabb258c5f760e39",
+      "excerpts": [
+        {
+          "start_line": 130,
+          "start_column": 1,
+          "text": "positions: map<str, f64>\n"
+        },
+        {
+          "start_line": 138,
+          "start_column": 1,
+          "text": "const settings: map<str, str>\n"
+        },
+        {
+          "start_line": 558,
+          "start_column": 1,
+          "text": "map<str, f64>                     # keyed temporal map\natomic<map<str, f64>>             # stream of complete map snapshots\nmap<str, atomic<tuple<f64, f64>>> # keyed atomic tuple values\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/map-key-connections.md",
+      "source_sha256": "42336ad2f9797fce2253ceed3e8654d30f8a20c7b40c632549fb8c9a4790f393",
+      "excerpts": [
+        {
+          "start_line": 6,
+          "start_column": 1,
+          "text": "non-atomic `map<K, V>`. It does not perform ordinary dictionary value lookup.\n"
+        },
+        {
+          "start_line": 10,
+          "start_column": 1,
+          "text": "| Graph selection from non-atomic `map<K, V>` | `ref<V>` designating a child | Publish empty REF. |\n| Ordinary map value or `atomic<map<K, V>>` payload: `book[key]`, `at(book, key)` | Current ordinary V | `value.missing_key` failure. |\n"
+        },
+        {
+          "start_line": 41,
+          "start_column": 1,
+          "text": "Graph selection below `ref<map<K, V>>` composes with existing WIR-5\n"
+        },
+        {
+          "start_line": 46,
+          "start_column": 1,
+          "text": "`map<K, ref<T>>` and structural REF type formation and binding remain valid;\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/native-interface.md",
+      "source_sha256": "c1181eee25d72f5335349b84fb95f895907998cdcfb1e4a74f6765ba04e0b26f",
+      "excerpts": [
+        {
+          "start_line": 203,
+          "start_column": 1,
+          "text": "- collection arguments may use generic `list`, `set`, `map`, or `rolling`\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/native-surface-proposal.md",
+      "source_sha256": "0c243d66525f5b66a75abe6ea1ba79d44064eea6f0ff548483b71afae3ad1580",
+      "excerpts": [
+        {
+          "start_line": 42,
+          "start_column": 1,
+          "text": "Graph key selection from a non-atomic `map<K, V>` selects a `ref<V>`\n"
+        },
+        {
+          "start_line": 49,
+          "start_column": 1,
+          "text": "fn membership_changed(value: map<i64, f64>) -> bool {\n"
+        },
+        {
+          "start_line": 53,
+          "start_column": 1,
+          "text": "fn read_price(value: map<i64, f64>, key: i64) -> f64 {\n"
+        },
+        {
+          "start_line": 57,
+          "start_column": 1,
+          "text": "fn key_changes(value: map<i64, f64>) -> i64 {\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/nullable-map-lookup.md",
+      "source_sha256": "41f09cd9906fbb74e46437b54ad59f8d32ea4aa8cb4f381bf1b2b27aa663e78a",
+      "excerpts": [
+        {
+          "start_line": 7,
+          "start_column": 1,
+          "text": "   and `atomic<map<K, V>>` payloads use point-in-time value\n"
+        },
+        {
+          "start_line": 37,
+          "start_column": 1,
+          "text": "const fn price_or_zero(book: map<str, i64>, key: str) -> i64 {\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/ordinary-delta-types.md",
+      "source_sha256": "8db7cf4f6599928536162a560fab4e57fa4fcaebaf8e21d24c4c5c6d8242a328",
+      "excerpts": [
+        {
+          "start_line": 96,
+          "start_column": 1,
+          "text": "is `TimedValue<map<i64, i64>>`, with a `delta<map<i64, i64>>` payload.\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/publication-state-proposal.md",
+      "source_sha256": "39208402ba34ab9e7837dc92b8343736d4d36a7b1f8da168b76274211b70f120",
+      "excerpts": [
+        {
+          "start_line": 25,
+          "start_column": 1,
+          "text": "fn observe_valid(step: i64, watched: map<i64, i64>) -> bool {\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/scalar-collection-keys.md",
+      "source_sha256": "db53d0c12e030f8254b719d0a4641fb5485ef3f846022ef5f454526e357b2f68",
+      "excerpts": [
+        {
+          "start_line": 3,
+          "start_column": 1,
+          "text": "Extend the existing structural publication profile to `set<K>` and `map<K, S>`,\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/design/type-extensions.md",
+      "source_sha256": "1fbe224156c33ab05df2242cea022b9e68fc1850e3d5c7f6fc49eefcd2eb410e",
+      "excerpts": [
+        {
+          "start_line": 264,
+          "start_column": 1,
+          "text": "ref<map<i64, str>> -> REF[TSD[int, TS[str]]]\n"
+        },
+        {
+          "start_line": 270,
+          "start_column": 1,
+          "text": "ref<map<i64, str>> ~ map<i64, str>\n"
+        },
+        {
+          "start_line": 280,
+          "start_column": 1,
+          "text": "map<ref<i64>, str> -> error\n"
+        },
+        {
+          "start_line": 416,
+          "start_column": 1,
+          "text": "Graph key selection `book[key]` from a non-atomic `map<K, V>` likewise returns\n"
+        },
+        {
+          "start_line": 461,
+          "start_column": 1,
+          "text": "map<i64, ref<str>> -> TSD[int, REF[TS[str]]]\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/developer-guide/syntax-and-semantics.md",
+      "source_sha256": "aa8476015f826de76f71bb0aa099fb816b185f2c7677a69cddf810e65d21ff68",
+      "excerpts": [
+        {
+          "start_line": 138,
+          "start_column": 1,
+          "text": "`atomic`, `tuple`, `list`, `set`, `map`, `rolling`, `result`, and `error` are contextual type\nkeywords, and `unbounded` is a contextual constant in a list-size position.\n"
+        },
+        {
+          "start_line": 141,
+          "start_column": 1,
+          "text": "as in `map(fn(value) => value * 2.0, values)`. `in` is contextual: it is the\nseparator of a `for` statement, the membership relation in a `requires`\nclause, and an ordinary identifier elsewhere. `out` and the names of other\n"
+        },
+        {
+          "start_line": 462,
+          "start_column": 1,
+          "text": "                | map_type\n"
+        },
+        {
+          "start_line": 474,
+          "start_column": 1,
+          "text": "                | value_map_type\n"
+        },
+        {
+          "start_line": 492,
+          "start_column": 1,
+          "text": "map_type        = \"map\", \"<\", value_type, \",\", type, \">\";\n"
+        },
+        {
+          "start_line": 502,
+          "start_column": 1,
+          "text": "value_map_type  = \"map\", \"<\", value_type, \",\", value_type, \">\";\n"
+        },
+        {
+          "start_line": 544,
+          "start_column": 1,
+          "text": "map<str, atomic<tuple<f64, f64>>>\n"
+        },
+        {
+          "start_line": 1740,
+          "start_column": 1,
+          "text": "temporalize(map<K, V>)\n"
+        },
+        {
+          "start_line": 1788,
+          "start_column": 1,
+          "text": "`map<str, atomic<Quote>>` becomes a temporal map of atomic Quote snapshots while\n"
+        },
+        {
+          "start_line": 2203,
+          "start_column": 1,
+          "text": "| `map<K, V>` | `insert(out, key, value)`, `update(out, key, value)`, `upsert(out, key, value)`, `remove(out, key)`, `discard(out, key)`, `invalidate(out, key)`, `clear(out)` |\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/user-guide/error-management.md",
+      "source_sha256": "950f657aa9d373c72bf03fe1c7929d45f01f7a6278603dcbb46c19382892069a",
+      "excerpts": [
+        {
+          "start_line": 7,
+          "start_column": 1,
+          "text": "const fn price_or_zero(book: map<str, i64>, key: str) -> i64 {\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/user-guide/functions.md",
+      "source_sha256": "f8c87e8cc2b8766edfa8ddcb753ba163d3808eab710db725ed5bd4625d4cd216",
+      "excerpts": [
+        {
+          "start_line": 196,
+          "start_column": 1,
+          "text": "positions: map<str, f64>\n"
+        },
+        {
+          "start_line": 205,
+          "start_column": 1,
+          "text": "const settings: map<str, f64>\n"
+        },
+        {
+          "start_line": 1246,
+          "start_column": 1,
+          "text": "fn latest_by_key(key: str, value: f64) -> map<str, f64> {\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/user-guide/language-tour.md",
+      "source_sha256": "180d39361748541ea3cd2177753b7a8ba6671fe002c76fe483f817eb4083a917",
+      "excerpts": [
+        {
+          "start_line": 160,
+          "start_column": 1,
+          "text": "    prices: map<str, f64>,\n    quantities: map<str, i64>\n) -> map<str, f64> =>\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/docs/user-guide/types-and-expressions.md",
+      "source_sha256": "fc6b89258fa52c54e6ebbb10922a15fd48bae303d07c8081db16b358274d2bad",
+      "excerpts": [
+        {
+          "start_line": 257,
+          "start_column": 1,
+          "text": "Canonical containers and structured values become structural time-series\nshapes recursively:\n"
+        },
+        {
+          "start_line": 269,
+          "start_column": 1,
+          "text": "| `map<str, f64>` | Keyed temporal map from `str` to temporal `f64` |\n"
+        },
+        {
+          "start_line": 291,
+          "start_column": 1,
+          "text": "`ref<map<i64, str>>` refers to a time-varying map from integers to strings. Reference wrappers\n"
+        },
+        {
+          "start_line": 294,
+          "start_column": 1,
+          "text": "Invalid placements remain invalid: `map<ref<i64>, str>` is an error because\n"
+        },
+        {
+          "start_line": 335,
+          "start_column": 1,
+          "text": "`map<K, ref<V>>` is a map containing references, `TSD[K, REF[V]]`, with no\n"
+        },
+        {
+          "start_line": 724,
+          "start_column": 1,
+          "text": "    quotes: map<str, Quote>\n    snapshots: map<str, atomic<Quote>>\n"
+        },
+        {
+          "start_line": 985,
+          "start_column": 1,
+          "text": "| `atomic<map<str, f64>>` | One endpoint carrying a complete map snapshot |\n| `map<str, atomic<tuple<f64, f64>>>` | Keyed temporal map whose values are atomic tuples |\n"
+        },
+        {
+          "start_line": 1010,
+          "start_column": 1,
+          "text": "const labels: map<str, str>\n"
+        },
+        {
+          "start_line": 1225,
+          "start_column": 1,
+          "text": "fn observe(book: map<str, f64>, offset: f64) {\n"
+        },
+        {
+          "start_line": 1247,
+          "start_column": 1,
+          "text": "fn membership_changed(book: map<str, f64>) -> bool {\n"
+        },
+        {
+          "start_line": 1278,
+          "start_column": 1,
+          "text": "In graph composition, `book[key]` on a non-atomic `map<K, V>` selects a\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/any-values.hgl",
+      "source_sha256": "46daed2e292a08f62ba9f86d4b889c8afce984f6445c6c9dfea2a71e33dac22f",
+      "excerpts": [
+        {
+          "start_line": 35,
+          "start_column": 1,
+          "text": "        let value: any = any(map<i64, i64>(items: [1: 2]))\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/atomic-set-map-publications.hgl",
+      "source_sha256": "766a7e7a3a8718bda80c63071e971b244b45820fa4a53c2661364fe3d4a4298a",
+      "excerpts": [
+        {
+          "start_line": 7,
+          "start_column": 1,
+          "text": "fn forward_map(value: atomic<map<str, list<i64>>>) -> atomic<map<str, list<i64>>> => pass_through(value)\n"
+        },
+        {
+          "start_line": 9,
+          "start_column": 1,
+          "text": "const fn ordinary_map(key: str, value: i64) -> map<str, list<i64>> {\n"
+        },
+        {
+          "start_line": 12,
+          "start_column": 1,
+          "text": "    return map<str, list<i64>>(items: [key: values])\n"
+        },
+        {
+          "start_line": 21,
+          "start_column": 1,
+          "text": "    let both = map<str, list<i64>>(items: [\"alpha\": [1, 2], \"beta\": [3]])\n"
+        },
+        {
+          "start_line": 23,
+          "start_column": 1,
+          "text": "    let empty_map = map<str, list<i64>>(items: [])\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/collection-views.hgl",
+      "source_sha256": "0ad47f51f29f74d07cf64d7b784cf40bbf09faab52093ebbd9e835759e123537",
+      "excerpts": [
+        {
+          "start_line": 5,
+          "start_column": 1,
+          "text": "fn active_symbols(book: map<str, f64>) -> set<str> =>\n"
+        },
+        {
+          "start_line": 9,
+          "start_column": 1,
+          "text": "    book: map<str, f64>,\n"
+        },
+        {
+          "start_line": 30,
+          "start_column": 1,
+          "text": "fn audit_book(book: map<str, f64>) {\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/composite-collection-keys.hgl",
+      "source_sha256": "785aa2c2b8838a6c5826f2793636b94e9098784a5a4ea327a8544c8afaf49d16",
+      "excerpts": [
+        {
+          "start_line": 10,
+          "start_column": 1,
+          "text": "fn keyed(value: map<Key, i64>) -> map<Key, i64> => pass_through(value)\n"
+        },
+        {
+          "start_line": 15,
+          "start_column": 1,
+          "text": "    assert eval(keyed, [delta<map<Key, i64>>(upsert: [Key(number: 1, label: \"a\"): 7]), _, delta<map<Key, i64>>(remove: [Key(number: 1, label: \"a\")])]) == [\n        delta<map<Key, i64>>(upsert: [Key(number: 1, label: \"a\"): 7]), _, delta<map<Key, i64>>(remove: [Key(number: 1, label: \"a\")])\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/dynamic-collection-iteration.hgl",
+      "source_sha256": "6b46a1ecc8035b08ebb993c9bc2e1de085674608abd4ec64bbb677a671fcf2e2",
+      "excerpts": [
+        {
+          "start_line": 8,
+          "start_column": 1,
+          "text": "export fn observe_values(book: map<str, f64>, offset: f64) {\n"
+        },
+        {
+          "start_line": 14,
+          "start_column": 1,
+          "text": "export fn observe_items(book: map<str, f64>, offset: f64) {\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/empty-delta-validity.hgl",
+      "source_sha256": "6da9b7603f5aa2bfe7090ab3b75a9ba87dd3af477b941df14cfe04a76dd63dfa",
+      "excerpts": [
+        {
+          "start_line": 14,
+          "start_column": 1,
+          "text": "fn empty_delta_map(value: map<i64, i64>) -> map<i64, i64> => forward_empty_delta(value)\n"
+        },
+        {
+          "start_line": 34,
+          "start_column": 1,
+          "text": "    assert eval(empty_delta_map, value: [delta<map<i64, i64>>(), delta<map<i64, i64>>()]) == [delta<map<i64, i64>>(), _]\n"
+        },
+        {
+          "start_line": 81,
+          "start_column": 1,
+          "text": "        eval(empty_delta_map, value: [delta<map<i64, i64>>(), delta<map<i64, i64>>(remove: [1])])\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/error-capture.hgl",
+      "source_sha256": "12a6441f30fbcc60620862ebe2f63eeff423b3db8e887ca76bbb5bbb267c5550",
+      "excerpts": [
+        {
+          "start_line": 114,
+          "start_column": 1,
+          "text": "fn per_key(book: map<str, i64>) {\n"
+        },
+        {
+          "start_line": 122,
+          "start_column": 1,
+          "text": "    start { at(map<str, i64>(items: []), \"X\") }\n"
+        },
+        {
+          "start_line": 151,
+          "start_column": 1,
+          "text": "        delta<map<str, i64>>(upsert: [\"A\": -1, \"B\": 7]),\n        delta<map<str, i64>>(upsert: [\"A\": 8, \"B\": 9]),\n        delta<map<str, i64>>(remove: [\"A\"]),\n        delta<map<str, i64>>(upsert: [\"A\": -1])\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/eval-profile-errors.hgl",
+      "source_sha256": "45fa83af42c970a74ea457e928ce8b3786bc8fa4d4983e31ff9fc3346295a4e8",
+      "excerpts": [
+        {
+          "start_line": 7,
+          "start_column": 1,
+          "text": "fn keyed(value: map<i64, i64>) -> map<i64, i64> => pass_through(value)\n"
+        },
+        {
+          "start_line": 9,
+          "start_column": 1,
+          "text": "fn nested(value: map<i64, set<i64>>) -> map<i64, set<i64>> => pass_through(value)\n"
+        },
+        {
+          "start_line": 50,
+          "start_column": 1,
+          "text": "            delta<map<i64, i64>>(remove: [1])\n"
+        },
+        {
+          "start_line": 58,
+          "start_column": 1,
+          "text": "            delta<map<i64, i64>>(upsert: [1: 10]),\n            delta<map<i64, i64>>(remove: [1]),\n            delta<map<i64, i64>>(remove: [1])\n"
+        },
+        {
+          "start_line": 129,
+          "start_column": 1,
+          "text": "            delta<map<i64, set<i64>>>(upsert: [7: delta<set<i64>>(added: [1])]),\n            delta<map<i64, set<i64>>>(upsert: [7: delta<set<i64>>(removed: [2])])\n"
+        },
+        {
+          "start_line": 138,
+          "start_column": 1,
+          "text": "            delta<map<i64, set<i64>>>(upsert: [7: delta<set<i64>>(removed: [1])])\n"
+        },
+        {
+          "start_line": 146,
+          "start_column": 1,
+          "text": "            delta<map<i64, set<i64>>>(upsert: [7: delta<set<i64>>(added: [1])]),\n            delta<map<i64, set<i64>>>(remove: [7]),\n            delta<map<i64, set<i64>>>(upsert: [7: delta<set<i64>>(removed: [1])])\n"
+        },
+        {
+          "start_line": 191,
+          "start_column": 1,
+          "text": "    assert eval(keyed, value: [delta<map<i64, i64>>(upsert: [1: 2])]) == [\n        delta<map<i64, i64>>(upsert: [1: 2])\n"
+        },
+        {
+          "start_line": 207,
+          "start_column": 1,
+          "text": "        delta<map<i64, i64>>(upsert: [1: 10]),\n        delta<map<i64, i64>>(upsert: [1: 10]),\n        delta<map<i64, i64>>(remove: [1]),\n        delta<map<i64, i64>>(upsert: [1: 11])\n"
+        },
+        {
+          "start_line": 212,
+          "start_column": 1,
+          "text": "        delta<map<i64, i64>>(upsert: [1: 10]),\n        delta<map<i64, i64>>(upsert: [1: 10]),\n        delta<map<i64, i64>>(remove: [1]),\n        delta<map<i64, i64>>(upsert: [1: 11])\n"
+        },
+        {
+          "start_line": 229,
+          "start_column": 1,
+          "text": "        delta<map<i64, set<i64>>>(upsert: [7: delta<set<i64>>(added: [1])]),\n        delta<map<i64, set<i64>>>(upsert: [7: delta<set<i64>>(removed: [1])]),\n        delta<map<i64, set<i64>>>(remove: [7]),\n        delta<map<i64, set<i64>>>(upsert: [7: delta<set<i64>>(added: [1])])\n"
+        },
+        {
+          "start_line": 234,
+          "start_column": 1,
+          "text": "        delta<map<i64, set<i64>>>(upsert: [7: delta<set<i64>>(added: [1])]),\n        delta<map<i64, set<i64>>>(upsert: [7: delta<set<i64>>(removed: [1])]),\n        delta<map<i64, set<i64>>>(remove: [7]),\n        delta<map<i64, set<i64>>>(upsert: [7: delta<set<i64>>(added: [1])])\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/map-key-connections.hgl",
+      "source_sha256": "aa47638991a495e3395954dcf38e0cdb8a6ae5ecbbbc113eb21f7c802818bf42",
+      "excerpts": [
+        {
+          "start_line": 3,
+          "start_column": 1,
+          "text": "fn select_price(book: map<str, i64>, key: str) -> ref<i64> => book[key]\nfn select_reference_price(book: ref<map<str, i64>>, key: str) -> ref<i64> => book[key]\n"
+        },
+        {
+          "start_line": 8,
+          "start_column": 1,
+          "text": "fn followed_price(book: map<str, i64>, key: str) -> i64 =>\n"
+        },
+        {
+          "start_line": 10,
+          "start_column": 1,
+          "text": "fn followed_reference_price(book: map<str, i64>, key: str) -> i64 =>\n"
+        },
+        {
+          "start_line": 12,
+          "start_column": 1,
+          "text": "fn choose_book(index: i64, first: ref<map<str, i64>>, second: ref<map<str, i64>>) -> ref<map<str, i64>> {\n"
+        },
+        {
+          "start_line": 21,
+          "start_column": 1,
+          "text": "fn followed_selected_book(index: i64, first: map<str, i64>, second: map<str, i64>, key: str) -> i64 {\n"
+        },
+        {
+          "start_line": 28,
+          "start_column": 1,
+          "text": "fn selection_ticks(book: map<str, i64>, key: str, step: i64) -> bool =>\n"
+        },
+        {
+          "start_line": 43,
+          "start_column": 1,
+          "text": "fn saved_price(book: map<str, i64>, key: str, step: i64) -> i64 {\n"
+        },
+        {
+          "start_line": 48,
+          "start_column": 1,
+          "text": "fn atomic_price(book: atomic<map<str, i64>>, key: str) -> i64 {\n"
+        },
+        {
+          "start_line": 51,
+          "start_column": 1,
+          "text": "fn atomic_missing(book: atomic<map<str, i64>>, key: str) -> bool {\n"
+        },
+        {
+          "start_line": 57,
+          "start_column": 1,
+          "text": "fn atomic_at(book: atomic<map<str, i64>>, key: str) -> i64 {\n"
+        },
+        {
+          "start_line": 60,
+          "start_column": 1,
+          "text": "const fn missing_price(book: map<str, i64>, key: str) -> bool {\n"
+        },
+        {
+          "start_line": 64,
+          "start_column": 1,
+          "text": "const fn strict_price(book: map<str, i64>, key: str) -> i64 => book[key]\nconst fn strict_at(book: map<str, i64>, key: str) -> i64 => at(book, key)\nconst fn fallback_price(book: map<str, i64>, key: str) -> i64 =>\n"
+        },
+        {
+          "start_line": 72,
+          "start_column": 1,
+          "text": "        book: [_, _, delta<map<str, i64>>(upsert: [\"X\": 10])],\n"
+        },
+        {
+          "start_line": 76,
+          "start_column": 1,
+          "text": "        book: [_, _, delta<map<str, i64>>(upsert: [\"X\": 10])], key: [\"X\"]\n"
+        },
+        {
+          "start_line": 78,
+          "start_column": 1,
+          "text": "    let idle = delta<map<str, i64>>()\n    let changes: list<delta<map<str, i64>>, 12> = [\n"
+        },
+        {
+          "start_line": 81,
+          "start_column": 1,
+          "text": "        delta<map<str, i64>>(upsert: [\"X\": 7]),\n        delta<map<str, i64>>(upsert: [\"Y\": 20]),\n        delta<map<str, i64>>(upsert: [\"X\": 8]),\n        delta<map<str, i64>>(remove: [\"X\"]),\n"
+        },
+        {
+          "start_line": 86,
+          "start_column": 1,
+          "text": "        delta<map<str, i64>>(upsert: [\"X\": 8]),\n        idle, idle, idle, idle, delta<map<str, i64>>(upsert: [\"Y\": 21])\n"
+        },
+        {
+          "start_line": 102,
+          "start_column": 1,
+          "text": "        book: [delta<map<str, i64>>(upsert: [\"X\": 7, \"Y\": 7])],\n"
+        },
+        {
+          "start_line": 106,
+          "start_column": 1,
+          "text": "        book: [delta<map<str, i64>>(upsert: [\"X\": 7, \"Y\": 7])],\n"
+        },
+        {
+          "start_line": 117,
+          "start_column": 1,
+          "text": "        book: [_, delta<map<str, i64>>(upsert: [\"X\": 7]), delta<map<str, i64>>(remove: [\"X\"])],\n"
+        },
+        {
+          "start_line": 122,
+          "start_column": 1,
+          "text": "        first: [delta<map<str, i64>>(upsert: [\"X\": 7])],\n        second: [delta<map<str, i64>>(upsert: [\"X\": 7]), _, delta<map<str, i64>>(upsert: [\"X\": 8])]\n"
+        },
+        {
+          "start_line": 125,
+          "start_column": 1,
+          "text": "    let zero = map<str, i64>(items: [\"X\": 0])\n    let empty = map<str, i64>(items: [])\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/nullable-map-lookup.hgl",
+      "source_sha256": "0381a12c802043c6eeaf05d9057b3b7ba0ef2eb52288a66c49a66a44e3687d2a",
+      "excerpts": [
+        {
+          "start_line": 3,
+          "start_column": 1,
+          "text": "const fn price_or_zero(book: map<str, i64>, key: str) -> i64 {\n"
+        },
+        {
+          "start_line": 8,
+          "start_column": 1,
+          "text": "const fn fallback(book: map<str, i64>, key: str) -> i64 =>\n"
+        },
+        {
+          "start_line": 10,
+          "start_column": 1,
+          "text": "const fn strict(book: map<str, i64>, key: str) -> i64 => book[key]\nconst fn strict_at(book: map<str, i64>, key: str) -> i64 => at(book, key)\nconst fn eager_default(book: map<str, i64>, key: str) -> i64 =>\n    get(book, key, default: at(map<str, i64>(items: []), \"fallback\"))\nfn atomic_price(book: atomic<map<str, i64>>, key: str) -> i64 {\n"
+        },
+        {
+          "start_line": 20,
+          "start_column": 1,
+          "text": "fn atomic_strict(book: atomic<map<str, i64>>, key: str) -> i64 {\n"
+        },
+        {
+          "start_line": 25,
+          "start_column": 1,
+          "text": "    let zero = map<str, i64>(items: [\"X\": 0])\n    let empty = map<str, i64>(items: [])\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/ordinary-delta-types.hgl",
+      "source_sha256": "01ccdc76caee607ab2d27bf4a9a8db8ce68b129696a41b8868f03f46ba362abd",
+      "excerpts": [
+        {
+          "start_line": 39,
+          "start_column": 1,
+          "text": "instantiate replay<map<i64, i64>>, record<map<i64, i64>>\n"
+        },
+        {
+          "start_line": 46,
+          "start_column": 1,
+          "text": "const fn map_values() -> list<TimedValue<map<i64, i64>>> {\n    var values: list<TimedValue<map<i64, i64>>> = []\n    var update: delta<map<i64, i64>> = delta<map<i64, i64>>(upsert: [1: 10, 2: 20])\n    push(values, TimedValue<map<i64, i64>>(\n"
+        },
+        {
+          "start_line": 54,
+          "start_column": 1,
+          "text": "    update = delta<map<i64, i64>>(upsert: [1: 11])\n    push(values, TimedValue<map<i64, i64>>(\n"
+        },
+        {
+          "start_line": 64,
+          "start_column": 1,
+          "text": "fn replay_map(tick: i64) -> map<i64, i64> {\n"
+        },
+        {
+          "start_line": 70,
+          "start_column": 1,
+          "text": "fn capture_map(value: map<i64, i64>) {\n"
+        },
+        {
+          "start_line": 95,
+          "start_column": 1,
+          "text": "    let empty: delta<map<i64, i64>> = delta<map<i64, i64>>()\n    var values: list<delta<map<i64, i64>>> = []\n"
+        },
+        {
+          "start_line": 107,
+          "start_column": 1,
+          "text": "        delta<map<i64, i64>>(upsert: [1: 10, 2: 20]),\n"
+        },
+        {
+          "start_line": 109,
+          "start_column": 1,
+          "text": "        delta<map<i64, i64>>(upsert: [1: 11]),\n"
+        },
+        {
+          "start_line": 116,
+          "start_column": 1,
+          "text": "        delta<map<i64, i64>>(upsert: [1: 10, 2: 20]),\n        delta<map<i64, i64>>(remove: [2])\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/reject/any-constant-capability.hgl",
+      "source_sha256": "3dcb1d828e26258082bc8cc9a5e6e627acb98f28aca198f8b789c1f7d125b750",
+      "excerpts": [
+        {
+          "start_line": 9,
+          "start_column": 1,
+          "text": "struct BadIndexDefault { value: bool = CapabilityList(values: [any(map<i64, i64>(items: []))]).values[0] < any(map<i64, i64>(items: [])) }\n"
+        },
+        {
+          "start_line": 12,
+          "start_column": 1,
+          "text": "struct BadFieldDefault { value: bool = CapabilityCell(value: any(map<i64, i64>(items: []))).value < any(map<i64, i64>(items: [])) }\n"
+        },
+        {
+          "start_line": 20,
+          "start_column": 1,
+          "text": "const fn bad_parameter_default(value: bool = CapabilityCell(value: any(map<i64, i64>(items: []))).value < any(map<i64, i64>(items: []))) -> bool => value\n"
+        },
+        {
+          "start_line": 34,
+          "start_column": 1,
+          "text": "        let unordered: any = any(map<i64, i64>(items: []))\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/reject/delta-errors.hgl",
+      "source_sha256": "6c30be78892f87a59deb263473135fcb52e533bdb24906ddbe53d379e142654b",
+      "excerpts": [
+        {
+          "start_line": 40,
+          "start_column": 1,
+          "text": "const fn rejected_delta_as_shape(value: delta<delta<map<i64, i64>>>) -> i64 => 0\n"
+        },
+        {
+          "start_line": 43,
+          "start_column": 1,
+          "text": "const fn rejected_atomic_delta_payload(value: delta<atomic<delta<map<i64, i64>>>>) -> i64 => 0\n"
+        },
+        {
+          "start_line": 46,
+          "start_column": 1,
+          "text": "const fn rejected_collection_key(value: delta<map<list<i64>, i64>>) -> i64 => 0\n"
+        },
+        {
+          "start_line": 168,
+          "start_column": 1,
+          "text": "    let source: delta<map<i64, i64>> = delta<map<i64, i64>>()\n"
+        },
+        {
+          "start_line": 205,
+          "start_column": 1,
+          "text": "    let value: delta<map<str, i64>> = delta<map<i64, i64>>(upsert: [1: 2])\n"
+        },
+        {
+          "start_line": 224,
+          "start_column": 1,
+          "text": "    let value = delta<map<i64, Quote>>(upsert: [\n"
+        },
+        {
+          "start_line": 242,
+          "start_column": 1,
+          "text": "    let value: delta<map<i64, i64>> = map<i64, i64>(items: [1: 2])\n"
+        },
+        {
+          "start_line": 247,
+          "start_column": 1,
+          "text": "    let value: map<i64, i64> = delta<map<i64, i64>>(upsert: [1: 2])\n"
+        },
+        {
+          "start_line": 327,
+          "start_column": 1,
+          "text": "    let value: delta<atomic<map<str, i64>>> = map<i64, i64>(items: [1: 2])\n"
+        },
+        {
+          "start_line": 380,
+          "start_column": 1,
+          "text": "    let value = delta<map<i64, i64>>(upsert: [\"wrong\": 1])\n"
+        },
+        {
+          "start_line": 385,
+          "start_column": 1,
+          "text": "    let value = delta<map<i64, i64>>(remove: [\"wrong\"])\n"
+        },
+        {
+          "start_line": 395,
+          "start_column": 1,
+          "text": "    let value = delta<map<Quote, i64>>(upsert: [OtherQuote(bid: 1): 2])\n"
+        },
+        {
+          "start_line": 404,
+          "start_column": 1,
+          "text": "    let value = delta<map<i64, i64>>(upsert: [\n"
+        },
+        {
+          "start_line": 413,
+          "start_column": 1,
+          "text": "    let value = delta<map<i64, i64>>(remove: [1, 1])\n"
+        },
+        {
+          "start_line": 428,
+          "start_column": 1,
+          "text": "    let value = delta<map<Quote, i64>>(upsert: [Quote(bid: 1): 2, Quote(bid: 1): 3])\n"
+        },
+        {
+          "start_line": 466,
+          "start_column": 1,
+          "text": "    let value = delta<map<i64, i64>>(upsert: [1: 2], remove: [1])\n"
+        },
+        {
+          "start_line": 471,
+          "start_column": 1,
+          "text": "    let value = delta<map<i64, i64>>(remove: [1], upsert: [1: 2])\n"
+        },
+        {
+          "start_line": 483,
+          "start_column": 1,
+          "text": "    let value = delta<map<i64, i64>>(upsert: [position: 1])\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/reject/nullable-map-lookup.hgl",
+      "source_sha256": "69cd79d22cd6406489a623954907a21b76e7f340e44292de1699802c864d20c8",
+      "excerpts": [
+        {
+          "start_line": 3,
+          "start_column": 1,
+          "text": "const fn unchecked(book: map<str, i64>, key: str) -> i64 {\n"
+        },
+        {
+          "start_line": 8,
+          "start_column": 1,
+          "text": "const fn wrong_default(book: map<str, i64>, key: str) -> i64 {\n"
+        },
+        {
+          "start_line": 12,
+          "start_column": 1,
+          "text": "const fn repeated_read(book: map<str, i64>, key: str) -> i64 {\n"
+        },
+        {
+          "start_line": 20,
+          "start_column": 1,
+          "text": "    let value = get(map<str, i64>(items: [\"X\": 7]), \"X\")\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/reject/result-errors.hgl",
+      "source_sha256": "449f1ed7fbabef3148b9aa5d0ee1ac4cedc347f59b96cf036bf7d763b0b27446",
+      "excerpts": [
+        {
+          "start_line": 24,
+          "start_column": 1,
+          "text": "const fn nullable_operand(book: map<str, i64>) -> result<i64, error> {\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/result-errors.hgl",
+      "source_sha256": "3ccd46d70e21ce5ea55751008e42d759248580bfc1dd7e50654983de818891b6",
+      "excerpts": [
+        {
+          "start_line": 3,
+          "start_column": 1,
+          "text": "const fn price(book: map<str, i64>, key: str) -> result<i64, error> {\n"
+        },
+        {
+          "start_line": 10,
+          "start_column": 1,
+          "text": "const fn doubled(book: map<str, i64>, key: str) -> result<i64, error> {\n"
+        },
+        {
+          "start_line": 14,
+          "start_column": 1,
+          "text": "const fn propagate_before_strict(book: map<str, i64>, key: str) -> result<i64, error> {\n"
+        },
+        {
+          "start_line": 16,
+          "start_column": 1,
+          "text": "    return ok(item + at(map<str, i64>(items: []), \"unreachable-on-Err\"))\n"
+        },
+        {
+          "start_line": 18,
+          "start_column": 1,
+          "text": "const fn recovered(book: map<str, i64>, key: str) -> i64 {\n"
+        },
+        {
+          "start_line": 27,
+          "start_column": 1,
+          "text": "fn required(book: atomic<map<str, i64>>, key: str) -> i64 {\n"
+        },
+        {
+          "start_line": 30,
+          "start_column": 1,
+          "text": "fn outcome(book: atomic<map<str, i64>>, key: str) -> result<i64, error> {\n"
+        },
+        {
+          "start_line": 42,
+          "start_column": 1,
+          "text": "    let full = map<str, i64>(items: [\"X\": 10])\n    let empty = map<str, i64>(items: [])\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/scalar-collection-keys.hgl",
+      "source_sha256": "1ae84342b0133bf52db24779bce3c6047381895639801559e35c9f1137c94f72",
+      "excerpts": [
+        {
+          "start_line": 9,
+          "start_column": 1,
+          "text": "fn forward_modes(value: map<Mode, i64>) -> map<Mode, i64> => pass_through(value)\n"
+        },
+        {
+          "start_line": 22,
+          "start_column": 1,
+          "text": "        delta<map<Mode, i64>>(upsert: [Mode::first: 10, Mode::second: 20]),\n        delta<map<Mode, i64>>(upsert: [Mode::first: 10]),\n"
+        },
+        {
+          "start_line": 25,
+          "start_column": 1,
+          "text": "        delta<map<Mode, i64>>(remove: [Mode::first])\n"
+        },
+        {
+          "start_line": 27,
+          "start_column": 1,
+          "text": "        delta<map<Mode, i64>>(upsert: [Mode::second: 20, Mode::first: 10]),\n        delta<map<Mode, i64>>(upsert: [Mode::first: 10]),\n"
+        },
+        {
+          "start_line": 30,
+          "start_column": 1,
+          "text": "        delta<map<Mode, i64>>(remove: [Mode::first])\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/stateful-node.hgl",
+      "source_sha256": "8d9189ea3293fe634f6a73006d79109bb9a0e5cfae52c159db4735de3ceeefe7",
+      "excerpts": [
+        {
+          "start_line": 40,
+          "start_column": 1,
+          "text": "fn latest_by_key(key: str, value: f64) -> map<str, f64> {\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/structural-types.hgl",
+      "source_sha256": "05b462228a46af40b2f8eb74c5fde4d5d5beadaba2cdbf0b5f31f51a2114a7f3",
+      "excerpts": [
+        {
+          "start_line": 66,
+          "start_column": 1,
+          "text": "    prices: map<str, f64>,\n    quantities: map<str, i64>\n) -> map<str, f64> =>\n"
+        }
+      ]
+    },
+    {
+      "source_path": "language/examples/structural-value-publication.hgl",
+      "source_sha256": "8b970593ec761d7b868a0c34f23cfe1aaa0cf52dcd395c60cb7a47fc37d69f0a",
+      "excerpts": [
+        {
+          "start_line": 46,
+          "start_column": 1,
+          "text": "fn select_map(step: i64, a: map<i64, i64>, b: map<i64, i64>) -> map<i64, i64> {\n"
+        },
+        {
+          "start_line": 57,
+          "start_column": 1,
+          "text": "fn select_map_delta(step: i64, a: map<i64, i64>, b: map<i64, i64>) -> map<i64, i64> {\n"
+        },
+        {
+          "start_line": 66,
+          "start_column": 1,
+          "text": "fn invalidating_map(step: i64) -> map<i64, i64> {\n"
+        },
+        {
+          "start_line": 75,
+          "start_column": 1,
+          "text": "fn has_second(step: i64, watched: map<i64, i64>) -> bool {\n"
+        },
+        {
+          "start_line": 78,
+          "start_column": 1,
+          "text": "fn map_validity(step: i64, watched: map<i64, i64>) -> bool {\n"
+        },
+        {
+          "start_line": 81,
+          "start_column": 1,
+          "text": "fn copied_membership(step: i64, a: map<i64, i64>, b: map<i64, i64>) -> bool =>\n"
+        },
+        {
+          "start_line": 83,
+          "start_column": 1,
+          "text": "fn delta_membership(step: i64, a: map<i64, i64>, b: map<i64, i64>) -> bool =>\n"
+        },
+        {
+          "start_line": 85,
+          "start_column": 1,
+          "text": "fn copied_invalid_membership(step: i64, a: map<i64, i64>, b_step: i64) -> bool =>\n"
+        },
+        {
+          "start_line": 87,
+          "start_column": 1,
+          "text": "fn copied_map_validity(step: i64, a: map<i64, i64>, b_step: i64) -> bool =>\n"
+        },
+        {
+          "start_line": 89,
+          "start_column": 1,
+          "text": "fn delta_map_validity(step: i64, a: map<i64, i64>, b_step: i64) -> bool =>\n"
+        },
+        {
+          "start_line": 93,
+          "start_column": 1,
+          "text": "    let full = delta<map<i64, i64>>(upsert: [7: 10, 8: 20])\n    let only_first = delta<map<i64, i64>>(upsert: [7: 30])\n"
+        }
+      ]
+    },
+    {
+      "source_path": "library/ordinary_replay_record.md",
+      "source_sha256": "dab65167eb8a394b16d224c32551936727b80f8f0b9b6c355a828288a37083b4",
+      "excerpts": [
+        {
+          "start_line": 39,
+          "start_column": 1,
+          "text": "For example, the value field of `TimedValue<map<i64, i64>>` has exact ordinary\ntype `delta<map<i64, i64>>`, while that of `TimedValue<i64>` is i64 by scalar\n"
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/cases_ordinary_delta_types.md",
+      "source_sha256": "766a4e2bb100d08714c51e47d1cdb9be403d30c331a30ead8a9e6370b44e69d2",
+      "excerpts": [
+        {
+          "start_line": 13,
+          "start_column": 1,
+          "text": "let update: delta<map<i64, i64>> = delta<map<i64, i64>>(upsert: [1: 10])\n"
+        },
+        {
+          "start_line": 43,
+          "start_column": 1,
+          "text": "A typed empty `list<TimedValue<map<i64, i64>>>` passed to generic\nreplay fixes T to `map<i64, i64>`, despite having no payload from which to\n"
+        },
+        {
+          "start_line": 59,
+          "start_column": 1,
+          "text": "`TimedValue<map<i64, i64>>`, not a TimedValue parameterized by a structural\n"
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/cases_scalar.md",
+      "source_sha256": "befd5937e55380e73f0db36d8b4cc4e9a62ff605715ac4e3e37112068b5439a4",
+      "excerpts": [
+        {
+          "start_line": 33,
+          "start_column": 1,
+          "text": "| `map<str, i64>` | yes | yes | no |\n| `map<str, list<f64>>` | yes | yes | no |\n"
+        },
+        {
+          "start_line": 37,
+          "start_column": 1,
+          "text": "A `set<map<str, i64>>` is a type: a map has hash. A `TSS` of a type without\n"
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/graph.md",
+      "source_sha256": "acbd3c12ad50aaa585db1c73c570e0b152f143bfb5167d1057573554934746c4",
+      "excerpts": [
+        {
+          "start_line": 460,
+          "start_column": 1,
+          "text": "This is the operation set the library builds on. `map_`, `switch_`,\n"
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/time_series.md",
+      "source_sha256": "14d0c31ca655d1022b37603c4a238162e8751e49696f178a97d5edc3e1752baa",
+      "excerpts": [
+        {
+          "start_line": 91,
+          "start_column": 1,
+          "text": "| **TSD** | `map<K, V>` | A dictionary from scalar keys to time-series, whose keys come and go while the graph runs |\n"
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/validation/wiring/decisions.json",
+      "source_sha256": "231045c9587c9c1ea6d8e82228705c923c0615e2c188432b1cc1a3416f55e993",
+      "excerpts": [
+        {
+          "start_line": 7,
+          "start_column": 1,
+          "text": "      \"question\": \"debug_print over a map_-shaped TSD[str, REF[TS[int]]] printed reference tokens and missed value ticks. Should a generic parameter ever bind a reference?\",\n"
+        },
+        {
+          "start_line": 66,
+          "start_column": 1,
+          "text": "      \"question\": \"Does HGL's map<K, ref<V>> carry an outer reference?\",\n      \"ruling\": \"map<K, ref<V>> gets a map containing ref values.\",\n"
+        }
+      ]
+    },
+    {
+      "source_path": "runtime/validation/wiring/reasoned.json",
+      "source_sha256": "2ecff5ebe3f5c2771bc1a5d47182584abee379fee8533cba46b94f2d221bdbd4",
+      "excerpts": [
+        {
+          "start_line": 7,
+          "start_column": 1,
+          "text": "      \"derivation\": \"Premise: tsl_to_tsd publishes a reference per key (a map_-shaped output).\"\n"
+        }
+      ]
+    }
+  ]
+}

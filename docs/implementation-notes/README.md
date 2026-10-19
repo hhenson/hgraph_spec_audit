@@ -93,3 +93,5 @@ library; implementation-specific audit adapters live here.
   ([provenance](base-layer-alignment-2026-10-19.provenance.json)).
 - [19 October 2026: map call order correction](map-call-order-2026-10-19.md)
   ([provenance](map-call-order-2026-10-19.provenance.json)).
+- [19 October 2026: dictionary and mapping names](dictionary-naming-2026-10-19.md)
+  ([provenance](dictionary-naming-2026-10-19.provenance.json)).
