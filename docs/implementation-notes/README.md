@@ -12,8 +12,9 @@ pins were changed by this relocation.
 
 Original source revision: [`766033278bef`](https://github.com/hhenson/hgraph_spec/tree/766033278bef6e9403cc99c0d8f318ba46a03919).
 [Provenance](provenance.json) records each source file's hash and excerpt count.
-Local documentation links in excerpts resolve to that revision. HGL files and
-portable examples remain owned by the specification and standard library.
+Local documentation links in excerpts resolve to that revision. Portable HGL
+examples and library code remain owned by the specification and standard
+library; implementation-specific audit adapters live here.
 
 - [language/docs/design/control-flow.md](language/docs/design/control-flow.md)
 - [language/docs/design/decisions/0005-inline-cpp-native-functions.md](language/docs/design/decisions/0005-inline-cpp-native-functions.md)
@@ -82,3 +83,15 @@ portable examples remain owned by the specification and standard library.
   ([provenance](final-editorial-cleanup-2026-10-18.provenance.json)).
 - [18 October 2026: specification authority and extraction history](specification-authority-2026-10-18.md)
   ([provenance](specification-authority-2026-10-18.provenance.json)).
+- [19 October 2026: operator namespace migration history](operator-namespace-2026-10-19.md)
+  ([provenance](operator-namespace-2026-10-19.provenance.json)).
+- [19 October 2026: core/std consistency review](namespace-consistency-review-2026-10-19.md)
+  ([provenance](namespace-consistency-review-2026-10-19.provenance.json)).
+- [19 October 2026: operator review clarifications](operator-review-clarifications-2026-10-19.md)
+  ([provenance](operator-review-clarifications-2026-10-19.provenance.json)).
+- [19 October 2026: base-layer proposal alignment](base-layer-alignment-2026-10-19.md)
+  ([provenance](base-layer-alignment-2026-10-19.provenance.json)).
+- [19 October 2026: map call order correction](map-call-order-2026-10-19.md)
+  ([provenance](map-call-order-2026-10-19.provenance.json)).
+- [19 October 2026: dictionary and mapping names](dictionary-naming-2026-10-19.md)
+  ([provenance](dictionary-naming-2026-10-19.provenance.json)).
